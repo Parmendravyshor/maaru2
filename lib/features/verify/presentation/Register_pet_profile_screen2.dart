@@ -5,7 +5,6 @@ import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
-
 import 'Register_pet_profile_screen1.dart';
 import 'Register_pet_profile_screen3.dart';
 
@@ -41,7 +40,9 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
               alignment: FractionalOffset.bottomCenter,
               decoration: BoxDecoration(
                   color: Color(0xFFffffff),
-                  borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30))),
               child: Container(
                   padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
                   child: Column(
@@ -63,7 +64,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                         ),
                         Text(
                           'Known allergies',
-                          style: MaaruStyle.text.small,
+                          style: MaaruStyle.text.tiniest,
                         ),
                         SizedBox(
                           height: 10,
@@ -84,7 +85,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                         ),
                         Text(
                           'Pet Vaccines',
-                          style: MaaruStyle.text.small,
+                          style: MaaruStyle.text.tiniest,
                         ),
                         SizedBox(
                           height: 10,

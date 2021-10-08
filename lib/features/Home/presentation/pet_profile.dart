@@ -22,7 +22,7 @@ class _PetProfileState extends State<PetProfile> {
           SizedBox(
             height: 20,
           ),
-              Padding(padding: EdgeInsets.only(top: 15,right: 10,left: 5),
+              Padding(padding: EdgeInsets.only(top: 15,right: 10,left: 20),
                   child:
                   TextFormField(
 

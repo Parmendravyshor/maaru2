@@ -47,7 +47,7 @@ class _CustomCardState extends State<CustomCard> {
             ),
             title: Text(
               'Austin pet care',
-              style: MaaruStyle.text.large,
+              style: MaaruStyle.text.tiniest,
             ),
             subtitle:
             Text(
@@ -85,7 +85,7 @@ class _CustomCardState extends State<CustomCard> {
                         ),
                         title: Text(
                           'Austin pet Grooming',
-                          style: MaaruStyle.text.large,
+                          style: MaaruStyle.text.tiniest,
                         ),
                         subtitle: Text(
                           'Are we still meeting tommorrow about the pet services',

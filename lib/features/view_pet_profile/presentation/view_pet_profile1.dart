@@ -246,7 +246,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                   padding:
                                                       EdgeInsets.only(left: 43),
                                                   child: Text(
-                                                    'Jimmmy Booker',
+                                                    'Jimmmy Booker',style: MaaruStyle.text.tiniest,
                                                   )),
                                               Row(
                                                 mainAxisAlignment:
@@ -254,7 +254,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                         .spaceEvenly,
                                                 children: [
                                                   Text(
-                                                    'Owner',
+                                                    'Owner',style: MaaruStyle.text.tiny,
                                                     textAlign: TextAlign.center,
                                                   ),
                                                   SizedBox(
@@ -272,7 +272,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                 ),
                                 Text(
                                   'Upcoming Appointments',
-                                  style: MaaruStyle.text.large,
+                                  style: MaaruStyle.text.tiniest,
                                 ),
                                 SizedBox(
                                   height: 20,

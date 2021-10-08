@@ -27,20 +27,19 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   TextEditingController _petName;
   TextEditingController _breadType;
 //  TextEditingController _height;
- // TextEditingController _weight;
- // TextEditingController _emailController;
- // TextEditingController _sex;
- // TextEditingController _birthDate;
+  // TextEditingController _weight;
+  // TextEditingController _emailController;
+  // TextEditingController _sex;
+  // TextEditingController _birthDate;
   @override
   void initState() {
     _petName = TextEditingController();
     _breadType = TextEditingController();
-   // _height = TextEditingController();
-   // _emailController = TextEditingController();
-   // _weight = TextEditingController();
-   // _birthDate = TextEditingController();
-   // _sex = TextEditingController();
-
+    // _height = TextEditingController();
+    // _emailController = TextEditingController();
+    // _weight = TextEditingController();
+    // _birthDate = TextEditingController();
+    // _sex = TextEditingController();
 
     super.initState();
   }
@@ -49,20 +48,21 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   void dispose() {
     _petName.dispose();
     _breadType.dispose();
-   // _height.dispose();
-   // _emailController.dispose();
-  //  _weight.dispose();
-  //  _sex.dispose();
-   // _birthDate.dispose();
+    // _height.dispose();
+    // _emailController.dispose();
+    //  _weight.dispose();
+    //  _sex.dispose();
+    // _birthDate.dispose();
     super.dispose();
   }
+
   @override
   Widget _stepIndicator() {
     return Padding(
         padding: EdgeInsets.fromLTRB(40, 0, 320, 0),
         child: LinearProgressIndicator(
           value: initial,
-          backgroundColor: Color(0xFF367355),
+          backgroundColor: Color(0xFFd8d8d8),
         ));
   }
 
@@ -73,7 +73,9 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
         body: SingleChildScrollView(
             child: SafeArea(
                 child: Column(children: [
-          ProfileForm(assetImage: 'assets/images/dogicon.png',),
+          ProfileForm(
+            assetImage: 'assets/images/dogicon.png',
+          ),
           Padding(
               padding: EdgeInsets.only(left: 40, right: 40),
               child: Row(
@@ -118,12 +120,17 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
             height: 920,
             alignment: FractionalOffset.bottomCenter,
             decoration: BoxDecoration(
-                color: Color(0xFFffffff), borderRadius: BorderRadius.circular(30)),
+                color: Color(0xFFffffff),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30))),
             child: Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: Column(
                   children: [
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       "Gender",
                       style: MaaruStyle.text.tiniest,
@@ -137,24 +144,23 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                       "Pet Name   ",
                       TextInputType.text,
                       textStyle: TextStyle(color: Colors.black),
-                      textInputAction: TextInputAction.next,
+
+                      textinputaction: TextInputAction.next,
                       onChanged: (text) {
                         //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
                       },
-                        editingController: _petName,
+                      editingController: _petName,
                     ),
                     new SizedBox(
                       height: 10.0,
                     ),
-                    ThemedTextField(
-                      "Bread Type", TextInputType.text,
+                    ThemedTextField("Bread Type", TextInputType.text,
                         textStyle: TextStyle(color: Colors.black),
-                      textInputAction: TextInputAction.next,
-                      onChanged: (text) {
-                        //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-                      },
-                        editingController: _breadType
-                    ),
+                        textInputAction: TextInputAction.done,
+
+                        onChanged: (text) {
+                      //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                    }, editingController: _breadType),
                     ThemeChanges(),
                     new SizedBox(
                       height: 10.0,
@@ -167,15 +173,14 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InkWell(
-                          onTap: () {},
-                          child:
-                              Padding(padding: EdgeInsets.only(left: 50),
-                          child:
-                          Text(
-                            "Birth Date",
-                            style:MaaruStyle.text.tiniest,
-                          ),
-                        )),
+                            onTap: () {},
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 50),
+                              child: Text(
+                                "Birth Date",
+                                style: MaaruStyle.text.tiniest,
+                              ),
+                            )),
                       ],
                     ),
                     new SizedBox(
@@ -200,36 +205,39 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                     SizedBox(
                       height: 10.0,
                     ),
-                    Padding(padding: EdgeInsets.only(left: 10),child:
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            alignment: Alignment.center,
-                            width: 85,
-                            height: 85,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(color: MaaruColors.textColor),
-                                color:
-                               MaaruColors.primaryColorsuggesion1),
-                            child: Text(
-                           'Neutered',
-                              style: GoogleFonts.poppins(textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Poppins',
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
-                            )),
-                          ),
-                          SizedBox(width: 10,),
-                          ReuseCircle1(
-                            text: 'Spade',
-                          ),
-                          ReuseCircle1(
-                            text: 'Neighter',
-                          ),
-                        ])),
+                    Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Container(
+                                alignment: Alignment.center,
+                                width: 85,
+                                height: 85,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                        color: MaaruColors.textColor),
+                                    color: MaaruColors.primaryColorsuggesion1),
+                                child: Text('Neutered',
+                                    style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                          color: Color(0xFFffffff),
+                                          fontFamily: 'Poppins',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500),
+                                    )),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              ReuseCircle1(
+                                text: 'Spade',
+                              ),
+                              ReuseCircle1(
+                                text: 'Neighter',
+                              ),
+                            ])),
                     new SizedBox(
                       height: 40.0,
                     ),
@@ -249,37 +257,38 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                   color: Colors.white12,
                                   shape: BoxShape.circle),
                               child: Text(
-                                'Back',style: MaaruStyle.text.greyDisable,
+                                'Back',
+                                style: MaaruStyle.text.greyDisable,
                               ),
                             ),
                           ),
                           InkWell(
                               onTap: () {
-    String petName = _petName.text;
-    String breadType = _breadType.text;
-   // String height = _height.text;
-   // String width = _weight.text;
+                                String petName = _petName.text;
+                                String breadType = _breadType.text;
+                                // String height = _height.text;
+                                // String width = _weight.text;
 
-    if (petName.isEmpty) {
-    AlertManager.showErrorMessage(
-    "Please enter Pet name", context);
-    } else if (breadType.isEmpty) {
-      AlertManager.showErrorMessage(
-          "Please enter Bread Type", context);
-      // } else if (height.isEmpty) {
-      // AlertManager.showErrorMessage(
-      // "Please enter Height", context);
-      // } else if (width.isEmpty) {
-      //   AlertManager.showErrorMessage(
-      //       "Please enter weight",
+                                if (petName.isEmpty) {
+                                  AlertManager.showErrorMessage(
+                                      "Please enter Pet name", context);
+                                } else if (breadType.isEmpty) {
+                                  AlertManager.showErrorMessage(
+                                      "Please enter Bread Type", context);
+                                  // } else if (height.isEmpty) {
+                                  // AlertManager.showErrorMessage(
+                                  // "Please enter Height", context);
+                                  // } else if (width.isEmpty) {
+                                  //   AlertManager.showErrorMessage(
+                                  //       "Please enter weight",
 
-      // context);
-    }
-    else{
-               Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) =>
-                                        CreateRegisterPetProfile2()));
-                              }},
+                                  // context);
+                                } else {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) =>
+                                          CreateRegisterPetProfile2()));
+                                }
+                              },
                               child: Container(
                                 alignment: Alignment.centerRight,
                                 child:
@@ -374,31 +383,34 @@ class _ReuseCircle1State extends State<ReuseCircle1> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: FlatButton(
-      onPressed: () {
-        setState(() => pressGeoON = !pressGeoON);
-      },
-      child: Container(
-        alignment: Alignment.center,
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: MaaruColors.textColor),
-            color:
-                pressGeoON ? Colors.white : MaaruColors.primaryColorsuggesion1),
-        child: Text(
-          widget.text,
-          style: pressGeoON? TextStyle(
-              color: MaaruColors.textColor,
-              fontFamily: 'Poppins',
-              fontSize: 12,
-              fontWeight: FontWeight.w300): GoogleFonts.poppins(textStyle: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Poppins',
-              fontSize: 12,
-              fontWeight: FontWeight.w500),))
-        ),
+      child: FlatButton(
+        onPressed: () {
+          setState(() => pressGeoON = !pressGeoON);
+        },
+        child: Container(
+            alignment: Alignment.center,
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: MaaruColors.textColor),
+                color: pressGeoON
+                    ? Colors.white
+                    : MaaruColors.primaryColorsuggesion1),
+            child: Text(widget.text,
+                style: pressGeoON
+                    ? MaaruStyle.text.greyDisable
+                    // TextStyle(
+                    //     color: MaaruColors.textColor,
+                    //     fontFamily: 'Poppins',
+                    //     fontSize: 12,
+                    //     fontWeight: FontWeight.w300
+                    : GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Poppins',
+                            fontSize: 15,
+                            color: Color(0xFFffffff))))),
       ),
     );
   }

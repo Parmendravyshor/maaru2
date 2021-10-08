@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
+import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/widgets.dart';
 
 import 'booked_confirm.dart';
@@ -36,7 +37,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                 ),
               ),
               Container(
-                height: size.height * 0.85,
+                height: size.height * 0.95,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -58,10 +59,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                               children: [
                                 Text(
                                   'Austin Pet Groomer',
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
+                                  style: MaaruStyle.text.tiniest
                                 ),
 // SizedBox(width: size.width*0.34,),
                                 Image.asset('assets/icons/New Project (2).png',
@@ -71,8 +69,8 @@ class _BookAppointment2State extends State<BookAppointment2> {
                             Text(
                               '1115 Emihi Grove Austin, Textas 00000',
                               style:
-                                  TextStyle(fontSize: 13, color: Colors.black),
-                            ),
+                                MaaruStyle.text
+                              .tiny,),
                             SizedBox(
                               height: size.height * 0.02,
                             ),
@@ -141,7 +139,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                               padding: const EdgeInsets.only(left: 55),
                               child: Text(
                                 'Lorem ipsum dolor sit amet,consectur adipiscing elit,sed do ejusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                style: TextStyle(fontSize: 15),
+                                style: MaaruStyle.text.tiny
                               ),
                             ),
                             Row(
@@ -181,22 +179,24 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                 padding: const EdgeInsets.only(left: 55),
                                 child: Text(
                                   'Lorem ipsum dolor sit amet,consectur adipiscing elit,sed do ejusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                  style: TextStyle(fontSize: 15),
-                                ))
+                                  style: MaaruStyle.text.tiny
+                                )),
+                            SizedBox(height: 10,),
+                            ThemedButton(
+                              text: 'Book Appointment',
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (_) => BookedConfirm()));
+                              },
+                              enabled: true,
+                            ),
+                            SizedBox(
+                              height: 50,
+                            )
                           ])),
                 ),
               ),
-              ThemedButton(
-                text: 'Book Appointment',
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => BookedConfirm()));
-                },
-                enabled: true,
-              ),
-              SizedBox(
-                height: 50,
-              )
+
             ]),
           ],
         ));

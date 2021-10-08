@@ -54,7 +54,10 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
               height: 1250,
               alignment: FractionalOffset.bottomCenter,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                  color: Color(0xFFffffff),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30))),
               child: Container(
                   padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
                   child: Column(
@@ -73,7 +76,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                         ),
                         Text(
                           'Walking Schedule',
-                          style: MaaruStyle.text.small,
+                          style: MaaruStyle.text.tiniest,
                         ),
                         SizedBox(
                           height: 10,
@@ -94,7 +97,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                         ),
                         Text(
                           'Feeding Schedule',
-                          style: MaaruStyle.text.small,
+                          style: MaaruStyle.text.tiniest,
                         ),
                         SizedBox(
                           height: 10,
@@ -115,7 +118,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                         ),
                         Text(
                           'Temperament',
-                          style: MaaruStyle.text.small,
+                          style: MaaruStyle.text.tiniest,
                         ),
                         SizedBox(
                           height: 10,
@@ -139,13 +142,13 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                             children: [
                               Text(
                                 'Medication',
-                                style: MaaruStyle.text.small,
+                                style: MaaruStyle.text.tiniest,
                               ),
                               SizedBox(
                                 height: 20,
                                 width: 60,
                               ),
-                              Text('No', style: MaaruStyle.text.tiny),
+                              Text('No', style: MaaruStyle.text.tiniest),
                               Switch(
                                 activeColor: MaaruColors.buttonTextColor,
                                 inactiveThumbColor: MaaruColors.buttonTextColor,
@@ -159,7 +162,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                 },
                               ),
                               // ),
-                              Text('Yes', style: MaaruStyle.text.tiny),
+                              Text('Yes', style: MaaruStyle.text.tiniest),
                             ]),
                         SizedBox(
                           height: 40,
@@ -201,11 +204,11 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                           TextButton.icon(
                             onPressed: () {},
                             icon: Image.asset(
-                              'assets/images/addvaccine.png',
+                              'assets/icons/icone-setting-64.png',height: 40,
                             ),
                             label: Text(
                               'Add More Vaccines',
-                              style: MaaruStyle.text.medium,
+                              style: MaaruStyle.text.tiniest,
                             ),
                           ),
                         SizedBox(

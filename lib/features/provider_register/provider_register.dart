@@ -7,6 +7,7 @@ import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
+import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 
 class RegisterPoviderScreen extends StatefulWidget {
   @override
@@ -153,9 +154,9 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                             else {
                               // AlertManager.disclaimerPopup(context, onSuccess: () {
                               // BlocProvider.of<RegisterBloc>(context);
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //   builder: (context) =>
-                              //    CreateregisterPetProfile1()));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                 CreateProviderHome()));
                             }
                             enabled = false;
                           },

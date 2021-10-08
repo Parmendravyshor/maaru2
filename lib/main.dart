@@ -21,6 +21,7 @@ import 'features/Book_Appointment/presentation/reviewe_screen.dart';
 import 'features/Home/presentation/home_sceen.dart';
 import 'features/Home/presentation/message.dart';
 import 'features/Home/presentation/pet_profile.dart';
+import 'features/provider_home/presentation/create_provider_home.dart';
 import 'features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'features/provider_home/presentation/upcoming_appointment_calender.dart';
 import 'features/provider_home/presentation/upcoming_appointment_screen.dart';
@@ -53,9 +54,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Maaru',
+
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: AccountSettingScreen ()));
+        home: Scaffold(body: SplashScreen ()));
   }
 }
 class Slidabble extends StatefulWidget {

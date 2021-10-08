@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../theme/maaru_style.dart';
 
 class RoundedButton extends StatelessWidget {
@@ -20,11 +21,11 @@ class RoundedButton extends StatelessWidget {
       child: Center(
         child: Text(
           buttonName,
-          style: TextStyle(
+          style:GoogleFonts.poppins(textStyle:TextStyle(
               color: Color1,
-              fontFamily: 'Popins',
+              fontFamily: 'Poppins',
               fontWeight: FontWeight.w600,
-              fontSize: 20),
+              fontSize: 20)),
         ),
       ),
     );

@@ -23,7 +23,7 @@ class _MessagesState extends State<Messages> {
             child: Column(
 
           children: [
-
+SizedBox(height: 30,),
             Align(
                 alignment: Alignment.centerRight,
 

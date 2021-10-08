@@ -41,6 +41,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
     return InputDecoration(
         filled: true,
         fillColor: Colors.white,
+
         suffixIcon: widget.suffixIcon != null
             ? Container(
                 child: FractionallySizedBox(
@@ -84,6 +85,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
                             obscureText: _obscureText,
                             enabled: widget.enabled,
                             controller: widget.editingController,
+textInputAction: widget.textinputaction,
                             onChanged: widget.onChanged,
                             autocorrect: false,
                             keyboardType: widget.keyboardType,
@@ -109,7 +111,9 @@ class ThemedTextField extends StatefulWidget {
   final bool enabled, password;
   final Text text;
   final TextStyle textStyle;
+final textinputaction;
   ThemedTextField(
+
     this.placeholder,
     this.keyboardType, {
     this.suffixIcon,
@@ -117,6 +121,7 @@ class ThemedTextField extends StatefulWidget {
     this.text,
     this.editingController,
     this.enabled,
+        this.textinputaction,
     this.password = false,
     this.textStyle,
     TextInputAction textInputAction,
@@ -154,9 +159,9 @@ class ThemeChanges2 extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.only(right: 15),
             child: ThemedTextField(
-              "0", TextInputType.text,
+              "0", TextInputType.text, textStyle: TextStyle(color: Colors.black),
               textInputAction: TextInputAction.next,
-              textStyle: TextStyle(color: Colors.grey[300],height: 20),
+              // textStyle: TextStyle(color: Colors.grey[300],height: 20),
               onChanged: (text) {
                 //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
               },
@@ -184,6 +189,8 @@ class ThemeChanges2 extends StatelessWidget {
 }
 
 class ThemeChanges extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -215,6 +222,7 @@ class ThemeChanges extends StatelessWidget {
             padding: EdgeInsets.only(right: 15),
             child:
             ThemedTextField(
+
               "0 ft", TextInputType.text,
               textInputAction: TextInputAction.next,
               textStyle: TextStyle(color: Colors.black),

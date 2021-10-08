@@ -51,50 +51,47 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                ViewPetProfile()));
-                                  },
-                                  child:
-                                  Image.asset(
-                                  'assets/icons/icone-setting-67.png',
-                                  height: 40,
-                                  width: 40,
-                                )),
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  ViewPetProfile()));
+                                    },
+                                    child: Image.asset(
+                                      'assets/icons/icone-setting-67.png',
+                                      height: 40,
+                                      width: 40,
+                                    )),
                                 SizedBox(
                                   width: 10,
                                 ),
                                 InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                ViewPetProfile2()));
-                                  },
-                                  child:
-                                  Image.asset(
-                                  'assets/icons/icone-setting-67.png',
-                                  height: 40,
-                                  width: 40,
-                                )),
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  ViewPetProfile2()));
+                                    },
+                                    child: Image.asset(
+                                      'assets/icons/icone-setting-67.png',
+                                      height: 40,
+                                      width: 40,
+                                    )),
                                 SizedBox(
                                   width: 10,
                                 ),
                                 InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                ViewPetProfile3()));
-                                  },
-                                  child:
-                                  Image.asset(
-                                  'assets/icons/icone-setting-67.png',
-                                  height: 40,
-                                  width: 40,
-                                )),
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  ViewPetProfile3()));
+                                    },
+                                    child: Image.asset(
+                                      'assets/icons/icone-setting-67.png',
+                                      height: 40,
+                                      width: 40,
+                                    )),
                               ],
                             ),
                             Row(
@@ -236,7 +233,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                 ),
                                 Text(
                                   'Notes',
-                                  style: MaaruStyle.text.large,
+                                  style: MaaruStyle.text.tiniest,
                                 ),
                                 SizedBox(
                                   height: 20,
@@ -258,16 +255,23 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                 children: [
                                                   Text(
                                                     'Max Additional Information',
-                                                    style: MaaruStyle
-                                                        .text.tinyDisable,
+                                                    style:
+                                                        MaaruStyle.text.tiniest,
                                                   ),
-                                                  Text('Aug. 10, 2021',style: MaaruStyle.text.tinyDisable,),
+                                                  Text(
+                                                    'Aug. 10, 2021',
+                                                    style:
+                                                        MaaruStyle.text.medium,
+                                                  ),
                                                   SizedBox(
                                                     height: 10,
                                                   ),
                                                   Text(
-                                                      'Lorem ipsum is placeholder text commonly used in the graphic, print,'
-                                                          'and publishing industries for previewing layouts and visual mockups')
+                                                    'Lorem ipsum is placeholder text commonly used in the graphic, print,'
+                                                    'and publishing industries for previewing layouts and visual mockups',
+                                                    style: MaaruStyle
+                                                        .text.greyDisable,
+                                                  )
                                                 ])))),
                                 SizedBox(
                                   height: 20,

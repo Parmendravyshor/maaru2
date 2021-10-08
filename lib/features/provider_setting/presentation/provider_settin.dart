@@ -96,7 +96,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 image: 'assets/icons/icone-setting-3.png',
                                 hite: 40,
                                 text: 'Transactions',
-                                size: 130,
+                                size: 90,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (_) => PaymentScreen()));
@@ -109,7 +109,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 image: 'assets/icons/icone-setting-3.png',
                                 hite: 40,
                                 text: 'ACH Information',
-                                size: 130,
+                                size: 60,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (_) => PaymentScreen()));

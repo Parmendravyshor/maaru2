@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/features/Account_setting/presentation/account_setting.dart';
 
 class ShowLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
+        BackArrowButton(),
         Expanded(
           child: Container(
             color: Colors.white,
-            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
             child: TextFormField(
               cursorColor: Colors.black,
               decoration: InputDecoration(
@@ -20,13 +24,13 @@ class ShowLocation extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: new BorderRadius.circular(25.0),
                   borderSide: const BorderSide(color: Colors.white, width: 0.0)),
-                hintText: 'Search Location',
+                hintText: 'Search Location',hintStyle: MaaruStyle.text.greyDisable,
                 fillColor: Colors.grey[100],
                 suffixIcon: Container(
                   child: IconButton(
                     icon: Icon(
                       Icons.search,
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                     onPressed: () {},
                   ),

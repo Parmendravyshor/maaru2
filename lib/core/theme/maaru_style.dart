@@ -54,12 +54,13 @@ class MaaruColors {
   Color get divider => _darkTheme ? Color(0x0DE1E9F0) : Color(0xFFD5D9DE);
   TextStyle get tiny {
     return GoogleFonts.poppins( textStyle: TextStyle(
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w400,
         fontFamily: 'Poppins',
         fontSize: 15,
-        color: Colors.black));
-  }
 
+        color: Color(0xFF000000)));
+  }
+//regular
   TextStyle get mediumGreen {
     return GoogleFonts.poppins( textStyle: TextStyle(
         fontWeight: FontWeight.w600,
@@ -92,21 +93,21 @@ class MaaruColors {
       fontSize: 20,
       fontWeight: FontWeight.w600,
       color: Colors.black));
-
+//semibold
   TextStyle get medium {
     return GoogleFonts.poppins( textStyle: TextStyle(
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         fontFamily: 'Poppins',
-        fontSize: 20,
+        fontSize: 14,
         color:
              Colors.black));
   }
-
+//semibold large
   TextStyle get large {
     return GoogleFonts.poppins( textStyle: TextStyle(
         fontWeight: FontWeight.w700,
         fontFamily: 'Poppins',
-        fontSize: 18,
+        fontSize: 22,
         color: _darkTheme
             ? MaaruStyle.colors.textColorWhite
             : MaaruStyle.colors.textColorBlack));
@@ -121,21 +122,21 @@ class MaaruColors {
   }
   TextStyle get red {
     return GoogleFonts.poppins(textStyle: TextStyle(
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w500,
         fontFamily: 'Poppins',
         fontSize: 15,
-        color:Colors.red));
+        color:Color(0xFFc72019)));
   }
   // ignore: unused_element
 
 
-
+//semibold
   TextStyle get tiniest {
   return GoogleFonts.poppins(textStyle: TextStyle(
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w600,
   fontFamily: 'Poppins',
   fontSize: 18,
-  color: Colors.black));
+  color: Color(0xFF000000)));
   }
 
 

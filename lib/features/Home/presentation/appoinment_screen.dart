@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/show_location.dart';
 
 class AppointmentScreen extends StatefulWidget {
@@ -68,7 +69,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             padding: EdgeInsets.only(left: 20),
             child: Text(
               'Upcoming Appoinments',
-              style: MaaruStyle.text.large,
+              style: MaaruStyle.text.tiniest,
             ),
           ),
           SizedBox(
@@ -83,7 +84,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
             padding: EdgeInsets.only(left: 20),
             child: Text(
               'Past Appoinments',
-              style: MaaruStyle.text.large,
+              style: MaaruStyle.text.tiniest,
             ),
           ),
                   SizedBox(

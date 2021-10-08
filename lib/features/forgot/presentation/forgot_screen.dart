@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/theme/style.dart';
+import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
@@ -83,12 +84,13 @@ class ResetWidget extends State<ResetPasswordScreen> {
                           //             width: MediaQuery.of(context).size.width,
                           //             height: MediaQuery.of(context).size.height,
                           child: Column(children: [
+                            BackArrowButton(),
                             Container(
                                 margin: EdgeInsets.only(top: 80),
                                 child: Align(
                                     alignment: Alignment.center,
                                     child: Logo())),
-                            ThemedTextField("Email", TextInputType.emailAddress,
+                            ThemedTextField("Enter your email", TextInputType.emailAddress,
                                 onChanged: (text) {
                               //   BlocProvider.of<ResetBloc>(context)
                               //  .add(EmailChanged(text));

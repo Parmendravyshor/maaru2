@@ -34,7 +34,7 @@ class _DatePickerState extends State<DatePicker> {
               // labelText: "Date of birth",
               hintText: 'mm/dd/year',hintStyle: MaaruStyle.text.greyDisable,
               prefixIcon:
-                  Icon(Icons.calendar_today, color: MaaruColors.primaryColor),
+                  Icon(Icons.calendar_today_outlined, color: MaaruColors.primaryColorsuggesion),
             ),
             onTap: () {
               _selectDate(context);

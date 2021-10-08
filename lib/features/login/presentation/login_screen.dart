@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/icons.dart';
 import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/forgot/presentation/forgot_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -46,10 +49,11 @@ class _LoginScreenState extends State<LoginScreen> {
           Center(
             child: Text(
               'or login with email',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500)),
             ),
           ),
           SizedBox(
@@ -76,14 +80,37 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 editingController: _passwordController,
               ),
+              Container(
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.only(right: 20),
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => ResetPasswordScreen()));
+                      },
+                      child: Text(
+                        'Forgot Password',
+                        style: MaaruStyle.text.greyDisable,
+                      ))),
               SizedBox(
                 height: 20,
               ),
               ThemedButton(
                 text: 'Login',
                 onPressed: () {
+                  String email = _emailController.text;
+                  String password = _passwordController.text;
+
+                  if (validateEmail(email) != null) {
+                    AlertManager.showErrorMessage(
+                        "Please enter valid email", context);
+                  } else if (password.length < 6) {
+                    AlertManager.showErrorMessage(
+                        "Password must be 6 characters long", context);
+                  }
+                  else{
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => CreateHomeScreen()));
+                      MaterialPageRoute(builder: (_) => CreateHomeScreen()));}
                 },
               ),
               SizedBox(

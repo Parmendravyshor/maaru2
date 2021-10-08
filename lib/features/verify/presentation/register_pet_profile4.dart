@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
-
 import 'Register_pet_profile_screen3.dart';
 
 class CreateRegisterPetProfile4 extends StatefulWidget {
@@ -40,7 +38,10 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
               height: 600,
               alignment: FractionalOffset.bottomCenter,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                  color: Color(0xFFffffff),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30))),
               child: Container(
                   padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
                   child: Column(
@@ -49,7 +50,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                         Text('Max',
                             style: MaaruStyle.text.large,
                             textAlign: TextAlign.left),
-                        Text('Jack  Russell'),
+                        Text('Jack  Russell',),
                         SizedBox(
                           width: 20,
                         ),
@@ -108,7 +109,8 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                           ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 160, 0, 0),
-                            child: Imagesgg(
+                            child:
+                            Imagesgg(
                               AssetImage: 'assets/icons/icone-setting-72.png',
                               text: 'Walking',
                             ),
@@ -204,7 +206,7 @@ class _ImagesggState extends State<Imagesgg> {
             ),
             child: Column(children: [
               Padding(
-                padding: EdgeInsets.only(top: 30),
+                padding: EdgeInsets.only(top: 20),
                 child: Image.asset(
                   widget.AssetImage,
                   height: 20,

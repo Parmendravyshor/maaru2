@@ -16,6 +16,7 @@ class ScreenIcon extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(width: 10,),
         Expanded(
           child: FlatButton(
             padding: EdgeInsets.only(right: 20),

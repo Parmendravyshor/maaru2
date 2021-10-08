@@ -32,7 +32,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     topLeft: Radius.circular(20),
                   ),
                   color: Colors.white),
-              height: size.height * 0.90,
+              height: size.height *1.1,
               width: size.width * 1,
               child: Container(
                 margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -78,10 +78,10 @@ class _BookAppointment1State extends State<BookAppointment1> {
                       children: [
                         Text(
                           'Austin Pet Groomer',
-                          style: MaaruStyle.text.large,
+                          style: MaaruStyle.text.tiniest,
                         ),
                         SizedBox(
-                          width: size.width * 0.27,
+                          width: size.width * 0.16,
                         ),
                         Image.asset(
                           'assets/icons/New Project (2).png',
@@ -150,7 +150,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     ),
                     Text(
                       'About',
-                      style: MaaruStyle.text.large,
+                      style: MaaruStyle.text.tiniest,
                     ),
                     SizedBox(
                       height: size.height * 0.02,
@@ -165,7 +165,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     ),
                     Text(
                       'Hours Of Operation',
-                      style: MaaruStyle.text.large,
+                      style: MaaruStyle.text.tiniest,
                     ),
                     const SizedBox(
                       height: 20,
@@ -176,7 +176,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                         Text('monday-saturday',
                             textAlign: TextAlign.start,
                             style: MaaruStyle.text.greyDisable),
-                        Text('9:00 am-6:00 pm', style: MaaruStyle.text.tiny),
+                        Text('9:00 am-6:00 pm', style: MaaruStyle.text.tiniest),
                       ],
                     ),
                     SizedBox(
@@ -188,7 +188,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                         Text('sunday',
                             textAlign: TextAlign.start,
                             style: MaaruStyle.text.greyDisable),
-                        Text('closed', style: MaaruStyle.text.tiny),
+                        Text('closed', style: MaaruStyle.text.tiniest),
                       ],
                     ),
                     SizedBox(

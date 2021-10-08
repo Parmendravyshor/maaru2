@@ -18,7 +18,11 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
         backgroundColor: Colors.white,
         body: SafeArea(
             child: Stack(children: [
-          Padding(padding: EdgeInsets.only(top: 20), child: ShowLocation()),
+          Padding(padding: EdgeInsets.only(top: 20),
+              child:
+              Padding(padding: EdgeInsets.only(bottom: 450),
+                  child:
+              ShowLocation())),
           MyClass(),
           SizedBox(
             height: 20,

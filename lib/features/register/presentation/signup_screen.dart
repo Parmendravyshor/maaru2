@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/icons.dart';
@@ -61,10 +62,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Center(
                 child: Text(
                   'or signup with email',
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(textStyle: TextStyle(
                       color: Colors.black,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.w500)),
                 ),
               ),
               SizedBox(

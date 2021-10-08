@@ -237,7 +237,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                 ),
                                Text(
                                     'Known Allergies',
-                                    style: MaaruStyle.text.large,
+                                    style: MaaruStyle.text.tiniest,
                                   ),
                                 SizedBox(
                                   height: 20,
@@ -252,7 +252,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                 SizedBox(
                                   height: 30,
                                 ),
-                                Text('Pet Vaccine',style: MaaruStyle.text.large,),
+                                Text('Pet Vaccine',style: MaaruStyle.text.tiniest,),
                                 SizedBox(
                                   height: 20,
                                 ),
@@ -278,20 +278,20 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                 children: [
 
                                                   Text(
-                                                    'Robbins',style: MaaruStyle.text.large,
+                                                    'Robbins',style: MaaruStyle.text.tiniest,
                                                     textAlign: TextAlign.center,
                                                   ),
                                                   SizedBox(
                                                     width: size.width * 0.22,
                                                   ),
-                                                Text('Jan. 13, 2019',style: MaaruStyle.text.tinyDisable,)
+                                                Text('Jan. 13, 2019',style: MaaruStyle.text.medium,)
                                                 ],
                                               ),
 
                                         Padding(
                                             padding:
                                             EdgeInsets.only(left: 20),child:
-                                              Text('Austin Vet Services',style: MaaruStyle.text.tinyDisable,))
+                                              Text('Austin Vet Services',style: MaaruStyle.text.medium,))
                                             ]))),
                                 SizedBox(
                                   height: 20,
@@ -318,20 +318,20 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                 children: [
 
                                                   Text(
-                                                    'Parvo',style: MaaruStyle.text.large,
+                                                    'Parvo',style: MaaruStyle.text.tiniest,
                                                     textAlign: TextAlign.center,
                                                   ),
                                                   SizedBox(
                                                     width: size.width * 0.22,
                                                   ),
-                                                  Text('Mar. 25, 2020',style: MaaruStyle.text.tinyDisable,)
+                                                  Text('Mar. 25, 2020',style: MaaruStyle.text.medium,)
                                                 ],
                                               ),
 
                                               Padding(
                                                   padding:
                                                   EdgeInsets.only(left: 20),child:
-                                              Text('Austin Vet Services',style: MaaruStyle.text.tinyDisable,))
+                                              Text('Austin Vet Services',style: MaaruStyle.text.medium,))
                                             ]))),
 
                               ],

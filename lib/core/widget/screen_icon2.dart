@@ -30,26 +30,23 @@ class _ToggleButtonState extends State<ToggleButton> {
         ),
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.fromLTRB(70, 10, 35, 15),
-            child: Align(
-              alignment: Alignment.center,
-              child: Text('Male',
-                  style: pressed
-                      ? GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Poppins',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500),
-                        )
-                      : GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Poppins',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500),
-                        )),
-            ),
+            padding: EdgeInsets.fromLTRB(50, 10, 50, 15),
+            child: Text('Male',
+                style: pressed
+                    ? GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Poppins',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                )
+                    : GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Poppins',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                )),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(40, 10, 35, 15),

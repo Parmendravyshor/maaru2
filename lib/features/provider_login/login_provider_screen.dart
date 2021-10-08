@@ -4,6 +4,7 @@ import 'package:maru/core/widget/icons.dart';
 import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 
 class LoginProviderScreen extends StatefulWidget {
@@ -80,7 +81,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
               ),
               ThemedButton(
                 text: 'Login',
-                onPressed: () {},
+                onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CreateProviderHome()));},
               ),
               SizedBox(
                 height: 20,
