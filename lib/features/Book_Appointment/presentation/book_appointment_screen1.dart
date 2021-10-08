@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
+import 'book_appointment_screen2.dart';
+import 'booked_confirm.dart';
 
 class BookAppointment1 extends StatefulWidget {
   @override
@@ -9,24 +11,21 @@ class BookAppointment1 extends StatefulWidget {
 }
 
 class _BookAppointment1State extends State<BookAppointment1> {
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return  Scaffold(
+    return Scaffold(
         backgroundColor: Colors.grey,
         resizeToAvoidBottomInset: true,
         body: SafeArea(
             child: SingleChildScrollView(
                 child: Column(
           children: [
-
             Container(
               width: 2000,
               child: Image.asset('assets/images/imgdd.jpg'),
             ),
-
-             Container(
+            Container(
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(20),
@@ -35,11 +34,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                   color: Colors.white),
               height: size.height * 0.90,
               width: size.width * 1,
-              child:
-
-
-
-                  Container(
+              child: Container(
                 margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                 color: Colors.white,
                 //height: size.height*0.80,
@@ -79,7 +74,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                       ],
                     ),
                     Row(
-                    //  mainAxisAlignment: MainAxisAlignment.start,
+                      //  mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
                           'Austin Pet Groomer',
@@ -165,7 +160,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                         "the graphic, print, and publishing industries \n"
                         "for previewing layouts and visual mackups.",
                         style: MaaruStyle.text.greyDisable),
-                   const SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Text(
@@ -196,18 +191,23 @@ class _BookAppointment1State extends State<BookAppointment1> {
                         Text('closed', style: MaaruStyle.text.tiny),
                       ],
                     ),
-                    SizedBox(height: 20,),
-                    RoundedButton(
-                      buttonName: 'Book Appointments',
-                      Color1: MaaruColors.primaryColorsuggesion1,
-                      Color: MaaruColors.primaryColorsuggesion,
+                    SizedBox(
+                      height: 20,
                     ),
-
+                    InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => BookedConfirm()));
+                        },
+                        child: RoundedButton(
+                          buttonName: 'Book Appointments',
+                          Color1: MaaruColors.primaryColorsuggesion1,
+                          Color: MaaruColors.primaryColorsuggesion,
+                        )),
                   ],
                 ),
               ),
             ),
-
           ],
         ))));
   }

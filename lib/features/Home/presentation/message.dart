@@ -18,7 +18,7 @@ class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFffffff),
         body: SafeArea(
             child: Column(
 
@@ -41,27 +41,31 @@ class _MessagesState extends State<Messages> {
                   ),
                 )),
 
-            Container(
-              padding: EdgeInsets.only(right: 20,left: 20
-              ),
-              color: Colors.white,
-              height: 45,
-              //  width: 200,
-              child: TextFormField(
-                cursorColor: Colors.black,
-                decoration: InputDecoration(
-                    border: new OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(10.7),
-                        borderSide: new BorderSide()),
-                    hintText: 'Search',
-                    fillColor: Colors.white,
-                    suffixIcon: Image.asset(
-                      'assets/icons/icone-setting-19.png',
-                      height: 50,
-                      // width: 30,
-                    )),
-              ),
-            ),
+            Padding(padding: EdgeInsets.only(top: 15,right: 20,left: 10),
+                child:
+                TextFormField(
+
+                  // cursorColor: Colors.black,
+                  decoration: InputDecoration(
+
+                      enabledBorder: new OutlineInputBorder(
+                          borderRadius:
+                          new BorderRadius.circular(10.7),
+                          borderSide: new BorderSide(color: Colors.grey[300],width: 1.0)),
+                      focusedBorder: new OutlineInputBorder(
+                          borderRadius:
+                          new BorderRadius.circular(10.7),
+                          borderSide: new BorderSide(color: Colors.grey[300],width: 1.0)),
+
+                      hintText: 'Search',hintStyle: MaaruStyle.text.greyDisable,
+                      contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 25.0, 10.0),
+                      fillColor: Colors.white,
+                      suffixIcon: Image.asset(
+                        'assets/icons/icone-setting-19.png',
+                        height: 50,
+                        // width: 30,
+                      )),
+                )),
             SizedBox(
               height: 30,
             ),
@@ -101,7 +105,7 @@ class _MessagesState extends State<Messages> {
 // ),
                   )),
 
-
+SizedBox(height: 20,),
             CustomCard()
           ],
         )));

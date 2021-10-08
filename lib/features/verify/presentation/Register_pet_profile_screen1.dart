@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
@@ -72,7 +73,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
         body: SingleChildScrollView(
             child: SafeArea(
                 child: Column(children: [
-          ProfileForm(),
+          ProfileForm(assetImage: 'assets/images/dogicon.png',),
           Padding(
               padding: EdgeInsets.only(left: 40, right: 40),
               child: Row(
@@ -114,21 +115,18 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
           ),
           Container(
             width: 1000,
-            height: 1000,
+            height: 920,
             alignment: FractionalOffset.bottomCenter,
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                color: Color(0xFFffffff), borderRadius: BorderRadius.circular(30)),
             child: Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: Column(
                   children: [
+                    SizedBox(height: 20,),
                     Text(
                       "Gender",
-                      style: TextStyle(
-                          //  color: MyTheme.secondryColor,
-                          fontFamily: 'Poppins',
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500),
+                      style: MaaruStyle.text.tiniest,
                     ),
                     SizedBox(height: 20),
                     ToggleButton(),
@@ -136,7 +134,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                       height: 20.0,
                     ),
                     ThemedTextField(
-                      "Pet Name",
+                      "Pet Name   ",
                       TextInputType.text,
                       textStyle: TextStyle(color: Colors.black),
                       textInputAction: TextInputAction.next,
@@ -146,11 +144,11 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                         editingController: _petName,
                     ),
                     new SizedBox(
-                      height: 20.0,
+                      height: 10.0,
                     ),
                     ThemedTextField(
                       "Bread Type", TextInputType.text,
-                      textStyle: TextStyle(color: Colors.black),
+                        textStyle: TextStyle(color: Colors.black),
                       textInputAction: TextInputAction.next,
                       onChanged: (text) {
                         //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
@@ -170,16 +168,14 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                       children: [
                         InkWell(
                           onTap: () {},
-                          child: Text(
+                          child:
+                              Padding(padding: EdgeInsets.only(left: 50),
+                          child:
+                          Text(
                             "Birth Date",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
-                                // color: MyTheme.secondryColor
-                                ),
+                            style:MaaruStyle.text.tiniest,
                           ),
-                        ),
+                        )),
                       ],
                     ),
                     new SizedBox(
@@ -204,19 +200,36 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                     SizedBox(
                       height: 10.0,
                     ),
+                    Padding(padding: EdgeInsets.only(left: 10),child:
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          ReuseCircle1(
-                            text: 'Neutered',
+                          Container(
+                            alignment: Alignment.center,
+                            width: 85,
+                            height: 85,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: MaaruColors.textColor),
+                                color:
+                               MaaruColors.primaryColorsuggesion1),
+                            child: Text(
+                           'Neutered',
+                              style: GoogleFonts.poppins(textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500),
+                            )),
                           ),
+                          SizedBox(width: 10,),
                           ReuseCircle1(
                             text: 'Spade',
                           ),
                           ReuseCircle1(
                             text: 'Neighter',
                           ),
-                        ]),
+                        ])),
                     new SizedBox(
                       height: 40.0,
                     ),
@@ -236,7 +249,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                   color: Colors.white12,
                                   shape: BoxShape.circle),
                               child: Text(
-                                'Back',
+                                'Back',style: MaaruStyle.text.greyDisable,
                               ),
                             ),
                           ),
@@ -284,6 +297,9 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
 }
 
 class ProfileForm extends StatefulWidget {
+  final String assetImage;
+
+  const ProfileForm({Key key, this.assetImage}) : super(key: key);
   @override
   _ProfileFormState createState() => _ProfileFormState();
 }
@@ -329,7 +345,7 @@ class _ProfileFormState extends State<ProfileForm> {
                           child: ClipOval(
                             child: (_image != null)
                                 ? Image.file(_image)
-                                : Image.asset('assets/images/dogicon.png'),
+                                : Image.asset(widget.assetImage),
                           ),
                           backgroundColor: MaaruColors.whiteColor,
 
@@ -354,6 +370,7 @@ class ReuseCircle1 extends StatefulWidget {
 
 class _ReuseCircle1State extends State<ReuseCircle1> {
   bool pressGeoON = true;
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -372,13 +389,17 @@ class _ReuseCircle1State extends State<ReuseCircle1> {
                 pressGeoON ? Colors.white : MaaruColors.primaryColorsuggesion1),
         child: Text(
           widget.text,
-          style: TextStyle(
+          style: pressGeoON? TextStyle(
               color: MaaruColors.textColor,
               fontFamily: 'Poppins',
               fontSize: 12,
-              fontWeight: FontWeight.w300),
+              fontWeight: FontWeight.w300): GoogleFonts.poppins(textStyle: TextStyle(
+              color: Colors.white,
+              fontFamily: 'Poppins',
+              fontSize: 12,
+              fontWeight: FontWeight.w500),))
         ),
       ),
-    ));
+    );
   }
 }

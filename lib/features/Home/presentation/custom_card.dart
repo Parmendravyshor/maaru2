@@ -24,12 +24,18 @@ class _CustomCardState extends State<CustomCard> {
             Align(
             alignment: Alignment.centerRight,
             child:Expanded(
-                child:  Container(
-                    height: 100,child:
-                Card(
-                  color: Colors.grey[50],
+                child: Padding(padding: EdgeInsets.only(left: 10,right: 20),
+                child:
+                Container(
 
-                  elevation:4.0,
+                    height: 120,width:400,
+
+                    decoration: BoxDecoration(
+                        color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(20.0),
+
+
+                    ),
                   child:Center(child:
 
           ListTile(
@@ -41,13 +47,14 @@ class _CustomCardState extends State<CustomCard> {
             ),
             title: Text(
               'Austin pet care',
-              style: MaaruStyle.text.small,
+              style: MaaruStyle.text.large,
             ),
-            subtitle: Text(
+            subtitle:
+            Text(
               'Are we meeting tommarow still pet services',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.grey),
             ),
-            trailing: Text('today'),
+            trailing: Text('today', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.grey),),
 
           ),
 
@@ -55,12 +62,18 @@ class _CustomCardState extends State<CustomCard> {
           Align(
               alignment: Alignment.centerRight,
               child:Expanded(
-                  child:  Container(
-                      height: 100,child:
-                  Card(
-                      color: Colors.grey[50],
+                  child: Padding(padding: EdgeInsets.only(left: 10,right: 20),
+                      child:
+                      Container(
 
-                      elevation:4.0,
+                          height: 120,width:400,
+
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.0),
+
+
+                          ),
                       child:Center(child:
 
                       ListTile(
@@ -72,13 +85,13 @@ class _CustomCardState extends State<CustomCard> {
                         ),
                         title: Text(
                           'Austin pet Grooming',
-                          style: MaaruStyle.text.small,
+                          style: MaaruStyle.text.large,
                         ),
                         subtitle: Text(
                           'Are we still meeting tommorrow about the pet services',
-                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.grey),
                         ),
-                        trailing: Text('today'),
+                        trailing: Text('today', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.grey),),
 
                       ),
 

@@ -22,33 +22,38 @@ class _PetProfileState extends State<PetProfile> {
           SizedBox(
             height: 20,
           ),
-          Container(
-            padding: EdgeInsets.only(right: 10, left: 10),
-            color: Colors.white,
-            height: 45,
-            //   width: 200,
-            child: TextFormField(
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                  border: new OutlineInputBorder(
-                      borderRadius: new BorderRadius.circular(10.7),
-                      borderSide: new BorderSide()),
-                  hintText: 'Search',
-                  fillColor: Colors.white,
-                  suffixIcon: Image.asset(
-                    'assets/icons/icone-setting-19.png',
-                    height: 50,
-                    // width: 30,
+              Padding(padding: EdgeInsets.only(top: 15,right: 10,left: 5),
+                  child:
+                  TextFormField(
+
+                    // cursorColor: Colors.black,
+                    decoration: InputDecoration(
+
+                        enabledBorder: new OutlineInputBorder(
+                            borderRadius:
+                            new BorderRadius.circular(10.7),
+                            borderSide: new BorderSide(color: Colors.grey[300],width: 1.0)),
+                        focusedBorder: new OutlineInputBorder(
+                            borderRadius:
+                            new BorderRadius.circular(10.7),
+                            borderSide: new BorderSide(color: Colors.grey[300],width: 1.0)),
+
+                        hintText: 'Search',hintStyle: MaaruStyle.text.greyDisable,
+                        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 25.0, 10.0),
+                        fillColor: Colors.white,
+                        suffixIcon: Image.asset(
+                          'assets/icons/icone-setting-19.png',
+                          height: 50,
+                          // width: 30,
+                        )),
                   )),
-            ),
-          ),
           SizedBox(
             height: 20,
           ),
           Container(
               alignment: Alignment.center,
               height: 260,
-              width: 200,
+              width: 250,
               child: ListView.builder(
                 itemCount: 1,
                 scrollDirection: Axis.vertical,
@@ -66,7 +71,7 @@ class _PetProfileState extends State<PetProfile> {
                           width: 240.0,
                           child: Column(children: [
                             Container(
-                              alignment: Alignment.centerRight,
+                              alignment: Alignment.center,
                               child: Image.asset(
                                 'assets/images/kutta.png',
                                 height: 140,
@@ -89,7 +94,7 @@ class _PetProfileState extends State<PetProfile> {
                                   ],
                                 )),
                             Padding(
-                                padding: EdgeInsets.only(right: 70),
+                                padding: EdgeInsets.only(right: 115,bottom: 20),
                                 child: Text(
                                   'Scotis Terrior',
                                   style: MaaruStyle.text.tiny,
@@ -101,19 +106,19 @@ class _PetProfileState extends State<PetProfile> {
               )),
           Row(children: [
             Padding(
-                padding: EdgeInsets.only(left: 80),
+                padding: EdgeInsets.only(left: 70),
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (_) => CreateregisterPetProfile1()));
                   },
                   child: Image.asset(
-                    'assets/icons/icone-setting-64.png',
-                    height: 40,
+                    'assets/icons/New Project (40).png',
+                    height: 60,
                   ),
                 )),
             SizedBox(
-              width: 40,
+              width: 20,
             ),
             InkWell(
               onTap:() {

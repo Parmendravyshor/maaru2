@@ -42,7 +42,7 @@ class ThemedButton extends StatelessWidget {
     final enabledColor = MaaruColors.buttonColor;
     final disabledColor = MaaruStyle.colors.buttonDisabled;
 
-    final enabledTextColor = MaaruColors.buttonTextColor;
+    final enabledTextColor = MaaruColors.primaryColorsuggesion1;
     final disabledTextColor = MaaruStyle.colors.textDisabled;
     return Center(
         child: FractionallySizedBox(
@@ -64,7 +64,7 @@ class ThemedButton extends StatelessWidget {
                         //style: TextStyle(color: MaaruColors.buttonTextColor),
 
                         style: MaaruStyle.text.small.copyWith(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             color: enabled
                                 ? enabledTextColor
                                 : disabledTextColor))))));

@@ -13,12 +13,12 @@ class SkipButtons extends StatelessWidget {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (_) => CreateHomeScreen()));
         },
-        child:
+        child:Padding(padding: EdgeInsets.only(right: 20),child:
         Text(
           'Skip Registration',
-          style: MaaruStyle.text.medium,
+          style:TextStyle(color: Colors.white)
         ),
-      ),
+      )),
     );
   }
 }

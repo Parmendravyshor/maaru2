@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
+import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
@@ -36,10 +37,11 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
               )),
           Container(
               width: 1000,
-              height: 600,
+              height: 700,
               alignment: FractionalOffset.bottomCenter,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                  color: Color(0xFFffffff),
+                  borderRadius: BorderRadius.circular(20)),
               child: Container(
                   padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
                   child: Column(
@@ -48,7 +50,10 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                         Text('Max',
                             style: MaaruStyle.text.large,
                             textAlign: TextAlign.left),
-                        Text('Jack  Russell'),
+                        Text(
+                          'Jack  Russell',
+                          style: MaaruStyle.text.tiny,
+                        ),
                         SizedBox(
                           width: 20,
                         ),
@@ -66,9 +71,13 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                         TextFormField(
                           maxLines: 3,
                           decoration: InputDecoration(
+                              hintText: 'Seprated by comma',
+                              hintStyle: MaaruStyle.text.greyDisable,
                               border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)))),
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide:
+                                      BorderSide(color: Colors.grey[50]))),
                         ),
                         SizedBox(
                           height: 30,
@@ -80,14 +89,16 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                         SizedBox(
                           height: 10,
                         ),
-                        ThemedButton(
-                          text: 'Upload Vaccine Record',
-                          enabled: true,
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => CreateRegisterPetProfile2()));
-                          },
-                        ),
+                        InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => CreateRegisterPetProfile2()));
+                            },
+                            child: RoundedButton(
+                              buttonName: 'Upload Vaccine Record',
+                              Color: MaaruColors.primaryColorsuggesion,
+                              Color1:MaaruColors.primaryColorsuggesion1,
+                            )),
                         SizedBox(
                           height: 40,
                         ),
@@ -123,7 +134,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                       color: Colors.white12,
                                       shape: BoxShape.circle),
                                   child: Text(
-                                    'Back',
+                                    'Back',style: MaaruStyle.text.greyDisable,
                                   ),
                                 ),
                               ),

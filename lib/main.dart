@@ -3,17 +3,37 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:maru/features/Account_setting/presentation/account_setting.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
-
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/splash/view/splash_screen.dart';
+import 'package:maru/features/verify/presentation/Register_pet_profile_screen1.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-
 import 'core/theme/maaru_style.dart';
-
+import 'core/widget/date_picker.dart';
+import 'features/Account_setting/presentation/edit_profile_screen.dart';
+import 'features/Account_setting/presentation/payment_screen.dart';
+import 'features/Account_setting/presentation/transition.dart';
 import 'features/Book_Appointment/presentation/book_appointment_screen1.dart';
+import 'features/Book_Appointment/presentation/book_appointment_screen2.dart';
+import 'features/Book_Appointment/presentation/booked_confirm.dart';
+import 'features/Book_Appointment/presentation/reviewe_screen.dart';
+import 'features/Home/presentation/home_sceen.dart';
+import 'features/Home/presentation/message.dart';
+import 'features/Home/presentation/pet_profile.dart';
+import 'features/provider_home/presentation/provider_accept_decline_screen.dart';
+import 'features/provider_home/presentation/upcoming_appointment_calender.dart';
+import 'features/provider_home/presentation/upcoming_appointment_screen.dart';
+import 'features/provider_register/provider_register.dart';
+import 'features/provider_setting/presentation/provider_settin.dart';
+import 'features/splash/view/after_splash_Screen2.dart';
+import 'features/verify/presentation/Register_pet_profile_screen2.dart';
+import 'features/verify/presentation/Register_pet_profile_screen3.dart';
+import 'features/verify/presentation/register_pet_profile4.dart';
 import 'features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'features/view_pet_profile/presentation/view_pet_profile2.dart';
 import 'features/view_pet_profile/presentation/view_pet_profile3.dart';
-
+import 'package:flutter_slidable/flutter_slidable.dart';
 void main() {
   runApp(MyApp());
   //BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
@@ -35,7 +55,59 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: BookAppointmentScreen3()));
+        home: Scaffold(body: AccountSettingScreen ()));
+  }
+}
+class Slidabble extends StatefulWidget {
+
+  @override
+  _SlidabbleState createState() => _SlidabbleState();
+}
+
+class _SlidabbleState extends State<Slidabble> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView.builder(
+
+          itemCount:20,
+          itemBuilder: (context, index){
+            return Slidable(
+              actionPane:SlidableDrawerActionPane(),
+              actions: <Widget>[
+                IconSlideAction(
+                  caption: 'Archive',
+                  color: Colors.blue,
+                  icon: Icons.archive,
+
+                ),
+                IconSlideAction(
+                  caption: 'Share',
+                  color: Colors.indigo,
+                  icon: Icons.share,
+
+                ),
+              ],
+              secondaryActions: <Widget>[
+                IconSlideAction(
+                  caption: 'More',
+                  color: Colors.black45,
+                  icon: Icons.more_horiz,
+
+                ),
+                IconSlideAction(
+                  caption: 'Delete',
+                  color: Colors.red,
+                  icon: Icons.delete,
+
+                ),
+              ],
+              child: Container(
+                child: Text('Item Data$index'),
+              ),
+            );
+    }
+    ));
   }
 }
 

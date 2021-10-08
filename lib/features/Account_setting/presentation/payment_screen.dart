@@ -121,11 +121,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
               SizedBox(
                 height: 10,
               ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+              child:Column(children: [
+
               Container(
                   height: 100,
                   width: 380,
                   decoration: BoxDecoration(
-                      color: Colors.green[50],
+                      color: Color(0xFFe0eae7),
                       borderRadius: BorderRadius.circular(20.0)),
                   child: Padding(
                       padding: EdgeInsets.fromLTRB(20, 20, 10, 0),
@@ -135,7 +139,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           children: [
                             Text(
                               'Visa Card',
-                              style: MaaruStyle.text.medium,
+                              style: MaaruStyle.text.large,
                             ),
                             Text('Primary payment'),
                           ],
@@ -144,8 +148,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           height: 20,
                         ),
                         Padding(
-                            padding: EdgeInsets.only(right: 240),
-                            child: Text('**** **** **** 9877'))
+                            padding: EdgeInsets.only(right: 150),
+                            child: Text('**** **** **** 9877',style: MaaruStyle.text.tiny,))
                       ]))),
               SizedBox(
                 height: 20,
@@ -154,8 +158,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   height: 100,
                   width: 380,
                   decoration: BoxDecoration(
-                      color: Colors.grey[50],
-                      borderRadius: BorderRadius.circular(20.0)),
+                      color: Colors.white,
+
+                      borderRadius: BorderRadius.circular(20.0),
+                    border: Border.all(color: Colors.grey[100])
+                  ),
                   child: Padding(
                       padding: EdgeInsets.fromLTRB(20, 20, 10, 0),
                       child: Column(children: [
@@ -164,7 +171,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           children: [
                             Text(
                               'Discover Card',
-                              style: MaaruStyle.text.medium,
+                              style: MaaruStyle.text.greyDisable,
                             ),
                           ],
                         ),
@@ -172,8 +179,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           height: 20,
                         ),
                         Padding(
-                            padding: EdgeInsets.only(right: 240),
-                            child: Text('**** **** **** 9877'))
+                            padding: EdgeInsets.only(right: 150),
+                            child: Text('**** **** **** 9877',style: MaaruStyle.text.greyDisable,))
                       ]))),
               SizedBox(
                 height: 30,
@@ -187,6 +194,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
               )
             ],
           ),
-        )));
+        )]))));
   }
 }

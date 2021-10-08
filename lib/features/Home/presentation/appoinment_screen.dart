@@ -11,10 +11,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFffffff),
         body: SafeArea(
-            child:
+
+            child:SingleChildScrollView(child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    SizedBox(height: 30,),
           ShowLocation(),
           SizedBox(
             height: 20,
@@ -25,24 +27,31 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Expanded(
-                      child: Container(
-                        color: Colors.white,
-                        height: 45,
-                        //     width: 350,
-                        child: TextFormField(
-                          cursorColor: Colors.black,
-                          decoration: InputDecoration(
-                              border: new OutlineInputBorder(
-                                  borderRadius: new BorderRadius.circular(10.7),
-                                  borderSide: new BorderSide()),
-                              hintText: 'Search',
-                              fillColor: Colors.white,
-                              suffixIcon: Image.asset(
-                                'assets/icons/icone-setting-19.png',
-                                width: 30,
-                              )),
-                        ),
-                      ),
+                      child: Padding(padding: EdgeInsets.only(top: 15,right: 10,),
+                          child:
+                          TextFormField(
+
+                            // cursorColor: Colors.black,
+                            decoration: InputDecoration(
+
+                                enabledBorder: new OutlineInputBorder(
+                                    borderRadius:
+                                    new BorderRadius.circular(10.7),
+                                    borderSide: new BorderSide(color: Colors.grey[300],width: 1.0)),
+                                focusedBorder: new OutlineInputBorder(
+                                    borderRadius:
+                                    new BorderRadius.circular(10.7),
+                                    borderSide: new BorderSide(color: Colors.grey[300],width: 1.0)),
+
+                                hintText: 'Search',hintStyle: MaaruStyle.text.greyDisable,
+                                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                                fillColor: Colors.white,
+                                suffixIcon: Image.asset(
+                                  'assets/icons/icone-setting-19.png',
+                                  height: 50,
+                                  // width: 30,
+                                )),
+                          )),
                     ),
                     SizedBox(
                       width: 10,
@@ -65,7 +74,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
           SizedBox(
             height: 40,
           ),
-          Image.asset('assets/images/frankspet.png'),
+          Padding(padding: EdgeInsets.only(left: 20,right: 15),child:
+          Image.asset('assets/images/frankspet.png')),
           SizedBox(
             height: 80,
           ),
@@ -76,6 +86,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               style: MaaruStyle.text.large,
             ),
           ),
-        ])));
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Padding(padding: EdgeInsets.only(left: 20,right: 15),child:
+                  Image.asset('assets/images/frankspet.png')),
+        ]))));
   }
 }

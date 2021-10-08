@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFffffff),
         body: SafeArea(
             child: SingleChildScrollView(
                 child: Padding(
@@ -30,27 +30,40 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 20,
                           ),
-                          Container(
-                            padding: EdgeInsets.only(right: 20),
-                            color: Colors.white,
-                            height: 45,
-                            //   width: 200,
-                            child: TextFormField(
-                              cursorColor: Colors.black,
+                          // Container(
+                          //   alignment: Alignment.center,
+                          //   padding: EdgeInsets.only(right: 20,),
+                          //   color: Colors.white,
+                          //   height: 50,
+                          //   //   width: 200,
+                          //
+                          //   child:
+                          Padding(padding: EdgeInsets.only(top: 15,right: 10,left: 5),
+                            child:
+                            TextFormField(
+
+                             // cursorColor: Colors.black,
                               decoration: InputDecoration(
-                                  border: new OutlineInputBorder(
+
+                                  enabledBorder: new OutlineInputBorder(
                                       borderRadius:
                                           new BorderRadius.circular(10.7),
-                                      borderSide: new BorderSide()),
-                                  hintText: 'Search',
+                                      borderSide: new BorderSide(color: Colors.grey[300],width: 1.0)),
+                                focusedBorder: new OutlineInputBorder(
+                                    borderRadius:
+                                    new BorderRadius.circular(10.7),
+                                    borderSide: new BorderSide(color: Colors.grey[300],width: 1.0)),
+
+                                  hintText: 'Search',hintStyle: MaaruStyle.text.greyDisable,
+                                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 25.0, 10.0),
                                   fillColor: Colors.white,
                                   suffixIcon: Image.asset(
                                     'assets/icons/icone-setting-19.png',
                                     height: 50,
                                     // width: 30,
                                   )),
-                            ),
-                          ),
+                            )),
+                        //  ),
                           SizedBox(
                             height: 30,
                           ),
@@ -66,10 +79,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 30,
                           ),
+                    Padding(
+                        padding: EdgeInsets.only(left: 5),child:
                           Text('Upcoming Appoinments',
                               style:
                                  MaaruStyle.text.large,
-                              ),
+                              )),
                           Padding(
                             padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
                             child: Image.asset(
@@ -87,10 +102,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: 30,
                           ),
+                    Padding(
+                        padding:  EdgeInsets.only(left: 5),child:
                           Text(
                             'Recent Messages',
                             style: MaaruStyle.text.large,
-                          ),
+                          )),
                           Padding(
                             padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
                             child: Image.asset(
@@ -142,7 +159,7 @@ class HorizList extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                          padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

@@ -19,16 +19,20 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
   bool update = true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-            child: SingleChildScrollView(
-                //  child:
+            child:
+            SingleChildScrollView(
+
+                //  child
                 //   Padding(
                 padding: EdgeInsets.only(
                   left: 20,
                 ),
-                child: Column(
+                child:Expanded(child:
+            Flex(direction: Axis.vertical,children:[
+                Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Align(
@@ -63,7 +67,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                               image: 'assets/icons/icone-setting-1.png',
                               hite: 40,
                               text: 'Edit Profile',
-                              size: 120,
+                              size: 115,
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (_) => CreateUserProfile()));
@@ -76,7 +80,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                               image: 'assets/icons/icone-setting-2.png',
                               hite: 40,
                               text: 'Change Password',
-                              size: 50,
+                              size: 35,
                               onPressed: () {},
                             ),
                             SizedBox(
@@ -121,7 +125,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                   style: MaaruStyle.text.medium,
                                                 ),
                                                 SizedBox(
-                                                  width: 50,
+                                                  width: 35,
                                                 ),
                                                 Align(
                                                   alignment:
@@ -177,7 +181,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                   style: MaaruStyle.text.medium,
                                                 ),
                                                 SizedBox(
-                                                  width: 50,
+                                                  width: 33,
                                                 ),
                                                 Switch(
                                                   activeColor: MaaruColors
@@ -209,11 +213,12 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                             SizedBox(
                               height: 20,
                             ),
+                            
                             Test3(
                               image: 'assets/icons/icone-setting-7.png',
                               hite: 40,
                               text: 'Terms and  Conditions',
-                              size: 10,
+                              size: 0,
                               onPressed: () {},
                             ),
                             SizedBox(
@@ -229,9 +234,10 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (_) => AfterSplashScreen()));
                               },
-                            )
+                            ),
+                            SizedBox(height: 20,)
                           ]))
-                    ]))));
+                    ])])))));
   }
 }
 

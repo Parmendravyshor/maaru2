@@ -54,15 +54,15 @@ class MaaruColors {
   Color get divider => _darkTheme ? Color(0x0DE1E9F0) : Color(0xFFD5D9DE);
   TextStyle get tiny {
     return GoogleFonts.poppins( textStyle: TextStyle(
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         fontFamily: 'Poppins',
         fontSize: 15,
-        color: MaaruColors(_darkTheme).textColorBlack));
+        color: Colors.black));
   }
 
   TextStyle get mediumGreen {
     return GoogleFonts.poppins( textStyle: TextStyle(
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         fontFamily: 'Poppins',
         fontSize: 20,
         color: MaaruColors.primaryColorsuggesion1));
@@ -71,7 +71,7 @@ class MaaruColors {
     return GoogleFonts.poppins( textStyle: TextStyle(
         fontWeight: FontWeight.normal,
         fontFamily: 'Poppins',
-        fontSize: 13,
+        fontSize: 15,
         color: Colors.grey[400]));
   }
 
@@ -90,7 +90,7 @@ class MaaruColors {
       //   fontWeight: FontWeight.bold,
       fontFamily: 'Poppins',
       fontSize: 20,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w600,
       color: Colors.black));
 
   TextStyle get medium {
@@ -99,7 +99,7 @@ class MaaruColors {
         fontFamily: 'Poppins',
         fontSize: 20,
         color:
-            _darkTheme ? MaaruColors(_darkTheme).textColorWhite : Colors.black));
+             Colors.black));
   }
 
   TextStyle get large {
@@ -126,22 +126,20 @@ class MaaruColors {
         fontSize: 15,
         color:Colors.red));
   }
-}
+  // ignore: unused_element
 
-// ignore: unused_element
-class _MaaruTextStyle {
-  final bool _darkTheme;
 
-  _MaaruTextStyle(this._darkTheme);
+
   TextStyle get tiniest {
-    return TextStyle(
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Quicksand',
-        fontSize: 13,
-        color: _darkTheme
-            ? MaaruColors(_darkTheme).textColorWhite
-            : MaaruColors(_darkTheme).textColorBlack);
+  return GoogleFonts.poppins(textStyle: TextStyle(
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Poppins',
+  fontSize: 18,
+  color: Colors.black));
   }
+
+
+
 
 
 

@@ -49,12 +49,15 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
                         onPressed: _password ? _toggle : null,
                         child: Image(image: widget.suffixIcon))))
             : null,
-        errorBorder: MaaruStyle.defaultBorder,
+      //  errorBorder: MaaruStyle.defaultBorder,
         // focusedErrorBorder: MaaruStyle.defaultBorder,
         // border: MaaruStyle.defaultBorder,
         // disabledBorder: MaaruStyle.defaultBorder,
         // enabledBorder: MaaruStyle.defaultBorder,
         // focusedBorder: MaaruStyle.focusedBorder,
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey[300]),
+        ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         labelText: widget.placeholder,
         contentPadding: EdgeInsets.only(left: 20),
@@ -65,6 +68,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
+
             height: TextFieldContainerHeight,
             color: Colors.white,
             child: FractionallySizedBox(
@@ -83,10 +87,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
                             onChanged: widget.onChanged,
                             autocorrect: false,
                             keyboardType: widget.keyboardType,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                            style:MaaruStyle.text.tiniest,
                             decoration: inputDecoration(widget),
                           )))
                 ]))));
@@ -155,7 +156,7 @@ class ThemeChanges2 extends StatelessWidget {
             child: ThemedTextField(
               "0", TextInputType.text,
               textInputAction: TextInputAction.next,
-              textStyle: TextStyle(color: Colors.black),
+              textStyle: TextStyle(color: Colors.grey[300],height: 20),
               onChanged: (text) {
                 //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
               },
@@ -189,9 +190,11 @@ class ThemeChanges extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         new Flexible(
-          child: Container(
+          child:
+          Container(
             padding: EdgeInsets.only(left: 15),
-            child: ThemedTextField(
+            child:
+            ThemedTextField(
               "Height", TextInputType.text,
               textInputAction: TextInputAction.next,
               textStyle: TextStyle(color: Colors.black),
@@ -205,10 +208,13 @@ class ThemeChanges extends StatelessWidget {
         SizedBox(
           width: 10,
         ),
+
         new Flexible(
+
           child: Container(
             padding: EdgeInsets.only(right: 15),
-            child: ThemedTextField(
+            child:
+            ThemedTextField(
               "0 ft", TextInputType.text,
               textInputAction: TextInputAction.next,
               textStyle: TextStyle(color: Colors.black),

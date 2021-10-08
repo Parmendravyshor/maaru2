@@ -3,7 +3,8 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
-
+import 'package:flutter/painting.dart';
+import 'package:maru/features/verify/presentation/Register_pet_profile_screen1.dart';
 class CreateUserProfile extends StatefulWidget {
   @override
   _CreateUserProfileState createState() => _CreateUserProfileState();
@@ -53,16 +54,27 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
           SizedBox(
             height: 20,
           ),
-          Container(
-              height: size.height * 0.2,
-              width: size.width * 0.9,
-              child: ProfileAvatar(
-                  imageUrl: 'assets/images/4970774.png',
-                  width: 20,
-                  avatarRadius: 100)),
-          // BackgroundImage(
+          // Container(
+          //  //   color: Colors.grey[360],
+          //     height: size.height * 0.2,
+          //     width: size.width * 0.9,
+          //     child: const
+                  Container(
+                   //   color: Colors.grey[360],
+                      height: size.height * 0.3,
+                      width: size.width * 0.9,
+                      child: ProfileForm(assetImage: 'assets/images/4970774.png',)),
+                      // ProfileAvatar(
+                      //     imageUrl: 'assets/images/4970774.png',
+                      //  //   Color: Colors.grey[360],
+                      //     width: 20,
+                      //     avatarRadius: 100)),
+                  // BackgroundImage(
+                  //   assetImage: 'assets/images/dogicon.png',
+
+                  // BackgroundImage(
           //   assetImage: 'assets/images/dogicon.png',
-          // )),
+
 
           Container(
             width: 1000,

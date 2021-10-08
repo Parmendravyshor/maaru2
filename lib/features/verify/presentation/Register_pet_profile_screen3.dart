@@ -51,7 +51,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
               )),
           Container(
               width: 1000,
-              height: 1200,
+              height: 1250,
               alignment: FractionalOffset.bottomCenter,
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(20)),
@@ -63,7 +63,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                         Text('Max',
                             style: MaaruStyle.text.large,
                             textAlign: TextAlign.left),
-                        Text('Jack  Russell'),
+                        Text('Jack  Russell',style: MaaruStyle.text.tiny,),
                         SizedBox(
                           width: 20,
                         ),
@@ -82,9 +82,12 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                           maxLines: 3,
                           decoration: InputDecoration(
                               hintText: 'Note',
+                              hintStyle: MaaruStyle.text.greyDisable,
                               border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)))),
+                                  BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide:
+                                  BorderSide(color: Colors.grey[50]))),
                         ),
                         SizedBox(
                           height: 30,
@@ -100,15 +103,18 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                           maxLines: 3,
                           decoration: InputDecoration(
                               hintText: 'Note',
+                              hintStyle: MaaruStyle.text.greyDisable,
                               border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)))),
+                                  BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide:
+                                  BorderSide(color: Colors.grey[50]))),
                         ),
                         SizedBox(
                           height: 30,
                         ),
                         Text(
-                          'Temprament',
+                          'Temperament',
                           style: MaaruStyle.text.small,
                         ),
                         SizedBox(
@@ -118,9 +124,12 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                           maxLines: 3,
                           decoration: InputDecoration(
                               hintText: 'Note',
+                              hintStyle: MaaruStyle.text.greyDisable,
                               border: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)))),
+                                  BorderRadius.all(Radius.circular(20.0)),
+                                  borderSide:
+                                  BorderSide(color: Colors.grey[50]))),
                         ),
                         SizedBox(
                           height: 20,
@@ -160,7 +169,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                             textInputAction: TextInputAction.next,
                             onChanged: (text) {},
                             controller: _nameEditingController,
-                            decoration: InputDecoration(hintText: 'Name'),
+                            decoration: InputDecoration(hintText: 'Name',hintStyle: MaaruStyle.text.greyDisable),
                           ),
                         SizedBox(
                           height: 30,
@@ -171,7 +180,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                             onChanged: (text) {},
                             controller: _controller,
                             decoration: InputDecoration(
-                                hintText: 'How many times a day?'),
+                                hintText: 'How many times a day?',hintStyle: MaaruStyle.text.greyDisable),
                           ),
                         SizedBox(
                           height: 30,
@@ -180,7 +189,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                           TextFormField(
                             maxLines: 3,
                             decoration: InputDecoration(
-                                hintText: 'Note',
+                                hintText: 'Note',hintStyle: MaaruStyle.text.greyDisable,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(20.0)))),
@@ -222,7 +231,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                       color: Colors.white12,
                                       shape: BoxShape.circle),
                                   child: Text(
-                                    'Back',
+                                    'Back',style: MaaruStyle.text.greyDisable,
                                   ),
                                 ),
                               ),

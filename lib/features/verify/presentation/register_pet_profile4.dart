@@ -37,7 +37,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
               )),
           Container(
               width: 1000,
-              height: 700,
+              height: 600,
               alignment: FractionalOffset.bottomCenter,
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(20)),
@@ -148,7 +148,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                       color: Colors.white12,
                                       shape: BoxShape.circle),
                                   child: Text(
-                                    'Back',
+                                    'Back',style: MaaruStyle.text.greyDisable,
                                   ),
                                 ),
                               ),
@@ -200,7 +200,7 @@ class _ImagesggState extends State<Imagesgg> {
               color: pressAttention
                   ? Colors.white
                   : MaaruColors.primaryColorsuggesion1,
-              border: Border.all(color: Colors.grey),
+              border: Border.all(color: Colors.grey[300]),
             ),
             child: Column(children: [
               Padding(

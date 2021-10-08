@@ -19,13 +19,13 @@ class AfterSplashScreen2 extends StatelessWidget {
           width: 3000,
           fit: BoxFit.cover,
         ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(60, 230, 0, 0),
-          child: BackgroundImage(
-            assetImage: 'assets/images/logom (3).png',
-            widt: 300,
-          ),
-        ),
+        Container(
+            alignment: Alignment.center,
+            child: BackgroundImage(
+              assetImage: 'assets/images/logom (3).png',
+              //  hight: 200,
+              widt: 300,
+            )),
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Column(

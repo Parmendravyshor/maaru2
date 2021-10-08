@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maru/features/Account_setting/presentation/Account_setting.dart';
+import 'package:maru/features/Account_setting/presentation/account_setting.dart';
 
 class ShowLocation extends StatelessWidget {
   @override
@@ -17,8 +17,11 @@ class ShowLocation extends StatelessWidget {
                   borderRadius: new BorderRadius.circular(25.0),
                   borderSide: const BorderSide(color: Colors.white, width: 0.0),
                 ),
-                hintText: 'Search',
-                fillColor: Colors.grey[50],
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: new BorderRadius.circular(25.0),
+                  borderSide: const BorderSide(color: Colors.white, width: 0.0)),
+                hintText: 'Search Location',
+                fillColor: Colors.grey[100],
                 suffixIcon: Container(
                   child: IconButton(
                     icon: Icon(

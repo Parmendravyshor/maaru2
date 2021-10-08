@@ -123,7 +123,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 20,
                         ),
                         ThemedButton(
-                          text: "Register",
+                          text: "Join",
                           onPressed: () {
                             String fname = _fnameController.text;
                             String lname = _lnameController.text;
