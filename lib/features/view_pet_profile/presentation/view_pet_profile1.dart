@@ -1,9 +1,12 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile2.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
 
@@ -19,6 +22,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
     return Scaffold(
         backgroundColor: MaaruColors.DogsBackground,
         body: SafeArea(
+          bottom: false,
             child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,7 +31,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                 height: 20,
               ),
               Container(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.bottomRight,
                   height: size.height * 0.25,
                   width: size.width * 0.9,
                   child: BackgroundImage(
@@ -66,8 +70,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                               builder: (_) =>
                                                   ViewPetProfile2()));
                                     },
-                                    child:
-                                    Image.asset(
+                                    child: Image.asset(
                                       'assets/icons/icone-setting-68.png',
                                       height: 40,
                                       width: 40,
@@ -80,16 +83,15 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                   onTap: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
-                                            builder: (_) =>
-                                                ViewPetProfile3()));
+                                            builder: (_) => ViewPetProfile3()));
                                   },
-                                  child:
-                                  Image.asset(
-                                  'assets/icons/icone-setting-68.png',
-                                  height: 40,
-                                  width: 40,
-                                  color: Colors.grey[100],
-                                ),)
+                                  child: Image.asset(
+                                    'assets/icons/icone-setting-68.png',
+                                    height: 40,
+                                    width: 40,
+                                    color: Colors.grey[100],
+                                  ),
+                                )
                               ],
                             ),
                             Row(
@@ -103,10 +105,17 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                   SizedBox(
                                     width: size.width * 0.60,
                                   ),
-                                  Image.asset(
-                                    'assets/icons/icone-setting-29.png',
-                                    height: 40,
-                                  )
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    CreateregisterPetProfile1()));
+                                      },
+                                      child: Image.asset(
+                                        'assets/icons/icone-setting-29.png',
+                                        height: 40,
+                                      ))
                                 ]),
                             Text(
                               'Jack  Russell',
@@ -129,7 +138,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                         children: [
                                           Container(
                                             height: 80,
-                                            width: 60,
+                                            width: 70,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[50],
                                               shape: BoxShape.rectangle,
@@ -153,7 +162,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                           ),
                                           Container(
                                             height: 80,
-                                            width: 60,
+                                            width: 70,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[50],
                                               shape: BoxShape.rectangle,
@@ -177,7 +186,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                           ),
                                           Container(
                                             height: 80,
-                                            width: 60,
+                                            width: 70,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[50],
                                               shape: BoxShape.rectangle,
@@ -199,9 +208,10 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                           .text.tinyDisable),
                                                 ]),
                                           ),
+
                                           Container(
                                             height: 80,
-                                            width: 60,
+                                            width: 70,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[50],
                                               shape: BoxShape.rectangle,
@@ -215,9 +225,10 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                   Padding(
                                                       padding: EdgeInsets.only(
                                                           top: 20),
-                                                      child: Text('Weight',
+                                                      child: Expanded(child:
+                                                      Text('Weight',
                                                           style: MaaruStyle
-                                                              .text.red)),
+                                                              .text.red))),
                                                   Text('4lbs',
                                                       style: MaaruStyle
                                                           .text.tinyDisable),
@@ -246,7 +257,9 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                   padding:
                                                       EdgeInsets.only(left: 43),
                                                   child: Text(
-                                                    'Jimmmy Booker',style: MaaruStyle.text.tiniest,
+                                                    'Jimmmy Booker',
+                                                    style:
+                                                        MaaruStyle.text.tiniest,
                                                   )),
                                               Row(
                                                 mainAxisAlignment:
@@ -254,7 +267,8 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                         .spaceEvenly,
                                                 children: [
                                                   Text(
-                                                    'Owner',style: MaaruStyle.text.tiny,
+                                                    'Owner',
+                                                    style: MaaruStyle.text.tiny,
                                                     textAlign: TextAlign.center,
                                                   ),
                                                   SizedBox(

@@ -1,5 +1,6 @@
+
 import 'package:flutter/material.dart';
-//import 'package:background_location/background_location.dart';
+
 import 'package:maru/core/data/datasource/notification.dart';
 import 'package:maru/core/data/datasource/notification_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
@@ -28,11 +29,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    //  pushNotification();
+    // pushNotification();
     getToken();
-    navigateToNextScreen();
+
     localDataHelper.saveValue(key: "IsActive", value: false);
-    // onBackgroundLocationUpdation();
+    //onBackgroundLocationUpdation();
+    navigateToNextScreen();
   }
 //todo: Navigate to AfterSplashScreen
 
@@ -93,8 +95,8 @@ class _SplashScreenState extends State<SplashScreen> {
         //Todo: Useing Background image inside the Screen
 
         backgroundColor: MaaruColors.whiteColor,
-        body: SafeArea(
-            child: Stack(children: [
+        body:
+         Stack(children: [
           Image.asset(
             'assets/icons/Splash-Provider-or-User-screen-svg-new.png',
             height: 3000,
@@ -108,6 +110,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 //  hight: 200,
                 widt: 300,
               ))
-        ])));
+        ]));
   }
 }

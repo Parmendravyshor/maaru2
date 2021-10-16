@@ -9,8 +9,8 @@ class VerifyUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SafeArea(
-        child: Stack(
+    return
+        Stack(
       children: [
         Image.asset(
           'assets/icons/Splash-Provider-or-User-screen-svg-new.png',
@@ -68,7 +68,7 @@ class VerifyUser extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 120,
+                        height: 170,
                       ),
                       //  Navigator.of(context).push(MaterialPageRoute(
                       //  builder: (context) => AfterSplashScreen2()));
@@ -78,6 +78,6 @@ class VerifyUser extends StatelessWidget {
               ),
             ))
       ],
-    ));
+    );
   }
 }

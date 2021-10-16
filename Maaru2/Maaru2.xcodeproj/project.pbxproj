@@ -1,0 +1,729 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		34CD1BDB2715A492004AD0F9 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD1BDA2715A492004AD0F9 /* Tests_iOS.swift */; };
+		34CD1BDD2715A492004AD0F9 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD1BDC2715A492004AD0F9 /* Tests_iOSLaunchTests.swift */; };
+		34CD1BE72715A492004AD0F9 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD1BE62715A492004AD0F9 /* Tests_macOS.swift */; };
+		34CD1BE92715A492004AD0F9 /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD1BE82715A492004AD0F9 /* Tests_macOSLaunchTests.swift */; };
+		34CD1BEA2715A492004AD0F9 /* Maaru2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD1BC22715A490004AD0F9 /* Maaru2App.swift */; };
+		34CD1BEB2715A492004AD0F9 /* Maaru2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD1BC22715A490004AD0F9 /* Maaru2App.swift */; };
+		34CD1BEC2715A492004AD0F9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD1BC32715A490004AD0F9 /* ContentView.swift */; };
+		34CD1BED2715A492004AD0F9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CD1BC32715A490004AD0F9 /* ContentView.swift */; };
+		34CD1BEE2715A492004AD0F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34CD1BC42715A492004AD0F9 /* Assets.xcassets */; };
+		34CD1BEF2715A492004AD0F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34CD1BC42715A492004AD0F9 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		34CD1BD72715A492004AD0F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34CD1BBD2715A490004AD0F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 34CD1BC82715A492004AD0F9;
+			remoteInfo = "Maaru2 (iOS)";
+		};
+		34CD1BE32715A492004AD0F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34CD1BBD2715A490004AD0F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 34CD1BCE2715A492004AD0F9;
+			remoteInfo = "Maaru2 (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		34CD1BC22715A490004AD0F9 /* Maaru2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maaru2App.swift; sourceTree = "<group>"; };
+		34CD1BC32715A490004AD0F9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		34CD1BC42715A492004AD0F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		34CD1BC92715A492004AD0F9 /* Maaru2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maaru2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		34CD1BCF2715A492004AD0F9 /* Maaru2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maaru2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		34CD1BD12715A492004AD0F9 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		34CD1BD62715A492004AD0F9 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34CD1BDA2715A492004AD0F9 /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
+		34CD1BDC2715A492004AD0F9 /* Tests_iOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOSLaunchTests.swift; sourceTree = "<group>"; };
+		34CD1BE22715A492004AD0F9 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		34CD1BE62715A492004AD0F9 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
+		34CD1BE82715A492004AD0F9 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		34CD1BC62715A492004AD0F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34CD1BCC2715A492004AD0F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34CD1BD32715A492004AD0F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34CD1BDF2715A492004AD0F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34CD1BBC2715A490004AD0F9 = {
+			isa = PBXGroup;
+			children = (
+				34CD1BC12715A490004AD0F9 /* Shared */,
+				34CD1BD02715A492004AD0F9 /* macOS */,
+				34CD1BD92715A492004AD0F9 /* Tests iOS */,
+				34CD1BE52715A492004AD0F9 /* Tests macOS */,
+				34CD1BCA2715A492004AD0F9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		34CD1BC12715A490004AD0F9 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				34CD1BC22715A490004AD0F9 /* Maaru2App.swift */,
+				34CD1BC32715A490004AD0F9 /* ContentView.swift */,
+				34CD1BC42715A492004AD0F9 /* Assets.xcassets */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		34CD1BCA2715A492004AD0F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				34CD1BC92715A492004AD0F9 /* Maaru2.app */,
+				34CD1BCF2715A492004AD0F9 /* Maaru2.app */,
+				34CD1BD62715A492004AD0F9 /* Tests iOS.xctest */,
+				34CD1BE22715A492004AD0F9 /* Tests macOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		34CD1BD02715A492004AD0F9 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				34CD1BD12715A492004AD0F9 /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		34CD1BD92715A492004AD0F9 /* Tests iOS */ = {
+			isa = PBXGroup;
+			children = (
+				34CD1BDA2715A492004AD0F9 /* Tests_iOS.swift */,
+				34CD1BDC2715A492004AD0F9 /* Tests_iOSLaunchTests.swift */,
+			);
+			path = "Tests iOS";
+			sourceTree = "<group>";
+		};
+		34CD1BE52715A492004AD0F9 /* Tests macOS */ = {
+			isa = PBXGroup;
+			children = (
+				34CD1BE62715A492004AD0F9 /* Tests_macOS.swift */,
+				34CD1BE82715A492004AD0F9 /* Tests_macOSLaunchTests.swift */,
+			);
+			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		34CD1BC82715A492004AD0F9 /* Maaru2 (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34CD1BF22715A492004AD0F9 /* Build configuration list for PBXNativeTarget "Maaru2 (iOS)" */;
+			buildPhases = (
+				34CD1BC52715A492004AD0F9 /* Sources */,
+				34CD1BC62715A492004AD0F9 /* Frameworks */,
+				34CD1BC72715A492004AD0F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Maaru2 (iOS)";
+			productName = "Maaru2 (iOS)";
+			productReference = 34CD1BC92715A492004AD0F9 /* Maaru2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		34CD1BCE2715A492004AD0F9 /* Maaru2 (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34CD1BF52715A492004AD0F9 /* Build configuration list for PBXNativeTarget "Maaru2 (macOS)" */;
+			buildPhases = (
+				34CD1BCB2715A492004AD0F9 /* Sources */,
+				34CD1BCC2715A492004AD0F9 /* Frameworks */,
+				34CD1BCD2715A492004AD0F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Maaru2 (macOS)";
+			productName = "Maaru2 (macOS)";
+			productReference = 34CD1BCF2715A492004AD0F9 /* Maaru2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		34CD1BD52715A492004AD0F9 /* Tests iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34CD1BF82715A492004AD0F9 /* Build configuration list for PBXNativeTarget "Tests iOS" */;
+			buildPhases = (
+				34CD1BD22715A492004AD0F9 /* Sources */,
+				34CD1BD32715A492004AD0F9 /* Frameworks */,
+				34CD1BD42715A492004AD0F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				34CD1BD82715A492004AD0F9 /* PBXTargetDependency */,
+			);
+			name = "Tests iOS";
+			productName = "Tests iOS";
+			productReference = 34CD1BD62715A492004AD0F9 /* Tests iOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		34CD1BE12715A492004AD0F9 /* Tests macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34CD1BFB2715A492004AD0F9 /* Build configuration list for PBXNativeTarget "Tests macOS" */;
+			buildPhases = (
+				34CD1BDE2715A492004AD0F9 /* Sources */,
+				34CD1BDF2715A492004AD0F9 /* Frameworks */,
+				34CD1BE02715A492004AD0F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				34CD1BE42715A492004AD0F9 /* PBXTargetDependency */,
+			);
+			name = "Tests macOS";
+			productName = "Tests macOS";
+			productReference = 34CD1BE22715A492004AD0F9 /* Tests macOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		34CD1BBD2715A490004AD0F9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					34CD1BC82715A492004AD0F9 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					34CD1BCE2715A492004AD0F9 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					34CD1BD52715A492004AD0F9 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 34CD1BC82715A492004AD0F9;
+					};
+					34CD1BE12715A492004AD0F9 = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 34CD1BCE2715A492004AD0F9;
+					};
+				};
+			};
+			buildConfigurationList = 34CD1BC02715A490004AD0F9 /* Build configuration list for PBXProject "Maaru2" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 34CD1BBC2715A490004AD0F9;
+			productRefGroup = 34CD1BCA2715A492004AD0F9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				34CD1BC82715A492004AD0F9 /* Maaru2 (iOS) */,
+				34CD1BCE2715A492004AD0F9 /* Maaru2 (macOS) */,
+				34CD1BD52715A492004AD0F9 /* Tests iOS */,
+				34CD1BE12715A492004AD0F9 /* Tests macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		34CD1BC72715A492004AD0F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34CD1BEE2715A492004AD0F9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34CD1BCD2715A492004AD0F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34CD1BEF2715A492004AD0F9 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34CD1BD42715A492004AD0F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34CD1BE02715A492004AD0F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		34CD1BC52715A492004AD0F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34CD1BEC2715A492004AD0F9 /* ContentView.swift in Sources */,
+				34CD1BEA2715A492004AD0F9 /* Maaru2App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34CD1BCB2715A492004AD0F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34CD1BED2715A492004AD0F9 /* ContentView.swift in Sources */,
+				34CD1BEB2715A492004AD0F9 /* Maaru2App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34CD1BD22715A492004AD0F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34CD1BDD2715A492004AD0F9 /* Tests_iOSLaunchTests.swift in Sources */,
+				34CD1BDB2715A492004AD0F9 /* Tests_iOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		34CD1BDE2715A492004AD0F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34CD1BE92715A492004AD0F9 /* Tests_macOSLaunchTests.swift in Sources */,
+				34CD1BE72715A492004AD0F9 /* Tests_macOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		34CD1BD82715A492004AD0F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 34CD1BC82715A492004AD0F9 /* Maaru2 (iOS) */;
+			targetProxy = 34CD1BD72715A492004AD0F9 /* PBXContainerItemProxy */;
+		};
+		34CD1BE42715A492004AD0F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 34CD1BCE2715A492004AD0F9 /* Maaru2 (macOS) */;
+			targetProxy = 34CD1BE32715A492004AD0F9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		34CD1BF02715A492004AD0F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		34CD1BF12715A492004AD0F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		34CD1BF32715A492004AD0F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 67PPB9GBYP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "itx-web-solution.Maaru2";
+				PRODUCT_NAME = Maaru2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		34CD1BF42715A492004AD0F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 67PPB9GBYP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "itx-web-solution.Maaru2";
+				PRODUCT_NAME = Maaru2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		34CD1BF62715A492004AD0F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FMM2HHY9S8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "itx-web-solution.Maaru2";
+				PRODUCT_NAME = Maaru2;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		34CD1BF72715A492004AD0F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "itx-web-solution.Maaru2";
+				PRODUCT_NAME = Maaru2;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		34CD1BF92715A492004AD0F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "itx-web-solution.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Maaru2 (iOS)";
+			};
+			name = Debug;
+		};
+		34CD1BFA2715A492004AD0F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "itx-web-solution.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Maaru2 (iOS)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		34CD1BFC2715A492004AD0F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "itx-web-solution.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Maaru2 (macOS)";
+			};
+			name = Debug;
+		};
+		34CD1BFD2715A492004AD0F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "itx-web-solution.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Maaru2 (macOS)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		34CD1BC02715A490004AD0F9 /* Build configuration list for PBXProject "Maaru2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34CD1BF02715A492004AD0F9 /* Debug */,
+				34CD1BF12715A492004AD0F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34CD1BF22715A492004AD0F9 /* Build configuration list for PBXNativeTarget "Maaru2 (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34CD1BF32715A492004AD0F9 /* Debug */,
+				34CD1BF42715A492004AD0F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34CD1BF52715A492004AD0F9 /* Build configuration list for PBXNativeTarget "Maaru2 (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34CD1BF62715A492004AD0F9 /* Debug */,
+				34CD1BF72715A492004AD0F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34CD1BF82715A492004AD0F9 /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34CD1BF92715A492004AD0F9 /* Debug */,
+				34CD1BFA2715A492004AD0F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34CD1BFB2715A492004AD0F9 /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34CD1BFC2715A492004AD0F9 /* Debug */,
+				34CD1BFD2715A492004AD0F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 34CD1BBD2715A490004AD0F9 /* Project object */;
+}

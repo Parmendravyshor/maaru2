@@ -1,3 +1,4 @@
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
+import 'package:maru/features/Home/presentation/chat_screen.dart';
 
 class CustomCard extends StatefulWidget {
   const CustomCard({Key key,this.chatModel}) : super(key: key);
@@ -18,12 +20,15 @@ class _CustomCardState extends State<CustomCard> {
   Widget build(BuildContext context) {
     return
       InkWell(
-        onTap: (){},
+        onTap: (){
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => ChatScreen()));
+        },
         child: Column(
         children: [
             Align(
             alignment: Alignment.centerRight,
-            child:Expanded(
+
                 child: Padding(padding: EdgeInsets.only(left: 10,right: 20),
                 child:
                 Container(
@@ -58,10 +63,10 @@ class _CustomCardState extends State<CustomCard> {
 
           ),
 
-    ))))),
+    )))),
           Align(
               alignment: Alignment.centerRight,
-              child:Expanded(
+
                   child: Padding(padding: EdgeInsets.only(left: 10,right: 20),
                       child:
                       Container(
@@ -95,7 +100,7 @@ class _CustomCardState extends State<CustomCard> {
 
                       ),
 
-                      ))))),
+                      )))),
         ]),
       );
   }

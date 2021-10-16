@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/theme/style.dart';
 
@@ -41,16 +44,18 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
     return InputDecoration(
         filled: true,
         fillColor: Colors.white,
-
         suffixIcon: widget.suffixIcon != null
             ? Container(
-                child: FractionallySizedBox(
+                child: Row(children: [
+                Text(widget.text1),
+                FractionallySizedBox(
                     heightFactor: 0.7,
                     child: TextButton(
                         onPressed: _password ? _toggle : null,
-                        child: Image(image: widget.suffixIcon))))
+                        child: Image(image: widget.suffixIcon)))
+              ]))
             : null,
-      //  errorBorder: MaaruStyle.defaultBorder,
+        //  errorBorder: MaaruStyle.defaultBorder,
         // focusedErrorBorder: MaaruStyle.defaultBorder,
         // border: MaaruStyle.defaultBorder,
         // disabledBorder: MaaruStyle.defaultBorder,
@@ -69,7 +74,6 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-
             height: TextFieldContainerHeight,
             color: Colors.white,
             child: FractionallySizedBox(
@@ -85,11 +89,11 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
                             obscureText: _obscureText,
                             enabled: widget.enabled,
                             controller: widget.editingController,
-textInputAction: widget.textinputaction,
+                            textInputAction: widget.textinputaction2,
                             onChanged: widget.onChanged,
                             autocorrect: false,
                             keyboardType: widget.keyboardType,
-                            style:MaaruStyle.text.tiniest,
+                            style: MaaruStyle.text.tiniest,
                             decoration: inputDecoration(widget),
                           )))
                 ]))));
@@ -110,18 +114,19 @@ class ThemedTextField extends StatefulWidget {
   final TextEditingController editingController;
   final bool enabled, password;
   final Text text;
+  final String text1;
   final TextStyle textStyle;
-final textinputaction;
+  final textinputaction2;
   ThemedTextField(
-
     this.placeholder,
     this.keyboardType, {
     this.suffixIcon,
     this.onChanged,
+    this.text1,
     this.text,
     this.editingController,
     this.enabled,
-        this.textinputaction,
+    this.textinputaction2,
     this.password = false,
     this.textStyle,
     TextInputAction textInputAction,
@@ -135,119 +140,186 @@ final textinputaction;
 class ThemeChanges2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        new Flexible(
-          child: Container(
-            padding: EdgeInsets.only(left: 15),
-            child: ThemedTextField(
-              "Weight", TextInputType.text,
-              textInputAction: TextInputAction.next,
-              textStyle: TextStyle(color: Colors.black),
-              onChanged: (text) {
-                //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-              },
-              //   editingController: _lnameController
+    return Padding(
+        padding: EdgeInsets.only(left: 20, right: 20),
+        child: Container(
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            new Flexible(
+              child: Container(
+                  alignment: Alignment.center,
+                  // padding: EdgeInsets.only(right: 15),
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[300]),
+                      ),
+                      //When the TextFormField is ON focus
+                      contentPadding: EdgeInsets.only(right: 6),
+                      hintText: 'Height',
+                      hintStyle: MaaruStyle.text.tiniest,
+                    ),
+                    onChanged: (text) {
+                      //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                    },
+                    //   editingController: _lnameController
+                  )),
             ),
-          ),
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        new Flexible(
-          child: Container(
-            padding: EdgeInsets.only(right: 15),
-            child: ThemedTextField(
-              "0", TextInputType.text, textStyle: TextStyle(color: Colors.black),
-              textInputAction: TextInputAction.next,
-              // textStyle: TextStyle(color: Colors.grey[300],height: 20),
-              onChanged: (text) {
-                //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-              },
-              //   editingController: _lnameController
+            new Flexible(
+              child: Container(
+                  alignment: Alignment.center,
+
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey[300]),
+                        ),
+                        //When the TextFormField is ON focus
+
+                        hintText: '0',
+                        hintStyle: MaaruStyle.text.greyDisable,
+                        suffixIcon: Padding(
+                          padding: EdgeInsets.only(top: 20, right: 1),
+                          child: Text(
+                            'ft',
+                            style: MaaruStyle.text.tiniest,
+                          ),
+                        )),
+                    onChanged: (text) {
+                      //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                    },
+                    //   editingController: _lnameController
+                  )),
             ),
-          ),
-        ),
-        new Flexible(
-          child: Container(
-            padding: EdgeInsets.only(right: 15),
-            child: ThemedTextField(
-              "lbs", TextInputType.text,
-              textInputAction: TextInputAction.next,
-              textStyle: TextStyle(color: Colors.black),
-              onChanged: (text) {
-                //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-              },
-              //   editingController: _lnameController
+            new Flexible(
+              child: Container(
+                 
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    textInputAction: TextInputAction.done,
+                    decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey[300]),
+                        ),
+                        // //When the TextFormField is ON focus
+                        // focusedBorder: UnderlineInputBorder(
+                        //   borderSide: BorderSide(color: Colors.teal),
+                        // ),
+                        hintText: '0',
+                        hintStyle: MaaruStyle.text.greyDisable,
+                        suffixIcon: Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Text(
+                            'inch',
+                            style: MaaruStyle.text.tiniest,
+                          ),
+                        )),
+                    onChanged: (text) {
+                      //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                    },
+                    //   editingController: _lnameController
+                  )),
             ),
-          ),
-        ),
-      ],
-    );
+          ],
+        )));
   }
 }
 
 class ThemeChanges extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        new Flexible(
-          child:
-          Container(
-            padding: EdgeInsets.only(left: 15),
-            child:
-            ThemedTextField(
-              "Height", TextInputType.text,
-              textInputAction: TextInputAction.next,
-              textStyle: TextStyle(color: Colors.black),
-              onChanged: (text) {
-                //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-              },
-              //   editingController: _lnameController
+    return Padding(
+        padding: EdgeInsets.only(left: 20, right: 20),
+        child: Container(
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            new Flexible(
+              child: Container(
+                  padding: EdgeInsets.only(top: 3),
+                  alignment: Alignment.center,
+                  // padding: EdgeInsets.only(right: 15),
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey[300]),
+                      ),
+                      //When the TextFormField is ON focus
+                       contentPadding: EdgeInsets.only(right: 5),
+                      hintText: 'Weight',
+                      hintStyle: MaaruStyle.text.tiniest,
+                    ),
+                    onChanged: (text) {
+                      //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                    },
+                    //   editingController: _lnameController
+                  )),
             ),
-          ),
-        ),
-        SizedBox(
-          width: 10,
-        ),
+            new Flexible(
+              child: Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(top: 3),
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey[300]),
+                        ),
+                        //When the TextFormField is ON focus
 
-        new Flexible(
+                        hintText: '      0',
+                        hintStyle: MaaruStyle.text.greyDisable,
 
-          child: Container(
-            padding: EdgeInsets.only(right: 15),
-            child:
-            ThemedTextField(
+                        )),
 
-              "0 ft", TextInputType.text,
-              textInputAction: TextInputAction.next,
-              textStyle: TextStyle(color: Colors.black),
-              onChanged: (text) {
-                //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-              },
-              //   editingController: _lnameController
+
+                    //   editingController: _lnameController
+                  )),
+
+            new Flexible(
+              child: Container(
+                  padding: EdgeInsets.only(top: 3),
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey[300]),
+                        ),
+                        // //When the TextFormField is ON focus
+                        // focusedBorder: UnderlineInputBorder(
+                        //   borderSide: BorderSide(color: Colors.teal),
+                        // ),
+
+                        hintStyle: MaaruStyle.text.greyDisable,
+                        suffixIcon: Padding(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Text(
+                            'lbs',
+                            style: MaaruStyle.text.tiniest,
+                          ),
+                        )),
+                    onChanged: (text) {
+                      //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                    },
+                    //   editingController: _lnameController
+                  )),
             ),
-          ),
-        ),
-        new Flexible(
-          child: Container(
-            padding: EdgeInsets.only(right: 15),
-            child: ThemedTextField(
-              "0 inch", TextInputType.text,
-              textInputAction: TextInputAction.next,
-              textStyle: TextStyle(color: Colors.black),
-              onChanged: (text) {
-                //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-              },
-              //   editingController: _lnameController
-            ),
-          ),
-        ),
-      ],
-    );
+          ],
+        )));
   }
 }

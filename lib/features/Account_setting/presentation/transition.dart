@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:maru/core/widget/back_arrow.dart';
 class TransitionScreen extends StatefulWidget {
 
 
@@ -20,6 +21,7 @@ class _TransitionScreenState extends State<TransitionScreen> {
               margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
               child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                BackArrowButton(),
                 Align(
                     alignment: Alignment.centerRight,
                     child: Container(

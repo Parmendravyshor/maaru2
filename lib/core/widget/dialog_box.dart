@@ -88,12 +88,12 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                 alignment: Alignment.bottomRight,
                 child: TextButton(
                     onPressed: () {
-                      if (_controller.text.isNotEmpty) {
-                        KiwiContainer().resolve<SharedPrefHelper>().saveString(
-                            MaaruConstant.chatEndPoint, _controller.text);
-                        _controller.clear();
-                        Navigator.of(context).pop();
-                      }
+                      // if (_controller.text.isNotEmpty) {
+                      //   KiwiContainer().resolve<SharedPrefHelper>().saveString(
+                      //       MaaruConstant.chatEndPoint, _controller.text);
+                      //   _controller.clear();
+                      //   Navigator.of(context).pop();
+                      // }
                     },
                     child: Text(
                       widget.text,

@@ -9,14 +9,15 @@ class BackgroundImage extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
+    return
+       Container(
+
         child: Image.asset(
           assetImage, height: hight, width: widt,
 
           // colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken),
         ),
-      ),
+
     );
   }
 }

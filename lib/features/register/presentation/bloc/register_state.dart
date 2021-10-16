@@ -2,11 +2,11 @@ abstract class RegisterState {
   RegisterState();
 }
 
-class ResgiterInitial extends RegisterState {
-  ResgiterInitial() : super();
+class RegisterInitial extends RegisterState {
+  RegisterInitial() : super();
 
   @override
-  String toString() => "ResgiterInitial";
+  String toString() => "RegisterInitial";
 }
 
 class RegisterInProgress extends RegisterState {

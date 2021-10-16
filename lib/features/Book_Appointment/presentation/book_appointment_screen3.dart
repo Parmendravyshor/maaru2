@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 
+import 'book_appointment_screen2.dart';
 import 'booked_confirm.dart';
 
 class BookAppointmentScreen3 extends StatefulWidget {
@@ -19,6 +21,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
+          bottom: false,
             child: SingleChildScrollView(
                 child: Flex(direction: Axis.vertical, children: [
           Column(
@@ -34,7 +37,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                         topLeft: Radius.circular(20),
                       ),
                       color: Colors.white),
-                  height: 200,
+                  height: 250,
                   width: size.width * 1,
                   child: Container(
                       margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -50,38 +53,56 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => BookAppointment1()));
+                                },
+                                child:
                               Image.asset(
                                 'assets/icons/icone-setting-67.png',
                                 height: 40,
                                 width: 40,
-                              ),
+                              )),
                               SizedBox(
                                 width: 10,
                               ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => BookAppointment2()));
+                                },
+                                child:
                               Image.asset(
                                 'assets/icons/icone-setting-67.png',
                                 height: 40,
                                 width: 40,
-                              ),
+                              )),
                               SizedBox(
                                 width: 10,
                               ),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => BookAppointmentScreen3()));
+                                },
+                                child:
                               Image.asset(
                                 'assets/icons/icone-setting-67.png',
                                 height: 40,
                                 width: 40,
-                              ),
+                              )),
                             ],
                           ),
                           Row(
-                            //  mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Austin Pet Groomer',
-                                style: MaaruStyle.text.large,
+                                style: MaaruStyle.text.tiniest,
                               ),
                               SizedBox(
-                                width: size.width * 0.27,
+                                width: size.width * 0.16,
                               ),
                               Image.asset(
                                 'assets/icons/New Project (2).png',
@@ -98,13 +119,13 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                           ),
                           Text(
                             'Book Appointments',
-                            style: MaaruStyle.text.large,
+                            style: MaaruStyle.text.tiniest,
                           ),
                         ],
                       )))
             ],
           ),
-          Container(height: 400, width: 400, child: Appointments()),
+          Container(height: 450, width: 400, child: Appointments()),
           Container(
             alignment: Alignment.center,
             padding: EdgeInsets.only(right: 20, left: 20),
@@ -118,6 +139,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.7),
                       borderSide: BorderSide()),
+                  contentPadding: EdgeInsets.only(top: 10),
                   hintText: 'Select a Provider',
                   hintStyle: MaaruStyle.text.greyDisable,
                   fillColor: Colors.white,
@@ -136,9 +158,10 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
           ),
           Align(
             alignment: Alignment.center,
+
             child: Text(
               'Pet',
-              style: MaaruStyle.text.large,
+              style: MaaruStyle.text.tiniest,
             ),
           ),
           SizedBox(
@@ -157,6 +180,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.7),
                       borderSide: BorderSide()),
+                  contentPadding: EdgeInsets.only(top: 10),
                   hintText: 'Select  pet',
                   hintStyle: MaaruStyle.text.greyDisable,
                   fillColor: Colors.white,
@@ -177,7 +201,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
             alignment: Alignment.center,
             child: Text(
               'Morning',
-              style: MaaruStyle.text.large,
+              style: MaaruStyle.text.tiniest,
             ),
           ),
           SizedBox(
@@ -224,7 +248,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
             alignment: Alignment.center,
             child: Text(
               'Afternoon',
-              style: MaaruStyle.text.large,
+              style: MaaruStyle.text.tiniest,
             ),
           ),
           SizedBox(

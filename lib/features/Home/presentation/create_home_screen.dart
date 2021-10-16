@@ -43,11 +43,12 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
         child: Container(
           height: 70,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Expanded(
                   child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+             //   crossAxisAlignment: CrossAxisAlignment,
+                    mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
                 children: <Widget>[
                   MaterialButton(
                     minWidth: 40,

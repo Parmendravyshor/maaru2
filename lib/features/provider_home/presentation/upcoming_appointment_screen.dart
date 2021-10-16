@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/show_location.dart';
 
 class UpcomingAppointmentCalender1 extends StatefulWidget {
@@ -19,6 +20,10 @@ class _UpcomingAppointmentCalender1State
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      BackArrowButton(),
+                      SizedBox(
+                        height: 20,
+                      ),
               ShowLocation(),
               SizedBox(
                 height: 20,
@@ -41,6 +46,7 @@ class _UpcomingAppointmentCalender1State
                                         10.7,
                                       ),
                                       borderSide: new BorderSide()),
+                                  contentPadding: EdgeInsets.only(left: 10,top: 20),
                                   hintText: 'Search',
                                   fillColor: Colors.white,
                                   suffixIcon: Image.asset(

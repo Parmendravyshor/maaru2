@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/Home/presentation/custom_card.dart';
@@ -20,14 +21,19 @@ class _MessagesState extends State<Messages> {
     return Scaffold(
         backgroundColor: Color(0xFFffffff),
         body: SafeArea(
-            child: Column(
+        bottom: false,
+            child: SingleChildScrollView(child:
+            Column(
 
           children: [
-SizedBox(height: 30,),
-            Align(
-                alignment: Alignment.centerRight,
 
-                    child:
+SizedBox(height: 30,),
+            BackArrowButton(),
+
+            // Align(
+            //     alignment: Alignment.centerRight,
+            //
+            //         child:
                     Container(
                   alignment: Alignment.centerRight,
                   decoration: BoxDecoration(
@@ -39,7 +45,8 @@ SizedBox(height: 30,),
                     height: 60,
                    // width: 60,
                   ),
-                )),
+               // )
+        ),
 
             Padding(padding: EdgeInsets.only(top: 15,right: 20,left: 10),
                 child:
@@ -108,6 +115,6 @@ SizedBox(height: 30,),
 SizedBox(height: 20,),
             CustomCard()
           ],
-        )));
+        ))));
   }
 }

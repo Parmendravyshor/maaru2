@@ -7,10 +7,12 @@ import 'package:maru/features/Account_setting/presentation/account_setting.dart'
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/splash/view/splash_screen.dart';
-import 'package:maru/features/verify/presentation/Register_pet_profile_screen1.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'core/theme/maaru_style.dart';
+import 'core/widget/background_image.dart';
 import 'core/widget/date_picker.dart';
+import 'features/Account_setting/presentation/change_password_screen.dart';
 import 'features/Account_setting/presentation/edit_profile_screen.dart';
 import 'features/Account_setting/presentation/payment_screen.dart';
 import 'features/Account_setting/presentation/transition.dart';
@@ -18,18 +20,21 @@ import 'features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'features/Book_Appointment/presentation/book_appointment_screen2.dart';
 import 'features/Book_Appointment/presentation/booked_confirm.dart';
 import 'features/Book_Appointment/presentation/reviewe_screen.dart';
+import 'features/Home/presentation/chat_screen.dart';
 import 'features/Home/presentation/home_sceen.dart';
 import 'features/Home/presentation/message.dart';
 import 'features/Home/presentation/pet_profile.dart';
+import 'features/Home/presentation/search_screen.dart';
 import 'features/provider_home/presentation/create_provider_home.dart';
 import 'features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'features/provider_home/presentation/upcoming_appointment_calender.dart';
 import 'features/provider_home/presentation/upcoming_appointment_screen.dart';
 import 'features/provider_register/provider_register.dart';
 import 'features/provider_setting/presentation/provider_settin.dart';
+import 'features/register/presentation/signup_screen.dart';
 import 'features/splash/view/after_splash_Screen2.dart';
-import 'features/verify/presentation/Register_pet_profile_screen2.dart';
-import 'features/verify/presentation/Register_pet_profile_screen3.dart';
+import 'features/verify/presentation/register_pet_profile_screen2.dart';
+import 'features/verify/presentation/register_pet_profile_screen3.dart';
 import 'features/verify/presentation/register_pet_profile4.dart';
 import 'features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'features/view_pet_profile/presentation/view_pet_profile2.dart';
@@ -60,6 +65,19 @@ class MyApp extends StatelessWidget {
         home: Scaffold(body: SplashScreen ()));
   }
 }
+class PersonEntry {
+  final String name;
+  final String age;
+  final String studyJob;
+
+  PersonEntry(this.name, this.age, this.studyJob);
+  @override
+  String toString() {
+    return 'Person: name= $name, age= $age, study job= $studyJob';
+  }
+}
+
+
 class Slidabble extends StatefulWidget {
 
   @override

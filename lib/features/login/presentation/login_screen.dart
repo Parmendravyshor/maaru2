@@ -63,7 +63,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(children: [
             Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
               ThemedTextField("Email", TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next, onChanged: (text) {
+                  textinputaction2:TextInputAction.next,
+                  onChanged: (text) {
                 //BlocProvider.of<RegisterBloc>(context).add(EmailChanged(text));
               }, editingController: _emailController),
               SizedBox(
@@ -72,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ThemedTextField(
                 "Password",
                 TextInputType.number,
-                textInputAction: TextInputAction.next,
+                textinputaction2: TextInputAction.done,
                 password: true,
                 onChanged: (text) {
                   // BlocProvider.of<RegisterBloc>(context)
@@ -109,6 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Password must be 6 characters long", context);
                   }
                   else{
+                    AlertManager.showSuccessMessage( "Success", context);
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) => CreateHomeScreen()));}
                 },

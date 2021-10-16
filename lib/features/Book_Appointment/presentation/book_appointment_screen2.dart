@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 
 import 'booked_confirm.dart';
 
@@ -24,21 +25,24 @@ class _BookAppointment2State extends State<BookAppointment2> {
 
     return Scaffold(
         backgroundColor: Colors.grey,
-        body: ListView(
+        body:SafeArea(bottom: false,
+        child:
+        ListView(
           children: [
             Flex(direction: Axis.vertical, children: [
+
               Container(
                 color: Colors.red,
-                width: size.width * 1,
-                height: size.height * 0.30,
+
                 child: Image.asset(
                   'assets/images/imgdd.jpg',
                   fit: BoxFit.cover,
                 ),
               ),
+
               Container(
                 height: size.height * 0.95,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20)),
@@ -51,8 +55,48 @@ class _BookAppointment2State extends State<BookAppointment2> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+
                             SizedBox(
                               height: size.height * 0.05,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/icone-setting-67.png',
+                                  height: 40,
+                                  width: 40,
+                                ),
+                               const SizedBox(
+                                  width: 10,
+                                ),
+                                InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (_) => BookAppointment2()));
+                                    },
+                                    child: Image.asset(
+                                      'assets/icons/icone-setting-67.png',
+                                      height: 40,
+                                      width: 40,
+                                      color: Colors.grey[100],
+                                    )),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (_) => BookAppointmentScreen3()));
+                                    },
+                                    child:
+                                    Image.asset(
+                                      'assets/icons/icone-setting-68.png',
+                                      height: 40,
+                                      width: 40,
+                                      color: Colors.grey[100],
+                                    )),
+                              ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -199,7 +243,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
 
             ]),
           ],
-        ));
+        )));
   }
 }
 

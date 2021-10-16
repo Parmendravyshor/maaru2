@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
@@ -20,6 +21,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              BackArrowButton(),
               SizedBox(
                 height: 30,
               ),
@@ -43,7 +45,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   padding: EdgeInsets.only(left: 30.0),
                   child: Text(
                     'Payment Information',
-                    style: MaaruStyle.text.medium,
+                    style: MaaruStyle.text.tiniest,
                   )),
               SizedBox(
                 height: 20,

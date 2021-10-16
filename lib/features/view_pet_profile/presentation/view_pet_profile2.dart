@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
 
@@ -17,6 +18,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
     return Scaffold(
         backgroundColor: MaaruColors.DogsBackground,
         body: SafeArea(
+          bottom: false,
             child: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,7 +27,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                 height: 20,
               ),
               Container(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.bottomRight,
                   height: size.height * 0.25,
                   width: size.width * 0.9,
                   child: BackgroundImage(
@@ -109,10 +111,17 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                   SizedBox(
                                     width: size.width * 0.60,
                                   ),
+                                  InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    CreateregisterPetProfile1()));
+                                      },child:
                                   Image.asset(
                                     'assets/icons/icone-setting-29.png',
                                     height: 40,
-                                  )
+                                  ))
                                 ]),
                             Text(
                               'Jack  Russell',
@@ -135,7 +144,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                         children: [
                                           Container(
                                             height: 80,
-                                            width: 60,
+                                            width: 70,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[50],
                                               shape: BoxShape.rectangle,
@@ -159,7 +168,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                           ),
                                           Container(
                                             height: 80,
-                                            width: 60,
+                                            width: 70,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[50],
                                               shape: BoxShape.rectangle,
@@ -183,7 +192,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                           ),
                                           Container(
                                             height: 80,
-                                            width: 60,
+                                            width: 70,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[50],
                                               shape: BoxShape.rectangle,
@@ -207,7 +216,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                           ),
                                           Container(
                                             height: 80,
-                                            width: 60,
+                                            width: 70,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[50],
                                               shape: BoxShape.rectangle,

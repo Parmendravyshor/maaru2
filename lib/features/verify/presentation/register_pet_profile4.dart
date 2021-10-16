@@ -1,10 +1,12 @@
+
 import 'package:flutter/material.dart';
+
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
-import 'Register_pet_profile_screen3.dart';
+import 'register_pet_profile_screen3.dart';
 
 class CreateRegisterPetProfile4 extends StatefulWidget {
   @override
@@ -17,20 +19,32 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Scaffold(
+    return
+
+      Scaffold(
         backgroundColor: MaaruColors.DogsBackground,
-        body: SafeArea(
-            child: SingleChildScrollView(
-                child: Column(children: [
+
+        body:SafeArea(
+        top: true,
+bottom: false,
+        child:
+           SingleChildScrollView(
+                child: Column(children: [  SizedBox(
+                  height: 20,
+                ),
           SkipButtons(),
           SizedBox(
             height: 20,
           ),
+
           Container(
-              alignment: Alignment.centerRight,
-              height: size.height * 0.25,
+
+              alignment: Alignment.bottomRight,
+
+             height: size.height * 0.25,
               width: size.width * 0.9,
-              child: BackgroundImage(
+              child:
+            BackgroundImage(
                 assetImage: 'assets/images/kutta.png',
               )),
           Container(
@@ -78,7 +92,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                   )),
                               //     ),
                               SizedBox(
-                                width: 20,
+                                width: 0,
                                 height: 20,
                               ),
                               //    ),
@@ -116,7 +130,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(200, 150, 0, 0),
+                            padding: EdgeInsets.fromLTRB(215, 150, 0, 0),
                             child: Imagesgg(
                               AssetImage: 'assets/icons/icone-setting-74.png',
                               text: 'Day care',
@@ -130,7 +144,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                             ),
                           ),
                         ]),
-                        SizedBox(
+                        const SizedBox(
                           height: 40,
                         ),
                         Row(
@@ -147,7 +161,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                   height: 50,
                                   width: 60,
                                   decoration: BoxDecoration(
-                                      color: Colors.white12,
+                                      color:  Colors.white12,
                                       shape: BoxShape.circle),
                                   child: Text(
                                     'Back',style: MaaruStyle.text.greyDisable,
@@ -195,8 +209,8 @@ class _ImagesggState extends State<Imagesgg> {
         },
         child: Container(
             alignment: Alignment.center,
-            width: 85,
-            height: 85,
+            width: 90,
+            height: 90,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: pressAttention

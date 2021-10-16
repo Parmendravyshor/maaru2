@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -560,16 +561,21 @@ class _AppointmentsState extends State<Appointments>
       //holidays: _holidays,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
-      startingDayOfWeek: StartingDayOfWeek.sunday,
+
+      startingDayOfWeek:
+      StartingDayOfWeek.sunday,
       availableGestures: AvailableGestures.all,
       availableCalendarFormats: const {CalendarFormat.month: ''},
+
       calendarStyle: CalendarStyle(
         outsideDaysVisible: false,
-        weekendStyle: TextStyle().copyWith(color: Colors.blue[800]),
-        holidayStyle: TextStyle().copyWith(color: Colors.blue[800]),
+
+        weekendStyle: TextStyle().copyWith(color: Colors.grey[800]),
+        holidayStyle: TextStyle().copyWith(color: Colors.grey[800]),
       ),
+
       daysOfWeekStyle: DaysOfWeekStyle(
-        weekendStyle: TextStyle().copyWith(color: Colors.blue[600]),
+        weekendStyle: TextStyle().copyWith(color: Colors.grey[800]),
       ),
       headerStyle: HeaderStyle(
         centerHeaderTitle: true,
@@ -583,14 +589,14 @@ class _AppointmentsState extends State<Appointments>
               margin: const EdgeInsets.all(4.0),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: Colors.blue[300],
+                  color: MaaruColors.primaryColorsuggesion1,
                   borderRadius: BorderRadius.circular(36.0),
-                  border: Border.all(width: 2, color: Colors.blue[300])),
+                  border: Border.all(width: 2, color: MaaruColors.primaryColorsuggesion1)),
               child: Text(
                 '${date.day}',
                 style: TextStyle().copyWith(
                     fontSize: 20.0,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -601,17 +607,18 @@ class _AppointmentsState extends State<Appointments>
             margin: const EdgeInsets.all(4.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: MaaruColors.primaryColorsuggesion1,
                 borderRadius: BorderRadius.circular(36.0),
-                border: Border.all(width: 2, color: Colors.white)),
+                border: Border.all(width: 2, color: MaaruColors.primaryColorsuggesion1)),
             child: Text(
               '${date.day}',
-              style: TextStyle().copyWith(
-                  fontSize: 20.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
-            ),
-          );
+              style:MaaruStyle.text.greyDisable
+            //   TextStyle().copyWith(
+            //       fontSize: 20.0,
+            //       color: Colors.grey[100],
+            //       fontWeight: FontWeight.bold),
+            // ),
+          ));
         },
         markersBuilder: (context, date, events, holidays) {
           final children = <Widget>[];
@@ -648,7 +655,7 @@ class _AppointmentsState extends State<Appointments>
       alignment: Alignment.center,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(36.0),
-          border: Border.all(width: 2, color: Colors.blue[300])),
+          border: Border.all(width: 2, color: Colors.green[300])),
     );
   }
 

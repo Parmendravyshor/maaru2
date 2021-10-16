@@ -12,7 +12,7 @@ Widget _buildDialog(_ToastMode mode, String message) {
       child: Container(
           padding: EdgeInsets.only(top: 10, bottom: 15),
           decoration: BoxDecoration(
-              color: MaaruStyle.colors.darkGrey,
+              color: MaaruStyle.colors.textColorWhite,
               borderRadius: BorderRadius.circular(12),
               border:
                   Border.all(width: 1, color: MaaruStyle.colors.borderColor)),

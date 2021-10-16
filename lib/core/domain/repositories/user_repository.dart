@@ -10,8 +10,8 @@ import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 
 abstract class UserRepository<T> {
-  Future<Either<Failure, Void>> emailSignup(EmailAuthParams params);
-  Future<Either<Failure, Void>> emailLogin(EmailAuthParams params);
+  Future<Either<Failure, void>> emailSignup(EmailAuthParams params);
+  Future<Either<Failure, void>> emailLogin(EmailAuthParams params);
   Future<Either<Failure, void>> resendOtp(String email);
   Future<Either<Failure, void>> sendPasswordResetEmail(String email);
   Future<Either<Failure, void>> setNewPassword(

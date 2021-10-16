@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/features/Account_setting/presentation/Account_setting.dart';
+import 'package:maru/features/Account_setting/presentation/change_password_screen.dart';
 import 'package:maru/features/Account_setting/presentation/edit_profile_screen.dart';
 import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
+import 'package:maru/features/Account_setting/presentation/transition.dart';
+import 'package:maru/features/splash/verify_screen.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -86,7 +89,10 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 hite: 40,
                                 text: 'Change Password',
                                 size: 35,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => ChangePasswordScreen()));
+                                },
                               ),
                               SizedBox(
                                 height: 20,
@@ -99,7 +105,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 size: 90,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => PaymentScreen()));
+                                      builder: (_) => TransitionScreen()));
                                 },
                               ),
                               SizedBox(
@@ -134,14 +140,16 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                   BorderRadius.circular(10.0),
                                                 ),
                                                 alignment: Alignment.centerLeft,
-                                                child: Row(children: [
+                                                child: Row(
+                                                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                                    children: [
                                                   Image.asset(
                                                     'assets/icons/icone-setting-4.png',
                                                     height: 40,
                                                   ),
                                                   Text(
                                                     'Push Notification',
-                                                    style: MaaruStyle.text.medium,
+                                                    style: MaaruStyle.text.tiniest,
                                                   ),
                                                   SizedBox(
                                                     width: 35,
@@ -190,14 +198,15 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                   BorderRadius.circular(10.0),
                                                 ),
                                                 alignment: Alignment.centerLeft,
-                                                child: Row(children: [
+                                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
                                                   Image.asset(
                                                     'assets/icons/icone-setting-5.png',
                                                     height: 40,
                                                   ),
                                                   Text(
                                                     'Email Notification',
-                                                    style: MaaruStyle.text.medium,
+                                                    style: MaaruStyle.text.tiniest,
                                                   ),
                                                   SizedBox(
                                                     width: 33,
@@ -211,9 +220,9 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                     // title: Text("Do you want to update your price?"),
                                                     // controlAffinity: ListTileControlAffinity.leading,
                                                     value: update,
-                                                    onChanged: (update) {
+                                                    onChanged: (Update) {
                                                       setState(() {
-                                                        update = update;
+                                                        update = Update;
                                                       });
                                                     },
                                                   ),
@@ -251,7 +260,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 text: 'Log Out',
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => AfterSplashScreen()));
+                                      builder: (_) => VerifyUser()));
                                 },
                               )
                             ]))

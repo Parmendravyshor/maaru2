@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
@@ -16,13 +17,13 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+
         body: SafeArea(
-            child: Stack(children: [
-          Padding(padding: EdgeInsets.only(top: 20),
-              child:
-              Padding(padding: EdgeInsets.only(bottom: 450),
-                  child:
-              ShowLocation())),
+            child: Column(children: [
+              BackArrowButton(),
+
+Stack(children:[
+  ShowLocation(),
           MyClass(),
           SizedBox(
             height: 20,
@@ -31,8 +32,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
           //    padding: EdgeInsets.only(left: 20),
           //
           // child:PadExp
-          Expanded(
-              child: Padding(
+
+              Padding(
             padding: EdgeInsets.fromLTRB(10, 100, 0, 0),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -81,13 +82,13 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                             height: 40,
                           ))),
                 ]),
-          )),
+          ),
           SizedBox(
             width: 20,
           ),
 
           Padding(
-              padding: EdgeInsets.only(top: 300),
+              padding: EdgeInsets.only(top: 300,right: 10,left: 10),
               child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -97,7 +98,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
         ])
 
             //   ]
-            ));
+            ])));
   }
 }
 
@@ -114,7 +115,7 @@ class _MyClassState extends State<MyClass> {
   Widget build(BuildContext context) {
     return Column(children: [
       Padding(
-        padding: EdgeInsets.fromLTRB(10, 105, 10, 0),
+        padding: EdgeInsets.fromLTRB(20, 105, 10, 0),
         child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(50.0),
@@ -140,7 +141,7 @@ class _MyClassState extends State<MyClass> {
                               ),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              padding: EdgeInsets.fromLTRB(10, 0, 30, 0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

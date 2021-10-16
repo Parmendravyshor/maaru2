@@ -7,13 +7,14 @@ class ShowLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        BackArrowButton(),
+
+
         Expanded(
           child: Container(
             color: Colors.white,
-            padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+            margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: TextFormField(
               cursorColor: Colors.black,
               decoration: InputDecoration(

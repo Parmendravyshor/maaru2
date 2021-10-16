@@ -24,15 +24,15 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
   int currentTab = 0;
   final List<Widget> screens = [
 
-    ProviderAcceptOrDeclineScreen(),
-    //UpcomingAppointmentCalender(),
-    UpcomingAppointmentCalender1(),
+    TestApp(),
+    UpcomingAppointmentCalender(),
+   UpcomingAppointmentCalender1(),
     Messages(),
     ProviderSetting(),
     //   ArtistProfile()
   ]; // to store nested tabs
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = ProviderAcceptOrDeclineScreen();
+  Widget currentScreen = TestApp();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,17 +48,17 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
         child: Container(
           height: 70,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Expanded(
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       MaterialButton(
                         minWidth: 40,
                         onPressed: () {
                           setState(() {
-                            currentScreen = ProviderAcceptOrDeclineScreen();
+                            currentScreen = TestApp();
                             currentTab = 0;
                           });
                         },
@@ -78,7 +78,7 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                         minWidth: 40,
                         onPressed: () {
                           setState(() {
-                          //  currentScreen = UpcomingAppointmentCalender();
+                            currentScreen = UpcomingAppointmentCalender();
                             currentTab = 1;
                           });
                         },

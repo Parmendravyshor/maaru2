@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/icons.dart';
 import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
@@ -81,7 +82,22 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
               ),
               ThemedButton(
                 text: 'Login',
-                onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CreateProviderHome()));},
+                onPressed: () {
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    if (validateEmail(email) != null) {
+    AlertManager.showErrorMessage(
+    "Please enter valid email", context);
+    } else if (password.length < 6) {
+    AlertManager.showErrorMessage(
+    "Password must be 6 characters long", context);
+    }
+    else{
+    AlertManager.showSuccessMessage( "Success", context);
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => CreateProviderHome()));
+                }}
               ),
               SizedBox(
                 height: 20,

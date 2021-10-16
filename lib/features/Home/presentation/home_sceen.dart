@@ -139,7 +139,7 @@ class HorizList extends StatelessWidget {
     final List _hotels = [10];
 
     return Container(
-        height: 230,
+        height: 240,
         child: ListView.builder(
           itemCount: 5,
           scrollDirection: Axis.horizontal,

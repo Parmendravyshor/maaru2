@@ -21,8 +21,11 @@ class _BookedConfirmState extends State<BookedConfirm> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: ListView(
+      backgroundColor: MaaruColors.primaryColorsuggesion1,
+      body: SafeArea(
+        bottom: false,
+        child:
+      ListView(
         children: [
           Flex(direction: Axis.vertical, children: [
             Container(
@@ -68,9 +71,9 @@ class _BookedConfirmState extends State<BookedConfirm> {
                   topRight: Radius.circular(20), topLeft: Radius.circular(20)),
               color: Colors.white,
             ),
-            height: size.height * 0.90,
-            width: double.infinity,
-            child: Container(
+
+            child:
+            Container(
               margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
               color: Colors.white,
               child: Column(
@@ -153,6 +156,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                         height: size.height * 0.20,
                         width: size.width * 1,
                       )),
+                  SizedBox(height: 20,),
                   Row(
                     children: [
                       TextButton(
@@ -217,7 +221,13 @@ class _BookedConfirmState extends State<BookedConfirm> {
                       SizedBox(
                         width: 20,
                       ),
-                      FlatButton(
+                      Container(
+                        height: 50,
+                        width: 170,
+                          decoration: BoxDecoration(
+                              color: MaaruColors.primaryColorsuggesion,
+                              borderRadius: BorderRadius.circular(10)),
+                  child:    FlatButton(
                         height: 50,
                         minWidth: 170,
                         color: MaaruColors.primaryColorsuggesion,
@@ -232,21 +242,17 @@ class _BookedConfirmState extends State<BookedConfirm> {
                               fontWeight: FontWeight.w600,
                             ))),
                         textColor: MaaruColors.textButtonColor,
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                                color: MaaruColors.primaryColorsuggesion,
-                                width: 1,
-                                style: BorderStyle.solid),
-                            borderRadius: BorderRadius.circular(10)),
+
                       )
-                    ],
+                      )],
                   ),
+                  SizedBox(height: 20,)
                 ],
               ),
             ),
           )
-        ],
+          ],
       ),
-    );
+    ));
   }
 }

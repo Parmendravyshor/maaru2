@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/show_location.dart';
-import 'package:maru/features/verify/presentation/Register_pet_profile_screen1.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 
 class PetProfile extends StatefulWidget {
   @override
@@ -14,10 +15,12 @@ class _PetProfileState extends State<PetProfile> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
+          bottom: false,
             child: Column(children: [
           SizedBox(
             height: 40,
           ),
+          BackArrowButton(),
           ShowLocation(),
           SizedBox(
             height: 20,

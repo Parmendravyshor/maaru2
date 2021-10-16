@@ -1,7 +1,10 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'book_appointment_screen2.dart';
 import 'booked_confirm.dart';
 
@@ -18,6 +21,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
         backgroundColor: Colors.grey,
         resizeToAvoidBottomInset: true,
         body: SafeArea(
+          bottom: false,
             child: SingleChildScrollView(
                 child: Column(
           children: [
@@ -32,7 +36,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     topLeft: Radius.circular(20),
                   ),
                   color: Colors.white),
-              height: size.height *1.1,
+              height: size.height * 1.1,
               width: size.width * 1,
               child: Container(
                 margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -56,25 +60,36 @@ class _BookAppointment1State extends State<BookAppointment1> {
                         SizedBox(
                           width: 10,
                         ),
-                        Image.asset(
-                          'assets/icons/icone-setting-68.png',
-                          height: 40,
-                          width: 40,
-                          color: Colors.grey[100],
-                        ),
+                        InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => BookAppointment2()));
+                            },
+                            child: Image.asset(
+                              'assets/icons/icone-setting-68.png',
+                              height: 40,
+                              width: 40,
+                              color: Colors.grey[100],
+                            )),
                         SizedBox(
                           width: 10,
                         ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => BookAppointmentScreen3()));
+                          },
+                          child:
                         Image.asset(
                           'assets/icons/icone-setting-68.png',
                           height: 40,
                           width: 40,
                           color: Colors.grey[100],
-                        ),
+                        )),
                       ],
                     ),
                     Row(
-                      //  mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Austin Pet Groomer',

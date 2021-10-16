@@ -8,7 +8,7 @@ import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 
-import 'package:maru/features/verify/presentation/Register_pet_profile_screen1.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -78,8 +78,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        ThemedTextField("First Name", TextInputType.text,
-                            textInputAction: TextInputAction.next,
+                        ThemedTextField("First Name", TextInputType.name,
+                            textinputaction2: TextInputAction.next,
                             onChanged: (text) {
                           // BlocProvider.of<RegisterBloc>(context)
                           //  .add(FNameChanged(text));
@@ -87,7 +87,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         SizedBox(
                           height: 5,
                         ),
-                        ThemedTextField("Last Name", TextInputType.text,
+                        ThemedTextField("Last Name", TextInputType.name,
                             textInputAction: TextInputAction.next,
                             onChanged: (text) {
                           //   BlocProvider.of<RegisterBloc>(context)
@@ -108,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ThemedTextField(
                           "Password",
                           TextInputType.number,
-                          textInputAction: TextInputAction.next,
+                          textInputAction: TextInputAction.done,
                           password: true,
                           onChanged: (text) {
                             //  BlocProvider.of<RegisterBloc>(context)
@@ -152,15 +152,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             //   AlertManager.showErrorMessage(
                             //       "Password do not match", context);
 
-                            else {
+                            else  {
                               // AlertManager.disclaimerPopup(context, onSuccess: () {
                               // BlocProvider.of<RegisterBloc>(context);
+                               AlertManager.showSuccessMessage( "Success", context);
+
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) =>
-                                      CreateregisterPetProfile1()));
-                            }
-                            enabled = false;
-                          },
+                                      CreateregisterPetProfile1()));}
+
+
+
+                          }
                         ),
                         SizedBox(
                           height: 20,

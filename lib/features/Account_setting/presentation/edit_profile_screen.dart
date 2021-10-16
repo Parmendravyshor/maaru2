@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:flutter/painting.dart';
-import 'package:maru/features/verify/presentation/Register_pet_profile_screen1.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 class CreateUserProfile extends StatefulWidget {
   @override
   _CreateUserProfileState createState() => _CreateUserProfileState();
@@ -51,6 +52,7 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
         body: SafeArea(
             child: SingleChildScrollView(
                 child: Column(children: [
+                  BackArrowButton(),
           SizedBox(
             height: 20,
           ),
@@ -91,7 +93,7 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                         padding: EdgeInsets.only(left: 30.0),
                         child: Text(
                           'Payment Information',
-                          style: MaaruStyle.text.medium,
+                          style: MaaruStyle.text.tiniest,
                         )),
                     SizedBox(
                       height: 20,

@@ -136,7 +136,7 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                             } else if (lname.isEmpty) {
                               AlertManager.showErrorMessage(
                                   "Please enter last name", context);
-                            } else if (EmailValidator.validate(email)) {
+                            } else if (validateEmail(email) != null) {
                               AlertManager.showErrorMessage(
                                   "Please enter valid email", context);
                             } else if (password.length < 6) {
@@ -152,6 +152,7 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                             //       "Password do not match", context);
 
                             else {
+                              AlertManager.showSuccessMessage( "Success", context);
                               // AlertManager.disclaimerPopup(context, onSuccess: () {
                               // BlocProvider.of<RegisterBloc>(context);
                               Navigator.of(context).push(MaterialPageRoute(
