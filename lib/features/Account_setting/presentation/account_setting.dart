@@ -247,7 +247,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                               },
                             ),
                             SizedBox(
-                              height: 20,
+                              height: 40,
                             )
                           ]))
                     ]))));

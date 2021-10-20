@@ -7,7 +7,8 @@ import 'disclaimer.dart';
 enum _ToastMode { success, error }
 
 Widget _buildDialog(_ToastMode mode, String message) {
-  return Align(
+  return SingleChildScrollView(child:
+    Align(
       alignment: Alignment.bottomCenter,
       child: Container(
           padding: EdgeInsets.only(top: 10, bottom: 15),
@@ -32,7 +33,7 @@ Widget _buildDialog(_ToastMode mode, String message) {
                 ),
               ),
             ],
-          )));
+          ))));
 }
 
 /// This class is responsible for any modal alert that is displayed on screen.

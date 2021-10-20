@@ -2,14 +2,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 class MaaruColors {
   final bool _darkTheme;
   MaaruColors(this._darkTheme);
   static Color primaryColor = Color(0xffFFC938);
-  static Color primaryColorsuggesion = Color(0xffffe05b);
+  static Color primaryColorsuggesion = Color(0xffffe05a);
   static Color primaryColorsuggesion1 = Color(0xff236855);
-  static Color buttonColor = Color(0xFFffe05b);
+  static Color buttonColor = Color(0xFFffe05a);
   static Color buttonTextColor = Color(0xFF367355);
   static Color textButtonColor = Color(0xFFcc1f19);
   static Color textColor = Color(0xFF6a6a6a);

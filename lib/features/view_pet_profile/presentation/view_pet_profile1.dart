@@ -225,10 +225,10 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                   Padding(
                                                       padding: EdgeInsets.only(
                                                           top: 20),
-                                                      child: Expanded(child:
+                                                      child:
                                                       Text('Weight',
                                                           style: MaaruStyle
-                                                              .text.red))),
+                                                              .text.red)),
                                                   Text('4lbs',
                                                       style: MaaruStyle
                                                           .text.tinyDisable),

@@ -12,6 +12,7 @@ import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/faketest.dart';
+import '../../../main.dart';
 import 'register_pet_profile_screen1.dart';
 import 'register_pet_profile_screen3.dart';
 
@@ -22,6 +23,91 @@ class CreateRegisterPetProfile2 extends StatefulWidget {
 }
 
 class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
+  @override
+  void dispose() {
+  //  _nameEditingController.dispose();
+  //  _controller.dispose();
+    super.dispose();
+  }
+  List<int> userSearchItems = [];
+  final GlobalKey<PopupMenuButtonState<int>> _key = GlobalKey();
+  var nameTECs = <TextEditingController>[];
+  var ageTECs = <TextEditingController>[];
+  var jobTECs = <TextEditingController>[];
+  var containers = <Container>[];
+
+  Container createContainer() {
+    var nameController = TextEditingController();
+    var ageController = TextEditingController();
+    var jobController = TextEditingController();
+    nameTECs.add(nameController);
+    ageTECs.add(ageController);
+    jobTECs.add(jobController);
+    return Container(color: Color(0xFFffffff),
+
+      child: Column(
+        //  mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          //Text('Person ${cards.length + 1}'),
+        //  if (priceupdate_value)
+            TextFormField(
+              textInputAction: TextInputAction.next,
+              onChanged: (text) {},
+            //  controller: _nameEditingController,
+              decoration: InputDecoration(
+                  hintText: 'Name',
+                  hintStyle: MaaruStyle.text.greyDisable),
+            ),
+          SizedBox(
+            height: 30,
+          ),
+         // if (priceupdate_value)
+            TextFormField(
+              textInputAction: TextInputAction.next,
+              onChanged: (text) {},
+           //   controller: _nameEditingController,
+              decoration: InputDecoration(
+                  hintText: 'How many times a day?',
+                  hintStyle: MaaruStyle.text.greyDisable),
+            ),
+          SizedBox(
+            height: 30,
+          ),
+      //    if (priceupdate_value)
+            TextFormField(
+              maxLines: 3,
+              decoration: InputDecoration(
+                  hintText: 'Note',
+                  hintStyle: MaaruStyle.text.greyDisable,
+                  border: OutlineInputBorder(
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(20.0)),
+                      borderSide:
+                      BorderSide(color: Colors.grey[50]))),
+            ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    containers.add(createContainer());
+  //  _nameEditingController = TextEditingController();
+   // _controller = TextEditingController();
+  }
+
+  _onDone() {
+    List<PersonEntry> entries = [];
+    for (int i = 0; i < containers.length; i++) {
+      var name = nameTECs[i].text;
+      var age = ageTECs[i].text;
+      var job = jobTECs[i].text;
+      entries.add(PersonEntry(name, age, job));
+    }
+    Navigator.pop(context, entries);
+  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

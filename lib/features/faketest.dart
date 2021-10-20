@@ -2,7 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+class Secrets {
+  // Add your Google Maps API Key here
+  static const API_KEY = 'AIzaSyAcwOMoEO8-zDBVGzeGdPspSM3qJepJeUA';
+}
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -51,14 +51,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 height: 20,
               ),
               ThemedTextField(
-                "FirstName",
+                "Name on Card",
                 TextInputType.text,
                 textInputAction: TextInputAction.next,
                 textStyle: TextStyle(color: Colors.grey[300]),
                 onChanged: (text) {},
               ),
               ThemedTextField(
-                "FirstName",
+                "Credit Card Number",
                 TextInputType.text,
                 textInputAction: TextInputAction.next,
                 textStyle: TextStyle(color: Colors.grey[300]),
@@ -70,7 +70,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: Container(
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: ThemedTextField(
-                        "Exp date", TextInputType.number,
+                        "Exp Date", TextInputType.number,
                         textInputAction: TextInputAction.next,
                         textStyle: TextStyle(color: Colors.grey[300]),
                         onChanged: (text) {
@@ -87,7 +87,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: Container(
                       padding: EdgeInsets.only(right: 15),
                       child: ThemedTextField(
-                        "cvv", TextInputType.number,
+                        "Cvv", TextInputType.number,
                         textInputAction: TextInputAction.next,
                         textStyle: TextStyle(color: Colors.grey[300]),
                         onChanged: (text) {
@@ -103,12 +103,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 20),
-                    child: Icon(
+                    child: CircleAvatar(
+                      backgroundColor:Colors.grey[100],radius: 30,
+                      child:
+                    Icon(
                       Icons.add,
                       color: MaaruColors.buttonTextColor,
-                      size: 40,
+                      size: 35,
                     ),
-                  ),
+                  )),
                   SizedBox(
                     width: 20,
                   ),
@@ -131,7 +134,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   height: 100,
                   width: 380,
                   decoration: BoxDecoration(
-                      color: Color(0xFFe0eae7),
+                      color: Color(0xFFe0eae6),
                       borderRadius: BorderRadius.circular(20.0)),
                   child: Padding(
                       padding: EdgeInsets.fromLTRB(20, 20, 10, 0),
@@ -141,9 +144,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           children: [
                             Text(
                               'Visa Card',
-                              style: MaaruStyle.text.large,
+                              style: MaaruStyle.text.tiniest,
                             ),
-                            Text('Primary payment'),
+                            Text('Primary Payment',style: MaaruStyle.text.greyDisable,),
                           ],
                         ),
                         SizedBox(

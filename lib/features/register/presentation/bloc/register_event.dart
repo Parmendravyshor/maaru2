@@ -17,7 +17,7 @@ class RegisterOpened extends RegisterEvent {
 ///
 /// This event is fired when Register button is tapped
 class RegisterButtonTapped extends RegisterEvent {
-  RegisterButtonTapped();
+  RegisterButtonTapped():super();
 
   @override
   String toString() => "RegisterButtonTapped";

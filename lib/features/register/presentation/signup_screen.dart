@@ -1,5 +1,16 @@
+
+
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/repository/user_repository.impl.dart';
+import 'package:maru/core/domain/repositories/user_repository.dart';
+import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/icons.dart';
@@ -8,7 +19,36 @@ import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 
+
+import 'dart:ffi';
+import 'dart:convert';
+import 'dart:ffi';
+import 'dart:io';
+import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+
+
+
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/auth_source.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
+import 'package:maru/core/domain/repositories/user_repository.dart';
+import 'package:maru/core/domain/usecases/email_auth_params.dart';
+import 'package:maru/core/error/failure.dart';
+import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
+import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
+import 'package:maru/features/verify/domain/usecases/verify_code.dart';
+import 'package:flutter/scheduler.dart';
+import 'dart:convert' as convert;
+import 'package:http/http.dart' as https;
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
+
+import 'bloc/register_bloc.dart';
+import 'bloc/register_state.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -50,18 +90,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body:
+
+
+      SingleChildScrollView(
         child: SafeArea(
-          child: Column(
+        child:
+          Column(
             children: [
+
+
+            // BlocBuilder<RegisterBloc,RegisterState>(
+            //   builder: (context,state){
+            //     return
+            //   },
+            //
+            //     )
+
               Logo(),
               ScreenIcon(),
-              SizedBox(
+             const SizedBox(
                 height: 20,
               ),
               Center(
                 child: Text(
-                  'or signup with email',
+                  'or sign up with email',
                   style: GoogleFonts.poppins(textStyle: TextStyle(
                       color: Colors.black,
                       fontSize: 20,
@@ -125,7 +178,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         ThemedButton(
                           text: "Join",
-                          onPressed: () {
+                          onPressed: ()  {
+
                             String fname = _fnameController.text;
                             String lname = _lnameController.text;
                             String email = _emailController.text;
@@ -147,6 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                               enabled = true;
                             }
+
 
                             // else if (password != cnfpassword) {
                             //   AlertManager.showErrorMessage(

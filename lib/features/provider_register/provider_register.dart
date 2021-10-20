@@ -60,7 +60,7 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
               ),
               Center(
                 child: Text(
-                  'or signup with email',
+                  'or sign up with email',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,

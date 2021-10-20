@@ -6,6 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
+import 'package:maru/features/Book_Appointment/presentation/provider_confirm_book.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_screen.dart';
 
 import '../../../main.dart';
@@ -33,7 +34,7 @@ class _ProviderAcceptOrDeclineScreenState
               height: 20,
             ),
             Padding(
-                padding: EdgeInsets.only(left: 20, right: 18),
+                padding: EdgeInsets.only(left: 20, right: 18,top: 15),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -195,15 +196,16 @@ class _TestAppState extends State<TestApp> {
                 height: 20,
               ),
               Padding(
-                  padding: EdgeInsets.only(left: 20, right: 18),
+                  padding: EdgeInsets.only(left: 20, right: 18,top: 15),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Expanded(
                           child: Container(
+                            padding: EdgeInsets.only(right: 10),
                             color: Colors.white,
                             height: 45,
-                            //     width: 350,
+                                 width: 350,
                             child: TextFormField(
                               cursorColor: Colors.black,
                               decoration: InputDecoration(
@@ -213,12 +215,13 @@ class _TestAppState extends State<TestApp> {
                                       ),
                                       borderSide: new BorderSide()),
                                   contentPadding:
-                                      EdgeInsets.only(top: 20, left: 10),
+                                      EdgeInsets.only(top: 0, left: 0),
                                   hintText: 'Search',
                                   fillColor: Colors.white,
-                                  suffixIcon: Image.asset(
+                                  suffixIcon:
+                                  Image.asset(
                                     'assets/icons/icone-setting-19.png',
-                                    width: 30,
+                                    height: 65,
                                   )),
                             ),
                           ),
@@ -269,7 +272,7 @@ class _TestAppState extends State<TestApp> {
                           color: Colors.white,
                         ),
                         child: Container(
-                            height: 200,
+                            height: 220,
                             width: 420,
                             decoration: BoxDecoration(
                                 borderRadius: new BorderRadius.circular(20.7),
@@ -283,12 +286,12 @@ class _TestAppState extends State<TestApp> {
                                   children: [
                                     Text(
                                       'Max',
-                                      style: TextStyle(fontSize: 20),
+                                      style: MaaruStyle.text.large,
                                     ),
                                     SizedBox(
                                       width: 60,
                                     ),
-                                    Text('Aug. 21, 2021')
+                                    Text('Aug. 21, 2021',style:   MaaruStyle.text.tiniest,)
                                   ],
                                 ),
                                 Row(
@@ -297,19 +300,19 @@ class _TestAppState extends State<TestApp> {
                                   children: [
                                     Text(
                                       'Dog Grooming',
-                                      style: TextStyle(fontSize: 20),
+                                      style: MaaruStyle.text.tiniest,
                                     ),
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    Text('10:00')
+                                    Text('10:00',style: MaaruStyle.text.greyDisable,)
                                   ],
                                 ),
                                 Padding(
                                     padding:
                                         EdgeInsets.only(right: 40, left: 18),
                                     child: Text(
-                                      '1357 Muno Manor Austin, Tx 75923',
+                                      '1357 Muno Manor Austin, Tx 75923',style: MaaruStyle.text.greyDisable
                                     )),
                                 SizedBox(
                                   height: 20,
@@ -318,7 +321,7 @@ class _TestAppState extends State<TestApp> {
                                     onTap: () {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
-                                              builder: (_) => BookedConfirm()));
+                                              builder: (_) => ProviderBookedConfirm()));
                                     },
                                     child: Container(
                                       alignment: Alignment.center,
@@ -358,7 +361,7 @@ class _TestAppState extends State<TestApp> {
                           }
                         ),
                         SizedBox(
-                          width: 30,
+                          width: 25,
                         ),
                         IconSlideAction(
                           color: MaaruColors.primaryColorsuggesion1,
@@ -397,7 +400,5 @@ class _TestAppState extends State<TestApp> {
     );
   }
 
-  Container finction() {
-    return Container();
-  }
+
 }

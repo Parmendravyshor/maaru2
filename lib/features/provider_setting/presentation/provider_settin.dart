@@ -38,7 +38,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                 padding: EdgeInsets.only(
                   left: 20,
                 ),
-                child:Expanded(child:
+                child:
                 Flex(direction: Axis.vertical,children:[
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -264,6 +264,6 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 },
                               )
                             ]))
-                      ])])))));
+                      ])]))));
   }
 }

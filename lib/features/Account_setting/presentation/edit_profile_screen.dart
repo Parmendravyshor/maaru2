@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
+import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
@@ -65,7 +66,8 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                    //   color: Colors.grey[360],
                       height: size.height * 0.3,
                       width: size.width * 0.9,
-                      child: ProfileForm(assetImage: 'assets/images/4970774.png',)),
+                      child:
+                      ProfileForm(assetImage: 'assets/images/4970774.png',)),
                       // ProfileAvatar(
                       //     imageUrl: 'assets/images/4970774.png',
                       //  //   Color: Colors.grey[360],
@@ -92,14 +94,14 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                     Container(
                         padding: EdgeInsets.only(left: 30.0),
                         child: Text(
-                          'Payment Information',
+                          'Edit Profile',
                           style: MaaruStyle.text.tiniest,
                         )),
                     SizedBox(
                       height: 20,
                     ),
                     ThemedTextField(
-                      "FirstName",
+                      "First Name",
                       TextInputType.text,
                       textInputAction: TextInputAction.next,
                       textStyle: TextStyle(color: Colors.grey[300]),
@@ -109,7 +111,7 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                       editingController: _fnameController,
                     ),
                     ThemedTextField(
-                      "lastName",
+                      "Last Name",
                       TextInputType.text,
                       textInputAction: TextInputAction.next,
                       textStyle: TextStyle(color: Colors.grey[300]),
@@ -119,7 +121,7 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                       editingController: _lnameController,
                     ),
                     ThemedTextField(
-                      "email",
+                      "Email",
                       TextInputType.text,
                       textInputAction: TextInputAction.next,
                       textStyle: TextStyle(color: Colors.grey[300]),
@@ -130,7 +132,7 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                       editingController: _emailController,
                     ),
                     ThemedTextField(
-                      "PhoneNumber",
+                      "Phone Number",
                       TextInputType.number,
                       textInputAction: TextInputAction.next,
                       textStyle: TextStyle(color: Colors.grey[300]),
@@ -154,6 +156,8 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+
+
                         new Flexible(
                           child: Container(
                             padding: EdgeInsets.only(left: 15),
@@ -168,29 +172,25 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
+                        // SizedBox(
+                        //   width: 10,
+                        // ),
                         new Flexible(
-                            flex: 1,
-                            child: Container(
-                                padding: EdgeInsets.only(right: 10),
-                                child: Row(
-                                  children: [
-                                    Text('State',
-                                        style: TextStyle(
-                                            color: Colors.grey[300],
-                                            fontSize: 22)),
-                                    SizedBox(
-                                      width: 50,
+                          child: Container(
+
+                              padding: EdgeInsets.only(left: 15,bottom: 30),
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  // contentPadding: EdgeInsets.only(left: 20),
+                                    hintText: 'State',hintStyle: MaaruStyle.text.greyDisable,
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.grey[300]),
                                     ),
-                                    Icon(
-                                      Icons.expand_more,
-                                      size: 40,
-                                      color: MaaruColors.buttonTextColor,
-                                    ),
-                                  ],
-                                )))
+                                    suffixIcon: Icon(Icons.keyboard_arrow_down_outlined,size: 40,color: MaaruColors.primaryColorsuggesion1,)
+                                ),
+                              )
+                          ),
+                        ),
                       ],
                     ),
                     ThemedTextField(

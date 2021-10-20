@@ -548,7 +548,7 @@ class _AppointmentsState extends State<Appointments>
             const SizedBox(height: 8.0),
             //_buildEventList()
             //_buildsameMonthEventList()
-            Expanded(child: _buildsameMonthEventList()),
+           // Expanded(child: _buildsameMonthEventList()),
           ]);
         }));
   }
@@ -667,92 +667,92 @@ class _AppointmentsState extends State<Appointments>
     );
   }
 
-  Widget _buildsameMonthEventList() {
-    var _samemontheventsFilter = _samemonthevents.where((element) =>
-    element.date.year == current.year &&
-        element.date.month == current.month);
-
-    return Scaffold(
-//         appBar: PreferredSize(
-//           preferredSize: Size.fromHeight(22.0),
-//           child: AppBar(
-//             centerTitle: true,
-//             title: Text("",
-//                 style: TextStyle(color: Colors.black, fontSize: 18)),
-//             backgroundColor: Colors.white,
-//             //brightness: Brightness.light,
-//           //  automaticallyImplyLeading: false,
-// //          backgroundColor: Color(0x44000000),
-//           //  elevation: 0.5,
-//           ),
-
-        body: (_samemontheventsFilter.length == 0)
-            ? Text("",
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.black, fontSize: 16))
-            : ListView(
-            children: _samemontheventsFilter
-                .map((event) => Container(
-                decoration: BoxDecoration(
-                  border: Border.all(width: 0.8),
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                margin: const EdgeInsets.symmetric(
-                    horizontal: 8.0, vertical: 4.0),
-                child: (event is Appointment)
-                    ? ListTile(
-                  leading: SizedBox(
-                    width: 90,
-                    child: Column(children: <Widget>[
-                      //Show Weekday, Month and day of Appiontment
-                      Text(
-                          DateFormat('EE').format(event.date) +
-                              '  ' +
-                              DateFormat.MMMd().format(event.date),
-                          style: TextStyle(
-                            color: Colors.blue.withOpacity(1.0),
-                            fontWeight: FontWeight.bold,
-                          )),
-                      //Show Start Time of Appointment
-                      Text(DateFormat.jm().format(event.date),
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            height: 1.5,
-                          )),
-                      //Show End Time of Appointment
-                      Text(
-                        DateFormat.jm().format(event.date.add(
-                            Duration(
-                                minutes: event.duration ?? 0))),
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.6)),
-                      ),
-                    ]),
-                  ), //Text(DateFormat.Hm().format(event.date)),//DateFormat.Hm().format(now)
-                  title: Text(event.title),
-                  trailing: event.status == 'UNCONFIRMED'
-                      ? Column(children: <Widget>[
-                    //event.status=='CONFIRMED' ?
-                    Icon(Icons.error,
-                        color: Colors.pink,
-                        //size:25.0,
-                        semanticLabel:
-                        'Unconfirmed Appointment'), //:Container(width:0,height:0),
-                    Icon(Icons.arrow_right),
-                  ])
-                      : Icon(Icons.arrow_right),
-                  onTap: () {
-                    setState(() {});
-                    /* Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                AppointmentDetail(event)));*/
-                  },
-                )
-                    : null))
-                .toList()));
-  }
+//   Widget _buildsameMonthEventList() {
+//     var _samemontheventsFilter = _samemonthevents.where((element) =>
+//     element.date.year == current.year &&
+//         element.date.month == current.month);
+//
+//     return Scaffold(
+// //         appBar: PreferredSize(
+// //           preferredSize: Size.fromHeight(22.0),
+// //           child: AppBar(
+// //             centerTitle: true,
+// //             title: Text("",
+// //                 style: TextStyle(color: Colors.black, fontSize: 18)),
+// //             backgroundColor: Colors.white,
+// //             //brightness: Brightness.light,
+// //           //  automaticallyImplyLeading: false,
+// // //          backgroundColor: Color(0x44000000),
+// //           //  elevation: 0.5,
+// //           ),
+//
+//         body: (_samemontheventsFilter.length == 0)
+//             ? Text("",
+//             textAlign: TextAlign.center,
+//             style: TextStyle(color: Colors.black, fontSize: 16))
+//             : ListView(
+//             children: _samemontheventsFilter
+//                 .map((event) => Container(
+//                 decoration: BoxDecoration(
+//                   border: Border.all(width: 0.8),
+//                   borderRadius: BorderRadius.circular(12.0),
+//                 ),
+//                 margin: const EdgeInsets.symmetric(
+//                     horizontal: 8.0, vertical: 4.0),
+//                 child: (event is Appointment)
+//                     ? ListTile(
+//                   leading: SizedBox(
+//                     width: 90,
+//                     child: Column(children: <Widget>[
+//                       //Show Weekday, Month and day of Appiontment
+//                       Text(
+//                           DateFormat('EE').format(event.date) +
+//                               '  ' +
+//                               DateFormat.MMMd().format(event.date),
+//                           style: TextStyle(
+//                             color: Colors.blue.withOpacity(1.0),
+//                             fontWeight: FontWeight.bold,
+//                           )),
+//                       //Show Start Time of Appointment
+//                       Text(DateFormat.jm().format(event.date),
+//                           textAlign: TextAlign.center,
+//                           overflow: TextOverflow.ellipsis,
+//                           style: TextStyle(
+//                             fontWeight: FontWeight.bold,
+//                             height: 1.5,
+//                           )),
+//                       //Show End Time of Appointment
+//                       Text(
+//                         DateFormat.jm().format(event.date.add(
+//                             Duration(
+//                                 minutes: event.duration ?? 0))),
+//                         style: TextStyle(
+//                             color: Colors.black.withOpacity(0.6)),
+//                       ),
+//                     ]),
+//                   ), //Text(DateFormat.Hm().format(event.date)),//DateFormat.Hm().format(now)
+//                   title: Text(event.title),
+//                   trailing: event.status == 'UNCONFIRMED'
+//                       ? Column(children: <Widget>[
+//                     //event.status=='CONFIRMED' ?
+//                     Icon(Icons.error,
+//                         color: Colors.pink,
+//                         //size:25.0,
+//                         semanticLabel:
+//                         'Unconfirmed Appointment'), //:Container(width:0,height:0),
+//                     Icon(Icons.arrow_right),
+//                   ])
+//                       : Icon(Icons.arrow_right),
+//                   onTap: () {
+//                     setState(() {});
+//                     /* Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                             builder: (context) =>
+//                                 AppointmentDetail(event)));*/
+//                   },
+//                 )
+//                     : null))
+//                 .toList()));
+//   }
 }

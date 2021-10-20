@@ -36,22 +36,28 @@ class _UpcomingAppointmentCalender1State
                         Expanded(
                           child: Container(
                             color: Colors.white,
-                            height: 45,
+                            height: 48,
                             //     width: 350,
                             child: TextFormField(
                               cursorColor: Colors.black,
                               decoration: InputDecoration(
+
                                   border: new OutlineInputBorder(
-                                      borderRadius: new BorderRadius.circular(
-                                        10.7,
+
+                                      borderRadius: new BorderRadius.only(
+                                          topRight: Radius.circular(90),
+                                          bottomRight: Radius.circular(90),
+                                        topLeft: Radius.circular(30),
+                                        bottomLeft: Radius.circular(30),
                                       ),
-                                      borderSide: new BorderSide()),
+                                      borderSide: new BorderSide(color: Colors.grey, width: 1),),
                                   contentPadding: EdgeInsets.only(left: 10,top: 20),
                                   hintText: 'Search',
                                   fillColor: Colors.white,
                                   suffixIcon: Image.asset(
                                     'assets/icons/icone-setting-19.png',
-                                    width: 30,
+                                    height: 65,
+                                    width: 45,
                                   )),
                             ),
                           ),
@@ -79,7 +85,7 @@ class _UpcomingAppointmentCalender1State
                 Padding(padding: EdgeInsets.only(left: 20,right: 20),child:
               Image.asset('assets/images/abin1.png')),
               Container(
-                  margin: EdgeInsets.only(left: 20, right: 20),
+                  margin: EdgeInsets.only(left: 20, right: 20,top: 10),
                   child: Text(
                     'Past Appointment',
                     style: MaaruStyle.text.large,

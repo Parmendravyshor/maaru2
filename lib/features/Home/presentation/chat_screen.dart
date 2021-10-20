@@ -1,8 +1,10 @@
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
+import 'package:maru/main.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -16,7 +18,7 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Color(0XFFf9f9f9),
         appBar: AppBar(
           toolbarHeight: 190,
-
+elevation: 0,
           // Set this height
           flexibleSpace: Container(
             color: Colors.white,
@@ -42,7 +44,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ),
         floatingActionButton: Padding(
-            padding: const EdgeInsets.only(bottom: 130.0, right: 20),
+            padding:  EdgeInsets.only(bottom: 130.0, right: 20),
             child: FloatingActionButton(
                 onPressed: () {},
                 child: Image.asset('assets/icons/icone-setting-65.png'))),
@@ -75,10 +77,11 @@ class _ChatScreenState extends State<ChatScreen> {
                                 bottomLeft: Radius.circular(20),
                                 bottomRight: Radius.circular(20),
                               )),
-                              child: Container(
+                              child:
+                        Container(
                                   margin: EdgeInsets.only(top: 10),
-                                  height: 70,
-                                  width: 270,
+                                  height: 80,
+                                 width: 270,
                                   child: Column(
                                     children: <Widget>[
                                       ListTile(
@@ -199,11 +202,21 @@ class _ChatScreenState extends State<ChatScreen> {
                                                                   .insert_photo,
                                                               Colors.purple,
                                                               'Gallery'),
-                                                          IconItem(
-                                                              Icons
-                                                                  .location_pin,
-                                                              Colors.yellow,
-                                                              'Location'),
+                                                          InkWell(
+                                                            onTap: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .push(MaterialPageRoute(
+                                                                      builder:
+                                                                          (_) =>
+                                                                              SimpleMAp()));
+                                                            },
+                                                            child: IconItem(
+                                                                Icons
+                                                                    .location_pin,
+                                                                Colors.yellow,
+                                                                'Location'),
+                                                          )
                                                         ])
                                                   ]));
                                             });

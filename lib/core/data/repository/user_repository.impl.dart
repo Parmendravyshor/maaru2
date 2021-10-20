@@ -29,30 +29,46 @@ class UserRepositoryImpl implements UserRepository {
 
   UserRepositoryImpl(this.authSource, this.sharedPrefHelper);
 
-  @override
-  Future<Either<Failure, Void>> emailLogin(EmailAuthParams params) {
-    // TODO: implement emailLogin
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<Either<Failure, Void>> emailLogin(EmailAuthParams params) {
+  //   // TODO: implement emailLogin
+  //   throw UnimplementedError();
+  // }
 
-  Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
-    try {
-      final result = await http.post(
-        Uri.https(MaruConstant.BaseUrl, "emailSignup"),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          //'jwttoken': sharedPrefHelper.getIdJwtToken(),
-        }),
-      );
-      var jsonResponse = convert.jsonDecode(result.body);
-    //  saveRegistrationId();
-      print("emailSignup $jsonResponse ${result.request.url}");
-      return Right(Void);
-    } catch (e) {
-      return Left(ApiFailure(e.toString()));
-    }
+   Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
+    // try {
+    //   final result = await http.post(
+    //     Uri.https(MaruConstant.BaseUrl, "emailSignup"),
+    //     headers: <String, String>{
+    //       'Content-Type': 'application/json; charset=UTF-8',
+    //     },
+    //     body: jsonEncode(<String, String>{
+    //       'jwttoken': sharedPrefHelper.getIdJwtToken(),
+    //     }),
+    //   );
+    //   var jsonResponse = convert.jsonDecode(result.body);
+    // // saveRegistrationId();
+    //   print("emailSignup $jsonResponse ${result.request.url}");
+    //   if (result.statusCode == 200) {
+    //
+    //   }
+    //   return Right(Void);
+    // } catch (e) {
+    //   return Left(ApiFailure(e.toString()));
+    // }
+     try {
+       var url = Uri.parse("$BASE_URL/signup");
+       var response = await http.post(url, body: {'jwttoken': sharedPrefHelper.getIdJwtToken(),});
+       print('Response status: ${response.statusCode}');
+       print('Response body: ${response.body}');
+       Map Void = json.decode(response.body);
+
+
+       return Right(Void);
+     } catch (e) {
+       print("Thrown Exception While signing Up:$e");
+       throw e;
+     }
   }
 
 
@@ -205,6 +221,12 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, void>> getWalkingSearchIcons() {
     // TODO: implement getWalkingSearchIcons
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, void>> emailLogin(EmailAuthParams params) {
+    // TODO: implement emailLogin
     throw UnimplementedError();
   }
 }

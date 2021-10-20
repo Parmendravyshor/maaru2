@@ -49,6 +49,7 @@ SizedBox(height: 30,),
               borderSide: new BorderSide(
                   color: Colors.grey[300],
                   width: 1.0)),
+
           hintText: 'Search',
           hintStyle: MaaruStyle.text.greyDisable,
           contentPadding: EdgeInsets.fromLTRB(
@@ -67,7 +68,7 @@ SizedBox(width: 10,),
                 width: 400,
                 color: Colors.white,
                 child: Appointments()),
-            SizedBox(height: 40,),
+            SizedBox(height: 20,),
            Padding(padding:EdgeInsets.only(left: 10,right: 10),child:
             Image.asset('assets/images/austintext-1.png')),
           ],

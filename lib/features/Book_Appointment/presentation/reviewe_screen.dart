@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
@@ -125,6 +126,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   ),
                   InkWell(
                       onTap: () {
+                        AlertManager.showSuccessMessage('Thank you for Review', context);
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (_) => ViewPetProfile()));
                       },

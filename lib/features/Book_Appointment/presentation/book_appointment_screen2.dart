@@ -5,6 +5,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 
+import 'book_appointment_screen1.dart';
 import 'booked_confirm.dart';
 
 class BookAppointment2 extends StatefulWidget {
@@ -47,8 +48,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20)),
                     color: Colors.white),
-                child: Expanded(
-                  flex: 1,
+
                   child: Container(
                       margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
                       color: Color(0xffFFFFFF),
@@ -62,11 +62,17 @@ class _BookAppointment2State extends State<BookAppointment2> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (_) => BookAppointment1()));
+                                  },
+                                  child:
                                 Image.asset(
                                   'assets/icons/icone-setting-67.png',
                                   height: 40,
                                   width: 40,
-                                ),
+                                )),
                                const SizedBox(
                                   width: 10,
                                 ),
@@ -239,7 +245,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                             )
                           ])),
                 ),
-              ),
+              
 
             ]),
           ],

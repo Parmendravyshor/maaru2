@@ -57,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             new BorderRadius.circular(10.7),
                                         borderSide: new BorderSide(
                                             color: Colors.grey[300],
+
                                             width: 1.0)),
                                     hintText: 'Search',
                                     hintStyle: MaaruStyle.text.greyDisable,

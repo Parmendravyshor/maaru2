@@ -183,8 +183,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                       children: [
                         InkWell(
                             onTap: () {},
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 50),
+                            child: Center(
+                            //  padding: EdgeInsets.only(left: 30),
                               child: Text(
                                 "Birth Date",
                                 style: MaaruStyle.text.tiniest,

@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/widgets.dart';
@@ -21,390 +24,529 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          bottom: false,
             child: SingleChildScrollView(
                 child: Flex(direction: Axis.vertical, children: [
-          Column(
-            children: [
-              Container(
-                width: 2000,
-                child: Image.asset('assets/images/imgdd.jpg'),
-              ),
-              Container(
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        topLeft: Radius.circular(20),
+                  Column(
+                    children: [
+                      Container(
+                        width: 2000,
+                        child: Image.asset('assets/images/imgdd.jpg'),
                       ),
-                      color: Colors.white),
-                  height: 250,
-                  width: size.width * 1,
-                  child: Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      color: Colors.white,
-                      //height: size.height*0.80,
-                      width: size.width * 1,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Container(
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20),
+                              ),
+                              color: Colors.white),
+                          height: 250,
+                          width: size.width * 1,
+                          child: Container(
+                              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              color: Colors.white,
+                              //height: size.height*0.80,
+                              width: size.width * 1,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: size.height * 0.05,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        BookAppointment1()));
+                                          },
+                                          child: Image.asset(
+                                            'assets/icons/icone-setting-67.png',
+                                            height: 40,
+                                            width: 40,
+                                          )),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        BookAppointment2()));
+                                          },
+                                          child: Image.asset(
+                                            'assets/icons/icone-setting-67.png',
+                                            height: 40,
+                                            width: 40,
+                                          )),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        BookAppointmentScreen3()));
+                                          },
+                                          child: Image.asset(
+                                            'assets/icons/icone-setting-67.png',
+                                            height: 40,
+                                            width: 40,
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    //  mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Austin Pet Groomer',
+                                        style: MaaruStyle.text.tiniest,
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.16,
+                                      ),
+                                      Image.asset(
+                                        'assets/icons/New Project (2).png',
+                                        width: size.width * 0.10,
+                                      )
+                                    ],
+                                  ),
+                                  Text(
+                                    '1115 Emihi Grove Austin, Textas 00000',
+                                    style: MaaruStyle.text.tiny,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    'Book Appointments',
+                                    style: MaaruStyle.text.tiniest,
+                                  ),
+                                ],
+                              )))
+                    ],
+                  ),
+                  Container(height: 450, width: 400, child: Appointments()),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(right: 20, left: 20),
+                    color: Colors.white,
+                    height: 40,
+                    //   width: 200,
+                    child: TextFormField(
+                      textAlign: TextAlign.center,
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.7),
+                              borderSide: BorderSide()),
+                          contentPadding: EdgeInsets.only(top: 10),
+                          hintText: 'Select a Provider',
+                          hintStyle: MaaruStyle.text.greyDisable,
+                          fillColor: Colors.white,
+                          suffixIcon: Container(
+                              margin: EdgeInsets.all(10),
+                              child: Image.asset(
+                                'assets/icons/icone-setting-30.png',
+                                height: 10,
+                                width: 20,
+                                // width: 30,
+                              ))),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Pet',
+                      style: MaaruStyle.text.tiniest,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(right: 20, left: 20),
+                    color: Colors.white,
+                    height: 40,
+                    //   width: 200,
+                    child: TextFormField(
+                      textAlign: TextAlign.center,
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.7),
+                              borderSide: BorderSide()),
+                          contentPadding: EdgeInsets.only(top: 10),
+                          hintText: 'Select  pet',
+                          hintStyle: MaaruStyle.text.greyDisable,
+                          fillColor: Colors.white,
+                          suffixIcon: Container(
+                              margin: EdgeInsets.all(10),
+                              child: Image.asset(
+                                'assets/icons/icone-setting-30.png',
+                                height: 10,
+                                width: 20,
+                                // width: 30,
+                              ))),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Morning',
+                      style: MaaruStyle.text.tiniest,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      height: 40,
+                      width: 400,
+                      child: Padding(
+                          padding: EdgeInsets.only(right: 20, left: 20),
+                          child: ListView(scrollDirection: Axis.horizontal, children: [
+                            ChoiceRow(
+                              lebal1: '10:00 AM',
+                              lebal2: '10:30 AM',
+                              lebal3: '11:00 AM',
+                              lebal4: '11:30 AM',
+                              lebal5: '12:00 AM',
+                            ),
+                          ]))),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Afternoon',
+                      style: MaaruStyle.text.tiniest,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      height: 40,
+                      width: double.infinity,
+                      child: Padding(
+                          padding: EdgeInsets.only(right: 20, left: 20),
+                          child: ListView(scrollDirection: Axis.horizontal, children: [
+                            ChoiceRow(
+                              lebal1: '12:00 PM',
+                              lebal2: '12:30 PM',
+                              lebal3: '01:00 PM',
+                              lebal4: '01:30 PM',
+                              lebal5: '02:00 PM',
+                            ),
+                          ]))),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Booking Cost',
+                            style: MaaruStyle.text.large,
+                          ))),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(left: 20, right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(
-                            height: size.height * 0.05,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => BookAppointment1()));
-                                },
-                                child:
-                              Image.asset(
-                                'assets/icons/icone-setting-67.png',
-                                height: 40,
-                                width: 40,
-                              )),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => BookAppointment2()));
-                                },
-                                child:
-                              Image.asset(
-                                'assets/icons/icone-setting-67.png',
-                                height: 40,
-                                width: 40,
-                              )),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => BookAppointmentScreen3()));
-                                },
-                                child:
-                              Image.asset(
-                                'assets/icons/icone-setting-67.png',
-                                height: 40,
-                                width: 40,
-                              )),
-                            ],
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Austin Pet Groomer',
-                                style: MaaruStyle.text.tiniest,
-                              ),
-                              SizedBox(
-                                width: size.width * 0.16,
-                              ),
-                              Image.asset(
-                                'assets/icons/New Project (2).png',
-                                width: size.width * 0.10,
-                              )
-                            ],
-                          ),
                           Text(
-                            '1115 Emihi Grove Austin, Textas 00000',
+                            'Booking Total',
                             style: MaaruStyle.text.tiny,
                           ),
-                          SizedBox(
-                            height: 20,
+                          Text(
+                            " \$ 85.0",
+                            style: MaaruStyle.text.tiny,
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(left: 20, right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Taxes',
+                            style: MaaruStyle.text.tiny,
                           ),
                           Text(
-                            'Book Appointments',
-                            style: MaaruStyle.text.tiniest,
-                          ),
+                            '\$ 5.0',
+                            style: MaaruStyle.text.tiny,
+                          )
                         ],
-                      )))
-            ],
-          ),
-          Container(height: 450, width: 400, child: Appointments()),
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(right: 20, left: 20),
-            color: Colors.white,
-            height: 40,
-            //   width: 200,
-            child: TextFormField(
-              textAlign: TextAlign.center,
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.7),
-                      borderSide: BorderSide()),
-                  contentPadding: EdgeInsets.only(top: 10),
-                  hintText: 'Select a Provider',
-                  hintStyle: MaaruStyle.text.greyDisable,
-                  fillColor: Colors.white,
-                  suffixIcon: Container(
-                      margin: EdgeInsets.all(10),
-                      child: Image.asset(
-                        'assets/icons/icone-setting-30.png',
-                        height: 10,
-                        width: 20,
-                        // width: 30,
-                      ))),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.center,
-
-            child: Text(
-              'Pet',
-              style: MaaruStyle.text.tiniest,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(right: 20, left: 20),
-            color: Colors.white,
-            height: 40,
-            //   width: 200,
-            child: TextFormField(
-              textAlign: TextAlign.center,
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.7),
-                      borderSide: BorderSide()),
-                  contentPadding: EdgeInsets.only(top: 10),
-                  hintText: 'Select  pet',
-                  hintStyle: MaaruStyle.text.greyDisable,
-                  fillColor: Colors.white,
-                  suffixIcon: Container(
-                      margin: EdgeInsets.all(10),
-                      child: Image.asset(
-                        'assets/icons/icone-setting-30.png',
-                        height: 10,
-                        width: 20,
-                        // width: 30,
-                      ))),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              'Morning',
-              style: MaaruStyle.text.tiniest,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-              height: 40,
-              width: 400,
-              child: Padding(
-                  padding: EdgeInsets.only(right: 20, left: 20),
-                  child: ListView(scrollDirection: Axis.horizontal, children: [
-                    Imagesgg(
-                      text: '10:00 am',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Imagesgg(
-                      text: '10:30 am',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Imagesgg(
-                      text: '11:00 am',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Imagesgg(
-                      text: '10:30 am',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Imagesgg(
-                      text: '12:00 am',
-                    ),
-                  ]))),
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              'Afternoon',
-              style: MaaruStyle.text.tiniest,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-              height: 40,
-              width: 400,
-              child: Padding(
-                  padding: EdgeInsets.only(right: 20, left: 20),
-                  child: ListView(scrollDirection: Axis.horizontal, children: [
-                    Imagesgg(
-                      text: '12:30 am',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Imagesgg(
-                      text: '1:00 am',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Imagesgg(
-                      text: '1:30 am',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Imagesgg(
-                      text: '2:00 am',
-                    ),
-                  ]))),
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                  margin: EdgeInsets.only(left: 20),
-                  child: Text(
-                    'Booking Cost',
-                    style: MaaruStyle.text.large,
-                  ))),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-              padding: EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Booking Total',
-                    style: MaaruStyle.text.tiny,
+                      )),
+                  Divider(
+                    thickness: 1.0,
                   ),
-                  Text(
-                    " \$ 85.0",
-                    style: MaaruStyle.text.tiny,
-                  )
-                ],
-              )),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-              padding: EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Taxes',
-                    style: MaaruStyle.text.tiny,
+                  SizedBox(
+                    height: 20,
                   ),
-                  Text(
-                    '\$ 5.0',
-                    style: MaaruStyle.text.tiny,
-                  )
-                ],
-              )),
-          Divider(
-            thickness: 1.0,
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-              padding: EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Total',
-                    style: MaaruStyle.text.tiny,
+                  Padding(
+                      padding: EdgeInsets.only(left: 20, right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Total',
+                            style: MaaruStyle.text.tiny,
+                          ),
+                          Text(
+                            '\$ 90.0',
+                            style: MaaruStyle.text.tiny,
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    height: 20,
                   ),
-                  Text(
-                    '\$ 90.0',
-                    style: MaaruStyle.text.tiny,
+                  ThemedButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) => BookedConfirm()));
+                    },
+                    text: 'Book Appointment',
+                    enabled: true,
+                  ),
+                  SizedBox(
+                    height: 100,
                   )
-                ],
-              )),
-          SizedBox(
-            height: 20,
-          ),
-          ThemedButton(
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => BookedConfirm()));
-            },
-            text: 'Book Appointment',
-            enabled: true,
-          ),
-          SizedBox(
-            height: 100,
-          )
-        ]))));
+                ]))));
   }
 }
 
-class Imagesgg extends StatefulWidget {
-  final String text;
+class ChoiceRow extends StatefulWidget {
+  final String lebal1;
+  final String lebal2;
+  final String lebal3;
+  final String lebal4;
+  final String lebal5;
 
-  Imagesgg({
-    @required this.text,
-  });
+  const ChoiceRow(
+      {Key key,
+        this.lebal1,
+        this.lebal2,
+        this.lebal3,
+        this.lebal4,
+        this.lebal5})
+      : super(key: key);
 
   @override
-  _ImagesggState createState() => _ImagesggState();
+  _ChoiceRowState createState() => _ChoiceRowState();
 }
 
-class _ImagesggState extends State<Imagesgg> {
-  bool pressAttention = true;
+class _ChoiceRowState extends State<ChoiceRow> {
+  List<bool> isPressedList = [false, false, false,false,false,false];
+
+  String classChoice = '';
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onTap: () {
-          setState(() => pressAttention = !pressAttention);
-        },
-        child: Container(
-          alignment: Alignment.center,
-          width: 150,
-          height: 40,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            color: pressAttention
-                ? Colors.white
-                : MaaruColors.primaryColorsuggesion1,
-            // border: Border.all(color: Colors.grey),
+    print("Status L $isPressedList");
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        //  SizedBox(width: 30),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              if (isPressedList[0] == true) {
+                isPressedList[0] = false;
+                isPressedList[1] = false;
+                isPressedList[2] = false;
+                isPressedList[3] = false;
+                isPressedList[4] = false;
+                isPressedList[5] = false;
+              } else {
+                isPressedList[0] = true;
+                isPressedList[1] = false;
+                isPressedList[2] = false;
+                isPressedList[3] = false;
+                isPressedList[4] = false;
+                isPressedList[5] = false;
+
+              }
+            });
+          },
+          child: ChoiceButton(
+            isPressed: isPressedList[0],
+            label: widget.lebal1,
           ),
+        ),
+        SizedBox(width: 10),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              if (isPressedList[1] == true) {
+                isPressedList[0] = false;
+                isPressedList[1] = false;
+                isPressedList[2] = false;
+                isPressedList[3] = false;
+                isPressedList[4] = false;
+                isPressedList[5] = false;
+              } else {
+                isPressedList[0] = false;
+                isPressedList[1] = true;
+                isPressedList[2] = false;
+                isPressedList[3] = false;
+                isPressedList[4] = false;
+                isPressedList[5] = false;
+              }
+            });
+          },
+          child: ChoiceButton(
+            isPressed: isPressedList[1],
+            label: widget.lebal2,
+          ),
+        ),
+        SizedBox(width: 10),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              if (isPressedList[2] == true) {
+                isPressedList[0] = false;
+                isPressedList[1] = false;
+                isPressedList[2] = false;
+                isPressedList[3] = false;
+                isPressedList[4] = false;
+
+              } else {
+                isPressedList[0] = false;
+                isPressedList[1] = false;
+                isPressedList[2] = true;
+                isPressedList[3] = false;
+                isPressedList[4] = false;
+
+              }
+            });
+          },
+          child: ChoiceButton(
+            isPressed: isPressedList[2],
+            label: widget.lebal3,
+          ),
+        ),
+        SizedBox(width: 10),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              if (isPressedList[3] == true) {
+                isPressedList[0] = false;
+                isPressedList[1] = false;
+                isPressedList[2] = false;
+                isPressedList[3] = false;
+                isPressedList[4] = false;
+                isPressedList[5] = false;
+              } else {
+                isPressedList[0] = false;
+                isPressedList[1] = false;
+                isPressedList[2] = false;
+                isPressedList[3] = true;
+                isPressedList[4] = false;
+                isPressedList[5] = false;
+              }
+            });
+          },
+          child: ChoiceButton(
+            isPressed: isPressedList[3],
+            label: widget.lebal4,
+          ),
+        ),
+        SizedBox(width: 10),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              if (isPressedList[4] == true) {
+                isPressedList[0] = false;
+                isPressedList[1] = false;
+                isPressedList[2] = false;
+                isPressedList[3] = false;
+                isPressedList[4] = false;
+                isPressedList[5] = false;
+              } else {
+                isPressedList[0] = false;
+                isPressedList[1] = false;
+                isPressedList[2] = false;
+                isPressedList[3] = false;
+                isPressedList[4] = true;
+                isPressedList[5] = false;
+              }
+            });
+          },
+          child: ChoiceButton(
+            isPressed: isPressedList[4],
+            label: widget.lebal5,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ChoiceButton extends StatefulWidget {
+  final String label;
+  final bool isPressed;
+
+  ChoiceButton({this.label, this.isPressed});
+
+  @override
+  State<ChoiceButton> createState() => _ChoiceButtonState();
+}
+
+class _ChoiceButtonState extends State<ChoiceButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        width: 150,
+        height: 40,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.grey,
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: widget.isPressed
+              ? MaaruColors.primaryColorsuggesion1
+              : Colors.white,
+          // border: Border.all(color: Colors.grey),
+        ),
+        child: Center(
           child: Text(
-            widget.text,
-            style: MaaruStyle.text.greyDisable,
+            widget.label,
+            style: widget.isPressed?
+            GoogleFonts.poppins( textStyle: TextStyle(
+                fontWeight: FontWeight.normal,
+                fontFamily: 'Poppins',
+                fontSize: 15,
+                color: Colors.white)):
+            MaaruStyle.text.greyDisable,
+            textAlign: TextAlign.center,
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

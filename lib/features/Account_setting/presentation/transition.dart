@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
 class TransitionScreen extends StatefulWidget {
 
@@ -16,12 +17,14 @@ class _TransitionScreenState extends State<TransitionScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-            child: Container(
+            child: Column(children: [
+                BackArrowButton(),
+            Container(
               color: Colors.white,
-              margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+              padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
               child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                BackArrowButton(),
+
                 Align(
                     alignment: Alignment.centerRight,
                     child: Container(
@@ -37,26 +40,36 @@ class _TransitionScreenState extends State<TransitionScreen> {
                       ),
                     )),
               SizedBox(height: 20,),
-              Container(
-                  padding: EdgeInsets.only(right: 20),
-                  color: Colors.white,
-                  height: 45,
-                  //   width: 200,
-                  child: TextFormField(
-                    cursorColor: Colors.black,
-                    decoration: InputDecoration(
-                        border: new OutlineInputBorder(
-                            borderRadius:
-                            new BorderRadius.circular(10.7),
-                            borderSide: new BorderSide()),
-                        hintText: 'Search',
-                        fillColor: Colors.white,
-                        suffixIcon: Image.asset(
-                          'assets/icons/icone-setting-19.png',
-                          height: 50,
-                          // width: 30,
-                        )),
-                  ),),
+                Padding(
+                    padding:
+                    EdgeInsets.only(top: 15, right: 10, left: 5),
+                    child: TextFormField(
+                      // cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                          enabledBorder: new OutlineInputBorder(
+                              borderRadius:
+                              new BorderRadius.circular(10.7),
+                              borderSide: new BorderSide(
+                                  color: Colors.grey[300],
+                                  width: 1.0)),
+                          focusedBorder: new OutlineInputBorder(
+                              borderRadius:
+                              new BorderRadius.circular(10.7),
+                              borderSide: new BorderSide(
+                                  color: Colors.grey[300],
+
+                                  width: 1.0)),
+                          hintText: 'Search',
+                          hintStyle: MaaruStyle.text.greyDisable,
+                          contentPadding: EdgeInsets.fromLTRB(
+                              20.0, 15.0, 25.0, 10.0),
+                          fillColor: Colors.white,
+                          suffixIcon: Image.asset(
+                            'assets/icons/icone-setting-19.png',
+                            height: 50,
+                            // width: 30,
+                          )),
+                    )),
                 SizedBox(
                   height: size.height * 0.02,
                 ),
@@ -125,7 +138,7 @@ class _TransitionScreenState extends State<TransitionScreen> {
                 ),
                 Image.asset('assets/images/austingpet.png'),
               ]),
-            )));
+            )])));
     ;
   }
 }

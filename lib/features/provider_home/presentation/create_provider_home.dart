@@ -78,7 +78,7 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                         minWidth: 40,
                         onPressed: () {
                           setState(() {
-                            currentScreen = UpcomingAppointmentCalender();
+                            currentScreen = UpcomingAppointmentCalender1();
                             currentTab = 1;
                           });
                         },
@@ -99,7 +99,7 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                         onPressed: () {
                           setState(() {
                             Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => UpcomingAppointmentCalender1()));
+                                MaterialPageRoute(builder: (_) => UpcomingAppointmentCalender()));
                             //  currentScreen = SimpleMAp();
                             currentTab = 2;
                           });

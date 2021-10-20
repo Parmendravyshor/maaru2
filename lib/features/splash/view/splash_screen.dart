@@ -1,6 +1,9 @@
 
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geolocator/geolocator.dart' as geolocator;
 import 'package:maru/core/data/datasource/notification.dart';
 import 'package:maru/core/data/datasource/notification_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
@@ -16,6 +19,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  Position _currentPosition;
+  String _currentAddress;
   // final String _heading = "Standing up as a community\nagainst sexual violence";
   LocalDataHelper localDataHelper = LocalDataHelper();
   String latitude = 'waiting...';
@@ -29,11 +34,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // pushNotification();
+    _getCurrentLocation();
     getToken();
-
+    if (_currentPosition != null) Text(
+        "LAT: ${_currentPosition.latitude}, LNG: ${_currentPosition.longitude}"
+    );
+    if (_currentAddress != null) Text(
+        _currentAddress
+    );
+    //getCurrentLocation();
     localDataHelper.saveValue(key: "IsActive", value: false);
-    //onBackgroundLocationUpdation();
+   // onBackgroundLocationUpdation();
     navigateToNextScreen();
   }
 //todo: Navigate to AfterSplashScreen
@@ -50,22 +61,53 @@ class _SplashScreenState extends State<SplashScreen> {
 
   getToken() async {
     NotificationHelper helper = NotificationHelper();
+
     var fcmToken = await helper.getToken();
     print("fcm fcm fcm fcm fcm fcm fcm:$fcmToken");
   }
 
 //todo: showing notificatonon background when app is running
+  _getCurrentLocation() {
 
-  // onBackgroundLocationUpdation() async {
+    Geolocator
+        .getCurrentPosition(desiredAccuracy: geolocator.LocationAccuracy.best, forceAndroidLocationManager: true)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+        _getAddressFromLatLng();
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+          _currentPosition.latitude,
+          _currentPosition.longitude
+      );
+
+      Placemark place = placemarks[0];
+
+      setState(() {
+        _currentAddress = "${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+  //*onBackgroundLocationUpdation() async {
   //   await BackgroundLocation.setAndroidNotification(
   //     title: 'Background service is running',
   //     message: 'Background location in progress',
   //     icon: '@mipmap/ic_launcher',
   //   );
   //   await BackgroundLocation.setAndroidConfiguration(1000);
+  //
   //   await BackgroundLocation.startLocationService(distanceFilter: 20);
   //   BackgroundLocation.getLocationUpdates((location) {
   //     setState(() {
+  //       getCurrentLocation();
   //       latitude = location.latitude.toString();
   //       longitude = location.longitude.toString();
   //       accuracy = location.accuracy.toString();
@@ -86,8 +128,12 @@ class _SplashScreenState extends State<SplashScreen> {
   //       Time: $time
   //     ''');
   //   });
-  // }
-
+ //* }
+ //  void getCurrentLocation() {
+ //    BackgroundLocation().getCurrentLocation().then((location) {
+ //      print('This is current Location ' + location.toMap().toString());
+ //    });
+ //  }
   @override
   Widget build(BuildContext context) {
     //final size = MediaQuery.of(context).size;
@@ -97,6 +143,7 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: MaaruColors.whiteColor,
         body:
          Stack(children: [
+
           Image.asset(
             'assets/icons/Splash-Provider-or-User-screen-svg-new.png',
             height: 3000,
