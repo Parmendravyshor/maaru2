@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class MaaruColors {
   final bool _darkTheme;
   MaaruColors(this._darkTheme);
@@ -17,9 +18,9 @@ class MaaruColors {
   static Color DogsBackground = Color(0xFFedc8be);
   Color darkColor = Color(0xFF171819);
   static Color darkColor1 = Color(0xff000000);
-  Color textColorWhite = Color(0xffffffff);
+   Color textColorWhite = Color(0xffffffff);
   Color textColorBlack = Color(0xff0000000);
-  static Color darkGrey2 = Color(0xfff7f7f7);
+  static Color darkGrey2 = Color(0xffffffff);
   Color darkGrey = Color(0xffA1A6AB);
   Color lightGrey = Color(0xffD5D9DE);
   Color snowGrey = Color(0xFFF0F2F5);
@@ -30,7 +31,7 @@ class MaaruColors {
   Color greyDay100 = Color(0xff171819);
   Color greyDay800 = Color(0xffF7FAFC);
   Color greyDay600 = Color(0xffD5D9DE);
-  Color green = Color(0xff2B954C); // Green color for buttons
+  Color green = Color(0xFF397766); // Green color for buttons
   Color greenAccent = Color(0x336de793); // Green border highlight for buttons
   Color dotIndicator = Color(0xff404952);
   Color navyBlue = Color(0xff3f37c9);
@@ -52,97 +53,101 @@ class MaaruColors {
       : Color(0xF0F2F5).withOpacity(0.9);
   Color get divider => _darkTheme ? Color(0x0DE1E9F0) : Color(0xFFD5D9DE);
   TextStyle get tiny {
-    return GoogleFonts.poppins( textStyle: TextStyle(
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Poppins',
-        fontSize: 15,
-
-        color: Color(0xFF000000)));
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontFamily: 'Poppins',
+            fontSize: 15,
+            color: Color(0xFF000000)));
   }
+
 //regular
   TextStyle get mediumGreen {
-    return GoogleFonts.poppins( textStyle: TextStyle(
-        fontWeight: FontWeight.w600,
-        fontFamily: 'Poppins',
-        fontSize: 20,
-        color: MaaruColors.primaryColorsuggesion1));
-  }
-  TextStyle get greyDisable {
-    return GoogleFonts.poppins( textStyle: TextStyle(
-        fontWeight: FontWeight.normal,
-        fontFamily: 'Poppins',
-        fontSize: 15,
-        color: Colors.grey[400]));
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
+            fontSize: 20,
+            color: MaaruColors.primaryColorsuggesion1));
   }
 
+  TextStyle get greyDisable {
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.normal,
+            fontFamily: 'Poppins',
+            fontSize: 15,
+            color: Colors.grey[400]));
+  }
 
   TextStyle get tinyDisable {
-    return  GoogleFonts.poppins( textStyle: TextStyle(
-        fontWeight: FontWeight.w700,
-        fontFamily: 'Poppins',
-        fontSize: 13,
-        color: _darkTheme
-            ? MaaruStyle.colors.buttonTextColor1
-            : MaaruStyle.colors.greyDay100));
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontFamily: 'Poppins',
+            fontSize: 13,
+            color: _darkTheme
+                ? MaaruStyle.colors.buttonTextColor1
+                : MaaruStyle.colors.greyDay100));
   }
 
-  TextStyle get small => GoogleFonts.poppins(textStyle:TextStyle(
-      //   fontWeight: FontWeight.bold,
-      fontFamily: 'Poppins',
-      fontSize: 20,
-      fontWeight: FontWeight.w600,
-      color: Colors.black));
+  TextStyle get small => GoogleFonts.poppins(
+      textStyle: TextStyle(
+          //   fontWeight: FontWeight.bold,
+          fontFamily: 'Poppins',
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: Colors.black));
 //semibold
   TextStyle get medium {
-    return GoogleFonts.poppins( textStyle: TextStyle(
-        fontWeight: FontWeight.w500,
-        fontFamily: 'Poppins',
-        fontSize: 14,
-        color:
-             Colors.black));
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Poppins',
+            fontSize: 14,
+            color: Colors.black));
   }
+
 //semibold large
   TextStyle get large {
-    return GoogleFonts.poppins( textStyle: TextStyle(
-        fontWeight: FontWeight.w700,
-        fontFamily: 'Poppins',
-        fontSize: 22,
-        color: _darkTheme
-            ? MaaruStyle.colors.textColorWhite
-            : MaaruStyle.colors.textColorBlack));
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontFamily: 'Poppins',
+            fontSize: 22,
+            color: _darkTheme
+                ? MaaruStyle.colors.textColorWhite
+                : MaaruStyle.colors.textColorBlack));
   }
 
   TextStyle get mediumDisable {
-    return GoogleFonts.poppins(textStyle: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Poppins',
-        fontSize: 20,
-        color: MaaruColors.textButtonColor));
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Poppins',
+            fontSize: 20,
+            color: MaaruColors.textButtonColor));
   }
+
   TextStyle get red {
-    return GoogleFonts.poppins(textStyle: TextStyle(
-        fontWeight: FontWeight.w500,
-        fontFamily: 'Poppins',
-        fontSize: 15,
-        color:Color(0xFFc72019)));
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Poppins',
+            fontSize: 15,
+            color: Color(0xFFc72019)));
   }
   // ignore: unused_element
 
-
 //semibold
   TextStyle get tiniest {
-  return GoogleFonts.poppins(textStyle: TextStyle(
-  fontWeight: FontWeight.w600,
-  fontFamily: 'Poppins',
-  fontSize: 18,
-  color: Color(0xFF000000)));
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
+            fontSize: 18,
+            color: Color(0xFF000000)));
   }
-
-
-
-
-
-
 
   TextStyle get xlarge {
     return TextStyle(
@@ -183,11 +188,12 @@ class MaaruColors {
   }
 
   TextStyle get smallGreen {
-    return TextStyle(
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Quicksand',
-        fontSize: 15,
-        color: MaaruStyle.colors.green);
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
+            fontSize: 12,
+            color: MaaruColors.primaryColorsuggesion1));
   }
 }
 

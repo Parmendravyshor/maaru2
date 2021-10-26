@@ -4,8 +4,7 @@ import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/provider_login/login_provider_screen.dart';
 import 'package:maru/features/provider_register/provider_register.dart';
-import 'package:maru/features/splash/view/providerLogin.dart';
-import 'package:maru/features/splash/view/provider_register_screen.dart';
+
 
 class AfterSplashScreen2 extends StatelessWidget {
   @override

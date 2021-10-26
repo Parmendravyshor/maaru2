@@ -44,11 +44,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             ),
                           ),
 
-
-                             Text(
-                                'Change Password',textAlign: TextAlign.start,
+                            Align(
+                              alignment: Alignment.centerLeft,
+                          child:   Text(
+                                '          Change Password',textAlign: TextAlign.start,
                                 style: MaaruStyle.text.tiniest,
-                              ),
+                              )),
 
                             SizedBox(
                               height: 40,

@@ -1,4 +1,3 @@
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
@@ -21,9 +20,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   // final CreateProfile createProfile;
 
-  LoginBloc(this._emailSignin,
-      this._resendCode,
-      this.getprofile,);
+  LoginBloc(
+    this._emailSignin,
+    this._resendCode,
+    this.getprofile,
+  );
 
   String email = "";
   String password = "";
@@ -84,6 +85,4 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   // TODO: implement initialState
   LoginState get initialState => throw UnimplementedError();
-
-
 }

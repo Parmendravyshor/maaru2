@@ -309,7 +309,7 @@ class ThemeChanges extends StatelessWidget {
                         suffixIcon: Padding(
                           padding: EdgeInsets.only(top: 20),
                           child: Text(
-                            'lbs',
+                            '   lbs',
                             style: MaaruStyle.text.tiniest,
                           ),
                         )),

@@ -1,12 +1,19 @@
+part of 'register_bloc.dart';
+
 abstract class RegisterState {
-  RegisterState();
+   RegisterState();
 }
 
 class RegisterInitial extends RegisterState {
-  RegisterInitial() : super();
+  RegisterInitial(): super();
+}
+
+class ResgiterInitial extends RegisterState {
+  ResgiterInitial() : super();
 
   @override
-  String toString() => "RegisterInitial";
+  String toString() => "ResgiterInitial";
+
 }
 
 class RegisterInProgress extends RegisterState {
@@ -14,6 +21,7 @@ class RegisterInProgress extends RegisterState {
 
   @override
   String toString() => "RegisterInProgress";
+
 }
 
 class RegisterSuccess extends RegisterState {
@@ -21,6 +29,8 @@ class RegisterSuccess extends RegisterState {
 
   @override
   String toString() => "RegisterSuccess";
+
+
 }
 
 class RegisterFailure extends RegisterState {
@@ -28,6 +38,8 @@ class RegisterFailure extends RegisterState {
   RegisterFailure(this.errorMessage) : super();
   @override
   String toString() => "RegisterFailure";
+
+
 }
 
 class RegisterFormValidationSuccess extends RegisterState {
@@ -35,11 +47,13 @@ class RegisterFormValidationSuccess extends RegisterState {
 
   @override
   String toString() => "RegisterFormValidationSuccess";
-}
 
+}
 class RegisterFormValidationFailure extends RegisterState {
   RegisterFormValidationFailure() : super();
 
   @override
   String toString() => "RegisterFormValidationFailure";
+
+
 }

@@ -263,7 +263,8 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                       builder: (_) => VerifyUser()));
                                 },
                               )
-                            ]))
+                            ])),
+                        SizedBox(height: 30,)
                       ])]))));
   }
 }

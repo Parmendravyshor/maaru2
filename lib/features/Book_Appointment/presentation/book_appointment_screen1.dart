@@ -212,7 +212,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     InkWell(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => BookedConfirm()));
+                              builder: (_) => BookAppointmentScreen3()));
                         },
                         child: RoundedButton(
                           buttonName: 'Book Appointments',

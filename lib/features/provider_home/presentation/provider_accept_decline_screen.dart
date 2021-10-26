@@ -33,41 +33,42 @@ class _ProviderAcceptOrDeclineScreenState
             SizedBox(
               height: 20,
             ),
-            Padding(
-                padding: EdgeInsets.only(left: 20, right: 18,top: 15),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          color: Colors.white,
-                          height: 45,
-                          //     width: 350,
-                          child: TextFormField(
-                            cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                                border: new OutlineInputBorder(
-                                    borderRadius: new BorderRadius.circular(
-                                      10.7,
-                                    ),
-                                    borderSide: new BorderSide()),
-                                hintText: 'Search',
-                                fillColor: Colors.white,
-                                suffixIcon: Image.asset(
-                                  'assets/icons/icone-setting-19.png',
-                                  width: 30,
-                                )),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Image.asset(
-                        'assets/icons/New Project (36).png',
-                        height: 40,
-                      )
-                    ])),
+                Padding(padding:EdgeInsets.only(left: 10,right: 10),child:
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children:[
+                      Container(
+                          child:new Flexible(
+                            child:
+                            TextFormField(
+                              // cursorColor: Colors.black,
+                              decoration: InputDecoration(
+                                  enabledBorder: new OutlineInputBorder(
+                                      borderRadius:
+                                      new BorderRadius.circular(10.7),
+                                      borderSide: new BorderSide(
+                                          color: Colors.grey[300],
+                                          width: 1.0)),
+                                  focusedBorder: new OutlineInputBorder(
+                                      borderRadius:
+                                      new BorderRadius.circular(10.7),
+                                      borderSide: new BorderSide(
+                                          color: Colors.grey[300],
+                                          width: 1.0)),
+
+                                  hintText: 'Search',
+                                  hintStyle: MaaruStyle.text.greyDisable,
+                                  contentPadding: EdgeInsets.fromLTRB(
+                                      20.0, 15.0, 25.0, 10.0),
+                                  fillColor: Colors.white,
+                                  suffixIcon: Image.asset(
+                                    'assets/icons/icone-setting-19.png',
+                                    height: 50,
+                                    // width: 30,
+                                  )),
+                            ),)),
+                      SizedBox(width: 10,),
+                      Image.asset('assets/icons/scnd.png',height: 40,),])),
             SizedBox(
               height: 20,
             ),
@@ -195,45 +196,42 @@ class _TestAppState extends State<TestApp> {
               SizedBox(
                 height: 20,
               ),
-              Padding(
-                  padding: EdgeInsets.only(left: 20, right: 18,top: 15),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(right: 10),
-                            color: Colors.white,
-                            height: 45,
-                                 width: 350,
-                            child: TextFormField(
-                              cursorColor: Colors.black,
-                              decoration: InputDecoration(
-                                  border: new OutlineInputBorder(
-                                      borderRadius: new BorderRadius.circular(
-                                        10.7,
-                                      ),
-                                      borderSide: new BorderSide()),
-                                  contentPadding:
-                                      EdgeInsets.only(top: 0, left: 0),
-                                  hintText: 'Search',
-                                  fillColor: Colors.white,
-                                  suffixIcon:
-                                  Image.asset(
-                                    'assets/icons/icone-setting-19.png',
-                                    height: 65,
-                                  )),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Image.asset(
-                          'assets/icons/New Project (36).png',
-                          height: 40,
-                        )
-                      ])),
+              Padding(padding:EdgeInsets.only(left: 10,right: 10),child:
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:[
+                    Container(
+                        child:new Flexible(
+                          child:
+                          TextFormField(
+                            // cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                                enabledBorder: new OutlineInputBorder(
+                                    borderRadius:
+                                    new BorderRadius.circular(10.7),
+                                    borderSide: new BorderSide(
+                                        color: Colors.grey[300],
+                                        width: 1.0)),
+                                focusedBorder: new OutlineInputBorder(
+                                    borderRadius:
+                                    new BorderRadius.circular(10.7),
+                                    borderSide: new BorderSide(
+                                        color: Colors.grey[300],
+                                        width: 1.0)),
+
+                                hintText: 'Search',
+                                hintStyle: MaaruStyle.text.greyDisable,
+                                contentPadding: EdgeInsets.fromLTRB(
+                                    20.0, 15.0, 25.0, 10.0),
+                                fillColor: Colors.white,
+                                suffixIcon: Image.asset(
+                                  'assets/icons/icone-setting-19.png',
+                                  height: 50,
+                                  // width: 30,
+                                )),
+                          ),)),
+                    SizedBox(width: 10,),
+                    Image.asset('assets/icons/New Project (36).png',height: 40,),])),
               SizedBox(
                 height: 20,
               ),
@@ -272,7 +270,7 @@ class _TestAppState extends State<TestApp> {
                           color: Colors.white,
                         ),
                         child: Container(
-                            height: 220,
+                            height: 240,
                             width: 420,
                             decoration: BoxDecoration(
                                 borderRadius: new BorderRadius.circular(20.7),

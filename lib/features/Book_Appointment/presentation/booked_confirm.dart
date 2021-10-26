@@ -1,18 +1,15 @@
 
-
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Book_Appointment/presentation/reviewe_screen.dart';
-import 'package:maru/features/register/presentation/bloc/register_bloc.dart';
-import 'package:maru/features/register/presentation/bloc/register_event.dart';
+import 'package:maru/features/Home/presentation/home_sceen.dart';
+
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 
@@ -170,7 +167,14 @@ class _BookedConfirmState extends State<BookedConfirm> {
                           style: TextButton.styleFrom(
                               backgroundColor:
                                   MaaruColors.primaryColorsuggesion1,
-                              minimumSize: Size(130, 50)),
+                              minimumSize: Size(130, 50),
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color:Colors.white,
+
+                                ),
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (_) => ReviewScreen()));
@@ -216,7 +220,15 @@ class _BookedConfirmState extends State<BookedConfirm> {
                       TextButton(
                           style: TextButton.styleFrom(
                               backgroundColor: MaaruColors.textButtonColor,
-                              minimumSize: Size(130, 50)),
+                              minimumSize: Size(130, 50),
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color:Colors.white,
+
+                                   ),
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+
                           onPressed: () {
 
                                 showAlertDialog(context)  ;
@@ -231,18 +243,21 @@ class _BookedConfirmState extends State<BookedConfirm> {
                         width: 20,
                       ),
                       Container(
+                        alignment: Alignment.center,
                         height: 50,
                         width: 170,
                           decoration: BoxDecoration(
                               color: MaaruColors.primaryColorsuggesion,
                               borderRadius: BorderRadius.circular(10)),
-                  child:    FlatButton(
+                  child:FlatButton(
                         height: 50,
                         minWidth: 170,
                         color: MaaruColors.primaryColorsuggesion,
                         onPressed: (){Navigator.of(context).push(MaterialPageRoute(
                             builder: (_) => BookAppointmentScreen3()));},
-                        child: Text('Reschedule',
+                        child:
+                            Padding(padding:EdgeInsets.only(top: 10),child:
+                        Text('Reschedule',
                             style: GoogleFonts.poppins(
                                 textStyle: TextStyle(
                               color: MaaruColors
@@ -250,9 +265,14 @@ class _BookedConfirmState extends State<BookedConfirm> {
                               fontFamily: 'Poppins',
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
-                            ))),
+                            )))),
                         textColor: MaaruColors.textButtonColor,
+                    shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color:Colors.white,
 
+                        ),
+                        borderRadius: BorderRadius.circular(10)),
                       )
                       )],
                   ),
@@ -265,6 +285,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
       ),
     ));
   }
+
   showAlertDialog(BuildContext context,) {
     final size = MediaQuery.of(context).size;
     // set up the buttons
@@ -289,7 +310,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
           color: MaaruColors.primaryColorsuggesion),),
       onPressed:  () {
         AlertManager.showSuccessMessage( "Appointment cancel successful", context);
-        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>RegisterScreen()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>HomeScreen()));
       },
     );
 
@@ -311,8 +332,10 @@ class _BookedConfirmState extends State<BookedConfirm> {
       content:
       Text("Are you want to \n cancel Appointment?",textAlign: TextAlign.center,),
       actions: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
         cancelButton,
         continueButton,
+      ]),
       ],
     );
 

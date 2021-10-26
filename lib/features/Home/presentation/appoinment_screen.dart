@@ -9,14 +9,17 @@ class AppointmentScreen extends StatefulWidget {
 }
 
 class _AppointmentScreenState extends State<AppointmentScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xFFffffff),
+
         body: SafeArea(
 bottom: false,
             child:SingleChildScrollView(child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+
                     SizedBox(height: 30,),
           BackArrowButton(),
           ShowLocation(),

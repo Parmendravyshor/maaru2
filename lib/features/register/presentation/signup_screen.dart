@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 import 'dart:ffi';
 
@@ -17,16 +15,14 @@ import 'package:maru/core/widget/icons.dart';
 import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
-
 
 import 'dart:ffi';
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
-
-
 
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -39,6 +35,9 @@ import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/error/failure.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
+import 'package:maru/features/register/domain/usecases/email_signup.dart';
+import 'package:maru/features/register/presentation/register_bloc.dart';
+
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
@@ -47,16 +46,12 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as https;
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 
-import 'bloc/register_bloc.dart';
-import 'bloc/register_state.dart';
-
 class RegisterScreen extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  bool enabled = false;
 
   TextEditingController _fnameController;
   TextEditingController _lnameController;
@@ -90,43 +85,63 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body:
-
-
-      SingleChildScrollView(
+      body: SingleChildScrollView(
         child: SafeArea(
-        child:
-          Column(
+          child: Column(
             children: [
-
-
-            // BlocBuilder<RegisterBloc,RegisterState>(
-            //   builder: (context,state){
-            //     return
-            //   },
-            //
-            //     )
+              // BlocBuilder<RegisterBloc,RegisterState>(
+              //   builder: (context,state){
+              //     return
+              //   },
+              //
+              //     )
 
               Logo(),
               ScreenIcon(),
-             const SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Center(
                 child: Text(
                   'or sign up with email',
-                  style: GoogleFonts.poppins(textStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500)),
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500)),
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
+
               Container(
-                // padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Column(
+                  // padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: BlocProvider(create: (context) {
+                EmailSignup _emailSignup;
+                return RegisterBloc(_emailSignup);
+              }, child: BlocBuilder<RegisterBloc, RegisterState>(
+                      builder: (context, state) {
+                if (state is RegisterSuccess) {
+                  //  SchedulerBinding.instance.addPostFrameCallback((_) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => CreateregisterPetProfile1()));
+                } else if (state is RegisterFailure) {
+                  Future.delayed(Duration(seconds: 1), () {
+                    Scaffold.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.black,
+                        content: Text(state.errorMessage,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Poppins',
+                                fontSize: 20,
+                                color: MaaruStyle.colors.textColorWhite)),
+                      ),
+                    );
+                  });
+                }
+                return Column(
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -134,8 +149,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ThemedTextField("First Name", TextInputType.name,
                             textinputaction2: TextInputAction.next,
                             onChanged: (text) {
-                          // BlocProvider.of<RegisterBloc>(context)
-                          //  .add(FNameChanged(text));
+                          BlocProvider.of<RegisterBloc>(context)
+                              .add(FNameChanged(text));
                         }, editingController: _fnameController),
                         SizedBox(
                           height: 5,
@@ -143,8 +158,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ThemedTextField("Last Name", TextInputType.name,
                             textInputAction: TextInputAction.next,
                             onChanged: (text) {
-                          //   BlocProvider.of<RegisterBloc>(context)
-                          //  .add(LNameChanged(text));
+                          BlocProvider.of<RegisterBloc>(context)
+                              .add(LNameChanged(text));
                         }, editingController: _lnameController),
                         SizedBox(
                           height: 5,
@@ -152,20 +167,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ThemedTextField("Email", TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
                             onChanged: (text) {
-                          // BlocProvider.of<RegisterBloc>(context)
-                          //  .add(EmailChanged(text));
+                          BlocProvider.of<RegisterBloc>(context)
+                              .add(EmailChanged(text));
                         }, editingController: _emailController),
                         SizedBox(
                           height: 5,
                         ),
                         ThemedTextField(
                           "Password",
-                          TextInputType.number,
+                          TextInputType.text,
                           textInputAction: TextInputAction.done,
                           password: true,
                           onChanged: (text) {
-                            //  BlocProvider.of<RegisterBloc>(context)
-                            //   .add(PasswordChanged(text));
+                            BlocProvider.of<RegisterBloc>(context)
+                                .add(PasswordChanged(text));
                           },
                           editingController: _passwordController,
                         ),
@@ -177,49 +192,51 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 20,
                         ),
                         ThemedButton(
-                          text: "Join",
-                          onPressed: ()  {
+                            text: "Join",
+                            onPressed: () async {
+                              String fname = _fnameController.text;
+                              String lname = _lnameController.text;
+                              String email = _emailController.text;
+                              String password = _passwordController.text;
 
-                            String fname = _fnameController.text;
-                            String lname = _lnameController.text;
-                            String email = _emailController.text;
-                            String password = _passwordController.text;
+                              if (fname.isEmpty) {
+                                AlertManager.showErrorMessage(
+                                    "Please enter first name", context);
+                              } else if (lname.isEmpty) {
+                                AlertManager.showErrorMessage(
+                                    "Please enter last name", context);
+                              } else if (validateEmail(email) != null) {
+                                AlertManager.showErrorMessage(
+                                    "Please enter valid email", context);
+                              } else if (password.length<6)
+                                    {
+                                AlertManager.showErrorMessage(
+                                    "Password must be 6 characters long",
+                                    context);
 
-                            if (fname.isEmpty) {
-                              AlertManager.showErrorMessage(
-                                  "Please enter first name", context);
-                            } else if (lname.isEmpty) {
-                              AlertManager.showErrorMessage(
-                                  "Please enter last name", context);
-                            } else if (validateEmail(email) != null) {
-                              AlertManager.showErrorMessage(
-                                  "Please enter valid email", context);
-                            } else if (password.length < 6) {
-                              AlertManager.showErrorMessage(
-                                  "Password must be 6 characters long",
-                                  context);
+                              //  enabled = true;
+                              }
 
-                              enabled = true;
-                            }
+                              // else if (password != cnfpassword) {
+                              //   AlertManager.showErrorMessage(
+                              //       "Password do not match", context);
 
+                              else {
+                                // AlertManager.disclaimerPopup(context, onSuccess: () {
+                                // BlocProvider.of<RegisterBloc>(context);
+                                BlocProvider.of<RegisterBloc>(context)
+                                    .add(RegisterButtonTapped());
+                                // AlertManager.(context,
+                                //     onSuccess: () {
+                                //   BlocProvider.of<RegisterBloc>(context)
+                                //       .add(RegisterButtonTapped());
+                                // });
 
-                            // else if (password != cnfpassword) {
-                            //   AlertManager.showErrorMessage(
-                            //       "Password do not match", context);
-
-                            else  {
-                              // AlertManager.disclaimerPopup(context, onSuccess: () {
-                              // BlocProvider.of<RegisterBloc>(context);
-                               AlertManager.showSuccessMessage( "Success", context);
-
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      CreateregisterPetProfile1()));}
-
-
-
-                          }
-                        ),
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        CreateregisterPetProfile1()));
+                              }
+                            }),
                         SizedBox(
                           height: 20,
                         ),
@@ -230,14 +247,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ],
                     )
                   ],
-                ),
-              )
+                );
+              })))
             ],
           ),
         ),
       ),
     );
   }
+
 }
 
 /// Text for showing at bottom of screen

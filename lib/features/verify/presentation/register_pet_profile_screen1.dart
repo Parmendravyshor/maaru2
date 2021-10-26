@@ -280,7 +280,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                   color: Colors.white12,
                                   shape: BoxShape.circle),
                               child: Text(
-                                'Back',
+                                '',
                                 style: MaaruStyle.text.greyDisable,
                               ),
                             ),

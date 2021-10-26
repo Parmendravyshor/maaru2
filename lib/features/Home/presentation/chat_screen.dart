@@ -44,7 +44,7 @@ elevation: 0,
           ),
         ),
         floatingActionButton: Padding(
-            padding:  EdgeInsets.only(bottom: 130.0, right: 20),
+            padding:  EdgeInsets.only(bottom: 170.0, right: 20),
             child: FloatingActionButton(
                 onPressed: () {},
                 child: Image.asset('assets/icons/icone-setting-65.png'))),
@@ -66,7 +66,7 @@ elevation: 0,
                                   ('assets/images/Russo-Alessandro-Eric-20.jpg'),
                               width: 40,
                               avatarRadius: 40,
-                              Color: Colors.yellow,
+                              Color:Color(0XFFf9f9f9)
                             ),
                             Card(
                               margin: EdgeInsets.only(top: 20),
@@ -78,9 +78,11 @@ elevation: 0,
                                 bottomRight: Radius.circular(20),
                               )),
                               child:
+
+
                         Container(
                                   margin: EdgeInsets.only(top: 10),
-                                  height: 80,
+                                  height: 100,
                                  width: 270,
                                   child: Column(
                                     children: <Widget>[
@@ -117,7 +119,7 @@ elevation: 0,
                               )),
                               child: Container(
                                   margin: EdgeInsets.only(top: 10),
-                                  height: 70,
+                                  height: 100,
                                   width: 270,
                                   child: Column(
                                     children: <Widget>[
@@ -133,7 +135,7 @@ elevation: 0,
                               imageUrl: ('assets/128/DavidElks.png'),
                               width: 40,
                               avatarRadius: 40,
-                              Color: Colors.yellow,
+                              Color: Color(0XFFf9f9f9)
                             ),
                           ],
                         )),

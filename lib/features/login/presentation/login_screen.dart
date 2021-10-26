@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               ThemedTextField(
                 "Password",
-                TextInputType.number,
+                TextInputType.text,
                 textinputaction2: TextInputAction.done,
                 password: true,
                 onChanged: (text) {

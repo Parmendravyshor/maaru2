@@ -75,7 +75,7 @@ Stack(children:[
                       child: InkWell(
                           onTap: () {
                             Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => SimpleMAp()));
+                                MaterialPageRoute(builder: (_) => MapView()));
                           },
                           child: Image.asset(
                             'assets/icons/icone-setting-61.png',

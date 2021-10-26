@@ -1,5 +1,3 @@
-
-
 import 'dart:ffi';
 import 'dart:convert';
 import 'dart:ffi';
@@ -35,43 +33,31 @@ class UserRepositoryImpl implements UserRepository {
   //   throw UnimplementedError();
   // }
 
-   Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
-    // try {
-    //   final result = await http.post(
-    //     Uri.https(MaruConstant.BaseUrl, "emailSignup"),
-    //     headers: <String, String>{
-    //       'Content-Type': 'application/json; charset=UTF-8',
-    //     },
-    //     body: jsonEncode(<String, String>{
-    //       'jwttoken': sharedPrefHelper.getIdJwtToken(),
-    //     }),
-    //   );
-    //   var jsonResponse = convert.jsonDecode(result.body);
-    // // saveRegistrationId();
-    //   print("emailSignup $jsonResponse ${result.request.url}");
-    //   if (result.statusCode == 200) {
-    //
-    //   }
-    //   return Right(Void);
-    // } catch (e) {
-    //   return Left(ApiFailure(e.toString()));
-    // }
-     try {
-       var url = Uri.parse("$BASE_URL/signup");
-       var response = await http.post(url, body: {'jwttoken': sharedPrefHelper.getIdJwtToken(),});
-       print('Response status: ${response.statusCode}');
-       print('Response body: ${response.body}');
-       Map Void = json.decode(response.body);
+  Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
+    try {
+      final result = await http.post(
+        Uri.https(MaruConstant.signup, 'signup'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          MaruConstant.fName: params.fName,
+          MaruConstant.lName: params.lName,
+          MaruConstant.email: params.email,
+          MaruConstant.password: params.password,
+          'jwttoken': sharedPrefHelper.getIdJwtToken(),
+        }),
+      );
+      var jsonResponse = convert.jsonDecode(result.body);
+      // saveRegistrationId();
+      print("emailSignup $jsonResponse ${result.request.url}");
 
-
-       return Right(Void);
-     } catch (e) {
-       print("Thrown Exception While signing Up:$e");
-       throw e;
-     }
+      //  if (result.statusCode == 200) {
+      return Right(Void);
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
   }
-
-
 
   @override
   Future<Either<Failure, void>> resendOtp(String email) {

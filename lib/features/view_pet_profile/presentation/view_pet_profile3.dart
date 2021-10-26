@@ -54,11 +54,19 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        ViewPetProfile()));
+                                          },
+                                          child:
                                         Image.asset(
                                           'assets/icons/icone-setting-67.png',
                                           height: 40,
                                           width: 40,
-                                        ),
+                                        )),
                                         SizedBox(
                                           width: 10,
                                         ),
@@ -70,10 +78,10 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                           ViewPetProfile2()));
                                             },
                                             child: Image.asset(
-                                              'assets/icons/icone-setting-68.png',
+                                              'assets/icons/icone-setting-67.png',
                                               height: 40,
                                               width: 40,
-                                              color: Colors.grey[100],
+                                              //color: Colors.grey[100],
                                             )),
                                         SizedBox(
                                           width: 10,
@@ -85,10 +93,10 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                     builder: (_) => ViewPetProfile3()));
                                           },
                                           child: Image.asset(
-                                            'assets/icons/icone-setting-68.png',
+                                            'assets/icons/icone-setting-67.png',
                                             height: 40,
                                             width: 40,
-                                            color: Colors.grey[100],
+                                            //color: Colors.grey[100],
                                           ),
                                         )
                                       ],
@@ -246,7 +254,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                         ),
 
                                         Container(
-                                           height: size.height * 0.25,
+                                           height: size.height * 0.30,
                                           width: size.width * 0.85,
                                             decoration: BoxDecoration(
                                                 color: Colors.grey[200],

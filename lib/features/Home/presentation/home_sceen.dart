@@ -57,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                             new BorderRadius.circular(10.7),
                                         borderSide: new BorderSide(
                                             color: Colors.grey[300],
-
                                             width: 1.0)),
                                     hintText: 'Search',
                                     hintStyle: MaaruStyle.text.greyDisable,
@@ -126,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             text: ' All messages',
                             enabled: true,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30,
                           )
                         ])))));
@@ -148,7 +147,7 @@ class HorizList extends StatelessWidget {
             return Padding(
                 padding: index == _hotels.length - 1
                     ? const EdgeInsets.fromLTRB(8, 0, 8, 0)
-                    : const EdgeInsets.only(left: 8,right: 8),
+                    : const EdgeInsets.only(left: 8, right: 8),
                 child: Container(
                     alignment: FractionalOffset.topLeft,
                     decoration: BoxDecoration(

@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/theme/style.dart';
-
+import 'dart:math' as math;
 //import 'package:formz/formz.dart';
 /// This is a widget that will be used for displaying header titles
 class HeaderText extends StatelessWidget {

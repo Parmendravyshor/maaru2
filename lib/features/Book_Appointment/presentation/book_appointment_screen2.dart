@@ -42,7 +42,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
               ),
 
               Container(
-                height: size.height * 0.95,
+                height: size.height * 1.1,
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -57,7 +57,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                           children: [
 
                             SizedBox(
-                              height: size.height * 0.05,
+                              height: size.height * 0.10,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +85,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                       'assets/icons/icone-setting-67.png',
                                       height: 40,
                                       width: 40,
-                                      color: Colors.grey[100],
+
                                     )),
                                 SizedBox(
                                   width: 10,

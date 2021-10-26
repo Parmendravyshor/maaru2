@@ -1,4 +1,6 @@
 
+
+
 import 'package:flutter/material.dart';
 
 
@@ -6,6 +8,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 
 import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/show_location.dart';
+import 'package:maru/features/Book_Appointment/presentation/provider_confirm_book.dart';
 
 class UpcomingAppointmentCalender extends StatefulWidget {
   @override
@@ -62,7 +65,7 @@ SizedBox(height: 30,),
           )),
     ),)),
 SizedBox(width: 10,),
-  Image.asset('assets/icons/scnd.png',height: 40,),])),
+  Image.asset('assets/icons/icone-setting-40.png',height: 40,),])),
             Container(
                 height: 450,
                 width: 400,
@@ -70,7 +73,10 @@ SizedBox(width: 10,),
                 child: Appointments()),
             SizedBox(height: 20,),
            Padding(padding:EdgeInsets.only(left: 10,right: 10),child:
-            Image.asset('assets/images/austintext-1.png')),
+               InkWell(onTap: (){
+                 Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ProviderBookedConfirm()));
+               },
+          child:  Image.asset('assets/images/austintext-1.png'))),
           ],
         )),
       ),

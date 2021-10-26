@@ -1,26 +1,27 @@
-/// Events class for Register screen
-abstract class RegisterEvent {
-  RegisterEvent();
-}
+part of 'register_bloc.dart';
 
-/// Register Opened
-///
-/// This event is fired when register is opened
+abstract class RegisterEvent  {
+
+}
 class RegisterOpened extends RegisterEvent {
   RegisterOpened();
 
   @override
   String toString() => "RegisterOpened";
+
+
 }
 
 /// Register Button Tapped
 ///
 /// This event is fired when Register button is tapped
 class RegisterButtonTapped extends RegisterEvent {
-  RegisterButtonTapped():super();
+  RegisterButtonTapped();
 
   @override
   String toString() => "RegisterButtonTapped";
+
+
 }
 
 /// Name Changed
@@ -32,6 +33,8 @@ class FNameChanged extends RegisterEvent {
 
   @override
   String toString() => "NameChanged";
+
+
 }
 
 /// Name Changed
@@ -43,6 +46,8 @@ class LNameChanged extends RegisterEvent {
 
   @override
   String toString() => "NameChanged";
+
+
 }
 
 /// Email Changed
@@ -54,6 +59,8 @@ class EmailChanged extends RegisterEvent {
 
   @override
   String toString() => "EmailChanged";
+
+
 }
 
 /// Password Changed
@@ -65,4 +72,6 @@ class PasswordChanged extends RegisterEvent {
 
   @override
   String toString() => "PasswordChanged";
+
+
 }
