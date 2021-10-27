@@ -6,6 +6,8 @@ import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'package:maru/main.dart';
 
+import 'create_home_screen.dart';
+
 class ProviderSearchScreen extends StatefulWidget {
   @override
   _ProviderSearchScreenState createState() => _ProviderSearchScreenState();
@@ -17,7 +19,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-
+        bottomNavigationBar: CreateHomeScreen(selectedIndex: 1,Color:
+        MaaruColors.textButtonColor),
         body: SafeArea(
             child: Column(children: [
               BackArrowButton(),

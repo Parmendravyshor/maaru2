@@ -7,6 +7,7 @@ import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/Home/presentation/custom_card.dart';
 
 import 'chat_circle_list_view.dart';
+import 'create_home_screen.dart';
 
 class Messages extends StatefulWidget {
   // const Messages({Key key}) : super(key: key);
@@ -20,6 +21,7 @@ class _MessagesState extends State<Messages> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xFFffffff),
+        bottomNavigationBar: CreateHomeScreen(selectedIndex: 3, Color:MaaruColors.textButtonColor),
         body: SafeArea(
         bottom: false,
             child: SingleChildScrollView(child:

@@ -4,6 +4,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/appoinment_screen.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 
 import 'message.dart';
@@ -14,12 +15,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final PageStorageBucket bucket = PageStorageBucket();
+  Widget currentScreen = HomeScreen();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Stack(children: [
+      Scaffold(
         backgroundColor: Color(0xFFffffff),
-        body: SafeArea(
-            child: SingleChildScrollView(
+bottomNavigationBar: CreateHomeScreen(selectedIndex: 0,Color:
+     MaaruColors.textButtonColor
+    ,),
+        body:SafeArea(
+
+           child: SingleChildScrollView(
                 child: Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Column(
@@ -128,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(
                             height: 30,
                           )
-                        ])))));
+                        ])))))]);
   }
 }
 

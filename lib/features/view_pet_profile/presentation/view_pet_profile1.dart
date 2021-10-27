@@ -6,6 +6,7 @@ import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile2.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
@@ -21,6 +22,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: MaaruColors.DogsBackground,
+        bottomNavigationBar: CreateHomeScreen(selectedIndex: 4,),
         body: SafeArea(
           bottom: false,
             child: SingleChildScrollView(

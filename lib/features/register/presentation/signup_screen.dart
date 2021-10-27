@@ -15,6 +15,7 @@ import 'package:maru/core/widget/icons.dart';
 import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 
@@ -125,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 if (state is RegisterSuccess) {
                   //  SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => CreateregisterPetProfile1()));
+                      builder: (_) => HomeScreen()));
                 } else if (state is RegisterFailure) {
                   Future.delayed(Duration(seconds: 1), () {
                     Scaffold.of(context).showSnackBar(

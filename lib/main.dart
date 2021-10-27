@@ -144,9 +144,11 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: (CreateHomeScreen())));
+        home: Scaffold(body: (SplashScreen())));
   }
 }
+
+
 
 class MapView extends StatefulWidget {
   @override

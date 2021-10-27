@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/show_location.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 
 class AppointmentScreen extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color(0xFFffffff),
-
+bottomNavigationBar: CreateHomeScreen(selectedIndex: 1,Color:MaaruColors.textButtonColor),
         body: SafeArea(
 bottom: false,
             child:SingleChildScrollView(child:

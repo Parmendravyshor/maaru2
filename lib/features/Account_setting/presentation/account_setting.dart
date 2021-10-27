@@ -6,8 +6,8 @@ import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/disclaimer.dart';
 import 'package:maru/features/Account_setting/presentation/change_password_screen.dart';
 import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
-
 import 'edit_profile_screen.dart';
 
 class AccountSettingScreen extends StatefulWidget {
@@ -22,6 +22,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+        bottomNavigationBar: CreateHomeScreen(selectedIndex: 4, Color:MaaruColors.textButtonColor),
         body: SafeArea(
             child: SingleChildScrollView(
 

@@ -7,6 +7,7 @@ import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/forgot/presentation/forgot_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 
@@ -38,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+
         body: SingleChildScrollView(
             child: SafeArea(
                 child: Column(children: [
@@ -112,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   else{
                     AlertManager.showSuccessMessage( "Success", context);
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => CreateHomeScreen()));}
+                      MaterialPageRoute(builder: (_) => HomeScreen()));}
                 },
               ),
               SizedBox(

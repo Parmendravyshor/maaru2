@@ -227,3 +227,14 @@ class _BookAppointment1State extends State<BookAppointment1> {
         ))));
   }
 }
+// icon:SizedBox(
+//
+//   child:
+//   new IconButton(
+//       icon: new Image.asset("assets/icons/icone-setting-9.png"),
+//       onPressed: () {
+//         AppStatecurrentTab == index ? Colors.red : Colors.blue;
+//       }),
+//   width: 38,
+//   height: 38,
+// ),

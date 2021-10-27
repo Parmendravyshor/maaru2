@@ -4,6 +4,8 @@ import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 
+import 'create_home_screen.dart';
+
 class PetProfile extends StatefulWidget {
   @override
   _PetProfileState createState() => _PetProfileState();
@@ -14,9 +16,11 @@ class _PetProfileState extends State<PetProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+        bottomNavigationBar: CreateHomeScreen(selectedIndex: 2,),
         body: SafeArea(
           bottom: false,
-            child: Column(children: [
+            child: SingleChildScrollView(child:
+            Column(children: [
           SizedBox(
             height: 40,
           ),
@@ -135,6 +139,6 @@ class _PetProfileState extends State<PetProfile> {
               style: MaaruStyle.text.mediumGreen,
             ))
           ]),
-        ])));
+        ]))));
   }
 }
