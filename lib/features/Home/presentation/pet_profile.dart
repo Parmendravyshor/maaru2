@@ -1,9 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
-
 import 'create_home_screen.dart';
 
 class PetProfile extends StatefulWidget {
@@ -15,8 +15,11 @@ class _PetProfileState extends State<PetProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        bottomNavigationBar: CreateHomeScreen(selectedIndex: 2,),
+        backgroundColor:MaaruColors.darkGrey2,
+        bottomNavigationBar: CreateHomeScreen(
+          selectedIndex: 2,
+
+        ),
         body: SafeArea(
           bottom: false,
             child: SingleChildScrollView(child:
@@ -29,7 +32,7 @@ class _PetProfileState extends State<PetProfile> {
           SizedBox(
             height: 20,
           ),
-              Padding(padding: EdgeInsets.only(top: 15,right: 10,left: 20),
+              Padding(padding:     EdgeInsets.only(top: 15,right: 10,left: 20),
                   child:
                   TextFormField(
 

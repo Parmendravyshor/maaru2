@@ -5,6 +5,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/main.dart';
+import 'create_home_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -14,8 +15,15 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
+    var selectedIndex;
     return Scaffold(
         backgroundColor: Color(0XFFf9f9f9),
+        // bottomNavigationBar: CreateHomeScreen(
+        //   selectedIndex: 3,
+        //    Color2 :selectedIndex ==3 ? Colors.red
+        //     : MaaruColors.textButtonColor
+        //   // Color:MaaruColors.textButtonColor
+        // ),
         appBar: AppBar(
           toolbarHeight: 190,
 elevation: 0,
@@ -25,7 +33,7 @@ elevation: 0,
             child: Column(
               children: [
                 SizedBox(height: 30),
-                BackArrowButton(),
+
                 ProfileAvatar(
                   imageUrl: ('assets/images/Russo-Alessandro-Eric-20.jpg'),
                   width: 80,
@@ -43,14 +51,17 @@ elevation: 0,
             ),
           ),
         ),
-        floatingActionButton: Padding(
-            padding:  EdgeInsets.only(bottom: 170.0, right: 20),
-            child: FloatingActionButton(
-                onPressed: () {},
-                child: Image.asset('assets/icons/icone-setting-65.png'))),
+        floatingActionButton: Wrap(
+            spacing: 40, // to apply margin in the main axis of the wrap
+            runSpacing: 20,
+          children:[FloatingActionButton(
+              onPressed: () {},
+              child: Image.asset('assets/icons/icone-setting-65.png')),
+        ]),
         body: SafeArea(
           bottom: false,
-          child: Container(
+          child: SingleChildScrollView(
+       child:   Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Stack(children: [
@@ -146,8 +157,9 @@ elevation: 0,
                   child: Row(
                       //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+
                         Container(
-                            height: MediaQuery.of(context).size.height * 0.25,
+                            height: MediaQuery.of(context).size.height*0.55,
                             width: MediaQuery.of(context).size.width,
                             color: Colors.white,
                             child: Padding(
@@ -233,7 +245,7 @@ elevation: 0,
                       ]),
                 ),
               ])),
-        ));
+        )));
   }
 
   Widget IconItem(IconData icon, Color color, String text) {

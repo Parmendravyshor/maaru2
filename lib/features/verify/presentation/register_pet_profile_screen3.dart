@@ -1,7 +1,7 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
@@ -37,7 +37,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
   var nameTECs = <TextEditingController>[];
   var ageTECs = <TextEditingController>[];
   var jobTECs = <TextEditingController>[];
-  var containers = <Container>[];
+  List<Container> containers = List <Container>();
 
   Container createContainer() {
     var nameController = TextEditingController();
@@ -88,8 +88,36 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                       borderSide:
                       BorderSide(color: Colors.grey[50]))),
             ),
+
+          SizedBox(height: 10,),
+          InkWell(onTap: (){
+            setState(() {
+              _removeWidget();
+            });
+          },
+         child: Row(children: [
+          ElevatedButton(
+
+            onPressed: () {
+
+            },
+            child: Icon(Icons.remove, color: Colors.white,),
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              padding: EdgeInsets.all(10),
+              primary: Colors.red, // <-- Button color
+              onPrimary: Colors.red, // <-- Splash color
+            ),
+          ),
+            Text('Remove Vaccine',style:GoogleFonts.poppins(
+                textStyle: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontFamily: 'Poppins',
+                    fontSize: 18,
+                    color: Color(0xFFc72019))))
         ],
-      ),
+      )),
+    ])
     );
   }
 
@@ -111,11 +139,22 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
     }
     Navigator.pop(context, entries);
   }
+  _onRemove() {
+    List<PersonEntry> entries = [];
+    for (int i = 0; i < containers.length; i--) {
+      var name = nameTECs[i].text;
+      var age = ageTECs[i].text;
+      var job = jobTECs[i].text;
+      entries.add(PersonEntry(name, age, job));
+    }
+    Navigator.pop(context, entries);
+  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: MaaruColors.DogsBackground,
+
         body:SingleChildScrollView(
           //  physics: ScrollPhysics(),
             child:
@@ -288,12 +327,12 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               InkWell(
-                                onTap: _onDone,
-                                // {
-                                //   Navigator.of(context).push(MaterialPageRoute(
-                                //       builder: (_) =>
-                                //           CreateRegisterPetProfile3()));
-                                // },
+                                onTap: ()
+                                 {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) =>
+                                          CreateRegisterPetProfile2()));
+                                },
                                 child: Container(
                                   alignment: Alignment.center,
                                   height: 50,
@@ -325,6 +364,11 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
      //floatingActionButton:
      // FloatingActionButton(child: Icon(Icons.done), onPressed: _onDone),
     );
+  }
+  _removeWidget() {
+    if (containers.length > 0) {
+      containers.removeLast();
+    }
   }
 }
 
@@ -396,4 +440,6 @@ class showButtomSheetScreen extends StatelessWidget {
           ))
     ]);
   }
-}
+
+  }
+

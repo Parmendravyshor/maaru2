@@ -17,13 +17,20 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
   Color _iconColor = Colors.yellowAccent;
   @override
   Widget build(BuildContext context) {
+    var selectedIndex;
     return Scaffold(
-        backgroundColor: Colors.white,
-        bottomNavigationBar: CreateHomeScreen(selectedIndex: 1,Color:
-        MaaruColors.textButtonColor),
+        backgroundColor:MaaruColors.darkGrey2,
+        bottomNavigationBar: CreateHomeScreen(
+          selectedIndex: 1,
+          Color1:  selectedIndex == 1
+              ? MaaruColors.darkGrey2
+              : Colors.red,
+          //  Color:Colors.red
+       // MaaruColors.textButtonColor
+        ),
         body: SafeArea(
             child: Column(children: [
-              BackArrowButton(),
+
 
 Stack(children:[
   ShowLocation(),

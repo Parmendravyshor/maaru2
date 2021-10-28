@@ -22,7 +22,9 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: MaaruColors.DogsBackground,
-        bottomNavigationBar: CreateHomeScreen(selectedIndex: 4,),
+        bottomNavigationBar: CreateHomeScreen(
+          // Color:MaaruColors.textButtonColor
+        ),
         body: SafeArea(
           bottom: false,
             child: SingleChildScrollView(

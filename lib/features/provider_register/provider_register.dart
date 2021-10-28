@@ -8,6 +8,7 @@ import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
+import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
 
 class RegisterPoviderScreen extends StatefulWidget {
   @override
@@ -157,7 +158,7 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                               // BlocProvider.of<RegisterBloc>(context);
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
-                                 CreateProviderHome()));
+                                 TestApp()));
                             }
                             enabled = false;
                           },

@@ -6,6 +6,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 
 import 'book_appointment_screen2.dart';
 import 'booked_confirm.dart';
@@ -23,6 +24,9 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
+        bottomNavigationBar: CreateHomeScreen(
+          // Color:MaaruColors.textButtonColor
+        ),
         body: SafeArea(
             child: SingleChildScrollView(
                 child: Flex(direction: Axis.vertical, children: [

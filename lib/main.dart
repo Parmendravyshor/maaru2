@@ -503,7 +503,7 @@ class _MapViewState extends State<MapView> {
                       height: 20,
                     ),
                     InkWell(onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ViewPetProfile()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ViewPetProfile2()));
                     },
                   child:  Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,

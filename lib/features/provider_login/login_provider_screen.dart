@@ -6,6 +6,7 @@ import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
+import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 
 class LoginProviderScreen extends StatefulWidget {
@@ -96,7 +97,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
     else{
     AlertManager.showSuccessMessage( "Success", context);
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (_) => CreateProviderHome()));
+                      MaterialPageRoute(builder: (_) => TestApp()));
                 }}
               ),
               SizedBox(

@@ -8,6 +8,7 @@ import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Book_Appointment/presentation/reviewe_screen.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 
 import 'package:maru/features/register/presentation/signup_screen.dart';
@@ -26,6 +27,9 @@ class _BookedConfirmState extends State<BookedConfirm> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: MaaruColors.primaryColorsuggesion1,
+        bottomNavigationBar: CreateHomeScreen(
+          // Color:MaaruColors.textButtonColor
+        ),
       body: SafeArea(
         bottom: false,
         child:

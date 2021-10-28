@@ -7,9 +7,11 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/Book_Appointment/presentation/provider_confirm_book.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_screen.dart';
 
 import '../../../main.dart';
+import 'create_provider_home.dart';
 
 class ProviderAcceptOrDeclineScreen extends StatefulWidget {
   const ProviderAcceptOrDeclineScreen({Key key}) : super(key: key);
@@ -183,8 +185,15 @@ class _TestAppState extends State<TestApp> {
 
   @override
   Widget build(BuildContext context) {
+    var selectedIndex;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MaaruColors.darkGrey2,
+      bottomNavigationBar: CreateProviderHome(selectedIndex: 0,
+        Color:  selectedIndex == 0
+            ? Colors.grey[300]
+            : MaaruColors.textButtonColor,
+
+      ),
       body: Column(
         children: [
           SafeArea(

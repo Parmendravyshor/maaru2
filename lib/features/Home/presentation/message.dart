@@ -19,9 +19,16 @@ class Messages extends StatefulWidget {
 class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
+    var selectedIndex;
     return Scaffold(
         backgroundColor: Color(0xFFffffff),
-        bottomNavigationBar: CreateHomeScreen(selectedIndex: 3, Color:MaaruColors.textButtonColor),
+        bottomNavigationBar: CreateHomeScreen(
+          selectedIndex: 3,
+            Color2: selectedIndex == 3
+                ? Colors.grey[300]
+                : MaaruColors.textButtonColor
+            //Color:MaaruColors.textButtonColor
+        ),
         body: SafeArea(
         bottom: false,
             child: SingleChildScrollView(child:
@@ -30,7 +37,7 @@ class _MessagesState extends State<Messages> {
           children: [
 
 SizedBox(height: 30,),
-            BackArrowButton(),
+
 
             // Align(
             //     alignment: Alignment.centerRight,

@@ -10,6 +10,8 @@ import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/Book_Appointment/presentation/provider_confirm_book.dart';
 
+import 'create_provider_home.dart';
+
 class UpcomingAppointmentCalender extends StatefulWidget {
   @override
   _UpcomingAppointmentCalenderState createState() =>
@@ -20,8 +22,14 @@ class _UpcomingAppointmentCalenderState
     extends State<UpcomingAppointmentCalender> {
   @override
   Widget build(BuildContext context) {
+    var selectedIndex;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MaaruColors.darkGrey2,
+        bottomNavigationBar: CreateProviderHome(selectedIndex: 1,
+        Color1:  selectedIndex == 1
+        ? Colors.grey[300]
+            :  MaaruColors.textButtonColor
+        ),
       body: SafeArea(
         bottom: false,
         child: SingleChildScrollView(

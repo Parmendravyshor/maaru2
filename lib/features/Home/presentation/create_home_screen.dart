@@ -12,12 +12,23 @@ import 'package:maru/main.dart';
 
 import 'message.dart';
 
-
 class CreateHomeScreen extends StatefulWidget {
-  final int selectedIndex;
+  // final int selectedIndex;
   final Color;
-  const CreateHomeScreen({@required this.selectedIndex, @required this.Color})
-      : super();
+  final Color1;
+  final Color2;
+  final Color3;
+  final selectedIndex;
+  const CreateHomeScreen(
+      {Key key,
+      this.Color,
+      this.selectedIndex,
+      this.Color1,
+      this.Color2,
+      this.Color3})
+      : super(key: key);
+  // const CreateHomeScreen({@required this.selectedIndex, @required this.Color})
+  //     : super();
   @override
   _CreateHomeScreenState createState() => _CreateHomeScreenState();
 }
@@ -29,6 +40,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       elevation: 0.0,
+      backgroundColor: MaaruColors.darkGrey2,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
             icon: InkWell(
@@ -36,13 +48,12 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => HomeScreen()));
               },
-              child: Image.asset(
-                'assets/icons/icone-setting-10.png',
-                height: 30,
-                color: selectedIndex == 0
-                    ? MaaruColors.textButtonColor
-                    : Colors.grey[350],
-              ),
+              child: Image.asset('assets/icons/icone-setting-10.png',
+                  height: 30, color: widget.Color
+                  //selectedIndex == 0
+                  ///  ? MaaruColors.textButtonColor
+                  // : Colors.grey[350],
+                  ),
             ),
             title: Text('')),
         BottomNavigationBarItem(
@@ -51,13 +62,12 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ProviderSearchScreen()));
               },
-              child: Image.asset(
-                'assets/icons/icone-setting-9.png',
-                height: 30,
-                color: selectedIndex == 1
-                    ? MaaruColors.textButtonColor
-                    : Colors.grey[350],
-              ),
+              child: Image.asset('assets/icons/icone-setting-9.png',
+                  height: 30, color: widget.Color1
+                  //selectedIndex == 1
+                  //   ? MaaruColors.textButtonColor
+                  //  : Colors.grey[350],
+                  ),
             ),
             title: Text('')),
         BottomNavigationBarItem(
@@ -80,9 +90,10 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                 child: Image.asset(
                   'assets/icons/icone-setting-11.png',
                   height: 30,
-                  color: selectedIndex == 3
-                      ? MaaruColors.textButtonColor
-                      : Colors.grey[350],
+                  color: widget.Color2
+                  //selectedIndex == 3
+                    //  ? MaaruColors.textButtonColor
+                     // : Colors.grey[350],
                 )),
             title: Text('')),
         BottomNavigationBarItem(
@@ -94,15 +105,16 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                 child: Image.asset(
                   'assets/icons/icone98.png',
                   height: 30,
-                  color: selectedIndex == 4
-                      ? MaaruColors.textButtonColor
-                      : Colors.grey[350],
+                  color: widget.Color3
+                  //selectedIndex == 4
+                    //  ? MaaruColors.textButtonColor
+                     // : Colors.grey[350],
                 )),
             title: Text('')),
       ],
-      currentIndex: selectedIndex,
-      onTap: (index) => setState(() => selectedIndex = index),
-      selectedItemColor: Colors.green,
+      // currentIndex: selectedIndex,
+      // onTap: (index) => setState(() => selectedIndex = index),
+      //
     );
   }
 }

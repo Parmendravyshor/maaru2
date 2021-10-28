@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen3.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile2.dart';
-
-
-
-
 class ViewPetProfile3 extends StatefulWidget {
   @override
   _ViewPetProfile3State createState() => _ViewPetProfile3State();
@@ -20,6 +17,9 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: MaaruColors.DogsBackground,
+        bottomNavigationBar: CreateHomeScreen(
+          // Color:MaaruColors.textButtonColor
+        ),
         body: SafeArea(
             bottom: false,
             child: SingleChildScrollView(

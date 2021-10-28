@@ -113,6 +113,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: MaaruColors.DogsBackground,
+
         body: SafeArea(
           bottom: false,
             child: SingleChildScrollView(

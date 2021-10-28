@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 
 import 'book_appointment_screen1.dart';
 import 'booked_confirm.dart';
@@ -26,6 +27,9 @@ class _BookAppointment2State extends State<BookAppointment2> {
 
     return Scaffold(
         backgroundColor: Colors.grey,
+        bottomNavigationBar: CreateHomeScreen(
+          // Color:MaaruColors.textButtonColor
+        ),
         body:SafeArea(bottom: false,
         child:
         ListView(

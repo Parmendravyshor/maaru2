@@ -20,9 +20,16 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
   bool update = true;
   @override
   Widget build(BuildContext context) {
+    var selectedIndex;
     return Scaffold(
         backgroundColor: Colors.white,
-        bottomNavigationBar: CreateHomeScreen(selectedIndex: 4, Color:MaaruColors.textButtonColor),
+        bottomNavigationBar: CreateHomeScreen(
+          selectedIndex: 4,
+          Color3:  selectedIndex == 4
+              ? Colors.red
+              : MaaruColors.textButtonColor
+         //   Color:MaaruColors.textButtonColor
+        ),
         body: SafeArea(
             child: SingleChildScrollView(
 

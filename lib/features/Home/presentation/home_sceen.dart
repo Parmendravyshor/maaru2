@@ -6,7 +6,6 @@ import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
-
 import 'message.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,128 +14,130 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = HomeScreen();
   @override
   Widget build(BuildContext context) {
+    var selectedIndex = 0;
     return Stack(children: [
       Scaffold(
-        backgroundColor: Color(0xFFffffff),
-bottomNavigationBar: CreateHomeScreen(selectedIndex: 0,Color:
-     MaaruColors.textButtonColor
-    ,),
-        body:SafeArea(
-
-           child: SingleChildScrollView(
-                child: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 40,
-                          ),
-                          ShowLocation(),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          // Container(
-                          //   alignment: Alignment.center,
-                          //   padding: EdgeInsets.only(right: 20,),
-                          //   color: Colors.white,
-                          //   height: 50,
-                          //   //   width: 200,
-                          //
-                          //   child:
-                          Padding(
-                              padding:
-                                  EdgeInsets.only(top: 15, right: 10, left: 5),
-                              child: TextFormField(
-                                // cursorColor: Colors.black,
-                                decoration: InputDecoration(
-                                    enabledBorder: new OutlineInputBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(10.7),
-                                        borderSide: new BorderSide(
-                                            color: Colors.grey[300],
-                                            width: 1.0)),
-                                    focusedBorder: new OutlineInputBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(10.7),
-                                        borderSide: new BorderSide(
-                                            color: Colors.grey[300],
-                                            width: 1.0)),
-                                    hintText: 'Search',
-                                    hintStyle: MaaruStyle.text.greyDisable,
-                                    contentPadding: EdgeInsets.fromLTRB(
-                                        20.0, 15.0, 25.0, 10.0),
-                                    fillColor: Colors.white,
-                                    suffixIcon: Image.asset(
-                                      'assets/icons/icone-setting-19.png',
-                                      height: 50,
-                                      // width: 30,
-                                    )),
-                              )),
-                          //  ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          InkWell(
-                              onTap: () {
+          backgroundColor: Color(0xFFffffff),
+          bottomNavigationBar: CreateHomeScreen(
+            selectedIndex: 0,
+            Color: selectedIndex == 0
+                ? MaaruColors.textButtonColor
+                : Colors.grey[350],
+          ),
+          body: SafeArea(
+              child: SingleChildScrollView(
+                  child: Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 40,
+                            ),
+                            ShowLocation(),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            // Container(
+                            //   alignment: Alignment.center,
+                            //   padding: EdgeInsets.only(right: 20,),
+                            //   color: Colors.white,
+                            //   height: 50,
+                            //   //   width: 200,
+                            //
+                            //   child:
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    top: 15, right: 10, left: 5),
+                                child: TextFormField(
+                                  // cursorColor: Colors.black,
+                                  decoration: InputDecoration(
+                                      enabledBorder: new OutlineInputBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(10.7),
+                                          borderSide: new BorderSide(
+                                              color: Colors.grey[300],
+                                              width: 1.0)),
+                                      focusedBorder: new OutlineInputBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(10.7),
+                                          borderSide: new BorderSide(
+                                              color: Colors.grey[300],
+                                              width: 1.0)),
+                                      hintText: 'Search',
+                                      hintStyle: MaaruStyle.text.greyDisable,
+                                      contentPadding: EdgeInsets.fromLTRB(
+                                          20.0, 15.0, 25.0, 10.0),
+                                      fillColor: Colors.white,
+                                      suffixIcon: Image.asset(
+                                        'assets/icons/icone-setting-19.png',
+                                        height: 50,
+                                        // width: 30,
+                                      )),
+                                )),
+                            //  ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => ViewPetProfile()));
+                                },
+                                child: HorizList()),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(left: 5),
+                                child: Text(
+                                  'Upcoming Appoinments',
+                                  style: MaaruStyle.text.tiniest,
+                                )),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
+                              child: Image.asset(
+                                'assets/images/austintext-1.png',
+                              ),
+                            ),
+                            ThemedButton(
+                              onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => ViewPetProfile()));
+                                    builder: (_) => AppointmentScreen()));
                               },
-                              child: HorizList()),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Upcoming Appoinments',
-                                style: MaaruStyle.text.tiniest,
-                              )),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
-                            child: Image.asset(
-                              'assets/images/austintext-1.png',
+                              text: 'View All Appoinments',
+                              enabled: true,
                             ),
-                          ),
-                          ThemedButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => AppointmentScreen()));
-                            },
-                            text: 'View All Appoinments',
-                            enabled: true,
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(left: 5),
-                              child: Text(
-                                'Recent Messages',
-                                style: MaaruStyle.text.tiniest,
-                              )),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
-                            child: Image.asset(
-                              'assets/images/austintext-2.png',
+                            SizedBox(
+                              height: 30,
                             ),
-                          ),
-                          ThemedButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => Messages()));
-                            },
-                            text: ' All messages',
-                            enabled: true,
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          )
-                        ])))))]);
+                            Padding(
+                                padding: EdgeInsets.only(left: 5),
+                                child: Text(
+                                  'Recent Messages',
+                                  style: MaaruStyle.text.tiniest,
+                                )),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
+                              child: Image.asset(
+                                'assets/images/austintext-2.png',
+                              ),
+                            ),
+                            ThemedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => Messages()));
+                              },
+                              text: ' All messages',
+                              enabled: true,
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            )
+                          ])))))
+    ]);
   }
 }
 

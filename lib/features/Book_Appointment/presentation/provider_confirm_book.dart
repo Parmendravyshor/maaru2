@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/Book_Appointment/presentation/reviewe_screen.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 
@@ -23,6 +24,9 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: MaaruColors.primaryColorsuggesion1,
+        bottomNavigationBar: CreateHomeScreen(
+          // Color:MaaruColors.textButtonColor
+        ),
         body: SafeArea(
           bottom: false,
           child: ListView(

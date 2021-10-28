@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
@@ -16,7 +17,9 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: MaaruColors.DogsBackground,
+        backgroundColor: MaaruColors.DogsBackground,bottomNavigationBar: CreateHomeScreen(
+      // Color:MaaruColors.textButtonColor
+    ),
         body: SafeArea(
           bottom: false,
             child: SingleChildScrollView(
