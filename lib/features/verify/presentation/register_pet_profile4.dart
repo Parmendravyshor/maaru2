@@ -173,7 +173,7 @@ bottom: false,
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (_) =>
-                                                CreateHomeScreen()));
+                                                HomeScreen()));
                                   },
                                   child: Container(
                                     alignment: Alignment.centerRight,

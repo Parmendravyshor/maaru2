@@ -4,6 +4,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/appoinment_screen.dart';
+import 'package:maru/features/Home/presentation/chat_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'message.dart';
@@ -58,13 +59,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                           borderRadius:
                                               new BorderRadius.circular(10.7),
                                           borderSide: new BorderSide(
-                                              color: Colors.grey[300],
+                                              color: Colors.grey[50],
                                               width: 1.0)),
                                       focusedBorder: new OutlineInputBorder(
                                           borderRadius:
                                               new BorderRadius.circular(10.7),
                                           borderSide: new BorderSide(
-                                              color: Colors.grey[300],
+                                              color: Colors.grey[50],
                                               width: 1.0)),
                                       hintText: 'Search',
                                       hintStyle: MaaruStyle.text.greyDisable,
@@ -98,8 +99,86 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )),
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
-                              child: Image.asset(
-                                'assets/images/austintext-1.png',
+                              child:  Container(
+                                height: 150,
+                                width: 400,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(color: Colors.grey[300])),
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  child: Row(
+                                    children: [
+                                      Expanded(child:
+                                      Container(
+                                        width: 100,
+
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: Colors.white,
+                                        ),
+                                        child: Image.asset('assets/images/kutta.png',height: 200,),
+                                      )),
+                                      
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Container(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Austin pet care',
+                                              style: MaaruStyle.text.tiniestSmall
+                                            ),
+                                            Text(
+                                              'Pet walking',
+                                              style: MaaruStyle.text.tiny
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                              '1357 Muno Manor',
+                                              style: MaaruStyle.text.greyDisable
+                                            ),
+                                            Text(
+                                              'Austin,Tx 75923',
+                                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        //width: 40,
+                                      ),
+                                      Container(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          children: [
+                                            Icon(
+                                              Icons.calendar_today_outlined,
+                                              size: 22,
+                                              color: Colors.yellow,
+                                            ),
+                                            SizedBox(
+                                              height: 36,
+                                            ),
+                                            Text(
+                                              'Aug 21,2021',
+                                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                                            ),
+                                            Text(
+                                              '11:00 am',
+                                              style: TextStyle(
+                                                  fontSize: 13, fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                             ThemedButton(
@@ -121,9 +200,74 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )),
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
-                              child: Image.asset(
-                                'assets/images/austintext-2.png',
-                              ),
+                              child:    Container(
+                                height: 170,
+
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(color: Colors.grey),
+                                ),
+                                child: Container(
+                                  margin: EdgeInsets.all(15.0),
+
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Austin Pet Groomings',
+                                            style:MaaruStyle.text. tiniestSmall
+                                          ),
+
+                                          Text(
+                                            'Aug 8,2021 11:00am',
+                                            style: MaaruStyle.text.greyDisable
+                                          ),
+                                        ],
+
+
+
+                                      ),
+                                      SizedBox(
+                                        height: 3,
+                                      ),
+                                      Text(
+                                        'Pet Grooming',
+                                        style: MaaruStyle.text.tiny
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        'Roscoe needs a trim and was wanting to know if we  could move up our appointmenr?',
+                                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                                      ),
+                                      SizedBox(height: 10,),
+
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          InkWell(
+                                            onTap: (){
+                                              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ChatScreen()));
+                                            },
+                                            child:
+                                          Text(
+
+                                            'Show Message',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold, fontSize: 12,color: MaaruColors.primaryColorsuggesion1),
+                                          ),
+                                          )],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                              )
+
                             ),
                             ThemedButton(
                               onPressed: () {

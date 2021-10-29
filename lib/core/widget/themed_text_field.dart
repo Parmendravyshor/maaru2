@@ -146,11 +146,12 @@ class ThemeChanges2 extends StatelessWidget {
             child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            new Flexible(
+             Flexible(
               child: Container(
                   alignment: Alignment.center,
-                  // padding: EdgeInsets.only(right: 15),
-                  child: TextFormField(
+                   padding: EdgeInsets.only(top: 4),
+                  child:
+                  TextFormField(
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
@@ -167,7 +168,8 @@ class ThemeChanges2 extends StatelessWidget {
                       //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
                     },
                     //   editingController: _lnameController
-                  )),
+                  )
+              ),
             ),
             new Flexible(
               child: Container(
@@ -244,7 +246,7 @@ class ThemeChanges extends StatelessWidget {
           children: <Widget>[
             new Flexible(
               child: Container(
-                  padding: EdgeInsets.only(top: 3),
+                  padding: EdgeInsets.only(top: 7),
                   alignment: Alignment.center,
                   // padding: EdgeInsets.only(right: 15),
                   child: TextFormField(

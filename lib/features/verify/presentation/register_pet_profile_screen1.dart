@@ -162,16 +162,25 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                       },
                       editingController: _petName,
                     ),
-                    new SizedBox(
+                    SizedBox(
                       height: 10.0,
                     ),
                     ThemedTextField("Bread Type", TextInputType.text,
                         textStyle: TextStyle(color: Colors.black),
                         textInputAction: TextInputAction.done,
-
                         onChanged: (text) {
                       //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
                     }, editingController: _breadType),
+                    new SizedBox(
+                      height: 10.0,
+                    ),
+                    ThemedTextField("Age", TextInputType.text,
+                        textStyle: TextStyle(color: Colors.black),
+                        textInputAction: TextInputAction.done,
+
+                        onChanged: (text) {
+                          //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                        }, editingController: _breadType),
                     ThemeChanges2(),
                     new SizedBox(
                       height: 20.0,

@@ -104,7 +104,63 @@ Stack(children:[
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => BookAppointment1()));
                   },
-                  child: Image.asset('assets/images/frankspet-1.png'))),
+                  child:      Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.grey[300])),
+                    height: 120,
+                    child: Container(
+                      color: Colors.white,
+                      margin: EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                            ),
+                            child: Image.asset('assets/images/kutta.png'),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Franks Pet Lounge',
+                                style: MaaruStyle.text.tiniest
+                              ),
+                              Text(
+                                'Franks Daycare',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 12),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    size: 25,
+                                    color: Colors.yellow,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    '42 Reviews   (4.0)',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold, fontSize: 12),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),)),
         ])
 
             //   ]

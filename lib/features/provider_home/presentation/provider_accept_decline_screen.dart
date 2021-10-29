@@ -198,11 +198,11 @@ class _TestAppState extends State<TestApp> {
         children: [
           SafeArea(
             child: Column(children: [
-              SizedBox(
+             const  SizedBox(
                 height: 20,
               ),
               ShowLocation(),
-              SizedBox(
+            const   SizedBox(
                 height: 20,
               ),
               Padding(padding:EdgeInsets.only(left: 10,right: 10),child:
@@ -321,6 +321,7 @@ class _TestAppState extends State<TestApp> {
                                     child: Text(
                                       '1357 Muno Manor Austin, Tx 75923',style: MaaruStyle.text.greyDisable
                                     )),
+
                                 SizedBox(
                                   height: 20,
                                 ),

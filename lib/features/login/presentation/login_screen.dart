@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Password must be 6 characters long", context);
                   }
                   else{
-                    AlertManager.showSuccessMessage( "Success", context);
+                    AlertManager.showSuccessMessage( "Login Success", context);
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) => HomeScreen()));}
                 },

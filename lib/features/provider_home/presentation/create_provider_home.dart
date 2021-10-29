@@ -8,6 +8,7 @@ import 'package:maru/features/Home/presentation/search_screen.dart';
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_calender.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_screen.dart';
+import 'package:maru/features/provider_home/provider_message.dart';
 import 'package:maru/features/provider_setting/presentation/provider_settin.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:maru/main.dart';
@@ -86,7 +87,7 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
             icon: InkWell(
                 onTap: () {
                   Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => Messages()));
+                      .push(MaterialPageRoute(builder: (_) => ProviderMessages()));
                 },
                 child: Image.asset(
                     'assets/icons/icone-setting-11.png',

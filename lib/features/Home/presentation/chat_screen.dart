@@ -18,12 +18,12 @@ class _ChatScreenState extends State<ChatScreen> {
     var selectedIndex;
     return Scaffold(
         backgroundColor: Color(0XFFf9f9f9),
-        // bottomNavigationBar: CreateHomeScreen(
-        //   selectedIndex: 3,
-        //    Color2 :selectedIndex ==3 ? Colors.red
-        //     : MaaruColors.textButtonColor
-        //   // Color:MaaruColors.textButtonColor
-        // ),
+        bottomNavigationBar: CreateHomeScreen(
+          selectedIndex: 3,
+           Color2 :selectedIndex ==3 ? Colors.red
+            : MaaruColors.textButtonColor
+          // Color:MaaruColors.textButtonColor
+        ),
         appBar: AppBar(
           toolbarHeight: 190,
 elevation: 0,
@@ -35,7 +35,7 @@ elevation: 0,
                 SizedBox(height: 30),
 
                 ProfileAvatar(
-                  imageUrl: ('assets/images/Russo-Alessandro-Eric-20.jpg'),
+                  imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
                   width: 80,
                   avatarRadius: 80,
                   Color: Colors.yellow,
@@ -51,13 +51,13 @@ elevation: 0,
             ),
           ),
         ),
-        floatingActionButton: Wrap(
-            spacing: 40, // to apply margin in the main axis of the wrap
-            runSpacing: 20,
-          children:[FloatingActionButton(
+        floatingActionButton: Padding(
+           padding: EdgeInsets.only(bottom: 40),
+          child:
+        FloatingActionButton(
               onPressed: () {},
               child: Image.asset('assets/icons/icone-setting-65.png')),
-        ]),
+        ),
         body: SafeArea(
           bottom: false,
           child: SingleChildScrollView(
@@ -67,6 +67,7 @@ elevation: 0,
               child: Stack(children: [
                 ListView(
                   children: [
+
                     Padding(
                         padding: EdgeInsets.only(left: 10, right: 20),
                         child: Row(
@@ -74,7 +75,7 @@ elevation: 0,
                           children: [
                             ProfileAvatar(
                               imageUrl:
-                                  ('assets/images/Russo-Alessandro-Eric-20.jpg'),
+                                  ('assets/128/CrystalGaskell.png'),
                               width: 40,
                               avatarRadius: 40,
                               Color:Color(0XFFf9f9f9)

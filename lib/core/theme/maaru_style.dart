@@ -76,7 +76,7 @@ class MaaruColors {
         textStyle: TextStyle(
             fontWeight: FontWeight.normal,
             fontFamily: 'Poppins',
-            fontSize: 15,
+            fontSize: 12,
             color: Colors.grey[400]));
   }
 
@@ -148,7 +148,14 @@ class MaaruColors {
             fontSize: 18,
             color: Color(0xFF000000)));
   }
-
+  TextStyle get tiniestSmall {
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
+            fontSize: 14,
+            color: Color(0xFF000000)));
+  }
   TextStyle get xlarge {
     return TextStyle(
         fontWeight: FontWeight.w700,

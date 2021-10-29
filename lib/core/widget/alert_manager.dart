@@ -1,15 +1,15 @@
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
-
 import 'disclaimer.dart';
 
 enum _ToastMode { success, error }
 
 Widget _buildDialog(_ToastMode mode, String message) {
-  return SingleChildScrollView(child:
-    Align(
-      alignment: Alignment.bottomCenter,
+  return Center(child:
+    SingleChildScrollView(child:Center(
+   child: Align(
+      alignment: Alignment.center,
       child: Container(
           padding: EdgeInsets.only(top: 10, bottom: 15),
           decoration: BoxDecoration(
@@ -33,7 +33,7 @@ Widget _buildDialog(_ToastMode mode, String message) {
                 ),
               ),
             ],
-          ))));
+          ))))) );
 }
 
 /// This class is responsible for any modal alert that is displayed on screen.

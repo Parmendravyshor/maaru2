@@ -44,9 +44,9 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
               Container(
                   //height: size.,
                   width: 1000,
-                  height: 700,
+                  height: 800,
                   alignment: FractionalOffset.bottomCenter,
-                  decoration: BoxDecoration(
+                  decoration:const  BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
@@ -296,9 +296,89 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                   height: 20,
                                 ),
                                 Padding(
-                                    padding: EdgeInsets.only(right: 20),
-                                    child: Image.asset(
-                                        'assets/images/austintext-1.png')),
+                                  padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
+                                  child:  Container(
+                                    height: 150,
+                                    width: 400,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(color: Colors.grey[300])),
+                                    child: Container(
+                                      margin: EdgeInsets.all(10),
+                                      child: Row(
+                                        children: [
+                                          Expanded(child:
+                                          Container(
+                                            width: 100,
+
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(20),
+                                              color: Colors.white,
+                                            ),
+                                            child: Image.asset('assets/images/kutta.png',height: 200,),
+                                          )),
+
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Container(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                    'Austin pet care',
+                                                    style: MaaruStyle.text.tiniestSmall
+                                                ),
+                                                Text(
+                                                    'Pet walking',
+                                                    style: MaaruStyle.text.tiny
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Text(
+                                                    '1357 Muno Manor',
+                                                    style: MaaruStyle.text.greyDisable
+                                                ),
+                                                Text(
+                                                  'Austin,Tx 75923',
+                                                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            //width: 40,
+                                          ),
+                                          Container(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              children: [
+                                                Icon(
+                                                  Icons.calendar_today_outlined,
+                                                  size: 22,
+                                                  color: Colors.yellow,
+                                                ),
+                                                SizedBox(
+                                                  height: 36,
+                                                ),
+                                                Text(
+                                                  'Aug 21,2021',
+                                                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                                                ),
+                                                Text(
+                                                  '11:00 am',
+                                                  style: TextStyle(
+                                                      fontSize: 13, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
                                 SizedBox(
                                   height: 20,
                                 ),

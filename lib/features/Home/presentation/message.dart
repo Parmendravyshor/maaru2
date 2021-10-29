@@ -100,7 +100,7 @@ SizedBox(height: 30,),
                   mainAxisSize: MainAxisSize.max,
                   children: [
               ProfileAvatar(
-                imageUrl: 'assets/images/Russo-Alessandro-Eric-20.jpg',
+                imageUrl: 'assets/images/istockphoto-1179420343-612x612.jpg',
                 avatarRadius: 60,
                 width: 90,
                 Color: Colors.yellow,

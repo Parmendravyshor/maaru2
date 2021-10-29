@@ -83,7 +83,7 @@ class _CustomCardState extends State<CustomCard> {
 
                       ListTile(
                         leading: ProfileAvatar(
-                          imageUrl:  ('assets/images/Russo-Alessandro-Eric-20.jpg'),
+                          imageUrl:  ('assets/images/istockphoto-1179420343-612x612.jpg'),
                           width: 50,
                           avatarRadius: 60,
                           Color: Colors.yellow,
