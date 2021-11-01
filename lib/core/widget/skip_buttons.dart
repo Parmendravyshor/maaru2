@@ -11,7 +11,7 @@ class SkipButtons extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => CreateHomeScreen()));
+              .push(MaterialPageRoute(builder: (_) => HomeScreen()));
         },
         child:Padding(padding: EdgeInsets.only(right: 20),child:
         Text(

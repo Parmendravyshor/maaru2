@@ -7,7 +7,9 @@ import 'package:maru/core/widget/disclaimer.dart';
 import 'package:maru/features/Account_setting/presentation/change_password_screen.dart';
 import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/splash/verify_screen.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
+import 'package:maru/features/splash/view/view.dart';
 import 'edit_profile_screen.dart';
 
 class AccountSettingScreen extends StatefulWidget {
@@ -51,7 +53,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                               shape: BoxShape.circle,
                             ),
                             child: Image.asset(
-                              'assets/64/AlanPost.png',
+                              'assets/128/CrystalGaskell.png',
                               height: 60,
                               width: 60,
                             ),
@@ -251,7 +253,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                               text: 'Log Out',
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => AfterSplashScreen()));
+                                    builder: (_) => VerifyUser()));
                               },
                             ),
                             SizedBox(

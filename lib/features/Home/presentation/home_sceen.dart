@@ -29,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: SafeArea(
               child: SingleChildScrollView(
-                  child: Padding(
+                  child:
+                  Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 30,
                             ),
                             Padding(
-                                padding: EdgeInsets.only(left: 5),
+                                padding: const EdgeInsets.only(left: 15),
                                 child: Text(
                                   'Upcoming Appoinments',
                                   style: MaaruStyle.text.tiniest,
@@ -193,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: 30,
                             ),
                             Padding(
-                                padding: EdgeInsets.only(left: 5),
+                                padding: EdgeInsets.only(left: 15),
                                 child: Text(
                                   'Recent Messages',
                                   style: MaaruStyle.text.tiniest,

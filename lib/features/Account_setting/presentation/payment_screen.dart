@@ -33,7 +33,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   shape: BoxShape.circle,
                 ),
                 child: Image.asset(
-                  'assets/64/AlanPost.png',
+                  'assets/128/CrystalGaskell.png',
                   height: 60,
                   width: 60,
                 ),

@@ -95,7 +95,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
     "Password must be 6 characters long", context);
     }
     else{
-    AlertManager.showSuccessMessage( "Success", context);
+  //  AlertManager.showSuccessMessage( "Success", context);
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (_) => TestApp()));
                 }}

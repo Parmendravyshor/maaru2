@@ -38,7 +38,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               shape: BoxShape.circle,
                             ),
                             child: Image.asset(
-                              'assets/64/AlanPost.png',
+                              'assets/128/CrystalGaskell.png',
                               height: 60,
                               width: 60,
                             ),
@@ -66,7 +66,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               // editingController: _emailController,
                             ),
                             ThemedTextField(
-                              "Eneter new password",
+                              "Enter new password",
                               TextInputType.text,
                               textInputAction: TextInputAction.next,
                               textStyle: TextStyle(color: Colors.grey[300]),

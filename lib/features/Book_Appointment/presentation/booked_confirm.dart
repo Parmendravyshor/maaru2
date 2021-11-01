@@ -134,56 +134,15 @@ class _BookedConfirmState extends State<BookedConfirm> {
                       ])),
                   Container(
                     height: 135,
+                    padding: EdgeInsets.only(left: 10,right: 10),
                     decoration: BoxDecoration(
+                      color: Color(0xFFf9f9f9),
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: Colors.white),
                     ),
                     child: Container(
-                      margin: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Icon(
-                                Icons.calendar_today_outlined,
-                                size: 22,
-                                color: Colors.yellow,
-                              ),
-                              Icon(
-                                Icons.bike_scooter,
-                                size: 22,
-                                color: Colors.yellow,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 0,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                '  Date & Time',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 12),
-                              ),
-                              Text(
-                                'Austin pet Groomers',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
-                              ),
-                              Text(
-                                'Max',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
+                     // margin: EdgeInsets.all(10),
+                      child:
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
@@ -191,24 +150,64 @@ class _BookedConfirmState extends State<BookedConfirm> {
                                 'Aug 21,2021',
                                 style: TextStyle(color: Colors.grey, fontSize: 12),
                               ),
+                              Row(
+
+                                children: [
+
+                             Image.asset('assets/icons/icone-setting-21.png',height: 20,),
+                                  Text(
+                                    '  Date & Time',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold, fontSize: 12),
+                                  ),
+                            ],
+                          ),
                               Text(
                                 '11:00 am',
                                 style: TextStyle(
                                     fontSize: 13, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    'Austin pet Groomers',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold, fontSize: 15),
+                                  ),
+                                  Text(
+                                    '\$85.00',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold, fontSize: 12),
+                                  ),
+
+                                ],
+                              ),
+                              Row(
+                                //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+
+                                  Image.asset('assets/icons/caticon.png',height: 20,),
+                                  Text(
+                                    '  Max',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold, fontSize: 15),
+                                  ),
+                                ],
+                              ),
+
+
+                             const SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                '\$85.00',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 12),
-                              ),
+
                             ],
                           )
-                        ],
+
                       ),
                     ),
+                  const SizedBox(
+                    height: 20,
                   ),
                   Text(
                     'Location',

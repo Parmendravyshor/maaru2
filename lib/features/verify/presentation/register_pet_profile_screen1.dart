@@ -31,6 +31,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   final BackgroundColor = Color(0xFF367355);
   TextEditingController _petName;
   TextEditingController _breadType;
+  TextEditingController _ageType;
 //  TextEditingController _height;
   // TextEditingController _weight;
   // TextEditingController _emailController;
@@ -40,6 +41,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   void initState() {
     _petName = TextEditingController();
     _breadType = TextEditingController();
+   _ageType =   TextEditingController();
     // _height = TextEditingController();
     // _emailController = TextEditingController();
     // _weight = TextEditingController();
@@ -53,6 +55,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   void dispose() {
     _petName.dispose();
     _breadType.dispose();
+    _ageType.dispose();
     // _height.dispose();
     // _emailController.dispose();
     //  _weight.dispose();
@@ -180,7 +183,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
 
                         onChanged: (text) {
                           //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-                        }, editingController: _breadType),
+                        }, editingController: _ageType),
                     ThemeChanges2(),
                     new SizedBox(
                       height: 20.0,

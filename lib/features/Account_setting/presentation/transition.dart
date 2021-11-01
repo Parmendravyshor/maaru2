@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
+import 'package:maru/core/widget/profile_avtar.dart';
 class TransitionScreen extends StatefulWidget {
 
 
@@ -34,7 +35,7 @@ class _TransitionScreenState extends State<TransitionScreen> {
                         shape: BoxShape.circle,
                       ),
                       child: Image.asset(
-                        'assets/64/AlanPost.png',
+                        'assets/128/CrystalGaskell.png',
                         height: 60,
                         // width: 60,
                       ),
@@ -136,9 +137,70 @@ class _TransitionScreenState extends State<TransitionScreen> {
                 SizedBox(
                   height: size.height * 0.02,
                 ),
-                Image.asset('assets/images/austingpet.png'),
-              ]),
-            )])));
+                Container(
+                  height: 125,
+                  width: 450,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: Colors.grey.shade100,),
+
+                  child: Container(
+
+                    margin: EdgeInsets.all(5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ProfileAvatar(
+                          imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
+                          width: 60,
+                          avatarRadius: 60,
+                          Color: Colors.yellow,
+                        ),
+                        SizedBox(width: 0,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Austin Pet Groomings',
+                              style:MaaruStyle.text.tiniestSmall,),
+                            SizedBox(height: 8,),
+                            Text(
+                              'Aug 8,2021',
+                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              '\$78.00',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 12),
+                            ),
+                            Text(
+                              'Pet Grooming',
+                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                            ),
+                            SizedBox(height: 8,),
+
+                          ],
+                        )
+                      ],
+                    ),
+                      FlatButton(
+                        onPressed: () {},
+                        child: Text('View Details'),
+                        color: MaaruColors.primaryColorsuggesion1,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      )
+                  ]),
+                )
+              ),
+            ]))])));
     ;
   }
 }

@@ -9,6 +9,7 @@ import 'package:maru/features/Account_setting/presentation/change_password_scree
 import 'package:maru/features/Account_setting/presentation/edit_profile_screen.dart';
 import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
 import 'package:maru/features/Account_setting/presentation/transition.dart';
+import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/splash/verify_screen.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,14 @@ class _ProviderSettingState extends State<ProviderSetting> {
   bool update = true;
   @override
   Widget build(BuildContext context) {
+    var selectedIndex;
     return  Scaffold(
         backgroundColor: Colors.white,
+        bottomNavigationBar: CreateProviderHome(selectedIndex: 1,
+            Color3:  selectedIndex == 1
+                ? Colors.grey[300]
+                :  MaaruColors.textButtonColor
+        ),
         body: SafeArea(
             child:
             SingleChildScrollView(
@@ -53,7 +60,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset(
-                                'assets/64/AlanPost.png',
+                                'assets/128/CrystalGaskell.png',
                                 height: 60,
                                 width: 60,
                               ),

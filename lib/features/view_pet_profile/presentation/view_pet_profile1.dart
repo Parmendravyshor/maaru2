@@ -6,6 +6,7 @@ import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile2.dart';
@@ -296,7 +297,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                   height: 20,
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
+                                  padding: EdgeInsets.fromLTRB(0, 20, 20, 20),
                                   child:  Container(
                                     height: 150,
                                     width: 400,
@@ -382,12 +383,17 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                 SizedBox(
                                   height: 20,
                                 ),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (_)=>AppointmentScreen()));
+                                  },
+                                child:
                                 RoundedButton(
                                   buttonName: 'View all Appointments',
                                   Color: MaaruColors.primaryColorsuggesion,
                                   Color1: MaaruColors.primaryColorsuggesion1,
                                 )
-                              ],
+                                )],
                             )
                           ])))
             ]))));

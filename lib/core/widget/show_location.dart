@@ -14,7 +14,7 @@ class ShowLocation extends StatelessWidget {
         Expanded(
           child: Container(
             color: Colors.white,
-            margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+            margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: TextFormField(
               cursorColor: Colors.black,
               decoration: InputDecoration(
@@ -58,7 +58,7 @@ class ShowLocation extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Image.asset(
-                'assets/64/AlanPost.png',
+                'assets/128/CrystalGaskell.png',
                 height: 60,
                 width: 60,
               ),
