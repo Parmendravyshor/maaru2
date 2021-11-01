@@ -31,8 +31,8 @@ class _ProviderSettingState extends State<ProviderSetting> {
     var selectedIndex;
     return  Scaffold(
         backgroundColor: Colors.white,
-        bottomNavigationBar: CreateProviderHome(selectedIndex: 1,
-            Color3:  selectedIndex == 1
+        bottomNavigationBar: CreateProviderHome(selectedIndex: 4,
+            Color3:  selectedIndex == 4
                 ? Colors.grey[300]
                 :  MaaruColors.textButtonColor
         ),

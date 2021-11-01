@@ -134,7 +134,55 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                               )))
                     ],
                   ),
-                  Container(height: 450, width: 400, child: Appointments()),
+                  Container(height: 440, width: 400, child: Appointments()),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Services',
+                      style: MaaruStyle.text.tiniest,
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(right: 20, left: 20),
+                    color: Colors.white,
+                    height: 40,
+                    //   width: 200,
+                    child: TextFormField(
+                      textAlign: TextAlign.center,
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.7),
+                              borderSide: BorderSide()),
+                          contentPadding: EdgeInsets.only(top: 10),
+                          hintText: 'Select a Services',
+                          hintStyle: MaaruStyle.text.greyDisable,
+                          fillColor: Colors.white,
+                          suffixIcon: Container(
+                              margin: EdgeInsets.all(10),
+                              child: Image.asset(
+                                'assets/icons/icone-setting-30.png',
+                                height: 10,
+                                width: 20,
+                                // width: 30,
+                              ))),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Provider',
+                      style: MaaruStyle.text.tiniest,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.only(right: 20, left: 20),

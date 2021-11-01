@@ -22,6 +22,7 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 import 'core/theme/maaru_style.dart';
 
+import 'features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'features/Home/presentation/search_screen.dart';
 import 'features/faketest.dart';
 
@@ -114,7 +115,7 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: (SplashScreen())));
+        home: Scaffold(body: (BookAppointmentScreen3())));
   }
 }
 
