@@ -16,6 +16,72 @@
 		E8EFD8F74BD5074920554E96 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74822CD0FD5740F0C722C9A /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		340CC06C273D59EC00DACEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 340CC05E273D59EC00DACEDC /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4EA1ECF4A16154D250154FE91DFB3CBE;
+			remoteInfo = geolocation;
+		};
+		340CC06E273D59EC00DACEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 340CC05E273D59EC00DACEDC /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 502E20F09A7CAFBD1DE1AA882DCC550C;
+			remoteInfo = geolocator_apple;
+		};
+		340CC070273D59EC00DACEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 340CC05E273D59EC00DACEDC /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C29007C320980A87E44F3BEEAE1DA4B6;
+			remoteInfo = google_maps_flutter;
+		};
+		340CC072273D59EC00DACEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 340CC05E273D59EC00DACEDC /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 82E59F73EFCFED5A91D21FE6046A6F0A;
+			remoteInfo = image_picker;
+		};
+		340CC074273D59EC00DACEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 340CC05E273D59EC00DACEDC /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 24E61CEB88846F2BC249F4488CBD1013;
+			remoteInfo = location;
+		};
+		340CC076273D59EC00DACEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 340CC05E273D59EC00DACEDC /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DAE35F9EEF7110C6DC7645F4C250E0F5;
+			remoteInfo = path_provider;
+		};
+		340CC078273D59EC00DACEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 340CC05E273D59EC00DACEDC /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 669E8F25E1897672BDB80B7EB784DA24;
+			remoteInfo = "Pods-Runner";
+		};
+		340CC07A273D59EC00DACEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 340CC05E273D59EC00DACEDC /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2E9151FF178A177C7E4A82248E431AB;
+			remoteInfo = shared_preferences;
+		};
+		340CC07C273D59EC00DACEDC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 340CC05E273D59EC00DACEDC /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 40996A1FB562D14A672EE476FE24511B;
+			remoteInfo = streams_channel;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		9705A1C41CF9048500538489 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -34,6 +100,7 @@
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		23473D7DF64288D9370A292A /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		340C536627181C3F00C56265 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
+		340CC05E273D59EC00DACEDC /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = ../../../.Trash/Pods.xcodeproj; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		3B66E48504DA3E3255E48297 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -45,7 +112,7 @@
 		97C146FB1CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = ../../../../../../../../StudioProjects/maaru2/ios/Runner/Info.plist; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74822CD0FD5740F0C722C9A /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1EC8A100E03381433F817DA /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +129,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		340CC05F273D59EC00DACEDC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				340CC06D273D59EC00DACEDC /* geolocation */,
+				340CC06F273D59EC00DACEDC /* geolocator_apple */,
+				340CC071273D59EC00DACEDC /* google_maps_flutter */,
+				340CC073273D59EC00DACEDC /* image_picker */,
+				340CC075273D59EC00DACEDC /* location */,
+				340CC077273D59EC00DACEDC /* path_provider */,
+				340CC079273D59EC00DACEDC /* Pods-Runner */,
+				340CC07B273D59EC00DACEDC /* shared_preferences */,
+				340CC07D273D59EC00DACEDC /* streams_channel */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +194,7 @@
 		B59274D5237B2D3029AD295D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				340CC05E273D59EC00DACEDC /* Pods.xcodeproj */,
 				A74822CD0FD5740F0C722C9A /* Pods_Runner.framework */,
 			);
 			name = Frameworks;
@@ -178,12 +262,93 @@
 			mainGroup = 97C146E51CF9000F007C117D;
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 340CC05F273D59EC00DACEDC /* Products */;
+					ProjectRef = 340CC05E273D59EC00DACEDC /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		340CC06D273D59EC00DACEDC /* geolocation */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = geolocation;
+			path = geolocation.framework;
+			remoteRef = 340CC06C273D59EC00DACEDC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		340CC06F273D59EC00DACEDC /* geolocator_apple */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = geolocator_apple;
+			path = geolocator_apple.framework;
+			remoteRef = 340CC06E273D59EC00DACEDC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		340CC071273D59EC00DACEDC /* google_maps_flutter */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = google_maps_flutter;
+			path = google_maps_flutter.framework;
+			remoteRef = 340CC070273D59EC00DACEDC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		340CC073273D59EC00DACEDC /* image_picker */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = image_picker;
+			path = image_picker.framework;
+			remoteRef = 340CC072273D59EC00DACEDC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		340CC075273D59EC00DACEDC /* location */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = location;
+			path = location.framework;
+			remoteRef = 340CC074273D59EC00DACEDC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		340CC077273D59EC00DACEDC /* path_provider */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = path_provider;
+			path = path_provider.framework;
+			remoteRef = 340CC076273D59EC00DACEDC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		340CC079273D59EC00DACEDC /* Pods-Runner */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = "Pods-Runner";
+			path = Pods_Runner.framework;
+			remoteRef = 340CC078273D59EC00DACEDC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		340CC07B273D59EC00DACEDC /* shared_preferences */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = shared_preferences;
+			path = shared_preferences.framework;
+			remoteRef = 340CC07A273D59EC00DACEDC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		340CC07D273D59EC00DACEDC /* streams_channel */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			name = streams_channel;
+			path = streams_channel.framework;
+			remoteRef = 340CC07C273D59EC00DACEDC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		97C146EC1CF9000F007C117D /* Resources */ = {
@@ -389,7 +554,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = maaru2;
+				PRODUCT_BUNDLE_IDENTIFIER = Maaru3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
@@ -528,7 +693,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Maaru2;
+				PRODUCT_BUNDLE_IDENTIFIER = Maruupdated;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
@@ -559,7 +724,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Maaru2;
+				PRODUCT_BUNDLE_IDENTIFIER = Maruupdated;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";

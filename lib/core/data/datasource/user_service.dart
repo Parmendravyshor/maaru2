@@ -10,7 +10,7 @@ class UserService extends AuthSource {
  // final Storage storage;
   //UserService(this._userPool, this.prefs, this.storage);
   @override
-  Future<void> emailSignup(EmailAuthParams params) {
+  Future<CognitoUserPoolData> emailSignup(EmailAuthParams params) {
     final userAttribute =[
 
 

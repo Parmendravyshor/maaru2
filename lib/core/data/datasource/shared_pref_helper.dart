@@ -1,3 +1,4 @@
+import 'package:maru/core/constant/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class SharedPrefHelper {
@@ -5,6 +6,10 @@ abstract class SharedPrefHelper {
   Future<void> saveString(String key, String value);
   String getIdJwtToken();
   saveRegistrationId();
+  Future<void> userLogin();
+  Future<void> savePassword(String password);
+  Future<void> saveIdJwtToken(String jwtToken);
+
 }
 
 class SharedPrefHelperImpl implements SharedPrefHelper {
@@ -18,14 +23,12 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
 
   @override
   Future<void> saveEmail(String email) {
-    // TODO: implement saveEmail
-    throw UnimplementedError();
+    return sharedPreferences.setString(MaruConstant.email, email);
   }
 
   @override
   String getIdJwtToken() {
-    // TODO: implement getIdJwtToken
-    throw UnimplementedError();
+    return sharedPreferences.getString(MaruConstant.idjwtToken) ?? "";
   }
 
   @override
@@ -34,4 +37,24 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
     throw UnimplementedError();
   }
 
-}
+  @override
+  Future<void> userLogin() {
+   // return sharedPreferences.setBool(MaruConstant.isloggedIn, true);
+  }
+
+  @override
+  Future<void> savePassword(String password) {
+    // TODO: implement savePassword
+    return sharedPreferences.setString(MaruConstant.password, password);
+  }
+
+  @override
+  Future<void> saveIdJwtToken(String jwtToken) {
+    // TODO: implement saveIdJwtToken
+    return sharedPreferences.setString(MaruConstant.idjwtToken, jwtToken);
+  }
+  }
+
+
+
+

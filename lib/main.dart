@@ -22,6 +22,7 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 import 'core/theme/maaru_style.dart';
 
+import 'core/utils.dart';
 import 'features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'features/Home/presentation/search_screen.dart';
 import 'features/faketest.dart';
@@ -30,6 +31,7 @@ import 'package:location/location.dart';
 
 import 'package:flutter/services.dart';
 import 'dart:math' show cos, sqrt, asin;
+import 'features/register/presentation/signup_screen.dart';
 import 'features/verify/presentation/register_pet_profile_screen2.dart';
 import 'features/verify/presentation/register_pet_profile_screen3.dart';
 import 'features/view_pet_profile/presentation/view_pet_profile1.dart';
@@ -37,7 +39,9 @@ import 'features/view_pet_profile/presentation/view_pet_profile2.dart';
 import 'features/view_pet_profile/presentation/view_pet_profile3.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-void main() {
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await registerDependencyInjection();
   runApp(MyApp());
   Geolocation.loggingEnabled = true;
   WidgetsFlutterBinding.ensureInitialized();
@@ -115,10 +119,9 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: (BookAppointmentScreen3())));
+        home: Scaffold(body: (SplashScreen())));
   }
 }
-
 
 
 class MapView extends StatefulWidget {

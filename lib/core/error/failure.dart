@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+  import 'package:equatable/equatable.dart';
 
 // ignore: todo
 ///TODO: Core Failure abstract class
@@ -56,7 +56,7 @@ class ApiFailure extends Failure {
 
   @override
   String toString() {
-    return message;
+    return 'failure';
   }
 }
 

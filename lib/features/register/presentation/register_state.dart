@@ -6,6 +6,9 @@ abstract class RegisterState {
 
 class RegisterInitial extends RegisterState {
   RegisterInitial(): super();
+
+  @override
+  String toString() => "RegisterInitial";
 }
 
 class ResgiterInitial extends RegisterState {

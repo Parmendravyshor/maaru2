@@ -38,6 +38,7 @@ import 'package:maru/core/error/failure.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
 import 'package:maru/features/register/domain/usecases/email_signup.dart';
 import 'package:maru/features/register/presentation/register_bloc.dart';
+import 'package:maru/features/register/presentation/register_bloc.dart';
 
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
@@ -53,7 +54,6 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
   TextEditingController _fnameController;
   TextEditingController _lnameController;
   TextEditingController _passwordController;
@@ -85,178 +85,175 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              // BlocBuilder<RegisterBloc,RegisterState>(
-              //   builder: (context,state){
-              //     return
-              //   },
-              //
-              //     )
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+            child: BlocProvider(
+                create: (context) => KiwiContainer().resolve<RegisterBloc>(),
+                child: BlocBuilder<RegisterBloc, RegisterState>(
+                    builder: (context, state) {
 
-              Logo(),
-              ScreenIcon(),
-              const SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: Text(
-                  'or sign up with email',
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500)),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
+                    if (state is RegisterSuccess) {
+                      AlertManager.showErrorMessage(
+                          "otp send your register email",
+                          context);
+                      SchedulerBinding.instance.addPostFrameCallback((_) {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return CreateregisterPetProfile1();
+                        }));
+                      });
 
-              Container(
-                  // padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: BlocProvider(create: (context) {
-                EmailSignup _emailSignup;
-                return RegisterBloc(_emailSignup);
-              }, child: BlocBuilder<RegisterBloc, RegisterState>(
-                      builder: (context, state) {
-                if (state is RegisterSuccess) {
-                  //  SchedulerBinding.instance.addPostFrameCallback((_) {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => HomeScreen()));
-                } else if (state is RegisterFailure) {
-                  Future.delayed(Duration(seconds: 1), () {
-                    Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: Colors.black,
-                        content: Text(state.errorMessage,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Poppins',
-                                fontSize: 20,
-                                color: MaaruStyle.colors.textColorWhite)),
-                      ),
-                    );
-                  });
-                }
-                return Column(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        ThemedTextField("First Name", TextInputType.name,
-                            textinputaction2: TextInputAction.next,
-                            onChanged: (text) {
-                          BlocProvider.of<RegisterBloc>(context)
-                              .add(FNameChanged(text));
-                        }, editingController: _fnameController),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        ThemedTextField("Last Name", TextInputType.name,
-                            textInputAction: TextInputAction.next,
-                            onChanged: (text) {
-                          BlocProvider.of<RegisterBloc>(context)
-                              .add(LNameChanged(text));
-                        }, editingController: _lnameController),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        ThemedTextField("Email", TextInputType.emailAddress,
-                            textInputAction: TextInputAction.next,
-                            onChanged: (text) {
-                          BlocProvider.of<RegisterBloc>(context)
-                              .add(EmailChanged(text));
-                        }, editingController: _emailController),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        ThemedTextField(
-                          "Password",
-                          TextInputType.text,
-                          textInputAction: TextInputAction.done,
-                          password: true,
-                          onChanged: (text) {
-                            BlocProvider.of<RegisterBloc>(context)
-                                .add(PasswordChanged(text));
-                          },
-                          editingController: _passwordController,
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        ThemedButton(
-                            text: "Join",
-                            onPressed: () async {
-                              String fname = _fnameController.text;
-                              String lname = _lnameController.text;
-                              String email = _emailController.text;
-                              String password = _passwordController.text;
-
-                              if (fname.isEmpty) {
-                                AlertManager.showErrorMessage(
-                                    "Please enter first name", context);
-                              } else if (lname.isEmpty) {
-                                AlertManager.showErrorMessage(
-                                    "Please enter last name", context);
-                              } else if (validateEmail(email) != null) {
-                                AlertManager.showErrorMessage(
-                                    "Please enter valid email", context);
-                              } else if (password.length<6)
-                                    {
-                                AlertManager.showErrorMessage(
-                                    "Password must be 6 characters long",
-                                    context);
-
-                              //  enabled = true;
-                              }
-
-                              // else if (password != cnfpassword) {
-                              //   AlertManager.showErrorMessage(
-                              //       "Password do not match", context);
-
-                              else {
-                                // AlertManager.disclaimerPopup(context, onSuccess: () {
-                                // BlocProvider.of<RegisterBloc>(context);
-                                BlocProvider.of<RegisterBloc>(context)
-                                    .add(RegisterButtonTapped());
-                                // AlertManager.(context,
-                                //     onSuccess: () {
-                                //   BlocProvider.of<RegisterBloc>(context)
-                                //       .add(RegisterButtonTapped());
-                                // });
-
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        CreateregisterPetProfile1()));
-                              }
-                            }),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        GoToSignInText(),
-                        SizedBox(
-                          height: 30,
-                        ),
-                      ],
-                    )
-                  ],
-                );
-              })))
-            ],
+                      return Container();
+                    } else if (state is RegisterFailure) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(Duration(seconds: 1), () {
+        Scaffold.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.black,
+            content: Text(state.errorMessage,
+                style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'poppins',
+                    fontSize: 20,
+                    color: MaaruStyle.colors.textColorWhite)),
           ),
-        ),
-      ),
-    );
-  }
+        );
+      });
+    });
 
+                    }
+
+                    return Container(
+                        child: SafeArea(
+                            child: Column(children: [
+                      //
+
+                      Logo(),
+                      ScreenIcon(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Center(
+                        child: Text(
+                          'or sign up with email',
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500)),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                      Column(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              ThemedTextField("First Name", TextInputType.name,
+                                  textinputaction2: TextInputAction.next,
+                                  onChanged: (text) {
+                                BlocProvider.of<RegisterBloc>(context)
+                                    .add(FNameChanged(text));
+                              }, editingController: _fnameController),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              ThemedTextField("Last Name", TextInputType.name,
+                                  textInputAction: TextInputAction.next,
+                                  onChanged: (text) {
+                                BlocProvider.of<RegisterBloc>(context)
+                                    .add(LNameChanged(text));
+                              }, editingController: _lnameController),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              ThemedTextField(
+                                  "Email", TextInputType.emailAddress,
+                                  textInputAction: TextInputAction.next,
+                                  onChanged: (text) {
+                                BlocProvider.of<RegisterBloc>(context)
+                                    .add(EmailChanged(text));
+                              }, editingController: _emailController),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              ThemedTextField(
+                                "Password",
+                                TextInputType.text,
+                                textInputAction: TextInputAction.done,
+                                password: true,
+                                onChanged: (text) {
+                                  BlocProvider.of<RegisterBloc>(context)
+                                      .add(PasswordChanged(text));
+                                },
+                                editingController: _passwordController,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              ThemedButton(
+                                  text: "Join",
+                                  onPressed: () async {
+                                    String fname = _fnameController.text;
+                                    String lname = _lnameController.text;
+                                    String email = _emailController.text;
+                                    String password = _passwordController.text;
+
+                                    if (fname.isEmpty) {
+                                      AlertManager.showErrorMessage(
+                                          "Please enter first name", context);
+                                    } else if (lname.isEmpty) {
+                                      AlertManager.showErrorMessage(
+                                          "Please enter last name", context);
+                                    } else if (validateEmail(email) != null) {
+                                      AlertManager.showErrorMessage(
+                                          "Please enter valid email", context);
+                                    } else if (password.length < 6) {
+                                      AlertManager.showErrorMessage(
+                                          "Password must be 6 characters long",
+                                          context);
+
+                                      //  enabled = true;
+                                    }
+                                    BlocProvider.of<RegisterBloc>(context)
+                                        .add(RegisterButtonTapped());
+                                    // else {
+                                    //   AlertManager.disclaimerPopup(context,
+                                    //       onSuccess: () {
+                                    //
+                                    //       });
+                                    // }
+                                  }),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              state is RegisterInProgress
+                                  ? Center(
+                                      child: Container(
+                                      width: 5,
+                                      height: 5,
+                                      child: CircularProgressIndicator(),
+                                    ))
+                                  : Container(),
+                              GoToSignInText(),
+                              SizedBox(
+                                height: 30,
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                    ])));
+
+                }))));
+  }
 }
 
 /// Text for showing at bottom of screen
