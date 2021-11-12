@@ -6,6 +6,7 @@ import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 
 class ReviewScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: CreateHomeScreen(
+      bottomNavigationBar: CreateProviderHome(
         // Color:MaaruColors.textButtonColor
       ),
       body: SingleChildScrollView(

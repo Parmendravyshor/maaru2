@@ -224,7 +224,7 @@ elevation: 0,
                                                                   .push(MaterialPageRoute(
                                                                       builder:
                                                                           (_) =>
-                                                                              SimpleMAp()));
+                                                                              MapView()));
                                                             },
                                                             child: IconItem(
                                                                 Icons

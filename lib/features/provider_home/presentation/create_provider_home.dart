@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
-
-import 'package:maru/features/Home/presentation/home_sceen.dart';
-import 'package:maru/features/Home/presentation/message.dart';
-import 'package:maru/features/Home/presentation/pet_profile.dart';
-import 'package:maru/features/Home/presentation/search_screen.dart';
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_calender.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_screen.dart';
 import 'package:maru/features/provider_home/provider_message.dart';
 import 'package:maru/features/provider_setting/presentation/provider_settin.dart';
-import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
-import 'package:maru/main.dart';
 
 
 class CreateProviderHome extends StatefulWidget {

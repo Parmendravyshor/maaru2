@@ -296,7 +296,10 @@ class Test3 extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+    return
+    InkWell(
+        onTap: onPressed,
+    child:  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Expanded(
           child: Padding(
               padding: EdgeInsets.only(right: 35),
@@ -322,18 +325,17 @@ class Test3 extends StatelessWidget {
                         SizedBox(
                           width: size,
                         ),
-                        InkWell(
-                          onTap: onPressed,
+
+
                           // Navigator.of(context).push(
                           //     MaterialPageRoute(builder: (_) => CreateUserProfile()));
-
-                          child: Icon(
+ Icon(
                             Icons.navigate_next,
                             color: MaaruColors.buttonTextColor,
                             size: 40,
                           ),
-                        ),
+
                       ]))))
-    ]);
+    ]));
   }
 }

@@ -82,8 +82,6 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
     try {
-      var url = Uri.parse("http://18.191.199.31/api/auth/signup");
-
       var response = await http.post(
           MaruConstant.signup, body: { MaruConstant.fName: params.fName,
         MaruConstant.lName: params.lName,

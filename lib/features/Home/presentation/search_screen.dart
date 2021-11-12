@@ -207,7 +207,7 @@ class _MyClassState extends State<MyClass> {
                               ),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 30, 0),
+                              padding: EdgeInsets.fromLTRB(10, 20, 30, 0),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -225,26 +225,54 @@ class _MyClassState extends State<MyClass> {
                                       height: 40,
                                     ),
                                   ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  // isPressed = !isPressed;
+                                });
+                              },
+                              child:
                                   Image.asset(
                                     'assets/icons/icone-setting-50.png',
                                     height: 40,
-                                  ),
+                                  )),
                                   Image.asset(
                                     'assets/icons/icone-setting-51.png',
                                     height: 40,
                                   ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  // isPressed = !isPressed;
+                                });
+                              },
+                              child:
                                   Image.asset(
                                     'assets/icons/icone-setting-53.png',
                                     height: 40,
-                                  ),
+                                  )),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  // isPressed = !isPressed;
+                                });
+                              },
+                              child:
                                   Image.asset(
                                     'assets/icons/icone-setting-54.png',
                                     height: 40,
-                                  ),
+                                  )),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  // isPressed = !isPressed;
+                                });
+                              },
+                              child:
                                   Image.asset(
                                     'assets/icons/icone-setting-52.png',
                                     height: 40,
-                                  ),
+                                  )),
                                   // Padding(
                                   //     padding:
                                   //         EdgeInsets.fromLTRB(0, 100, 500, 0),

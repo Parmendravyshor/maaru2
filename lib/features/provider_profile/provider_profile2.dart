@@ -5,6 +5,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/provider_profile/provider_profile1.dart';
 
 
@@ -59,9 +60,9 @@ class _ProviderProfile2State extends State<ProviderProfile2> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                              SizedBox(
-                                height: size.height * 0.10,
-                              ),
+                              // SizedBox(
+                              //   height: size.height * 0.10,
+                              // ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

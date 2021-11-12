@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/features/Account_setting/presentation/account_setting.dart';
 
@@ -38,7 +39,8 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
+    return
+      BottomNavigationBar(
       elevation: 0.0,
       backgroundColor: MaaruColors.darkGrey2,
       items: <BottomNavigationBarItem>[
@@ -62,21 +64,26 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ProviderSearchScreen()));
               },
-              child: Image.asset('assets/icons/icone-setting-9.png',
+              child: Padding(padding: EdgeInsets.only(right: 30),
+
+  child:  Image.asset('assets/icons/icone-setting-9.png',
                   height: 30, color: widget.Color1
                   //selectedIndex == 1
                   //   ? MaaruColors.textButtonColor
                   //  : Colors.grey[350],
                   ),
-            ),
+            )),
             title: Text('')),
-        BottomNavigationBarItem(
+
+         BottomNavigationBarItem(
+
             icon: InkWell(
                 onTap: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => PetProfile()));
                 },
-                child: Image.asset(
+
+               child: Image.asset(
                   'assets/icons/icone-setting-15.png',
                   height: 60,
                 )),
@@ -87,14 +94,16 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => Messages()));
                 },
-                child: Image.asset(
+   child: Padding(padding: EdgeInsets.only(left: 20),
+                child:
+                Image.asset(
                   'assets/icons/icone-setting-11.png',
                   height: 30,
                   color: widget.Color2
                   //selectedIndex == 3
                     //  ? MaaruColors.textButtonColor
                      // : Colors.grey[350],
-                )),
+                ))),
             title: Text('')),
         BottomNavigationBarItem(
             icon: InkWell(

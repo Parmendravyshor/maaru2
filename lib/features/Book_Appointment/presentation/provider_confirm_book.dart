@@ -4,9 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/Book_Appointment/presentation/reviewe_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 
@@ -24,7 +27,8 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: MaaruColors.primaryColorsuggesion1,
-        bottomNavigationBar: CreateHomeScreen(
+        bottomNavigationBar: CreateProviderHome(
+
           // Color:MaaruColors.textButtonColor
         ),
         body: SafeArea(
@@ -277,8 +281,7 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                                   backgroundColor: MaaruColors.textButtonColor,
                                   minimumSize: Size(130, 50)),
                               onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => RegisterScreen()));
+                                showAlertDialog;
                               },
                               child: Text('Cancel',
                                   style: MaaruStyle.text.small.copyWith(
@@ -327,4 +330,67 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
           ),
         ));
   }
+  showAlertDialog(BuildContext context,) {
+    final size = MediaQuery.of(context).size;
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      style: TextButton.styleFrom(
+          backgroundColor: MaaruColors.textButtonColor,
+          minimumSize: Size(130, 50)),
+      child: Text("Cancel", style: MaaruStyle.text.small.copyWith(
+          fontWeight: FontWeight.w500,
+          color: MaaruColors.primaryColorsuggesion)),
+      onPressed:  () {
+        Navigator.pop(context);
+      },
+    );
+
+    Widget continueButton = TextButton(
+      style: TextButton.styleFrom(
+          backgroundColor: MaaruColors.primaryColorsuggesion1,
+          minimumSize: Size(130, 50)),
+      child: Text("Continue",style: MaaruStyle.text.small.copyWith(
+          fontWeight: FontWeight.w500,
+          color: MaaruColors.primaryColorsuggesion),),
+      onPressed:  () {
+        AlertManager.showSuccessMessage( "Appointment cancel successful", context);
+        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CreateProviderHome()));
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+
+      title: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white),
+        height: size.height * 0.08,
+        width: size.width * 0.16,
+        child: Image.asset(
+          'assets/images/kutta.png',
+          height: size.height * 0.08,
+          width: size.width * 0.16,
+        ),
+      ),
+      content:
+      Text("Are you want to \n cancel Appointment?",textAlign: TextAlign.center,),
+      actions: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+          cancelButton,
+          continueButton,
+        ]),
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }
+
+

@@ -173,7 +173,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                         ),
                       ),),
                   SizedBox(
-                    height: 80,
+                    height: 30,
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 20),

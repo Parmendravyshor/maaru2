@@ -11,7 +11,6 @@ import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 
-/// Bloc for Register page
 ///
 class VerifyBloc extends Bloc<VerifyEvent, VerifyState> {
   final ResendCode _resendCode;
@@ -21,7 +20,7 @@ class VerifyBloc extends Bloc<VerifyEvent, VerifyState> {
   final CreatePetProfile createProfile;
 
   VerifyBloc(this._resendCode, this._verifyCode, this.emailSignin,
-      this.savePetProfile, this.createProfile)
+      this.savePetProfile, this.createProfile,)
       : super();
 
   @override

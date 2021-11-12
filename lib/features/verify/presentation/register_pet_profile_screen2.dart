@@ -127,7 +127,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
               ),
               Container(
                   alignment: Alignment.bottomRight,
-                  height: size.height * 0.25,
+                  height: size.height * 0.20,
                   width: size.width * 0.9,
                   child: BackgroundImage(
                     assetImage: 'assets/images/kutta.png',
@@ -205,53 +205,8 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                             SizedBox(
                               height: 40,
                             ),
-                            TextButton.icon(
-                                onPressed: () {
-                                  setState(() {});
-                                  // showModalBottomSheet<void>(
-                                  //   context: context,
-                                  //   builder: (BuildContext context) {
-                                  //     return Container(
-                                  //       height: 200,
-                                  //       color: Colors.amber,
-                                  //       child: Center(
-                                  //         child: Column(
-                                  //           mainAxisAlignment:
-                                  //               MainAxisAlignment.center,
-                                  //           mainAxisSize: MainAxisSize.min,
-                                  //           children: <Widget>[
-                                  //
-                                  //             const Text('Modal BottomSheet'),
-                                  //             InkWell(
-                                  //                 onTap: () {
-                                  //                   AlertManager.showSuccessMessage(
-                                  //                       "Add Success", context);
-                                  //                   Navigator.pop(context);
-                                  //                 },
-                                  //                 child: RoundedButton(
-                                  //                   buttonName: 'Add',
-                                  //                   Color1: MaaruColors
-                                  //                       .primaryColorsuggesion,
-                                  //                   Color: MaaruColors
-                                  //                       .primaryColorsuggesion1,
-                                  //                 ))
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //     );
-                                  //   },
-                                  // );
-                                },
-                                icon: Image.asset(
-                                  'assets/images/addvaccine.png',
-                                ),
-                                label: Text(
-                                  'Add More Vaccines',
-                                  style: MaaruStyle.text.medium,
-                                )),
-                            SizedBox(
-                              height: 40,
-                            ),
+
+
                             SizedBox(
                               height: 30,
                             ),

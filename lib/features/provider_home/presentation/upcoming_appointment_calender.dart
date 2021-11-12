@@ -74,7 +74,7 @@ SizedBox(height: 30,),
 SizedBox(width: 10,),
   Image.asset('assets/icons/icone-setting-40.png',height: 40,),])),
             Container(
-                height: 450,
+                height: 380,
                 width: 400,
                 color: Colors.white,
                 child: Appointments()),

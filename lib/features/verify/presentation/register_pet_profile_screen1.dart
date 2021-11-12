@@ -379,7 +379,8 @@ class _ProfileFormState extends State<ProfileForm> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     double avatarRadius = size.height * 0.30;
-    return Container(
+    return
+      Container(
         padding: const EdgeInsets.only(left: 25, right: 25, top: 50),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
@@ -400,7 +401,7 @@ class _ProfileFormState extends State<ProfileForm> {
                           child: ClipOval(
                             child: (_image != null)
                                 ? Image.file(_image)
-                                : Image.asset(widget.assetImage),
+                                : Image.asset(widget.assetImage,fit: BoxFit.cover,),
                           ),
                           backgroundColor: MaaruColors.whiteColor,
 
