@@ -9,7 +9,8 @@ import '../../../../core/usecases/usecase.dart';
 class EmailSignin implements UseCase<void, EmailAuthParams> {
   UserRepository userRepository;
   EmailSignin(this.userRepository);
-  Future<Either<Failure, Void>> call(EmailAuthParams params) async {
+@override
+  Future<Either<Failure, void>> call(EmailAuthParams params) async {
     return userRepository.emailLogin(params);
   }
 }

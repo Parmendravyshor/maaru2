@@ -14,7 +14,7 @@ class ResendEmail implements UseCase<void, String> {
   /// If authentication over firebase succeeds, it will Call [UserRepository] again to authenticate on triffic servers
   /// if any of above requests fails it will return [Failure] with message of cause
   @override
-  Future<Either<Failure, User>> call(String email) async {
+  Future<Either<Failure, void>> call(String email) async {
     return userRepository.sendPasswordResetEmail(email);
   }
 }

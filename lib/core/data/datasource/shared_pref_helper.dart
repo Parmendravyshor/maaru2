@@ -39,7 +39,7 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
 
   @override
   Future<void> userLogin() {
-   // return sharedPreferences.setBool(MaruConstant.isloggedIn, true);
+    return sharedPreferences.setBool(MaruConstant.email, true);
   }
 
   @override

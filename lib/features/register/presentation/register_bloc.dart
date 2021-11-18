@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:core';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
@@ -10,7 +11,7 @@ part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final EmailSignup _emailSignup;
-  String fname = "";
+  String first_name = "";
   String lname = "";
   String email = "";
   String password = "";
@@ -24,9 +25,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
     if (event is FNameChanged) {
       if (event.name.isNotEmpty) {
-        fname = event.name;
+        first_name = event.name;
       } else {
-        fname = "";
+        first_name = "";
       }
       bool isValidated = _isFormValid();
       if (isValidated) {
@@ -75,8 +76,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       final result = await _emailSignup(EmailAuthParams(
           email: email,
           password: password,
-          fName: "Parmendra",
-          lName: "Singh"));
+          first_name:  first_name,
+          lName: lname));
       yield* result.fold((l) async* {
         yield RegisterFailure("Signup failed..please try again.. $l");
       }, (r) async* {
@@ -86,7 +87,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   bool _isFormValid() {
-    return fname.isNotEmpty &&
+    return first_name.isNotEmpty &&
         lname.isNotEmpty &&
         email.isNotEmpty &&
         password.isNotEmpty;

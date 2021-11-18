@@ -11,33 +11,34 @@ import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
+import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 
 import 'bloc/verify_bloc.dart';
 import 'bloc/verify_event.dart';
 import 'bloc/verify_state.dart';
 
-class Otp extends StatefulWidget {
+class ProviderOtp extends StatefulWidget {
   final String email;
   final String password;
   final String fname;
   final String lname;
   final bool isRegister;
-  Otp(this.email, this.password, this.fname, this.lname, this.isRegister);
+  ProviderOtp(this.email, this.password, this.fname, this.lname, this.isRegister);
   @override
-  OtpWidget createState() =>
-      OtpWidget(email, password, fname, lname, isRegister);
+  ProviderOtpWidget createState() =>
+      ProviderOtpWidget(email, password, fname, lname, isRegister);
 }
 
 /// Main Widget that decides either to show Login Scree screen or Forgot password
-class OtpWidget extends State<Otp> {
+class ProviderOtpWidget extends State<ProviderOtp> {
   TextEditingController _otpController;
   final String email;
   final String password;
   final String fname;
   final String lname;
   final bool isRegister;
-  OtpWidget(this.email, this.password, this.fname, this.lname, this.isRegister);
+  ProviderOtpWidget(this.email, this.password, this.fname, this.lname, this.isRegister);
 
   @override
   void initState() {
@@ -73,8 +74,8 @@ class OtpWidget extends State<Otp> {
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) {
-                              return CreateregisterPetProfile1();
-                            }));
+                                      return CreateProviderHome();
+                                    }));
                           });
                           return Container();
                         }
@@ -89,7 +90,7 @@ class OtpWidget extends State<Otp> {
                                         fontFamily: 'Quicksand',
                                         fontSize: 20,
                                         color:
-                                            MaaruStyle.colors.textColorWhite)),
+                                        MaaruStyle.colors.textColorWhite)),
                               ),
                             );
                           });
@@ -105,7 +106,7 @@ class OtpWidget extends State<Otp> {
                                         fontFamily: 'Quicksand',
                                         fontSize: 20,
                                         color:
-                                            MaaruStyle.colors.textColorWhite)),
+                                        MaaruStyle.colors.textColorWhite)),
                               ),
                             );
                           });
@@ -121,7 +122,7 @@ class OtpWidget extends State<Otp> {
                                         fontFamily: 'Quicksand',
                                         fontSize: 20,
                                         color:
-                                            MaaruStyle.colors.textColorWhite)),
+                                        MaaruStyle.colors.textColorWhite)),
                               ),
                             );
                           });
@@ -152,7 +153,7 @@ class OtpWidget extends State<Otp> {
                                 height: 30,
                               ),
                               ThemedTextField(
-                                  "Enter 5 digit otp code", TextInputType.text,
+                                  "Enter 5 digit otp code", TextInputType.phone,
                                   onChanged: (text) {},
                                   editingController: _otpController),
                               SizedBox(
@@ -194,14 +195,14 @@ class OtpWidget extends State<Otp> {
                                 height: 20,
                               ),
                               state is VerifyOtpInProgress ||
-                                      state is ResendOtpInProgress
+                                  state is ResendOtpInProgress
                                   ? Center(
-                                      child: Container(
-                                      margin: EdgeInsets.only(bottom: 10),
-                                      width: 40,
-                                      height: 40,
-                                      child: CircularProgressIndicator(),
-                                    ))
+                                  child: Container(
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    width: 40,
+                                    height: 40,
+                                    child: CircularProgressIndicator(),
+                                  ))
                                   : Container(),
                             ],
                           ),

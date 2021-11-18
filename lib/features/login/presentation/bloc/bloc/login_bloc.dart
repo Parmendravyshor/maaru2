@@ -5,7 +5,8 @@ import 'package:maru/core/domain/usecases/resend_verification_code.dart';
 import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
-
+import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
@@ -13,19 +14,22 @@ import 'login_state.dart';
 
 /// Bloc for Register page
 ///
+
+import 'package:email_validator/email_validator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
+
+/// Bloc for Register page
+///
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final EmailSignin _emailSignin;
   final ResendCode _resendCode;
-  final getprofile;
-
-  // final CreateProfile createProfile;
+  //final GetProfile getprofile;
+ // final CreateProfile createProfile;
 
   LoginBloc(
-    this._emailSignin,
-    this._resendCode,
-    this.getprofile,
-  );
-
+      this._emailSignin, this._resendCode, )
+      : super();
   String email = "";
   String password = "";
 
@@ -57,8 +61,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     } else if (event is LoginButtonTapped) {
       yield LoginInProgress();
-      final result = await _emailSignin.call(EmailAuthParams(
-          email: email, password: password, fName: "Tes", lName: "Test"));
+      final result = await _emailSignin(EmailAuthParams(
+          email: email, password: password, first_name: "Tes", lName: "Test"));
       yield* result.fold((l) async* {
         if (l is UserNotConfirmedFailure) {
           final res = await _resendCode(email);
@@ -72,7 +76,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
-        await getprofile(NoParams());
+        //await getprofile(NoParams());
         yield LoginSuccess();
       });
     }
@@ -84,5 +88,5 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   // TODO: implement initialState
-  LoginState get initialState => throw UnimplementedError();
+  LoginState get initialState => LoginInitial();
 }

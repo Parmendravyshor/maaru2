@@ -1,14 +1,10 @@
-import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:kiwi/kiwi.dart';
-import 'package:maru/core/constant/constant.dart';
-import 'package:maru/core/data/repository/user_repository.impl.dart';
-import 'package:maru/core/domain/repositories/user_repository.dart';
-import 'package:maru/core/error/failure.dart';
+
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/icons.dart';
@@ -16,19 +12,19 @@ import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
-import 'package:maru/features/bloc/verify_bloc.dart';
+
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 
-import 'dart:ffi';
+
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+
 
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+
 
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/auth_source.dart';
@@ -47,6 +43,7 @@ import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:flutter/scheduler.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as https;
+import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/verify/presentation/verify.dart';
 
@@ -56,7 +53,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController _fnameController;
+  TextEditingController _first_nameController;
   TextEditingController _lnameController;
   TextEditingController _passwordController;
   TextEditingController _cnfpasswordController;
@@ -65,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   void initState() {
     _passwordController = TextEditingController();
-    _fnameController = TextEditingController();
+    _first_nameController = TextEditingController();
     _lnameController = TextEditingController();
     _emailController = TextEditingController();
     _lnameController = TextEditingController();
@@ -78,7 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void dispose() {
     _passwordController.dispose();
     _emailController.dispose();
-    _fnameController.dispose();
+    _first_nameController.dispose();
     _lnameController.dispose();
     _cnfpasswordController.dispose();
     super.dispose();
@@ -94,12 +91,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: BlocBuilder<RegisterBloc, RegisterState>(
                     builder: (context, state) {
                   if (state is RegisterSuccess) {
-                    // AlertManager.showErrorMessage(
-                    //     "otp send your register email", context);
+                    AlertManager.showErrorMessage(
+                        "otp send your register email", context);
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return CreateregisterPetProfile1();
+                        return BlocProvider(
+                          create: (context) =>
+                              KiwiContainer().resolve<VerifyBloc>(),
+                          child: Otp(
+                            _emailController.text,
+                            _passwordController.text,
+                            _first_nameController.text,
+                            _lnameController.text,
+                            true,
+                          ),
+                        );
                       }));
                     });
 
@@ -156,7 +163,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 onChanged: (text) {
                               BlocProvider.of<RegisterBloc>(context)
                                   .add(FNameChanged(text));
-                            }, editingController: _fnameController),
+                            }, editingController: _first_nameController),
                             SizedBox(
                               height: 5,
                             ),
@@ -198,13 +205,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             ThemedButton(
                                 text: "Join",
-                                onPressed: () async {
-                                  String fname = _fnameController.text;
+                                onPressed: ()  {
+                                  String first_name = _first_nameController.text;
                                   String lname = _lnameController.text;
                                   String email = _emailController.text;
                                   String password = _passwordController.text;
 
-                                  if (fname.isEmpty) {
+                                  if (first_name.isEmpty) {
                                     AlertManager.showErrorMessage(
                                         "Please enter first name", context);
                                   } else if (lname.isEmpty) {
@@ -213,16 +220,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   } else if (validateEmail(email) != null) {
                                     AlertManager.showErrorMessage(
                                         "Please enter valid email", context);
-                                  } else if (password.length < 6) {
+                                  } else if (password.length < 8) {
                                     AlertManager.showErrorMessage(
                                         "Password must be 6 characters long",
                                         context);
 
                                     //  enabled = true;
                                   }
+                                  else {
                                   BlocProvider.of<RegisterBloc>(context)
                                       .add(RegisterButtonTapped());
-                                  // else {
+}
+                        // else {
                                   //   AlertManager.disclaimerPopup(context,
                                   //       onSuccess: () {
                                   //

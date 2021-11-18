@@ -1,44 +1,21 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:ffi';
-
-
-
-
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+//import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:dartz/dartz.dart';
-
+import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import 'dart:convert';
-
-import 'dart:ffi';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/repository/user_repository.impl.dart';
 import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/error/failure.dart';
-import 'package:maru/core/theme/maaru_style.dart';
-import 'package:maru/core/widget/alert_manager.dart';
-import 'package:maru/core/widget/icons.dart';
-import 'package:maru/core/widget/logo.dart';
-import 'package:maru/core/widget/themed_text_field.dart';
-import 'package:maru/core/widget/widgets.dart';
-import 'package:maru/features/Home/presentation/home_sceen.dart';
-import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
-import 'package:maru/features/login/presentation/login_screen.dart';
 
-import 'dart:ffi';
-import 'dart:convert';
-import 'dart:ffi';
-import 'dart:io';
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+
 
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/auth_source.dart';
@@ -47,9 +24,6 @@ import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/error/failure.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
-import 'package:maru/features/register/domain/usecases/email_signup.dart';
-import 'package:maru/features/register/presentation/register_bloc.dart';
-import 'package:maru/features/register/presentation/register_bloc.dart';
 
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
@@ -57,78 +31,112 @@ import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:flutter/scheduler.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as https;
-import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 
-import 'package:maru/core/constant/constant.dart';
-import 'package:maru/core/data/datasource/auth_source.dart';
-import 'package:maru/core/data/datasource/shared_pref_helper.dart';
-import 'package:maru/core/domain/repositories/user_repository.dart';
-import 'package:maru/core/domain/usecases/email_auth_params.dart';
-import 'package:maru/core/error/exception.dart';
-import 'package:maru/core/error/failure.dart';
-import 'package:maru/core/error/registration_failure.dart';
-import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
-import 'package:maru/features/register/presentation/register_bloc.dart';
-import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
-import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
-import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  final AuthSource authSource;
+//  final AuthSource authSource;
   final SharedPrefHelper sharedPrefHelper;
 
-  UserRepositoryImpl(this.authSource, this.sharedPrefHelper);
+  UserRepositoryImpl(this.sharedPrefHelper);
 
   @override
   Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
     try {
-      var response = await http.post(
-          MaruConstant.signup, body: { MaruConstant.fName: params.fName,
-        MaruConstant.lName: params.lName,
-        MaruConstant.email: params.email,
-        MaruConstant.password: params.password
-        ,
-        'jwttoken': sharedPrefHelper.getIdJwtToken(),
-      });
-
-      print('Response status: ${response.statusCode}');
-      // print('Response body: ${response.body}');
-      // var jsonResponse = convert.jsonDecode(response.body);
-      // // saveRegistrationId();
-      // print("emailSignup $jsonResponse ${response.request.url}");
-      // if (response == 200) {
-      //   print(response.body);
-
-
+      var map = new Map<String, String>();
+      map [MaruConstant.first_name] = params.first_name;
+      map[MaruConstant.last_name] = params.lName;
+      map[ MaruConstant.email] = params.email;
+      map [MaruConstant.password] = params.password;
+      map[MaruConstant.user_type] = 'User';
+      final response = await http.post(MaruConstant.signup,
+          body: map
+      );
+      print("Register Success  ${response.body}");
+      sharedPrefHelper.saveString(MaruConstant.first_name, params.first_name);
+      sharedPrefHelper.saveString(MaruConstant.last_name, params.lName);
+      sharedPrefHelper.saveString(MaruConstant.email, params.email);
+      if (response.statusCode == 200) {
+        //  await authSource.emailSignup(params);
         return
-          Right(UnknownFailure("Invalid OTP code"));;
-    //  }
-      // else {
-      //   return Left(UnknownFailure("Invalid send code"));
-      // }
-
-    }
-    on CognitoClientException catch (e) {
-      if (e.code == 'UserNotConfirmedException') {
-        return Left(UnknownFailure("Invalid OTP code"));
-      } else {
-        return Left(UnknownFailure("Invalid OTP code"));
+          Right(Void);
       }
-    } catch (e) {
-      return Left(UnknownFailure("Invalid OTP code"));
-    }
+      else {
+        return Left(UnknownFailure("Already registered account"));
       }
+    }
 
-  @override
-  Future<Either<Failure, void>> resendOtp(String email) {
-    // TODO: implement resendOtp
-    throw UnimplementedError();
+    catch (e) {
+      print("Thrown Exception While signing IN:$e");
+      throw e;
+    }
   }
 
   @override
-  Future<Either<Failure, void>> sendPasswordResetEmail(String email) {
-    // TODO: implement sendPasswordResetEmail
-    throw UnimplementedError();
+  Future<Either<Failure, void>> emailLogin(EmailAuthParams params) async {
+    try {
+      var map = new Map<String, String>();
+
+      map[ MaruConstant.email] = params.email;
+      map [MaruConstant.password] = params.password;
+
+      final response = await http.post(MaruConstant.signin,
+          body: map
+      );
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        // await authSource.emailLogin(params);
+        return
+          Right(Void);
+      }
+      else {
+        return Left(UnknownFailure("Need to verify Account"));
+      }
+    }
+    catch (e) {
+      print("Thrown Exception While signing IN:$e");
+      throw e;
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> resendOtp(String email) async {
+    try {
+      var map = new Map<String, String>();
+      map[ MaruConstant.email] = email;
+      final response = await http.post(MaruConstant.resend,
+          body: map
+      );
+      print("Register Success  ${response.body}");
+
+
+      return
+        Right(Void);
+    }
+    catch (e) {
+      print("Thrown Exception While signing IN:$e");
+      throw e;
+    }
+  }
+  @override
+  Future<Either<Failure, void>> sendPasswordResetEmail(String email) async {
+    try {
+      var map = new Map<String, String>();
+      map[ MaruConstant.otp] = email;
+      final response = await http.post(MaruConstant.reset,
+          body: map
+      );
+      print("Register Success  ${response.body}");
+
+
+      return
+        Right(Void);
+    }
+    catch (e) {
+      print("Thrown Exception While signing IN:$e");
+      throw e;
+    }
   }
 
   @override
@@ -144,10 +152,29 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> createPetProfile() {
-    // TODO: implement createPetProfile
-    throw UnimplementedError();
+  Future<Either<Failure, void>> createPetProfile() async{
+    try {
+
+      final response = await http.post(MaruConstant.createpProfile,
+          body: {}
+      );
+
+      if (response.statusCode == 200) {
+        //  await authSource.emailSignup(params);
+        return
+          Right(Void);
+      }
+      else {
+        return Left(UnknownFailure("Already registered account"));
+      }
+    }
+
+    catch (e) {
+      print("Thrown Exception While signing IN:$e");
+      throw e;
+    }
   }
+
 
   @override
   Future<Either<Failure, void>> createUserProfile() {
@@ -180,11 +207,36 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> savePetProfile(PetProfileParams params) {
-    // TODO: implement savePetProfile
-    throw UnimplementedError();
-  }
+  Future<Either<Failure, void>> savePetProfile(PetProfileParams params) async {
+    try {
+      var map = new Map<String, String>();
+      map [MaruConstant.age] = params.age;
+      map[MaruConstant.birth_date] = params.birthDate;
+      map[ MaruConstant.img] = params.profileImage;
+     // map [MaruConstant.password] = params.password;
+      map[MaruConstant.user_type] = 'User';
+      final response = await http.post(MaruConstant.savepet1,
+          body: map
+      );
+      print("Register Success  ${response.body}");
+     // sharedPrefHelper.saveString(MaruConstant.first_name, params.first_name);
+     // sharedPrefHelper.saveString(MaruConstant.last_name, params.lName);
+     // sharedPrefHelper.saveString(MaruConstant.email, params.email);
+      if (response.statusCode == 200) {
+        //  await authSource.emailSignup(params);
+        return
+          Right(Void);
+      }
+      else {
+        return Left(UnknownFailure("Already registered account"));
+      }
+    }
 
+    catch (e) {
+      print("Thrown Exception While signing IN:$e");
+      throw e;
+    }
+  }
   @override
   Future<Either<Failure, void>> saveUserProfile(UserProfileParams params) {
     // TODO: implement saveUserProfile
@@ -199,9 +251,24 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> verifyCode(VerifyParams params) {
-    // TODO: implement verifyCode
-    throw UnimplementedError();
+  Future<Either<Failure, void>> verifyCode(VerifyParams params) async {
+    try {
+      var map = Map<String, String>();
+      map[ MaruConstant.otp] = params.code;
+     // map[ MaruConstant.email] = params.email;
+      final response = await http.post(MaruConstant.verify,
+          body: map
+      );
+      print("Register Success  ${response.body}");
+
+
+      return
+        Right(Void);
+    }
+    catch (e) {
+      print("Thrown Exception While signing IN:$e");
+      throw e;
+    }
   }
 
   @override
@@ -263,17 +330,9 @@ class UserRepositoryImpl implements UserRepository {
     // TODO: implement getVetSearchIcons
     throw UnimplementedError();
   }
-
   @override
   Future<Either<Failure, void>> getWalkingSearchIcons() {
     // TODO: implement getWalkingSearchIcons
     throw UnimplementedError();
   }
-
-  @override
-  Future<Either<Failure, void>> emailLogin(EmailAuthParams params) {
-    // TODO: implement emailLogin
-    throw UnimplementedError();
-  }
-
 }

@@ -16,9 +16,9 @@ import 'package:maru/features/verify/presentation/register_pet_profile_screen3.d
 import 'register_pet_profile_screen2.dart';
 
 class CreateregisterPetProfile1 extends StatefulWidget {
-  final String text;
-
-  const CreateregisterPetProfile1({Key key, this.text}) : super(key: key);
+  // final String text;
+  //
+  // const CreateregisterPetProfile1({Key key, this.text}) : super(key: key);
   @override
   _CreateregisterPetProfile1State createState() =>
       _CreateregisterPetProfile1State();

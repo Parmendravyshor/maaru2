@@ -10,19 +10,20 @@ class EmailAuthParams extends Equatable {
   final String password;
 
   /// first name to use for login
-  final String fName;
+  final String first_name;
 
   /// last name to use for login
   final String lName;
-
+final String userType;
   EmailAuthParams(
       {@required this.email,
       @required this.password,
-      @required this.fName,
-      @required this.lName});
+     this.first_name,
+ this.userType,
+   this.lName});
 
   @override
-  List<Object> get props => [email, password, fName, lName];
+  List<Object> get props => [email, password, first_name, lName,userType];
 }
 class ChatModel{
   String name;

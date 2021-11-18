@@ -12,6 +12,6 @@ class EmailSignup implements UseCase<void, EmailAuthParams> {
   EmailSignup(this.userRepository);
 @override
   Future<Either<Failure, void>> call(EmailAuthParams params) async {
-    return userRepository.emailSignup(params);
+    return  userRepository.emailSignup(params);
   }
 }

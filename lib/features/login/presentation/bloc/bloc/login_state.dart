@@ -32,9 +32,14 @@ class VerificationNeeded extends LoginState {
 
 class LoginFailure extends LoginState {
   final String errorMessage;
-  LoginFailure(this.errorMessage) : super();
+
+   LoginFailure( this.errorMessage);
+
   @override
-  String toString() => "RegisterFailure";
+  List<Object> get props => [errorMessage];
+
+  @override
+  String toString() => 'LoginFailure { error: $errorMessage }';
 }
 
 class LoginFormValidationSuccess extends LoginState {

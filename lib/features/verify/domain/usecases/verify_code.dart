@@ -17,7 +17,7 @@ class VerifyCode implements UseCase<void, VerifyParams> {
 }
 
 class VerifyParams {
-  final String email;
+ // final String email;
   final String code;
-  VerifyParams(this.code, this.email);
+  VerifyParams(this.code, );
 }

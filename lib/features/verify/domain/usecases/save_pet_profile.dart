@@ -25,6 +25,7 @@ class PetProfileParams {
   final String temperament;
   final String medication;
   final String notes;
+  final String age;
   final String grooming;
   final String vet;
   final String hotel;
@@ -63,5 +64,6 @@ class PetProfileParams {
     this.sex,
     this.petVaccine,
     this.addMoreVaccine,
+    this.age,
   });
 }

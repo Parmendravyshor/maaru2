@@ -23,7 +23,7 @@ class ResetPasswordScreen extends StatefulWidget {
 /// Main Widget that decides either to show Login Scree screen or Forgot password
 class ResetWidget extends State<ResetPasswordScreen> {
   TextEditingController _passwordController;
-  TextEditingController _cnfpasswordController;
+
   TextEditingController _emailController;
   TextEditingController _otpController;
 
@@ -31,7 +31,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
   void initState() {
     _passwordController = TextEditingController();
     _emailController = TextEditingController();
-    _cnfpasswordController = TextEditingController();
+
     _otpController = TextEditingController();
     super.initState();
   }
@@ -40,7 +40,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
   void dispose() {
     _passwordController.dispose();
     _emailController.dispose();
-    _cnfpasswordController.dispose();
+
     _otpController.dispose();
     super.dispose();
   }
@@ -93,16 +93,16 @@ class ResetWidget extends State<ResetPasswordScreen> {
                           child: Column(
                             children: [
                               Container(
-                                  margin: EdgeInsets.only(top: 80),
+                                  margin:const EdgeInsets.only(top: 80),
                                   child: Align(
                                       alignment: Alignment.center,
                                       child: Logo())),
 
-                              SizedBox(
+                              const   SizedBox(
                                 height: 10,
                               ),
 
-                              SizedBox(
+                              const  SizedBox(
                                 height: 20,
                               ),
                               ThemedTextField(
@@ -112,7 +112,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                     BlocProvider.of<ResetBloc>(context)
                                         .add(EmailChanged(text));
                                   }, editingController: _emailController),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               ThemedButton(
@@ -125,7 +125,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                     }
                                   },
                                   enabled: true),
-                              SizedBox(
+                             const SizedBox(
                                 height: 10,
                               ),
                               state is ResetInProgress
@@ -149,30 +149,36 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                   margin: EdgeInsets.only(top: 80),
                                   child: Align(
                                       alignment: Alignment.center,
-                                      child: Image.asset(
-                                          "assets/images/logo.png"))),
+                                      child:Container(
+                                        alignment: Alignment.center,
+                                       // height: size.height * 0.4,
+                                        // width: size.width * 0.9,
+
+                                        child: Image.asset(
+                                          "assets/images/logom (3).png",
+                                          width: 200,
+                                        ),
+                                        //  fit: BoxFit.cover,
+                                      ))),
                               Container(
                                   margin: EdgeInsets.only(top: 20),
                                   child: Align(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        "Welcome to",
+                                        "Set New",
                                         style: MaaruStyle.text.medium,
                                       ))),
                               Container(
                                   child: Align(
                                       alignment: Alignment.center,
                                       child: Text(
-                                        "Kompanion.ai",
+                                        "Password",
                                         style: MaaruStyle.text.medium,
                                       ))),
                               SizedBox(
                                 height: 10,
                               ),
-                              Container(
-                                  height: 30,
-                                  child: Image.asset(
-                                      "assets/images/beta.png")),
+
                               SizedBox(
                                 height: 20,
                               ),
@@ -189,11 +195,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                   TextInputType.text,
                                   onChanged: (text) {},
                                   editingController: _passwordController),
-                              ThemedTextField("Confirm new password",
-                                  TextInputType.text,
-                                  onChanged: (text) {},
-                                  editingController:
-                                  _cnfpasswordController),
+
                               SizedBox(
                                 height: 10,
                               ),
@@ -203,20 +205,16 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                     String otp = _otpController.text;
                                     String password =
                                         _passwordController.text;
-                                    String cnfpwd =
-                                        _cnfpasswordController.text;
+
                                     if (otp.length < 4) {
                                       AlertManager.showErrorMessage(
                                           "Invalid OTP", context);
-                                    } else if (password.length < 6) {
+                                    } else if (password.length < 8) {
                                       AlertManager.showErrorMessage(
-                                          "Password should be of minimum 6 characters",
+                                          "Password should be of minimum 8 characters",
                                           context);
-                                    } else if (password != cnfpwd) {
-                                      AlertManager.showErrorMessage(
-                                          "Password do not match",
-                                          context);
-                                    } else {
+                                    }
+                                    else {
                                       BlocProvider.of<ResetBloc>(context)
                                           .add(SetNewPasswordTapped(
                                           otp, password));

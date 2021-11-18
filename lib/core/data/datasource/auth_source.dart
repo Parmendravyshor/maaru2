@@ -1,5 +1,5 @@
 
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+//import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 
 import '../../domain/usecases/email_auth_params.dart';
 import '../../error/exception.dart';
@@ -18,6 +18,7 @@ class EmailAlreadyInUseAuthException extends AuthException {}
 /// the credentials from local disk after this is called.
 ///
 abstract class AuthSource {
-  Future<CognitoUserPoolData> emailSignup(EmailAuthParams params);
-  Future<CognitoUserSession> emailLogin(EmailAuthParams params);
+
+   Future<void> emailSignup(EmailAuthParams params);
+   Future<void> emailLogin(EmailAuthParams params);
 }

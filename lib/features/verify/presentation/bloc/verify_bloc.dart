@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/domain/usecases/resend_verification_code.dart';
 import 'package:maru/core/usecases/usecase.dart';
-import 'package:maru/features/bloc/verify_event.dart';
-import 'package:maru/features/bloc/verify_state.dart';
+
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
+import 'package:maru/features/verify/presentation/bloc/verify_event.dart';
+import 'package:maru/features/verify/presentation/bloc/verify_state.dart';
 
 ///
 class VerifyBloc extends Bloc<VerifyEvent, VerifyState> {
@@ -18,9 +19,9 @@ class VerifyBloc extends Bloc<VerifyEvent, VerifyState> {
   final EmailSignin emailSignin;
   final SavePetProfile savePetProfile;
   final CreatePetProfile createProfile;
-
   VerifyBloc(this._resendCode, this._verifyCode, this.emailSignin,
-      this.savePetProfile, this.createProfile,)
+      this.savePetProfile, this.createProfile,
+  )
       : super();
 
   @override
@@ -29,12 +30,12 @@ class VerifyBloc extends Bloc<VerifyEvent, VerifyState> {
   Stream<VerifyState> mapEventToState(VerifyEvent event) async* {
     if (event is CodeEntered) {
       yield VerifyOtpInProgress();
-      final res = await _verifyCode(VerifyParams(event.code, event.email));
+      final res = await _verifyCode(VerifyParams(event.code, ));
       if (res.isRight()) {
         final result = await emailSignin(EmailAuthParams(
             email: event.email,
             password: event.password,
-            fName: "",
+            first_name: "",
             lName: ""));
         if (result.isRight()) {
           final create = await createProfile(NoParams());

@@ -4,7 +4,7 @@ class ScreenIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+     // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
           child: FlatButton(
@@ -16,7 +16,7 @@ class ScreenIcon extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 10,),
+       SizedBox(width: 10,),
         Expanded(
           child: FlatButton(
             padding: EdgeInsets.only(right: 20),
