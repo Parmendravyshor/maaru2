@@ -18,10 +18,10 @@ class VerifyBloc extends Bloc<VerifyEvent, VerifyState> {
   final ResendCode _resendCode;
   final VerifyCode _verifyCode;
   final EmailSignin emailSignin;
- // final SavePetProfile savePetProfile;
-//  final CreatePetProfile createProfile;
+  final SavePetProfile savePetProfile;
+  final CreatePetProfile createProfile;
 
-  VerifyBloc(this._resendCode, this._verifyCode, this.emailSignin,
+  VerifyBloc(this._resendCode, this._verifyCode, this.emailSignin, this.createProfile, this.savePetProfile,
 
   )
       : super();
@@ -40,36 +40,36 @@ class VerifyBloc extends Bloc<VerifyEvent, VerifyState> {
             first_name: "",
             lName: ""));
         if (result.isRight()) {
-        //  final create = await createProfile(PetProfileParams());
-        //   if (create.isRight()) {
-        //     await savePetProfile(PetProfileParams(
-        //    profileImage:'',
-        //     gender:'',
-        //     petName:'',
-        //     providerName:'',
-        //    petVaccine:'',
-        //      uploadVaccineRecord:'',
-        //  walkingSchedule:'',
-        //    feedingSchedule:'',
-        //     temperament:'',
-        //     medication:'',
-        //    notes:'',
-        //      age:'',
-        //      grooming:'',
-        //      vet:'',
-        //  hotel:'',
-        //     walking:'',
-        //    dayCare:'',
-        //    hospital:'',
-        //     breadType:'',
-        //     height:'',
-        //     weight:'',
-        //     birthDate:'',
-        //     sex:'',
-        //
-        //   addMoreVaccine:'',
-        //     ));
-        //   }
+         //  final create = await createProfile(PetProfileParams());
+         //  if (create.isRight()) {
+         //    await savePetProfile(PetProfileParams(
+         //   profileImage:'',
+         //    gender:'',
+         //    petName:'',
+         //    providerName:'',
+         //   petVaccine:'',
+         //     uploadVaccineRecord:'',
+         // walkingSchedule:'',
+         //   feedingSchedule:'',
+         //    temperament:'',
+         //    medication:'',
+         //   notes:'',
+         //     age:'',
+         //     grooming:'',
+         //     vet:'',
+         // hotel:'',
+         //    walking:'',
+         //   dayCare:'',
+         //   hospital:'',
+         //    breadType:'',
+         //    height:'',
+         //    weight:'',
+         //    birthDate:'',
+         //    sex:'',
+         //
+         //  addMoreVaccine:'',
+         //    ));
+         //  }
           yield VerifyOtpSuccess();
         } else {
           yield VerifyOtpFailure(

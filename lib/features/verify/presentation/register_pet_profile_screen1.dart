@@ -368,26 +368,33 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
 
                                       String petName = _petName.text;
                                       String breadType = _breadType.text;
-                                      // String height = _height.text;
-                                      // String width = _weight.text;
-
+                                       String height = _height.text;
+                                       String width = _weight.text;
+String age = _ageType.text;
                                       if (petName.isEmpty) {
                                         AlertManager.showErrorMessage(
                                             "Please enter Pet name", context);
                                       } else if (breadType.isEmpty) {
                                         AlertManager.showErrorMessage(
                                             "Please enter Bread Type", context);
-                                        // } else if (height.isEmpty) {
-                                        // AlertManager.showErrorMessage(
-                                        // "Please enter Height", context);
-                                        // } else if (width.isEmpty) {
-                                        //   AlertManager.showErrorMessage(
-                                        //       "Please enter weight",
+                                        } else if (height.isEmpty) {
+                                        AlertManager.showErrorMessage(
+                                        "Please enter Height", context);
+                                        }
+                                      else if (age.isEmpty) {
+                                        AlertManager.showErrorMessage(
+                                            "Please enter Height", context);
+                                      }
+                                      else if (width.isEmpty) {
+                                          AlertManager.showErrorMessage(
+                                              "Please enter weight",context);
+
 
                                         // context);
                                       } else {
                                         BlocProvider.of<PetProfileBloc>(context)
                                             .add(RegisterButtonTapped());
+                                       // Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CreateRegisterPetProfile2()));
                                       }
                                     },
                                     child: Container(

@@ -98,6 +98,14 @@ class AgeChanged extends PetProfileEvent {
   @override
   String toString() => "AgeChanged";
 }
+class petNameChanged extends PetProfileEvent {
+  final String petname;
+
+  petNameChanged(this.petname);
+
+  @override
+  String toString() => "petNameChanged";
+}
 class SexChanged extends PetProfileEvent {
   final String sex;
 

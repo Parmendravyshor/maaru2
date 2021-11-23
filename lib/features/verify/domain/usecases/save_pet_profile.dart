@@ -1,3 +1,4 @@
+import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../core/domain/repositories/user_repository.dart';
 import '../../../../core/error/failure.dart';
@@ -37,7 +38,7 @@ class PetProfileParams {
   final String weight;
   final String birthDate;
   final String sex;
-
+final String name;
   final String addMoreVaccine;
 
   PetProfileParams({
@@ -65,5 +66,6 @@ class PetProfileParams {
     this.petVaccine,
     this.addMoreVaccine,
     this.age,
+    this.name
   });
 }

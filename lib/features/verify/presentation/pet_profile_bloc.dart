@@ -19,6 +19,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
   //final GetPetProfile getPetProfile;
  // int step = 1;
   String age = "";
+  String petname ="";
   String width = "" ;
   String hight = "" ;
   String sex = "";
@@ -30,6 +31,20 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
   @override
   Stream<PetProfileState> mapEventToState(PetProfileEvent event) async* {
+    if (event is petNameChanged) {
+      if (event.petname.isNotEmpty) {
+        petname = event.petname;
+      }
+      else {
+        petname = '';
+      }
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield RegisterFormValidationFailure();
+      }
+    }
     if (event is AgeChanged) {
       if (event.age.isNotEmpty) {
         age = event.age;
@@ -153,7 +168,8 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
   //   }
    }
       bool _isFormValid() {
-        return age.isNotEmpty &&
+        return petname.isNotEmpty &&
+          age.isNotEmpty &&
             width.isNotEmpty &&
             hight.isNotEmpty &&
             breadtype.isNotEmpty &&

@@ -2,6 +2,7 @@
 
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/notification.dart';
 import 'package:maru/core/data/datasource/storage.dart';
 
 import 'package:maru/features/forgot/Domain/usecases/reset_password.dart';
@@ -32,7 +33,7 @@ Future<void> registerDependencyInjection() async {
 
   await _registerMisc(container);
   await _registerApiClient(container);
-  //await _registerDataSources(container);
+  await _registerDataSources(container);
   _registerRepositories(container);
   _registerUseCases(container);
   _registerBloc(container);
@@ -48,7 +49,7 @@ void _registerBloc(KiwiContainer container) {
    container.registerFactory((c) => PetProfileBloc(c.resolve()));
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
   container.registerFactory(
-    (c) => VerifyBloc(c.resolve(), c.resolve(),c.resolve(), ));
+    (c) => VerifyBloc(c.resolve(), c.resolve(),c.resolve(),c.resolve(), c.resolve(), ));
 }
 
 void _registerUseCases(KiwiContainer container) {
@@ -68,21 +69,22 @@ void _registerUseCases(KiwiContainer container) {
 
 void _registerRepositories(KiwiContainer container) {
   container.registerFactory<UserRepository>(
-      (c) => UserRepositoryImpl( ));
+      (c) => UserRepositoryImpl(c.resolve() ));
 }
-//
-//  _registerDataSources(KiwiContainer container) {
-// //   container.registerFactory<AuthSource>((c) => UserService(c.resolve(),c.resolve(),c.resolve()),);
-//    container.registerFactory<SharedPrefHelper>(
-//       (c) => SharedPrefHelperImpl(c.resolve()));
-//  }
+_registerDataSources(KiwiContainer container) {
+  container.registerFactory<AuthSource>(
+          (c) => UserService(c.resolve(), c.resolve(), c.resolve()));
+  container.registerFactory<SharedPrefHelper>(
+          (c) => SharedPrefHelperImpl(c.resolve()));
+}
+
 
 _registerApiClient(KiwiContainer container) {}
 
 _registerMisc(KiwiContainer container) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   container.registerFactory((c) => sharedPreferences);
-  //container.registerFactory((c) => Storage(sharedPreferences));
+  container.registerFactory((c) => Storage(sharedPreferences));
   // container.registerFactory((c) => new CognitoUserPool(
   //  MaruConstant.poolid, MaruConstant.clientid));
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:math';
 //import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:dartz/dartz.dart';
@@ -37,10 +38,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class UserRepositoryImpl implements UserRepository {
-//  final AuthSource authSource;
- // final SharedPrefHelper sharedPrefHelper;
 
- // UserRepositoryImpl(this.sharedPrefHelper);
+ final SharedPrefHelper sharedPrefHelper;
+
+ UserRepositoryImpl(this.sharedPrefHelper);
 
   @override
   Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
@@ -176,34 +177,45 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, void>> createPetProfile(PetProfileParams params) async{
     try {
-      String token = await SharedPreferencesHelper().GetAuthToken();
-      Map<String, String> headers = { "access-token": "access-token"};
+     var token = sharedPrefHelper.saveIdJwtToken(
+          MaruConstant.token,);
+      print(token);
+     // var data = json.encode(createPetProfile.toJson());
+     // String token = await SharedPreferencesHelper().GetAuthToken();
+  var  headers = { "access-token":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo4NCwiZmlyc3RfbmFtZSI6InAiLCJsYXN0X25hbWUiOiJzIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6InBhcm1lbmRyYWhvbWUyMjJAeW9wbWFpbC5jb20iLCJ0b2tlbiI6bnVsbCwicGFzc3dvcmQiOiIkMmEkMDgkOGxENjA4TlNNRG5OdjNmam5xZEtadWpzWlN4LnRFN282VERtUXRaWGplQ0dTOVVrRDd5T2UiLCJvdHAiOiJQeFBLUyIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMTEtMjNUMDc6MTA6MDMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMjNUMDc6MTA6NTAuMDAwWiJ9LCJpYXQiOjE2Mzc2NTE0NTEsImV4cCI6MTYzNzczNzg1MX0.tLVM-Me5szca3FRs5en3GVltkeTIvu4ti6Moz4nl5_k",
+      'Content-Type': 'json/application'};
       var map = new Map<String, String>();
-      map[MaruConstant.pet_name] = MaruConstant.pet_name;
-      map[MaruConstant.age] = MaruConstant.age;
+      map[MaruConstant.pet_name] = params.petName;
+      map[MaruConstant.age] = params.age;
 
-      map[MaruConstant.birth_date] = MaruConstant.birth_date;
-      map[MaruConstant.breed_type] = MaruConstant.breed_type;
+      map[MaruConstant.birth_date] = params.birthDate;
+      map[MaruConstant.breed_type] = params.breadType;
       // map[MaruConstant.known_allergies] = '';
       // map[MaruConstant.img] = '';
-      map[MaruConstant.height] = MaruConstant.height;
-      map[MaruConstant.weight] = MaruConstant.weight;
+      map[MaruConstant.height] = params.height;
+      map[MaruConstant.weight] = params.weight;
+      map[MaruConstant.name] = params.name;
       // map[MaruConstant.feeding_schedule] = '';
       // map[MaruConstant.medication] = '';
       // map[MaruConstant.pet_needs] = '';
-      map[MaruConstant.sex] = MaruConstant.sex;
+      map[MaruConstant.sex] = params.sex;
       // map[MaruConstant.walking_schedule] = '';
       // map[MaruConstant.temperament] = '';
       // map[MaruConstant.name] ='';
-
+       //var data = json.encode(map.toJson());
       final response = await http.post(MaruConstant.createpProfile,
           headers: {
-           'access-token': "$token"},
 
-          body:map
+            "access-token": "$token"
+          },
+          body:map,
 
       );
-
+      print('Response status: ${map}');
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+     // response.headers.addAll(headers);
+      print("Register Success  ${response.body}");
       print(response);
       print("Register Success  ${response.body}");
       if (response.statusCode == 200) {
@@ -303,21 +315,25 @@ print(token);
   @override
   Future<Either<Failure, void>> verifyCode(VerifyParams params) async {
     try {
-      await SharedPreferencesHelper().GetAuthToken();
+
+     // print("verifyOTP TOKEEEEEEEEEEEEEEnnnnnnnnnnnnnnnn:$token");
       var map = Map<String, String>();
       map[ MaruConstant.otp] = params.code;
       map[ MaruConstant.email] = params.email;
      // map[ MaruConstant.email] = params.email;
       final response = await http.post(MaruConstant.verify,
+
           body: map
       );
       print("Register Success  ${response.body}");
 
-      if (response.statusCode == 200) {
-       String token ="";
-       await SharedPreferencesHelper().SetAuthToken(token);
 
-        print(token);
+      if (response.statusCode == 200) {
+        sharedPrefHelper.saveIdJwtToken(
+            MaruConstant.token,);
+      // String token ="";
+      // await SharedPreferencesHelper().SetAuthToken(token);
+/// print(token);
      // Map<String,Strin
         return
           Right(Void);
