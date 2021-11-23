@@ -50,13 +50,15 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => HomeScreen()));
               },
-              child: Image.asset('assets/icons/icone-setting-10.png',
+              child:Padding(padding: EdgeInsets.only(top: 10),
+
+           child:   Image.asset('assets/icons/icon0.png',
                   height: 30, color: widget.Color
                   //selectedIndex == 0
                   ///  ? MaaruColors.textButtonColor
                   // : Colors.grey[350],
                   ),
-            ),
+            )),
             title: Text('')),
         BottomNavigationBarItem(
             icon: InkWell(
@@ -66,7 +68,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
               },
               child: Padding(padding: EdgeInsets.only(right: 30),
 
-  child:  Image.asset('assets/icons/icone-setting-9.png',
+  child:  Image.asset('assets/icons/icon1.png',
                   height: 30, color: widget.Color1
                   //selectedIndex == 1
                   //   ? MaaruColors.textButtonColor
@@ -84,7 +86,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                 },
 
                child: Image.asset(
-                  'assets/icons/icone-setting-15.png',
+                  'assets/icons/icon4.png',
                   height: 60,
                 )),
             title: Text('')),
@@ -97,7 +99,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
    child: Padding(padding: EdgeInsets.only(left: 20),
                 child:
                 Image.asset(
-                  'assets/icons/icone-setting-11.png',
+                  'assets/icons/icon2.png',
                   height: 30,
                   color: widget.Color2
                   //selectedIndex == 3
@@ -111,14 +113,16 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => AccountSettingScreen()));
                 },
-                child: Image.asset(
-                  'assets/icons/icone98.png',
+                child: Padding(padding: EdgeInsets.only(top: 5),
+
+  child:  Image.asset(
+                  'assets/icons/icon3.png',
                   height: 30,
                   color: widget.Color3
                   //selectedIndex == 4
                     //  ? MaaruColors.textButtonColor
                      // : Colors.grey[350],
-                )),
+                ))),
             title: Text('')),
       ],
       // currentIndex: selectedIndex,

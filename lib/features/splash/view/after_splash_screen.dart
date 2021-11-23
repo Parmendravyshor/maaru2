@@ -20,7 +20,7 @@ class AfterSplashScreen extends StatelessWidget {
         Container(
             alignment: Alignment.center,
             child: BackgroundImage(
-              assetImage: 'assets/images/logom (3).png',
+              assetImage: 'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
               //  hight: 200,
               widt: 300,
             )),
@@ -41,7 +41,7 @@ class AfterSplashScreen extends StatelessWidget {
                     },
                     child: RoundedButton(
                       buttonName: 'Login',
-                      Color1: MaaruColors.primaryColorsuggesion1,
+                      Color1: MaaruColors.button2Color,
                       Color: MaaruColors.primaryColorsuggesion,
                     ),
                   ),
@@ -52,10 +52,10 @@ class AfterSplashScreen extends StatelessWidget {
                     height: size.height * 0.09,
                     width: size.width * 0.85,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                    //  borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         width: 2,
-                        color: MaaruColors.buttonTextColor,
+                        color: MaaruColors.button2Color,
                       ),
                     ),
                     child: FlatButton(
@@ -66,7 +66,7 @@ class AfterSplashScreen extends StatelessWidget {
                       child: Text(
                         'Create account',
                         style: TextStyle(
-                            color: MaaruColors.primaryColorsuggesion1,
+                            color: MaaruColors.buttonColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 20),
                       ),

@@ -7,6 +7,7 @@ import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
@@ -23,16 +24,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 ///
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final EmailSignin _emailSignin;
-  final ResendCode _resendCode;
+  final VerifyCode _verifyCode;
   //final GetProfile getprofile;
  // final CreateProfile createProfile;
 
   LoginBloc(
-      this._emailSignin, this._resendCode, )
+      this._emailSignin, this._verifyCode, )
       : super();
   String email = "";
   String password = "";
-
+String code = '';
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is EmailChanged) {
@@ -48,7 +49,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         yield LoginFormValidationFailure();
       }
     } else if (event is PasswordChanged) {
-      if (event.password.isNotEmpty && event.password.length > 5) {
+      if (event.password.isNotEmpty && event.password.length > 8 ){
         password = event.password;
       } else {
         password = "";
@@ -61,11 +62,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     } else if (event is LoginButtonTapped) {
       yield LoginInProgress();
-      final result = await _emailSignin(EmailAuthParams(
-          email: email, password: password, first_name: "Tes", lName: "Test"));
+      final result = await _emailSignin.call(EmailAuthParams(
+          email: email, password: password, first_name: "", lName: ""));
       yield* result.fold((l) async* {
-        if (l is UserNotConfirmedFailure) {
-          final res = await _resendCode(email);
+        if (result.isLeft()) {
+          yield VerificationNeeded();
+          final res = await _verifyCode(VerifyParams(code,email ));
           if (res.isRight()) {
             yield VerificationNeeded();
           } else {

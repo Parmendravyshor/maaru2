@@ -155,7 +155,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                         // width: size.width * 0.9,
 
                                         child: Image.asset(
-                                          "assets/images/logom (3).png",
+                                          "assets/icons/MARU_Logo_B2_Horizontal_03 copy.png",
                                           width: 200,
                                         ),
                                         //  fit: BoxFit.cover,

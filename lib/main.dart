@@ -15,11 +15,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:maru/features/Account_setting/presentation/account_setting.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
+import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_profile/provider_profile1.dart';
 
 import 'package:maru/features/splash/view/splash_screen.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -28,8 +31,19 @@ import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'core/theme/maaru_style.dart';
 
 import 'core/utils.dart';
+import 'features/Account_setting/presentation/change_password_screen.dart';
+import 'features/Account_setting/presentation/edit_profile_screen.dart';
+import 'features/Account_setting/presentation/payment_screen.dart';
+import 'features/Account_setting/presentation/transition.dart';
+import 'features/Book_Appointment/presentation/book_appointment_screen2.dart';
 import 'features/Book_Appointment/presentation/book_appointment_screen3.dart';
+import 'features/Book_Appointment/presentation/provider_confirm_book.dart';
+import 'features/Book_Appointment/presentation/reviewe_screen.dart';
 import 'features/Home/presentation/appoinment_screen.dart';
+import 'features/Home/presentation/chat_screen.dart';
+import 'features/Home/presentation/create_home_screen.dart';
+import 'features/Home/presentation/custom_card.dart';
+import 'features/Home/presentation/pet_profile.dart';
 import 'features/Home/presentation/search_screen.dart';
 import 'features/faketest.dart';
 
@@ -37,7 +51,10 @@ import 'package:location/location.dart';
 
 import 'package:flutter/services.dart';
 import 'dart:math' show cos, sqrt, asin;
+import 'features/provider_home/presentation/create_provider_home.dart';
+import 'features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'features/provider_home/presentation/upcoming_appointment_calender.dart';
+import 'features/provider_home/presentation/upcoming_appointment_screen.dart';
 import 'features/provider_profile/provider_profile2.dart';
 import 'features/register/presentation/signup_screen.dart';
 import 'features/verify/presentation/register_pet_profile_screen2.dart';
@@ -113,17 +130,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        builder: (context, widget) => ResponsiveWrapper.builder(
-            BouncingScrollWrapper.builder(context, widget),
-            maxWidth: 1400,
-            minWidth: 450,
-            defaultScale: true,
-            breakpoints: [
-              ResponsiveBreakpoint.resize(450, name: MOBILE),
-              ResponsiveBreakpoint.autoScale(800, name: TABLET),
-              ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-            ],
-            background: Container(color: Color(0xFFF5F5F5))),
+        // builder: (context, widget) => ResponsiveWrapper.builder(
+        //     BouncingScrollWrapper.builder(context, widget),
+        //     maxWidth: 1400,
+        //     minWidth: 450,
+        //     defaultScale: true,
+        //     breakpoints: [
+        //       ResponsiveBreakpoint.resize(450, name: MOBILE),
+        //       ResponsiveBreakpoint.autoScale(800, name: TABLET),
+        //       ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+        //     ],
+        //     background: Container(color: Color(0xFFF5F5F5))),
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
@@ -823,7 +840,7 @@ class _MapViewState extends State<MapView> {
                 alignment: Alignment.bottomRight,
                 padding: const EdgeInsets.fromLTRB(20, 180, 30, 10),
                 child: Image.asset(
-                  'assets/icons/icone-setting-43.png',
+                  'assets/icons/icone-setting-42.png',
                   height: 60,
                 )),
             const SizedBox(height: 10),
@@ -833,7 +850,7 @@ class _MapViewState extends State<MapView> {
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.fromLTRB(40, 140, 50, 100),
                 child: Image.asset(
-                  'assets/icons/icone-setting-43.png',
+                  'assets/icons/icone-setting-42.png',
                   height: 60,
                 )),
             const SizedBox(height: 10),

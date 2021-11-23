@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/src/bloc_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
 class ToggleButton extends StatefulWidget {
   @override
@@ -22,12 +24,12 @@ class _ToggleButtonState extends State<ToggleButton> {
       ToggleButtons(
         borderColor: Colors.grey[300],
         borderWidth: -0.0,
-        fillColor: MaaruColors.primaryColorsuggesion1,
+        fillColor: Color(0xffe2d6b8),
         selectedBorderColor: Colors.white,
         selectedColor: Colors.white,
-        borderRadius: BorderRadius.circular(
-          10,
-        ),
+        // borderRadius: BorderRadius.circular(
+        //   10,
+        // ),
         children: <Widget>[
           Padding(
             padding: EdgeInsets.fromLTRB(50, 10, 50, 15),
@@ -35,7 +37,7 @@ class _ToggleButtonState extends State<ToggleButton> {
                 style: pressed
                     ? GoogleFonts.poppins(
                   textStyle: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontFamily: 'Poppins',
                       fontSize: 18,
                       fontWeight: FontWeight.w500),
@@ -61,7 +63,7 @@ class _ToggleButtonState extends State<ToggleButton> {
                       )
                     : GoogleFonts.poppins(
                         textStyle: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontFamily: 'Poppins',
                             fontSize: 18,
                             fontWeight: FontWeight.w500),
@@ -104,12 +106,12 @@ class _ToggleButton2State extends State<ToggleButton2> {
       ToggleButtons(
         borderColor: Colors.grey[300],
         borderWidth: -0.0,
-        fillColor: MaaruColors.primaryColorsuggesion1,
+        fillColor: MaaruColors.blueColor,
         selectedBorderColor: Colors.white,
         selectedColor: Colors.white,
-        borderRadius: BorderRadius.circular(
-          10,
-        ),
+        // borderRadius: BorderRadius.circular(
+        //   10,
+        // ),
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.fromLTRB(40, 10, 100, 15),
@@ -140,6 +142,109 @@ class _ToggleButton2State extends State<ToggleButton2> {
         },
         isSelected: isSelected,
       ),
+    ]);
+  }
+}
+class ToggleButton3 extends StatefulWidget {
+  @override
+  _ToggleButton3State createState() => _ToggleButton3State();
+}
+
+class _ToggleButton3State extends State<ToggleButton3> {
+  List<bool> isSelected;
+  bool pressed = true;
+  @override
+  void initState() {
+    isSelected = [true, false,false];
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      ToggleButtons(
+        borderColor: Colors.grey[300],
+        borderWidth: -0.0,
+        fillColor: MaaruColors.redColor,
+        selectedBorderColor: Colors.white,
+        selectedColor: Colors.white,
+        // borderRadius: BorderRadius.circular(
+        //   10,
+        // ),
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.fromLTRB(30, 10, 25, 15),
+            child: Text('NEUTERED',
+                style: pressed
+                    ? GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Poppins',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                )
+                    : GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Poppins',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                )),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(40, 10, 35, 15),
+            child: Text('SPADE',
+                style: pressed
+                    ? GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Poppins',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                )
+                    : GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Poppins',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                )),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(30, 10, 25, 15),
+            child: Text('NEITHER',
+                style: pressed
+                    ? GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Poppins',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                )
+                    : GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Poppins',
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                )),
+          ),
+        ],
+
+        onPressed: (int index) {
+          BlocProvider.of<PetProfileBloc>(context)
+              .add(CreateProfileVerified(sex: index.toString()));
+          setState(() {
+            for (int i = 0; i < isSelected.length; i++) {
+              isSelected[i] = i == index;
+            }
+          });
+          setState(() {
+            pressed = !pressed;
+          });
+        },
+        isSelected: isSelected,
+      )
     ]);
   }
 }

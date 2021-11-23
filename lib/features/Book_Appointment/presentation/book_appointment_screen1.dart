@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
+import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'book_appointment_screen2.dart';
@@ -56,8 +57,8 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          'assets/icons/icone-setting-67.png',
+                     Image.asset(
+                          'assets/icons/Rectangle copy 3.png',
                           height: 40,
                           width: 40,
                         ),
@@ -113,27 +114,22 @@ class _BookAppointment1State extends State<BookAppointment1> {
                       style: MaaruStyle.text.tiny,
                     ),
                     SizedBox(
-                      height: size.height * 0.05,
+                      height: size.height * 0.04,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image.asset(
-                          'assets/icons/icone-setting-78.png',
-                          width: size.width * 0.18,
+                          'assets/icons/container1.png',
+                          width: 150,
+                          height: 100,
                         ),
                         Image.asset(
-                          'assets/icons/icone-setting-79.png',
-                          width: size.width * 0.18,
+                          'assets/icons/container2.png',
+                          width: 150,
+                          height: 100,
                         ),
-                        Image.asset(
-                          'assets/icons/icone-setting-80.png',
-                          width: size.width * 0.18,
-                        ),
-                        Image.asset(
-                          'assets/icons/icone-setting-81.png',
-                          width: size.width * 0.18,
-                        ),
+
                       ],
                     ),
                     SizedBox(
@@ -142,28 +138,20 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Grooming',
-                          style: MaaruStyle.text.greyDisable,
+                        Image.asset(
+                          'assets/icons/container3.png',
+                          width: 150,
+                          height: 100,
                         ),
-                        Text(
-                          'Walking',
-                          style: TextStyle(
-                              color: Colors.grey.shade400, fontSize: 15),
+                        Image.asset(
+                          'assets/icons/container4.png',
+                          width: 150,
+                          height: 100,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(30, 0, 35, 0),
-                          child: Text(
-                            'vet',
-                            style: MaaruStyle.text.greyDisable,
-                          ),
-                        ),
-                        Text(
-                          'Hotel   ',
-                          style: MaaruStyle.text.greyDisable,
-                        ),
+
                       ],
                     ),
+
                     SizedBox(
                       height: size.height * 0.01,
                     ),
@@ -213,16 +201,26 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     SizedBox(
                       height: 20,
                     ),
-                    InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => BookAppointmentScreen3()));
-                        },
-                        child: RoundedButton(
-                          buttonName: 'Book Appointments',
-                          Color1: MaaruColors.primaryColorsuggesion1,
-                          Color: MaaruColors.primaryColorsuggesion,
-                        )),
+                    ThemedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => BookAppointmentScreen3()));
+                      },
+                      text: ' Book Appointments',
+                      enabled: true,
+                    ),
+                    // InkWell(
+                    //     onTap: () {
+                    //       Navigator.of(context).push(MaterialPageRoute(
+                    //           builder: (_) => BookAppointmentScreen3()));
+                    //     },
+
+                        // RoundedButton(
+                        //   buttonName: 'Book Appointments',
+                        //   Color1: MaaruColors.blueColor,
+                        //   Color: MaaruColors.primaryColorsuggesion,
+                        // ),
+
                   ],
                 ),
               ),

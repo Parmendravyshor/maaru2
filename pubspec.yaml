@@ -22,7 +22,7 @@ environment:
 
 
 dependencies:
- # amazon_cognito_identity_dart_2: ^1.0.3
+  amazon_cognito_identity_dart_2: ^1.0.3
 
   cupertino_icons: ^1.0.2
 

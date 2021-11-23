@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -16,7 +18,20 @@ class DatePicker extends StatefulWidget {
 
 class _DatePickerState extends State<DatePicker> {
   DateTime _selectedDate;
+  TextEditingController _ageType;
   TextEditingController _textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    _ageType = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _ageType.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +39,7 @@ class _DatePickerState extends State<DatePicker> {
     Padding(
         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: Column(children: [
-          TextField(
+          TextFormField(
             focusNode: AlwaysDisabledFocusNode(),
             controller: _textEditingController,
             textAlign: TextAlign.center,
@@ -40,7 +55,11 @@ class _DatePickerState extends State<DatePicker> {
             onTap: () {
               _selectDate(context);
             },
-          ),
+            onChanged:  (text) {
+      BlocProvider.of<PetProfileBloc>(context)
+          .add(CreateProfileVerified(height: text));
+    },  ),
+
         ]));
   }
 
@@ -589,9 +608,9 @@ class _AppointmentsState extends State<Appointments>
               margin: const EdgeInsets.all(4.0),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: MaaruColors.primaryColorsuggesion1,
+                  color: MaaruColors.blueColor,
                   borderRadius: BorderRadius.circular(36.0),
-                  border: Border.all(width: 2, color: MaaruColors.primaryColorsuggesion1)),
+                  border: Border.all(width: 2, color: MaaruColors.blueColor)),
               child: Text(
                 '${date.day}',
                 style: TextStyle().copyWith(
@@ -607,9 +626,9 @@ class _AppointmentsState extends State<Appointments>
             margin: const EdgeInsets.all(4.0),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: MaaruColors.primaryColorsuggesion1,
+                color: MaaruColors.blueColor,
                 borderRadius: BorderRadius.circular(36.0),
-                border: Border.all(width: 2, color: MaaruColors.primaryColorsuggesion1)),
+                border: Border.all(width: 2, color: MaaruColors.blueColor)),
             child: Text(
               '${date.day}',
               style:MaaruStyle.text.greyDisable

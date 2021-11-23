@@ -5,12 +5,13 @@ class MaruConstant {
    static final resend =Uri.parse ('http://18.191.199.31/api/auth/re-send-otp');
    static final reset =Uri.parse ('http://18.191.199.31/api/auth/forget-password');
    static final signin = Uri.parse('http://18.191.199.31/api/auth/signin');
-   static final createpProfile = Uri.parse('http://18.191.199.31/api/auth/pets');
+   static final createpProfile = Uri.parse('http://18.191.199.31/api/pets');
   //static var signin = Uri.parse('$BASE_URL/signin');
    static var verify = Uri.parse('http://18.191.199.31/api/auth/verify-otp');
    static String first_name = 'first_name';
    static String pet_name = 'pet_name';
    static String breed_type = 'breed_type';
+   static String token = 'access-token';
    static String  age = 'age';
    static String weight ='weight';
    static String height ='height';

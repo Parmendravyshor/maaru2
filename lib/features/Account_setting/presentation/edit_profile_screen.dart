@@ -142,17 +142,7 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                       },
                       editingController: _phoneController,
                     ),
-                    ThemedTextField(
-                      "City",
-                      TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      textStyle: TextStyle(color: Colors.grey[300]),
-                      onChanged: (text) {
-                        //  BlocProvider.of<RegisterBloc>(context)
-                        // .add(PasswordChanged(text));
-                      },
-                      editingController: _cityController,
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -186,7 +176,7 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(color: Colors.grey[300]),
                                     ),
-                                    suffixIcon: Icon(Icons.keyboard_arrow_down_outlined,size: 40,color: MaaruColors.primaryColorsuggesion1,)
+                                    suffixIcon: Icon(Icons.keyboard_arrow_down_outlined,size: 40,color: MaaruColors.buttonColor,)
                                 ),
                               )
                           ),

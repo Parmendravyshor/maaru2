@@ -153,7 +153,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Container(
               alignment: Alignment.center,
               child: BackgroundImage(
-                assetImage: 'assets/images/logom (3).png',
+                assetImage: 'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
                 //  hight: 200,
                 widt: 300,
               ))

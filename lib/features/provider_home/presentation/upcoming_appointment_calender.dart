@@ -168,7 +168,7 @@ SizedBox(width: 10,),
                   width: 140,
                   decoration: BoxDecoration(
                       color: MaaruColors
-                          .primaryColorsuggesion1,
+                          .blueColor,
                       borderRadius:
                       new BorderRadius.circular(20),
                       border:

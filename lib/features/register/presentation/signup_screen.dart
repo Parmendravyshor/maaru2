@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,15 +17,12 @@ import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 
-
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 
-
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-
 
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/auth_source.dart';
@@ -161,7 +159,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ThemedTextField("First Name", TextInputType.name,
                                 textinputaction2: TextInputAction.next,
                                 onChanged: (text) {
-                              BlocProvider.of<RegisterBloc>(context)
+                             BlocProvider.of<RegisterBloc>(context)
                                   .add(FNameChanged(text));
                             }, editingController: _first_nameController),
                             SizedBox(
@@ -198,6 +196,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ],
                         ),
+
                         Column(
                           children: [
                             SizedBox(
@@ -205,8 +204,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                             ThemedButton(
                                 text: "Join",
-                                onPressed: ()  {
-                                  String first_name = _first_nameController.text;
+                                onPressed: () {
+                                  String first_name =
+                                      _first_nameController.text;
                                   String lname = _lnameController.text;
                                   String email = _emailController.text;
                                   String password = _passwordController.text;
@@ -226,12 +226,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         context);
 
                                     //  enabled = true;
+                                  } else {
+                                    BlocProvider.of<RegisterBloc>(context)
+                                        .add(RegisterButtonTapped());
+                                    // Navigator.of(context).push(
+                                    //     MaterialPageRoute(
+                                    //         builder: (_) =>
+                                    //             CreateregisterPetProfile1()));
                                   }
-                                  else {
-                                  BlocProvider.of<RegisterBloc>(context)
-                                      .add(RegisterButtonTapped());
-}
-                        // else {
+                                  // else {
                                   //   AlertManager.disclaimerPopup(context,
                                   //       onSuccess: () {
                                   //

@@ -259,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                             'Show Message',
                                             style: TextStyle(
-                                                fontWeight: FontWeight.bold, fontSize: 12,color: MaaruColors.primaryColorsuggesion1),
+                                                fontWeight: FontWeight.bold, fontSize: 12,color: MaaruColors.blueColor),
                                           ),
                                           )],
                                       ),
@@ -309,7 +309,7 @@ class HorizList extends StatelessWidget {
                       border: Border.all(color: Colors.grey[300], width: 1.0),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    width: 200.0,
+                    width: 180.0,
                     child: Column(children: [
                       Container(
                         alignment: Alignment.centerRight,

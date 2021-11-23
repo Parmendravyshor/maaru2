@@ -122,10 +122,17 @@ class _PetProfileState extends State<PetProfile> {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (_) => CreateregisterPetProfile1()));
                   },
-                  child: Image.asset(
-                    'assets/icons/New Project (40).png',
-                    height: 60,
-                  ),
+                  child:  Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: CircleAvatar(
+                        backgroundColor:Colors.grey[100],radius: 30,
+                        child:
+                        Icon(
+                          Icons.add,
+                          color: MaaruColors.buttonColor,
+                          size: 35,
+                        ),
+                      )),
                 )),
             SizedBox(
               width: 20,

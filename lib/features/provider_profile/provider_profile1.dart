@@ -58,7 +58,7 @@ class _ProviderProfile1State extends State<ProviderProfile1> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  'assets/icons/icone-setting-67.png',
+                                  'assets/icons/Rectangle copy 3.png',
                                   height: 40,
                                   width: 40,
                                 ),

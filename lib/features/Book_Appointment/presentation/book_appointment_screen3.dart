@@ -67,7 +67,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                                                         BookAppointment1()));
                                           },
                                           child: Image.asset(
-                                            'assets/icons/icone-setting-67.png',
+                                            'assets/icons/Rectangle copy 3.png',
                                             height: 40,
                                             width: 40,
                                           )),
@@ -82,7 +82,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                                                         BookAppointment2()));
                                           },
                                           child: Image.asset(
-                                            'assets/icons/icone-setting-67.png',
+                                            'assets/icons/Rectangle copy 3.png',
                                             height: 40,
                                             width: 40,
                                           )),
@@ -97,7 +97,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                                                         BookAppointmentScreen3()));
                                           },
                                           child: Image.asset(
-                                            'assets/icons/icone-setting-67.png',
+                                            'assets/icons/Rectangle copy 3.png',
                                             height: 40,
                                             width: 40,
                                           )),
@@ -267,7 +267,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                       height: 40,
                       width: 400,
                       child: Padding(
-                          padding: EdgeInsets.only(right: 20, left: 20),
+                          padding: EdgeInsets.only(right: 0, left: 0),
                           child: ListView(scrollDirection: Axis.horizontal, children: [
                             ChoiceRow(
                               lebal1: '10:00 AM',
@@ -581,7 +581,7 @@ class _ChoiceButtonState extends State<ChoiceButton> {
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),
           color: widget.isPressed
-              ? MaaruColors.primaryColorsuggesion1
+              ? MaaruColors.blueColor
               : Colors.white,
           // border: Border.all(color: Colors.grey),
         ),
@@ -593,7 +593,7 @@ class _ChoiceButtonState extends State<ChoiceButton> {
                 fontWeight: FontWeight.normal,
                 fontFamily: 'Poppins',
                 fontSize: 15,
-                color: Colors.white)):
+                color: Colors.black)):
             MaaruStyle.text.greyDisable,
             textAlign: TextAlign.center,
           ),

@@ -62,7 +62,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           },
                           child: Icon(
                             star1 ? Icons.star_border : Icons.star,
-                            color: star1 ? Colors.grey : Colors.orange,
+                            color: star1 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
@@ -73,7 +73,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           },
                           child: Icon(
                             star2 ? Icons.star_border : Icons.star,
-                            color: star2 ? Colors.grey : Colors.orange,
+                            color: star2 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
@@ -84,7 +84,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           },
                           child: Icon(
                             star3 ? Icons.star_border : Icons.star,
-                            color: star3 ? Colors.grey : Colors.orange,
+                            color: star3 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
@@ -95,7 +95,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           },
                           child: Icon(
                             star4 ? Icons.star_border : Icons.star,
-                            color: star4 ? Colors.grey : Colors.orange,
+                            color: star4 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
@@ -106,7 +106,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           },
                           child: Icon(
                             star5 ? Icons.star_border : Icons.star,
-                            color: star5 ? Colors.grey : Colors.orange,
+                            color: star5 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                     ],
@@ -137,7 +137,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       },
                       child: RoundedButton(
                         buttonName: 'Submit Review',
-                        Color1: MaaruColors.primaryColorsuggesion1,
+                        Color1: MaaruColors.button2Color,
                         Color: MaaruColors.primaryColorsuggesion,
                       )),
                 ],

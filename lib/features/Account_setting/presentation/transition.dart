@@ -193,7 +193,7 @@ class _TransitionScreenState extends State<TransitionScreen> {
                       FlatButton(
                         onPressed: () {},
                         child: Text('View Details'),
-                        color: MaaruColors.primaryColorsuggesion1,
+                        color: MaaruColors.blueColor,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
                       )

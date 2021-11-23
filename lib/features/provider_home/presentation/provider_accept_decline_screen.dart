@@ -70,7 +70,7 @@ class _ProviderAcceptOrDeclineScreenState
                                   )),
                             ),)),
                       SizedBox(width: 10,),
-                      Image.asset('assets/icons/scnd.png',height: 40,),])),
+                      Image.asset('assets/icons/icone-setting-40.png',height: 40,),])),
             SizedBox(
               height: 20,
             ),
@@ -153,7 +153,7 @@ class _ProviderAcceptOrDeclineScreenState
                             height: 35,
                             width: 150,
                             decoration: BoxDecoration(
-                                color: MaaruColors.primaryColorsuggesion1,
+                                color: MaaruColors.blueColor,
                                 borderRadius: new BorderRadius.circular(10.7),
                                 border: Border.all(color: Colors.white)),
                             child: Text(
@@ -255,9 +255,9 @@ class _TestAppState extends State<TestApp> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         gradient: LinearGradient(colors: [
-                          MaaruColors.primaryColorsuggesion1,
-                          MaaruColors.primaryColorsuggesion1,
-                          MaaruColors.primaryColorsuggesion1,
+                          MaaruColors.blueColor,
+                          MaaruColors.blueColor,
+                          MaaruColors.blueColor,
                           Colors.red,
                           Colors.red,
                           Colors.red
@@ -338,7 +338,7 @@ class _TestAppState extends State<TestApp> {
                                       width: 150,
                                       decoration: BoxDecoration(
                                           color: MaaruColors
-                                              .primaryColorsuggesion1,
+                                              .blueColor,
                                           borderRadius:
                                               new BorderRadius.circular(20),
                                           border:
@@ -361,7 +361,7 @@ class _TestAppState extends State<TestApp> {
                       Row(children: [
                         IconSlideAction(
                           caption: 'Accept',
-                          color: MaaruColors.primaryColorsuggesion1,
+                          color: MaaruColors.blueColor,
                           icon: Icons.done,
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -372,7 +372,7 @@ class _TestAppState extends State<TestApp> {
                           width: 25,
                         ),
                         IconSlideAction(
-                          color: MaaruColors.primaryColorsuggesion1,
+                          color: MaaruColors.blueColor,
                           icon: Icons.arrow_forward,
                           //onTap: () => _showSnackBar('Archive'),
                         ),

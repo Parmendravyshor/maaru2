@@ -7,14 +7,43 @@ import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'register_pet_profile_screen3.dart';
-
+const kRegistration4PlainText = TextStyle(
+    fontWeight: FontWeight.w600, fontSize: 13,color: Colors.black);
 class CreateRegisterPetProfile4 extends StatefulWidget {
+
+
   @override
   _CreateRegisterPetProfile4State createState() =>
       _CreateRegisterPetProfile4State();
 }
 
 class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
+  Color circlecolor1 = MaaruColors.whiteColor;
+  Color circlecolor2 = MaaruColors.whiteColor;
+  Color circlecolor3 = MaaruColors.whiteColor;
+  Color circlecolor4 = MaaruColors.whiteColor;
+  Color circlecolor5 = MaaruColors.whiteColor;
+  Color circlecolor6 = MaaruColors.whiteColor;
+  Widget choosecircle(Image image, String text, Color color) {
+    return CircleAvatar(
+      radius: 55,
+      backgroundColor: MaaruColors.greyColorText,
+      child: CircleAvatar(
+        backgroundColor: color,
+        radius: 53,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            image,
+            Text(
+              text,
+              style: kRegistration4PlainText,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -76,74 +105,126 @@ bottom: false,
                           'Pet Needs',
                           style: MaaruStyle.text.small,
                         ),
-                        Stack(children: [
-                          Row(
-                            children: [
-                              // Padding(
-                              //   padding: EdgeInsets.fromLTRB(10, 70, 10, 0),
-                              //   child:
-
-                              Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  child: Imagesgg(
-                                    AssetImage:
+                        Container(
+                          height: 350,
+                          width: 360,
+                          child: Stack(
+                            children: <Widget>[
+                              Positioned(
+                                top: 30,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      circlecolor1 == MaaruColors.whiteColor
+                                          ? circlecolor1 =  MaaruColors.buttonColor
+                                          : circlecolor1 =  MaaruColors.whiteColor;
+                                    });
+                                  },
+                                  child: choosecircle(
+                                      Image.asset(
                                         'assets/icons/icone-setting-77.png',
-                                    text: 'Grooming',
-                                  )),
-                              //     ),
-                              SizedBox(
-                                width: 0,
-                                height: 20,
-                              ),
-                              //    ),
-                              Expanded(
-                                  child: Align(
-                                      alignment: Alignment.center,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                          right: 20,
-                                          top: 90,
-                                        ),
-                                        child: Imagesgg(
-                                          AssetImage:
-                                              'assets/icons/icone-setting-73.png',
-                                          text: 'Hotel',
-                                        ),
-                                      ))),
-                              //  ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                child: Imagesgg(
-                                  AssetImage:
-                                      'assets/icons/icone-setting-71.png',
-                                  text: 'Vet',
+                                        height: 35,
+                                      ),
+                                      'Grooming',
+                                      circlecolor1),
                                 ),
                               ),
+                              Positioned(
+                                  left: 200,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        circlecolor2 == MaaruColors.whiteColor
+                                            ? circlecolor2 = MaaruColors.buttonColor
+                                            : circlecolor2 = MaaruColors.whiteColor;
+                                      });
+                                    },
+                                    child: choosecircle(
+                                        Image.asset(
+                                          'assets/icons/icone-setting-71.png',
+                                          height: 35,
+                                        ),
+                                        'Vet',
+                                        circlecolor2),
+                                  )),
+                              Positioned(
+                                  top: 100,
+                                  left: 110,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        circlecolor3 == MaaruColors.whiteColor
+                                            ? circlecolor3 = MaaruColors.buttonColor
+                                            : circlecolor3 = MaaruColors.whiteColor;
+                                      });
+                                    },
+                                    child: choosecircle(
+                                        Image.asset(
+                                          'assets/icons/icone-setting-73.png',
+                                          height: 35,
+                                        ),
+                                        'Hotel',
+                                        circlecolor3),
+                                  )),
+                              Positioned(
+                                  top: 160,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        circlecolor4 == MaaruColors.whiteColor
+                                            ? circlecolor4 = MaaruColors.buttonColor
+                                            : circlecolor4 = MaaruColors.whiteColor;
+                                      });
+                                    },
+                                    child: choosecircle(
+                                        Image.asset(
+                                          'assets/icons/icone-setting-72.png',
+                                          height: 35,
+                                        ),
+                                        'Walking',
+                                        circlecolor4),
+                                  )),
+                              Positioned(
+                                  top: 130,
+                                  left: 240,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        circlecolor5 == MaaruColors.whiteColor
+                                            ? circlecolor5 = MaaruColors.buttonColor
+                                            : circlecolor5 = MaaruColors.whiteColor;
+                                      });
+                                    },
+                                    child: choosecircle(
+                                        Image.asset(
+                                          'assets/icons/icone-setting-74.png',
+                                          height: 35,
+                                        ),
+                                        'Daycare',
+                                        circlecolor5),
+                                  )),
+                              Positioned(
+                                  top: 230,
+                                  left: 150,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        circlecolor6 == MaaruColors.whiteColor
+                                            ? circlecolor6 = MaaruColors.buttonColor
+                                            : circlecolor6 = MaaruColors.whiteColor;
+                                      });
+                                    },
+                                    child: choosecircle(
+                                        Image.asset(
+                                          'assets/icons/icone-setting-76.png',
+                                          height: 35,
+                                        ),
+                                        'Hospital',
+                                        circlecolor6),
+                                  ))
                             ],
                           ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(20, 160, 0, 0),
-                            child:
-                            Imagesgg(
-                              AssetImage: 'assets/icons/icone-setting-72.png',
-                              text: 'Walking',
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(215, 150, 0, 0),
-                            child: Imagesgg(
-                              AssetImage: 'assets/icons/icone-setting-74.png',
-                              text: 'Day care',
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(120, 220, 0, 0),
-                            child: Imagesgg(
-                              AssetImage: 'assets/icons/icone-setting-76.png',
-                              text: 'Hospital',
-                            ),
-                          ),
-                        ]),
+                        ),
                         const SizedBox(
                           height: 40,
                         ),
@@ -215,7 +296,7 @@ class _ImagesggState extends State<Imagesgg> {
               shape: BoxShape.circle,
               color: pressAttention
                   ? Colors.white
-                  : MaaruColors.primaryColorsuggesion1,
+                  : MaaruColors.blueColor,
               border: Border.all(color: Colors.grey[300]),
             ),
             child: Column(children: [

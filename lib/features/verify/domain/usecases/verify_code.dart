@@ -11,13 +11,13 @@ class VerifyCode implements UseCase<void, VerifyParams> {
   VerifyCode(this.userRepository);
 
   @override
-  Future<Either<Failure, void>> call(params) async {
+  Future<Either<Failure, void>> call(VerifyParams params) async {
     return userRepository.verifyCode(params);
   }
 }
 
 class VerifyParams {
- // final String email;
+  final String email;
   final String code;
-  VerifyParams(this.code, );
+  VerifyParams(this.code,this.email );
 }

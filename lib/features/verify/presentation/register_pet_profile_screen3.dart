@@ -280,8 +280,8 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                               ),
                               Text('No', style: MaaruStyle.text.tiniest),
                               Switch(
-                                activeColor: MaaruColors.buttonTextColor,
-                                inactiveThumbColor: MaaruColors.buttonTextColor,
+                                activeColor: MaaruColors.buttonColor,
+                                inactiveThumbColor: MaaruColors.buttonColor,
                                 // title: Text("Do you want to update your price?"),
                                 // controlAffinity: ListTileControlAffinity.leading,
                                 value: priceupdate_value,
@@ -432,7 +432,7 @@ class showButtomSheetScreen extends StatelessWidget {
                 child:  RoundedButton(
                     buttonName: 'Add',
                     Color1: MaaruColors.primaryColorsuggesion,
-                    Color: MaaruColors.primaryColorsuggesion1,
+                    Color: MaaruColors.blueColor,
                   ))
                 ],
               ),

@@ -16,6 +16,7 @@ import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,7 +32,7 @@ Future<void> registerDependencyInjection() async {
 
   await _registerMisc(container);
   await _registerApiClient(container);
-  await _registerDataSources(container);
+  //await _registerDataSources(container);
   _registerRepositories(container);
   _registerUseCases(container);
   _registerBloc(container);
@@ -44,10 +45,10 @@ void _registerBloc(KiwiContainer container) {
   container
       .registerFactory((c) => LoginBloc(c.resolve(), c.resolve(), ));
    container.registerFactory((c) => ResetBloc(c.resolve(), c.resolve()));
-  // container.registerFactory((c) => ProfileBloc(c.resolve(), c.resolve()));
+   container.registerFactory((c) => PetProfileBloc(c.resolve()));
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
   container.registerFactory(
-    (c) => VerifyBloc(c.resolve(), c.resolve(), c.resolve(),c.resolve(), c.resolve() ));
+    (c) => VerifyBloc(c.resolve(), c.resolve(),c.resolve(), ));
 }
 
 void _registerUseCases(KiwiContainer container) {
@@ -67,14 +68,14 @@ void _registerUseCases(KiwiContainer container) {
 
 void _registerRepositories(KiwiContainer container) {
   container.registerFactory<UserRepository>(
-      (c) => UserRepositoryImpl(c.resolve(), ));
+      (c) => UserRepositoryImpl( ));
 }
 //
- _registerDataSources(KiwiContainer container) {
-//   container.registerFactory<AuthSource>((c) => UserService(c.resolve(),c.resolve(),c.resolve()),);
-   container.registerFactory<SharedPrefHelper>(
-      (c) => SharedPrefHelperImpl(c.resolve()));
- }
+//  _registerDataSources(KiwiContainer container) {
+// //   container.registerFactory<AuthSource>((c) => UserService(c.resolve(),c.resolve(),c.resolve()),);
+//    container.registerFactory<SharedPrefHelper>(
+//       (c) => SharedPrefHelperImpl(c.resolve()));
+//  }
 
 _registerApiClient(KiwiContainer container) {}
 

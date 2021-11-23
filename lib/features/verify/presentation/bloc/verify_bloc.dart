@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/domain/usecases/resend_verification_code.dart';
 import 'package:maru/core/usecases/usecase.dart';
+import 'package:maru/features/Account_setting/presentation/edit_profile_screen.dart';
 
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
@@ -17,10 +18,11 @@ class VerifyBloc extends Bloc<VerifyEvent, VerifyState> {
   final ResendCode _resendCode;
   final VerifyCode _verifyCode;
   final EmailSignin emailSignin;
-  final SavePetProfile savePetProfile;
-  final CreatePetProfile createProfile;
+ // final SavePetProfile savePetProfile;
+//  final CreatePetProfile createProfile;
+
   VerifyBloc(this._resendCode, this._verifyCode, this.emailSignin,
-      this.savePetProfile, this.createProfile,
+
   )
       : super();
 
@@ -30,7 +32,7 @@ class VerifyBloc extends Bloc<VerifyEvent, VerifyState> {
   Stream<VerifyState> mapEventToState(VerifyEvent event) async* {
     if (event is CodeEntered) {
       yield VerifyOtpInProgress();
-      final res = await _verifyCode(VerifyParams(event.code, ));
+      final res = await _verifyCode(VerifyParams(event.code,event.email ));
       if (res.isRight()) {
         final result = await emailSignin(EmailAuthParams(
             email: event.email,
@@ -38,21 +40,36 @@ class VerifyBloc extends Bloc<VerifyEvent, VerifyState> {
             first_name: "",
             lName: ""));
         if (result.isRight()) {
-          final create = await createProfile(NoParams());
-          if (create.isRight()) {
-            await savePetProfile(PetProfileParams(
-              profileImage: '',
-              gender: '',
-              petName: '',
-              breadType: '',
-              height: '',
-              weight: '',
-              birthDate: '',
-              sex: '',
-              petVaccine: '',
-              addMoreVaccine: '',
-            ));
-          }
+        //  final create = await createProfile(PetProfileParams());
+        //   if (create.isRight()) {
+        //     await savePetProfile(PetProfileParams(
+        //    profileImage:'',
+        //     gender:'',
+        //     petName:'',
+        //     providerName:'',
+        //    petVaccine:'',
+        //      uploadVaccineRecord:'',
+        //  walkingSchedule:'',
+        //    feedingSchedule:'',
+        //     temperament:'',
+        //     medication:'',
+        //    notes:'',
+        //      age:'',
+        //      grooming:'',
+        //      vet:'',
+        //  hotel:'',
+        //     walking:'',
+        //    dayCare:'',
+        //    hospital:'',
+        //     breadType:'',
+        //     height:'',
+        //     weight:'',
+        //     birthDate:'',
+        //     sex:'',
+        //
+        //   addMoreVaccine:'',
+        //     ));
+        //   }
           yield VerifyOtpSuccess();
         } else {
           yield VerifyOtpFailure(

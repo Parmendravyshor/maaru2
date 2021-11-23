@@ -11,7 +11,7 @@ class ScreenIcon extends StatelessWidget {
             padding: EdgeInsets.only(left: 20),
             onPressed: () {},
             child: Image.asset(
-              "assets/icons/btn-facebook.png",
+              "assets/icons/Rectangle copy.png",
               width: 170,
             ),
           ),
@@ -22,7 +22,7 @@ class ScreenIcon extends StatelessWidget {
             padding: EdgeInsets.only(right: 20),
             onPressed: () {},
             child: Image.asset(
-              "assets/icons/btn-google.png",
+              "assets/icons/Rectangle (1).png",
               width: 170,
               //  fit: BoxFit.cover,
 

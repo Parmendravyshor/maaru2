@@ -159,10 +159,10 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                           //   scale: 1.2,
                                                           child: Switch(
                                                             activeColor: MaaruColors
-                                                                .buttonTextColor,
+                                                                .buttonColor,
                                                             inactiveThumbColor:
                                                                 MaaruColors
-                                                                    .buttonTextColor,
+                                                                    .buttonColor,
                                                             // title: Text("Do you want to update your price?"),
                                                             // controlAffinity: ListTileControlAffinity.leading,
                                                             value:
@@ -220,10 +220,10 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                         ),
                                                         Switch(
                                                           activeColor: MaaruColors
-                                                              .buttonTextColor,
+                                                              .buttonColor,
                                                           inactiveThumbColor:
                                                               MaaruColors
-                                                                  .buttonTextColor,
+                                                                  .buttonColor,
                                                           // title: Text("Do you want to update your price?"),
                                                           // controlAffinity: ListTileControlAffinity.leading,
                                                           value: update,
@@ -331,7 +331,7 @@ class Test3 extends StatelessWidget {
                           //     MaterialPageRoute(builder: (_) => CreateUserProfile()));
  Icon(
                             Icons.navigate_next,
-                            color: MaaruColors.buttonTextColor,
+                            color: MaaruColors.buttonColor,
                             size: 40,
                           ),
 

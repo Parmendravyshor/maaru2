@@ -7,13 +7,22 @@ class MaaruColors {
   final bool _darkTheme;
   MaaruColors(this._darkTheme);
   static Color primaryColor = Color(0xffFFC938);
-  static Color primaryColorsuggesion = Color(0xffffe05a);
+  static Color primaryColorsuggesion = Color(0xff2e1475);
   static Color primaryColorsuggesion1 = Color(0xff236855);
-  static Color buttonColor = Color(0xFFffe05a);
+  static Color buttonColor = Color(0xff2e1475);
   static Color buttonTextColor = Color(0xFF367355);
-  static Color textButtonColor = Color(0xFFcc1f19);
+ static const Color greenColor=Color(0xff53CC71);
+  static const Color musteredColor=Color(0xffFDE15A);
+ static const Color redColor=Color(0xffFD8447);
+ static const Color whiteColor=Colors.white;
+  static const Color greyColorText=Color(0xffBDBDBD);
+  static const Color underlineColor=Color(0xffE5E5E5);
+  static const Color blackColor=Colors.black;
+ static const Color blueColor=Color(0xff2e1475);
+ static const Color button2Color=Color(0xffe2d6b8);
+  static Color textButtonColor = Color(0xff2e1475);
   static Color textColor = Color(0xFF6a6a6a);
-  static Color whiteColor = Color(0xFFE5E5E5);
+
   Color buttonTextColor1 = Color(0xFF367355);
   static Color DogsBackground = Color(0xFFedc8be);
   Color darkColor = Color(0xFF171819);
@@ -68,7 +77,7 @@ class MaaruColors {
             fontWeight: FontWeight.w600,
             fontFamily: 'Poppins',
             fontSize: 20,
-            color: MaaruColors.primaryColorsuggesion1));
+            color: MaaruColors.blueColor));
   }
 
   TextStyle get greyDisable {
@@ -200,7 +209,7 @@ class MaaruColors {
             fontWeight: FontWeight.w600,
             fontFamily: 'Poppins',
             fontSize: 12,
-            color: MaaruColors.primaryColorsuggesion1));
+            color: MaaruColors.blueColor));
   }
 }
 
@@ -211,8 +220,8 @@ class MaaruStyle {
   static MaaruColors get text => MaaruColors(_isDarkTheme);
 
   static get buttonShapeEnabled => RoundedRectangleBorder(
-      side: BorderSide(color: Colors.amber, width: 1),
-      borderRadius: BorderRadius.circular(10));
+      side: BorderSide(color: Colors.transparent, width: 1),
+      );
 
   static get buttonShapeDisabled => RoundedRectangleBorder(
       side: BorderSide(color: Colors.yellowAccent.withOpacity(0.25), width: 1),

@@ -26,7 +26,7 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: MaaruColors.primaryColorsuggesion1,
+        backgroundColor: MaaruColors.blueColor,
         bottomNavigationBar: CreateProviderHome(
 
           // Color:MaaruColors.textButtonColor
@@ -37,7 +37,7 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
             children: [
               Flex(direction: Axis.vertical, children: [
                 Container(
-                  color: Color(0xff236855),
+                  color: MaaruColors.primaryColorsuggesion,
                   height: size.height * 0.30,
                   width: double.infinity,
                   child: Column(
@@ -221,15 +221,20 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                         height: 20,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
                               style: TextButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  backgroundColor:
-                                      MaaruColors.primaryColorsuggesion1,
-                                  minimumSize: Size(130, 50)),
+                                backgroundColor:
+                                MaaruColors.blueColor,
+                                minimumSize: Size(130, 50),
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                      color:Colors.white,
+
+                                    ),
+                                    borderRadius: BorderRadius.circular(10)),
+                              ),
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (_) => ReviewScreen()));
@@ -237,8 +242,7 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                               child: Text('Done',
                                   style: MaaruStyle.text.small.copyWith(
                                       fontWeight: FontWeight.w500,
-                                      color:
-                                          MaaruColors.primaryColorsuggesion))),
+                                      color: MaaruColors.button2Color))),
                           SizedBox(
                             width: 20,
                           ),
@@ -252,16 +256,16 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                             child: Text('View Profile',
                                 style: GoogleFonts.poppins(
                                     textStyle: TextStyle(
-                                  color: MaaruColors
-                                      .primaryColorsuggesion1, //   fontWeight: FontWeight.bold,
-                                  fontFamily: 'Poppins',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ))),
+                                      color: MaaruColors
+                                          .blueColor, //   fontWeight: FontWeight.bold,
+                                      fontFamily: 'Poppins',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                    ))),
                             textColor: MaaruColors.textButtonColor,
                             shape: RoundedRectangleBorder(
                                 side: BorderSide(
-                                    color: MaaruColors.primaryColorsuggesion1,
+                                    color: MaaruColors.blueColor,
                                     width: 1,
                                     style: BorderStyle.solid),
                                 borderRadius: BorderRadius.circular(10)),
@@ -272,61 +276,72 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                         height: 10,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
                               style: TextButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  backgroundColor: MaaruColors.textButtonColor,
-                                  minimumSize: Size(130, 50)),
+                                backgroundColor: Colors.redAccent,
+                                minimumSize: Size(130, 50),
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                      color:Colors.white,
+
+                                    ),
+                                    borderRadius: BorderRadius.circular(10)),
+                              ),
+
                               onPressed: () {
-                                showAlertDialog;
+
+                                showAlertDialog(context)  ;
+
+
                               },
                               child: Text('Cancel',
                                   style: MaaruStyle.text.small.copyWith(
                                       fontWeight: FontWeight.w500,
-                                      color:
-                                          MaaruColors.primaryColorsuggesion))),
+                                      color: MaaruColors.button2Color))),
                           SizedBox(
                             width: 20,
                           ),
                           Container(
+                              alignment: Alignment.center,
                               height: 50,
                               width: 170,
                               decoration: BoxDecoration(
-                                  color: MaaruColors.primaryColorsuggesion,
+                                  color: MaaruColors.button2Color,
                                   borderRadius: BorderRadius.circular(10)),
-                              child: FlatButton(
+                              child:FlatButton(
                                 height: 50,
                                 minWidth: 170,
-                                color: MaaruColors.primaryColorsuggesion,
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) =>
-                                          BookAppointmentScreen3()));
-                                },
-                                child: Text('Reschedule',
+                                color: MaaruColors.button2Color,
+                                onPressed: (){Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => BookAppointmentScreen3()));},
+                                child:
+                                Center(child:
+                                Text('Reschedule',
                                     style: GoogleFonts.poppins(
                                         textStyle: TextStyle(
-                                      color: MaaruColors
-                                          .primaryColorsuggesion1, //   fontWeight: FontWeight.bold,
-                                      fontFamily: 'Poppins',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ))),
-                                textColor: MaaruColors.textButtonColor,
-                              ))
-                        ],
+                                          color: MaaruColors
+                                              .blueColor, //   fontWeight: FontWeight.bold,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                        )))),
+                                textColor: MaaruColors.primaryColorsuggesion,
+                                shape: RoundedRectangleBorder(
+                                    side: const BorderSide(
+                                      color:Colors.white,
+
+                                    ),
+                                    borderRadius: BorderRadius.circular(10)),
+                              )
+                          )],
                       ),
-                      SizedBox(
-                        height: 20,
-                      )
+                      SizedBox(height: 20,)
                     ],
                   ),
-                ),
               )
-            ],
+              )],
           ),
         ));
   }
@@ -335,7 +350,7 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
     // set up the buttons
     Widget cancelButton = TextButton(
       style: TextButton.styleFrom(
-          backgroundColor: MaaruColors.textButtonColor,
+          backgroundColor: MaaruColors.button2Color,
           minimumSize: Size(130, 50)),
       child: Text("Cancel", style: MaaruStyle.text.small.copyWith(
           fontWeight: FontWeight.w500,
@@ -347,14 +362,14 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
 
     Widget continueButton = TextButton(
       style: TextButton.styleFrom(
-          backgroundColor: MaaruColors.primaryColorsuggesion1,
+          backgroundColor: MaaruColors.blueColor,
           minimumSize: Size(130, 50)),
       child: Text("Continue",style: MaaruStyle.text.small.copyWith(
           fontWeight: FontWeight.w500,
-          color: MaaruColors.primaryColorsuggesion),),
+          color: MaaruColors.button2Color),),
       onPressed:  () {
         AlertManager.showSuccessMessage( "Appointment cancel successful", context);
-        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CreateProviderHome()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>HomeScreen()));
       },
     );
 

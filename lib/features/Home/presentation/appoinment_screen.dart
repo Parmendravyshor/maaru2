@@ -70,10 +70,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             ),
                             SizedBox(
                               width: 10,
+                              height: 30,
                             ),
                             Image.asset(
-                              'assets/icons/icone-setting-20.png',
-                              height: 50,
+                              'assets/icons/icon-bl-19.png',
+                              height: 40,
                             )
                           ])),
                   SizedBox(

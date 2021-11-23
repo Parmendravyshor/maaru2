@@ -11,7 +11,7 @@ class BackArrowButton extends StatelessWidget {
       children: <Widget>[
         Align(alignment: Alignment.topLeft,child:
         IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined,color:MaaruColors.primaryColorsuggesion1,),
+          icon: Icon(Icons.arrow_back_ios_outlined,color:MaaruColors.buttonColor,),
           onPressed: (){Navigator.pop(context);},
         ))
       ],

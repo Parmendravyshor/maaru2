@@ -24,7 +24,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
           selectedIndex: 1,
           Color1:  selectedIndex == 1
               ? MaaruColors.darkGrey2
-              : Colors.red,
+              : MaaruColors.textButtonColor
           //  Color:Colors.red
        // MaaruColors.textButtonColor
         ),
@@ -88,7 +88,7 @@ Stack(children:[
                                 MaterialPageRoute(builder: (_) => MapView()));
                           },
                           child: Image.asset(
-                            'assets/icons/icone-setting-61.png',
+                            'assets/icons/icon-bl-15.png',
                             height: 40,
                           ))),
                 ]),
@@ -98,7 +98,7 @@ Stack(children:[
           ),
 
           Padding(
-              padding: EdgeInsets.only(top: 300,right: 10,left: 10),
+              padding: EdgeInsets.only(top: 320,right: 10,left: 10),
               child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -192,7 +192,7 @@ class _MyClassState extends State<MyClass> {
                 child: Column(children: [
                   cmbscritta
                       ? Image.asset(
-                          'assets/icons/marufilter-button-last.png',
+                          'assets/icons/icon-bl-05.png',
                           height: 40,
                         )
                       : Padding(
@@ -213,6 +213,7 @@ class _MyClassState extends State<MyClass> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   InkWell(
+
                                     onTap: () {
                                       setState(() {
                                         // isPressed = !isPressed;
@@ -233,11 +234,11 @@ class _MyClassState extends State<MyClass> {
                               },
                               child:
                                   Image.asset(
-                                    'assets/icons/icone-setting-50.png',
+                                    'assets/icons/icone-setting-71.png',
                                     height: 40,
                                   )),
                                   Image.asset(
-                                    'assets/icons/icone-setting-51.png',
+                                    'assets/icons/icone-setting-72.png',
                                     height: 40,
                                   ),
                             InkWell(
@@ -248,7 +249,7 @@ class _MyClassState extends State<MyClass> {
                               },
                               child:
                                   Image.asset(
-                                    'assets/icons/icone-setting-53.png',
+                                    'assets/icons/icone-setting-73.png',
                                     height: 40,
                                   )),
                             InkWell(
@@ -259,7 +260,7 @@ class _MyClassState extends State<MyClass> {
                               },
                               child:
                                   Image.asset(
-                                    'assets/icons/icone-setting-54.png',
+                                    'assets/icons/icone-setting-74.png',
                                     height: 40,
                                   )),
                             InkWell(
@@ -270,7 +271,7 @@ class _MyClassState extends State<MyClass> {
                               },
                               child:
                                   Image.asset(
-                                    'assets/icons/icone-setting-52.png',
+                                    'assets/icons/icone-setting-75.png',
                                     height: 40,
                                   )),
                                   // Padding(

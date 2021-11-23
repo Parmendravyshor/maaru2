@@ -108,7 +108,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       child:
                     Icon(
                       Icons.add,
-                      color: MaaruColors.buttonTextColor,
+                      color: MaaruColors.buttonColor,
                       size: 35,
                     ),
                   )),
@@ -134,7 +134,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   height: 100,
                   width: 380,
                   decoration: BoxDecoration(
-                      color: Color(0xFFe0eae6),
+                      color: Colors.deepPurple[50],
                       borderRadius: BorderRadius.circular(20.0)),
                   child: Padding(
                       padding: EdgeInsets.fromLTRB(20, 20, 10, 0),

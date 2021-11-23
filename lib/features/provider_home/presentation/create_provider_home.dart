@@ -45,7 +45,7 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => TestApp()));
               },
-              child: Image.asset('assets/icons/icone-setting-10.png',
+              child: Image.asset('assets/icons/icon0.png',
                   height: 30, color: widget.Color
                 //selectedIndex == 0
                 //  ? MaaruColors.textButtonColor
@@ -59,7 +59,7 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => UpcomingAppointmentCalender()));
               },
-              child: Image.asset('assets/icons/icone-setting-9.png',
+              child: Image.asset('assets/icons/icon1.png',
                   height: 30, color: widget.Color1
                 //selectedIndex == 1
                 //   ? MaaruColors.textButtonColor
@@ -74,7 +74,7 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                       .push(MaterialPageRoute(builder: (_) =>  UpcomingAppointmentCalender1(),));
                 },
                 child: Image.asset(
-                  'assets/icons/icone-setting-15.png',
+                  'assets/icons/icon4.png',
                   height: 60,
                 )),
             title: Text('')),
@@ -85,7 +85,7 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                       .push(MaterialPageRoute(builder: (_) => ProviderMessages()));
                 },
                 child: Image.asset(
-                    'assets/icons/icone-setting-11.png',
+                    'assets/icons/icon2.png',
                     height: 30,
                     color: widget.Color2
                   //selectedIndex == 3
@@ -100,7 +100,7 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                       builder: (context) =>   ProviderSetting()));
                 },
                 child: Image.asset(
-                    'assets/icons/icone98.png',
+                    'assets/icons/icon3.png',
                     height: 30,
                     color: widget.Color3
                   //selectedIndex == 4

@@ -28,6 +28,7 @@ class VerificationNeeded extends LoginState {
 
   @override
   String toString() => "VerificationNeeded";
+
 }
 
 class LoginFailure extends LoginState {

@@ -65,7 +65,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: SafeArea(
                         child:   BlocBuilder<LoginBloc, LoginState>(
                             builder: (context, state) {
+
                               if (state is LoginSuccess) {
+
                                 SchedulerBinding.instance.addPostFrameCallback((_) {
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (BuildContext context) {
@@ -74,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 });
                                 return Container();
                               } else if (state is VerificationNeeded) {
+
                                 SchedulerBinding.instance.addPostFrameCallback((_) {
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (BuildContext context) {
@@ -173,6 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     BlocProvider.of<LoginBloc>(context)
                                         .add(event.LoginButtonTapped());
                                   }
+
                                 },
                                 enabled: true),
                             SizedBox(

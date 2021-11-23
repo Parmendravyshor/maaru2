@@ -22,7 +22,7 @@ class VerifyUser extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(10, 0, 10, 100),
             alignment: Alignment.center,
             child: BackgroundImage(
-              assetImage: 'assets/images/logom (3).png',
+              assetImage: 'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
               //hight: 10,
               widt: 200,
             )),
@@ -48,8 +48,8 @@ class VerifyUser extends StatelessWidget {
                         },
                         child: RoundedButton(
                           buttonName: 'I am a Customer',
-                          Color: MaaruColors.primaryColorsuggesion1,
-                          Color1: MaaruColors.primaryColorsuggesion,
+                          Color: MaaruColors.blueColor,
+                          Color1: MaaruColors.button2Color,
                         ),
                       ),
                       SizedBox(
@@ -63,8 +63,8 @@ class VerifyUser extends StatelessWidget {
                         },
                         child: RoundedButton(
                           buttonName: 'I am a Provider',
-                          Color1: MaaruColors.primaryColorsuggesion1,
-                          Color: MaaruColors.primaryColorsuggesion,
+                          Color1: MaaruColors.blueColor,
+                          Color: MaaruColors.button2Color,
                         ),
                       ),
                       SizedBox(

@@ -46,7 +46,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
               ),
 
               Container(
-                height: size.height * 1.1,
+               // height: size.height * 1.1,
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -61,7 +61,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                           children: [
 
                             SizedBox(
-                              height: size.height * 0.10,
+                              height: size.height * 0.05,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +73,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                   },
                                   child:
                                 Image.asset(
-                                  'assets/icons/icone-setting-67.png',
+                                  'assets/icons/Rectangle copy 3.png',
                                   height: 40,
                                   width: 40,
                                 )),
@@ -86,7 +86,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                           builder: (_) => BookAppointment2()));
                                     },
                                     child: Image.asset(
-                                      'assets/icons/icone-setting-67.png',
+                                      'assets/icons/Rectangle copy 3.png',
                                       height: 40,
                                       width: 40,
 

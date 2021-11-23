@@ -19,7 +19,7 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> petCreateProfile(PetProfileAuthParams params);
   Future<Either<Failure, void>> getPastAppointment();
   Future<Either<Failure, void>> getUpcomingAppointment();
-  Future<Either<Failure, void>> createPetProfile();
+  Future<Either<Failure, void>> createPetProfile(PetProfileParams params);
   Future<Either<Failure, void>> createUserProfile();
   Future<Either<Failure, void>> getPetProfile();
   Future<Either<Failure, void>> getUserProfile();

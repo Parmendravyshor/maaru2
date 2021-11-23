@@ -60,7 +60,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         yield RegisterFormValidationFailure();
       }
     } else if (event is PasswordChanged) {
-      if (event.password.isNotEmpty && event.password.length > 5) {
+      if (event.password.isNotEmpty && event.password.length > 8) {
         password = event.password;
       } else {
         password = "";

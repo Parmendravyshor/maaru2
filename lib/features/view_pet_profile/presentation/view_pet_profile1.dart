@@ -61,7 +61,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  'assets/icons/icone-setting-67.png',
+                                  'assets/icons/Rectangle copy 3.png',
                                   height: 40,
                                   width: 40,
                                 ),
@@ -391,7 +391,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                 RoundedButton(
                                   buttonName: 'View all Appointments',
                                   Color: MaaruColors.primaryColorsuggesion,
-                                  Color1: MaaruColors.primaryColorsuggesion1,
+                                  Color1: MaaruColors.button2Color,
                                 )
                                 )],
                             )

@@ -26,7 +26,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: MaaruColors.primaryColorsuggesion1,
+      backgroundColor: MaaruColors.blueColor,
         bottomNavigationBar: CreateHomeScreen(
           // Color:MaaruColors.textButtonColor
         ),
@@ -37,7 +37,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
         children: [
           Flex(direction: Axis.vertical, children: [
             Container(
-              color: Color(0xff236855),
+              color: MaaruColors.buttonColor,
               height: size.height * 0.30,
               width: double.infinity,
               child: Column(
@@ -238,11 +238,12 @@ class _BookedConfirmState extends State<BookedConfirm> {
                       )),
                   SizedBox(height: 20,),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
                           style: TextButton.styleFrom(
                               backgroundColor:
-                                  MaaruColors.primaryColorsuggesion1,
+                                  MaaruColors.blueColor,
                               minimumSize: Size(130, 50),
                             shape: RoundedRectangleBorder(
                                 side: BorderSide(
@@ -258,7 +259,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                           child: Text('Done',
                               style: MaaruStyle.text.small.copyWith(
                                   fontWeight: FontWeight.w500,
-                                  color: MaaruColors.primaryColorsuggesion))),
+                                  color: MaaruColors.button2Color))),
                       SizedBox(
                         width: 20,
                       ),
@@ -273,7 +274,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                             style: GoogleFonts.poppins(
                                 textStyle: TextStyle(
                               color: MaaruColors
-                                  .primaryColorsuggesion1, //   fontWeight: FontWeight.bold,
+                                  .blueColor, //   fontWeight: FontWeight.bold,
                               fontFamily: 'Poppins',
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
@@ -281,7 +282,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                         textColor: MaaruColors.textButtonColor,
                         shape: RoundedRectangleBorder(
                             side: BorderSide(
-                                color: MaaruColors.primaryColorsuggesion1,
+                                color: MaaruColors.blueColor,
                                 width: 1,
                                 style: BorderStyle.solid),
                             borderRadius: BorderRadius.circular(10)),
@@ -292,10 +293,11 @@ class _BookedConfirmState extends State<BookedConfirm> {
                     height: 10,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
                           style: TextButton.styleFrom(
-                              backgroundColor: MaaruColors.textButtonColor,
+                              backgroundColor: Colors.redAccent,
                               minimumSize: Size(130, 50),
                             shape: RoundedRectangleBorder(
                                 side: BorderSide(
@@ -314,7 +316,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                           child: Text('Cancel',
                               style: MaaruStyle.text.small.copyWith(
                                   fontWeight: FontWeight.w500,
-                                  color: MaaruColors.primaryColorsuggesion))),
+                                  color: MaaruColors.button2Color))),
                       SizedBox(
                         width: 20,
                       ),
@@ -323,26 +325,26 @@ class _BookedConfirmState extends State<BookedConfirm> {
                         height: 50,
                         width: 170,
                           decoration: BoxDecoration(
-                              color: MaaruColors.primaryColorsuggesion,
+                              color: MaaruColors.button2Color,
                               borderRadius: BorderRadius.circular(10)),
                   child:FlatButton(
                         height: 50,
                         minWidth: 170,
-                        color: MaaruColors.primaryColorsuggesion,
+                        color: MaaruColors.button2Color,
                         onPressed: (){Navigator.of(context).push(MaterialPageRoute(
                             builder: (_) => BookAppointmentScreen3()));},
                         child:
-                            Padding(padding:EdgeInsets.only(top: 10),child:
+                            Center(child:
                         Text('Reschedule',
                             style: GoogleFonts.poppins(
                                 textStyle: TextStyle(
                               color: MaaruColors
-                                  .primaryColorsuggesion1, //   fontWeight: FontWeight.bold,
+                                  .blueColor, //   fontWeight: FontWeight.bold,
                               fontFamily: 'Poppins',
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                             )))),
-                        textColor: MaaruColors.textButtonColor,
+                        textColor: MaaruColors.primaryColorsuggesion,
                     shape: RoundedRectangleBorder(
                         side: const BorderSide(
                           color:Colors.white,
@@ -367,7 +369,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
     // set up the buttons
     Widget cancelButton = TextButton(
       style: TextButton.styleFrom(
-          backgroundColor: MaaruColors.textButtonColor,
+          backgroundColor: MaaruColors.button2Color,
           minimumSize: Size(130, 50)),
       child: Text("Cancel", style: MaaruStyle.text.small.copyWith(
           fontWeight: FontWeight.w500,
@@ -379,11 +381,11 @@ class _BookedConfirmState extends State<BookedConfirm> {
 
     Widget continueButton = TextButton(
       style: TextButton.styleFrom(
-          backgroundColor: MaaruColors.primaryColorsuggesion1,
+          backgroundColor: MaaruColors.blueColor,
           minimumSize: Size(130, 50)),
       child: Text("Continue",style: MaaruStyle.text.small.copyWith(
           fontWeight: FontWeight.w500,
-          color: MaaruColors.primaryColorsuggesion),),
+          color: MaaruColors.button2Color),),
       onPressed:  () {
         AlertManager.showSuccessMessage( "Appointment cancel successful", context);
         Navigator.of(context).push(MaterialPageRoute(builder: (_)=>HomeScreen()));

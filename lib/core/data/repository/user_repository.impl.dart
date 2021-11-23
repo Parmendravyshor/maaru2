@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ffi';
+import 'dart:io';
 //import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart';
@@ -31,34 +33,42 @@ import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:flutter/scheduler.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as https;
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class UserRepositoryImpl implements UserRepository {
 //  final AuthSource authSource;
-  final SharedPrefHelper sharedPrefHelper;
+ // final SharedPrefHelper sharedPrefHelper;
 
-  UserRepositoryImpl(this.sharedPrefHelper);
+ // UserRepositoryImpl(this.sharedPrefHelper);
 
   @override
   Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
     try {
+      Future<void> _saveUser(int id, String access_token) async {
+        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+        await sharedPreferences.setInt('id', id);
+        await sharedPreferences.setString('access_token', access_token);
+      }
       var map = new Map<String, String>();
       map [MaruConstant.first_name] = params.first_name;
       map[MaruConstant.last_name] = params.lName;
       map[ MaruConstant.email] = params.email;
       map [MaruConstant.password] = params.password;
-      map[MaruConstant.user_type] = 'User';
+      map[MaruConstant.user_type] = 'provider';
       final response = await http.post(MaruConstant.signup,
           body: map
       );
+
       print("Register Success  ${response.body}");
-      sharedPrefHelper.saveString(MaruConstant.first_name, params.first_name);
-      sharedPrefHelper.saveString(MaruConstant.last_name, params.lName);
-      sharedPrefHelper.saveString(MaruConstant.email, params.email);
+     // sharedPrefHelper.saveString(MaruConstant.first_name, params.first_name);
+     // sharedPrefHelper.saveString(MaruConstant.last_name, params.lName);
+     // sharedPrefHelper.saveString(MaruConstant.email, params.email);
+
       if (response.statusCode == 200) {
         //  await authSource.emailSignup(params);
         return
-          Right(Void);
+          Right('Otp sent your register email');
       }
       else {
         return Left(UnknownFailure("Already registered account"));
@@ -80,13 +90,19 @@ class UserRepositoryImpl implements UserRepository {
       map [MaruConstant.password] = params.password;
 
       final response = await http.post(MaruConstant.signin,
+
+
           body: map
       );
+      //  sharedPrefHelper.saveString('access-token', MaruConstant.token);
+      print("$MaruConstant.token");
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
-
+      //  sharedPrefHelper.saveEmail(params.email);
       if (response.statusCode == 200) {
-        // await authSource.emailLogin(params);
+        print("res['data']token  :${"token"}");
+        // sharedPrefHelper.saveString (MaaruConstant. );
+        // print('save String:${accessToken}');
         return
           Right(Void);
       }
@@ -94,15 +110,21 @@ class UserRepositoryImpl implements UserRepository {
         return Left(UnknownFailure("Need to verify Account"));
       }
     }
-    catch (e) {
-      print("Thrown Exception While signing IN:$e");
-      throw e;
+
+    on CognitoClientException catch (e) {
+      if (e.code == 'UserNotConfirmedException') {
+        return Left(UserNotConfirmedFailure(e.message));
+      } else {
+        return Left(CacheFailure(e.message));
+      }
+    } catch (e) {
+      return Left(CacheFailure(e.toString()));
     }
   }
-
   @override
   Future<Either<Failure, void>> resendOtp(String email) async {
     try {
+
       var map = new Map<String, String>();
       map[ MaruConstant.email] = email;
       final response = await http.post(MaruConstant.resend,
@@ -152,15 +174,42 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> createPetProfile() async{
+  Future<Either<Failure, void>> createPetProfile(PetProfileParams params) async{
     try {
+      String token = await SharedPreferencesHelper().GetAuthToken();
+      Map<String, String> headers = { "access-token": "access-token"};
+      var map = new Map<String, String>();
+      map[MaruConstant.pet_name] = MaruConstant.pet_name;
+      map[MaruConstant.age] = MaruConstant.age;
+
+      map[MaruConstant.birth_date] = MaruConstant.birth_date;
+      map[MaruConstant.breed_type] = MaruConstant.breed_type;
+      // map[MaruConstant.known_allergies] = '';
+      // map[MaruConstant.img] = '';
+      map[MaruConstant.height] = MaruConstant.height;
+      map[MaruConstant.weight] = MaruConstant.weight;
+      // map[MaruConstant.feeding_schedule] = '';
+      // map[MaruConstant.medication] = '';
+      // map[MaruConstant.pet_needs] = '';
+      map[MaruConstant.sex] = MaruConstant.sex;
+      // map[MaruConstant.walking_schedule] = '';
+      // map[MaruConstant.temperament] = '';
+      // map[MaruConstant.name] ='';
 
       final response = await http.post(MaruConstant.createpProfile,
-          body: {}
+          headers: {
+           'access-token': "$token"},
+
+          body:map
+
       );
 
+      print(response);
+      print("Register Success  ${response.body}");
       if (response.statusCode == 200) {
-        //  await authSource.emailSignup(params);
+
+print(token);
+        print("Register Success  ${response.body}");
         return
           Right(Void);
       }
@@ -218,6 +267,7 @@ class UserRepositoryImpl implements UserRepository {
       final response = await http.post(MaruConstant.savepet1,
           body: map
       );
+
       print("Register Success  ${response.body}");
      // sharedPrefHelper.saveString(MaruConstant.first_name, params.first_name);
      // sharedPrefHelper.saveString(MaruConstant.last_name, params.lName);
@@ -253,17 +303,25 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, void>> verifyCode(VerifyParams params) async {
     try {
+      await SharedPreferencesHelper().GetAuthToken();
       var map = Map<String, String>();
       map[ MaruConstant.otp] = params.code;
+      map[ MaruConstant.email] = params.email;
      // map[ MaruConstant.email] = params.email;
       final response = await http.post(MaruConstant.verify,
           body: map
       );
       print("Register Success  ${response.body}");
 
+      if (response.statusCode == 200) {
+       String token ="";
+       await SharedPreferencesHelper().SetAuthToken(token);
 
-      return
-        Right(Void);
+        print(token);
+     // Map<String,Strin
+        return
+          Right(Void);
+      }
     }
     catch (e) {
       print("Thrown Exception While signing IN:$e");

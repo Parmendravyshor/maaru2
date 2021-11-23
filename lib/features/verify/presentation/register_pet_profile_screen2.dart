@@ -200,7 +200,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                 child: RoundedButton(
                                   buttonName: 'Upload Vaccine Record',
                                   Color: MaaruColors.primaryColorsuggesion,
-                                  Color1: MaaruColors.primaryColorsuggesion1,
+                                  Color1: MaaruColors.button2Color,
                                 )),
                             SizedBox(
                               height: 40,
@@ -248,7 +248,8 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                       )),
                                 ]),
                           ]))),
-            ]))));
+            ]
+                ))));
   }
 }
 

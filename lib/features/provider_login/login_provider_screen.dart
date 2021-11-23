@@ -72,7 +72,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                 SchedulerBinding.instance.addPostFrameCallback((_) {
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (BuildContext context) {
-                                        return CreateProviderHome();
+                                        return TestApp();
                                       }));
                                 });
                                 return Container();
@@ -191,8 +191,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                                 BlocProvider.of<LoginBloc>(context)
                                                     .add(event.LoginButtonTapped());
                                                 //  AlertManager.showSuccessMessage( "Login Success", context);
-                                                Navigator.of(context).push(MaterialPageRoute(
-                                                    builder: (_) => HomeScreen()));
+
 
                                               }
                                             }

@@ -73,7 +73,7 @@ class _ProviderProfile2State extends State<ProviderProfile2> {
                                       },
                                       child:
                                       Image.asset(
-                                        'assets/icons/icone-setting-67.png',
+                                        'assets/icons/Rectangle copy 3.png',
                                         height: 40,
                                         width: 40,
                                       )),
@@ -86,7 +86,7 @@ class _ProviderProfile2State extends State<ProviderProfile2> {
                                             builder: (_) => ProviderProfile2()));
                                       },
                                       child: Image.asset(
-                                        'assets/icons/icone-setting-67.png',
+                                        'assets/icons/Rectangle copy 3.png',
                                         height: 40,
                                         width: 40,
 

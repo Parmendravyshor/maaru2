@@ -63,7 +63,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                           },
                                           child:
                                         Image.asset(
-                                          'assets/icons/icone-setting-67.png',
+                                          'assets/icons/Rectangle copy 3.png',
                                           height: 40,
                                           width: 40,
                                         )),
@@ -78,7 +78,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                           ViewPetProfile2()));
                                             },
                                             child: Image.asset(
-                                              'assets/icons/icone-setting-67.png',
+                                              'assets/icons/Rectangle copy 3.png',
                                               height: 40,
                                               width: 40,
                                               //color: Colors.grey[100],
@@ -93,7 +93,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                     builder: (_) => ViewPetProfile3()));
                                           },
                                           child: Image.asset(
-                                            'assets/icons/icone-setting-67.png',
+                                            'assets/icons/Rectangle copy 3.png',
                                             height: 40,
                                             width: 40,
                                             //color: Colors.grey[100],
