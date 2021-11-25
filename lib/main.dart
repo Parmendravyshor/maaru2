@@ -43,6 +43,7 @@ import 'features/Home/presentation/appoinment_screen.dart';
 import 'features/Home/presentation/chat_screen.dart';
 import 'features/Home/presentation/create_home_screen.dart';
 import 'features/Home/presentation/custom_card.dart';
+import 'features/Home/presentation/message.dart';
 import 'features/Home/presentation/pet_profile.dart';
 import 'features/Home/presentation/search_screen.dart';
 import 'features/faketest.dart';
@@ -73,7 +74,7 @@ void main()async {
   // FlutterBackgroundService.initialize(onStart);
   // BackgroundFetch.registerHeadlessTask();
 }
-///gKJSGKJSGMNSB
+
 final theme = ThemeData(
   textTheme: GoogleFonts.poppinsTextTheme(),
 );
@@ -144,7 +145,7 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: (SplashScreen())));
+        home: Scaffold(body: (CreateregisterPetProfile1())));
   }
 }
 

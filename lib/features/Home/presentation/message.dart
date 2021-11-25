@@ -22,7 +22,8 @@ class _MessagesState extends State<Messages> {
     var selectedIndex;
     return Scaffold(
         backgroundColor: Color(0xFFffffff),
-        bottomNavigationBar: CreateHomeScreen(
+        bottomNavigationBar:
+        CreateHomeScreen(
           selectedIndex: 3,
             Color2: selectedIndex == 3
                 ? Colors.grey[300]

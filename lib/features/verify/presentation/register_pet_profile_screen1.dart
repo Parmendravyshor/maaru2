@@ -107,7 +107,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.black,
-                        content: Text('hhh',
+                        content: Text('Registration fails! try again after some time',
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'poppins',
@@ -137,25 +137,25 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                           width: 40,
                         ),
                         Image.asset(
-                          'assets/icons/icone-setting-68.png',
+                          'assets/icons/Rectangle copy 3.png',
                           height: 40,
                           width: 40,
                           color: Colors.white,
                         ),
                         Image.asset(
-                          'assets/icons/icone-setting-68.png',
+                          'assets/icons/Rectangle copy 3.png',
                           height: 40,
                           width: 40,
                           color: Colors.white,
                         ),
                         Image.asset(
-                          'assets/icons/icone-setting-68.png',
+                          'assets/icons/Rectangle copy 3.png',
                           height: 40,
                           width: 40,
                           color: Colors.white,
                         ),
                         Image.asset(
-                          'assets/icons/icone-setting-68.png',
+                          'assets/icons/Rectangle copy 3.png',
                           color: Colors.white,
                           height: 40,
                           width: 40,
@@ -168,6 +168,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
+
+                    
                     //  width: 1000,
                     // height: 880,
                     alignment: FractionalOffset.bottomCenter,
@@ -394,7 +396,7 @@ String age = _ageType.text;
                                       } else {
                                         BlocProvider.of<PetProfileBloc>(context)
                                             .add(RegisterButtonTapped());
-                                       // Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CreateRegisterPetProfile2()));
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CreateRegisterPetProfile2()));
                                       }
                                     },
                                     child: Container(
@@ -433,7 +435,7 @@ class _ProfileFormState extends State<ProfileForm> {
   final picker = ImagePicker();
 
   Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery,);
 
     setState(() {
       if (pickedFile != null) {
@@ -466,7 +468,9 @@ class _ProfileFormState extends State<ProfileForm> {
                         radius: 70.0,
                         child: CircleAvatar(
                           radius: 65.0,
-                          child: ClipOval(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+
                             child: (_image != null)
                                 ? Image.file(_image)
                                 : Image.asset(

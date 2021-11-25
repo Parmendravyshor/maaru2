@@ -173,7 +173,7 @@ class _ToggleButton3State extends State<ToggleButton3> {
         // ),
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.fromLTRB(30, 10, 25, 15),
+            padding: EdgeInsets.fromLTRB(20, 10, 20, 15),
             child: Text('NEUTERED',
                 style: pressed
                     ? GoogleFonts.poppins(
@@ -192,7 +192,7 @@ class _ToggleButton3State extends State<ToggleButton3> {
                 )),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(40, 10, 35, 15),
+            padding: EdgeInsets.fromLTRB(35, 10, 35, 15),
             child: Text('SPADE',
                 style: pressed
                     ? GoogleFonts.poppins(
@@ -211,7 +211,7 @@ class _ToggleButton3State extends State<ToggleButton3> {
                 )),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(30, 10, 25, 15),
+            padding: EdgeInsets.fromLTRB(35, 10, 35, 15),
             child: Text('NEITHER',
                 style: pressed
                     ? GoogleFonts.poppins(

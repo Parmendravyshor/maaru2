@@ -20,8 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
     var selectedIndex = 0;
     return Stack(children: [
       Scaffold(
-          backgroundColor: Color(0xFFffffff),
-          bottomNavigationBar: CreateHomeScreen(
+          backgroundColor: Color(0xFFffffff)  ,
+          bottomNavigationBar:
+          CreateHomeScreen(
             selectedIndex: 0,
             Color: selectedIndex == 0
                 ? MaaruColors.textButtonColor
@@ -289,11 +290,12 @@ class _HomeScreenState extends State<HomeScreen> {
 class HorizList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     // ignore: prefer_typing_uninitialized_variables
     final List _hotels = [10];
 
     return Container(
-        height: 240,
+        height: size.height*0.32,
         child: ListView.builder(
           itemCount: 5,
           scrollDirection: Axis.horizontal,

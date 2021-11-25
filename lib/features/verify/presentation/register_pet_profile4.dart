@@ -68,6 +68,7 @@ bottom: false,
 
           Container(
 
+
               alignment: Alignment.bottomRight,
 
              height: size.height * 0.25,
@@ -86,7 +87,8 @@ bottom: false,
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30))),
               child: Container(
-                  padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
+
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -116,7 +118,7 @@ bottom: false,
                                   onTap: () {
                                     setState(() {
                                       circlecolor1 == MaaruColors.whiteColor
-                                          ? circlecolor1 =  MaaruColors.buttonColor
+                                          ? circlecolor1 =  MaaruColors.redColor
                                           : circlecolor1 =  MaaruColors.whiteColor;
                                     });
                                   },
@@ -135,7 +137,7 @@ bottom: false,
                                     onTap: () {
                                       setState(() {
                                         circlecolor2 == MaaruColors.whiteColor
-                                            ? circlecolor2 = MaaruColors.buttonColor
+                                            ? circlecolor2 = MaaruColors.redColor
                                             : circlecolor2 = MaaruColors.whiteColor;
                                       });
                                     },
@@ -154,7 +156,7 @@ bottom: false,
                                     onTap: () {
                                       setState(() {
                                         circlecolor3 == MaaruColors.whiteColor
-                                            ? circlecolor3 = MaaruColors.buttonColor
+                                            ? circlecolor3 = MaaruColors.redColor
                                             : circlecolor3 = MaaruColors.whiteColor;
                                       });
                                     },
@@ -172,7 +174,7 @@ bottom: false,
                                     onTap: () {
                                       setState(() {
                                         circlecolor4 == MaaruColors.whiteColor
-                                            ? circlecolor4 = MaaruColors.buttonColor
+                                            ? circlecolor4 = MaaruColors.redColor
                                             : circlecolor4 = MaaruColors.whiteColor;
                                       });
                                     },
@@ -191,7 +193,7 @@ bottom: false,
                                     onTap: () {
                                       setState(() {
                                         circlecolor5 == MaaruColors.whiteColor
-                                            ? circlecolor5 = MaaruColors.buttonColor
+                                            ? circlecolor5 = MaaruColors.redColor
                                             : circlecolor5 = MaaruColors.whiteColor;
                                       });
                                     },
@@ -210,7 +212,7 @@ bottom: false,
                                     onTap: () {
                                       setState(() {
                                         circlecolor6 == MaaruColors.whiteColor
-                                            ? circlecolor6 = MaaruColors.buttonColor
+                                            ? circlecolor6 = MaaruColors.redColor
                                             : circlecolor6 = MaaruColors.whiteColor;
                                       });
                                     },

@@ -50,7 +50,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => HomeScreen()));
               },
-              child:Padding(padding: EdgeInsets.only(top: 10),
+              child:Padding(padding: EdgeInsets.only(right: 30,top: 10),
 
            child:   Image.asset('assets/icons/icon0.png',
                   height: 30, color: widget.Color
@@ -66,10 +66,10 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ProviderSearchScreen()));
               },
-              child: Padding(padding: EdgeInsets.only(right: 30),
+              child: Padding(padding: EdgeInsets.only(right: 40),
 
   child:  Image.asset('assets/icons/icon1.png',
-                  height: 30, color: widget.Color1
+                  height: 40, color: widget.Color1
                   //selectedIndex == 1
                   //   ? MaaruColors.textButtonColor
                   //  : Colors.grey[350],
@@ -85,10 +85,13 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                       .push(MaterialPageRoute(builder: (_) => PetProfile()));
                 },
 
-               child: Image.asset(
-                  'assets/icons/icon4.png',
-                  height: 60,
-                )),
+               child: Padding(
+                 padding:  EdgeInsets.only(right: 20),
+                 child: Image.asset(
+                    'assets/icons/icon4.png',
+                    height: 60,
+                  ),
+               )),
             title: Text('')),
         BottomNavigationBarItem(
             icon: InkWell(
@@ -96,7 +99,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => Messages()));
                 },
-   child: Padding(padding: EdgeInsets.only(left: 20),
+   child: Padding(padding: EdgeInsets.only(),
                 child:
                 Image.asset(
                   'assets/icons/icon2.png',
@@ -113,7 +116,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => AccountSettingScreen()));
                 },
-                child: Padding(padding: EdgeInsets.only(top: 5),
+                child: Padding(padding: EdgeInsets.only(),
 
   child:  Image.asset(
                   'assets/icons/icon3.png',

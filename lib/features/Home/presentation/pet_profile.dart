@@ -16,7 +16,8 @@ class _PetProfileState extends State<PetProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor:MaaruColors.darkGrey2,
-        bottomNavigationBar: CreateHomeScreen(
+        bottomNavigationBar:
+        CreateHomeScreen(
           selectedIndex: 2,
 
         ),

@@ -21,11 +21,12 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
   @override
   Widget build(BuildContext context) {
     var selectedIndex;
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
             backgroundColor: Colors.white,
-            bottomNavigationBar: CreateHomeScreen(
+            bottomNavigationBar:
+            CreateHomeScreen(
                 selectedIndex: 4,
                 Color3: selectedIndex == 4
                     ? Colors.red
@@ -72,7 +73,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   height: 20,
                                 ),
                                 Test3(
-                                  image: 'assets/icons/icone-setting-1.png',
+                                  image: 'assets/icons/icone-setting-2.png',
                                   hite: 40,
                                   text: 'Edit Profile',
                                   size: 115,

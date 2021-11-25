@@ -20,7 +20,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
     var selectedIndex;
     return Scaffold(
         backgroundColor:MaaruColors.darkGrey2,
-        bottomNavigationBar: CreateHomeScreen(
+        bottomNavigationBar:
+        CreateHomeScreen(
           selectedIndex: 1,
           Color1:  selectedIndex == 1
               ? MaaruColors.darkGrey2
@@ -234,11 +235,11 @@ class _MyClassState extends State<MyClass> {
                               },
                               child:
                                   Image.asset(
-                                    'assets/icons/icone-setting-71.png',
+                                    'assets/icons/icon-bl-26.png',
                                     height: 40,
                                   )),
                                   Image.asset(
-                                    'assets/icons/icone-setting-72.png',
+                                    'assets/icons/icon-bl-25.png',
                                     height: 40,
                                   ),
                             InkWell(
@@ -249,7 +250,7 @@ class _MyClassState extends State<MyClass> {
                               },
                               child:
                                   Image.asset(
-                                    'assets/icons/icone-setting-73.png',
+                                    'assets/icons/icon-bl-27.png',
                                     height: 40,
                                   )),
                             InkWell(
@@ -260,7 +261,7 @@ class _MyClassState extends State<MyClass> {
                               },
                               child:
                                   Image.asset(
-                                    'assets/icons/icone-setting-74.png',
+                                    'assets/icons/icon-bl-29.png',
                                     height: 40,
                                   )),
                             InkWell(
@@ -271,7 +272,7 @@ class _MyClassState extends State<MyClass> {
                               },
                               child:
                                   Image.asset(
-                                    'assets/icons/icone-setting-75.png',
+                                    'assets/icons/icon-bl-28.png',
                                     height: 40,
                                   )),
                                   // Padding(
