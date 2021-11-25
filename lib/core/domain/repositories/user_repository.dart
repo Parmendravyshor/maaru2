@@ -8,6 +8,7 @@ import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
 abstract class UserRepository<T> {
   Future<Either<Failure, void>> emailSignup(EmailAuthParams params);
@@ -20,6 +21,7 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> getPastAppointment();
   Future<Either<Failure, void>> getUpcomingAppointment();
   Future<Either<Failure, void>> createPetProfile(PetProfileParams params);
+  Future<Either<Failure, void>> saveRegistrationId();
   Future<Either<Failure, void>> createUserProfile();
   Future<Either<Failure, void>> getPetProfile();
   Future<Either<Failure, void>> getUserProfile();

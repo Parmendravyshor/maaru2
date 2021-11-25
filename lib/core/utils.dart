@@ -15,6 +15,7 @@ import 'package:maru/features/register/presentation/register_bloc.dart';
 import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/save_registration_id.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
@@ -46,7 +47,7 @@ void _registerBloc(KiwiContainer container) {
   container
       .registerFactory((c) => LoginBloc(c.resolve(), c.resolve(), ));
    container.registerFactory((c) => ResetBloc(c.resolve(), c.resolve()));
-   container.registerFactory((c) => PetProfileBloc(c.resolve()));
+   container.registerFactory((c) => PetProfileBloc(c.resolve(),c.resolve(),c.resolve()));
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
   container.registerFactory(
     (c) => VerifyBloc(c.resolve(), c.resolve(),c.resolve(),c.resolve(), c.resolve(), ));
@@ -63,7 +64,7 @@ void _registerUseCases(KiwiContainer container) {
    container.registerFactory((c) => CreatePetProfile(c.resolve()));
   // container.registerFactory((c) => SaveDebug(c.resolve()));
    container.registerFactory((c) => ResetPassword(c.resolve()));
- // container.registerFactory((c) => SaveRegistrationId(c.resolve()));
+  //container.registerFactory((c) => SaveRegistrationId(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 

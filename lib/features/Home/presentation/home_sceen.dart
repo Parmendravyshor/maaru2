@@ -292,7 +292,10 @@ class HorizList extends StatelessWidget {
     // ignore: prefer_typing_uninitialized_variables
     final List _hotels = [10];
 
-    return Container(
+    return Expanded(
+    flex: 2,
+    child:
+      Container(
         height: 240,
         child: ListView.builder(
           itemCount: 5,
@@ -343,6 +346,6 @@ class HorizList extends StatelessWidget {
                     // alignment: Alignment.center,
                     ));
           },
-        ));
+        )));
   }
 }

@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
+import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -18,52 +20,40 @@ class DatePicker extends StatefulWidget {
 
 class _DatePickerState extends State<DatePicker> {
   DateTime _selectedDate;
-  TextEditingController _ageType;
-  TextEditingController _textEditingController = TextEditingController();
+  TextEditingController _ageTypeController = TextEditingController();
+ // TextEditingController _ageTypeController = TextEditingController();
 
   @override
   void initState() {
-    _ageType = TextEditingController();
+    _ageTypeController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _ageType.dispose();
+    _ageTypeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final _PetProfileBloc = BlocProvider.of<PetProfileBloc>(context);
     return
     Padding(
         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: Column(children: [
-          TextFormField(
-            focusNode: AlwaysDisabledFocusNode(),
-            controller: _textEditingController,
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey[300]),
-              ),
-              // labelText: "Date of birth",
-              hintText: 'mm/dd/year',hintStyle: MaaruStyle.text.greyDisable,
-              prefixIcon:
-                  Icon(Icons.calendar_today_outlined, color: MaaruColors.primaryColorsuggesion),
-            ),
-            onTap: () {
-              _selectDate(context);
-            },
-            onChanged:  (text) {
-      BlocProvider.of<PetProfileBloc>(context)
-          .add(CreateProfileVerified(height: text));
-    },  ),
-
+          ThemedTextField("               mm/dd/year", TextInputType.text,
+              textStyle: TextStyle(color: Colors.black),
+              textInputAction: TextInputAction.done,
+              onChanged: (text) {
+                BlocProvider.of<PetProfileBloc>(context)
+                    .add(BirthChanged(text));
+              }, editingController: _ageTypeController),
         ]));
   }
 
-  _selectDate(BuildContext context) async {
+  _selectDate(BuildContext context,) async {
+
     DateTime newSelectedDate = await showDatePicker(
         context: context,
         initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
@@ -86,11 +76,12 @@ class _DatePickerState extends State<DatePicker> {
 
     if (newSelectedDate != null) {
       _selectedDate = newSelectedDate;
-      _textEditingController
+      _ageTypeController
         ..text = DateFormat.yMd().format(_selectedDate)
         ..selection = TextSelection.fromPosition(TextPosition(
-            offset: _textEditingController.text.length,
+            offset: _ageTypeController.text.length,
             affinity: TextAffinity.upstream));
+
     }
   }
 }

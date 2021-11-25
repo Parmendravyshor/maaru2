@@ -14,6 +14,7 @@ import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/forgot/presentation/forgot_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/verify/presentation/verify.dart';
 
 import 'bloc/bloc/login_bloc.dart';
@@ -71,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SchedulerBinding.instance.addPostFrameCallback((_) {
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (BuildContext context) {
-                                        return HomeScreen();
+                                        return CreateregisterPetProfile1();
                                       }));
                                 });
                                 return Container();

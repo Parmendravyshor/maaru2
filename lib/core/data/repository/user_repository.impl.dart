@@ -1,20 +1,18 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ffi';
-import 'dart:io';
-import 'dart:math';
 //import 'package:amazon_cognito_identity_dart_2/cognito.dart';
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'dart:convert' as convert;
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/repository/user_repository.impl.dart';
 import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/error/failure.dart';
-
+import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -34,37 +32,29 @@ import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:flutter/scheduler.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as https;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
 
 class UserRepositoryImpl implements UserRepository {
+//  final AuthSource authSource;
+  final SharedPrefHelper sharedPrefHelper;
 
- final SharedPrefHelper sharedPrefHelper;
-
- UserRepositoryImpl(this.sharedPrefHelper);
-
+  UserRepositoryImpl(this.sharedPrefHelper);
+  EncryptedSharedPreferences encryptedSharedPreferences = EncryptedSharedPreferences();
   @override
   Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
     try {
-      Future<void> _saveUser(int id, String access_token) async {
-        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-        await sharedPreferences.setInt('id', id);
-        await sharedPreferences.setString('access_token', access_token);
-      }
       var map = new Map<String, String>();
       map [MaruConstant.first_name] = params.first_name;
       map[MaruConstant.last_name] = params.lName;
       map[ MaruConstant.email] = params.email;
       map [MaruConstant.password] = params.password;
-      map[MaruConstant.user_type] = 'provider';
+      map[MaruConstant.user_type] = 'user';
       final response = await http.post(MaruConstant.signup,
           body: map
       );
 
       print("Register Success  ${response.body}");
-     // sharedPrefHelper.saveString(MaruConstant.first_name, params.first_name);
-     // sharedPrefHelper.saveString(MaruConstant.last_name, params.lName);
-     // sharedPrefHelper.saveString(MaruConstant.email, params.email);
 
       if (response.statusCode == 200) {
         //  await authSource.emailSignup(params);
@@ -85,23 +75,35 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, void>> emailLogin(EmailAuthParams params) async {
     try {
+
       var map = new Map<String, String>();
 
       map[ MaruConstant.email] = params.email;
       map [MaruConstant.password] = params.password;
 
       final response = await http.post(MaruConstant.signin,
-
-
           body: map
       );
-      //  sharedPrefHelper.saveString('access-token', MaruConstant.token);
+    //  sharedPrefHelper.saveString('access-token','value');
       print("$MaruConstant.token");
       print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
-      //  sharedPrefHelper.saveEmail(params.email);
+
+      sharedPrefHelper.saveEmail(params.email);
       if (response.statusCode == 200) {
-        print("res['data']token  :${"token"}");
+        await encryptedSharedPreferences.setString( MaruConstant.token, 'value').then((bool success) {
+          if (success) {
+            print('Response body: ${response.body}');
+            print('success');
+            print(MaruConstant.token);
+          } else {
+            print('fail');
+          }
+        });
+        sharedPrefHelper.saveString(MaruConstant.first_name, params.first_name);
+        sharedPrefHelper.saveString(MaruConstant.last_name, params.lName);
+        sharedPrefHelper.saveString(MaruConstant.email, params.email);
+      //  sharedPrefHelper.saveString('access-token', MaruConstant.token);
+      //  print("res['data']token  :${"token"}");
         // sharedPrefHelper.saveString (MaaruConstant. );
         // print('save String:${accessToken}');
         return
@@ -111,21 +113,15 @@ class UserRepositoryImpl implements UserRepository {
         return Left(UnknownFailure("Need to verify Account"));
       }
     }
-
-    on CognitoClientException catch (e) {
-      if (e.code == 'UserNotConfirmedException') {
-        return Left(UserNotConfirmedFailure(e.message));
-      } else {
-        return Left(CacheFailure(e.message));
-      }
-    } catch (e) {
-      return Left(CacheFailure(e.toString()));
+    catch (e) {
+      print("Thrown Exception While signing IN:$e");
+      throw e;
     }
   }
+
   @override
   Future<Either<Failure, void>> resendOtp(String email) async {
     try {
-
       var map = new Map<String, String>();
       map[ MaruConstant.email] = email;
       final response = await http.post(MaruConstant.resend,
@@ -175,67 +171,50 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> createPetProfile(PetProfileParams params) async{
+  Future<Either<Failure, void>> createPetProfile(PetProfileParams params) async {
     try {
-     var token = sharedPrefHelper.saveIdJwtToken(
-          MaruConstant.token,);
-      print(token);
-     // var data = json.encode(createPetProfile.toJson());
-     // String token = await SharedPreferencesHelper().GetAuthToken();
-  var  headers = { "access-token":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo4NCwiZmlyc3RfbmFtZSI6InAiLCJsYXN0X25hbWUiOiJzIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6InBhcm1lbmRyYWhvbWUyMjJAeW9wbWFpbC5jb20iLCJ0b2tlbiI6bnVsbCwicGFzc3dvcmQiOiIkMmEkMDgkOGxENjA4TlNNRG5OdjNmam5xZEtadWpzWlN4LnRFN282VERtUXRaWGplQ0dTOVVrRDd5T2UiLCJvdHAiOiJQeFBLUyIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMTEtMjNUMDc6MTA6MDMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMjNUMDc6MTA6NTAuMDAwWiJ9LCJpYXQiOjE2Mzc2NTE0NTEsImV4cCI6MTYzNzczNzg1MX0.tLVM-Me5szca3FRs5en3GVltkeTIvu4ti6Moz4nl5_k",
-      'Content-Type': 'json/application'};
+      var token =  await encryptedSharedPreferences.getString(MaruConstant.token).then((String value) {
+        if (value != null) {
+         // print('Response body: ${response.body}');
+          print(value);
+          print(MaruConstant.token);
+        } else {
+          print('fail');
+        }
+
+      });
       var map = new Map<String, String>();
-      map[MaruConstant.pet_name] = params.petName;
-      map[MaruConstant.age] = params.age;
-
+      map [MaruConstant.age] = params.age;
+      map[MaruConstant.pet_name] = 'kl;dkdk';
       map[MaruConstant.birth_date] = params.birthDate;
-      map[MaruConstant.breed_type] = params.breadType;
-      // map[MaruConstant.known_allergies] = '';
-      // map[MaruConstant.img] = '';
+      map[MaruConstant.breed_type] =params.breadType;
+      map[MaruConstant.weight] =params.weight;
       map[MaruConstant.height] = params.height;
-      map[MaruConstant.weight] = params.weight;
-      map[MaruConstant.name] = params.name;
-      // map[MaruConstant.feeding_schedule] = '';
-      // map[MaruConstant.medication] = '';
-      // map[MaruConstant.pet_needs] = '';
-      map[MaruConstant.sex] = params.sex;
-      // map[MaruConstant.walking_schedule] = '';
-      // map[MaruConstant.temperament] = '';
-      // map[MaruConstant.name] ='';
-       //var data = json.encode(map.toJson());
-      final response = await http.post(MaruConstant.createpProfile,
-          headers: {
+      map[MaruConstant.sex] = 'jdkjdkj';
+      map[MaruConstant.img] = 'assets/images/abin1.png';
 
-            "access-token": "$token"
-          },
-          body:map,
 
-      );
-      print('Response status: ${map}');
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
-     // response.headers.addAll(headers);
-      print("Register Success  ${response.body}");
-      print(response);
-      print("Register Success  ${response.body}");
-      if (response.statusCode == 200) {
+   // final headers = {"access-token":'$token'};
+    //{"access-token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2OCwiZmlyc3RfbmFtZSI6InAiLCJsYXN0X25hbWUiOiJzIiwidXNlcl90eXBlIjoidXNlciIsImVtYWlsIjoic2h1YmhhbTM2MzZAeW9wbWFpbC5jb20iLCJ0b2tlbiI6bnVsbCwicGFzc3dvcmQiOiIkMmEkMDgkbE9MVi50U2FpR0wuY0JVd05xeTFTZXpTSE1hRWhMUHN5OThncmlObEVyRkg3TXpjWFd5aW0iLCJvdHAiOiJ2S29HcyIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMTEtMjRUMTI6MjY6MDMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMjRUMTI6MjY6MjAuMDAwWiJ9LCJpYXQiOjE2Mzc3NTY4MDYsImV4cCI6MTYzNzg0MzIwNn0.DHluj_NeQFBXnEeDF4_Ag-kbX5YwWcUsDIM05eVUPG8'};
 
-print(token);
-        print("Register Success  ${response.body}");
-        return
-          Right(Void);
-      }
-      else {
-        return Left(UnknownFailure("Already registered account"));
-      }
+      //print;("$token");
+    final msg = {MaruConstant.pet_name: params.petName,MaruConstant.age:params.age,MaruConstant.birth_date:params.birthDate,
+      MaruConstant.breed_type:params.breadType,MaruConstant.height:params.height,MaruConstant.weight:params.weight,MaruConstant.sex:params.sex,
+    };
+
+
+    final response = await post(MaruConstant.createpProfile, headers: {"access-token":"$token"}, body:map);
+    print('Status code: ${response.statusCode}');
+    print('Body: ${response.body}');
+
+    return
+      Right(Void);
     }
-
     catch (e) {
-      print("Thrown Exception While signing IN:$e");
+      print("Thrown Exception While create IN:$e");
       throw e;
     }
   }
-
 
   @override
   Future<Either<Failure, void>> createUserProfile() {
@@ -274,16 +253,15 @@ print(token);
       map [MaruConstant.age] = params.age;
       map[MaruConstant.birth_date] = params.birthDate;
       map[ MaruConstant.img] = params.profileImage;
-     // map [MaruConstant.password] = params.password;
+      // map [MaruConstant.password] = params.password;
       map[MaruConstant.user_type] = 'User';
       final response = await http.post(MaruConstant.savepet1,
           body: map
       );
-
       print("Register Success  ${response.body}");
-     // sharedPrefHelper.saveString(MaruConstant.first_name, params.first_name);
-     // sharedPrefHelper.saveString(MaruConstant.last_name, params.lName);
-     // sharedPrefHelper.saveString(MaruConstant.email, params.email);
+      // sharedPrefHelper.saveString(MaruConstant.first_name, params.first_name);
+      // sharedPrefHelper.saveString(MaruConstant.last_name, params.lName);
+      // sharedPrefHelper.saveString(MaruConstant.email, params.email);
       if (response.statusCode == 200) {
         //  await authSource.emailSignup(params);
         return
@@ -315,29 +293,16 @@ print(token);
   @override
   Future<Either<Failure, void>> verifyCode(VerifyParams params) async {
     try {
-
-     // print("verifyOTP TOKEEEEEEEEEEEEEEnnnnnnnnnnnnnnnn:$token");
       var map = Map<String, String>();
       map[ MaruConstant.otp] = params.code;
-      map[ MaruConstant.email] = params.email;
-     // map[ MaruConstant.email] = params.email;
+      // map[ MaruConstant.email] = params.email;
       final response = await http.post(MaruConstant.verify,
-
           body: map
       );
-      print("Register Success  ${response.body}");
+    print(response.body);
 
-
-      if (response.statusCode == 200) {
-        sharedPrefHelper.saveIdJwtToken(
-            MaruConstant.token,);
-      // String token ="";
-      // await SharedPreferencesHelper().SetAuthToken(token);
-/// print(token);
-     // Map<String,Strin
-        return
-          Right(Void);
-      }
+      return
+        Right(Void);
     }
     catch (e) {
       print("Thrown Exception While signing IN:$e");
@@ -409,4 +374,11 @@ print(token);
     // TODO: implement getWalkingSearchIcons
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<Failure, void>> saveRegistrationId() {
+    // TODO: implement saveRegistrationId
+    throw UnimplementedError();
+  }
+
 }

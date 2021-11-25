@@ -1,14 +1,72 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
+import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
+import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
+import 'package:maru/features/verify/domain/usecases/save_registration_id.dart';
 
-class AfterSplashScreen extends StatelessWidget {
+class AfterSplashScreen extends StatefulWidget {
+  @override
+  State<AfterSplashScreen> createState() => _AfterSplashScreenState();
+}
+
+class _AfterSplashScreenState extends State<AfterSplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
+    Future.delayed(Duration(seconds: 3), () async {
+      SharedPrefHelper sharedPrefHelper =
+      KiwiContainer().resolve<SharedPrefHelper>();
+      bool isloggedin = sharedPrefHelper.isLoggedin();
+      if (!isloggedin) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+        );
+      } else {
+        DateTime expiryTime = DateTime.fromMillisecondsSinceEpoch(
+            int.parse(sharedPrefHelper.getExpiryTime()) * 1000);
+        if (expiryTime.isAfter(DateTime.now())) {
+          await KiwiContainer().resolve<SaveRegistrationId>().call(NoParams());
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+        } else {
+          EmailSignin emailSignin = KiwiContainer().resolve<EmailSignin>();
+          await emailSignin(EmailAuthParams(
+              email: sharedPrefHelper.getEmail(),
+              password: sharedPrefHelper.getPassword(),
+              first_name: "",
+              lName: ""));
+          await KiwiContainer().resolve<SaveRegistrationId>().call(NoParams());
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+        }
+      }
+    });
+
     return Stack(
       children: [
         Image.asset(

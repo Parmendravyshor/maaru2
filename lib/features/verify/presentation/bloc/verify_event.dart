@@ -40,11 +40,4 @@ class CodeEntered extends VerifyEvent {
   @override
   String toString() => "CodeEntered";
 }
-class PetNameChanged extends VerifyEvent {
-  final String name;
 
-  PetNameChanged(this.name);
-
-  @override
-  String toString() => "PetNameChanged";
-}

@@ -1,6 +1,7 @@
 
 import 'dart:math';
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoder/geocoder.dart';
@@ -71,7 +72,7 @@ void main()async {
   Geolocation.loggingEnabled = true;
   WidgetsFlutterBinding.ensureInitialized();
   // FlutterBackgroundService.initialize(onStart);
-  // BackgroundFetch.registerHeadlessTask();
+  // BackgroundFetch.registerHeadlessTask(callback);
 }
 
 final theme = ThemeData(

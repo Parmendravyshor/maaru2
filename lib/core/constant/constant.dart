@@ -2,13 +2,13 @@ class MaruConstant {
   // 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
    static final signup =Uri.parse ('http://18.191.199.31/api/auth/signup');
    static final savepet1 =Uri.parse ('http://18.191.199.31/api/auth/1');
-   static final resend =Uri.parse ('http://18.191.199.31/api/auth/re-send-otp');
+   static final resend =Uri.parse ('http://18.191.199.31/api/auth/re-send-otp-forgot');
    static final reset =Uri.parse ('http://18.191.199.31/api/auth/forget-password');
    static final signin = Uri.parse('http://18.191.199.31/api/auth/signin');
    static final createpProfile = Uri.parse('http://18.191.199.31/api/pets');
   //static var signin = Uri.parse('$BASE_URL/signin');
    static var verify = Uri.parse('http://18.191.199.31/api/auth/verify-otp');
-   static String Token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo4NCwiZmlyc3RfbmFtZSI6InAiLCJsYXN0X25hbWUiOiJzIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6InBhcm1lbmRyYWhvbWUyMjJAeW9wbWFpbC5jb20iLCJ0b2tlbiI6bnVsbCwicGFzc3dvcmQiOiIkMmEkMDgkOGxENjA4TlNNRG5OdjNmam5xZEtadWpzWlN4LnRFN282VERtUXRaWGplQ0dTOVVrRDd5T2UiLCJvdHAiOiJQeFBLUyIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMTEtMjNUMDc6MTA6MDMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMjNUMDc6MTA6NTAuMDAwWiJ9LCJpYXQiOjE2Mzc2NTE0NTEsImV4cCI6MTYzNzczNzg1MX0.tLVM-Me5szca3FRs5en3GVltkeTIvu4ti6Moz4nl5_k";
+
    static String first_name = 'first_name';
    static String pet_name = 'pet_name';
    static String breed_type = 'breed_type';

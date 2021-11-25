@@ -37,38 +37,37 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   int lineLength = 40;
   bool pressGeoON = true;
   final BackgroundColor = Color(0xFF367355);
-  TextEditingController _petName;
-  TextEditingController _breadType;
-  TextEditingController _ageType;
-  TextEditingController _height;
-  TextEditingController _weight;
-  TextEditingController _emailController;
-  TextEditingController _sex;
-  TextEditingController _birthDate;
+  TextEditingController _petNameController;
+  TextEditingController _breadTypeController;
+  TextEditingController _ageTypeController;
+  TextEditingController _heightController;
+  TextEditingController _weightController;
+  TextEditingController _sexController;
+  TextEditingController _birthDateContoller;
   @override
   void initState() {
-    _petName = TextEditingController();
-    _breadType = TextEditingController();
-    _ageType = TextEditingController();
-    _height = TextEditingController();
-    _emailController = TextEditingController();
-    _weight = TextEditingController();
-    _birthDate = TextEditingController();
-    _sex = TextEditingController();
+    _petNameController = TextEditingController();
+    _breadTypeController = TextEditingController();
+    _ageTypeController = TextEditingController();
+    _heightController = TextEditingController();
+
+    _weightController = TextEditingController();
+    _birthDateContoller = TextEditingController();
+    _sexController = TextEditingController();
 
     super.initState();
   }
 
   @override
   void dispose() {
-    _petName.dispose();
-    _breadType.dispose();
-    _ageType.dispose();
-    _height.dispose();
-    _emailController.dispose();
-    _weight.dispose();
-    _sex.dispose();
-    _birthDate.dispose();
+    _petNameController.dispose();
+    _breadTypeController.dispose();
+    _ageTypeController.dispose();
+    _heightController.dispose();
+    //_emailController.dispose();
+    _weightController.dispose();
+    _sexController.dispose();
+    _birthDateContoller.dispose();
     super.dispose();
   }
 
@@ -89,15 +88,15 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
         body: BlocProvider(
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child:
-                BlocBuilder<PetProfileBloc, PetProfileState>(builder: (context, state) {
+            BlocBuilder<PetProfileBloc, PetProfileState>(builder: (context, state) {
               if (state is RegisterSuccess) {
                 AlertManager.showErrorMessage(
                     "otp send your register email", context);
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return CreateRegisterPetProfile2();
-                  }));
+                        return CreateRegisterPetProfile2();
+                      }));
                 });
 
                 return Container();
@@ -122,300 +121,298 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
               return
 
                 SingleChildScrollView(
-                  child: Column(children: [
-                ProfileForm(
-                  assetImage: 'assets/icons/Oval.png',
-                ),
-                Padding(
-                    padding: EdgeInsets.only(left: 40, right: 40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          'assets/icons/Rectangle copy 3.png',
-                          height: 40,
-                          width: 40,
-                        ),
-                        Image.asset(
-                          'assets/icons/icone-setting-68.png',
-                          height: 40,
-                          width: 40,
-                          color: Colors.white,
-                        ),
-                        Image.asset(
-                          'assets/icons/icone-setting-68.png',
-                          height: 40,
-                          width: 40,
-                          color: Colors.white,
-                        ),
-                        Image.asset(
-                          'assets/icons/icone-setting-68.png',
-                          height: 40,
-                          width: 40,
-                          color: Colors.white,
-                        ),
-                        Image.asset(
-                          'assets/icons/icone-setting-68.png',
-                          color: Colors.white,
-                          height: 40,
-                          width: 40,
-                        ),
-                      ],
-                    )),
-                SizedBox(
-                  width: 20,
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    //  width: 1000,
-                    // height: 880,
-                    alignment: FractionalOffset.bottomCenter,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFffffff),
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30))),
-                    child: Padding(
-                        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Gender",
-                              style: MaaruStyle.text.tiniest,
-                            ),
-                            SizedBox(height: 20),
-                            ToggleButton(),
-                            new SizedBox(
-                              height: 20.0,
-                            ),
-                            ThemedTextField(
-                              "Pet Name   ",
-                              TextInputType.text,
-                              textStyle: TextStyle(color: Colors.black),
-                              textinputaction2: TextInputAction.next,
-                              onChanged: (text) {
-                                BlocProvider.of<PetProfileBloc>(context)
-                                    .add(CreateProfileVerified(petName: text));
-                              },
-                              editingController: _petName,
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            ThemedTextField("Bread Type", TextInputType.text,
-                                textStyle: TextStyle(color: Colors.black),
-                                textInputAction: TextInputAction.done,
-                                onChanged: (text) {
-                                  BlocProvider.of<PetProfileBloc>(context)
-                                      .add(CreateProfileVerified(breadType: text));
-                            }, editingController: _breadType),
-                            new SizedBox(
-                              height: 10.0,
-                            ),
-                            ThemedTextField("Age", TextInputType.text,
-                                textStyle: TextStyle(color: Colors.black),
-                                textInputAction: TextInputAction.done,
-                                onChanged: (text) {
-                                  BlocProvider.of<PetProfileBloc>(context)
-                                      .add(CreateProfileVerified(age: text));
-                            }, editingController: _ageType),
-                            ThemedTextField("Weight", TextInputType.text,
-                                textStyle: TextStyle(color: Colors.black),
-                                textInputAction: TextInputAction.done,
-                                onChanged: (text) {
-                                  BlocProvider.of<PetProfileBloc>(context)
-                                      .add(CreateProfileVerified(weight: text));
-                            }, editingController: _weight),
-                            new SizedBox(
-                              height: 20.0,
-                            ),
-                            //  ThemeChanges(),
-                            ThemedTextField("Height", TextInputType.text,
-                                textStyle: TextStyle(color: Colors.black),
-                                textInputAction: TextInputAction.done,
-                                onChanged: (text) {
-                                  BlocProvider.of<PetProfileBloc>(context)
-                                      .add(CreateProfileVerified(height: text));
-                            }, editingController: _height),
-                            new SizedBox(
-                              height: 10.0,
-                            ),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                    onTap: () {
-
-                                    },
-                                    child: Center(
-                                      //  padding: EdgeInsets.only(left: 30),
-                                      child: Text(
-                                        "Birth Date",
-                                        style: MaaruStyle.text.tiniest,
-                                      ),
-
-                                    )),
-
-                              ],
-                            ),
-                            new SizedBox(
-                              height: 10.0,
-                            ),
-                            DatePicker(),
-                            new SizedBox(
-                              height: 40.0,
-                            ),
-                            Center(
-                              child: Text(
-                                'Sex',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    //  color: MyTheme.secondryColor,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold
-                                    // color: MyTheme.secondryColor
-                                    ),
+                    child: Column(children: [
+                      ProfileForm(
+                        assetImage: 'assets/icons/Oval.png',
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(left: 40, right: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Image.asset(
+                                'assets/icons/Rectangle copy 3.png',
+                                height: 40,
+                                width: 40,
                               ),
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            //         Padding(
-                            //             padding: EdgeInsets.only(left: 10),
-                            //             child: Row(
-                            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //                 children: <Widget>[
-                            //             Expanded(
-                            //             child: FlatButton(
-                            //                 onPressed: () {
-                            //         setState(() => pressGeoON = !pressGeoON);
-                            //         },
-                            //           child: Container(
-                            //               alignment: Alignment.center,
-                            //               width: 100,
-                            //               height: 100,
-                            //               decoration: BoxDecoration(
-                            //                   shape: BoxShape.circle,
-                            //                   border: Border.all(color: Colors.grey[100]),
-                            //                   color: pressGeoON
-                            //                       ? MaaruColors.blueColor
-                            //                       : Color(0xFFffffff)),
-                            //               child: Text('Neutered',
-                            //                   style: pressGeoON
-                            //                       ? GoogleFonts.poppins(
-                            //                       textStyle: TextStyle(
-                            //                           fontWeight: FontWeight.normal,
-                            //                           fontFamily: 'Poppins',
-                            //                           fontSize: 15,
-                            //                           color: Color(0xFFffffff)))
-                            //                   //MaaruStyle.text.greyDisable
-                            //                   // TextStyle(
-                            //                   //     color: MaaruColors.textColor,
-                            //                   //     fontFamily: 'Poppins',
-                            //                   //     fontSize: 12,
-                            //                   //     fontWeight: FontWeight.w300
-                            //                       :   MaaruStyle.text.greyDisable)),
-                            //         ),
-                            // ),
-                            //                   SizedBox(
-                            //                     width: 10,
-                            //                   ),
-                            //                   ReuseCircle1(
-                            //                     text: 'Spade',
-                            //                   ),
-                            //                   ReuseCircle1(
-                            //                     text: 'Neighter',
-                            //                   ),
-                            //                 ])),
-                            ToggleButton3(),
-                            new SizedBox(
-                              height: 40.0,
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                              Image.asset(
+                                'assets/icons/icone-setting-68.png',
+                                height: 40,
+                                width: 40,
+                                color: Colors.white,
+                              ),
+                              Image.asset(
+                                'assets/icons/icone-setting-68.png',
+                                height: 40,
+                                width: 40,
+                                color: Colors.white,
+                              ),
+                              Image.asset(
+                                'assets/icons/icone-setting-68.png',
+                                height: 40,
+                                width: 40,
+                                color: Colors.white,
+                              ),
+                              Image.asset(
+                                'assets/icons/icone-setting-68.png',
+                                color: Colors.white,
+                                height: 40,
+                                width: 40,
+                              ),
+                            ],
+                          )),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          //  width: 1000,
+                          // height: 880,
+                          alignment: FractionalOffset.bottomCenter,
+                          decoration: BoxDecoration(
+                              color: Color(0xFFffffff),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30))),
+                          child: Padding(
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: Column(
                                 children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (_) =>
-                                                  RegisterScreen()));
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    "Gender",
+                                    style: MaaruStyle.text.tiniest,
+                                  ),
+                                  SizedBox(height: 20),
+                                  ToggleButton(),
+                                  new SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  ThemedTextField(
+                                    "Pet Name   ",
+                                    TextInputType.text,
+                                    textStyle: TextStyle(color: Colors.black),
+                                    textinputaction2: TextInputAction.next,
+                                    onChanged: (text) {
+                                      BlocProvider.of<PetProfileBloc>(context)
+                                          .add(petNameChanged(text));
                                     },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 50,
-                                      width: 60,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white12,
-                                          shape: BoxShape.circle),
-                                      child: Text(
-                                        '',
-                                        style: MaaruStyle.text.greyDisable,
+                                    editingController: _petNameController,
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  ThemedTextField("Bread Type", TextInputType.text,
+                                      textStyle: TextStyle(color: Colors.black),
+                                      textInputAction: TextInputAction.done,
+                                      onChanged: (text) {
+                                        BlocProvider.of<PetProfileBloc>(context)
+                                            .add(BreadChanged(text));
+                                      }, editingController: _breadTypeController),
+                                  new SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  ThemedTextField("Age", TextInputType.text,
+                                      textStyle: TextStyle(color: Colors.black),
+                                      textInputAction: TextInputAction.done,
+                                      onChanged: (text) {
+                                        BlocProvider.of<PetProfileBloc>(context)
+                                            .add(AgeChanged(text));
+                                      }, editingController: _ageTypeController),
+                                  ThemedTextField("Weight", TextInputType.text,
+                                      textStyle: TextStyle(color: Colors.black),
+                                      textInputAction: TextInputAction.done,
+                                      onChanged: (text) {
+                                        BlocProvider.of<PetProfileBloc>(context)
+                                            .add(WidthChanged(text));
+                                      }, editingController: _weightController),
+                                  new SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  //  ThemeChanges(),
+                                  ThemedTextField("Height", TextInputType.text,
+                                      textStyle: TextStyle(color: Colors.black),
+                                      textInputAction: TextInputAction.done,
+                                      onChanged: (text) {
+                                        BlocProvider.of<PetProfileBloc>(context)
+                                            .add(HeightChanged(text));
+                                      }, editingController: _heightController),
+                                  new SizedBox(
+                                    height: 10.0,
+                                  ),
+
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                          onTap: () {
+
+                                          },
+                                          child: Center(
+                                            //  padding: EdgeInsets.only(left: 30),
+                                            child: Text(
+                                              "Birth Date",
+                                              style: MaaruStyle.text.tiniest,
+                                            ),
+
+                                          )),
+
+                                    ],
+                                  ),
+                                  new SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  DatePicker(),
+                                  new SizedBox(
+                                    height: 40.0,
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      'Sex',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          //  color: MyTheme.secondryColor,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold
+                                        // color: MyTheme.secondryColor
                                       ),
                                     ),
                                   ),
-                                  InkWell(
-                                    onTap: ()  {
-
-
-                                      //  await authSource.emailSignup(params);
-
-                                      String petName = _petName.text;
-                                      String breadType = _breadType.text;
-                                       String height = _height.text;
-                                       String width = _weight.text;
-String age = _ageType.text;
-                                      if (petName.isEmpty) {
-                                        AlertManager.showErrorMessage(
-                                            "Please enter Pet name", context);
-                                      } else if (breadType.isEmpty) {
-                                        AlertManager.showErrorMessage(
-                                            "Please enter Bread Type", context);
-                                        } else if (height.isEmpty) {
-                                        AlertManager.showErrorMessage(
-                                        "Please enter Height", context);
-                                        }
-                                      else if (age.isEmpty) {
-                                        AlertManager.showErrorMessage(
-                                            "Please enter Height", context);
-                                      }
-                                      else if (width.isEmpty) {
-                                          AlertManager.showErrorMessage(
-                                              "Please enter weight",context);
-
-
-                                        // context);
-                                      } else {
-                                        BlocProvider.of<PetProfileBloc>(context)
-                                            .add(RegisterButtonTapped());
-                                       // Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CreateRegisterPetProfile2()));
-                                      }
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.only(right: 20),
-                                      // alignment: Alignment.centerRight,
-                                      child: Image.asset(
-                                          'assets/images/next (2).png'),
-                                    ),
+                                  SizedBox(
+                                    height: 10.0,
                                   ),
-                                ]),
-                            SizedBox(
-                              height: 70,
-                            )
-                          ],
-                        )),
-                  ),
-                  // SizedBox(
-                  //    height: 20,
-                  //  ),
-                ),
-              ]));
+                                  //         Padding(
+                                  //             padding: EdgeInsets.only(left: 10),
+                                  //             child: Row(
+                                  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  //                 children: <Widget>[
+                                  //             Expanded(
+                                  //             child: FlatButton(
+                                  //                 onPressed: () {
+                                  //         setState(() => pressGeoON = !pressGeoON);
+                                  //         },
+                                  //           child: Container(
+                                  //               alignment: Alignment.center,
+                                  //               width: 100,
+                                  //               height: 100,
+                                  //               decoration: BoxDecoration(
+                                  //                   shape: BoxShape.circle,
+                                  //                   border: Border.all(color: Colors.grey[100]),
+                                  //                   color: pressGeoON
+                                  //                       ? MaaruColors.blueColor
+                                  //                       : Color(0xFFffffff)),
+                                  //               child: Text('Neutered',
+                                  //                   style: pressGeoON
+                                  //                       ? GoogleFonts.poppins(
+                                  //                       textStyle: TextStyle(
+                                  //                           fontWeight: FontWeight.normal,
+                                  //                           fontFamily: 'Poppins',
+                                  //                           fontSize: 15,
+                                  //                           color: Color(0xFFffffff)))
+                                  //                   //MaaruStyle.text.greyDisable
+                                  //                   // TextStyle(
+                                  //                   //     color: MaaruColors.textColor,
+                                  //                   //     fontFamily: 'Poppins',
+                                  //                   //     fontSize: 12,
+                                  //                   //     fontWeight: FontWeight.w300
+                                  //                       :   MaaruStyle.text.greyDisable)),
+                                  //         ),
+                                  // ),
+                                  //                   SizedBox(
+                                  //                     width: 10,
+                                  //                   ),
+                                  //                   ReuseCircle1(
+                                  //                     text: 'Spade',
+                                  //                   ),
+                                  //                   ReuseCircle1(
+                                  //                     text: 'Neighter',
+                                  //                   ),
+                                  //                 ])),
+                                  ToggleButton3(),
+                                  new SizedBox(
+                                    height: 40.0,
+                                  ),
+                                  Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        RegisterScreen()));
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 50,
+                                            width: 60,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white12,
+                                                shape: BoxShape.circle),
+                                            child: Text(
+                                              '',
+                                              style: MaaruStyle.text.greyDisable,
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: ()  {
+
+
+                                            //  await authSource.emailSignup(params);
+
+                                            String petName = _petNameController.text;
+                                            String breadType = _breadTypeController.text;
+                                            // String height = _height.text;
+                                            // String width = _weight.text;
+
+                                            if (petName.isEmpty) {
+                                              AlertManager.showErrorMessage(
+                                                  "Please enter Pet name", context);
+                                            } else if (breadType.isEmpty) {
+                                              AlertManager.showErrorMessage(
+                                                  "Please enter Bread Type", context);
+                                              // } else if (height.isEmpty) {
+                                              // AlertManager.showErrorMessage(
+                                              // "Please enter Height", context);
+                                              // } else if (width.isEmpty) {
+                                              //   AlertManager.showErrorMessage(
+                                              //       "Please enter weight",
+
+                                              // context);
+
+                                            } else {
+                                              BlocProvider.of<PetProfileBloc>(context)
+                                                  .add(RegisterButtonTapped());
+                                              // Navigator.of(context).push(
+                                              //     MaterialPageRoute(
+                                              //         builder: (_) =>
+                                              //             CreateRegisterPetProfile2()));
+                                            }
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.only(right: 20),
+                                            // alignment: Alignment.centerRight,
+                                            child: Image.asset(
+                                                'assets/images/next (2).png'),
+                                          ),
+                                        ),
+                                      ]),
+                                  SizedBox(
+                                    height: 70,
+                                  )
+                                ],
+                              )),
+                        ),
+                        // SizedBox(
+                        //    height: 20,
+                        //  ),
+                      ),
+                    ]));
             })));
   }
 }
@@ -470,9 +467,9 @@ class _ProfileFormState extends State<ProfileForm> {
                             child: (_image != null)
                                 ? Image.file(_image)
                                 : Image.asset(
-                                    widget.assetImage,
-                                    fit: BoxFit.cover,
-                                  ),
+                              widget.assetImage,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           backgroundColor: MaaruColors.whiteColor,
 
@@ -516,17 +513,17 @@ class _ReuseCircle1State extends State<ReuseCircle1> {
             child: Text(widget.text,
                 style: pressGeoON
                     ? MaaruStyle.text.greyDisable
-                    // TextStyle(
-                    //     color: MaaruColors.textColor,
-                    //     fontFamily: 'Poppins',
-                    //     fontSize: 12,
-                    //     fontWeight: FontWeight.w300
+                // TextStyle(
+                //     color: MaaruColors.textColor,
+                //     fontFamily: 'Poppins',
+                //     fontSize: 12,
+                //     fontWeight: FontWeight.w300
                     : GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'Poppins',
-                            fontSize: 15,
-                            color: Color(0xFFffffff))))),
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Poppins',
+                        fontSize: 15,
+                        color: Color(0xFFffffff))))),
       ),
     );
   }

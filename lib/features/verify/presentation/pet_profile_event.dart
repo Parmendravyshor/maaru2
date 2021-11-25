@@ -35,61 +35,50 @@ class profileImageChanged extends PetProfileEvent {
   String toString() => "profileImageChanged";
 }
 
-class CreateProfileVerified extends PetProfileEvent {
-  CreateProfileVerified({
-      this.profileImage,
-      this.gender,
-      this.petName,
-      this.providerName,
-      this.petVaccine,
-      this.uploadVaccineRecord,
-      this.walkingSchedule,
-      this.feedingSchedule,
-      this.temperament,
-      this.medication,
-      this.notes,
-      this.age,
-      this.grooming,
-      this.vet,
-      this.hotel,
-      this.walking,
-      this.dayCare,
-      this.hospital,
-      this.breadType,
-      this.height,
-      this.weight,
-      this.birthDate,
-      this.sex,
-      this.addMoreVaccine});
-  final String profileImage;
-  final String gender;
-  final String petName;
-  final String providerName;
-  final String petVaccine;
-  final String uploadVaccineRecord;
-  final String walkingSchedule;
-  final String feedingSchedule;
-  final String temperament;
-  final String medication;
-  final String notes;
-  final String age;
-  final String grooming;
-  final String vet;
-  final String hotel;
-  final String walking;
-  final String dayCare;
-  final String hospital;
-  final String breadType;
-  final String height;
-  final String weight;
-  final String birthDate;
-  final String sex;
-
-  final String addMoreVaccine;
-
-  @override
-  String toString() => "PetProfileRegistered";
-}
+// class CreateProfileVerified extends PetProfileEvent {
+//   CreateProfileVerified(
+//
+//       this.gender,
+//       this.petName,
+//
+//       this.age,
+//
+//       this.breadType,
+//       this.height,
+//       this.weight,
+//       this.birthDate,
+//       this.sex,
+//      // this.addMoreVaccine
+//   );
+//  // final String profileImage;
+//   final String gender;
+//   final String petName;
+//   // final String providerName;
+//   // final String petVaccine;
+//   // final String uploadVaccineRecord;
+//   // final String walkingSchedule;
+//   // final String feedingSchedule;
+//   // final String temperament;
+//   // final String medication;
+//   // final String notes;
+//    final String age;
+//   // final String grooming;
+//   // final String vet;
+//   // final String hotel;
+//   // final String walking;
+//   // final String dayCare;
+//   // final String hospital;
+//   final String breadType;
+//   final String height;
+//   final String weight;
+//   final String birthDate;
+//   final String sex;
+//
+//   //final String addMoreVaccine;
+//
+//   @override
+//   String toString() => "PetProfileRegistered";
+// }
 class AgeChanged extends PetProfileEvent {
   final String age;
 
@@ -123,15 +112,15 @@ class HeightChanged extends PetProfileEvent {
   String toString() => "HeightChanged";
 }
 class BirthChanged extends PetProfileEvent {
-  final String birthdate;
+  var  _selectedDate;
 
-  BirthChanged(this.birthdate);
+  BirthChanged(this._selectedDate);
 
   @override
   String toString() => "BirthChanged";
 }
 class BreadChanged extends PetProfileEvent {
-  final String breadtype;
+   var breadtype;
 
   BreadChanged(this.breadtype);
 

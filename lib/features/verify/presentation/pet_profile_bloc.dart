@@ -11,40 +11,26 @@ part 'pet_profile_event.dart';
 part 'pet_profile_state.dart';
 
 class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
-  PetProfileBloc(  this.createPetProfile)
+  PetProfileBloc(this.getPetProfile, this.savePetProfile, this.createPetProfile)
       : super();
 
   final CreatePetProfile createPetProfile;
- // final SavePetProfile savePetProfile;
-  //final GetPetProfile getPetProfile;
- // int step = 1;
+  final SavePetProfile savePetProfile;
+  final GetPetProfile getPetProfile;
+  // int step = 1;
   String age = "";
-  String petname ="";
   String width = "" ;
   String hight = "" ;
   String sex = "";
   String birthdate ='';
   String breadtype = '';
+
   @override
   // TODO: implement initialState
   PetProfileState get initialState => PetProfileInitial();
 
   @override
   Stream<PetProfileState> mapEventToState(PetProfileEvent event) async* {
-    if (event is petNameChanged) {
-      if (event.petname.isNotEmpty) {
-        petname = event.petname;
-      }
-      else {
-        petname = '';
-      }
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    }
     if (event is AgeChanged) {
       if (event.age.isNotEmpty) {
         age = event.age;
@@ -101,8 +87,9 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       }
     }
     else if (event is BirthChanged) {
-      if (event.birthdate.isNotEmpty) {
-        birthdate = event.birthdate;
+      if (event._selectedDate.isNotEmpty) {
+        birthdate =
+            event._selectedDate;
       } else {
         birthdate = "";
       }
@@ -139,41 +126,42 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
           sex: sex));
       yield* result.fold((l) async* {
         yield RegisterFailure("Profile failed..please try again.. $l");
-      }, (r) async* {
-      ///  step = 2;
+      },
+              (r) async* {
+        ///  step = 2;
         yield RegisterSuccess();
       });
     }
-  //   else if (event is RegisterButtonTapped) {
-  //     yield RegisterInProgress();
-  //     final result = await savePetProfile(PetProfileParams(
-  //        ));
-  //     yield* result.fold((l) async* {
-  //       yield RegisterFailure("Profile failed..please try again.. $l");
-  //     }, (r) async* {
-  //      /// step = 2;
-  //       yield RegisterSuccess();
-  //     });
-  //   }
-  //   else if (event is RegisterButtonTapped) {
-  //     yield RegisterInProgress();
-  //     final result = await getPetProfile(PetProfileParams(
-  //        ));
-  //     yield* result.fold((l) async* {
-  //       yield RegisterFailure("Profile failed..please try again.. $l");
-  //     }, (r) async* {
-  //      /// step = 2;
-  //       yield RegisterSuccess();
-  //     });
-  //   }
-   }
-      bool _isFormValid() {
-        return petname.isNotEmpty &&
-          age.isNotEmpty &&
-            width.isNotEmpty &&
-            hight.isNotEmpty &&
-            breadtype.isNotEmpty &&
-            birthdate.isNotEmpty &&
-            sex.isNotEmpty;
-      }
+    // else if (event is RegisterButtonTapped) {
+    //   yield RegisterInProgress();
+    //   final result = await savePetProfile(PetProfileParams(
+    //   ));
+    //   yield* result.fold((l) async* {
+    //     yield RegisterFailure("Profile failed..please try again.. $l");
+    //   }, (r) async* {
+    //     /// step = 2;
+    //     yield RegisterSuccess();
+    //   });
+    // }
+    // else if (event is RegisterButtonTapped) {
+    //   yield RegisterInProgress();
+    //   final result = await getPetProfile(PetProfileParams(
+    //   ));
+    //   yield* result.fold((l) async* {
+    //     yield RegisterFailure("Profile failed..please try again.. $l");
+    //   },
+    //           (r) async* {
+    //     /// step = 2;
+    //     yield RegisterSuccess();
+    //   });
     }
+
+  bool _isFormValid() {
+    return age.isNotEmpty &&
+        width.isNotEmpty &&
+        hight.isNotEmpty &&
+        breadtype.isNotEmpty &&
+        birthdate.isNotEmpty &&
+        sex.isNotEmpty;
+  }
+}

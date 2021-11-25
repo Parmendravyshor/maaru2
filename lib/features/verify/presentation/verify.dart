@@ -57,6 +57,7 @@ class OtpWidget extends State<Otp> {
       create: (context) => KiwiContainer().resolve<VerifyBloc>(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
             children: [
@@ -73,7 +74,7 @@ class OtpWidget extends State<Otp> {
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) {
-                              return CreateregisterPetProfile1();
+                              return LoginScreen();
                             }));
                           });
                           return Container();
