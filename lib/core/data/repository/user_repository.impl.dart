@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ffi';
+import 'dart:io';
 //import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'dart:convert' as convert;
@@ -186,26 +188,39 @@ class UserRepositoryImpl implements UserRepository {
       var map = new Map<String, String>();
       map [MaruConstant.age] = params.age;
       map[MaruConstant.pet_name] = 'kl;dkdk';
-      map[MaruConstant.birth_date] = params.birthDate;
+      map[MaruConstant.birth_date] = '1/1/2021';
       map[MaruConstant.breed_type] =params.breadType;
       map[MaruConstant.weight] =params.weight;
       map[MaruConstant.height] = params.height;
       map[MaruConstant.sex] = 'jdkjdkj';
-      map[MaruConstant.img] = 'assets/images/abin1.png';
+    // map[ "file1"] = ' UploadFileInfo(new File("./upload.jpg"), "upload1.jpg")';
 
 
-   // final headers = {"access-token":'$token'};
-    //{"access-token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo2OCwiZmlyc3RfbmFtZSI6InAiLCJsYXN0X25hbWUiOiJzIiwidXNlcl90eXBlIjoidXNlciIsImVtYWlsIjoic2h1YmhhbTM2MzZAeW9wbWFpbC5jb20iLCJ0b2tlbiI6bnVsbCwicGFzc3dvcmQiOiIkMmEkMDgkbE9MVi50U2FpR0wuY0JVd05xeTFTZXpTSE1hRWhMUHN5OThncmlObEVyRkg3TXpjWFd5aW0iLCJvdHAiOiJ2S29HcyIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMTEtMjRUMTI6MjY6MDMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMjRUMTI6MjY6MjAuMDAwWiJ9LCJpYXQiOjE2Mzc3NTY4MDYsImV4cCI6MTYzNzg0MzIwNn0.DHluj_NeQFBXnEeDF4_Ag-kbX5YwWcUsDIM05eVUPG8'};
+      final headers = {
+        "access-token": '$token'
+      };
+      var request = http.MultipartRequest('POST', Uri.parse('http://18.191.199.31/api/pets'));
+      request.fields.addAll({
+        'pet_name': 'www',
+        'breed_type': '1',
+        'age': '3',
+        'weight': '10',
+        'height': '3',
+        'birth_date': '1/1/2021',
+        'sex': '1',
 
-      //print;("$token");
-    final msg = {MaruConstant.pet_name: params.petName,MaruConstant.age:params.age,MaruConstant.birth_date:params.birthDate,
-      MaruConstant.breed_type:params.breadType,MaruConstant.height:params.height,MaruConstant.weight:params.weight,MaruConstant.sex:params.sex,
-    };
+      });
+      http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
+          'file', 'assets/icons/icone-setting-21.png');
+      request.files.add(multipartFile);
 
+      //  request.files.add(await http.MultipartFile.fromString('FileType.image 'assets/icons/icone-setting-21.png',));
+     // request.headers.addAll(headers);
 
-    final response = await post(MaruConstant.createpProfile, headers: {"access-token":"$token"}, body:map);
+      http.StreamedResponse response = await request.send();
+
     print('Status code: ${response.statusCode}');
-    print('Body: ${response.body}');
+  //  print('Body: ${response.body}');
 
     return
       Right(Void);

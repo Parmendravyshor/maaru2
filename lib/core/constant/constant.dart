@@ -14,6 +14,7 @@ class MaruConstant {
    static String breed_type = 'breed_type';
   // static String token = 'access-token';
    static String  age = 'age';
+   static String   profileImage = 'profileImage';
    static String weight ='weight';
    static String height ='height';
    static String known_allergies ='known_allergies';

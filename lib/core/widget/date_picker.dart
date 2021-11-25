@@ -7,53 +7,73 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
-import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class DatePicker extends StatefulWidget {
 
+
   @override
   _DatePickerState createState() => _DatePickerState();
 }
 
 class _DatePickerState extends State<DatePicker> {
+
   DateTime _selectedDate;
-  TextEditingController _ageTypeController = TextEditingController();
- // TextEditingController _ageTypeController = TextEditingController();
+  TextEditingController _ageType;
+  TextEditingController _textEditingController = TextEditingController();
 
   @override
   void initState() {
-    _ageTypeController = TextEditingController();
+    _ageType = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    _ageTypeController.dispose();
+    _ageType.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final _PetProfileBloc = BlocProvider.of<PetProfileBloc>(context);
+
     return
-    Padding(
-        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-        child: Column(children: [
-          ThemedTextField("               mm/dd/year", TextInputType.text,
-              textStyle: TextStyle(color: Colors.black),
-              textInputAction: TextInputAction.done,
-              onChanged: (text) {
-                BlocProvider.of<PetProfileBloc>(context)
-                    .add(BirthChanged(text));
-              }, editingController: _ageTypeController),
-        ]));
+      Padding(
+          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: Column(children: [
+              GestureDetector(
+              child:
+            TextFormField(
+                focusNode: AlwaysDisabledFocusNode(),
+                controller: _textEditingController,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey[300]),
+                  ),
+                  // labelText: "Date of birth",
+                  hintText: 'mm/dd/year',hintStyle: MaaruStyle.text.greyDisable,
+                  prefixIcon:
+                  Icon(Icons.calendar_today_outlined, color: MaaruColors.primaryColorsuggesion),
+                ),
+                onSaved:(_selectDate){
+                  BlocProvider.of<PetProfileBloc>(context)
+                      .add(BirthChanged(_selectDate));
+                },
+                onTap:() {
+                  _selectDate(context);
+  
+   BlocProvider.of<PetProfileBloc>(context).add(BirthChanged(_selectedDate));
+
+                }),
+
+              )]));
   }
 
   _selectDate(BuildContext context,) async {
-
+    final _PetProfileBloc = BlocProvider.of<PetProfileBloc>(context);
     DateTime newSelectedDate = await showDatePicker(
         context: context,
         initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
@@ -76,10 +96,10 @@ class _DatePickerState extends State<DatePicker> {
 
     if (newSelectedDate != null) {
       _selectedDate = newSelectedDate;
-      _ageTypeController
+      _textEditingController
         ..text = DateFormat.yMd().format(_selectedDate)
         ..selection = TextSelection.fromPosition(TextPosition(
-            offset: _ageTypeController.text.length,
+            offset: _textEditingController.text.length,
             affinity: TextAffinity.upstream));
 
     }
@@ -157,7 +177,7 @@ class _DynamicEventState extends State<DynamicEvent> {
               calendarStyle: CalendarStyle(
                   canEventMarkersOverflow: true,
                   todayColor: Colors.orange,
-                //  selectedColor: Theme.of(context).primaryColor,
+                  //  selectedColor: Theme.of(context).primaryColor,
                   todayStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
@@ -172,8 +192,8 @@ class _DynamicEventState extends State<DynamicEvent> {
                 formatButtonShowsNext: false,
               ),
 
-      daysOfWeekStyle:
-      DaysOfWeekStyle(decoration: BoxDecoration(color: Colors.green),),
+              daysOfWeekStyle:
+              DaysOfWeekStyle(decoration: BoxDecoration(color: Colors.green),),
 
 
               startingDayOfWeek: StartingDayOfWeek.monday,
@@ -197,7 +217,7 @@ class _DynamicEventState extends State<DynamicEvent> {
                     margin: const EdgeInsets.all(4.0),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                       // color: Colors.orange,
+                      // color: Colors.orange,
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Text(
                       date.day.toString(),
@@ -233,40 +253,40 @@ class _DynamicEventState extends State<DynamicEvent> {
       // ),
     );
   }
-  //
-  // _showAddDialog() async {
-  //   await showDialog(
-  //       context: context,
-  //       builder: (context) => AlertDialog(
-  //         backgroundColor: Colors.white70,
-  //         title: Text("Add Events"),
-  //         content: TextField(
-  //           controller: _eventController,
-  //         ),
-  //         actions: <Widget>[
-  //           FlatButton(
-  //             child: Text("Save",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-  //             onPressed: () {
-  //               if (_eventController.text.isEmpty) return;
-  //               setState(() {
-  //                 if (_events[_controller.selectedDay] != null) {
-  //                   _events[_controller.selectedDay]
-  //                       .add(_eventController.text);
-  //                 } else {
-  //                   _events[_controller.selectedDay] = [
-  //                     _eventController.text
-  //                   ];
-  //                 }
-  //                 prefs.setString("events", json.encode(encodeMap(_events)));
-  //                 _eventController.clear();
-  //                 Navigator.pop(context);
-  //               });
+//
+// _showAddDialog() async {
+//   await showDialog(
+//       context: context,
+//       builder: (context) => AlertDialog(
+//         backgroundColor: Colors.white70,
+//         title: Text("Add Events"),
+//         content: TextField(
+//           controller: _eventController,
+//         ),
+//         actions: <Widget>[
+//           FlatButton(
+//             child: Text("Save",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+//             onPressed: () {
+//               if (_eventController.text.isEmpty) return;
+//               setState(() {
+//                 if (_events[_controller.selectedDay] != null) {
+//                   _events[_controller.selectedDay]
+//                       .add(_eventController.text);
+//                 } else {
+//                   _events[_controller.selectedDay] = [
+//                     _eventController.text
+//                   ];
+//                 }
+//                 prefs.setString("events", json.encode(encodeMap(_events)));
+//                 _eventController.clear();
+//                 Navigator.pop(context);
+//               });
 
-        //       },
-        //     )
-        //   ],
-        // ));
-  }
+//       },
+//     )
+//   ],
+// ));
+}
 //}
 
 class CalendarScreen extends StatefulWidget {
@@ -334,9 +354,9 @@ class CalendarScreenState extends State<CalendarScreen> {
 
   Widget _showWeek(DateTime date) {
     return Card(
-    elevation: 14,
-    child:
-      Container(padding: EdgeInsets.all(2), child: Text('${date.day}')));
+        elevation: 14,
+        child:
+        Container(padding: EdgeInsets.all(2), child: Text('${date.day}')));
   }
 }
 
@@ -517,7 +537,7 @@ class _AppointmentsState extends State<Appointments>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
 //         appBar: PreferredSize(
 //           preferredSize: Size.fromHeight(60.0),
 //           child: AppBar(
@@ -558,7 +578,7 @@ class _AppointmentsState extends State<Appointments>
             const SizedBox(height: 8.0),
             //_buildEventList()
             //_buildsameMonthEventList()
-           // Expanded(child: _buildsameMonthEventList()),
+            // Expanded(child: _buildsameMonthEventList()),
           ]);
         }));
   }
@@ -614,21 +634,21 @@ class _AppointmentsState extends State<Appointments>
         },
         todayDayBuilder: (context, date, _) {
           return Container(
-            margin: const EdgeInsets.all(4.0),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: MaaruColors.blueColor,
-                borderRadius: BorderRadius.circular(36.0),
-                border: Border.all(width: 2, color: MaaruColors.blueColor)),
-            child: Text(
-              '${date.day}',
-              style:MaaruStyle.text.greyDisable
-            //   TextStyle().copyWith(
-            //       fontSize: 20.0,
-            //       color: Colors.grey[100],
-            //       fontWeight: FontWeight.bold),
-            // ),
-          ));
+              margin: const EdgeInsets.all(4.0),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: MaaruColors.blueColor,
+                  borderRadius: BorderRadius.circular(36.0),
+                  border: Border.all(width: 2, color: MaaruColors.blueColor)),
+              child: Text(
+                  '${date.day}',
+                  style:MaaruStyle.text.greyDisable
+                //   TextStyle().copyWith(
+                //       fontSize: 20.0,
+                //       color: Colors.grey[100],
+                //       fontWeight: FontWeight.bold),
+                // ),
+              ));
         },
         markersBuilder: (context, date, events, holidays) {
           final children = <Widget>[];

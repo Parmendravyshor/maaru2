@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/date_picker.dart';
@@ -32,7 +34,25 @@ class CreateregisterPetProfile1 extends StatefulWidget {
       _CreateregisterPetProfile1State();
 }
 
-class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
+class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> with SingleTickerProviderStateMixin {
+  bool _status = true;
+  final FocusNode myFocusNode = FocusNode();
+  String _image = "";
+  final picker = ImagePicker();
+  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(
+        source: ImageSource.gallery, maxHeight: 200, maxWidth: 200);
+    if (pickedFile != null) {
+      _image = pickedFile.path;
+      await _prefHelper.saveString(MaruConstant.profileImage, _image);
+      setState(() {});
+    } else {
+      AlertManager.showErrorMessage("Failed to load image", context);
+    }
+  }
+
   double initial = 0.0;
   int lineLength = 40;
   bool pressGeoON = true;
@@ -83,6 +103,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
 
   @override
   Widget build(BuildContext context) {
+    _image = _prefHelper.getStringByKey(MaruConstant.profileImage, "");
+
     return Scaffold(
         backgroundColor: Colors.grey[100],
         body: BlocProvider(
@@ -118,13 +140,53 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                 });
               }
 
-              return
+              return SafeArea(
+              child:
 
                 SingleChildScrollView(
-                    child: Column(children: [
-                      ProfileForm(
-                        assetImage: 'assets/icons/Oval.png',
+                    child:
+                    Column(children: [
+                    Padding(
+                    padding: EdgeInsets.only(top: 5.0),
+                    child:
+                    Stack(fit: StackFit.loose, children: <Widget>[
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Container(
+
+                              width: 200.0,
+                              height: 200.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: _image.isEmpty
+                                      ? ExactAssetImage(
+                                      'assets/icons/Oval.png')
+                                      : FileImage(File(_image)),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            onTap: getImage,
+                          ),
+                        ],
                       ),
+                      Padding(
+                          padding:
+                          EdgeInsets.only(top: 160.0, right: 40.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              CircleAvatar(
+                                backgroundColor: Colors.red,
+                                radius: 15.0,
+                                child: Image.asset('assets/icons/caticon.png')
+                              )
+                            ],
+                          )),])),
                       Padding(
                           padding: EdgeInsets.only(left: 40, right: 40),
                           child: Row(
@@ -385,7 +447,20 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
 
                                               // context);
 
-                                            } else {
+                                            }else if (breadType.isEmpty) {
+                                              AlertManager.showErrorMessage(
+                                                  "Please enter Bread Type", context);
+                                              // } else if (height.isEmpty) {
+                                              // AlertManager.showErrorMessage(
+                                              // "Please enter Height", context);
+                                              // } else if (width.isEmpty) {
+                                              //   AlertManager.showErrorMessage(
+                                              //       "Please enter weight",
+
+                                              // context);
+
+                                            }
+                                            else {
                                               BlocProvider.of<PetProfileBloc>(context)
                                                   .add(RegisterButtonTapped());
                                               // Navigator.of(context).push(
@@ -412,7 +487,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                         //    height: 20,
                         //  ),
                       ),
-                    ]));
+                    ])));
             })));
   }
 }
