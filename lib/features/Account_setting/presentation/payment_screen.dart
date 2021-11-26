@@ -5,6 +5,8 @@ import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 
+import 'account_setting.dart';
+
 class PaymentScreen extends StatefulWidget {
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
@@ -21,23 +23,33 @@ class _PaymentScreenState extends State<PaymentScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BackArrowButton(),
-              SizedBox(
-                height: 30,
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  BackArrowButton(),
+                  InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (_) => AccountSettingScreen()));
+                      },
+                      child: Align(alignment: Alignment.topRight,
+                        child: Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.asset(
+                            'assets/128/CrystalGaskell.png',
+                            height: 60,
+                            width: 60,
+                          ),
+                        ),
+                      )),
+                ],
               ),
-              Container(
-                alignment: Alignment.topRight,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-                child: Image.asset(
-                  'assets/128/CrystalGaskell.png',
-                  height: 60,
-                  width: 60,
-                ),
-              ),
+
               SizedBox(
                 height: 60,
               ),

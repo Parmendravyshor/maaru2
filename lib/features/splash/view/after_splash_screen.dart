@@ -20,7 +20,7 @@ class AfterSplashScreen extends StatelessWidget {
         Container(
             alignment: Alignment.center,
             child: BackgroundImage(
-              assetImage: 'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
+              assetImage: 'assets/icons/Splash-Provider-or-User-screen-svg-new (3).png',
               //  hight: 200,
               widt: 300,
             )),

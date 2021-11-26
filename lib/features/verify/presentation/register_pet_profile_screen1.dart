@@ -468,14 +468,14 @@ class _ProfileFormState extends State<ProfileForm> {
                         radius: 70.0,
                         child: CircleAvatar(
                           radius: 65.0,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
+                          child: ClipOval(
+
 
                             child: (_image != null)
-                                ? Image.file(_image)
+                                ? Image.file(_image,)
                                 : Image.asset(
                                     widget.assetImage,
-                                    fit: BoxFit.cover,
+
                                   ),
                           ),
                           backgroundColor: MaaruColors.whiteColor,

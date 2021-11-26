@@ -4,6 +4,7 @@ import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
+import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/main.dart';
 
 import 'create_home_screen.dart';
@@ -103,7 +104,7 @@ Stack(children:[
               child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => BookAppointment1()));
+                        builder: (context) => BookedConfirm()));
                   },
                   child:      Container(
                     decoration: BoxDecoration(

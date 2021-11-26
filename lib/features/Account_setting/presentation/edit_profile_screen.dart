@@ -67,7 +67,7 @@ class _CreateUserProfileState extends State<CreateUserProfile> {
                       height: size.height * 0.3,
                       width: size.width * 0.9,
                       child:
-                      ProfileForm(assetImage: 'assets/images/4970774.png',)),
+                      ProfileForm()),
                       // ProfileAvatar(
                       //     imageUrl: 'assets/images/4970774.png',
                       //  //   Color: Colors.grey[360],

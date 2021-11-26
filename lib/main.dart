@@ -56,6 +56,8 @@ import 'features/provider_home/presentation/create_provider_home.dart';
 import 'features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'features/provider_home/presentation/upcoming_appointment_calender.dart';
 import 'features/provider_home/presentation/upcoming_appointment_screen.dart';
+import 'features/provider_home/provider_message.dart';
+import 'features/provider_login/login_provider_screen.dart';
 import 'features/provider_profile/provider_profile2.dart';
 import 'features/register/presentation/signup_screen.dart';
 import 'features/verify/presentation/register_pet_profile_screen2.dart';
@@ -145,7 +147,7 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: (CreateregisterPetProfile1())));
+        home: Scaffold(body: (SplashScreen())));
   }
 }
 

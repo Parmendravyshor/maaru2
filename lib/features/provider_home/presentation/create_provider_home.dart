@@ -45,11 +45,14 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => TestApp()));
               },
-              child: Image.asset('assets/icons/icon0.png',
-                  height: 30, color: widget.Color
-                //selectedIndex == 0
-                //  ? MaaruColors.textButtonColor
-                // : Colors.grey[350],
+              child: Padding(
+                padding: const EdgeInsets.only(right: 20,top: 10),
+                child: Image.asset('assets/icons/icon0.png',
+                    height: 30, color: widget.Color
+                  //selectedIndex == 0
+                  //  ? MaaruColors.textButtonColor
+                  // : Colors.grey[350],
+                ),
               ),
             ),
             title: Text('')),
@@ -59,11 +62,14 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => UpcomingAppointmentCalender()));
               },
-              child: Image.asset('assets/icons/icon1.png',
-                  height: 30, color: widget.Color1
-                //selectedIndex == 1
-                //   ? MaaruColors.textButtonColor
-                //  : Colors.grey[350],
+              child: Padding(
+                padding: const EdgeInsets.only(right: 40,bottom: 8),
+                child: Image.asset('assets/icons/icon1.png',
+                    height: 30, color: widget.Color1
+                  //selectedIndex == 1
+                  //   ? MaaruColors.textButtonColor
+                  //  : Colors.grey[350],
+                ),
               ),
             ),
             title: Text('')),
@@ -73,9 +79,12 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) =>  UpcomingAppointmentCalender1(),));
                 },
-                child: Image.asset(
-                  'assets/icons/icon4.png',
-                  height: 60,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Image.asset(
+                    'assets/icons/icon4.png',
+                    height: 60,
+                  ),
                 )),
             title: Text('')),
         BottomNavigationBarItem(
@@ -84,13 +93,16 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => ProviderMessages()));
                 },
-                child: Image.asset(
-                    'assets/icons/icon2.png',
-                    height: 30,
-                    color: widget.Color2
-                  //selectedIndex == 3
-                  //  ? MaaruColors.textButtonColor
-                  // : Colors.grey[350],
+                child: Padding(
+                  padding: const EdgeInsets.only(),
+                  child: Image.asset(
+                      'assets/icons/icon2.png',
+                      height: 30,
+                      color: widget.Color2
+                    //selectedIndex == 3
+                    //  ? MaaruColors.textButtonColor
+                    // : Colors.grey[350],
+                  ),
                 )),
             title: Text('')),
         BottomNavigationBarItem(
@@ -99,13 +111,16 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) =>   ProviderSetting()));
                 },
-                child: Image.asset(
-                    'assets/icons/icon3.png',
-                    height: 30,
-                    color: widget.Color3
-                  //selectedIndex == 4
-                  //  ? MaaruColors.textButtonColor
-                  // : Colors.grey[350],
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Image.asset(
+                      'assets/icons/icon3.png',
+                      height: 30,
+                      color: widget.Color3
+                    //selectedIndex == 4
+                    //  ? MaaruColors.textButtonColor
+                    // : Colors.grey[350],
+                  ),
                 )),
             title: Text('')),
       ],
