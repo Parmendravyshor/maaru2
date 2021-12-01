@@ -41,3 +41,16 @@ class CodeEntered extends VerifyEvent {
   String toString() => "CodeEntered";
 }
 
+class CodeEnteredProvider extends VerifyEvent {
+  final String code;
+  final String email;
+  final String password;
+  final String fname;
+  final String lname;
+  final bool isRegister;
+  CodeEnteredProvider(this.code, this.email, this.password, this.fname, this.lname,
+      this.isRegister);
+
+  @override
+  String toString() => "CodeEnteredProvider";
+}

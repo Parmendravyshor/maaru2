@@ -11,6 +11,7 @@ import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
+import 'package:maru/features/provider_login/presentation/login_provider_screen.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 
 import 'bloc/verify_bloc.dart';
@@ -74,7 +75,7 @@ class OtpWidget extends State<Otp> {
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) {
-                              return LoginScreen();
+                              return LoginProviderScreen();
                             }));
                           });
                           return Container();

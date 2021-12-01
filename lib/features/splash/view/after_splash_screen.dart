@@ -55,7 +55,7 @@ class _AfterSplashScreenState extends State<AfterSplashScreen> {
           EmailSignin emailSignin = KiwiContainer().resolve<EmailSignin>();
           await emailSignin(EmailAuthParams(
               email: sharedPrefHelper.getEmail(),
-              password: sharedPrefHelper.getPassword(),
+            //  password: sharedPrefHelper.getPassword(),
               first_name: "",
               lName: ""));
           await KiwiContainer().resolve<SaveRegistrationId>().call(NoParams());

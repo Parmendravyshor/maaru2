@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -27,6 +29,7 @@ class _DatePickerState extends State<DatePicker> {
   @override
   void initState() {
     _ageType = TextEditingController();
+    _selectedDate = _selectedDate;
     super.initState();
   }
 
@@ -59,17 +62,18 @@ class _DatePickerState extends State<DatePicker> {
                   Icon(Icons.calendar_today_outlined, color: MaaruColors.primaryColorsuggesion),
                 ),
                 onSaved:(_selectDate){
-                  BlocProvider.of<PetProfileBloc>(context)
-                      .add(BirthChanged(_selectDate));
+
                 },
-                onTap:() {
+                onTap:()
+                 {
+                 final petProfileBloc =  BlocProvider.of<PetProfileBloc>(context);
+                 petProfileBloc.add(BirthChanged(_selectDate));
                   _selectDate(context);
-  
-   BlocProvider.of<PetProfileBloc>(context).add(BirthChanged(_selectedDate));
 
                 }),
 
               )]));
+
   }
 
   _selectDate(BuildContext context,) async {

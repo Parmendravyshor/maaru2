@@ -14,6 +14,18 @@ class createPetProfile extends PetProfileEvent {
   @override
   String toString() => "createPetProfile";
 }
+class ProfileOpened extends PetProfileEvent {
+  ProfileOpened();
+
+  @override
+  String toString() => "ProfileOpened";
+}
+class ChangePasswordOpened extends PetProfileEvent {
+  ChangePasswordOpened();
+
+  @override
+  String toString() => "ChangePasswordOpened";
+}
 class savePetProfile extends PetProfileEvent {
 
   savePetProfile(this.message);
@@ -29,11 +41,25 @@ class getPetProfile extends PetProfileEvent {
   String toString() => "getPetProfile";
 }
 class profileImageChanged extends PetProfileEvent {
-  profileImageChanged();
+  final String img;
+  profileImageChanged(this.img);
 
   @override
   String toString() => "profileImageChanged";
 }
+class BirthDate extends PetProfileEvent {
+  String birthdate;
+
+
+
+  BirthDate({this.birthdate}); //add this line
+  @override
+  List<Object> get props => [birthdate];
+  @override
+  String toString() => "ResgiterInitial{$birthdate}";
+
+}
+
 
 // class CreateProfileVerified extends PetProfileEvent {
 //   CreateProfileVerified(
@@ -104,21 +130,28 @@ class SexChanged extends PetProfileEvent {
   String toString() => "SexChanged";
 }
 class HeightChanged extends PetProfileEvent {
-  final String hight;
+  final  String hight;
 
   HeightChanged(this.hight);
+  List<Object> get props => [
+    hight,
+
+  ];
 
   @override
   String toString() => "HeightChanged";
+
 }
 class BirthChanged extends PetProfileEvent {
-  var  _selectedDate;
+   var  _selectedDate;
 
-  BirthChanged(this._selectedDate);
+   BirthChanged(this._selectedDate);
 
-  @override
+   @override
   String toString() => "BirthChanged";
+
 }
+
 class BreadChanged extends PetProfileEvent {
    var breadtype;
 
@@ -143,4 +176,36 @@ class RegisterButtonTapped extends PetProfileEvent {
   String toString() => "RegisterButtonTapped";
 
 
+}
+
+class RegisterUser extends PetProfileEvent {
+  final String fname;
+  final String lname;
+  final String phone;
+  final String city;
+  final String state;
+  final String zip;
+  RegisterUser(this.fname, this.lname, this.phone, this.city, this.zip,this.state);
+
+  @override
+  String toString() => "SubmitProfileTapped";
+}
+class savePayment extends PetProfileEvent {
+  final String nameOnCard;
+  final String creditCardNumber;
+  final String expDate;
+  final String cvv;
+  savePayment(this.nameOnCard, this.creditCardNumber, this.expDate, this.cvv);
+
+  @override
+  String toString() => "savePayment";
+}
+class ChangePassword extends PetProfileEvent {
+  final String oldPassword;
+  final String newPasword;
+
+  ChangePassword(this.newPasword,this.oldPassword);
+
+  @override
+  String toString() => "SubmitProfileTapped";
 }

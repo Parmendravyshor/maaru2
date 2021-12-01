@@ -19,6 +19,7 @@ import 'package:maru/features/Account_setting/presentation/account_setting.dart'
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_profile/provider_profile1.dart';
 
@@ -52,6 +53,8 @@ import 'package:location/location.dart';
 
 import 'package:flutter/services.dart';
 import 'dart:math' show cos, sqrt, asin;
+import 'features/forgot/presentation/forgot_screen.dart';
+import 'features/login/presentation/bloc/bloc/login_event.dart';
 import 'features/provider_home/presentation/create_provider_home.dart';
 import 'features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'features/provider_home/presentation/upcoming_appointment_calender.dart';
@@ -145,7 +148,7 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: (SplashScreen())));
+        home: Scaffold(body: (HomeScreen())));
   }
 }
 

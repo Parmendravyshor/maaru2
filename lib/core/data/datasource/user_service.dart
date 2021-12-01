@@ -45,17 +45,17 @@ class UserService extends AuthSource {
     return _session.isValid();
   }
 
-  @override
-  Future<CognitoUserSession> emailLogin(EmailAuthParams params) {
-    CognitoUser _cognitoUser =
-    CognitoUser(params.email, _userPool, storage: _userPool.storage);
-
-    final authDetails = AuthenticationDetails(
-      username: params.email,
-      password: params.password,
-    );
-    return _cognitoUser.authenticateUser(authDetails);
-  }
+  // @override
+  // Future<CognitoUserSession> emailLogin(EmailAuthParams params)async {
+  //   CognitoUser _cognitoUser =
+  //   CognitoUser(params.email, _userPool, storage: _userPool.storage);
+  //
+  //   final authDetails = AuthenticationDetails(
+  //     username: params.email,
+  //     password: params.password,
+  //   );
+  //   return await _cognitoUser.authenticateUser(authDetails);
+  // }
 
 
   @override
@@ -89,17 +89,35 @@ class UserService extends AuthSource {
     return _cognitoUser.confirmPassword(otp, password);
   }
 
-  @override
-  Future<CognitoUserSession> emailSignup(EmailAuthParams params) {
-    final userAttributes = [
-      AttributeArg(name: 'email', value: params.email),
-    ];
-    try {
-    treturn( _userPool.signUp(params.email, params.password,
-          userAttributes: userAttributes));
+  // @override
+  // Future<CognitoUserSession> emailSignup(EmailAuthParams params) {
+  //   final userAttributes = [
+  //     AttributeArg(name: 'email', value: params.email),
+  //   ];
+  //   try {
+  //   treturn( _userPool.signUp(params.email, params.password,
+  //         userAttributes: userAttributes));
+  //
+  //   } catch (e) {
+  //     throw e;
+  //   }
+  // }
 
-    } catch (e) {
-      throw e;
-    }
+  @override
+  Future<void> forgetpassword(email) {
+    // TODO: implement forgetpassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<CognitoUserPoolData> emailLogin(EmailAuthParams params) {
+    // TODO: implement emailLogin
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<CognitoUserPoolData> emailSignup(EmailAuthParams params) {
+    // TODO: implement emailSignup
+    throw UnimplementedError();
   }
 }

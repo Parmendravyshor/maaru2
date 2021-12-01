@@ -38,10 +38,12 @@ class PetProfileParams {
   final String weight;
   final String birthDate;
   final String sex;
+  final String file;
 final String name;
   final String addMoreVaccine;
 
   PetProfileParams({
+    this.file,
     this.providerName,
     this.uploadVaccineRecord,
     this.walkingSchedule,

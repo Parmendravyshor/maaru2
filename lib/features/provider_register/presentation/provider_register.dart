@@ -219,7 +219,7 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
 
                                         else {
                                           BlocProvider.of<RegisterBloc>(context)
-                                              .add(RegisterButtonTapped());
+                                              .add(ProviderRegisterButtonTapped());
 
                                         }
                                         enabled = false;

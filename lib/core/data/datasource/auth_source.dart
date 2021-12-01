@@ -1,6 +1,9 @@
 
 //import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 
+import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+import 'package:maru/features/verify/domain/usecases/verify_code.dart';
+
 import '../../domain/usecases/email_auth_params.dart';
 import '../../error/exception.dart';
 
@@ -19,6 +22,8 @@ class EmailAlreadyInUseAuthException extends AuthException {}
 ///
 abstract class AuthSource {
 
-   Future<void> emailSignup(EmailAuthParams params);
-   Future<void> emailLogin(EmailAuthParams params);
+   Future<CognitoUserPoolData> emailSignup(EmailAuthParams params);
+   Future<CognitoUserPoolData> emailLogin(EmailAuthParams params);
+   Future<void>forgetpassword (email);
+   Future<bool> verifyOtp(VerifyParams params);
 }

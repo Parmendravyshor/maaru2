@@ -12,7 +12,7 @@ class ResetPassword implements UseCase<void, SetNewPasswordParams> {
   @override
   Future<Either<Failure, void>> call(SetNewPasswordParams params) async {
     return userRepository.setNewPassword(
-        email: params.email, otp: params.otp, password: params.password);
+       params);
   }
 }
 

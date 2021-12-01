@@ -22,7 +22,12 @@ class LoginButtonTapped extends LoginEvent {
   @override
   String toString() => "LoginButtonTapped";
 }
+class ProviderLoginButtonTapped extends LoginEvent {
+  ProviderLoginButtonTapped();
 
+  @override
+  String toString() => "ProviderLoginButtonTapped";
+}
 /// Email Changed
 ///
 /// This event is fired when Email is changed

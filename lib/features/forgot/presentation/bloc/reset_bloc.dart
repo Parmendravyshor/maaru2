@@ -1,8 +1,10 @@
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
 import 'package:maru/features/forgot/Domain/usecases/reset_password.dart';
 import 'package:maru/features/forgot/Domain/usecases/send_reset_otp.dart';
+import 'package:maru/features/verify/presentation/bloc/verify_state.dart';
 
 import 'reset_event.dart';
 import 'reset_state.dart';
@@ -11,9 +13,10 @@ import 'reset_state.dart';
 /// Bloc for Register page
 ///
 class ResetBloc extends Bloc<ResetEvent, ResetState> {
+  final ForgetPassword _forgetPassword;
   final SendResetPasswordOtp _sendResetPwdOtp;
   final ResetPassword _resetpwd;
-  ResetBloc(this._sendResetPwdOtp, this._resetpwd) : super();
+  ResetBloc(this._sendResetPwdOtp, this._resetpwd,this._forgetPassword) : super();
   String name = "";
   String email = "";
   String password = "";
@@ -33,12 +36,13 @@ class ResetBloc extends Bloc<ResetEvent, ResetState> {
       }
     } else if (event is ResetButtonTapped) {
       yield ResetInProgress();
-      final result = await _sendResetPwdOtp.call(email);
+      final result = await _sendResetPwdOtp(email);
       yield* result.fold((l) async* {
         yield ResetFailure(
             "Failed to send reset password link..please try again.");
-      }, (r) async* {
-        step = 2;
+      },
+              (r) async* {
+       step = 2;
         yield ResetPasswordMessageSent(
             "Password reset link sent to your email");
       });
@@ -51,11 +55,21 @@ class ResetBloc extends Bloc<ResetEvent, ResetState> {
             "Failed to send reset password link..please try again.");
       }, (r) async* {
         step = 2;
-        yield ResetPasswordMessageSent(
+        yield PasswordResetSuccess(
             "Password reset link sent to your email");
       });
     }
+    else if (event is ForgetVerify) {
+      yield VerifyInProgress();
+      final res = await _forgetPassword(event.email);
+      if (res.isRight()) {
+        yield ResendOtpSuccesss();
+      } else {
+        yield ResetFailure("Resend OTP failed.. please try again later");
+      }
+    }
+  }
   }
 
 
-}
+

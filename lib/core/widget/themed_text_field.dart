@@ -66,7 +66,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         labelText: widget.placeholder,
-        contentPadding: EdgeInsets.only(left: 20),
+        contentPadding: EdgeInsets.only(left: 0),
         labelStyle: widget.textStyle);
   }
 

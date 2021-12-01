@@ -233,9 +233,11 @@ class _ToggleButton3State extends State<ToggleButton3> {
         ],
 
         onPressed: (int index) {
-         BlocProvider.of<PetProfileBloc>(context)
-             .add(SexChanged(index.toString()));
+
           setState(() {
+
+            BlocProvider.of<PetProfileBloc>(context)
+                .add(SexChanged(index.toString()));
             for (int i = 0; i < isSelected.length; i++) {
               isSelected[i] = i == index;
             }

@@ -15,23 +15,26 @@ class SaveUserProfile implements UseCase<void, UserProfileParams> {
 
 class UserProfileParams {
   final String profileImage;
-  final String firstName;
-  final String lastName;
-  final String email;
+
   final String city;
   final String state;
   final String zipCode;
   final String password;
-  final String payment;
+final String phone;
+final String email;
+final String fname;
+  final String lname;
+final String oldPassword;
+final String  NewPassword;
+  UserProfileParams( {this.email, this.fname, this.lname,this.oldPassword, this.NewPassword,
 
-  UserProfileParams(
-      {this.email,
-      this.city,
+       this.phone,
+        this.city,
       this.state,
       this.zipCode,
       this.profileImage,
-      this.firstName,
-      this.lastName,
       this.password,
-      this.payment});
+      }
+
+      );
 }

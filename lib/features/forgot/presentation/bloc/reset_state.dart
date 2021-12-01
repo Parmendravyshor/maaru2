@@ -15,6 +15,18 @@ class ResetInProgress extends ResetState {
   @override
   String toString() => "ResetInProgress";
 }
+class VerifyInProgress extends ResetState {
+  VerifyInProgress() : super();
+
+  @override
+  String toString() => "VerifyInProgress";
+}
+class ResendOtpSuccesss extends ResetState {
+  ResendOtpSuccesss() : super();
+
+  @override
+  String toString() => "ResendOtpSuccesss";
+}
 
 class ResetSuccess extends ResetState {
   ResetSuccess() : super();

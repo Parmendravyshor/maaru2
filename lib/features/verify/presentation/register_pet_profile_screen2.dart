@@ -25,91 +25,17 @@ class CreateRegisterPetProfile2 extends StatefulWidget {
 }
 
 class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
-  @override
-  File _image;
-  final picker = ImagePicker();
 
-  void dispose() {
-    //  _nameEditingController.dispose();
-    //  _controller.dispose();
-    super.dispose();
-  }
-
-  List<int> userSearchItems = [];
-  final GlobalKey<PopupMenuButtonState<int>> _key = GlobalKey();
-  var nameTECs = <TextEditingController>[];
-  var ageTECs = <TextEditingController>[];
-  var jobTECs = <TextEditingController>[];
-  var containers = <Container>[];
-
-  Container createContainer() {
-    var nameController = TextEditingController();
-    var ageController = TextEditingController();
-    var jobController = TextEditingController();
-    nameTECs.add(nameController);
-    ageTECs.add(ageController);
-    jobTECs.add(jobController);
-    return Container(
-      color: Color(0xFFffffff),
-      child: Column(
-        //  mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          //Text('Person ${cards.length + 1}'),
-          //  if (priceupdate_value)
-          TextFormField(
-            textInputAction: TextInputAction.next,
-            onChanged: (text) {},
-            //  controller: _nameEditingController,
-            decoration: InputDecoration(
-                hintText: 'Name', hintStyle: MaaruStyle.text.greyDisable),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          // if (priceupdate_value)
-          TextFormField(
-            textInputAction: TextInputAction.next,
-            onChanged: (text) {},
-            //   controller: _nameEditingController,
-            decoration: InputDecoration(
-                hintText: 'How many times a day?',
-                hintStyle: MaaruStyle.text.greyDisable),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          //    if (priceupdate_value)
-          TextFormField(
-            maxLines: 3,
-            decoration: InputDecoration(
-                hintText: 'Note',
-                hintStyle: MaaruStyle.text.greyDisable,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    borderSide: BorderSide(color: Colors.grey[50]))),
-          ),
-        ],
-      ),
-    );
-  }
-
+  TextEditingController _breedTypeController;
   @override
   void initState() {
+    _breedTypeController = TextEditingController();
     super.initState();
-    containers.add(createContainer());
-    //  _nameEditingController = TextEditingController();
-    // _controller = TextEditingController();
   }
-
-  _onDone() {
-    List<PersonEntry> entries = [];
-    for (int i = 0; i < containers.length; i++) {
-      var name = nameTECs[i].text;
-      var age = ageTECs[i].text;
-      var job = jobTECs[i].text;
-      entries.add(PersonEntry(name, age, job));
-    }
-    Navigator.pop(context, entries);
+  @override
+  void dispose() {
+    _breedTypeController = TextEditingController();
+    super.dispose();
   }
 
   @override
@@ -177,6 +103,9 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                           Radius.circular(20.0)),
                                       borderSide:
                                           BorderSide(color: Colors.grey[50]))),
+                              onChanged: (text){
+
+                              },controller:_breedTypeController
                             ),
                             SizedBox(
                               height: 30,
@@ -253,119 +182,3 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
   }
 }
 
-class sanvn extends StatefulWidget {
-  @override
-  State<sanvn> createState() => _sanvnState();
-}
-
-class _sanvnState extends State<sanvn> {
-  int cntwidth = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          SafeArea(
-            child: Stack(
-              children: [
-                // AnimatedContainer(
-                //   color: Colors.green,
-                //   height: 80,
-                //   width: cntwidth.toDouble(),
-                //   duration: Duration(seconds: 1),
-                //   curve: Curves.ease,
-                // ),
-                Container(
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  height: 80,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.blue,
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.indigoAccent,
-                      foregroundColor: Colors.white,
-                    ),
-                    title: Text('Tile n°3'),
-                    subtitle: Text('SlidableDrawerDelegate'),
-                  ),
-                ),
-
-                Slidable(
-                  actionPane: SlidableDrawerActionPane(),
-                  actionExtentRatio: 0.25,
-
-                  // Listener(
-                  //  onPointerMove: (moveEvent) {
-                  //    if (moveEvent.delta.dx > 0) {
-                  //      print("swipe right");
-                  //      setState(() {
-                  //        if (cntwidth == 0) {
-                  //          cntwidth = 400;
-                  //        }
-                  //      });sanvn
-                  //    }
-                  //    if (moveEvent.delta.dx < 0) {
-                  //      setState(() {
-                  //        if (cntwidth == 400) {
-                  //          cntwidth = 0;
-                  //        }
-                  //      });
-                  //    }
-                  //  },
-                  child: Container(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.blue,
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.only(left: 20, right: 20),
-                      height: 80,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.blue,
-                      ),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.indigoAccent,
-                          foregroundColor: Colors.green,
-                        ),
-                        title: Text('Tile n°3'),
-                        subtitle: Text('SlidableDrawerDelegate'),
-                      ),
-                    ),
-                  ),
-
-                  actions: <Widget>[
-                    IconSlideAction(
-                      caption: 'Archive',
-                      color: Colors.green,
-                      icon: Icons.archive,
-                      //onTap: () => _showSnackBar('Archive'),
-                    ),
-                  ],
-                  secondaryActions: <Widget>[
-                    IconSlideAction(
-                      caption: 'Archive',
-                      color: Colors.red,
-                      icon: Icons.archive,
-                      //onTap: () => _showSnackBar('Archive'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container finction() {
-    return Container();
-  }
-}

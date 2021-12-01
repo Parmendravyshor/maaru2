@@ -45,3 +45,11 @@ class EmailChanged extends ResetEvent {
   @override
   String toString() => "EmailChanged";
 }
+class ForgetVerify extends ResetEvent {
+  final String email;
+
+  ForgetVerify(this.email, );
+
+  @override
+  String toString() => "ForgetVerify";
+}

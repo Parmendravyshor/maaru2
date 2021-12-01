@@ -189,7 +189,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                                   state
                                                   is LoginFormValidationFailure) {
                                                 BlocProvider.of<LoginBloc>(context)
-                                                    .add(event.LoginButtonTapped());
+                                                    .add(event.ProviderLoginButtonTapped());
                                                 //  AlertManager.showSuccessMessage( "Login Success", context);
 
 

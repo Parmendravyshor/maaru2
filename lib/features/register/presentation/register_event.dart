@@ -24,7 +24,15 @@ class RegisterButtonTapped extends RegisterEvent {
   List<Object> get props => [RegisterButtonTapped];
 
 }
+class ProviderRegisterButtonTapped extends RegisterEvent {
 
+  ProviderRegisterButtonTapped();
+
+  @override
+  String toString() => "ProviderRegisterButtonTapped";
+  List<Object> get props => [RegisterButtonTapped];
+
+}
 /// Name Changed
 ///
 /// This event is fired when Name is changed

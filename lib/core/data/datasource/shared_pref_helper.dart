@@ -4,18 +4,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class SharedPrefHelper {
   Future<void> userLogin();
-  Future<void> saveIdJwtToken(String jwtToken);
+  Future<void> saveIdJwtToken(String accessToken);
   Future<void> saveEmail(String email);
+  Future<void> savefname(String key,String value);
+  Future<void> savelname(String key,String value);
   Future<void> savePassword(String password);
   Future<void> savePayload(String payload);
   Future<void> saveExpiryTime(String expiryTime);
   Future<void> saveString(String key, String value);
   Future<void> saveBoolean(String key, bool value);
   Future<void> saveInt(String key, int value);
+  Future <void>saveImage(String key, value);
   Future<void> saveDouble(String key, double value);
   String gettoken();
+  String getfname();
+  String getlname();
   String getEmail();
-  String getPassword();
+  String getImage();
+  int getPassword();
   String getPayload();
   String getExpiryTime();
   double getDouble(String key, double defaultValue);
@@ -27,16 +33,19 @@ abstract class SharedPrefHelper {
 
 class SharedPrefHelperImpl implements SharedPrefHelper {
   SharedPreferences sharedPreferences;
+
   SharedPrefHelperImpl(this.sharedPreferences);
+
   @override
   String gettoken() {
     return sharedPreferences.getString(MaruConstant.token) ?? "";
   }
 
   @override
-  Future<void> saveIdJwtToken(String jwtToken) {
-    return sharedPreferences.setString(MaruConstant.token, jwtToken);
+  Future<void> saveIdJwtToken(String accessToken) {
+    return sharedPreferences.setString(MaruConstant.token, accessToken);
   }
+
   //
   // @override
   // Future<void> userLogin() {
@@ -49,8 +58,8 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
   }
 
   @override
-  String getPassword() {
-    return sharedPreferences.getString(MaruConstant.password) ?? "";
+  int getPassword() {
+    return sharedPreferences.getInt(MaruConstant.id);
   }
 
   @override
@@ -60,8 +69,9 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
 
   @override
   Future<void> savePassword(String password) {
-    return sharedPreferences.setString(MaruConstant.password, password);
+    return sharedPreferences.setString(MaruConstant.id, password);
   }
+
   @override
   String getStringByKey(String key, String defaultValue) {
     return sharedPreferences.getString(key) ?? defaultValue;
@@ -137,4 +147,37 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
     // TODO: implement userLogin
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> saveImage(String key, value) {
+    return sharedPreferences.setString(key, value);
+  }
+
+  @override
+  String getImage() {
+    return sharedPreferences.getString(MaruConstant.img) ?? "";
+  }
+
+  @override
+  Future<void> savefname(String key, String value) {
+    return sharedPreferences.setString(MaruConstant.first_name, '');
+  }
+
+  @override
+  String getfname() {
+    // TODO: implement getfname
+    return sharedPreferences.getString(MaruConstant.first_name,);
+  }
+
+  @override
+  String getlname() {
+    sharedPreferences.getString(MaruConstant.last_name,);
+  }
+
+  @override
+  Future<void> savelname(String key, String value) {
+    return sharedPreferences.setString(MaruConstant.last_name, '');
+  }
+
+
 }

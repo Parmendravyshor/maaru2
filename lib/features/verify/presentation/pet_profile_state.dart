@@ -12,7 +12,26 @@ class ResgiterInitial extends PetProfileState {
   String toString() => "ResgiterInitial";
 
 }
+class UpdatedBirthDate extends PetProfileState {
+  String birthdate;
 
+
+
+  UpdatedBirthDate({this.birthdate});
+ //add this line
+  @override
+  List<Object> get props => [birthdate];
+  @override
+  String toString() => "ResgiterInitial{$birthdate}";
+
+  }
+
+//CounterState._();
+//
+//   CounterState({this.counter}); //add this line
+//
+//   factory CounterState.initial() {
+//     return CounterState._()..counter = 0;//
 class RegisterInProgress extends PetProfileState {
   RegisterInProgress() : super();
 
@@ -20,7 +39,20 @@ class RegisterInProgress extends PetProfileState {
   String toString() => "RegisterInProgress";
 
 }
+class UserPetProfileButtonTapped extends PetProfileState {
+  UserPetProfileButtonTapped() : super();
 
+  @override
+  String toString() => "UserPetProfileButtonTapped";
+
+}
+class UserChangePasswordButtonTapped extends PetProfileState {
+  UserChangePasswordButtonTapped() : super();
+
+  @override
+  String toString() => "UserPetProfileButtonTapped";
+
+}
 class RegisterSuccess extends PetProfileState {
   RegisterSuccess() : super();
 

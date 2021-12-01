@@ -15,7 +15,7 @@ class EmailAuthParams extends Equatable {
   /// last name to use for login
   final String lName;
 final String userType;
-  EmailAuthParams(
+  const EmailAuthParams(
       {@required this.email,
       @required this.password,
      this.first_name,

@@ -13,6 +13,7 @@ import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
+import 'package:maru/features/provider_login/presentation/login_provider_screen.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 
 import 'bloc/verify_bloc.dart';
@@ -75,7 +76,7 @@ class ProviderOtpWidget extends State<ProviderOtp> {
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) {
-                                      return TestApp();
+                                      return LoginProviderScreen();
                                     }));
                           });
                           return Container();
@@ -183,7 +184,7 @@ class ProviderOtpWidget extends State<ProviderOtp> {
 
                                     if (_otpController.text.length < 5) return;
                                     BlocProvider.of<VerifyBloc>(context).add(
-                                        CodeEntered(
+                                        CodeEnteredProvider(
                                             _otpController.text,
                                             email,
                                             password,

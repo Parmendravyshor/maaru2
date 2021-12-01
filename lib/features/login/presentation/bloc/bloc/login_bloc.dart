@@ -1,39 +1,32 @@
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/domain/usecases/resend_verification_code.dart';
 import 'package:maru/core/error/failure.dart';
-import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
-import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
-import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
-import 'package:maru/features/verify/domain/usecases/verify_code.dart';
+import 'package:maru/features/provider_login/domain/usecases/provider_email_login.dart';
+import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
+
 import 'login_event.dart';
 import 'login_state.dart';
-
-//import 'package:fluttertoast/fluttertoast.dart';
-
-/// Bloc for Register page
-///
-
-import 'package:email_validator/email_validator.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 
 /// Bloc for Register page
 ///
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final EmailSignin _emailSignin;
-  final VerifyCode _verifyCode;
-  //final GetProfile getprofile;
- // final CreateProfile createProfile;
+  final ProviderEmailSignin _providerEmailSignin;
+  final ResendCode _resendCode;
+ // final GetProfile getprofile;
+  final SaveUserProfile saveUserProfile;
 
   LoginBloc(
-      this._emailSignin, this._verifyCode, )
+      this._emailSignin, this._resendCode,this.saveUserProfile,this._providerEmailSignin )
       : super();
   String email = "";
   String password = "";
-String code = '';
+
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is EmailChanged) {
@@ -49,7 +42,7 @@ String code = '';
         yield LoginFormValidationFailure();
       }
     } else if (event is PasswordChanged) {
-      if (event.password.isNotEmpty && event.password.length > 8 ){
+      if (event.password.isNotEmpty && event.password.length > 5) {
         password = event.password;
       } else {
         password = "";
@@ -63,11 +56,10 @@ String code = '';
     } else if (event is LoginButtonTapped) {
       yield LoginInProgress();
       final result = await _emailSignin.call(EmailAuthParams(
-          email: email, password: password, first_name: "", lName: ""));
+          email: email, password: password, first_name: "Tes", lName: "Test"));
       yield* result.fold((l) async* {
-        if (result.isLeft()) {
-          yield VerificationNeeded();
-          final res = await _verifyCode(VerifyParams(code,email ));
+        if (l is UserNotConfirmedFailure) {
+          final res = await _resendCode(email);
           if (res.isRight()) {
             yield VerificationNeeded();
           } else {
@@ -78,7 +70,44 @@ String code = '';
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
-        //await getprofile(NoParams());
+        // else if (event is RegisterButtonTapped) {
+        // yield RegisterInProgress();
+        // final result =
+        await saveUserProfile(UserProfileParams(
+        city: '',
+        zipCode: '',
+        password: '',
+        state: '',
+        profileImage: '',
+        phone: '',
+        ));
+        // yield* result.fold((l) async* {
+        // yield RegisterFailure("Profile failed..please try again.. $l");
+        // }, (r) async* {
+        // /// step = 2;
+        // yield RegisterSuccess();
+        // });
+        // }
+        yield LoginSuccess();
+      });
+    }
+    else if (event is ProviderLoginButtonTapped) {
+      yield LoginInProgress();
+      final result = await _providerEmailSignin.call(EmailAuthParams(
+          email: email, password: password, first_name: "Tes", lName: "Test"));
+      yield* result.fold((l) async* {
+        if (l is UserNotConfirmedFailure) {
+          final res = await _resendCode(email);
+          if (res.isRight()) {
+            yield VerificationNeeded();
+          } else {
+            yield LoginFailure("Signin failed..please try again.. $l");
+          }
+        } else {
+          yield LoginFailure("Signin failed..please try again.. $l");
+        }
+        //yield LoginFailure("Signin failed..please try again.. $l");
+      }, (r) async* {
         yield LoginSuccess();
       });
     }
@@ -90,5 +119,5 @@ String code = '';
 
   @override
   // TODO: implement initialState
-  LoginState get initialState => LoginInitial();
+  get initialState => LoginInitial();
 }
