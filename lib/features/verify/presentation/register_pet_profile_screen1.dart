@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:maru/core/widget/screen_icon2.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/chat/presentation/chatt_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_event.dart';
@@ -136,7 +138,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child:
             BlocBuilder<PetProfileBloc, PetProfileState>(builder: (context, state) {
-              if (state is RegisterSuccess) {
+              if (state is PetRegisterSuccess) {
                 AlertManager.showErrorMessage(
                     "otp send your register email", context);
                 SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -180,7 +182,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   GestureDetector(
-                                    child: Container(
+                                    child:
+                                    Container(
 
                                       width: 200.0,
                                       height: 200.0,
@@ -420,8 +423,9 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
                                     //                     text: 'Neighter',
                                     //                   ),
                                     //                 ])),
-                                    ToggleButton3(),
-                                    new SizedBox(
+
+                            ToggleButton3(),
+                                     SizedBox(
                                       height: 40.0,
                                     ),
                                     Row(
@@ -493,7 +497,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
                                                 // Navigator.of(context).push(
                                                 //     MaterialPageRoute(
                                                 //         builder: (_) =>
-                                                //             CreateRegisterPetProfile2()));
+                                                //             chatScreen()));
                                               }
                                             },
                                             child: Container(
@@ -664,3 +668,4 @@ class LocalDataHelper{
   }
 
 }
+

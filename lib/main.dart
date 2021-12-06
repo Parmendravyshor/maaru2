@@ -15,57 +15,31 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:maru/features/Account_setting/presentation/account_setting.dart';
-import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
-import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
-import 'package:maru/features/Home/presentation/home_sceen.dart';
-import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
-import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_profile/provider_profile1.dart';
-
 import 'package:maru/features/splash/view/splash_screen.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen3.dart';
+import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:responsive_framework/responsive_wrapper.dart';
-import 'package:responsive_framework/utils/scroll_behavior.dart';
-
 import 'core/theme/maaru_style.dart';
-
 import 'core/utils.dart';
-import 'features/Account_setting/presentation/change_password_screen.dart';
-import 'features/Account_setting/presentation/edit_profile_screen.dart';
-import 'features/Account_setting/presentation/payment_screen.dart';
-import 'features/Account_setting/presentation/transition.dart';
-import 'features/Book_Appointment/presentation/book_appointment_screen2.dart';
-import 'features/Book_Appointment/presentation/book_appointment_screen3.dart';
-import 'features/Book_Appointment/presentation/provider_confirm_book.dart';
-import 'features/Book_Appointment/presentation/reviewe_screen.dart';
-import 'features/Home/presentation/appoinment_screen.dart';
 import 'features/Home/presentation/chat_screen.dart';
-import 'features/Home/presentation/create_home_screen.dart';
-import 'features/Home/presentation/custom_card.dart';
-import 'features/Home/presentation/pet_profile.dart';
 import 'features/Home/presentation/search_screen.dart';
+import 'features/chat/presentation/chatt_screen.dart';
 import 'features/faketest.dart';
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:path_provider/path_provider.dart';
+
 
 import 'package:location/location.dart';
 
-import 'package:flutter/services.dart';
 import 'dart:math' show cos, sqrt, asin;
-import 'features/forgot/presentation/forgot_screen.dart';
-import 'features/login/presentation/bloc/bloc/login_event.dart';
-import 'features/provider_home/presentation/create_provider_home.dart';
-import 'features/provider_home/presentation/provider_accept_decline_screen.dart';
-import 'features/provider_home/presentation/upcoming_appointment_calender.dart';
-import 'features/provider_home/presentation/upcoming_appointment_screen.dart';
-import 'features/provider_profile/provider_profile2.dart';
-import 'features/register/presentation/signup_screen.dart';
-import 'features/verify/presentation/register_pet_profile_screen2.dart';
-import 'features/verify/presentation/register_pet_profile_screen3.dart';
-import 'features/view_pet_profile/presentation/view_pet_profile1.dart';
-import 'features/view_pet_profile/presentation/view_pet_profile2.dart';
-import 'features/view_pet_profile/presentation/view_pet_profile3.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 void main()async {
@@ -148,9 +122,10 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: (HomeScreen())));
+        home: Scaffold(body: (CreateRegisterPetProfile4())));
   }
 }
+
 
 
 class MapView extends StatefulWidget {

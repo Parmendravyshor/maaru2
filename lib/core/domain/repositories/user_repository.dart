@@ -19,6 +19,7 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> providerEmailSignin(EmailAuthParams params);
   Future<Either<Failure, void>> providerEmailSignup(EmailAuthParams params);
   Future<Either<Failure, void>> resendOtp(String email);
+  Future<Either<Failure, void>> getTextFile(params);
   Future<Either<Failure, void>> sendPasswordResetEmail(String email);
 
   Future<Either<Failure, void>> setNewPassword(

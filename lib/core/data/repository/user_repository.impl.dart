@@ -49,7 +49,7 @@ import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:flutter/scheduler.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as https;
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 class UserRepositoryImpl implements UserRepository {
@@ -99,7 +99,7 @@ class UserRepositoryImpl implements UserRepository {
 
       Map res = json.decode(response.body);
       print(res);
-      await sharedPrefHelper.savelname("accessToken", res['accessToken']);
+      await sharedPrefHelper.saveString("accessToken", res['accessToken']);
       print(res['accessToken']);
       // await sharedPrefHelper.savePassword(res[MaruConstant.id]);
       //   print(res);
@@ -180,34 +180,81 @@ class UserRepositoryImpl implements UserRepository {
       PetProfileParams params) async {
     try {
       final img = sharedPrefHelper.getImage();
-      print(img);
+      //  print(img);
       final token = _prefHelper.getStringByKey(MaruConstant.token, "",);
-      print(token);
+      // print(token);
 
       var headers = {
         "access-token": token
       };
-      var request;
-      // var response1 = request.files.add(
-      //     await http.MultipartFile.fromPath('profile_pic', img));
-      var map = Map<String, String>();
-      map [MaruConstant.age] = params.age;
-      map[MaruConstant.pet_name] = params.petName;
-      map[MaruConstant.birth_date] = '1/1/2021';
-      map[MaruConstant.breed_type] = params.breadType;
-      map[MaruConstant.weight] = params.weight;
-      map[MaruConstant.height] = params.height;
-      map[MaruConstant.sex] = 'djhd';
-      map[MaruConstant.img] = img;
 
-      final response = await http.post(
-          MaruConstant.createpProfile,
-          headers: headers,
-          body: map
+      // map[ MaruConstant.pet_name] ='ddd';
+      // map[MaruConstant.breed_type]='ddd';
+      // map[MaruConstant.age] = '1';
+      // map[MaruConstant.height]= '2';
+      // map[MaruConstant.weight] ='3';
+      // map[MaruConstant.known_allergies] = params.known_allergies;
+      // map[MaruConstant.pet_needs]= params.petneeds;
+      // map[MaruConstant.name] = params.name;
+      // map[MaruConstant.birth_date] ='2021-09-07';
+      // map[MaruConstant.note] = params.notes;
+      // map[MaruConstant.sex]= 'Male';
+      // map[MaruConstant.medication] = params.medication;
+      // map[MaruConstant.name] = params.name;
+      // map[MaruConstant.times_a_day] = params.times_aday;
 
+      final request = await http.MultipartRequest('POST', MaruConstant.createpProfile);
+      request.fields.addAll(
+
+          {
+
+            MaruConstant.pet_name: params.petName,
+            MaruConstant.sex: 'Male',
+            MaruConstant.breed_type :params.breadType,
+            MaruConstant.age: params.age,
+            MaruConstant.height:params.height,
+            MaruConstant.weight:params.weight,
+            MaruConstant.birth_date:params.birthDate,
+            MaruConstant.known_allergies:params.known_allergies,
+            MaruConstant.times_a_day:params.times_aday,
+            MaruConstant.medication:params.medication,
+            MaruConstant.pet_needs:params.petneeds,
+            MaruConstant.name:params.name,
+            MaruConstant.name:params.name,
+            MaruConstant.note:params.notes,
+            MaruConstant.age:params.age,
+            MaruConstant.walking_schedule:params.walkingSchedule,
+
+            // 'breed_type': 'bog',
+            // 'pet_name': 'bog',
+            // 'age': '3',
+            // 'weight': '10',
+            // 'height': '3',
+            // 'known_allergies': '',
+            // 'pet_needs': '',
+            // 'birth_date': '2021-09-07',
+            // 'sex': 'Male',
+            // 'medication': '',
+            // 'name': '',
+            // 'times_a_day': '',
+            // 'name': 'gfdgfg',
+            // 'times_a_day': '3',
+            // 'note': ''
+          }
+        // map
       );
-      print("Register Success  ${response.body}");
+      print(request);
+      request.files.add(await http.MultipartFile.fromPath('img', img));
+      request.headers.addAll(headers);
 
+      http.StreamedResponse response = await request.send();
+      print(await response.stream.bytesToString());
+      if (response.statusCode == 200) {
+        print(await response.stream.bytesToString());
+      }
+      else {
+        print(response.reasonPhrase);
+      }
       return
         Right(Void);
     }
@@ -245,7 +292,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Failure, void>> savePetProfile(PetProfileParams params) async {
     try {
       var map = new Map<String, String>();
-      map [MaruConstant.age] = params.age;
+      map [MaruConstant.age.toString()] = params.age.toString();
       map[MaruConstant.birth_date] = params.birthDate;
       // map[ MaruConstant.img] = params.profileImage;
       // map [MaruConstant.password] = params.password;
@@ -418,7 +465,7 @@ class UserRepositoryImpl implements UserRepository {
       map[ MaruConstant.cvv] = params.cvv;
       map[ MaruConstant.exp_date] = params.expDate;
       final response = await http.post(MaruConstant.saveUserPayment,
-headers: headers,
+          headers: headers,
           body: map
       );
       print("Register Success  ${response.body}");
@@ -537,7 +584,7 @@ headers: headers,
       map[MaruConstant.change_password] = params.NewPassword;
       // map[ MaruConstant.email] = params.email;
       final response = await http.post(MaruConstant.changePassword,
-headers: headers,
+          headers: headers,
           body: map
       );
       print("Register Success  ${response.body}");
@@ -611,7 +658,7 @@ headers: headers,
           body: map
       );
       Map res = json.decode(response.body);
-    print(res);
+      print(res);
       return
         Right('Otp sent your register email');
     }
@@ -621,5 +668,12 @@ headers: headers,
       return Left(CacheFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> getTextFile(params) {
+    // TODO: implement getTextFile
+    throw UnimplementedError();
+  }
+
 
 }

@@ -54,23 +54,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: EdgeInsets.only(
                                     top: 15, right: 10, left: 5),
                                 child: TextFormField(
-                                  // cursorColor: Colors.black,
+                                                // cursorColor: Colors.black,
                                   decoration: InputDecoration(
-                                      enabledBorder: new OutlineInputBorder(
+                                      enabledBorder:  OutlineInputBorder(
                                           borderRadius:
-                                              new BorderRadius.circular(10.7),
-                                          borderSide: new BorderSide(
+                                               BorderRadius.circular(10.7),
+                                          borderSide:  BorderSide(
                                               color: Colors.grey[50],
                                               width: 1.0)),
-                                      focusedBorder: new OutlineInputBorder(
+                                      focusedBorder:  OutlineInputBorder(
                                           borderRadius:
-                                              new BorderRadius.circular(10.7),
-                                          borderSide: new BorderSide(
+                                               BorderRadius.circular(10.7),
+                                          borderSide:  BorderSide(
                                               color: Colors.grey[50],
                                               width: 1.0)),
                                       hintText: 'Search',
                                       hintStyle: MaaruStyle.text.greyDisable,
-                                      contentPadding: EdgeInsets.fromLTRB(
+                                      contentPadding: const EdgeInsets.fromLTRB(
                                           20.0, 15.0, 25.0, 10.0),
                                       fillColor: Colors.white,
                                       suffixIcon: Image.asset(
@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       )),
                                 )),
                             //  ),
-                            SizedBox(
+                            const  SizedBox(
                               height: 30,
                             ),
                             InkWell(
@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       builder: (_) => ViewPetProfile()));
                                 },
                                 child: HorizList()),
-                            SizedBox(
+                           const SizedBox(
                               height: 30,
                             ),
                             Padding(
@@ -292,9 +292,8 @@ class HorizList extends StatelessWidget {
     // ignore: prefer_typing_uninitialized_variables
     final List _hotels = [10];
 
-    return Expanded(
-    flex: 2,
-    child:
+    return
+
       Container(
         height: 240,
         child: ListView.builder(
@@ -346,6 +345,6 @@ class HorizList extends StatelessWidget {
                     // alignment: Alignment.center,
                     ));
           },
-        )));
+        ));
   }
 }

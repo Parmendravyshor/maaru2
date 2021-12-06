@@ -20,6 +20,7 @@ class PetProfileParams {
   final String petName;
   final String providerName;
   final String petVaccine;
+  final String known_allergies;
   final String uploadVaccineRecord;
   final String walkingSchedule;
   final String feedingSchedule;
@@ -40,9 +41,14 @@ class PetProfileParams {
   final String sex;
   final String file;
 final String name;
+final String petneeds;
+final String times_aday;
   final String addMoreVaccine;
 
   PetProfileParams({
+    this.times_aday,
+    this.petneeds,
+    this.known_allergies,
     this.file,
     this.providerName,
     this.uploadVaccineRecord,

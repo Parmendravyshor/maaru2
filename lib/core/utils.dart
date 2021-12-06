@@ -5,6 +5,9 @@ import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/notification.dart';
 import 'package:maru/core/data/datasource/storage.dart';
+import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
+import 'package:maru/features/chat/domain/usecases/get_text_file.dart';
+import 'package:maru/features/chat/presentation/chat_bloc.dart';
 import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
 
 import 'package:maru/features/forgot/Domain/usecases/reset_password.dart';
@@ -57,6 +60,8 @@ void _registerBloc(KiwiContainer container) {
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
   container.registerFactory(
     (c) => VerifyBloc(c.resolve(), c.resolve(),c.resolve(),c.resolve(), c.resolve() ));
+  container.registerFactory(
+          (c) => ChatBloc(c.resolve(), c.resolve(),c.resolve() ));
 }
 
 void _registerUseCases(KiwiContainer container) {
@@ -74,6 +79,8 @@ void _registerUseCases(KiwiContainer container) {
    container.registerFactory((c) => ResetPassword(c.resolve()));
   container.registerFactory((c) => SaveUserProfile(c.resolve()));
   container.registerFactory((c) => SaveChangePassword(c.resolve()));
+  container.registerFactory((c) => SaveUserPayment(c.resolve()));
+  container.registerFactory((c) => GetTextFile(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 

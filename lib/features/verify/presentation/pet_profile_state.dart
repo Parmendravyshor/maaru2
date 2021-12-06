@@ -46,6 +46,13 @@ class UserPetProfileButtonTapped extends PetProfileState {
   String toString() => "UserPetProfileButtonTapped";
 
 }
+class pet3rofileButtonTapped extends PetProfileState {
+  pet3rofileButtonTapped() : super();
+
+  @override
+  String toString() => "pet3rofileButtonTapped";
+
+}
 class UserChangePasswordButtonTapped extends PetProfileState {
   UserChangePasswordButtonTapped() : super();
 
@@ -53,11 +60,18 @@ class UserChangePasswordButtonTapped extends PetProfileState {
   String toString() => "UserPetProfileButtonTapped";
 
 }
-class RegisterSuccess extends PetProfileState {
-  RegisterSuccess() : super();
+class SavePaymentButtonTapped extends PetProfileState {
+  SavePaymentButtonTapped() : super();
 
   @override
-  String toString() => "RegisterSuccess";
+  String toString() => "SavePaymentButtonTapped";
+
+}
+class PetRegisterSuccess extends PetProfileState {
+  PetRegisterSuccess() : super();
+
+  @override
+  String toString() => "PetRegisterSuccess";
 
 
 }

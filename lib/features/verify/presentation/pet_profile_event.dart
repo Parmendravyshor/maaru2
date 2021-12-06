@@ -8,6 +8,7 @@ class PetProfileRegistered extends PetProfileEvent {
   @override
   String toString() => "PetProfileRegistered";
 }
+
 class createPetProfile extends PetProfileEvent {
   createPetProfile();
 
@@ -47,11 +48,15 @@ class profileImageChanged extends PetProfileEvent {
   @override
   String toString() => "profileImageChanged";
 }
+class KnowAllergies extends PetProfileEvent {
+  final String allergies;
+  KnowAllergies(this.allergies);
+
+  @override
+  String toString() => "KnowAllergies";
+}
 class BirthDate extends PetProfileEvent {
   String birthdate;
-
-
-
   BirthDate({this.birthdate}); //add this line
   @override
   List<Object> get props => [birthdate];
@@ -60,54 +65,9 @@ class BirthDate extends PetProfileEvent {
 
 }
 
-
-// class CreateProfileVerified extends PetProfileEvent {
-//   CreateProfileVerified(
-//
-//       this.gender,
-//       this.petName,
-//
-//       this.age,
-//
-//       this.breadType,
-//       this.height,
-//       this.weight,
-//       this.birthDate,
-//       this.sex,
-//      // this.addMoreVaccine
-//   );
-//  // final String profileImage;
-//   final String gender;
-//   final String petName;
-//   // final String providerName;
-//   // final String petVaccine;
-//   // final String uploadVaccineRecord;
-//   // final String walkingSchedule;
-//   // final String feedingSchedule;
-//   // final String temperament;
-//   // final String medication;
-//   // final String notes;
-//    final String age;
-//   // final String grooming;
-//   // final String vet;
-//   // final String hotel;
-//   // final String walking;
-//   // final String dayCare;
-//   // final String hospital;
-//   final String breadType;
-//   final String height;
-//   final String weight;
-//   final String birthDate;
-//   final String sex;
-//
-//   //final String addMoreVaccine;
-//
-//   @override
-//   String toString() => "PetProfileRegistered";
-// }
 class AgeChanged extends PetProfileEvent {
-  final String age;
 
+  final String age;
   AgeChanged(this.age);
 
   @override
@@ -143,9 +103,9 @@ class HeightChanged extends PetProfileEvent {
 
 }
 class BirthChanged extends PetProfileEvent {
-   var  _selectedDate;
+   final selectedDate;
 
-   BirthChanged(this._selectedDate);
+   BirthChanged(this.selectedDate);
 
    @override
   String toString() => "BirthChanged";
@@ -177,7 +137,19 @@ class RegisterButtonTapped extends PetProfileEvent {
 
 
 }
+class Profile3 extends PetProfileEvent {
+  final String walking;
+  final String feeding;
+  final String temprament;
+  final String medication;
+  final String name;
+  final String times;
+  final String notes;
+  Profile3(this.walking, this.feeding, this.temprament, this.medication, this.name, this.times, this.notes,);
 
+  @override
+  String toString() => "SubmitProfileTapped";
+}
 class RegisterUser extends PetProfileEvent {
   final String fname;
   final String lname;

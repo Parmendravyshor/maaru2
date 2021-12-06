@@ -17,7 +17,10 @@ class MaruConstant {
    static String pet_name = 'pet_name';
    static String breed_type = 'breed_type';
   // static String token = 'access-token';
-   static String  age = 'age';
+   static String  age = 'age ';
+   static String modelendpoint =
+       "xhcz7a3myc.execute-api.us-east-2.amazonaws.com";
+   static String corePath = "chadbotcore";
    static String  city = 'city';
    static String  zip = 'zip';
    static String   phone_number = 'phone_number';

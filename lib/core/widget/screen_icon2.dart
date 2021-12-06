@@ -92,6 +92,7 @@ class ToggleButton2 extends StatefulWidget {
 }
 
 class _ToggleButton2State extends State<ToggleButton2> {
+  int index =['male','ddd','dddkd'] as int;
   List<bool> isSelected;
   bool pressed = true;
   @override
@@ -151,17 +152,22 @@ class ToggleButton3 extends StatefulWidget {
 }
 
 class _ToggleButton3State extends State<ToggleButton3> {
-  List<bool> isSelected;
+  List <bool>isSelected;
   bool pressed = true;
+
   @override
   void initState() {
     isSelected = [true, false,false];
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
+        
+        children: [
 
       ToggleButtons(
         borderColor: Colors.grey[300],
@@ -172,7 +178,8 @@ class _ToggleButton3State extends State<ToggleButton3> {
         // borderRadius: BorderRadius.circular(
         //   10,
         // ),
-        children: <Widget>[
+        children:
+        <Widget>[
           Padding(
             padding: EdgeInsets.fromLTRB(30, 10, 25, 15),
             child: Text('NEUTERED',
@@ -223,7 +230,7 @@ class _ToggleButton3State extends State<ToggleButton3> {
                       fontWeight: FontWeight.w500),
                 )
                     : GoogleFonts.poppins(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       color: Colors.black,
                       fontFamily: 'Poppins',
                       fontSize: 18,
@@ -236,17 +243,27 @@ class _ToggleButton3State extends State<ToggleButton3> {
 
           setState(() {
 
-            BlocProvider.of<PetProfileBloc>(context)
-                .add(SexChanged(index.toString()));
+
+            print(isSelected);
             for (int i = 0; i < isSelected.length; i++) {
               isSelected[i] = i == index;
             }
           });
           setState(() {
+
+            if (isSelected == "L") {
+              isSelected = "P" as List<bool> ;
+            } else if (index == "P") {
+              index = "A" as int ;
+            }
+            BlocProvider.of<PetProfileBloc>(context)
+                .add(SexChanged(isSelected.toString()));
             pressed = !pressed;
           });
         },
+
         isSelected: isSelected,
+
       )
     ]);
   }

@@ -66,17 +66,19 @@ class _DatePickerState extends State<DatePicker> {
                 },
                 onTap:()
                  {
-                 final petProfileBloc =  BlocProvider.of<PetProfileBloc>(context);
-                 petProfileBloc.add(BirthChanged(_selectDate));
+
                   _selectDate(context);
 
-                }),
+                },onEditingComplete: (){
+                  print('datepicker on editing complete');
+               },),
 
               )]));
 
   }
 
   _selectDate(BuildContext context,) async {
+
     final _PetProfileBloc = BlocProvider.of<PetProfileBloc>(context);
     DateTime newSelectedDate = await showDatePicker(
         context: context,
@@ -99,12 +101,15 @@ class _DatePickerState extends State<DatePicker> {
         });
 
     if (newSelectedDate != null) {
+
       _selectedDate = newSelectedDate;
       _textEditingController
-        ..text = DateFormat.yMd().format(_selectedDate)
+        ..text ="${_selectedDate.year.toString()}-${_selectedDate.month.toString().padLeft(2,'0')}-${_selectedDate.day.toString().padLeft(2,'0')}"
+         //   .format(_selectedDate).toString()
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: _textEditingController.text.length,
             affinity: TextAffinity.upstream));
+      BlocProvider.of<PetProfileBloc>(context).add(BirthChanged(_textEditingController.text));
 
     }
   }
