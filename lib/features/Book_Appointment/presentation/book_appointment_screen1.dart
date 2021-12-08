@@ -7,6 +7,7 @@ import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/faketest.dart';
 import 'book_appointment_screen2.dart';
 import 'booked_confirm.dart';
 
@@ -36,10 +37,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
             ),
             Container(
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20),
-                  ),
+
                   color: Colors.white),
               height: size.height * 1.1,
               width: size.width * 1,
@@ -52,7 +50,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: size.height * 0.05,
+                      height: size.height * 0.01,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -98,15 +96,15 @@ class _BookAppointment1State extends State<BookAppointment1> {
                       children: [
                         Text(
                           'Austin Pet Groomer',
-                          style: MaaruStyle.text.tiniest,
+                          style: MaaruStyle.text.xlarge,
                         ),
-                        SizedBox(
-                          width: size.width * 0.16,
-                        ),
-                        Image.asset(
-                          'assets/icons/New Project (2).png',
-                          width: size.width * 0.10,
-                        )
+                        // SizedBox(
+                        //   width: size.width * 0.16,
+                        // ),
+                        // Image.asset(
+                        //   'assets/icons/New Project (2).png',
+                        //   width: size.width * 0.10,
+                        // )
                       ],
                     ),
                     Text(
@@ -114,20 +112,21 @@ class _BookAppointment1State extends State<BookAppointment1> {
                       style: MaaruStyle.text.tiny,
                     ),
                     SizedBox(
-                      height: size.height * 0.04,
+                      height: size.height * 0.02,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+
                         Image.asset(
                           'assets/icons/container1.png',
-                          width: 150,
-                          height: 100,
+                          //width: 180,
+                          height: 80,
                         ),
                         Image.asset(
                           'assets/icons/container2.png',
-                          width: 150,
-                          height: 100,
+                        //  width: 180,
+                          height: 80,
                         ),
 
                       ],
@@ -140,13 +139,13 @@ class _BookAppointment1State extends State<BookAppointment1> {
                       children: [
                         Image.asset(
                           'assets/icons/container3.png',
-                          width: 150,
-                          height: 100,
+                         // width: 150,
+                          height: 80,
                         ),
                         Image.asset(
                           'assets/icons/container4.png',
-                          width: 150,
-                          height: 100,
+                         // width: 150,
+                          height: 80,
                         ),
 
                       ],

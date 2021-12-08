@@ -26,6 +26,7 @@ import 'package:maru/features/verify/presentation/bloc/verify_state.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen3.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'register_pet_profile_screen2.dart';
 import 'package:http/http.dart' as http;
@@ -83,6 +84,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
   double initial = 0.0;
   int lineLength = 40;
   bool pressGeoON = true;
+
   final BackgroundColor = Color(0xFF367355);
   TextEditingController _petNameController;
   TextEditingController _breadTypeController;
@@ -101,10 +103,14 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
     _weightController = TextEditingController();
     _birthDateContoller = TextEditingController();
     _sexController = TextEditingController();
-
+fetchData();
     super.initState();
   }
+void fetchData() async{
+setState(() {
 
+});
+}
   @override
   void dispose() {
     _petNameController.dispose();
@@ -138,7 +144,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child:
             BlocBuilder<PetProfileBloc, PetProfileState>(builder: (context, state) {
-              if (state is PetRegisterSuccess) {
+              if (state is fakeUserPetProfileButtonTapped) {
                 AlertManager.showErrorMessage(
                     "otp send your register email", context);
                 SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -332,7 +338,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
                                               .add(HeightChanged(text));
 
                                         }, editingController: _heightController),
-                                    new SizedBox(
+                                     SizedBox(
                                       height: 10.0,
                                     ),
 
@@ -493,11 +499,11 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
                                               }
                                               else {
                                                 BlocProvider.of<PetProfileBloc>(context)
-                                                    .add(RegisterButtonTapped());
-                                                // Navigator.of(context).push(
-                                                //     MaterialPageRoute(
-                                                //         builder: (_) =>
-                                                //             chatScreen()));
+                                                    .add(fakeRegisterButtonTapped());
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            CreateRegisterPetProfile2()));
                                               }
                                             },
                                             child: Container(

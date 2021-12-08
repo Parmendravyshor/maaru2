@@ -3,7 +3,9 @@ import 'package:bloc/bloc.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
+import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
 import 'package:maru/features/verify/domain/usecases/change_password.dart';
 import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
@@ -15,8 +17,7 @@ part 'pet_profile_event.dart';
 part 'pet_profile_state.dart';
 
 class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
-  PetProfileBloc(
-      this.getPetProfile,
+  PetProfileBloc(this.getPetProfile,
       this.saveChangePassword,
       this.savePetProfile,
       this.saveUserProfile,
@@ -33,7 +34,8 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
   final SaveUserPayment _saveUserPayment;
 
   // int step = 1;
-  String age ='' ;
+  String age = '';
+
   String petName = "";
   String width = "";
   String hight = "";
@@ -54,7 +56,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       if (event.age.isNotEmpty) {
         age = event.age;
       } else {
-        age =  '';
+        age = '';
       }
       print(age);
       bool isValidated = _isFormValid();
@@ -147,7 +149,19 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
         yield RegisterFormValidationFailure();
       }
     }
-     else if (event is RegisterButtonTapped) {
+    else if (event is fakeRegisterButtonTapped){
+      yield RegisterInProgress();
+     final result = await getPetProfile(NoParams());
+      yield* result.fold((l) async* {
+        yield RegisterFailure("Signup failed..please try again.. $l");
+      }, (r) async* {
+       // await savePetProfile(PetProfileParams());
+        yield  fakeUserPetProfileButtonTapped();
+      });
+
+    }
+
+    else if (event is RegisterButtonTapped) {
       yield RegisterInProgress();
       final result = await createPetProfile(PetProfileParams(
         age: age,
@@ -157,19 +171,16 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
         breadType: breadtype,
         petName: petName,
 
-         ));
-
-      if (result.isRight()) {
-        print("profileeee saveddd");
-      } else {
-        print("profileeee faileddd");
-      }
-      yield   UserPetProfileButtonTapped();
+      ));
+      yield* result.fold((l) async* {
+        yield RegisterFailure("Signup failed..please try again.. $l");
+      }, (r) async* {
+        await savePetProfile(PetProfileParams());
+        yield UserPetProfileButtonTapped();
+      });
     }
-
-
-    if (event is ProfileOpened) {
-    } else if (event is RegisterUser) {
+    if (event is ProfileOpened) {} else if (event is RegisterUser) {
+      await getPetProfile(NoParams());
       UserProfileParams profileParams = UserProfileParams(
         email: sharedPrefHelper.getEmail(),
         fname: event.fname,
@@ -185,11 +196,10 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       } else {
         print("profileeee faileddd");
       }
-      yield   UserPetProfileButtonTapped();
+      yield UserPetProfileButtonTapped();
     }
 
     else if (event is Profile3) {
-
       print('kkfkfk');
       PetProfileParams profileParams = PetProfileParams(
         walking: event.walking,
@@ -204,6 +214,8 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       print('dddd');
       final result = await createPetProfile(profileParams);
       if (result.isRight()) {
+        getPetProfile(NoParams());
+       // await savePetProfile(PetProfileParams());
         print("profileeee saveddd");
       } else {
         print("profileeee faileddd");
@@ -211,8 +223,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       yield pet3rofileButtonTapped();
       print('tapped');
     }
-    if (event is ProfileOpened) {
-    } else if (event is ChangePassword) {
+    if (event is ProfileOpened) {} else if (event is ChangePassword) {
       UserProfileParams profileParams = UserProfileParams(
         //email: sharedPrefHelper.getEmail(),
         oldPassword: event.oldPassword,
@@ -226,8 +237,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       }
       yield UserChangePasswordButtonTapped();
     }
-    if (event is ProfileOpened) {
-    } else if (event is savePayment) {
+    if (event is ProfileOpened) {} else if (event is savePayment) {
       PaymentParams profileParams = PaymentParams(
         expDate: event.expDate,
         creditCardNumber: event.creditCardNumber,
@@ -243,16 +253,30 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       yield SavePaymentButtonTapped();
     }
 
+  if (event is ProfileOpened) {
+  } else if (event is GetProfileOpened) {
+    PetProfileParams profileParams = PetProfileParams(
+ age: sharedPrefHelper.getStringByKey(MaruConstant.age, ''),
+      height: sharedPrefHelper.getStringByKey(MaruConstant.height, ''),
+      weight: sharedPrefHelper.getStringByKey(MaruConstant.height, ''),
+  );
+  final result = await getPetProfile(profileParams);
+  if (result.isRight()) {
+  print("Payment  Saved");
+  } else {
+  print("Payment faileddd");
   }
-
+  yield SavePaymentButtonTapped();
+  }
+}
   bool _isFormValid() {
     return age.isNotEmpty &&
         width.isNotEmpty &&
         hight.isNotEmpty &&
         breadtype.isNotEmpty &&
         birthdate.isNotEmpty &&
-       // img.isNotEmpty &&
+        // img.isNotEmpty &&
         petName.isNotEmpty ;
-       // sex.isNotEmpty;
+    // sex.isNotEmpty;
   }
 }

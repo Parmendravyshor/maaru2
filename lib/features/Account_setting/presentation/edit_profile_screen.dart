@@ -1,6 +1,4 @@
 import 'dart:io';
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,6 +14,9 @@ import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:flutter/painting.dart';
+import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
+import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
+import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 
@@ -82,10 +83,9 @@ class _CreateUserProfileState extends State<CreateUserProfile>
     _image = _prefHelper.getStringByKey(MaruConstant.img, "");
 
     return BlocProvider(
-      create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+      create: (context) => KiwiContainer().resolve<LoginBloc>(),
       child: Scaffold(
-
-        body: BlocBuilder<PetProfileBloc, PetProfileState>(builder: (context, state) {
+        body: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
           try {
             Navigator.of(_keyLoader.currentContext, rootNavigator: true);
             Navigator.of(context).pop();

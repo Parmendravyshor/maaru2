@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
 //todo: Navigate to AfterSplashScreen
 
   navigateToNextScreen() {
-    Future.delayed(Duration(seconds: 5), () async {
+    Future.delayed(Duration(seconds: 1), () async {
       String token = await localDataHelper.getStringValue(key: "token");
       print("tokennnnnnnnnnnn :$token");
       Navigator.of(context).pushAndRemoveUntil(

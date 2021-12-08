@@ -382,7 +382,7 @@ onSaved: (text){
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (_) =>
-                                                  CreateRegisterPetProfile2()));
+                                                  CreateRegisterPetProfile4()));
                                     },
                                     child: Container(
                                       alignment: Alignment.center,
@@ -399,20 +399,25 @@ onSaved: (text){
                                   ),
                                   InkWell(
                                       onTap: () {
+                                        //
+                                        // BlocProvider.of<PetProfileBloc>(
+                                        //     context)
+                                        //     .add(Profile3(
+                                        //
+                                        //  _tempramentController.text,
+                                        //   _timesController.text,
+                                        //   _feedingController.text,
+                                        //   _notesController.text,
+                                        //   _nameEditingController.text,
+                                        //    _walkingController.text,
+                                        //   _nameController.text,
+                                        // ));
+                                        Navigator.of(context)
+                                            .push(
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    CreateRegisterPetProfile3()));
 
-                                        BlocProvider.of<PetProfileBloc>(
-                                            context)
-                                            .add(Profile3(
-
-                                         _tempramentController.text,
-                                          _timesController.text,
-                                          _feedingController.text,
-                                          _notesController.text,
-                                          _nameEditingController.text,
-                                           _walkingController.text,
-                                          _nameController.text,
-                                        ));
-                                        print('qkqjww');
                                       },
                                       child: Container(
                                         alignment: Alignment.centerRight,

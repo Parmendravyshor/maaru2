@@ -15,7 +15,11 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:maru/features/Account_setting/presentation/account_setting.dart';
+import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_profile/provider_profile1.dart';
+import 'package:maru/features/provider_profile/provider_profile2.dart';
 import 'package:maru/features/splash/view/splash_screen.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
@@ -122,11 +126,9 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: (CreateRegisterPetProfile4())));
+        home: Scaffold(body: (ProviderSearchScreen())));
   }
 }
-
-
 
 class MapView extends StatefulWidget {
   @override

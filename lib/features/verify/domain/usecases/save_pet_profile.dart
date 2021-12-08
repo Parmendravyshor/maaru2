@@ -1,8 +1,11 @@
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:dartz/dartz.dart';
+import 'package:json_annotation/json_annotation.dart';
 import '../../../../core/domain/repositories/user_repository.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
+import 'package:json_annotation/json_annotation.dart';
+
 
 class SavePetProfile extends UseCase<void, PetProfileParams> {
   UserRepository userRepository;
@@ -40,9 +43,9 @@ class PetProfileParams {
   final String birthDate;
   final String sex;
   final String file;
-final String name;
-final String petneeds;
-final String times_aday;
+  final String name;
+  final String petneeds;
+  final String times_aday;
   final String addMoreVaccine;
 
   PetProfileParams({
@@ -76,4 +79,22 @@ final String times_aday;
     this.age,
     this.name
   });
+  // CreateAccount.fromJson(Map<String, dynamic> json) {
+  //   name = json['name'];
+  //   age = json['age'];
+  //   addMoreVaccine = json['dob'];
+  //   petVaccine = json['gender'];
+  //   sex = json['country_code'];
+  //   birthDate = json['phone'];
+  //   weight = json['image'];
+  //   height = json['license_image'];
+  //   breadType = json['latitude'];
+  //   petName = json['longitude'];
+  //   gender = json['fcm_token'];
+  //   profileImage = json['pin'];
+  //   hospital = json['otp'];
+  //   dayCare = json['account_status'];
+  //   walking = json['online_status'];
+  //   // token = json['token'];
+  // }
 }

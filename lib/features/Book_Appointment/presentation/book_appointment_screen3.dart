@@ -54,7 +54,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    height: size.height * 0.05,
+                                    height: size.height * 0.01,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,

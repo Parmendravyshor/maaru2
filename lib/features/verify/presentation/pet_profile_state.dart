@@ -46,6 +46,20 @@ class UserPetProfileButtonTapped extends PetProfileState {
   String toString() => "UserPetProfileButtonTapped";
 
 }
+class fakeUserPetProfileButtonTapped extends PetProfileState {
+  fakeUserPetProfileButtonTapped() : super();
+
+  @override
+  String toString() => "fakeUserPetProfileButtonTapped";
+
+}
+class GetUserPetProfileButtonTapped extends PetProfileState {
+  GetUserPetProfileButtonTapped() : super();
+
+  @override
+  String toString() => "GetUserPetProfileButtonTapped";
+
+}
 class pet3rofileButtonTapped extends PetProfileState {
   pet3rofileButtonTapped() : super();
 

@@ -119,7 +119,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                           Scaffold.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Colors.black,
-                              content: Text('Register Failure 🤣',
+                              content: Text('Register Failure ',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontFamily: 'poppins',
@@ -285,7 +285,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                           .push(
                                                           MaterialPageRoute(
                                                               builder: (_) =>
-                                                                  CreateregisterPetProfile1()));
+                                                                  CreateRegisterPetProfile3()));
                                                     },
                                                     child: Container(
                                                       alignment: Alignment

@@ -116,13 +116,13 @@ bottom: false,
                                   onTap: () {
                                     setState(() {
                                       circlecolor1 == MaaruColors.whiteColor
-                                          ? circlecolor1 =  MaaruColors.buttonColor
+                                          ? circlecolor1 =  Color(0xff93b7fd)
                                           : circlecolor1 =  MaaruColors.whiteColor;
                                     });
                                   },
                                   child: choosecircle(
                                       Image.asset(
-                                        'assets/icons/icone-setting-77.png',
+                                        'assets/icons/Fill 1.png',
                                         height: 35,
                                       ),
                                       'Grooming',
@@ -135,13 +135,13 @@ bottom: false,
                                     onTap: () {
                                       setState(() {
                                         circlecolor2 == MaaruColors.whiteColor
-                                            ? circlecolor2 = MaaruColors.buttonColor
+                                            ? circlecolor2 =Color(0xffff9976)
                                             : circlecolor2 = MaaruColors.whiteColor;
                                       });
                                     },
                                     child: choosecircle(
                                         Image.asset(
-                                          'assets/icons/icone-setting-71.png',
+                                          'assets/icons/Fill 1 (2).png',
                                           height: 35,
                                         ),
                                         'Vet',
@@ -154,13 +154,13 @@ bottom: false,
                                     onTap: () {
                                       setState(() {
                                         circlecolor3 == MaaruColors.whiteColor
-                                            ? circlecolor3 = MaaruColors.buttonColor
+                                            ? circlecolor3 = Color(0xfffff2bf)
                                             : circlecolor3 = MaaruColors.whiteColor;
                                       });
                                     },
                                     child: choosecircle(
                                         Image.asset(
-                                          'assets/icons/icone-setting-73.png',
+                                          'assets/icons/Fill 1 (3).png',
                                           height: 35,
                                         ),
                                         'Hotel',
@@ -172,13 +172,13 @@ bottom: false,
                                     onTap: () {
                                       setState(() {
                                         circlecolor4 == MaaruColors.whiteColor
-                                            ? circlecolor4 = MaaruColors.buttonColor
+                                            ? circlecolor4 = MaaruColors.button2Color
                                             : circlecolor4 = MaaruColors.whiteColor;
                                       });
                                     },
                                     child: choosecircle(
                                         Image.asset(
-                                          'assets/icons/icone-setting-72.png',
+                                          'assets/icons/Fill 1 (1).png',
                                           height: 35,
                                         ),
                                         'Walking',
@@ -191,13 +191,13 @@ bottom: false,
                                     onTap: () {
                                       setState(() {
                                         circlecolor5 == MaaruColors.whiteColor
-                                            ? circlecolor5 = MaaruColors.buttonColor
+                                            ? circlecolor5 = Color(0xff4f75fe)
                                             : circlecolor5 = MaaruColors.whiteColor;
                                       });
                                     },
                                     child: choosecircle(
                                         Image.asset(
-                                          'assets/icons/icone-setting-74.png',
+                                          'assets/icons/Background.png',
                                           height: 35,
                                         ),
                                         'Daycare',
@@ -210,13 +210,13 @@ bottom: false,
                                     onTap: () {
                                       setState(() {
                                         circlecolor6 == MaaruColors.whiteColor
-                                            ? circlecolor6 = MaaruColors.buttonColor
+                                            ? circlecolor6 = Color(0xffFc744f)
                                             : circlecolor6 = MaaruColors.whiteColor;
                                       });
                                     },
                                     child: choosecircle(
                                         Image.asset(
-                                          'assets/icons/icone-setting-76.png',
+                                          'assets/icons/Background (1).png',
                                           height: 35,
                                         ),
                                         'Hospital',
@@ -235,7 +235,7 @@ bottom: false,
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (_) =>
-                                          CreateRegisterPetProfile3()));
+                                          HomeScreen()));
                                 },
                                 child: Container(
                                   alignment: Alignment.center,

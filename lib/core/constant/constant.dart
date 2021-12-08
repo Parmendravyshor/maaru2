@@ -1,3 +1,5 @@
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+
 class MaruConstant {
   // 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
    static final signup =Uri.parse ('http://18.191.199.31/api/auth/signup');
@@ -32,6 +34,7 @@ class MaruConstant {
    static String pet_needs ='pet_needs';
    static String birth_date ='birth_date';
    static String sex = 'sex';
+   static String gender = 'gender';
    static String walking_schedule ='walking_schedule';
    static String feeding_schedule ='feeding_schedule';
    static String temperament ='temperament';

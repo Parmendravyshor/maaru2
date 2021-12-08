@@ -85,7 +85,7 @@ class MaaruColors {
         textStyle: TextStyle(
             fontWeight: FontWeight.normal,
             fontFamily: 'Poppins',
-            fontSize: 19,
+            fontSize: 12,
             color: Colors.grey[400]));
   }
 

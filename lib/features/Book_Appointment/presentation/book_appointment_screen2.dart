@@ -61,7 +61,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                           children: [
 
                             SizedBox(
-                              height: size.height * 0.05,
+                              height: size.height * 0.01,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,

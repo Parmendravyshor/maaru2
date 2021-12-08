@@ -21,6 +21,12 @@ class ProfileOpened extends PetProfileEvent {
   @override
   String toString() => "ProfileOpened";
 }
+class GetProfileOpened extends PetProfileEvent {
+  GetProfileOpened();
+
+  @override
+  String toString() => "GetProfileOpened";
+}
 class ChangePasswordOpened extends PetProfileEvent {
   ChangePasswordOpened();
 
@@ -134,6 +140,14 @@ class RegisterButtonTapped extends PetProfileEvent {
 
   @override
   String toString() => "RegisterButtonTapped";
+
+
+}
+class fakeRegisterButtonTapped extends PetProfileEvent {
+  fakeRegisterButtonTapped();
+
+  @override
+  String toString() => "fakeRegisterButtonTapped";
 
 
 }
