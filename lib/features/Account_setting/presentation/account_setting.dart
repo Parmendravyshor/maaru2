@@ -21,7 +21,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
   @override
   Widget build(BuildContext context) {
     var selectedIndex;
-    return new WillPopScope(
+    return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
             backgroundColor: Colors.white,
@@ -72,7 +72,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   height: 20,
                                 ),
                                 Test3(
-                                  image: 'assets/icons/icone-setting-1.png',
+                                  image: 'assets/icons/icone-setting-2.png',
                                   hite: 40,
                                   text: 'Edit Profile',
                                   size: 115,
@@ -158,8 +158,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                           // child: Transform.scale(
                                                           //   scale: 1.2,
                                                           child: Switch(
-                                                            activeColor: MaaruColors
-                                                                .buttonColor,
+                                                            activeColor:
+                                                                MaaruColors
+                                                                    .buttonColor,
                                                             inactiveThumbColor:
                                                                 MaaruColors
                                                                     .buttonColor,
@@ -219,8 +220,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                           width: 33,
                                                         ),
                                                         Switch(
-                                                          activeColor: MaaruColors
-                                                              .buttonColor,
+                                                          activeColor:
+                                                              MaaruColors
+                                                                  .buttonColor,
                                                           inactiveThumbColor:
                                                               MaaruColors
                                                                   .buttonColor,
@@ -260,10 +262,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   height: 20,
                                 ),
                                 Test3(
-                                  image:
-                                      'assets/images/126-1264365_grey-logout-icon-png-transparent-png.png',
-                                  hite: 40,
-                                  size: 130,
+                                  image: 'assets/icons/Background.png',
+                                  hite: 30,
+                                  size: 120,
                                   text: 'Log Out',
                                   onPressed: () {
                                     Navigator.of(context).pushAndRemoveUntil(
@@ -296,46 +297,44 @@ class Test3 extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return
-    InkWell(
+    return InkWell(
         onTap: onPressed,
-    child:  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Expanded(
-          child: Padding(
-              padding: EdgeInsets.only(right: 35),
-              child: Container(
-                  height: 60,
-                  width: 20,
-                  decoration: BoxDecoration(
-                    color: MaaruColors.darkGrey2,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          image,
-                          height: hite,
-                        ),
-                        Text(
-                          text,
-                          style: MaaruStyle.text.tiniest,
-                        ),
-                        SizedBox(
-                          width: size,
-                        ),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Expanded(
+              child: Padding(
+                  padding: EdgeInsets.only(right: 35),
+                  child: Container(
+                      height: 60,
+                      width: 20,
+                      decoration: BoxDecoration(
+                        color: MaaruColors.darkGrey2,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Image.asset(
+                              image,
+                              height: hite,
+                            ),
+                            Text(
+                              text,
+                              style: MaaruStyle.text.tiniest,
+                            ),
+                            SizedBox(
+                              width: size,
+                            ),
 
-
-                          // Navigator.of(context).push(
-                          //     MaterialPageRoute(builder: (_) => CreateUserProfile()));
- Icon(
-                            Icons.navigate_next,
-                            color: MaaruColors.buttonColor,
-                            size: 40,
-                          ),
-
-                      ]))))
-    ]));
+                            // Navigator.of(context).push(
+                            //     MaterialPageRoute(builder: (_) => CreateUserProfile()));
+                            Icon(
+                              Icons.navigate_next,
+                              color: MaaruColors.buttonColor,
+                              size: 40,
+                            ),
+                          ]))))
+        ]));
   }
 }

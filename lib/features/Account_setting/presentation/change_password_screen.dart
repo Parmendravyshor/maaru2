@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
@@ -36,6 +38,22 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
   }
 
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  String _image = "";
+  final picker = ImagePicker();
+
+
+  Future getImage() async {
+    final pickedFile = await picker.getImage(
+        source: ImageSource.gallery, maxHeight: 200, maxWidth: 200);
+    if (pickedFile != null) {
+      _image = pickedFile.path;
+      await _prefHelper.saveString(MaruConstant.img, _image);
+      setState(() {});
+    } else {
+      AlertManager.showErrorMessage("Failed to load image", context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -58,283 +76,118 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
           }
           return SafeArea(
               child: SingleChildScrollView(
+                  child: Column(children: [
+                    BackArrowButton(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Stack(fit: StackFit.loose, children: <Widget>[
 
-                  //   Padding(
-                  padding: EdgeInsets.only(left: 0, top: 0),
-                  child: Column(
-                      // crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        BackArrowButton(),
-                        Container(
-                          //  padding: EdgeInsets.only(right: 40),
-                          alignment: Alignment.centerRight,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Container(
+                              width: 200.0,
+                              height: 200.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: _image.isEmpty
+                                      ? ExactAssetImage(
+                                      'assets/icons/icone-setting-28.png')
+                                      : FileImage(File(_image)),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            onTap: getImage,
                           ),
-                          child: Image.asset(
-                            'assets/128/CrystalGaskell.png',
-                            height: 60,
-                            width: 60,
+                        ],
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(
+                            top: 160.0,
                           ),
-                        ),
-                        Container(
-                            color: Color(0xffFFFFFF),
-                            child: Padding(
-                                padding: EdgeInsets.only(top: 70.0),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                            left: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.1 /
-                                                2,
-                                            right: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.1 /
-                                                2,
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: <Widget>[
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'Change Password',
-                                                    style:
-                                                        MaaruStyle.text.tiniest,
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  _status
-                                                      ? _getEditIcon()
-                                                      : Container(),
-                                                ],
-                                              )
-                                            ],
-                                          )),
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 20.0,
-                                              left: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.1 /
-                                                  2),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: <Widget>[
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'Enter Current Password',
-                                                    style: MaaruStyle
-                                                        .text.greyDisable,
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          )),
-                                      Padding(
-                                          padding: EdgeInsets.only(top: 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: <Widget>[
-                                              Flexible(
-                                                child: ThemedTextField(
-                                                  "",
-                                                  TextInputType.text,
-                                                  enabled: !_status,
-                                                  editingController:
-                                                      _newController,
-                                                ),
-                                              ),
-                                            ],
-                                          )),
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 20.0,
-                                              left: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.1 /
-                                                  2),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: <Widget>[
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'Enter New Password',
-                                                    style: MaaruStyle
-                                                        .text.greyDisable,
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          )),
-                                      Padding(
-                                          padding: EdgeInsets.only(top: 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: <Widget>[
-                                              Flexible(
-                                                child: ThemedTextField(
-                                                  "",
-                                                  TextInputType.text,
-                                                  enabled: !_status,
-                                                  editingController:
-                                                      _currentController,
-                                                ),
-                                              ),
-                                            ],
-                                          )),
-                                      !_status
-                                          ? Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 25,
-                                                  right: 25,
-                                                  top: 15.0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                          right: 10.0),
-                                                      child: Container(
-                                                          child: RaisedButton(
-                                                        child: const Text(
-                                                            "Change"),
-                                                        textColor: Colors.white,
-                                                        color: MaaruColors
-                                                            .buttonColor,
-                                                        onPressed: () {
-                                                          String paword =
-                                                              _newController
-                                                                  .text;
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              CircleAvatar(
+                                  backgroundColor: Colors.red,
+                                  radius: 15.0,
+                                  child:
+                                  Image.asset(
+                                      'assets/icons/icone-setting-29.png'))
+                            ],
+                          )),
+                    ]),
+                    Container(
+                      width: 1000,
+                      height: 800,
+                      alignment: FractionalOffset.bottomCenter,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
 
-                                                          if (paword.length <
-                                                              8) {
-                                                            AlertManager
-                                                                .showErrorMessage(
-                                                                    "Password must be 8 characters long",
-                                                                    context);
-                                                          }
-                                                          else {
-                                                            Dialogs
-                                                                .showLoadingDialog(
-                                                                context,
-                                                                _keyLoader,
-                                                                "Updating Password..");
-                                                            BlocProvider.of<
-                                                                PetProfileBloc>(
-                                                                context)
-                                                                .add(
-                                                                ChangePassword(
-                                                                    _currentController
-                                                                        .text,
-                                                                    _newController
-                                                                        .text));
-                                                          }
-                                                        },
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2.0)),
-                                                      )),
-                                                    ),
-                                                    flex: 2,
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 10.0),
-                                                      child: Container(
-                                                          child: RaisedButton(
-                                                        child: Text("Cancel"),
-                                                        textColor: Colors.white,
-                                                        color: MaaruColors
-                                                            .textColor,
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            _status = true;
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(
-                                                                    FocusNode());
-                                                          });
-                                                        },
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        2.0)),
-                                                      )),
-                                                    ),
-                                                    flex: 2,
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          : Container(),
-                                    ])))
-                      ])));
+                              Container(
+                                  padding: EdgeInsets.only(left: 30.0),
+                                  child: Text(
+                                    'Change Password',
+                                    style: MaaruStyle.text.tiniest,
+                                  )),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              ThemedTextField(
+                                "First Name",
+                                TextInputType.text,
+                                textInputAction: TextInputAction.next,
+                                textStyle: TextStyle(
+                                    color: Colors.grey[300]),
+                                onChanged: (text) {
+                                  //BlocProvider.of<RegisterBloc>(context).add(FNameChanged(text));
+                                },
+                                editingController: _currentController,
+                              ),
+                              ThemedTextField(
+                                "Last Name",
+                                TextInputType.text,
+                                textInputAction: TextInputAction.next,
+                                textStyle: TextStyle(
+                                    color: Colors.grey[300]),
+                                onChanged: (text) {
+                                  //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                                },
+                                editingController: _newController,
+                              ),
+
+                              ThemedButton(
+                                onPressed: () {
+                                  Dialogs.showLoadingDialog(
+                                      context, _keyLoader,
+                                      "Change Password..");
+                                  BlocProvider.of<PetProfileBloc>(context)
+                                      .add(ChangePassword(
+                                 _currentController.text,
+              _newController.text
+                                  ));
+                                },
+                                text: 'Update Profile',
+                              )
+                            ]),
+                      ),
+                    ),
+                  ])));
+
         }),
       ),
     );
   }
 
-  @override
-  void dispose() {
-    // Clean up the controller when the Widget is disposed
-    myFocusNode.dispose();
-    super.dispose();
-  }
-
-  Widget _getEditIcon() {
-    return GestureDetector(
-      child: CircleAvatar(
-        backgroundColor: Colors.red,
-        radius: 14.0,
-        child: Icon(
-          Icons.edit,
-          color: Colors.white,
-          size: 16.0,
-        ),
-      ),
-      onTap: () {
-        setState(() {
-          _status = false;
-        });
-      },
-    );
-  }
 }

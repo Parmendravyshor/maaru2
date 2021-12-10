@@ -27,9 +27,9 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: MaaruColors.blueColor,
-        bottomNavigationBar: CreateProviderHome(
+        bottomNavigationBar: CreateProviderHome(selectedIndex: 0,
 
-          // Color:MaaruColors.textButtonColor
+
         ),
         body: SafeArea(
           bottom: false,

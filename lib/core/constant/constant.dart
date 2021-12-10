@@ -4,6 +4,9 @@ class MaruConstant {
   // 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
    static final signup =Uri.parse ('http://18.191.199.31/api/auth/signup');
    static final savepet1 =Uri.parse ('http://18.191.199.31/api/auth/1');
+   static final getupcominapointment =Uri.parse ('http://18.191.199.31/api/bookings?type=upcoming');
+   static final getproviders =Uri.parse ('http://18.191.199.31/api/public/providers');
+   static final getReview =Uri.parse ('http://18.191.199.31/api/company/reviews');
    static final resend =Uri.parse ('http://18.191.199.31/api/auth/re-send-otp');
    static final reset =Uri.parse ('http://18.191.199.31/api/auth/forget-password');
    static final signin = Uri.parse('http://18.191.199.31/api/auth/signin');
@@ -28,6 +31,10 @@ class MaruConstant {
    static String   phone_number = 'phone_number';
    static String   state = 'state';
    static String   img = 'img';
+   static String   operation_hours = 'operation_hours';
+   static String   review_comment = 'review_comment';
+   static String   description = 'description';
+   static String  rating_reviews = ' rating_reviews ';
    static String weight ='weight';
    static String height ='height';
    static String known_allergies ='known_allergies';
@@ -38,6 +45,8 @@ class MaruConstant {
    static String walking_schedule ='walking_schedule';
    static String feeding_schedule ='feeding_schedule';
    static String temperament ='temperament';
+   static String company_name ='company_name';
+   static String ratings ='ratings';
    static String medication = 'medication';
    static String name ='name';
 //static String img ='img';

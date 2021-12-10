@@ -1,11 +1,17 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 import 'package:maru/features/Home/presentation/chat_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen3.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'message.dart';
 
@@ -20,8 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
     var selectedIndex = 0;
     return Stack(children: [
       Scaffold(
-          backgroundColor: Color(0xFFffffff),
-          bottomNavigationBar: CreateHomeScreen(
+          backgroundColor: Color(0xFFffffff)  ,
+          bottomNavigationBar:
+          CreateHomeScreen(
             selectedIndex: 0,
             Color: selectedIndex == 0
                 ? MaaruColors.textButtonColor
@@ -286,25 +293,55 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class HorizList extends StatelessWidget {
+class HorizList extends StatefulWidget {
+  bool aet;
+  @override
+  State<HorizList> createState() => _HorizListState();
+}
+
+class _HorizListState extends State<HorizList> {
+  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  bool closedImage = false;
+  bool openImage = true;
+  bool switchOn = true;
+
+  void _onSwitchChanged(bool value) {
+    setState(() {
+      switchOn = false;
+    });
+  }
+
+  List<Container> containers = List <Container>();
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
+
     // ignore: prefer_typing_uninitialized_variables
-    final List _hotels = [10];
+    final List Message = [10];
 
     return
 
-      Container(
+      SizedBox(
         height: 240,
+
+
         child: ListView.builder(
-          itemCount: 5,
+          itemCount: Message.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Padding(
-                padding: index == _hotels.length - 1
+                padding: index == Message.length - 1
                     ? const EdgeInsets.fromLTRB(8, 0, 8, 0)
                     : const EdgeInsets.only(left: 8, right: 8),
-                child: Container(
+                child:InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ViewPetProfile()));
+            Switch(
+            onChanged: _onSwitchChanged,
+            value: switchOn,
+            );
+            },
+               child: Container(
                     alignment: FractionalOffset.topLeft,
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -315,17 +352,18 @@ class HorizList extends StatelessWidget {
                     child: Column(children: [
                       Container(
                         alignment: Alignment.centerRight,
-                        child: Image.asset(
+                        child:  switchOn ?
+            Image.asset(
                           'assets/images/kutta.png',
                           height: 140,
-                        ),
+                        ):Image.asset(_prefHelper.getStringByKey(MaruConstant.img, ''))
                       ),
                       Padding(
                           padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Sally',
+                              Text(_prefHelper.getStringByKey(MaruConstant.pet_name,''),
                                   style: GoogleFonts.poppins(
                                     textStyle: MaaruStyle.text.large,
                                   )),
@@ -338,12 +376,12 @@ class HorizList extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.only(right: 70),
                           child: Text(
-                            'Scotis Terrior',
+                            _prefHelper.getStringByKey(MaruConstant.breed_type,''),
                             style: MaaruStyle.text.tiny,
                           ))
                     ])
                     // alignment: Alignment.center,
-                    ));
+                    )));
           },
         ));
   }

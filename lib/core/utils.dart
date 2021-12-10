@@ -6,6 +6,7 @@ import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/notification.dart';
 import 'package:maru/core/data/datasource/storage.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
+import 'package:maru/features/Home/domain/usecases/get_upcoming_appointment.dart';
 import 'package:maru/features/chat/domain/usecases/get_text_file.dart';
 import 'package:maru/features/chat/presentation/chat_bloc.dart';
 import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
@@ -22,6 +23,8 @@ import 'package:maru/features/register/presentation/register_bloc.dart';
 import 'package:maru/features/verify/domain/usecases/change_password.dart';
 import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/get_providers.dart';
+import 'package:maru/features/verify/domain/usecases/get_review_request.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_registration_id.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
@@ -54,7 +57,7 @@ void _registerBloc(KiwiContainer container) {
         c.resolve(),c.resolve()
       ));
   container
-      .registerFactory((c) => LoginBloc(c.resolve(),c.resolve(), c.resolve(),c.resolve(),c.resolve(),));
+      .registerFactory((c) => LoginBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(), c.resolve(),c.resolve(),c.resolve(),c.resolve()));
    container.registerFactory((c) => ResetBloc(c.resolve(), c.resolve(),c.resolve()));
    container.registerFactory((c) => PetProfileBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve()));
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
@@ -81,6 +84,9 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => SaveChangePassword(c.resolve()));
   container.registerFactory((c) => SaveUserPayment(c.resolve()));
   container.registerFactory((c) => GetTextFile(c.resolve()));
+  container.registerFactory((c) => GetUpcomingAppointment(c.resolve()));
+  container.registerFactory((c) => GetProviders(c.resolve()));
+  container.registerFactory((c) => GetReview(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 

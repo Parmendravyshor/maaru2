@@ -1,6 +1,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
@@ -18,6 +21,7 @@ class BookAppointment1 extends StatefulWidget {
 
 class _BookAppointment1State extends State<BookAppointment1> {
   @override
+  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -95,7 +99,9 @@ class _BookAppointment1State extends State<BookAppointment1> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Austin Pet Groomer',
+                          'shandan',
+                          //_prefHelper.getStringByKey(MaruConstant.company_name, ''),
+
                           style: MaaruStyle.text.xlarge,
                         ),
                         // SizedBox(
@@ -155,16 +161,14 @@ class _BookAppointment1State extends State<BookAppointment1> {
                       height: size.height * 0.01,
                     ),
                     Text(
-                      'About',
+                     'About',
                       style: MaaruStyle.text.tiniest,
                     ),
                     SizedBox(
                       height: size.height * 0.02,
                     ),
                     Text(
-                        "Lorem ipsum is placeholder text commonly used in\n"
-                        "the graphic, print, and publishing industries \n"
-                        "for previewing layouts and visual mackups.",
+                        _prefHelper.getStringByKey(MaruConstant.description, ''),
                         style: MaaruStyle.text.greyDisable),
                     const SizedBox(
                       height: 20,

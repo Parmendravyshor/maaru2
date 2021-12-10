@@ -28,6 +28,8 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> getPastAppointment();
   Future<Either<Failure, void>> getUpcomingAppointment();
   Future<Either<Failure, void>> createPetProfile(PetProfileParams params);
+  Future<Either<Failure, void>> getProviders();
+  Future<Either<Failure, void>> getReview();
   Future<Either<Failure, void>> forgetPassword(email);
   Future<Either<Failure, void>> saveRegistrationId();
   Future<Either<Failure, void>> createUserProfile(UserProfile params);

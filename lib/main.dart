@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:geocoder/geocoder.dart';
 
 import 'package:geocoding/geocoding.dart';
@@ -15,36 +16,33 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:maru/features/Account_setting/presentation/account_setting.dart';
+import 'package:maru/features/Account_setting/presentation/change_password_screen.dart';
+import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
+import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/provider_profile/provider_profile1.dart';
 import 'package:maru/features/provider_profile/provider_profile2.dart';
 import 'package:maru/features/splash/view/splash_screen.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen2.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen3.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+
 import 'core/theme/maaru_style.dart';
 import 'core/utils.dart';
+import 'features/Account_setting/presentation/edit_profile_screen.dart';
 import 'features/Home/presentation/chat_screen.dart';
 import 'features/Home/presentation/search_screen.dart';
-import 'features/chat/presentation/chatt_screen.dart';
 import 'features/faketest.dart';
-import 'dart:async';
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kiwi/kiwi.dart';
-import 'package:path_provider/path_provider.dart';
 
 
-import 'package:location/location.dart';
-
-import 'dart:math' show cos, sqrt, asin;
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,7 +64,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Position _currentPosition;
+   Position _currentPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +124,7 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: (ProviderSearchScreen())));
+        home: Scaffold(body: ((maa()))));
   }
 }
 
@@ -164,11 +162,11 @@ class _MapViewState extends State<MapView> {
 
   String _startAddress = '';
   String _destinationAddress = '';
-  String _placeDistance;
+   String _placeDistance;
 
   Set<Marker> markers = {};
 
-  PolylinePoints polylinePoints;
+   PolylinePoints polylinePoints;
   Map<PolylineId, Polyline> polylines = {};
   List<LatLng> polylineCoordinates = [];
 

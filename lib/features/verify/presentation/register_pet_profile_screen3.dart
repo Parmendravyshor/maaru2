@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
@@ -172,6 +174,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
     Navigator.pop(context, entries);
   }
   final GlobalKey<State> _keyLoader =  GlobalKey<State>();
+  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -220,11 +223,11 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
 
-                            Text('Max',
+                            Text(_prefHelper.getStringByKey(MaruConstant.first_name, ''),
                                 style: MaaruStyle.text.large,
                                 textAlign: TextAlign.left),
                             Text(
-                              'Jack  Russell',
+                              _prefHelper.getStringByKey(MaruConstant.last_name, ''),
                               style: MaaruStyle.text.tiny,
                             ),
                             SizedBox(

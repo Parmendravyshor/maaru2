@@ -1,3 +1,5 @@
+
+
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ffi';
@@ -77,9 +79,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> emailLogin(
-    EmailAuthParams params,
-  ) async {
+  Future<Either<Failure, void>> emailLogin(EmailAuthParams params,) async {
     try {
       var map = new Map<String, String>();
 
@@ -259,44 +259,47 @@ class UserRepositoryImpl implements UserRepository {
       // map[MaruConstant.times_a_day] = params.times_aday;
 
       final request =
-          await http.MultipartRequest('POST', MaruConstant.createpProfile);
+      await http.MultipartRequest('POST', MaruConstant.createpProfile);
       request.fields.addAll({
-        // MaruConstant.pet_name: params.petName,
-        // MaruConstant.sex: 'Male',
-        // MaruConstant.breed_type: params.breadType,
-        // 'sex':'aa',
-        // MaruConstant.age: params.age,
-        // MaruConstant.height: params.height,
-        // MaruConstant.weight: params.weight,
-        // MaruConstant.birth_date: params.birthDate,
-        // MaruConstant.known_allergies: params.known_allergies,
-        // MaruConstant.times_a_day: params.times_aday,
-        // MaruConstant.medication: params.medication,
-        // MaruConstant.pet_needs: params.petneeds,
-        // MaruConstant.name: params.name,
-        // MaruConstant.name: params.name,
-        // MaruConstant.note: params.notes,
-        // MaruConstant.age: params.age,
-        // MaruConstant.walking_schedule: params.walkingSchedule,
-
-        'breed_type': 'bog',
-        'pet_name': 'bog',
+        // 'pet_name': 'boxer 4',
+        // 'breed_type': 'bog',
+        // 'age': '3',
+        // 'weight': '10',
+        // 'height': '3',
+        // MaruConstant.birth_date:params.birthDate,
+        // MaruConstant.known_allergies:params.known_allergies,
+        // MaruConstant.times_a_day:params.times_aday,
+        // MaruConstant.medication:params.medication,
+        // MaruConstant.pet_needs:params.petneeds,
+        //
+        // MaruConstant.name:params.name,
+        // MaruConstant.note:params.notes,
+        // MaruConstant.age:params.age,
+        // MaruConstant.walking_schedule:params.walkingSchedule,
+        'pet_name': 'boxerii 4',
+        'breed_type': 'bogii',
         'age': '3',
         'weight': '10',
         'height': '3',
-        'known_allergies': '',
-        'pet_needs': '',
+        'known_allergies': params.known_allergies,
+        'pet_needs': params.petneeds,
         'birth_date': '2021-09-07',
-        'sex': 'male',
-        'medication': '',
-        'name': '',
-        'times_a_day': '',
-        'name': 'gfdgfg',
-        'times_a_day': '3',
-        'note': ''
+        'walking_schedule': params.walkingSchedule,
+        'feeding_schedule': params.feedingSchedule,
+        'temperament': params.temperament,
+
+        'medication': params.medication,
+        'name': params.name,
+        'times_a_day': params.times_aday,
+        'note': params.notes,
+        'name': params.name,
+        'times_a_day': params.times_aday,
+        'note': params.notes,
+        'sex': 'spade',
+        'gender': 'male'
       }
-          // map
-          );
+        // map
+      );
       print(request);
       request.files.add(await http.MultipartFile.fromPath('img', img));
       request.headers.addAll(headers);
@@ -319,9 +322,9 @@ class UserRepositoryImpl implements UserRepository {
     // TODO: implement getPastAppointment
     throw UnimplementedError();
   }
-
+//TODO: Ricky
   @override
-  Future<Either<Failure, void>> getPetProfile() async {
+  Future<Either<Failure, Users>> getPetProfile() async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -332,69 +335,16 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
 
       final response =
-          await http.get(MaruConstant.createpProfile, headers: headers);
+      await http.get(MaruConstant.createpProfile, headers: headers);
 
       var data = convert.jsonDecode(response.body);
-      var profile = data['pet_profiles'];
-     // print('fklfjeklfjklfj$profile');
-      var pet_name = profile[0][MaruConstant.pet_name];
-      var age = profile[0]['age'];
-      var hight = profile[0][MaruConstant.height];
-      var width = profile[0][MaruConstant.weight];
-      var sex = profile[0][MaruConstant.sex];
-
-     // await  sharedPrefHelper.saveString(MaruConstant.pet_name, '$pet_name');
-      await  sharedPrefHelper.saveString(MaruConstant.age, '$age');
-      await  sharedPrefHelper.saveString(MaruConstant.age, '$hight');
-      await  sharedPrefHelper.saveString(MaruConstant.age, '$width');
+      // var profile = data['pet_profiles'];
+      // print('fklfjeklfjklfj$profile');
+      // List<PetProfileParams> user = [];
 
 
-
-      // print('gdhdhdhdd$profile2');
-  //  await  sharedPrefHelper.saveString(MaruConstant.pet_name, profile['pet_name']['']);
-     // print("getprofile $data");
-      var petname = "",
-          img = "",
-          breed_type = "",
-       //   age = "",
-          weight = "",
-          height = "",
-          known_allergies = "",
-          pet_needs = "",
-          memories = 0,
-          pokedelay = 30,
-          poketop = 2,
-          lastseen = "",
-          lastpoked = "",
-          model = 0,
-          repetition = 1.3,
-          contextlen = 10,
-          contextprune = 0,
-          userpersona = 10,
-          isadmin = false,
-          debug = false,
-          contextrand = false,
-          contextoff = false;
-      //  await sharedPrefHelper.saveString("accessToken", res['accessToken']);
-      if (profile.containsKey("pet_name"))  petname = profile[0]['pet_name'] ?? "";
-      if (profile.containsKey("img")) img = profile['img'] ?? "";
-      if (profile.containsKey("age")) age = profile['age'] ?? "";
-      if (profile.containsKey("weight")) weight = profile['weight'] ?? "";
-      if (profile.containsKey("sex")) sex = profile[0]['sex'] ?? "";
-      if (profile.containsKey("height")) weight = profile['height'] ?? "";
- // await  sharedPrefHelper.saveString(MaruConstant.pet_name, petname ?? "");
-
-      await sharedPrefHelper.saveString(MaruConstant.sex, '$img ?? ');
-//   await sharedPrefHelper.savefname(MaruConstant.age,profile[{'age'}]);
-// print(data['pet_profiles']['age']);
-//       sharedPrefHelper.saveString(MaruConstant.age, age ??"");
-//       sharedPrefHelper.saveString(MaruConstant.height, height ??"");
-//       sharedPrefHelper.saveString(MaruConstant.weight, weight ??"");
-//      // await sharedPrefHelper.saveString("sex", profile['0.pet_name']);
-//       print(profile['note']);
-//       print(profile['note']);
       print(response);
-      return Right('Otp sent your register email');
+      return Right(Users.fromJson(jsonDecode(response.body)));
     } on CognitoClientException catch (e) {
       return Left(CacheFailure(e.message));
     } catch (e) {
@@ -402,11 +352,33 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 
+
   @override
-  Future<Either<Failure, void>> getUpcomingAppointment() {
-    // TODO: implement getUpcomingAppointment
-    throw UnimplementedError();
+  Future<Either<Failure, void>> getUpcomingAppointment() async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+      final response = await http.get(MaruConstant.getupcominapointment,
+          headers: headers
+      );
+//print(response.body);
+      var data = convert.jsonDecode(response.body);
+
+      var profile = data['Upcoming_bookings'];
+      // print('fklfjeklfjklfj$profile');
+      var index;
+      var date = profile[index]['booking_date'];
+      print('kjhdjkhdjkhjkdhjkdhjkdhjdh$date');
+
+      return Right(Void);
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
   }
+
 
   @override
   Future<Either<Failure, void>> getUserProfile() {
@@ -517,12 +489,12 @@ class UserRepositoryImpl implements UserRepository {
       //   sharedPrefHelper.saveIdJwtToken(
       //     MaruConstant.token,
       //   );
-        // String token ="";
-        //await SharedPreferencesHelper().SetAuthToken(token);
+      // String token ="";
+      //await SharedPreferencesHelper().SetAuthToken(token);
 // print(token);
-        // Map<String,Strin
-        return Right(Void);
-     // }
+      // Map<String,Strin
+      return Right(Void);
+      // }
     } catch (e) {
       print("Thrown Exception While signing IN:$e");
       throw e;
@@ -760,4 +732,98 @@ class UserRepositoryImpl implements UserRepository {
     // TODO: implement getTextFile
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<Failure, void>> getProviders() async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+      final response = await http.get(MaruConstant.getproviders,
+          headers: headers
+      );
+//print(response.body);
+      var data = convert.jsonDecode(response.body);
+
+      var profile = data['provider_profiles'];
+      for (int i = 0; i < data['provider_profiles'].length; i++){
+
+      }
+      var comapny = profile[0]['company_name'];
+      var service = profile[0]['provider'] ['company_name'];
+//print($services)
+      var service2 = profile[1]['rating_reviews'];
+      var image1 = profile[1] ['provider'];
+      var comapny1 = image1[1]['company_name'];
+
+     // [MaruConstant.img];
+      var image = profile[0] [MaruConstant.img];
+      var discription = profile[0] [MaruConstant.description];
+      var operations = profile[0][MaruConstant.operation_hours];
+      await sharedPrefHelper.saveString(
+          MaruConstant.operation_hours, '$operations');
+      await sharedPrefHelper.saveString(
+          MaruConstant.company_name, '$discription');
+      await sharedPrefHelper.saveString(MaruConstant.company_name, '$comapny1');
+      await sharedPrefHelper.saveString(
+          MaruConstant.rating_reviews, '$service2');
+      await sharedPrefHelper.saveString(MaruConstant.img, '$image1');
+      await sharedPrefHelper.saveString(MaruConstant.img, '$image');
+      await sharedPrefHelper.saveString(MaruConstant.company_name, '$comapny');
+      await sharedPrefHelper.saveString(
+          MaruConstant.rating_reviews, 's$service');
+      // print('kjhdjkhdjkhjkdhjkdhjkdhjddffffffffffffffh$date');
+
+      return Right(Void);
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> getReview() async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'};
+      final response = await http.get(MaruConstant.getReview,
+          headers: headers
+      );
+//print(response.body);
+      var data = convert.jsonDecode(response.body);
+
+      return Right(Void);
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
 }
+// print(data);
+// var profile = data['reviews'];
+// // // print('fklfjeklfjklfj$profile');
+// // var index;
+// var review_comment = profile[0]['review_comment'];
+// var ratings = profile[0]['ratings'];
+// // var comapny1 = profile[1]['company_name'];
+// // var service2 = profile[1]['rating_reviews'];
+// // var image1 = profile[1] [MaruConstant.img];
+// // var image = profile[0] [MaruConstant.img];
+// // var discription = profile[0] [MaruConstant.description];
+// // var operations = profile[0][MaruConstant.operation_hours];
+// await sharedPrefHelper.saveString(
+// MaruConstant.review_comment, '$review_comment');
+// await sharedPrefHelper.saveString(
+// MaruConstant.ratings, '$ratings');
+// //   await sharedPrefHelper.saveString(MaruConstant.company_name, '$comapny1');
+// // await sharedPrefHelper.saveString(
+// //     MaruConstant.rating_reviews, '$service2');
+// // await sharedPrefHelper.saveString(MaruConstant.img, '$image1');
+// // await sharedPrefHelper.saveString(MaruConstant.img, '$image');
+// // await sharedPrefHelper.saveString(MaruConstant.company_name, '$comapny');
+// // await sharedPrefHelper.saveString(
+// //     MaruConstant.rating_reviews, 's$service');
+// print('kjhdjkhdjkhjkdhjkdhjkdhjddffffffffffffffh$date');

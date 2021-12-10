@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/widgets.dart';
@@ -18,6 +20,15 @@ class BookAppointmentScreen3 extends StatefulWidget {
 
 class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
   bool pressAttention = true;
+  bool _debug = false;
+  bool _contextoff = false;
+  bool _contextrand = false;
+
+  TextEditingController _controller;
+  int _dropDownValue = 0;
+  String _selValue = "SELECT SERVICES";
+  String _selValue1 = 'SELECT PET';
+  String _selValue2 = 'SELECT PROVIDER';
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +65,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
-                                    height: size.height * 0.01,
+                                    height: size.height * 0.05,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -143,33 +154,77 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                     ),
                   ),
                   SizedBox(height: 20,),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.only(right: 20, left: 20),
-                    color: Colors.white,
-                    height: 40,
-                    //   width: 200,
-                    child: TextFormField(
-                      textAlign: TextAlign.center,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.7),
-                              borderSide: BorderSide()),
-                          contentPadding: EdgeInsets.only(top: 10),
-                          hintText: 'Select a Services',
-                          hintStyle: MaaruStyle.text.greyDisable,
-                          fillColor: Colors.white,
-                          suffixIcon: Container(
-                              margin: EdgeInsets.all(10),
-                              child: Image.asset(
-                                'assets/icons/icone-setting-30.png',
-                                height: 10,
-                                width: 20,
-                                // width: 30,
-                              ))),
-                    ),
-                  ),
+                  Padding(  padding: EdgeInsets.only(right: 20, left: 20),
+                      child: DropdownButton(
+                        icon: Icon(
+                          Icons.expand_more,
+                          color: MaaruColors.textButtonColor,
+                          size: 40.09,
+                        ),
+                        hint:
+                            Center(
+                              child:
+                        Text(
+                          _selValue,
+                          style: MaaruStyle.text.small,
+                        )),
+                        isExpanded: true,
+                        iconSize: 30.0,
+                        style: TextStyle(color: Colors.white),
+                        items: [
+
+                          'WALKING',
+                          'GROOMING',
+                          'VET',
+                          'DAYCARE',
+                          'HOTEL',
+                          'HOSPITAL',
+
+                        ].map(
+                              (val) {
+                            return DropdownMenuItem<String>(
+                              value: val,
+                              child:
+                                Center(
+                                child:
+                              Text(val, style: MaaruStyle.text.small),
+                            ));
+                          },
+                        ).toList(),
+                        onChanged: (val) {
+                          setState(
+                                () {
+                              _selValue = val;
+                              if (val == "WALKING") {
+                                _dropDownValue = 1;
+                              }
+                              if (val == "SELECT PET") {
+                                _dropDownValue = 0;
+                              }
+
+                              if (val == "VET") {
+                                _dropDownValue = 2;
+                              }
+
+                              if (val == "DAYCARE") {
+                                _dropDownValue = 3;
+                              }
+                              if (val == "HOTEL") {
+                                _dropDownValue = 4;
+                              }
+                              if (val == "HOSPITAL") {
+                                _dropDownValue = 5;
+                              }
+                              // if (val == "GPT-3") {
+                              //   _dropDownValue = 6;
+                              // }
+                             },
+                           );
+                        },
+                      )),
+
+                  SizedBox(height: 20,),
+
                   SizedBox(
                     height: 20,
                   ),
@@ -183,33 +238,75 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.only(right: 20, left: 20),
-                    color: Colors.white,
-                    height: 40,
-                    //   width: 200,
-                    child: TextFormField(
-                      textAlign: TextAlign.center,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.7),
-                              borderSide: BorderSide()),
-                          contentPadding: EdgeInsets.only(top: 10),
-                          hintText: 'Select a Provider',
-                          hintStyle: MaaruStyle.text.greyDisable,
-                          fillColor: Colors.white,
-                          suffixIcon: Container(
-                              margin: EdgeInsets.all(10),
-                              child: Image.asset(
-                                'assets/icons/icone-setting-30.png',
-                                height: 10,
-                                width: 20,
-                                // width: 30,
-                              ))),
-                    ),
-                  ),
+                  Padding(  padding: EdgeInsets.only(right: 20, left: 20),
+                      child: DropdownButton(
+                        icon: Icon(
+                          Icons.expand_more,
+                          color: MaaruColors.textButtonColor,
+                          size: 40.09,
+                        ),
+                        hint: Center(
+                          child:
+                        Text(
+                          _selValue1,
+                          style: MaaruStyle.text.small,
+                        )),
+                        isExpanded: true,
+                        iconSize: 30.0,
+                        style: TextStyle(color: Colors.white),
+                        items: [
+                          'COMPANY1',
+                          'COMPANY2',
+                          'COMPANY3',
+                          // 'DAYCARE',
+                          // 'HOTEL',
+                          // 'HOSPITAL',
+
+                        ].map(
+                              (val) {
+                            return DropdownMenuItem<String>(
+                              value: val,
+                              child: Center(
+                                child:Center(child:
+                              Text(val, style: MaaruStyle.text.small),
+                            )));
+                          },
+                        ).toList(),
+                        onChanged: (val) {
+                          setState(
+                                () {
+                              _selValue1 = val;
+                              if (val == "COMPANY1") {
+                                _dropDownValue = 1;
+                              }
+                              if (val == "COMPANY2") {
+                                _dropDownValue = 0;
+                              }
+                              //
+                              if (val == "COMPANY3") {
+                                _dropDownValue = 2;
+                              }
+                              //
+                              // if (val == "DAYCARE") {
+                              //   _dropDownValue = 3;
+                              // }
+                              // if (val == "HOTEL") {
+                              //   _dropDownValue = 4;
+                              // }
+                              // if (val == "HOSPITAL") {
+                              //   _dropDownValue = 5;
+                              // }
+                              // // if (val == "GPT-3") {
+                              // //   _dropDownValue = 6;
+                              // // }
+                            },
+                          );
+                        },
+                      )),
+
+
+                  SizedBox(height: 20,),
+
                   SizedBox(
                     height: 20,
                   ),
@@ -223,33 +320,68 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                   SizedBox(
                     height: 20,
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.only(right: 20, left: 20),
-                    color: Colors.white,
-                    height: 40,
-                    //   width: 200,
-                    child: TextFormField(
-                      textAlign: TextAlign.center,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.7),
-                              borderSide: BorderSide()),
-                          contentPadding: EdgeInsets.only(top: 10),
-                          hintText: 'Select  pet',
-                          hintStyle: MaaruStyle.text.greyDisable,
-                          fillColor: Colors.white,
-                          suffixIcon: Container(
-                              margin: EdgeInsets.all(10),
-                              child: Image.asset(
-                                'assets/icons/icone-setting-30.png',
-                                height: 10,
-                                width: 20,
-                                // width: 30,
-                              ))),
-                    ),
-                  ),
+                  Padding(  padding: EdgeInsets.only(right: 20, left: 20),
+                  child: DropdownButton(
+                            icon: Icon(
+                              Icons.expand_more,
+                              color: MaaruColors.textButtonColor,
+                              size: 40.09,
+                            ),
+                            hint: Center(child:
+                            Text(
+                              _selValue2,
+                              style: MaaruStyle.text.small,
+                            )),
+                            isExpanded: true,
+                            iconSize: 30.0,
+                            style: TextStyle(color: Colors.white),
+                            items: [
+                              'TOMMY',
+                              'SALLY',
+
+                            ].map(
+                                  (val) {
+                                return DropdownMenuItem<String>(
+                                  value: val,
+                                  child: Center(child:
+                                  Text(val, style: MaaruStyle.text.small),
+                                ));
+                              },
+                            ).toList(),
+                            onChanged: (val) {
+                              setState(
+                                    () {
+                                  _selValue2 = val;
+                                  if (val == "TOMMY") {
+                                    _dropDownValue = 1;
+                                  }
+                                  if (val == "SALLY") {
+                                    _dropDownValue = 0;
+                                  }
+                                  //
+                                  // if (val == "VET") {
+                                  //   _dropDownValue = 2;
+                                  // }
+                                  //
+                                  // if (val == "DAYCARE") {
+                                  //   _dropDownValue = 3;
+                                  // }
+                                  // if (val == "HOTEL") {
+                                  //   _dropDownValue = 4;
+                                  // }
+                                  // if (val == "HOSPITAL") {
+                                  //   _dropDownValue = 5;
+                                  // }
+                                  // // if (val == "GPT-3") {
+                                  // //   _dropDownValue = 6;
+                                  // // }
+                                },
+                              );
+                            },
+                          )),
+
+                  SizedBox(height: 20,),
+
                   SizedBox(
                     height: 20,
                   ),
@@ -267,7 +399,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                       height: 40,
                       width: 400,
                       child: Padding(
-                          padding: EdgeInsets.only(right: 0, left: 0),
+                          padding: EdgeInsets.only(right: 20, left: 20),
                           child: ListView(scrollDirection: Axis.horizontal, children: [
                             ChoiceRow(
                               lebal1: '10:00 AM',
@@ -581,7 +713,7 @@ class _ChoiceButtonState extends State<ChoiceButton> {
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),
           color: widget.isPressed
-              ? MaaruColors.blueColor
+              ? MaaruColors.button2Color
               : Colors.white,
           // border: Border.all(color: Colors.grey),
         ),

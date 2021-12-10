@@ -103,14 +103,14 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
     _weightController = TextEditingController();
     _birthDateContoller = TextEditingController();
     _sexController = TextEditingController();
-fetchData();
+    fetchData();
     super.initState();
   }
-void fetchData() async{
-setState(() {
+  void fetchData() async{
+    setState(() {
 
-});
-}
+    });
+  }
   @override
   void dispose() {
     _petNameController.dispose();
@@ -136,7 +136,7 @@ setState(() {
 
   @override
   Widget build(BuildContext context) {
-   // _image = _prefHelper.getStringByKey(MaruConstant.img, "");
+    // _image = _prefHelper.getStringByKey(MaruConstant.img, "");
 
     return Scaffold(
         backgroundColor: Colors.grey[100],
@@ -315,10 +315,11 @@ setState(() {
                                     ThemedTextField("Age", TextInputType.text,
                                         textStyle: TextStyle(color: Colors.black),
                                         textInputAction: TextInputAction.done,
-                                        onChanged: (text) {
+                                        onChanged: (_ageTypeController) {
                                           BlocProvider.of<PetProfileBloc>(context)
-                                              .add(AgeChanged(text));
+                                              .add(AgeChanged(_ageTypeController));
                                         }, editingController: _ageTypeController),
+
                                     ThemedTextField("Weight", TextInputType.text,
                                         textStyle: TextStyle(color: Colors.black),
                                         textInputAction: TextInputAction.done,
@@ -338,7 +339,7 @@ setState(() {
                                               .add(HeightChanged(text));
 
                                         }, editingController: _heightController),
-                                     SizedBox(
+                                    new SizedBox(
                                       height: 10.0,
                                     ),
 
@@ -430,8 +431,8 @@ setState(() {
                                     //                   ),
                                     //                 ])),
 
-                            ToggleButton3(),
-                                     SizedBox(
+                                    ToggleButton3(),
+                                    SizedBox(
                                       height: 40.0,
                                     ),
                                     Row(
@@ -499,7 +500,7 @@ setState(() {
                                               }
                                               else {
                                                 BlocProvider.of<PetProfileBloc>(context)
-                                                    .add(fakeRegisterButtonTapped());
+                                                    .add(RegisterButtonTapped());
                                                 Navigator.of(context).push(
                                                     MaterialPageRoute(
                                                         builder: (_) =>

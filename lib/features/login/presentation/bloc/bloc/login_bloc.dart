@@ -5,9 +5,12 @@ import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/domain/usecases/resend_verification_code.dart';
 import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/usecases/usecase.dart';
+import 'package:maru/features/Home/domain/usecases/get_upcoming_appointment.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/provider_login/domain/usecases/provider_email_login.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/get_providers.dart';
+import 'package:maru/features/verify/domain/usecases/get_review_request.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
@@ -21,11 +24,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final EmailSignin _emailSignin;
   final ProviderEmailSignin _providerEmailSignin;
   final ResendCode _resendCode;
-  final GetPetProfile getPetProfile;
+  final GetPetProfile getPetProfile1;
   final SaveUserProfile saveUserProfile;
-
+  final GetProviders getProviders;
+  final GetReview getReview;
+final GetUpcomingAppointment getUpcomingAppointment;
   LoginBloc(
-      this._emailSignin,this.getPetProfile, this._resendCode,this.saveUserProfile,this._providerEmailSignin )
+      this._emailSignin,this.getProviders,this.getReview,
+      this.getPetProfile1,this.getUpcomingAppointment, this._resendCode,this.saveUserProfile,this._providerEmailSignin )
       : super();
   String email = "";
   String password = "";
@@ -64,8 +70,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         if (l is UserNotConfirmedFailure) {
           final res = await _resendCode(email);
           if (res.isRight()) {
-            final result =  await getPetProfile(NoParams());
+            final result =  await getPetProfile1(NoParams());
            if(result.isRight()) {
+             await getPetProfile1(NoParams());
              yield VerificationNeeded();
            }
           } else {
@@ -76,8 +83,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
-await getPetProfile(NoParams());
-
+await getPetProfile1(NoParams());
+//await getUpcomingAppointment(NoParams());
+//await getProviders(NoParams());
+//await getReview(NoParams());
         // else if (event is RegisterButtonTapped) {
         // yield RegisterInProgress();
         // final result =

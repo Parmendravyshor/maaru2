@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
@@ -12,6 +15,7 @@ class ViewPetProfile3 extends StatefulWidget {
 }
 
 class _ViewPetProfile3State extends State<ViewPetProfile3> {
+  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -106,7 +110,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                         crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            'Max',
+                                            _prefHelper.getStringByKey(MaruConstant.first_name, ''),
                                             style: MaaruStyle.text.large,
                                           ),
                                           SizedBox(
@@ -125,7 +129,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                               ))
                                         ]),
                                     Text(
-                                      'Jack  Russell',
+                                      _prefHelper.getStringByKey(MaruConstant.last_name, ''),
                                       style: MaaruStyle.text.tiny,
                                     ),
                                     SizedBox(
@@ -162,7 +166,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                               child: Text('Age',
                                                                   style: MaaruStyle
                                                                       .text.red)),
-                                                          Text('2',
+                                                          Text(_prefHelper.getStringByKey(MaruConstant.age, ''),
                                                               style: MaaruStyle
                                                                   .text.tinyDisable),
                                                         ]),
@@ -186,7 +190,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                               child: Text('Sex',
                                                                   style: MaaruStyle
                                                                       .text.red)),
-                                                          Text('Male',
+                                                          Text(_prefHelper.getStringByKey(MaruConstant.sex, ''),
                                                               style: MaaruStyle
                                                                   .text.tinyDisable),
                                                         ]),
@@ -210,7 +214,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                               child: Text('Height',
                                                                   style: MaaruStyle
                                                                       .text.red)),
-                                                          Text('8"',
+                                                          Text(_prefHelper.getStringByKey(MaruConstant.height, ''),
                                                               style: MaaruStyle
                                                                   .text.tinyDisable),
                                                         ]),
@@ -236,7 +240,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                               Text('Weight',
                                                                   style: MaaruStyle
                                                                       .text.red)),
-                                                          Text('4lbs',
+                                                          Text(_prefHelper.getStringByKey(MaruConstant.weight, ''),
                                                               style: MaaruStyle
                                                                   .text.tinyDisable),
                                                         ]),
@@ -269,12 +273,12 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                         CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
-                                                            'Max Additional Information',
+                                                            _prefHelper.getStringByKey(MaruConstant.name, ''),
                                                             style:
                                                             MaaruStyle.text.tiniest,
                                                           ),
                                                           Text(
-                                                            'Aug. 10, 2021',
+                                                            _prefHelper.getStringByKey(MaruConstant.times_a_day, ''),
                                                             style:
                                                             MaaruStyle.text.medium,
                                                           ),
@@ -282,8 +286,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                             height: 10,
                                                           ),
                                                           Text(
-                                                            'Lorem ipsum is placeholder text commonly used in the graphic, print,'
-                                                                'and publishing industries for previewing layouts and visual mockups',
+                                                           _prefHelper.getStringByKey(MaruConstant.note, ''),
                                                             style: MaaruStyle
                                                                 .text.greyDisable,
                                                           )

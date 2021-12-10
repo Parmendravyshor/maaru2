@@ -1,6 +1,8 @@
+import 'dart:ffi';
 import 'dart:math';
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +13,18 @@ import 'package:image_picker/image_picker.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
+import 'package:maru/core/data/datasource/user.dart';
+import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/widget/alert_manager.dart';
+import 'package:maru/features/verify/domain/usecases/get_providers.dart';
+import 'package:maru/features/verify/domain/usecases/get_review_request.dart';
+import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+import 'package:screenshot/screenshot.dart';
+import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
+import 'package:screenshot/screenshot.dart';
 class Secrets {
   // Add your Google Maps API Key here
   static const API_KEY = 'AIzaSyAcwOMoEO8-zDBVGzeGdPspSM3qJepJeUA';
@@ -617,3 +630,259 @@ class _MyApp4State extends State<MyApp4> {
   }
 }
 
+class fractional extends StatefulWidget {
+
+
+  @override
+  _fractionalState createState() => _fractionalState();
+}
+
+class _fractionalState extends State<fractional> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+    child:
+      Container(
+        height: 24.0,
+        color: Colors.black,
+        child: Row(
+            children: [
+              Flexible(
+                child: FractionallySizedBox(
+                  heightFactor: 10, widthFactor: 400,
+                  child: Container(color: Colors.orange),
+                ),
+              ),
+              Flexible(
+                child: FractionallySizedBox(
+                    heightFactor: 1, widthFactor: 0.15,
+                    child: Container(color: Colors.green)),
+              ),
+              Flexible(
+                child: FractionallySizedBox(
+                    heightFactor: 1, widthFactor: 0.05,
+                    child: Container(color: Colors.blue)
+                ),
+              ),
+            ]
+        )
+    ));
+  }
+}
+class MyHomePage extends StatefulWidget {
+  MyHomePage({ @required this.title}) : super();
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  //Create an instance of ScreenshotController
+  ScreenshotController screenshotController = ScreenshotController();
+
+  @override
+  void initState() {
+    // if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return Scaffold(
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text('ddd'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Screenshot(
+              controller: screenshotController,
+              child: Container(
+                  padding: const EdgeInsets.all(30.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.blueAccent, width: 5.0),
+                    color: Colors.amberAccent,
+                  ),
+                  child: Text("This widget will be captured as an image")),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            ElevatedButton(
+              child: Text(
+                'Capture Above Widget',
+              ),
+              onPressed: () {
+                screenshotController
+                    .capture(delay: Duration(milliseconds: 10))
+                    .then((capturedImage) async {
+                  ShowCapturedWidget(context, capturedImage);
+                }).catchError((onError) {
+                  print(onError);
+                });
+              },
+            ),
+            ElevatedButton(
+              child: Text(
+                'Capture An Invisible Widget',
+              ),
+              onPressed: () {
+                var container = Container(
+                    padding: const EdgeInsets.all(30.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blueAccent, width: 5.0),
+                      color: Colors.redAccent,
+                    ),
+                    child: Text(
+                      "This is an invisible widget",
+                      style: Theme.of(context).textTheme.headline6,
+                    ));
+                screenshotController
+                    .capture(
+
+
+                    delay: Duration(seconds: 1))
+                    .then((capturedImage) {
+                  ShowCapturedWidget(context, capturedImage);
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<dynamic> ShowCapturedWidget(
+      BuildContext context, Uint8List capturedImage) {
+    return showDialog(
+      useSafeArea: false,
+      context: context,
+      builder: (context) => Scaffold(
+        appBar: AppBar(
+          title: Text("Captured widget screenshot"),
+        ),
+        body: Center(
+            child: capturedImage != null
+                ? Image.memory(capturedImage)
+                : Container()),
+      ),
+    );
+  }
+
+// _saved(File image) async {
+//   // final result = await ImageGallerySaver.save(image.readAsBytesSync());
+//   print("File Saved to Gallery");
+// }
+}
+class fakeusein extends StatefulWidget {
+
+
+  @override
+  _fakeuseinState createState() => _fakeuseinState();
+}
+
+class _fakeuseinState extends State<fakeusein> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: FutureBuilder<List<dynamic>>(
+      //  future: getJobsData(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, index) {
+                  var title = snapshot.data[index]['title'];
+                  var company = snapshot.data[index]['company_name'];
+                  var skills = snapshot.data[index]['skills'];
+                  var description = snapshot.data[index]['description'];
+                  var positions = snapshot.data[index]['positions'];
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.green.shade300,
+                      ),
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: ListTile(
+                      leading: Text(skills),
+                      title: Text(title),
+                      subtitle: Text(
+                        company + '\n' + description,
+                      ),
+                      trailing: Text(positions),
+                    ),
+                  );
+                },
+              ),
+            );
+          }
+          return CircularProgressIndicator();
+        },
+      ),
+    );
+  }
+}
+//TODO: Ricky
+  class maa extends StatefulWidget {
+
+
+    @override
+    _maaState createState() => _maaState();
+  }
+ Future<Users> users;
+  class _maaState extends State<maa> {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Fetch Data Example',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Fetch Data Example'),
+        ),
+        body: FutureBuilder<Users>(
+          future: users,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data.users.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: <Widget>[
+                      Text('Title: ${snapshot.data.users[index].petName}'),
+                      Text('Body: ${snapshot.data.users[index].petName}'),
+                    ],
+                  );
+                },
+              );
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+
+            // By default, show a loading spinner.
+            return CircularProgressIndicator();
+          },
+        ),
+      ),
+    );
+  }
+}

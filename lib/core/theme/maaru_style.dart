@@ -15,6 +15,12 @@ class MaaruColors {
   static const Color musteredColor=Color(0xffFDE15A);
  static const Color redColor=Color(0xffFD8447);
  static const Color whiteColor=Colors.white;
+ static const Color groomingcolor=Color(0xff93b7fd);
+ static const Color vetcolor=Color(0xffff9976);
+ static const Color hotelcolor=Color(0xfffff2bf);
+ static const Color walkingcolor=Color(0xffe2d5b7);
+ static const Color hospitalcolor=Color(0xfffc744f);
+ static const Color daycarecolor=Color(0xff4f75fe);
   static const Color greyColorText=Color(0xffBDBDBD);
   static const Color underlineColor=Color(0xffE5E5E5);
   static const Color blackColor=Colors.black;

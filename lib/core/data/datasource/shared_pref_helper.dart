@@ -12,6 +12,7 @@ abstract class SharedPrefHelper {
   Future<void> savePayload(String payload);
   Future<void> saveExpiryTime(String expiryTime);
   Future<void> saveString(String key, String value);
+
   Future<void> saveBoolean(String key, bool value);
   Future<void> saveInt(String key, int value);
   Future <void>saveImage(String key, value);
@@ -149,7 +150,7 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
   }
 
   @override
-  Future<void> saveImage(String key, value) {
+  Future<bool> saveImage(String key, value) {
     return sharedPreferences.setString(key, value);
   }
 

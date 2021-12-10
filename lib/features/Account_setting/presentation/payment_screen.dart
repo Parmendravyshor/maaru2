@@ -39,6 +39,7 @@ class _PaymentScreenState extends State<PaymentScreen>
 
     super.initState();
   }
+
   TextEditingController _nameEditingController;
   TextEditingController _controller;
   bool priceupdate_value = true;
@@ -48,7 +49,7 @@ class _PaymentScreenState extends State<PaymentScreen>
   var nameTECs = <TextEditingController>[];
   var ageTECs = <TextEditingController>[];
   var jobTECs = <TextEditingController>[];
-  List<Container> containers = List <Container>();
+  List<Container> containers = List<Container>();
 
   Container createContainer() {
     var nameController = TextEditingController();
@@ -57,7 +58,7 @@ class _PaymentScreenState extends State<PaymentScreen>
     nameTECs.add(nameController);
     ageTECs.add(ageController);
     jobTECs.add(jobController);
-    return  Container(
+    return Container(
         color: Color(0xffFFFFFF),
         child: Padding(
             padding: EdgeInsets.only(top: 0.0),
@@ -66,194 +67,109 @@ class _PaymentScreenState extends State<PaymentScreen>
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
 
-                  Padding(
-                      padding: EdgeInsets.only(
-                          top: 20.0,
-                          left: MediaQuery.of(context)
-                              .size
-                              .width *
-                              0.1 /
-                              2),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Column(
-                            mainAxisAlignment:
-                            MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Text(
-                                'Name on Card',
-                                style:
-                                MaaruStyle.text.greyDisable,
-                              ),
-                            ],
-                          ),
-                        ],
-                      )),
-                  Padding(
-                      padding: EdgeInsets.only(top: 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Flexible(
-                            child: ThemedTextField(
-                              "",
-                              TextInputType.text,
-                              enabled: _status,
-                              editingController: _nameOnCardController,
-                            ),
-                          ),
-                        ],
-                      )),
-                  Padding(
-                      padding: EdgeInsets.only(
-                          top: 20.0,
-                          left: MediaQuery.of(context)
-                              .size
-                              .width *
-                              0.1 /
-                              2),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Column(
-                            mainAxisAlignment:
-                            MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Text(
-                                'Credit Card Number',
-                                style:
-                                MaaruStyle.text.greyDisable,
-                              ),
-                            ],
-                          ),
-                        ],
-                      )),
-                  Padding(
-                      padding: EdgeInsets.only(top: 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Flexible(
-                            child: ThemedTextField(
-                              "",
-                              TextInputType.number,
-                              enabled: _status,
-                              editingController:
-                              _creditCardNumberController,
-                            ),
-                          ),
-                        ],
-                      )),
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: 0.0,
-                        left: MediaQuery.of(context).size.width *
-                            0.1 /
-                            2),
-                    child:
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-
-                          Column(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Text(
-                                'Cvv',
-                                style: MaaruStyle.text.greyDisable,
-                              ),
-                            ],
-                          ),
-                          // SizedBox(
-                          //   width: 10,
-
-                          Flexible(
-                            child: Container(
-                                padding: EdgeInsets.only(left: 200, ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.max  ,
-                                  children: [
-                                    Row(children: [
-                                      Text('Exp', style: MaaruStyle.text.greyDisable,),
-
-
-                                    ],)
-                                  ],)
-                            ),
-                          ),
-
-                        ]),),
-
-                  Padding(
-                      padding: EdgeInsets.only(top: 0.0,),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Flexible(
-                            child: ThemedTextField(
-                              "",
-                              TextInputType.number,
-                              enabled: _status,
-                              editingController: _cvvController,
-                            ),
-                          ),
-                          Flexible(
-                            child: ThemedTextField(
-                              "",
-                              TextInputType.number,
-                              enabled: _status,
-                              editingController: _expDateController,
-                            ),
-                          ),
-                        ],
-                      )),
-
-
-              SizedBox(height: 10,),
-              InkWell(onTap: (){
-                setState(() {
-                  _removeWidget();
-                });
-              },
-                  child: Padding(
-                      padding: EdgeInsets.only(left: 20, ),
-                 child: Row(
-
+                  ThemedTextField(
+                    "Name On Card",
+                    TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    textStyle: TextStyle(color: Colors.grey[300]),
+                    onChanged: (text) {
+                      //BlocProvider.of<RegisterBloc>(context).add(FNameChanged(text));
+                    },
+                    editingController: _expDateController,
+                  ),
+                  ThemedTextField(
+                    "Credit Card Number",
+                    TextInputType.text,
+                    textInputAction: TextInputAction.next,
+                    textStyle: TextStyle(color: Colors.grey[300]),
+                    onChanged: (text) {
+                      //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                    },
+                    editingController: _nameEditingController,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-
-                    ElevatedButton(
-
-                      onPressed: () {
-
-                      },
-                      child: Icon(Icons.remove, color: Colors.white,),
-                      style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(10),
-                        primary: Colors.red, // <-- Button color
-                        onPrimary: Colors.red, // <-- Splash color
+                      Flexible(
+                        child: Container(
+                          padding: EdgeInsets.only(left: 15),
+                          child: ThemedTextField(
+                            "Cvv", TextInputType.text,
+                            textInputAction: TextInputAction.next,
+                            textStyle: TextStyle(color: Colors.grey[300]),
+                            onChanged: (text) {
+                              //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                            },
+                            //   editingController: _lnameController
+                          ),
+                        ),
                       ),
-                    ),
-                    Text('Remove Card',style:GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Poppins',
-                            fontSize: 18,
-                            color: Color(0xFFc72019))))
-                  ],
-                  ))),
-            ])
-    ));
+                      // SizedBox(
+                      //   width: 10,
+                      // ),
+                      Flexible(
+                        child: Container(
+                            padding: EdgeInsets.only(left: 15, bottom: 30),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  // contentPadding: EdgeInsets.only(left: 20),
+                                  hintText: 'Exp',
+                                  hintStyle: MaaruStyle.text.greyDisable,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.grey[300]),
+                                  ),
+                                  suffixIcon: Icon(
+                                    Icons.keyboard_arrow_down_outlined,
+                                    size: 40,
+                                    color: MaaruColors.buttonColor,
+                                  )),
+                            )),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                      onTap: () {
+                        setState(() {
+                          _removeWidget();
+                        });
+                      },
+                      child: Padding(
+                          padding: EdgeInsets.only(
+                            left: 20,
+                          ),
+                          child: Row(
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: Icon(
+                                  Icons.remove,
+                                  color: Colors.white,
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  shape: CircleBorder(),
+                                  padding: EdgeInsets.all(10),
+                                  primary: Colors.red, // <-- Button color
+                                  onPrimary: Colors.red, // <-- Splash color
+                                ),
+                              ),
+                              Text('Remove Card',
+                                  style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 18,
+                                          color: Color(0xFFc72019))))
+                            ],
+                          ))),
+                ])));
   }
 
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -282,24 +198,28 @@ class _PaymentScreenState extends State<PaymentScreen>
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
                     BackArrowButton(),
                     SizedBox(
                       height: 30,
                     ),
-                    Container(
-                      alignment: Alignment.topRight,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.asset(
-                        'assets/128/CrystalGaskell.png',
-                        height: 60,
-                        width: 60,
-                      ),
-                    ),
+                            Align(alignment: Alignment.center,
+                            child:
+                            Container(
+                              width: 200.0,
+                              height: 200.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                    //_image.isEmpty
+                                    // ? ExactAssetImage(
+                                    //  Image.asset(
+                                      'assets/icons/icone-setting-28.png'),
+                                  //  : FileImage(File(_image)),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )),
                     SizedBox(
                       height: 60,
                     ),
@@ -338,179 +258,96 @@ class _PaymentScreenState extends State<PaymentScreen>
                                               ),
                                             ],
                                           ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              _status
-                                                  ? _getEditIcon()
-                                                  : Container(),
-                                            ],
-                                          )
+                                          //   Row(
+                                          //     mainAxisAlignment:
+                                          //     MainAxisAlignment.spaceBetween,
+                                          //     mainAxisSize: MainAxisSize.min,
+                                          //     children: <Widget>[
+                                          //       _status
+                                          //           ? _getEditIcon()
+                                          //           : Container(),
+                                          //     ],
+                                          //   )
                                         ],
                                       )),
-                                  Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 20.0,
-                                          left: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.1 /
-                                              2),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: <Widget>[
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              Text(
-                                                'Name on Card',
-                                                style:
+                                  ThemedTextField(
+                                    "Name On Card",
+                                    TextInputType.text,
+                                    textInputAction: TextInputAction.next,
+                                    textStyle:
+                                        TextStyle(color: Colors.grey[300]),
+                                    onChanged: (text) {
+                                      //BlocProvider.of<RegisterBloc>(context).add(FNameChanged(text));
+                                    },
+                                    editingController: _expDateController,
+                                  ),
+                                  ThemedTextField(
+                                    "Credit Card Number",
+                                    TextInputType.text,
+                                    textInputAction: TextInputAction.next,
+                                    textStyle:
+                                        TextStyle(color: Colors.grey[300]),
+                                    onChanged: (text) {
+                                      //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                                    },
+                                    editingController: _nameEditingController,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
+                                        child: Container(
+                                          padding: EdgeInsets.only(left: 15),
+                                          child: ThemedTextField(
+                                            "Cvv", TextInputType.text,
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            textStyle: TextStyle(
+                                                color: Colors.grey[300]),
+                                            onChanged: (text) {
+                                              //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
+                                            },
+                                            //   editingController: _lnameController
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   width: 10,
+                                      // ),
+                                      Flexible(
+                                        child: Container(
+                                            padding: EdgeInsets.only(
+                                                left: 15, bottom: 40),
+                                            child: TextFormField(
+                                              decoration: InputDecoration(
+                                                // contentPadding: EdgeInsets.only(left: 20),
+                                                labelText: 'Exp',
+                                                labelStyle:
                                                     MaaruStyle.text.greyDisable,
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.grey[300]),
+                                                ),
                                               ),
-                                            ],
-                                          ),
-                                        ],
-                                      )),
-                                  Padding(
-                                      padding: EdgeInsets.only(top: 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: <Widget>[
-                                          Flexible(
-                                            child: ThemedTextField(
-                                              "",
-                                              TextInputType.text,
-                                              enabled: !_status,
-                                              editingController: _nameOnCardController,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                  Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 20.0,
-                                          left: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.1 /
-                                              2),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: <Widget>[
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              Text(
-                                                'Credit Card Number',
-                                                style:
-                                                    MaaruStyle.text.greyDisable,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      )),
-                                  Padding(
-                                      padding: EdgeInsets.only(top: 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: <Widget>[
-                                          Flexible(
-                                            child: ThemedTextField(
-                                              "",
-                                              TextInputType.number,
-                                              enabled: !_status,
-                                              editingController:
-                                                  _creditCardNumberController,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 0.0,
-                                        left: MediaQuery.of(context).size.width *
-                                            0.1 /
-                                            2),
-                                    child:
-                                    Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-
-                                          Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              Text(
-                                                'Cvv',
-                                                style: MaaruStyle.text.greyDisable,
-                                              ),
-                                            ],
-                                          ),
-                                          // SizedBox(
-                                          //   width: 10,
-
-                                          Flexible(
-                                            child: Container(
-                                                padding: EdgeInsets.only(left: 200, ),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  mainAxisSize: MainAxisSize.max  ,
-                                                  children: [
-                                                    Row(children: [
-                                                      Text('Exp', style: MaaruStyle.text.greyDisable,),
-
-
-                                                    ],)
-                                                  ],)
-                                            ),
-                                          ),
-
-                                        ]),),
-
-                                  Padding(
-                                      padding: EdgeInsets.only(top: 0.0,),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: <Widget>[
-                                          Flexible(
-                                            child: ThemedTextField(
-                                              "",
-                                              TextInputType.number,
-                                              enabled: !_status,
-                                              editingController: _cvvController,
-                                            ),
-                                          ),
-                                          Flexible(
-                                            child: ThemedTextField(
-                                              "",
-                                              TextInputType.number,
-                                              enabled: !_status,
-                                              editingController: _expDateController,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
+                                            )),
+                                      ),
+                                    ],
+                                  ),
                                 ]))),
-                            ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: containers.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return containers[index];
-                              },
-                            ),
+                    ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: containers.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return containers[index];
+                      },
+                    ),
                     Row(
                       children: [
                         Padding(
-                            padding: EdgeInsets.only(left: 20,top: 0),
+                            padding: EdgeInsets.only(left: 20, top: 0),
                             child: CircleAvatar(
                               backgroundColor: Colors.grey[100],
                               radius: 25,
@@ -520,15 +357,13 @@ class _PaymentScreenState extends State<PaymentScreen>
                                 size: 25,
                               ),
                             )),
-
-
                         InkWell(
-                            onTap: ()async {
+                            onTap: () async {
                               !_status;
                               setState(() => containers.add(createContainer()));
                             },
                             child: Text(
-                              '  Add New Card',
+                              'Add New Card',
                               style: MaaruStyle.text.mediumGreen,
                             ))
                       ],
@@ -609,22 +444,8 @@ class _PaymentScreenState extends State<PaymentScreen>
                           SizedBox(
                             height: 30,
                           ),
-                          !_status
-                              ? Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 25, right: 25, top: 15.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(right: 10.0),
-                                          child: Container(
-                                              child: RaisedButton(
-                                            child: const Text("Payment"),
-                                            textColor: Colors.white,
-                                            color: MaaruColors.buttonColor,
+                        ThemedButton(
+                          text: 'Update Payment',
                                             onPressed: () {
                                               // String paword =
                                               // _newController
@@ -638,92 +459,35 @@ class _PaymentScreenState extends State<PaymentScreen>
                                               // context);
                                               // }
                                               // else {
-                                              Dialogs
-                                                  .showLoadingDialog(
-                                              context,
-                                              _keyLoader,
-                                              "Updating Password..");
-                                              BlocProvider.of<
-                                              PetProfileBloc>(
-                                              context)
-                                                  .add(
-                                              savePayment(
-                                              _cvvController
-                                                  .text,
-                                              _creditCardNumberController.text,
-                                              _nameOnCardController.text,
-                                              _expDateController
-                                                  .text));
-                                               
+                                              Dialogs.showLoadingDialog(
+                                                  context,
+                                                  _keyLoader,
+                                                  "Updating Payment..");
+                                              BlocProvider.of<PetProfileBloc>(
+                                                      context)
+                                                  .add(savePayment(
+                                                      _cvvController.text,
+                                                      _creditCardNumberController
+                                                          .text,
+                                                      _nameOnCardController
+                                                          .text,
+                                                      _expDateController.text));
                                             },
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(2.0)),
-                                          )),
-                                        ),
-                                        flex: 2,
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(left: 10.0),
-                                          child: Container(
-                                              child: RaisedButton(
-                                            child: Text("Cancel"),
-                                            textColor: Colors.white,
-                                            color: MaaruColors.textColor,
-                                            onPressed: () {
-                                              setState(() {
-                                                _status = true;
-                                                FocusScope.of(context)
-                                                    .requestFocus(FocusNode());
-                                              });
-                                            },
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(2.0)),
-                                          )),
-                                        ),
-                                        flex: 2,
-                                      ),
-                                    ],
+
+                        ),
+                          SizedBox(height: 40,)
+                        ],
                                   ),
-                                )
-                              : Container(),
-                          SizedBox(
-                            height: 100,
-                          )
+                                ),
+
+
                         ],
                       ),
                     )
-                  ])));
+                  );
             })));
   }
 
-  @override
-  void dispose() {
-    // Clean up the controller when the Widget is disposed
-    myFocusNode.dispose();
-    super.dispose();
-  }
-
-  Widget _getEditIcon() {
-    return GestureDetector(
-      child: CircleAvatar(
-        backgroundColor: Colors.red,
-        radius: 14.0,
-        child: Icon(
-          Icons.edit,
-          color: Colors.white,
-          size: 16.0,
-        ),
-      ),
-      onTap: () {
-        setState(() {
-          _status = false;
-        });
-      },
-    );
-  }
   _removeWidget() {
     if (containers.length > 0) {
       containers.removeLast();

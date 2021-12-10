@@ -51,21 +51,8 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
   @override
   Stream<PetProfileState> mapEventToState(PetProfileEvent event) async* {
-    if (event is AgeChanged) {
-      print('djdd');
-      if (event.age.isNotEmpty) {
-        age = event.age;
-      } else {
-        age = '';
-      }
-      print(age);
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    } else if (event is WidthChanged) {
+
+    if (event is WidthChanged) {
       if (event.width.isNotEmpty) {
         width = event.width;
       } else {
@@ -78,6 +65,21 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       } else {
         yield RegisterFormValidationFailure();
       }
+    }
+     else if (event is AgeChanged) {
+        print('djdd');
+        if (event.age.isNotEmpty) {
+          age = event.age;
+        } else {
+          age = '';
+        }
+        print(age);
+        bool isValidated = _isFormValid();
+        if (isValidated) {
+          yield RegisterFormValidationSuccess();
+        } else {
+          yield RegisterFormValidationFailure();
+        }
     } else if (event is HeightChanged) {
       if (event.hight.isNotEmpty) {
         hight = event.hight;

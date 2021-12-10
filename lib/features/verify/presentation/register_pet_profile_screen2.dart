@@ -143,7 +143,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                   height: size.height * 0.20,
                                   width: size.width * 0.9,
                                   child: BackgroundImage(
-                                    assetImage: 'assets/images/kutta.png',
+                                    assetImage: _prefHelper.getStringByKey(MaruConstant.img, ''),
                                   )),
                               Container(
                                   alignment: FractionalOffset.bottomCenter,
@@ -159,11 +159,11 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                           crossAxisAlignment: CrossAxisAlignment
                                               .start,
                                           children: [
-                                            Text('Max',
+                                            Text(_prefHelper.getStringByKey(MaruConstant.first_name, ''),
                                                 style: MaaruStyle.text.large,
                                                 textAlign: TextAlign.left),
                                             Text(
-                                              'Jack  Russell',
+                                              _prefHelper.getStringByKey(MaruConstant.last_name, ''),
                                               style: MaaruStyle.text.tiny,
                                             ),
                                             SizedBox(

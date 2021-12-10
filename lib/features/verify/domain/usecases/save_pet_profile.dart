@@ -5,8 +5,10 @@ import '../../../../core/domain/repositories/user_repository.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-
+import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'save_pet_profile.g.dart';
+//TODO: Ricky
 class SavePetProfile extends UseCase<void, PetProfileParams> {
   UserRepository userRepository;
   SavePetProfile(this.userRepository);
@@ -17,6 +19,21 @@ class SavePetProfile extends UseCase<void, PetProfileParams> {
   }
 }
 
+class Users {
+  final List<PetProfileParams> users;
+
+  Users({this.users});
+
+  factory Users.fromJson(Map<String, dynamic> json) {
+    List<PetProfileParams> tempUsers = [];
+    for (int i = 0; i < json['users'].length; i++) {
+      PetProfileParams post = PetProfileParams.fromJson(json['users'][i]);
+      tempUsers.add(post);
+    }
+    return Users(users: tempUsers);
+  }
+}
+@JsonSerializable()
 class PetProfileParams {
   final String profileImage;
   final String gender;
@@ -40,8 +57,8 @@ class PetProfileParams {
   final String breadType;
   final String height;
   final String weight;
-  final String birthDate;
-  final String sex;
+  String birthDate;
+  String sex;
   final String file;
   final String name;
   final String petneeds;
@@ -79,22 +96,7 @@ class PetProfileParams {
     this.age,
     this.name
   });
-  // CreateAccount.fromJson(Map<String, dynamic> json) {
-  //   name = json['name'];
-  //   age = json['age'];
-  //   addMoreVaccine = json['dob'];
-  //   petVaccine = json['gender'];
-  //   sex = json['country_code'];
-  //   birthDate = json['phone'];
-  //   weight = json['image'];
-  //   height = json['license_image'];
-  //   breadType = json['latitude'];
-  //   petName = json['longitude'];
-  //   gender = json['fcm_token'];
-  //   profileImage = json['pin'];
-  //   hospital = json['otp'];
-  //   dayCare = json['account_status'];
-  //   walking = json['online_status'];
-  //   // token = json['token'];
-  // }
+factory PetProfileParams.fromJson(Map<String, dynamic> json) =>
+    _$PetProfileParamsFromJson(json);
+Map<String,dynamic> toJson() =>_$PetProfileParamsToJson(this);
 }

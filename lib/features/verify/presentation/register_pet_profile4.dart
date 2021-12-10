@@ -1,5 +1,8 @@
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+
 
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
@@ -24,6 +27,12 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
   Color circlecolor4 = MaaruColors.whiteColor;
   Color circlecolor5 = MaaruColors.whiteColor;
   Color circlecolor6 = MaaruColors.whiteColor;
+  bool pressed1 = true;
+  bool pressed2 = true;
+  bool pressed3 = true;
+  bool pressed4 = true;
+  bool pressed5 = true;
+  bool pressed6 = true;
   Widget choosecircle(Image image, String text, Color color) {
     return CircleAvatar(
       radius: 55,
@@ -68,6 +77,7 @@ bottom: false,
 
           Container(
 
+
               alignment: Alignment.bottomRight,
 
              height: size.height * 0.25,
@@ -86,7 +96,8 @@ bottom: false,
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30))),
               child: Container(
-                  padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
+
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -105,127 +116,317 @@ bottom: false,
                           'Pet Needs',
                           style: MaaruStyle.text.small,
                         ),
-                        Container(
-                          height: 350,
-                          width: 360,
-                          child: Stack(
-                            children: <Widget>[
-                              Positioned(
-                                top: 30,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      circlecolor1 == MaaruColors.whiteColor
-                                          ? circlecolor1 =  Color(0xff93b7fd)
-                                          : circlecolor1 =  MaaruColors.whiteColor;
-                                    });
-                                  },
-                                  child: choosecircle(
-                                      Image.asset(
-                                        'assets/icons/Fill 1.png',
-                                        height: 35,
-                                      ),
-                                      'Grooming',
-                                      circlecolor1),
+                        // Container(
+                        //   height: 350,
+                        //   width: 360,
+                        //   child: Stack(
+                        //     children: <Widget>[
+                        //       Positioned(
+                        //         top: 30,
+                        //         child: GestureDetector(
+                        //           onTap: () {
+                        //             setState(() {
+                        //               circlecolor1 == MaaruColors.whiteColor
+                        //
+                        //                   ? circlecolor1 =  Color(0xff93b7fd)
+                        //
+                        //                   : circlecolor1 =  MaaruColors.whiteColor;
+                        //             });
+                        //           },
+                        //           child: choosecircle(
+                        //               Image.asset(
+                        //                 'assets/icons/Fill 1.png',
+                        //                 height: 35,
+                        //               ),
+                        //               'Grooming',
+                        //               circlecolor1),
+                        //         ),
+                        //       ),
+                        //       Positioned(
+                        //           left: 200,
+                        //           child: GestureDetector(
+                        //             onTap: () {
+                        //               setState(() {
+                        //                 circlecolor2 == MaaruColors.whiteColor
+                        //
+                        //                     ? circlecolor2 =Color(0xffff9976)
+                        //
+                        //                     : circlecolor2 = MaaruColors.whiteColor;
+                        //               });
+                        //             },
+                        //             child: choosecircle(
+                        //                 Image.asset(
+                        //                   'assets/icons/Fill 1 (2).png',
+                        //                   height: 35,
+                        //                 ),
+                        //                 'Vet',
+                        //                 circlecolor2),
+                        //           )),
+                        //       Positioned(
+                        //           top: 100,
+                        //           left: 110,
+                        //           child: GestureDetector(
+                        //             onTap: () {
+                        //               setState(() {
+                        //                 circlecolor3 == MaaruColors.whiteColor
+                        //
+                        //                     ? circlecolor3 = Color(0xfffff2bf)
+                        //
+                        //                     : circlecolor3 = MaaruColors.whiteColor;
+                        //               });
+                        //             },
+                        //             child: choosecircle(
+                        //                 Image.asset(
+                        //                   'assets/icons/Fill 1 (3).png',
+                        //                   height: 35,
+                        //                 ),
+                        //                 'Hotel',
+                        //                 circlecolor3),
+                        //           )),
+                        //       Positioned(
+                        //           top: 160,
+                        //           child: GestureDetector(
+                        //             onTap: () {
+                        //               setState(() {
+                        //                 circlecolor4 == MaaruColors.whiteColor
+                        //
+                        //                     ? circlecolor4 = MaaruColors.button2Color
+                        //
+                        //
+                        //                     : circlecolor4 = MaaruColors.whiteColor;
+                        //               });
+                        //             },
+                        //             child: choosecircle(
+                        //                 Image.asset(
+                        //                   'assets/icons/Fill 1 (1).png',
+                        //                   height: 35,
+                        //                 ),
+                        //                 'Walking',
+                        //                 circlecolor4),
+                        //           )),
+                        //       Positioned(
+                        //           top: 130,
+                        //           left: 240,
+                        //           child: GestureDetector(
+                        //             onTap: () {
+                        //               setState(() {
+                        //                 circlecolor5 == MaaruColors.whiteColor
+                        //
+                        //                     ? circlecolor5 = Color(0xff4f75fe)
+                        //
+                        //                     : circlecolor5 = MaaruColors.whiteColor;
+                        //               });
+                        //             },
+                        //             child: choosecircle(
+                        //                 Image.asset(
+                        //                   'assets/icons/Background.png',
+                        //                   height: 35,
+                        //                 ),
+                        //                 'Daycare',
+                        //                 circlecolor5),
+                        //           )),
+                        //       Positioned(
+                        //           top: 230,
+                        //           left: 150,
+                        //           child: GestureDetector(
+                        //             onTap: () {
+                        //               setState(() {
+                        //                 circlecolor6 == MaaruColors.whiteColor
+                        //
+                        //                     ? circlecolor6 = Color(0xffFc744f)
+                        //
+                        //                     : circlecolor6 = MaaruColors.whiteColor;
+                        //               });
+                        //             },
+                        //             child: choosecircle(
+                        //                 Image.asset(
+                        //                   'assets/icons/Background (1).png',
+                        //                   height: 35,
+                        //                 ),
+                        //                 'Hospital',
+                        //                 circlecolor6),
+                        //           ))
+                        //     ],
+                        //   ),
+                      //   ),
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: [
+                            InkWell(
+                            onTap: () {
+              setState(() => pressed1 = !pressed1);
+              },
+                  child:
+                            Container(
+                                height: 80,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  color: pressed1? MaaruColors.whiteColor :MaaruColors.walkingcolor,
+                                  border: Border.all(color: Colors.grey[400]),
                                 ),
-                              ),
-                              Positioned(
-                                  left: 200,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        circlecolor2 == MaaruColors.whiteColor
-                                            ? circlecolor2 =Color(0xffff9976)
-                                            : circlecolor2 = MaaruColors.whiteColor;
-                                      });
-                                    },
-                                    child: choosecircle(
-                                        Image.asset(
-                                          'assets/icons/Fill 1 (2).png',
-                                          height: 35,
-                                        ),
-                                        'Vet',
-                                        circlecolor2),
-                                  )),
-                              Positioned(
-                                  top: 100,
-                                  left: 110,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        circlecolor3 == MaaruColors.whiteColor
-                                            ? circlecolor3 = Color(0xfffff2bf)
-                                            : circlecolor3 = MaaruColors.whiteColor;
-                                      });
-                                    },
-                                    child: choosecircle(
-                                        Image.asset(
-                                          'assets/icons/Fill 1 (3).png',
-                                          height: 35,
-                                        ),
-                                        'Hotel',
-                                        circlecolor3),
-                                  )),
-                              Positioned(
-                                  top: 160,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        circlecolor4 == MaaruColors.whiteColor
-                                            ? circlecolor4 = MaaruColors.button2Color
-                                            : circlecolor4 = MaaruColors.whiteColor;
-                                      });
-                                    },
-                                    child: choosecircle(
-                                        Image.asset(
-                                          'assets/icons/Fill 1 (1).png',
-                                          height: 35,
-                                        ),
-                                        'Walking',
-                                        circlecolor4),
-                                  )),
-                              Positioned(
-                                  top: 130,
-                                  left: 240,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        circlecolor5 == MaaruColors.whiteColor
-                                            ? circlecolor5 = Color(0xff4f75fe)
-                                            : circlecolor5 = MaaruColors.whiteColor;
-                                      });
-                                    },
-                                    child: choosecircle(
-                                        Image.asset(
-                                          'assets/icons/Background.png',
-                                          height: 35,
-                                        ),
-                                        'Daycare',
-                                        circlecolor5),
-                                  )),
-                              Positioned(
-                                  top: 230,
-                                  left: 150,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        circlecolor6 == MaaruColors.whiteColor
-                                            ? circlecolor6 = Color(0xffFc744f)
-                                            : circlecolor6 = MaaruColors.whiteColor;
-                                      });
-                                    },
-                                    child: choosecircle(
-                                        Image.asset(
-                                          'assets/icons/Background (1).png',
-                                          height: 35,
-                                        ),
-                                        'Hospital',
-                                        circlecolor6),
-                                  ))
-                            ],
-                          ),
+
+                                child: Padding(
+                                  padding:EdgeInsets.only(left: 20),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset('assets/icons/Fill 1 (1).png',height: 30,),
+                                      SizedBox(width: 10,),
+                                      Text('Walking')
+                                    ],),
+                                )
+                            )),
+                            InkWell(
+                              onTap: () {
+                                setState(() => pressed2 = !pressed2);
+                              },
+                              child:
+                            Container(
+                                height: 80,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  color: pressed2? MaaruColors.whiteColor :MaaruColors.groomingcolor,
+                                  border: Border.all(color: Colors.grey[400]),
+                                ),
+
+                                child:
+                                Padding(
+                                  padding:EdgeInsets.only(left: 20),
+                                  child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset('assets/icons/Fill 1.png',height: 30,),
+                                      SizedBox(width: 10,),
+                                      Text('Grooming')
+                                    ],),
+                                )
+                            ),
+                            )],),
+                        SizedBox(
+                          height: size.height * 0.01,
                         ),
-                        const SizedBox(
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: [
+                            InkWell(
+                                onTap: () {
+                                  setState(() => pressed3 = !pressed3);
+                                },
+                              child:
+                            Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  color: pressed3? MaaruColors.whiteColor :MaaruColors.vetcolor,
+                                  border: Border.all(color: Colors.grey[400]),
+                                ),
+                                height: 80,
+                                width: 150,
+
+                                child: Padding(
+                                  padding:EdgeInsets.only(left: 20),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset('assets/icons/Fill 1 (2).png',height: 30,),
+                                      SizedBox(width: 10,),
+                                      Text('Vet')
+                                    ],),
+                                )
+                            )),
+                            InkWell(
+                              onTap: () {
+                                setState(() => pressed4 = !pressed4);
+                              },
+                              child:
+                            Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  color: pressed4? MaaruColors.whiteColor :MaaruColors.hotelcolor,
+                                  border: Border.all(color: Colors.grey[400]),
+                                ),
+                                height: 80,
+                                width: 150,
+
+                                child:
+                                Padding(
+                                  padding:EdgeInsets.only(left: 20),
+                                  child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset('assets/icons/Fill 1 (3).png',height: 30,),
+                                      SizedBox(width: 10,),
+                                      Text('Hotel')
+                                    ],),
+                                )
+                            ),
+                            )],),
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                setState(() => pressed5 = !pressed5);
+                              },
+                         child: Container(
+                            height: 80,
+                            width: 150,
+                             decoration: BoxDecoration(
+                               shape: BoxShape.rectangle,
+                               color: pressed5? MaaruColors.whiteColor :MaaruColors.hospitalcolor,
+                               border: Border.all(color: Colors.grey[400]),
+                             ),
+
+                            child: Padding(
+                              padding:EdgeInsets.only(left: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                Image.asset('assets/icons/Background (1).png',height: 30,),
+                                  SizedBox(width: 10,),
+                                Text('Hospital')
+                              ],),
+                            )
+                          ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() => pressed6 = !pressed6);
+                              },
+                           child: Container(
+                                height: 80,
+                                width: 150,
+                               decoration: BoxDecoration(
+                                 shape: BoxShape.rectangle,
+                                 color: pressed6? MaaruColors.whiteColor :MaaruColors.daycarecolor,
+                                 border: Border.all(color: Colors.grey[400]),
+                               ),
+
+                                child:
+                                Padding(
+                                  padding:EdgeInsets.only(left: 20),
+                                  child: Row(
+                                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset('assets/icons/Background.png',height: 30,),
+                                      SizedBox(width: 10,),
+                                      Text('Daycare')
+                                  ],),
+                                )
+                            ),
+                            )],),
+                         SizedBox(
                           height: 40,
                         ),
                         Row(

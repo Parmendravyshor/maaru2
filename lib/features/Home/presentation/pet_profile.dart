@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/show_location.dart';
+import 'package:maru/features/Account_setting/presentation/account_setting.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'create_home_screen.dart';
 
@@ -16,7 +17,8 @@ class _PetProfileState extends State<PetProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor:MaaruColors.darkGrey2,
-        bottomNavigationBar: CreateHomeScreen(
+        bottomNavigationBar:
+        CreateHomeScreen(
           selectedIndex: 2,
 
         ),
@@ -24,11 +26,34 @@ class _PetProfileState extends State<PetProfile> {
           bottom: false,
             child: SingleChildScrollView(child:
             Column(children: [
-          SizedBox(
-            height: 40,
+
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BackArrowButton(),
+              InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => AccountSettingScreen()));
+                  },
+                  child: Align(alignment: Alignment.topRight,
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Image.asset(
+                        'assets/128/CrystalGaskell.png',
+                        height: 60,
+                        width: 60,
+                      ),
+                    ),
+                  )),
+            ],
           ),
-          BackArrowButton(),
-          ShowLocation(),
+
           SizedBox(
             height: 20,
           ),

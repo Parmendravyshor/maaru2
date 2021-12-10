@@ -70,17 +70,18 @@ class _AfterSplashScreenState extends State<AfterSplashScreen> {
     return Stack(
       children: [
         Image.asset(
-          'assets/icons/Splash-Provider-or-User-screen-svg-new.png',
+          'assets/icons/Splash-Provider-or-User-screen-svg-new (3).png',
           height: 3000,
           width: 3000,
           fit: BoxFit.cover,
         ),
         Container(
+            padding: EdgeInsets.fromLTRB(10, 0, 10, 100),
             alignment: Alignment.center,
             child: BackgroundImage(
               assetImage: 'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
-              //  hight: 200,
-              widt: 300,
+              //hight: 10,
+              widt: 200,
             )),
         Scaffold(
           backgroundColor: Colors.transparent,

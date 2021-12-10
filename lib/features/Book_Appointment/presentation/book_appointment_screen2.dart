@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
@@ -20,7 +23,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
   bool star3 = true;
   bool star4 = true;
   bool star5 = true;
-
+  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -111,8 +114,8 @@ class _BookAppointment2State extends State<BookAppointment2> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Austin Pet Groomer',
+                                Text('shandan',
+                                 //_prefHelper.getStringByKey(MaruConstant.company_name, ''),
                                   style: MaaruStyle.text.tiniest
                                 ),
 // SizedBox(width: size.width*0.34,),
@@ -184,7 +187,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                   color: Colors.yellowAccent,
                                 ),
                                 Text(
-                                  '5',
+                                 _prefHelper.getStringByKey(MaruConstant.ratings, ''),
                                   style: TextStyle(fontSize: 15),
                                 ),
                               ],
@@ -192,7 +195,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                             Padding(
                               padding: const EdgeInsets.only(left: 55),
                               child: Text(
-                                'Lorem ipsum dolor sit amet,consectur adipiscing elit,sed do ejusmod tempor incididunt ut labore et dolore magna aliqua.',
+                                  _prefHelper.getStringByKey(MaruConstant.review_comment, ''),
                                 style: MaaruStyle.text.tiny
                               ),
                             ),
@@ -232,7 +235,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                             Padding(
                                 padding: const EdgeInsets.only(left: 55),
                                 child: Text(
-                                  'Lorem ipsum dolor sit amet,consectur adipiscing elit,sed do ejusmod tempor incididunt ut labore et dolore magna aliqua.',
+                                  'sb kuch mai hi kru.',
                                   style: MaaruStyle.text.tiny
                                 )),
                             SizedBox(height: 10,),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
@@ -13,6 +16,7 @@ class ViewPetProfile2 extends StatefulWidget {
 }
 
 class _ViewPetProfile2State extends State<ViewPetProfile2> {
+  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -108,7 +112,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    'Max',
+                                      _prefHelper.getStringByKey(MaruConstant.first_name, ''),
                                     style: MaaruStyle.text.large,
                                   ),
                                   SizedBox(
@@ -127,7 +131,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                   ))
                                 ]),
                             Text(
-                              'Jack  Russell',
+                              _prefHelper.getStringByKey(MaruConstant.last_name, ''),
                               style: MaaruStyle.text.tiny,
                             ),
                             SizedBox(
@@ -164,7 +168,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                       child: Text('Age',
                                                           style: MaaruStyle
                                                               .text.red)),
-                                                  Text('2',
+                                                  Text(_prefHelper.getStringByKey(MaruConstant.age, ''),
                                                       style: MaaruStyle
                                                           .text.tinyDisable),
                                                 ]),
@@ -188,7 +192,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                       child: Text('Sex',
                                                           style: MaaruStyle
                                                               .text.red)),
-                                                  Text('Male',
+                                                  Text(_prefHelper.getStringByKey(MaruConstant.sex, ''),
                                                       style: MaaruStyle
                                                           .text.tinyDisable),
                                                 ]),
@@ -212,7 +216,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                       child: Text('Height',
                                                           style: MaaruStyle
                                                               .text.red)),
-                                                  Text('8"',
+                                                  Text(_prefHelper.getStringByKey(MaruConstant.height, ''),
                                                       style: MaaruStyle
                                                           .text.tinyDisable),
                                                 ]),
@@ -237,7 +241,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                           style: MaaruStyle
                                                               .text.red)),
                                                   Text(
-                                                    '4lbs',
+                                                    _prefHelper.getStringByKey(MaruConstant.weight, ''),
                                                     style: MaaruStyle
                                                         .text.tinyDisable,
                                                   ),
@@ -255,7 +259,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                   height: 20,
                                 ),
                                       Text(
-                                        'Itchy Skin, Congestion, Postnasal Drip, Wheezing' ,
+                                        _prefHelper.getStringByKey(MaruConstant.known_allergies, '') ,
                                         style: MaaruStyle.text.greyDisable,
                                       ),
 

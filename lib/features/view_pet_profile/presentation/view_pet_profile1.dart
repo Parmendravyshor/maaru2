@@ -1,10 +1,16 @@
 
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/auth_source.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
+import 'package:maru/core/data/repository/user_repository.impl.dart';
+import 'package:maru/core/domain/repositories/user_repository.dart';
+import 'package:maru/core/network/network_info.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
@@ -13,12 +19,13 @@ import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/faketest.dart';
+import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile2.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
-
+import 'package:http/http.dart' as http;
 class ViewPetProfile extends StatefulWidget {
   @override
   _ViewPetProfileState createState() => _ViewPetProfileState();
@@ -28,10 +35,18 @@ class _ViewPetProfileState extends State<ViewPetProfile>
   with SingleTickerProviderStateMixin {
   bool enabled = false;
   bool _status = true;
-  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   final FocusNode myFocusNode = FocusNode();
   PetProfileParams petProfileParams = PetProfileParams();
+GetPetProfile getPetProfile = GetPetProfile(userRepository);
+UserRepositoryImpl userRepositoryImpl = UserRepositoryImpl(sharedPrefHelper, authSource);
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
+
+  static UserRepository userRepository;
+
+  static AuthSource  authSource ;
+
+  static SharedPrefHelper  sharedPrefHelper ;
   // TextEditingController _fnameController;
   // TextEditingController _lnameController;
   // TextEditingController _cityController;
@@ -53,7 +68,11 @@ class _ViewPetProfileState extends State<ViewPetProfile>
     fetchData();
   }
 void fetchData() async{
+  var response = getPetProfile;
+setState(()  {
 
+ // petProfileParams = PetProfileParams.fromJson(jsonDecode(response['']));
+});
 }
   @override
   Widget build(BuildContext context) {
@@ -63,7 +82,8 @@ void fetchData() async{
     return BlocProvider(
       create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
       child: Scaffold(
-        body: BlocBuilder<PetProfileBloc, PetProfileState>(
+        body:
+        BlocBuilder<PetProfileBloc, PetProfileState>(
             builder: (context, state) {
               try {
                 Navigator.of(_keyLoader.currentContext, rootNavigator: true);
@@ -99,7 +119,8 @@ void fetchData() async{
                                       height: size.height * 0.25,
                                       width: size.width * 0.9,
                                       child: BackgroundImage(
-                                        assetImage: 'assets/images/kutta.png',
+                                        assetImage: _prefHelper.getStringByKey(MaruConstant.img, '')
+                                        //'assets/images/kutta.png',
                                       )),
                                   Container(
                                     //height: size.,
@@ -173,7 +194,7 @@ void fetchData() async{
                                                         .end,
                                                     children: [
                                                       Text(
-                                                        'Max',
+                                                        _prefHelper.getStringByKey(MaruConstant.first_name, ''),
                                                         style: MaaruStyle.text
                                                             .large,
                                                       ),
@@ -195,8 +216,8 @@ void fetchData() async{
                                                             height: 40,
                                                           ))
                                                     ]),
-                                                Text(
-                                                  'Jack  Russell',
+                                                Text( petProfileParams.temperament,
+                                                  //  _prefHelper.getStringByKey(MaruConstant.last_name, ''),
                                                   style: MaaruStyle.text.tiny,
                                                 ),
                                                 SizedBox(
@@ -245,7 +266,8 @@ void fetchData() async{
                                                                               style: MaaruStyle
                                                                                   .text
                                                                                   .red)),
-                                                                      Text(text2,
+                                                                      Text(
+                                                                          _prefHelper.getStringByKey(MaruConstant.age, ''),
 
                                                                           style: MaaruStyle
                                                                               .text
@@ -280,7 +302,7 @@ void fetchData() async{
                                                                                   .text
                                                                                   .red)),
                                                                       Text(
-                                                                          text3,
+                                                                          _prefHelper.getStringByKey(MaruConstant.sex , ''),
                                                                           style: MaaruStyle
                                                                               .text
                                                                               .tinyDisable),
@@ -313,7 +335,7 @@ void fetchData() async{
                                                                               style: MaaruStyle
                                                                                   .text
                                                                                   .red)),
-                                                                      Text(text4,
+                                                                      Text(_prefHelper.getStringByKey(MaruConstant.height  , ''),
                                                                           style: MaaruStyle
                                                                               .text
                                                                               .tinyDisable),
@@ -349,7 +371,7 @@ void fetchData() async{
                                                                                   .text
                                                                                   .red)),
                                                                       Text(
-                                                                          _prefHelper.getStringByKey(MaruConstant.pet_name, ''),
+                                                                          _prefHelper.getStringByKey(MaruConstant.weight, ''),
                                                                           style: MaaruStyle
                                                                               .text
                                                                               .tinyDisable),
@@ -574,5 +596,18 @@ void fetchData() async{
             }),
       ),
     );
+  }
+}
+class exteran extends StatefulWidget {
+
+
+  @override
+  _exteranState createState() => _exteranState();
+}
+
+class _exteranState extends State<exteran> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
