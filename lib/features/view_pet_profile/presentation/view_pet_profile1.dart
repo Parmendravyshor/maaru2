@@ -1,7 +1,5 @@
 
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -32,16 +30,16 @@ class ViewPetProfile extends StatefulWidget {
 }
 
 class _ViewPetProfileState extends State<ViewPetProfile>
-  with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   bool enabled = false;
   bool _status = true;
   final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   final FocusNode myFocusNode = FocusNode();
-  PetProfile petProfileParams = PetProfile();
-GetPetProfile getPetProfile = GetPetProfile(userRepository);
-UserRepositoryImpl userRepositoryImpl = UserRepositoryImpl(sharedPrefHelper, authSource);
+  Welcome petProfileParams = Welcome();
+  GetPetProfile getPetProfile = GetPetProfile(userRepository);
+  UserRepositoryImpl userRepositoryImpl = UserRepositoryImpl(sharedPrefHelper, authSource);
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
-
+  List<PetProfile> _cars = [];
   static UserRepository userRepository;
 
   static AuthSource  authSource ;
@@ -67,13 +65,12 @@ UserRepositoryImpl userRepositoryImpl = UserRepositoryImpl(sharedPrefHelper, aut
     super.initState();
     fetchData();
   }
-void fetchData() async{
-  var response = getPetProfile;
-setState(()  {
-
- // petProfileParams = PetProfileParams.fromJson(jsonDecode(response['']));
-});
-}
+  Future fetchData() async {
+    _cars = (await getPetProfile(petProfileParams)) as List<PetProfile>;
+    setState(() {
+      //_isLoading = false;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery
@@ -90,13 +87,13 @@ setState(()  {
                 Navigator.of(context).pop();
               } catch (e) {}
               var text1 =
-                  _prefHelper.getStringByKey(MaruConstant.pet_name, "");
-               var text2 =
-                  _prefHelper.getStringByKey(MaruConstant.sex, "");
-               var text3 =
-                  _prefHelper.getStringByKey(MaruConstant.height, "");
-               var text4 =
-                   _prefHelper.getStringByKey(MaruConstant.weight, "");
+              _prefHelper.getStringByKey(MaruConstant.pet_name, "");
+              var text2 =
+              _prefHelper.getStringByKey(MaruConstant.sex, "");
+              var text3 =
+              _prefHelper.getStringByKey(MaruConstant.height, "");
+              var text4 =
+              _prefHelper.getStringByKey(MaruConstant.weight, "");
               var text5 =
               _prefHelper.getStringByKey(MaruConstant.age, "");
               return
@@ -107,10 +104,15 @@ setState(()  {
                     ),
                     body: SafeArea(
                         bottom: false,
-                        child: SingleChildScrollView(
-                            child: Column(
+                        child: ListView.builder(
+                            itemCount: _cars.length,
+    itemBuilder: (context, index) {
+      Data car = _cars[index] as Data;
+
+                         return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Text(car.email),
                                   SizedBox(
                                     height: 20,
                                   ),
@@ -119,7 +121,7 @@ setState(()  {
                                       height: size.height * 0.25,
                                       width: size.width * 0.9,
                                       child: BackgroundImage(
-                                        assetImage: _prefHelper.getStringByKey(MaruConstant.img, '')
+                                          assetImage: _prefHelper.getStringByKey(MaruConstant.img, '')
                                         //'assets/images/kutta.png',
                                       )),
                                   Container(
@@ -335,7 +337,8 @@ setState(()  {
                                                                               style: MaaruStyle
                                                                                   .text
                                                                                   .red)),
-                                                                      Text(_prefHelper.getStringByKey(MaruConstant.height  , ''),
+                                                                      Text(
+                                                                          _prefHelper.getStringByKey(MaruConstant.height  , ''),
                                                                           style: MaaruStyle
                                                                               .text
                                                                               .tinyDisable),
@@ -592,22 +595,9 @@ setState(()  {
                                                   ],
                                                 )
                                               ])))
-                                ]))));
+                                ]);})));
             }),
       ),
     );
-  }
-}
-class exteran extends StatefulWidget {
-
-
-  @override
-  _exteranState createState() => _exteranState();
-}
-
-class _exteranState extends State<exteran> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

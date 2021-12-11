@@ -6,8 +6,8 @@
 // // JsonSerializableGenerator
 // // **************************************************************************
 //
-// PetProfileParams _$PetProfileParamsFromJson(Map<String, dynamic> json) =>
-//     PetProfileParams(
+// PetProfile _$PetProfileParamsFromJson(Map<String, dynamic> json) =>
+//     PetProfile(
 //       times_aday: json['times_aday'] as String,
 //       petneeds: json['petneeds'] as String,
 //       known_allergies: json['known_allergies'] as String,
@@ -39,7 +39,7 @@
 //       name: json['name'] as String,
 //     );
 //
-// Map<String, dynamic> _$PetProfileParamsToJson(PetProfileParams instance) =>
+// Map<String, dynamic> _$PetProfileParamsToJson(PetProfile instance) =>
 //     <String, dynamic>{
 //       'profileImage': instance.profileImage,
 //       'gender': instance.gender,

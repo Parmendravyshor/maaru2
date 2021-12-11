@@ -281,8 +281,8 @@ class UserRepositoryImpl implements UserRepository {
         'age': '3',
         'weight': '10',
         'height': '3',
-        'known_allergies': params.knownAllergies.toString(),
-        'pet_needs': params.petNeeds.toString(),
+      //  'known_allergies': params.knownAllergies.toString(),
+        //'pet_needs': params.petNeeds.toString(),
         'birth_date': '2021-09-07',
         'walking_schedule': params.walkingSchedule,
         'feeding_schedule': params.feedingSchedule,
@@ -324,7 +324,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 //TODO: Ricky
   @override
-  Future<Either<Failure, PetProfile>> getPetProfile() async {
+  Future<Either<Failure, Data>> getPetProfile() async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -338,13 +338,14 @@ class UserRepositoryImpl implements UserRepository {
       await http.get(MaruConstant.createpProfile, headers: headers);
 
       var data = convert.jsonDecode(response.body);
+      print(data);
       // var profile = data['pet_profiles'];
       // print('fklfjeklfjklfj$profile');
       // List<PetProfileParams> user = [];
 
 
       print(response);
-      return Right(PetProfile.fromJson(jsonDecode(response.body)));
+      return Right(Data.fromJson(data));
     } on CognitoClientException catch (e) {
       return Left(CacheFailure(e.message));
     } catch (e) {

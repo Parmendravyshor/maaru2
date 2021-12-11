@@ -12,6 +12,22 @@ class ResgiterInitial extends PetProfileState {
   String toString() => "ResgiterInitial";
 
 }
+class CovidLoading extends PetProfileState {
+   CovidLoading();
+  @override
+  List<Object> get props => null;
+}
+class CovidError extends PetProfileState {
+  CovidError();
+  @override
+  List<Object> get props => null;
+}
+class CovidLoaded extends PetProfileState {
+
+   CovidLoaded();
+  @override
+  List<Object> get props => [];
+}
 class UpdatedBirthDate extends PetProfileState {
   String birthdate;
 
@@ -37,6 +53,13 @@ class RegisterInProgress extends PetProfileState {
 
   @override
   String toString() => "RegisterInProgress";
+
+}
+class UsergetPetProfileButtonTapped extends PetProfileState {
+  final PetProfile _petProfile;
+   UsergetPetProfileButtonTapped(this._petProfile);
+  @override
+  List<Object> get props => [_petProfile];
 
 }
 class UserPetProfileButtonTapped extends PetProfileState {

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
+import 'package:maru/core/data/repository/user_repository.impl.dart';
+import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
 import 'package:maru/features/verify/domain/usecases/change_password.dart';
@@ -162,6 +164,20 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       });
 
     }
+   else if (event is GetCovidList) {
+      yield RegisterInProgress();
+      final response = await getPetProfile(PetProfile());
+        yield* response.fold((l) async* {
+          yield RegisterFailure("Signup failed..please try again.. $l");
+        },
+                (r) async* {
+           //   await savePetProfile(PetProfile());
+              PetProfile _petProfile;
+              yield UsergetPetProfileButtonTapped(_petProfile);
+            });
+    }
+
+
 
     else if (event is RegisterButtonTapped) {
       yield RegisterInProgress();
@@ -170,7 +186,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
         weight: width,
         height: hight,
         birthDate: birthdate,
-        breedType: breadtype.toString(),
+       // breedType: breadtype.toString(),
         petName: petName,
 
       ));

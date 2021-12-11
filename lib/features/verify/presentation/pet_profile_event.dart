@@ -143,6 +143,10 @@ class RegisterButtonTapped extends PetProfileEvent {
 
 
 }
+class GetCovidList extends PetProfileEvent {
+  @override
+  String toString() => "fakeRegisterButtonTapped";
+}
 class fakeRegisterButtonTapped extends PetProfileEvent {
   fakeRegisterButtonTapped();
 
