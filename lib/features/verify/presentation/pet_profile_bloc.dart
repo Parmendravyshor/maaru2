@@ -165,19 +165,19 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
     else if (event is RegisterButtonTapped) {
       yield RegisterInProgress();
-      final result = await createPetProfile(PetProfileParams(
+      final result = await createPetProfile(PetProfile(
         age: age,
         weight: width,
         height: hight,
         birthDate: birthdate,
-        breadType: breadtype,
+        breedType: breadtype.toString(),
         petName: petName,
 
       ));
       yield* result.fold((l) async* {
         yield RegisterFailure("Signup failed..please try again.. $l");
       }, (r) async* {
-        await savePetProfile(PetProfileParams());
+        await savePetProfile(PetProfile());
         yield UserPetProfileButtonTapped();
       });
     }
@@ -203,14 +203,14 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
     else if (event is Profile3) {
       print('kkfkfk');
-      PetProfileParams profileParams = PetProfileParams(
-        walking: event.walking,
+      PetProfile profileParams = PetProfile(
+        walkingSchedule: event.walking,
         feedingSchedule: event.feeding,
-        temperament: event.temprament,
-        medication: event.medication,
-        name: event.name,
-        times_aday: event.times,
-        notes: event.notes,
+      //  temperament: event.temprament,
+      //  medication: event.medication,
+     //   name: event.name,
+     //   : event.times,
+       // notes: event.notes,
 
       );
       print('dddd');
@@ -257,7 +257,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
   if (event is ProfileOpened) {
   } else if (event is GetProfileOpened) {
-    PetProfileParams profileParams = PetProfileParams(
+    PetProfile profileParams = PetProfile(
  age: sharedPrefHelper.getStringByKey(MaruConstant.age, ''),
       height: sharedPrefHelper.getStringByKey(MaruConstant.height, ''),
       weight: sharedPrefHelper.getStringByKey(MaruConstant.height, ''),

@@ -9,12 +9,10 @@ class ShowLocation extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-
-
         Expanded(
           child: Container(
             color: Colors.white,
-            margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+            margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: TextFormField(
               cursorColor: Colors.black,
               decoration: InputDecoration(
@@ -29,7 +27,7 @@ class ShowLocation extends StatelessWidget {
                 fillColor: Colors.grey[100],
                 suffixIcon: Container(
                   child: IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.search,
                       color: Colors.grey,
                     ),
@@ -37,7 +35,7 @@ class ShowLocation extends StatelessWidget {
                   ),
                 ),
                 filled: true,
-                contentPadding: EdgeInsets.only(
+                contentPadding: const EdgeInsets.only(
                   left: 15.0,
                   top: 0.0,
                   bottom: 0.0,
@@ -53,7 +51,7 @@ class ShowLocation extends StatelessWidget {
             },
             child: Container(
               height: 40,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
               ),

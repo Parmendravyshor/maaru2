@@ -124,7 +124,7 @@ class MyApp extends StatelessWidget {
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
-        home: Scaffold(body: ((maa()))));
+        home: Scaffold(body: ((MyApp8()))));
   }
 }
 

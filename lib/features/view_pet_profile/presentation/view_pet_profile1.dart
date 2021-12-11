@@ -37,7 +37,7 @@ class _ViewPetProfileState extends State<ViewPetProfile>
   bool _status = true;
   final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   final FocusNode myFocusNode = FocusNode();
-  PetProfileParams petProfileParams = PetProfileParams();
+  PetProfile petProfileParams = PetProfile();
 GetPetProfile getPetProfile = GetPetProfile(userRepository);
 UserRepositoryImpl userRepositoryImpl = UserRepositoryImpl(sharedPrefHelper, authSource);
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
@@ -216,7 +216,7 @@ setState(()  {
                                                             height: 40,
                                                           ))
                                                     ]),
-                                                Text( petProfileParams.temperament,
+                                                Text( '',
                                                   //  _prefHelper.getStringByKey(MaruConstant.last_name, ''),
                                                   style: MaaruStyle.text.tiny,
                                                 ),

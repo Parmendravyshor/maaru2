@@ -231,7 +231,7 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, void>> createPetProfile(
-      PetProfileParams params) async {
+      PetProfile params) async {
     try {
       final img = sharedPrefHelper.getImage();
       //  print(img);
@@ -281,20 +281,20 @@ class UserRepositoryImpl implements UserRepository {
         'age': '3',
         'weight': '10',
         'height': '3',
-        'known_allergies': params.known_allergies,
-        'pet_needs': params.petneeds,
+        'known_allergies': params.knownAllergies.toString(),
+        'pet_needs': params.petNeeds.toString(),
         'birth_date': '2021-09-07',
         'walking_schedule': params.walkingSchedule,
         'feeding_schedule': params.feedingSchedule,
-        'temperament': params.temperament,
+        'temperament': params.temperament.toString(),
 
-        'medication': params.medication,
-        'name': params.name,
-        'times_a_day': params.times_aday,
-        'note': params.notes,
-        'name': params.name,
-        'times_a_day': params.times_aday,
-        'note': params.notes,
+        'medication': params.medication.toString(),
+       // 'name': params.,
+      //  'times_a_day': params.times_aday,
+      //  'note': params.notes,
+      //  'name': params.n,
+      //  'times_a_day': params.times_aday,
+      //  'note': params.notes,
         'sex': 'spade',
         'gender': 'male'
       }
@@ -324,7 +324,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 //TODO: Ricky
   @override
-  Future<Either<Failure, Users>> getPetProfile() async {
+  Future<Either<Failure, PetProfile>> getPetProfile() async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -344,7 +344,7 @@ class UserRepositoryImpl implements UserRepository {
 
 
       print(response);
-      return Right(Users.fromJson(jsonDecode(response.body)));
+      return Right(PetProfile.fromJson(jsonDecode(response.body)));
     } on CognitoClientException catch (e) {
       return Left(CacheFailure(e.message));
     } catch (e) {
@@ -387,11 +387,11 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> savePetProfile(PetProfileParams params) async {
+  Future<Either<Failure, void>> savePetProfile(PetProfile params) async {
     try {
       var map = new Map<String, String>();
       map[MaruConstant.age.toString()] = params.age.toString();
-      map[MaruConstant.birth_date] = params.birthDate;
+      map[MaruConstant.birth_date] = params.birthDate.toString();
       // map[ MaruConstant.img] = params.profileImage;
       // map [MaruConstant.password] = params.password;
       map[MaruConstant.user_type] = 'User';

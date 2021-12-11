@@ -7,96 +7,377 @@ import '../../../../core/usecases/usecase.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'save_pet_profile.g.dart';
+//part 'save_pet_profile.g.dart';
 //TODO: Ricky
-class SavePetProfile extends UseCase<void, PetProfileParams> {
+class SavePetProfile extends UseCase<void, PetProfile> {
   UserRepository userRepository;
   SavePetProfile(this.userRepository);
 
   @override
-  Future<Either<Failure, void>> call(PetProfileParams params) {
+  Future<Either<Failure, void>> call(PetProfile params) {
     return userRepository.savePetProfile(params);
   }
 }
 
-class Users {
-  final List<PetProfileParams> users;
+// class Users {
+//   final List<Album> users;
+//
+//   Users({this.users});
+//
+//   factory Users.fromJson(Map<String, dynamic> json) {
+//     List<Album> tempUsers = [];
+//     for (int i = 0; i < json['pet_profiles'].length; i++) {
+//       Album post = Album.fromJson(json['pet_profiles'][i]);
+//       tempUsers.add(post);
+//     }
+//     return Users(users: tempUsers);
+//   }
+// }
+// class Album {
+//   final int userId;
+//   final String id;
+//   final String pet_name;
+//
+//   Album({
+//      this.userId,
+//      this.id,
+//      this.pet_name,
+//   });
+//
+//   factory Album.fromJson(Map<String, dynamic> json) {
+//     return Album(
+//       userId: json['userId'],
+//       id: json['pet_name'],
+//       pet_name: json['pet_profiles'][0]['pet_name'],
+//     );
+//   }
+// }
+// @JsonSerializable()
+// class PetProfileParams {
+//
+//   final String profileImage;
+//   final String gender;
+//   final String petName;
+//   final String providerName;
+//   final String petVaccine;
+//   final String known_allergies;
+//   final String uploadVaccineRecord;
+//   final String walkingSchedule;
+//   final String feedingSchedule;
+//   final String temperament;
+//   final String medication;
+//   final String notes;
+//   final String age;
+//   final String grooming;
+//   final String vet;
+//   final String hotel;
+//   final String walking;
+//   final String dayCare;
+//   final String hospital;
+//   final String breadType;
+//   final String height;
+//   final String weight;
+//   String birthDate;
+//   String sex;
+//   final String file;
+//   final String name;
+//   final String petneeds;
+//   final String times_aday;
+//   final String addMoreVaccine;
+//
+//   PetProfileParams({
+//     this.times_aday,
+//     this.petneeds,
+//     this.known_allergies,
+//     this.file,
+//     this.providerName,
+//     this.uploadVaccineRecord,
+//     this.walkingSchedule,
+//     this.feedingSchedule,
+//     this.temperament,
+//     this.medication,
+//     this.notes,
+//     this.grooming,
+//     this.vet,
+//     this.hotel,
+//     this.walking,
+//     this.dayCare,
+//     this.hospital,
+//     this.profileImage,
+//     this.gender,
+//     this.petName,
+//     this.breadType,
+//     this.height,
+//     this.weight,
+//     this.birthDate,
+//     this.sex,
+//     this.petVaccine,
+//     this.addMoreVaccine,
+//     this.age,
+//     this.name
+//   });
+// factory PetProfileParams.fromJson(Map<String, dynamic> json) =>
+//     _$PetProfileParamsFromJson(json);
+// Map<String,dynamic> toJson() =>_$PetProfileParamsToJson(this);
+// }
+// // To parse this JSON data, do
+// //
+// //     final welcome = welcomeFromJson(jsonString);
+//
+// import 'dart:convert';
+//
+// Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+//
+// String welcomeToJson(Welcome data) => json.encode(data.toJson());
+//
+// class Welcome {
+//   Welcome({
+//     this.petProfiles,
+//   });
+//
+//   List<PetProfile> petProfiles;
+//
+//   factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
+//     petProfiles: List<PetProfile>.from(json["pet_profiles"].map((x) => PetProfile.fromJson(x))),
+//   );
+//
+//   Map<String, dynamic> toJson() => {
+//     "pet_profiles": List<dynamic>.from(petProfiles.map((x) => x.toJson())),
+//   };
+// }
 
-  Users({this.users});
-
-  factory Users.fromJson(Map<String, dynamic> json) {
-    List<PetProfileParams> tempUsers = [];
-    for (int i = 0; i < json['users'].length; i++) {
-      PetProfileParams post = PetProfileParams.fromJson(json['users'][i]);
-      tempUsers.add(post);
-    }
-    return Users(users: tempUsers);
-  }
-}
-@JsonSerializable()
-class PetProfileParams {
-  final String profileImage;
-  final String gender;
-  final String petName;
-  final String providerName;
-  final String petVaccine;
-  final String known_allergies;
-  final String uploadVaccineRecord;
-  final String walkingSchedule;
-  final String feedingSchedule;
-  final String temperament;
-  final String medication;
-  final String notes;
-  final String age;
-  final String grooming;
-  final String vet;
-  final String hotel;
-  final String walking;
-  final String dayCare;
-  final String hospital;
-  final String breadType;
-  final String height;
-  final String weight;
-  String birthDate;
-  String sex;
-  final String file;
-  final String name;
-  final String petneeds;
-  final String times_aday;
-  final String addMoreVaccine;
-
-  PetProfileParams({
-    this.times_aday,
-    this.petneeds,
-    this.known_allergies,
-    this.file,
-    this.providerName,
-    this.uploadVaccineRecord,
+class PetProfile {
+  PetProfile({
+    this.id,
+    this.userId,
+    this.petName,
+    this.img,
+    this.breedType,
+    this.age,
+    this.weight,
+    this.height,
+    this.knownAllergies,
+    this.petNeeds,
+    this.birthDate,
+    this.sex,
+    this.gender,
     this.walkingSchedule,
     this.feedingSchedule,
     this.temperament,
     this.medication,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
     this.notes,
-    this.grooming,
-    this.vet,
-    this.hotel,
-    this.walking,
-    this.dayCare,
-    this.hospital,
-    this.profileImage,
-    this.gender,
-    this.petName,
-    this.breadType,
-    this.height,
-    this.weight,
-    this.birthDate,
-    this.sex,
-    this.petVaccine,
-    this.addMoreVaccine,
-    this.age,
-    this.name
+    this.vaccine,
   });
-factory PetProfileParams.fromJson(Map<String, dynamic> json) =>
-    _$PetProfileParamsFromJson(json);
-Map<String,dynamic> toJson() =>_$PetProfileParamsToJson(this);
+
+  String id;
+  String userId;
+  String petName;
+  String img;
+  String breedType;
+  String age;
+  String weight;
+  String height;
+  KnownAllergies knownAllergies;
+  PetNeeds petNeeds;
+  String birthDate;
+  Sex sex;
+  dynamic gender;
+  String walkingSchedule;
+  String feedingSchedule;
+  KnownAllergies temperament;
+  Medication medication;
+  String status;
+  DateTime createdAt;
+  DateTime updatedAt;
+  List<Note> notes;
+  List<Vaccine> vaccine;
+
+  factory PetProfile.fromJson(Map<String, dynamic> json) => PetProfile(
+    id: json["id"],
+    userId: json["user_id"],
+    petName: json["pet_name"],
+    img: json["img"],
+   // breedType: breedTypeValues.map[json["breed_type"]],
+    age: json["age"],
+    weight: json["weight"],
+    height: json["height"],
+    knownAllergies: json["known_allergies"] == null ? null : knownAllergiesValues.map[json["known_allergies"]],
+    petNeeds: json["pet_needs"] == null ? null : petNeedsValues.map[json["pet_needs"]],
+   // birthDate: DateTime.parse(json["birth_date"]),
+    sex: sexValues.map[json["sex"]],
+    gender: json["gender"],
+    walkingSchedule: json["walking_schedule"] == null ? null : json["walking_schedule"],
+    feedingSchedule: json["feeding_schedule"] == null ? null : json["feeding_schedule"],
+    temperament: json["temperament"] == null ? null : knownAllergiesValues.map[json["temperament"]],
+    medication: json["medication"] == null ? null : medicationValues.map[json["medication"]],
+    status: json["status"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    notes: List<Note>.from(json["notes"].map((x) => Note.fromJson(x))),
+    vaccine: List<Vaccine>.from(json["vaccine"].map((x) => Vaccine.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "user_id": userId,
+    "pet_name": petName,
+    "img": img,
+    "breed_type": breedTypeValues.reverse[breedType],
+    "age": age,
+    "weight": weight,
+    "height": height,
+    "known_allergies": knownAllergies == null ? null : knownAllergiesValues.reverse[knownAllergies],
+    "pet_needs": petNeeds == null ? null : petNeedsValues.reverse[petNeeds],
+  //  "birth_date": "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
+    "sex": sexValues.reverse[sex],
+    "gender": gender,
+    "walking_schedule": walkingSchedule == null ? null : walkingSchedule,
+    "feeding_schedule": feedingSchedule == null ? null : feedingSchedule,
+    "temperament": temperament == null ? null : knownAllergiesValues.reverse[temperament],
+    "medication": medication == null ? null : medicationValues.reverse[medication],
+    "status": status,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "notes": List<dynamic>.from(notes.map((x) => x.toJson())),
+    "vaccine": List<dynamic>.from(vaccine.map((x) => x.toJson())),
+  };
+}
+
+enum BreedType { BOG, BULL_DOG, CAT, SS }
+
+final breedTypeValues = EnumValues({
+  "bog": BreedType.BOG,
+  "bull dog": BreedType.BULL_DOG,
+  "cat": BreedType.CAT,
+  "ss": BreedType.SS
+});
+
+enum KnownAllergies { NO, KNOWN_ALLERGIES_NO, YES, EMPTY }
+
+final knownAllergiesValues = EnumValues({
+  "": KnownAllergies.EMPTY,
+  "No": KnownAllergies.KNOWN_ALLERGIES_NO,
+  "no": KnownAllergies.NO,
+  "yes": KnownAllergies.YES
+});
+
+enum Medication { YES, MEDICATION_YES, EMPTY }
+
+final medicationValues = EnumValues({
+  "": Medication.EMPTY,
+  "yes": Medication.MEDICATION_YES,
+  "Yes": Medication.YES
+});
+
+class Note {
+  Note({
+    this.id,
+    this.petId,
+    this.name,
+    this.timesADay,
+    this.note,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int id;
+  int petId;
+  String name;
+  int timesADay;
+  String note;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory Note.fromJson(Map<String, dynamic> json) => Note(
+    id: json["id"],
+    petId: json["pet_id"],
+    name: json["name"] == null ? null : json["name"],
+    timesADay: json["times_a_day"] == null ? null : json["times_a_day"],
+    note: json["note"] == null ? null : json["note"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "pet_id": petId,
+    "name": name == null ? null : name,
+    "times_a_day": timesADay == null ? null : timesADay,
+    "note": note == null ? null : note,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+  };
+}
+
+enum PetNeeds { MILK_BISCUITS, WALKING, FOOD, WALKING_MILK, EMPTY }
+
+final petNeedsValues = EnumValues({
+  "": PetNeeds.EMPTY,
+  "food ": PetNeeds.FOOD,
+  "Milk, biscuits": PetNeeds.MILK_BISCUITS,
+  "walking": PetNeeds.WALKING,
+  "walking,milk": PetNeeds.WALKING_MILK
+});
+
+enum Sex { NEITHER }
+
+final sexValues = EnumValues({
+  "neither": Sex.NEITHER
+});
+
+class Vaccine {
+  Vaccine({
+    this.id,
+    this.petId,
+    this.docUrl,
+    this.vaccineCreatedAt,
+    this.vaccineUpdatedAt,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int id;
+  int petId;
+  String docUrl;
+  DateTime vaccineCreatedAt;
+  DateTime vaccineUpdatedAt;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory Vaccine.fromJson(Map<String, dynamic> json) => Vaccine(
+    id: json["id"],
+    petId: json["pet_id"],
+    docUrl: json["doc_url"],
+    vaccineCreatedAt: DateTime.parse(json["created_at"]),
+    vaccineUpdatedAt: DateTime.parse(json["updated_at"]),
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "pet_id": petId,
+    "doc_url": docUrl,
+    "created_at": vaccineCreatedAt.toIso8601String(),
+    "updated_at": vaccineUpdatedAt.toIso8601String(),
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+  };
+}
+
+class EnumValues<T> {
+  Map<String, T> map;
+  Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    if (reverseMap == null) {
+      reverseMap = map.map((k, v) => new MapEntry(v, k));
+    }
+    return reverseMap;
+  }
 }
