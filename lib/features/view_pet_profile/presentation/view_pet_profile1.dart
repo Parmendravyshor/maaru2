@@ -43,7 +43,7 @@ class _ViewPetProfileState extends State<ViewPetProfile>
   static UserRepository userRepository;
 
   static AuthSource  authSource ;
-
+//kkkkk
   static SharedPrefHelper  sharedPrefHelper ;
   // TextEditingController _fnameController;
   // TextEditingController _lnameController;
@@ -107,7 +107,7 @@ class _ViewPetProfileState extends State<ViewPetProfile>
                         child: ListView.builder(
                             itemCount: _cars.length,
     itemBuilder: (context, index) {
-      Data car = _cars[index] as Data;
+      Welcome car = _cars[index] as Welcome;
 
                          return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
