@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:maru/features/verify/domain/usecases/create_user_profile.dart';
+import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
 
 import 'dart:convert';
 import 'package:path/path.dart';
@@ -324,7 +325,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 //TODO: Ricky
   @override
-  Future<Either<Failure, Data>> getPetProfile() async {
+  Future<Either<Failure, PetProfile>> getPetProfile() async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -345,7 +346,7 @@ class UserRepositoryImpl implements UserRepository {
 
 
       print(response);
-      return Right(Data.fromJson(data));
+      return Right(PetProfile.fromJson(data));
     } on CognitoClientException catch (e) {
       return Left(CacheFailure(e.message));
     } catch (e) {
