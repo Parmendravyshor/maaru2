@@ -157,6 +157,12 @@ class SavePetProfile extends UseCase<void, PetProfile> {
 //   };
 // }
 
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
+
+
 Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
 
 String welcomeToJson(Welcome data) => json.encode(data.toJson());
@@ -201,96 +207,90 @@ class PetProfile {
     this.updatedAt,
     this.notes,
     this.vaccine,
+    this.name,
+    this.times_a_day,
+
   });
 
-  String id;
-  String userId;
+  var id;
+  var userId;
   String petName;
   String img;
-  String breedType;
-  String age;
-  String weight;
-  String height;
-  KnownAllergies knownAllergies;
-  PetNeeds petNeeds;
-  String birthDate;
-  Sex sex;
-  dynamic gender;
+  var breedType;
+  var age;
+  var weight;
+  var height;
+  var knownAllergies;
+  var petNeeds;
+ var  birthDate;
+var name;
+var times_a_day;
+
+  var sex;
+  var gender;
   String walkingSchedule;
   String feedingSchedule;
-  KnownAllergies temperament;
-  Medication medication;
+  var temperament;
+  var medication;
   String status;
-  DateTime createdAt;
-  DateTime updatedAt;
-  List<Note> notes;
+  var createdAt;
+  var updatedAt;
+  var notes;
   List<Vaccine> vaccine;
 
   factory PetProfile.fromJson(Map<String, dynamic> json) => PetProfile(
-        id: json["id"],
-        userId: json["user_id"],
-        petName: json["pet_name"],
-        img: json["img"],
-        // breedType: breedTypeValues.map[json["breed_type"]],
-        age: json["age"],
-        weight: json["weight"],
-        height: json["height"],
-        knownAllergies: json["known_allergies"] == null
-            ? null
-            : knownAllergiesValues.map[json["known_allergies"]],
-        petNeeds: json["pet_needs"] == null
-            ? null
-            : petNeedsValues.map[json["pet_needs"]],
-        // birthDate: DateTime.parse(json["birth_date"]),
-        sex: sexValues.map[json["sex"]],
-        gender: json["gender"],
-        walkingSchedule:
-            json["walking_schedule"] == null ? null : json["walking_schedule"],
-        feedingSchedule:
-            json["feeding_schedule"] == null ? null : json["feeding_schedule"],
-        temperament: json["temperament"] == null
-            ? null
-            : knownAllergiesValues.map[json["temperament"]],
-        medication: json["medication"] == null
-            ? null
-            : medicationValues.map[json["medication"]],
-        status: json["status"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        notes: List<Note>.from(json["notes"].map((x) => Note.fromJson(x))),
-        vaccine:
-            List<Vaccine>.from(json["vaccine"].map((x) => Vaccine.fromJson(x))),
-      );
+    id: json["id"],
+    name: json['name'],
+    times_a_day: json['times_a_day'],
+    userId: json["user_id"],
+    petName: json["pet_name"],
+    img: json["img"],
+    breedType: breedTypeValues.map[json["breed_type"]],
+    age: json["age"],
+    weight: json["weight"],
+    height: json["height"],
+    knownAllergies: json["known_allergies"] == null ? null : knownAllergiesValues.map[json["known_allergies"]],
+    petNeeds: json["pet_needs"] == null ? null : petNeedsValues.map[json["pet_needs"]],
+    birthDate: DateTime.parse(json["birth_date"]),
+    sex: sexValues.map[json["sex"]],
+    gender: json["gender"],
+    walkingSchedule: json["walking_schedule"] == null ? null : json["walking_schedule"],
+    feedingSchedule: json["feeding_schedule"] == null ? null : json["feeding_schedule"],
+    temperament: json["temperament"] == null ? null : knownAllergiesValues.map[json["temperament"]],
+    medication: json["medication"] == null ? null : medicationValues.map[json["medication"]],
+    status: json["status"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    notes: List<Note>.from(json["notes"].map((x) => Note.fromJson(x))),
+    vaccine: List<Vaccine>.from(json["vaccine"].map((x) => Vaccine.fromJson(x))),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "user_id": userId,
-        "pet_name": petName,
-        "img": img,
-        "breed_type": breedTypeValues.reverse[breedType],
-        "age": age,
-        "weight": weight,
-        "height": height,
-        "known_allergies": knownAllergies == null
-            ? null
-            : knownAllergiesValues.reverse[knownAllergies],
-        "pet_needs": petNeeds == null ? null : petNeedsValues.reverse[petNeeds],
-        //  "birth_date": "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
-        "sex": sexValues.reverse[sex],
-        "gender": gender,
-        "walking_schedule": walkingSchedule == null ? null : walkingSchedule,
-        "feeding_schedule": feedingSchedule == null ? null : feedingSchedule,
-        "temperament": temperament == null
-            ? null
-            : knownAllergiesValues.reverse[temperament],
-        "medication":
-            medication == null ? null : medicationValues.reverse[medication],
-        "status": status,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "notes": List<dynamic>.from(notes.map((x) => x.toJson())),
-        "vaccine": List<dynamic>.from(vaccine.map((x) => x.toJson())),
-      };
+    "id": id,
+    "user_id": userId,
+    "pet_name": petName,
+    "img": img,
+    'times_a_day':times_a_day,
+    'name':name,
+    "breed_type": breedTypeValues.reverse[breedType],
+    "age": age,
+    "weight": weight,
+    "height": height,
+    "known_allergies": knownAllergies == null ? null : knownAllergiesValues.reverse[knownAllergies],
+    "pet_needs": petNeeds == null ? null : petNeedsValues.reverse[petNeeds],
+    "birth_date": "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
+    "sex": sexValues.reverse[sex],
+    "gender": gender,
+    "walking_schedule": walkingSchedule == null ? null : walkingSchedule,
+    "feeding_schedule": feedingSchedule == null ? null : feedingSchedule,
+    "temperament": temperament == null ? null : knownAllergiesValues.reverse[temperament],
+    "medication": medication == null ? null : medicationValues.reverse[medication],
+    "status": status,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "notes": List<dynamic>.from(notes.map((x) => x.toJson())),
+    "vaccine": List<dynamic>.from(vaccine.map((x) => x.toJson())),
+  };
 }
 
 enum BreedType { BOG, BULL_DOG, CAT, SS }
@@ -339,24 +339,24 @@ class Note {
   DateTime updatedAt;
 
   factory Note.fromJson(Map<String, dynamic> json) => Note(
-        id: json["id"],
-        petId: json["pet_id"],
-        name: json["name"] == null ? null : json["name"],
-        timesADay: json["times_a_day"] == null ? null : json["times_a_day"],
-        note: json["note"] == null ? null : json["note"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-      );
+    id: json["id"],
+    petId: json["pet_id"],
+    name: json["name"] == null ? null : json["name"],
+    timesADay: json["times_a_day"] == null ? null : json["times_a_day"],
+    note: json["note"] == null ? null : json["note"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "pet_id": petId,
-        "name": name == null ? null : name,
-        "times_a_day": timesADay == null ? null : timesADay,
-        "note": note == null ? null : note,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-      };
+    "id": id,
+    "pet_id": petId,
+    "name": name == null ? null : name,
+    "times_a_day": timesADay == null ? null : timesADay,
+    "note": note == null ? null : note,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+  };
 }
 
 enum PetNeeds { MILK_BISCUITS, WALKING, FOOD, WALKING_MILK, EMPTY }
@@ -371,7 +371,9 @@ final petNeedsValues = EnumValues({
 
 enum Sex { NEITHER }
 
-final sexValues = EnumValues({"neither": Sex.NEITHER});
+final sexValues = EnumValues({
+  "neither": Sex.NEITHER
+});
 
 class Vaccine {
   Vaccine({
@@ -393,24 +395,24 @@ class Vaccine {
   DateTime updatedAt;
 
   factory Vaccine.fromJson(Map<String, dynamic> json) => Vaccine(
-        id: json["id"],
-        petId: json["pet_id"],
-        docUrl: json["doc_url"],
-        vaccineCreatedAt: DateTime.parse(json["created_at"]),
-        vaccineUpdatedAt: DateTime.parse(json["updated_at"]),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-      );
+    id: json["id"],
+    petId: json["pet_id"],
+    docUrl: json["doc_url"],
+    vaccineCreatedAt: DateTime.parse(json["created_at"]),
+    vaccineUpdatedAt: DateTime.parse(json["updated_at"]),
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "pet_id": petId,
-        "doc_url": docUrl,
-        "created_at": vaccineCreatedAt.toIso8601String(),
-        "updated_at": vaccineUpdatedAt.toIso8601String(),
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-      };
+    "id": id,
+    "pet_id": petId,
+    "doc_url": docUrl,
+    "created_at": vaccineCreatedAt.toIso8601String(),
+    "updated_at": vaccineUpdatedAt.toIso8601String(),
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+  };
 }
 
 class EnumValues<T> {
@@ -425,4 +427,122 @@ class EnumValues<T> {
     }
     return reverseMap;
   }
+}
+
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
+
+
+Welcome2 welcome2FromJson(String str) => Welcome2.fromJson(json.decode(str));
+
+String welcome2ToJson(Welcome data) => json.encode(data.toJson());
+
+class Welcome2 {
+  Welcome2({
+    this.getSinglePe,
+  });
+
+  GetSinglePe getSinglePe;
+
+  factory Welcome2.fromJson(Map<String, dynamic> json) => Welcome2(
+    getSinglePe: GetSinglePe.fromJson(json["pet_profile"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "pet_profile": getSinglePe.toJson(),
+  };
+}
+
+class GetSinglePe {
+  GetSinglePe({
+    this.id,
+    this.userId,
+    this.petName,
+    this.img,
+    this.breedType,
+    this.age,
+    this.weight,
+    this.height,
+    this.knownAllergies,
+    this.petNeeds,
+    this.birthDate,
+    this.sex,
+    this.gender,
+    this.walkingSchedule,
+    this.feedingSchedule,
+    this.temperament,
+    this.medication,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int id;
+  int userId;
+  String petName;
+  String img;
+  String breedType;
+  int age;
+  int weight;
+  int height;
+  String knownAllergies;
+  String petNeeds;
+  DateTime birthDate;
+  String sex;
+  dynamic gender;
+  String walkingSchedule;
+  String feedingSchedule;
+  String temperament;
+  String medication;
+  String status;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory GetSinglePe.fromJson(Map<String, dynamic> json) => GetSinglePe(
+    id: json["id"],
+    userId: json["user_id"],
+    petName: json["pet_name"],
+    img: json["img"],
+    breedType: json["breed_type"],
+    age: json["age"],
+    weight: json["weight"],
+    height: json["height"],
+    knownAllergies: json["known_allergies"],
+    petNeeds: json["pet_needs"],
+    birthDate: DateTime.parse(json["birth_date"]),
+    sex: json["sex"],
+    gender: json["gender"],
+    walkingSchedule: json["walking_schedule"],
+    feedingSchedule: json["feeding_schedule"],
+    temperament: json["temperament"],
+    medication: json["medication"],
+    status: json["status"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "user_id": userId,
+    "pet_name": petName,
+    "img": img,
+    "breed_type": breedType,
+    "age": age,
+    "weight": weight,
+    "height": height,
+    "known_allergies": knownAllergies,
+    "pet_needs": petNeeds,
+    "birth_date": "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
+    "sex": sex,
+    "gender": gender,
+    "walking_schedule": walkingSchedule,
+    "feeding_schedule": feedingSchedule,
+    "temperament": temperament,
+    "medication": medication,
+    "status": status,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+  };
 }

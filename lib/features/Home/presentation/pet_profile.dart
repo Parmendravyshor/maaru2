@@ -7,12 +7,12 @@ import 'package:maru/features/Account_setting/presentation/account_setting.dart'
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'create_home_screen.dart';
 
-class PetProfile extends StatefulWidget {
+class PetProfile1 extends StatefulWidget {
   @override
-  _PetProfileState createState() => _PetProfileState();
+  _PetProfile1State createState() => _PetProfile1State();
 }
 
-class _PetProfileState extends State<PetProfile> {
+class _PetProfile1State extends State<PetProfile1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

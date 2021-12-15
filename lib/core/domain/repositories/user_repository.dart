@@ -21,7 +21,8 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> resendOtp(String email);
   Future<Either<Failure, void>> getTextFile(params);
   Future<Either<Failure, void>> sendPasswordResetEmail(String email);
-
+  Future<Either<Failure, void>> getProviderRequest();
+  Future<Either<Failure, void>> getSinglePetProfile();
   Future<Either<Failure, void>> setNewPassword(
       SetNewPasswordParams params);
   Future<Either<Failure, void>> petCreateProfile(PetProfileAuthParams params);
@@ -33,7 +34,7 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> forgetPassword(email);
   Future<Either<Failure, void>> saveRegistrationId();
   Future<Either<Failure, void>> createUserProfile(UserProfile params);
-  Future<Either<Failure, void>> getPetProfile();
+  Future <Either<Failure, Welcome>> getPetProfile();
   Future<Either<Failure, void>> saveChangePassword(UserProfileParams params);
   Future<Either<Failure, void>> getUserProfile();
   Future<Either<Failure, void>> savePetProfile(PetProfile params);

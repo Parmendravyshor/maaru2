@@ -135,17 +135,25 @@ class WidthChanged extends PetProfileEvent {
   String toString() => "WidthChanged";
 }
 
-class RegisterButtonTapped extends PetProfileEvent {
-  RegisterButtonTapped();
+class CreateRegisterPetProfile extends PetProfileEvent {
+  CreateRegisterPetProfile();
 
   @override
-  String toString() => "RegisterButtonTapped";
+  String toString() => "CreatePetRegisterButtonTapped";
 
 
 }
 class GetCovidList extends PetProfileEvent {
   @override
   String toString() => "fakeRegisterButtonTapped";
+}
+class GetSinglePRof extends PetProfileEvent {
+  @override
+  String toString() => "GetSinglePRof";
+}
+class GetProviderBookingRequest extends PetProfileEvent {
+  @override
+  String toString() => "GetProviderBookingRequest";
 }
 class fakeRegisterButtonTapped extends PetProfileEvent {
   fakeRegisterButtonTapped();

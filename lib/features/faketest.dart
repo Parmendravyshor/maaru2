@@ -944,7 +944,7 @@ class MyApp8 extends StatefulWidget {
 }
 
 class _MyApp8State extends State<MyApp8> {
-  Future<PetProfile> futureAlbum;
+  Future<PetProfile1> futureAlbum;
   List pet_profiles;
   @override
   void initState() {

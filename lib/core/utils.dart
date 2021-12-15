@@ -16,6 +16,7 @@ import 'package:maru/features/forgot/Domain/usecases/send_reset_otp.dart';
 import 'package:maru/features/forgot/presentation/bloc/reset_bloc.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
+import 'package:maru/features/provider_home/domain/use_cases/get_provider_request.dart';
 import 'package:maru/features/provider_login/domain/usecases/provider_email_login.dart';
 import 'package:maru/features/provider_register/domain/usecases/provider_email_register.dart';
 import 'package:maru/features/register/domain/usecases/email_signup.dart';
@@ -25,6 +26,7 @@ import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_providers.dart';
 import 'package:maru/features/verify/domain/usecases/get_review_request.dart';
+import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_registration_id.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
@@ -57,9 +59,9 @@ void _registerBloc(KiwiContainer container) {
         c.resolve(),c.resolve()
       ));
   container
-      .registerFactory((c) => LoginBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(), c.resolve(),c.resolve(),c.resolve(),c.resolve()));
+      .registerFactory((c) => LoginBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(), c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve()));
    container.registerFactory((c) => ResetBloc(c.resolve(), c.resolve(),c.resolve()));
-   container.registerFactory((c) => PetProfileBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve()));
+   container.registerFactory((c) => PetProfileBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve()));
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
   container.registerFactory(
     (c) => VerifyBloc(c.resolve(), c.resolve(),c.resolve(),c.resolve(), c.resolve() ));
@@ -87,6 +89,8 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => GetUpcomingAppointment(c.resolve()));
   container.registerFactory((c) => GetProviders(c.resolve()));
   container.registerFactory((c) => GetReview(c.resolve()));
+  container.registerFactory((c) => GetProviderRequest(c.resolve()));
+  container.registerFactory((c) => GetSinglePetProfile(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 

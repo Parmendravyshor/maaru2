@@ -12,22 +12,22 @@ class ResgiterInitial extends PetProfileState {
   String toString() => "ResgiterInitial";
 
 }
-class CovidLoading extends PetProfileState {
-   CovidLoading();
-  @override
-  List<Object> get props => null;
-}
-class CovidError extends PetProfileState {
-  CovidError();
-  @override
-  List<Object> get props => null;
-}
-class CovidLoaded extends PetProfileState {
-
-   CovidLoaded();
-  @override
-  List<Object> get props => [];
-}
+// class CovidLoading extends PetProfileState {
+//    CovidLoading();
+//   @override
+//   List<Object> get props => null;
+// }
+// class CovidError extends PetProfileState {
+//   CovidError();
+//   @override
+//   List<Object> get props => null;
+// }
+// class CovidLoaded extends PetProfileState {
+//
+//    CovidLoaded();
+//   @override
+//   List<Object> get props => [];
+// }
 class UpdatedBirthDate extends PetProfileState {
   String birthdate;
 
@@ -62,11 +62,11 @@ class UsergetPetProfileButtonTapped extends PetProfileState {
   List<Object> get props => [_petProfile];
 
 }
-class UserPetProfileButtonTapped extends PetProfileState {
-  UserPetProfileButtonTapped() : super();
+class UserCreatePetProfileButtonTapped extends PetProfileState {
+  UserCreatePetProfileButtonTapped() : super();
 
   @override
-  String toString() => "UserPetProfileButtonTapped";
+  String toString() => "UserCreatePetProfileButtonTapped";
 
 }
 class fakeUserPetProfileButtonTapped extends PetProfileState {
@@ -96,6 +96,35 @@ class UserChangePasswordButtonTapped extends PetProfileState {
   @override
   String toString() => "UserPetProfileButtonTapped";
 
+}
+
+class CovidLoading extends PetProfileState {
+   CovidLoading();
+  @override
+  List<Object> get props => null;
+}
+
+class CovidLoaded extends PetProfileState {
+  //final Welcome _newsBloc = Welcome();
+  final Welcome covidModel;
+   CovidLoaded(this.covidModel);
+
+  List<Object> get props => [covidModel];
+}
+
+class SingleProfileLoaded extends PetProfileState {
+  //final Welcome _newsBloc = Welcome();
+  final Welcome2 welcome2;
+  SingleProfileLoaded(this.welcome2);
+  List<Object> get props => [welcome2];
+
+}
+
+class CovidError extends PetProfileState {
+  final String message;
+   CovidError(this.message);
+  @override
+  List<Object> get props => [message];
 }
 class SavePaymentButtonTapped extends PetProfileState {
   SavePaymentButtonTapped() : super();

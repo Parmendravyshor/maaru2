@@ -1,5 +1,6 @@
 import 'dart:async';
 
+
 import 'package:flutter/material.dart';
 
 
@@ -10,6 +11,7 @@ import 'package:maru/features/Account_setting/presentation/edit_profile_screen.d
 import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
 import 'package:maru/features/Account_setting/presentation/transition.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
+import 'package:maru/features/provider_home/presentation/webview.dart';
 import 'package:maru/features/splash/verify_screen.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -243,7 +245,9 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 hite: 40,
                                 text: 'Privacy Policy',
                                 size: 90,
-                                onPressed: () {},
+                                onPressed: () {
+
+                                },
                               ),
                               SizedBox(
                                 height: 20,
@@ -254,7 +258,10 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 hite: 40,
                                 text: 'Terms and  Conditions',
                                 size: 0,
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => WebViewPrivacy()));
+                                },
                               ),
                               SizedBox(
                                 height: 20,

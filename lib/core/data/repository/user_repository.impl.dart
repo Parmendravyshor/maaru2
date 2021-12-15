@@ -231,90 +231,96 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> createPetProfile(
-      PetProfile params) async {
+  Future<Either<Failure, void>> createPetProfile(PetProfile params) async {
     try {
-      final img = sharedPrefHelper.getImage();
-      //  print(img);
+      final img = sharedPrefHelper.getStringByKey(MaruConstant.img, '');
+        print(img);
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
         "",
       );
-      // print(token);
+      var headers = {"access-token": token,
+        'Content-Type': 'json/application'
+      };
+      final File imageFile = File(img);
+      var stream = http.ByteStream(
+          DelegatingStream.typed(imageFile.openRead()));
+      var length = await imageFile.length();
+      var request = http.MultipartRequest("POST", MaruConstant.createpProfile,);
+      var multipartFile = http.MultipartFile('img', stream, length,
+          filename: basename(imageFile.path));
+      request.files.add(multipartFile);
+      request ..fields[ MaruConstant.pet_name] = params.petName
+       // ..fields[MaruConstant.breed_type] = params.age
+        ..fields[MaruConstant.age] = params.age
+        ..fields[MaruConstant.height] = params.height
+        ..fields[MaruConstant.weight] = params.weight
+        ..fields[MaruConstant.known_allergies] = 'params.knownAllergies'
+        ..fields[MaruConstant.name] = ''
+        ..fields[MaruConstant.note] = params.notes
+        ..fields[MaruConstant.pet_needs] = params.petNeeds
+        ..fields[MaruConstant.times_a_day] = ''
+        ..fields['sex']= 'spade'
+        ..fields['gender']= 'male'
+        ..fields['breed_type'] = 'dff'
+        ..fields['birth_date'] = '2021-09-07'
+        ..headers.addAll(headers);
+      print('request params ${request.fields.toString()}');
+      var response = await request.send();
+      final respStr = await response.stream.bytesToString();
+      print("respStr respStr respStr:$respStr");
+      Map res = json.decode(respStr);
+      print(res);
+//       var request = http.MultipartRequest('POST', MaruConstant.createpProfile)
+//
+//         ..fields[ MaruConstant.pet_name] = params.petName
+//        // ..fields[MaruConstant.breed_type] = params.age
+//         ..fields[MaruConstant.age] = params.age
+//         ..fields[MaruConstant.height] = params.height
+//         ..fields[MaruConstant.weight] = params.weight
+//         ..fields[MaruConstant.known_allergies] = 'params.knownAllergies'
+//         ..fields[MaruConstant.name] = 'params.age'
+//         ..fields[MaruConstant.note] = 'params.notes'
+//         ..fields[MaruConstant.pet_needs] = 'params.petNeeds'
+//         ..fields[MaruConstant.times_a_day] = 'params.times_a_day'
+//         ..fields['sex']= 'spade'
+//         ..fields['gender']= 'male'
+//         ..fields['breed_type'] = 'dff'
+//         ..fields['birth_date'] = '2021-09-07'
+//         ..headers.addAll(headers)
+//         ..files.add(await http.MultipartFile.fromPath(
+//             'img',
+//           '/storage/emulated/0/Android/data/com.example.maru/files/Pictures/scaled_image_picker8972218541099365994.jpg',
+//
+//            ),
+//
+//         );
+//
+// print(headers);
+//      // print('hddhkddj${request.files.add()}');
+//       print('yjjyjryjtrjtrjjkkkkkkkkkkkkk${request.fields}');
+//       print(request.files);
+//
+//       var response = await request.send();
+//       print('dgdjhdgddgdg${response}');
+//       print('eefggg433yt54y546uyh${response.statusCode}');
+//       if (response.statusCode == 200) {
+//         print(await response.stream.bytesToString());
+//       }
+//       else {
+//         print(response.reasonPhrase);
+//       }
 
-      var headers = {"access-token": token};
-
-      // map[ MaruConstant.pet_name] ='ddd';
-      // map[MaruConstant.breed_type]='ddd';
-      // map[MaruConstant.age] = '1';
-      // map[MaruConstant.height]= '2';
-      // map[MaruConstant.weight] ='3';
-      // map[MaruConstant.known_allergies] = params.known_allergies;
-      // map[MaruConstant.pet_needs]= params.petneeds;
-      // map[MaruConstant.name] = params.name;
-      // map[MaruConstant.birth_date] ='2021-09-07';
-      // map[MaruConstant.note] = params.notes;
-      // map[MaruConstant.sex]= 'Male';
-      // map[MaruConstant.medication] = params.medication;
-      // map[MaruConstant.name] = params.name;
-      // map[MaruConstant.times_a_day] = params.times_aday;
-
-      final request =
-      await http.MultipartRequest('POST', MaruConstant.createpProfile);
-      request.fields.addAll({
-        // 'pet_name': 'boxer 4',
-        // 'breed_type': 'bog',
-        // 'age': '3',
-        // 'weight': '10',
-        // 'height': '3',
-        // MaruConstant.birth_date:params.birthDate,
-        // MaruConstant.known_allergies:params.known_allergies,
-        // MaruConstant.times_a_day:params.times_aday,
-        // MaruConstant.medication:params.medication,
-        // MaruConstant.pet_needs:params.petneeds,
-        //
-        // MaruConstant.name:params.name,
-        // MaruConstant.note:params.notes,
-        // MaruConstant.age:params.age,
-        // MaruConstant.walking_schedule:params.walkingSchedule,
-        'pet_name': 'boxerii 4',
-        'breed_type': 'bogii',
-        'age': '3',
-        'weight': '10',
-        'height': '3',
-      //  'known_allergies': params.knownAllergies.toString(),
-        //'pet_needs': params.petNeeds.toString(),
-        'birth_date': '2021-09-07',
-        'walking_schedule': params.walkingSchedule,
-        'feeding_schedule': params.feedingSchedule,
-        'temperament': params.temperament.toString(),
-
-        'medication': params.medication.toString(),
-       // 'name': params.,
-      //  'times_a_day': params.times_aday,
-      //  'note': params.notes,
-      //  'name': params.n,
-      //  'times_a_day': params.times_aday,
-      //  'note': params.notes,
-        'sex': 'spade',
-        'gender': 'male'
-      }
-        // map
-      );
-      print(request);
-      request.files.add(await http.MultipartFile.fromPath('img', img));
-      request.headers.addAll(headers);
-
-      http.StreamedResponse response = await request.send();
-      print(await response.stream.bytesToString());
-      if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
-      } else {
-        print(response.reasonPhrase);
-      }
       return Right(Void);
-    } catch (e) {
-      return Left(ApiFailure(e.toString()));
+    }
+    on CognitoClientException catch (e) {
+      print('exception print  + $e');
+      return Left(CacheFailure(e.toString()));
+
+    }
+    catch (e) {
+      print('exception print etrhtjryjhytrytjrnytjjhy5jyjy + $e');
+      return Left(CacheFailure(e.toString()));
     }
   }
 
@@ -323,16 +329,16 @@ class UserRepositoryImpl implements UserRepository {
     // TODO: implement getPastAppointment
     throw UnimplementedError();
   }
+
 //TODO: Ricky
   @override
-  Future<Either<Failure, PetProfile>> getPetProfile() async {
+  Future<Either<Failure, Welcome>> getPetProfile() async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
         "",
       );
-      // print(token);
-
+      print(token);
       var headers = {"access-token": token};
 
       final response =
@@ -344,12 +350,14 @@ class UserRepositoryImpl implements UserRepository {
       // print('fklfjeklfjklfj$profile');
       // List<PetProfileParams> user = [];
 
-
+      print('dj sir');
       print(response);
-      return Right(PetProfile.fromJson(data));
+      return Right(Welcome.fromJson(data));
     } on CognitoClientException catch (e) {
-      return Left(CacheFailure(e.message));
+      print('Ricky sir ');
+      return Left(CacheFailure(e.toString()));
     } catch (e) {
+      print('Harinder sir $e');
       return Left(CacheFailure(e.toString()));
     }
   }
@@ -750,7 +758,7 @@ class UserRepositoryImpl implements UserRepository {
       var data = convert.jsonDecode(response.body);
 
       var profile = data['provider_profiles'];
-      for (int i = 0; i < data['provider_profiles'].length; i++){
+      for (int i = 0; i < data['provider_profiles'].length; i++) {
 
       }
       var comapny = profile[0]['company_name'];
@@ -760,7 +768,7 @@ class UserRepositoryImpl implements UserRepository {
       var image1 = profile[1] ['provider'];
       var comapny1 = image1[1]['company_name'];
 
-     // [MaruConstant.img];
+      // [MaruConstant.img];
       var image = profile[0] [MaruConstant.img];
       var discription = profile[0] [MaruConstant.description];
       var operations = profile[0][MaruConstant.operation_hours];
@@ -791,7 +799,9 @@ class UserRepositoryImpl implements UserRepository {
         MaruConstant.token,
         "",
       );
-      var headers = {"access-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'};
+      var headers = {
+        "access-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
+      };
       final response = await http.get(MaruConstant.getReview,
           headers: headers
       );
@@ -803,7 +813,47 @@ class UserRepositoryImpl implements UserRepository {
       return Left(ApiFailure(e.toString()));
     }
   }
-}
+
+  @override
+  Future<Either<Failure, void>> getProviderRequest() async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {
+        "access-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
+      };
+      final response = await http.get(MaruConstant.getProviderRequest,
+          headers: headers
+      );
+//print(response.body);
+      var data = convert.jsonDecode(response.body);
+
+      return Right(Void);
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
+  @override
+  Future<Either<Failure, Welcome2>> getSinglePetProfile() async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+      final response = await http.get(MaruConstant.getProviderRequest,
+          headers: headers
+      );
+//print(response.body);
+      var data = convert.jsonDecode(response.body);
+
+      return Right(Welcome2.fromJson(data));
+    } catch (e) {
+      return Left(ApiFailure(e.toString()));
+    }
+  }
 // print(data);
 // var profile = data['reviews'];
 // // // print('fklfjeklfjklfj$profile');
@@ -829,3 +879,56 @@ class UserRepositoryImpl implements UserRepository {
 // // await sharedPrefHelper.saveString(
 // //     MaruConstant.rating_reviews, 's$service');
 // print('kjhdjkhdjkhjkdhjkdhjkdhjddffffffffffffffh$date');
+
+//    final request =
+//          await http.post( MaruConstant.createpProfile,
+//   headers: headers,
+//   body:{
+//      MaruConstant.pet_name: params.petName,
+//      MaruConstant.breed_type: params.breedType,
+//      MaruConstant.age: params.age,
+//      MaruConstant.height: params.height,
+//      MaruConstant.weight: params.weight,
+//      MaruConstant.birth_date: params.birthDate,
+//      MaruConstant.known_allergies: params.knownAllergies,
+//      MaruConstant.name:params.name,
+//      MaruConstant.note:params.notes,
+//    //  MaruConstant.medication: params.medication,
+//      MaruConstant.pet_needs: params.petName,
+//     // MaruConstant.walking_schedule: params.walkingSchedule,
+//      MaruConstant.times_a_day:params.times_a_day,
+//      'sex': 'spade',
+//      'gender': 'male',
+//      'breed_type':'ff',
+//    }
+//      // map
+//    );
+//    print('kuch bhi ${request.body.toString()}');
+//
+//   // request.files.add(await http.MultipartFile.fromPath('img', img));
+//    request.headers.addAll(headers);
+//    //for completeing the request
+// //   var response =await request.send();
+//
+//    //for getting and decoding the response into json format
+//    // var responsed = await http.Response.fromStream(response);
+//    // final responseData = json.decode(responsed.body);
+//    // print(responseData);
+//
+//   // // if (response.statusCode==200) {
+//   //    print("SUCCESS");
+//   //    print(responseData);
+//   //  }
+//   //  else {
+//   //    print("ERROR");
+//   //  }
+//
+//   // http.StreamedResponse response = await request.send();
+//
+//   // print('ho jayega ${res.statusCode}');
+//   //  if (res.statusCode == 200) {
+//   //    print(await res.stream.bytesToString());
+//   //  } else {
+//   //    print(res.reasonPhrase);
+//   //  }
+}

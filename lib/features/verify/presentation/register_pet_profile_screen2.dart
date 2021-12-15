@@ -305,8 +305,8 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                   ),
                                                   InkWell(
                                                       onTap: () {
-                                                        BlocProvider.of<PetProfileBloc>(context)
-                                                            .add(RegisterButtonTapped());
+                                                        // BlocProvider.of<PetProfileBloc>(context)
+                                                        //     .add(RegisterButtonTapped());
                                                       },
                                                       child: Container(
                                                         alignment: Alignment

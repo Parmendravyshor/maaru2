@@ -9,9 +9,11 @@ import 'package:maru/core/data/repository/user_repository.impl.dart';
 import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
+import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/verify/domain/usecases/change_password.dart';
 import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:meta/meta.dart';
@@ -25,9 +27,12 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       this.saveUserProfile,
       this.createPetProfile,
       this.sharedPrefHelper,
+      this.getSinglePetProfile,
       this._saveUserPayment)
       : super();
+
   final SharedPrefHelper sharedPrefHelper;
+  final GetSinglePetProfile getSinglePetProfile;
   final CreatePetProfile createPetProfile;
   final SavePetProfile savePetProfile;
   final GetPetProfile getPetProfile;
@@ -41,8 +46,8 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
   String petName = "";
   String width = "";
   String hight = "";
-  String sex = "";
-  String birthdate = '';
+  String sex;
+  var birthdate = '';
   String breadtype = '';
   String img = '';
   String allergies = '';
@@ -153,39 +158,14 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
         yield RegisterFormValidationFailure();
       }
     }
-    else if (event is fakeRegisterButtonTapped){
-      yield RegisterInProgress();
-     final result = await getPetProfile(NoParams());
-      yield* result.fold((l) async* {
-        yield RegisterFailure("Signup failed..please try again.. $l");
-      }, (r) async* {
-       // await savePetProfile(PetProfileParams());
-        yield  fakeUserPetProfileButtonTapped();
-      });
 
-    }
-   else if (event is GetCovidList) {
-      yield RegisterInProgress();
-      final response = await getPetProfile(PetProfile());
-        yield* response.fold((l) async* {
-          yield RegisterFailure("Signup failed..please try again.. $l");
-        },
-                (r) async* {
-           //   await savePetProfile(PetProfile());
-              PetProfile _petProfile;
-              yield UsergetPetProfileButtonTapped(_petProfile);
-            });
-    }
-
-
-
-    else if (event is RegisterButtonTapped) {
+    else if (event is CreateRegisterPetProfile) {
       yield RegisterInProgress();
       final result = await createPetProfile(PetProfile(
         age: age,
         weight: width,
         height: hight,
-        birthDate: birthdate,
+       birthDate: birthdate.toString(),
        // breedType: breadtype.toString(),
         petName: petName,
 
@@ -193,100 +173,109 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       yield* result.fold((l) async* {
         yield RegisterFailure("Signup failed..please try again.. $l");
       }, (r) async* {
-        await savePetProfile(PetProfile());
-        yield UserPetProfileButtonTapped();
+       // await getPetProfile(NoParams());
+      ///  await savePetProfile(PetProfile());
+
+        yield UserCreatePetProfileButtonTapped();
       });
     }
-    if (event is ProfileOpened) {} else if (event is RegisterUser) {
-      await getPetProfile(NoParams());
-      UserProfileParams profileParams = UserProfileParams(
-        email: sharedPrefHelper.getEmail(),
-        fname: event.fname,
-        lname: event.lname,
-        phone: event.phone,
-        city: event.city,
-        zipCode: event.zip,
-        state: event.state,
-      );
-      final result = await saveUserProfile(profileParams);
-      if (result.isRight()) {
-        print("profileeee saveddd");
-      } else {
-        print("profileeee faileddd");
-      }
-      yield UserPetProfileButtonTapped();
-    }
+  //   if (event is ProfileOpened) {} else if (event is RegisterUser) {
+  //     await getPetProfile(NoParams());
+  //     UserProfileParams profileParams = UserProfileParams(
+  //       email: sharedPrefHelper.getEmail(),
+  //       fname: event.fname,
+  //       lname: event.lname,
+  //       phone: event.phone,
+  //       city: event.city,
+  //       zipCode: event.zip,
+  //       state: event.state,
+  //     );
+  //     final result = await saveUserProfile(profileParams);
+  //     if (result.isRight()) {
+  //       print("profileeee saveddd");
+  //     } else {
+  //       print("profileeee faileddd");
+  //     }
+  //    // yield UserPetProfileButtonTapped();
+  //   }
+  //
+  //   else if (event is Profile3) {
+  //     print('kkfkfk');
+  //     PetProfile profileParams = PetProfile(
+  //       walkingSchedule: event.walking,
+  //       feedingSchedule: event.feeding,
+  //       //  temperament: event.temprament,
+  //       //  medication: event.medication,
+  //       //   name: event.name,
+  //       //   : event.times,
+  //       // notes: event.notes,
+  //
+  //     );
+  //     // if (event is RegisterButtonTapped) {
+  //     //   final result = await createPetProfile(profileParams);
+  //     //   if (result.isRight()) {
+  //     //     getPetProfile(NoParams());
+  //     //     // await savePetProfile(PetProfileParams());
+  //     //     print("profileeee saveddd");
+  //     //   } else {
+  //     //     print("profileeee faileddd");
+  //     //   }
+  //     //   yield pet3rofileButtonTapped();
+  //     //   print('tapped');
+  //     // }
+  //   }
+  //   if (event is ProfileOpened) {} else if (event is ChangePassword) {
+  //     UserProfileParams profileParams = UserProfileParams(
+  //       //email: sharedPrefHelper.getEmail(),
+  //       oldPassword: event.oldPassword,
+  //       NewPassword: event.newPasword,
+  //     );
+  //     final result = await saveChangePassword(profileParams);
+  //     if (result.isRight()) {
+  //       print("Password  Changed");
+  //     } else {
+  //       print("Password faileddd");
+  //     }
+  //     yield UserChangePasswordButtonTapped();
+  //   }
+  //   if (event is ProfileOpened) {} else if (event is savePayment) {
+  //     PaymentParams profileParams = PaymentParams(
+  //       expDate: event.expDate,
+  //       creditCardNumber: event.creditCardNumber,
+  //       nameOnCard: event.nameOnCard,
+  //       cvv: event.cvv,
+  //     );
+  //     final result = await _saveUserPayment(profileParams);
+  //     if (result.isRight()) {
+  //       print("Payment  Saved");
+  //     } else {
+  //       print("Payment faileddd");
+  //     }
+  //     yield SavePaymentButtonTapped();
+  //   }
+  //   if (event is GetCovidList) {
+  //     final result = await getPetProfile(NoParams());
+  //
+  //     // final result =  await getPetProfile1(NoParams());
+  //     if (result.isRight()) {
+  //       print('dkdjddh');
+  //       // await getPetProfile1(NoParams());
+  //       yield CovidLoaded(result.getOrElse(() => null));
+  //       print('dddddddd$CovidLoaded(covidModel)');
+  //       print('445454dkdjddh');
+  //     }
+  //   }
+  //   if (event is GetSinglePRof){
+  //     final result = await getSinglePetProfile(NoParams());
+  //     if(result.isRight()){
+  //       yield SingleProfileLoaded(result.getOrElse(() => null));
+  //     }
+  //   }
+  // //  if( event is GetProviderBookingRequest ){
+  //  //   final result = await  getPr
+  // //  }
+ }
 
-    else if (event is Profile3) {
-      print('kkfkfk');
-      PetProfile profileParams = PetProfile(
-        walkingSchedule: event.walking,
-        feedingSchedule: event.feeding,
-      //  temperament: event.temprament,
-      //  medication: event.medication,
-     //   name: event.name,
-     //   : event.times,
-       // notes: event.notes,
-
-      );
-      print('dddd');
-      final result = await createPetProfile(profileParams);
-      if (result.isRight()) {
-        getPetProfile(NoParams());
-       // await savePetProfile(PetProfileParams());
-        print("profileeee saveddd");
-      } else {
-        print("profileeee faileddd");
-      }
-      yield pet3rofileButtonTapped();
-      print('tapped');
-    }
-    if (event is ProfileOpened) {} else if (event is ChangePassword) {
-      UserProfileParams profileParams = UserProfileParams(
-        //email: sharedPrefHelper.getEmail(),
-        oldPassword: event.oldPassword,
-        NewPassword: event.newPasword,
-      );
-      final result = await saveChangePassword(profileParams);
-      if (result.isRight()) {
-        print("Password  Changed");
-      } else {
-        print("Password faileddd");
-      }
-      yield UserChangePasswordButtonTapped();
-    }
-    if (event is ProfileOpened) {} else if (event is savePayment) {
-      PaymentParams profileParams = PaymentParams(
-        expDate: event.expDate,
-        creditCardNumber: event.creditCardNumber,
-        nameOnCard: event.nameOnCard,
-        cvv: event.cvv,
-      );
-      final result = await _saveUserPayment(profileParams);
-      if (result.isRight()) {
-        print("Payment  Saved");
-      } else {
-        print("Payment faileddd");
-      }
-      yield SavePaymentButtonTapped();
-    }
-
-  if (event is ProfileOpened) {
-  } else if (event is GetProfileOpened) {
-    PetProfile profileParams = PetProfile(
- age: sharedPrefHelper.getStringByKey(MaruConstant.age, ''),
-      height: sharedPrefHelper.getStringByKey(MaruConstant.height, ''),
-      weight: sharedPrefHelper.getStringByKey(MaruConstant.height, ''),
-  );
-  final result = await getPetProfile(profileParams);
-  if (result.isRight()) {
-  print("Payment  Saved");
-  } else {
-  print("Payment faileddd");
-  }
-  yield SavePaymentButtonTapped();
-  }
-}
   bool _isFormValid() {
     return age.isNotEmpty &&
         width.isNotEmpty &&

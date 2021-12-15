@@ -11,7 +11,7 @@ class MaaruColors {
   static Color primaryColorsuggesion1 = Color(0xff236855);
   static Color buttonColor = Color(0xff2e1475);
   static Color buttonTextColor = Color(0xFF367355);
- static const Color greenColor=Color(0xff53CC71);
+ static const Color greenColor = Color(0xff53CC71);
   static const Color musteredColor=Color(0xffFDE15A);
  static const Color redColor=Color(0xffFD8447);
  static const Color whiteColor=Colors.white;

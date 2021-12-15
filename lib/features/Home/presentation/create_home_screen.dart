@@ -82,7 +82,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
             icon: InkWell(
                 onTap: () {
                   Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => PetProfile()));
+                      .push(MaterialPageRoute(builder: (_) => PetProfile1()));
                 },
 
                child: Padding(

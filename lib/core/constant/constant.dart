@@ -7,6 +7,8 @@ class MaruConstant {
    static final getupcominapointment =Uri.parse ('http://18.191.199.31/api/bookings?type=upcoming');
    static final getproviders =Uri.parse ('http://18.191.199.31/api/public/providers');
    static final getReview =Uri.parse ('http://18.191.199.31/api/company/reviews');
+   static final getProviderRequest = Uri.parse('http://18.191.199.31/api/bookings/provider?page=1&limit=10');
+   static final getSinglePetProfile = Uri.parse('http://18.191.199.31/api/pets/2');
    static final resend =Uri.parse ('http://18.191.199.31/api/auth/re-send-otp');
    static final reset =Uri.parse ('http://18.191.199.31/api/auth/forget-password');
    static final signin = Uri.parse('http://18.191.199.31/api/auth/signin');
@@ -50,7 +52,7 @@ class MaruConstant {
    static String medication = 'medication';
    static String name ='name';
 //static String img ='img';
-   static String times_a_day ='times_a_day';
+   static var times_a_day ='times_a_day';
    static String note ='note';
    static String last_name = 'last_name';
    static String otp = 'otp';

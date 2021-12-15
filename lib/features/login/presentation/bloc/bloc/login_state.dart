@@ -1,3 +1,5 @@
+import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
+
 abstract class LoginState {
   LoginState();
 }
@@ -29,6 +31,26 @@ class VerificationNeeded extends LoginState {
   @override
   String toString() => "VerificationNeeded";
 
+}
+
+class CovidLoading extends LoginState {
+  CovidLoading();
+  @override
+  List<Object> get props => null;
+}
+
+class CovidLoaded extends LoginState {
+  //final Welcome _newsBloc = Welcome();
+  final Welcome covidModel;
+  CovidLoaded(this.covidModel);
+  List<Object> get props => [covidModel];
+}
+
+class CovidError extends LoginState {
+  final String message;
+  CovidError(this.message);
+  @override
+  List<Object> get props => [message];
 }
 
 class LoginFailure extends LoginState {

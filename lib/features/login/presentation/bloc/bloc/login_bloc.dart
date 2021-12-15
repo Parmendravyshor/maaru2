@@ -7,12 +7,14 @@ import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/features/Home/domain/usecases/get_upcoming_appointment.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
+import 'package:maru/features/provider_home/domain/use_cases/get_provider_request.dart';
 import 'package:maru/features/provider_login/domain/usecases/provider_email_login.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_providers.dart';
 import 'package:maru/features/verify/domain/usecases/get_review_request.dart';
+import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
-import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+
 
 import 'login_event.dart';
 import 'login_state.dart';
@@ -27,10 +29,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final GetPetProfile getPetProfile1;
   final SaveUserProfile saveUserProfile;
   final GetProviders getProviders;
+  final GetSinglePetProfile getSinglePetProfile;
   final GetReview getReview;
+  final GetProviderRequest getProviderRequest;
 final GetUpcomingAppointment getUpcomingAppointment;
-  LoginBloc(
-      this._emailSignin,this.getProviders,this.getReview,
+  LoginBloc(this.getSinglePetProfile,
+      this._emailSignin,this.getProviders,this.getReview,this.getProviderRequest,
       this.getPetProfile1,this.getUpcomingAppointment, this._resendCode,this.saveUserProfile,this._providerEmailSignin )
       : super();
   String email = "";
@@ -70,7 +74,7 @@ final GetUpcomingAppointment getUpcomingAppointment;
         if (l is UserNotConfirmedFailure) {
           final res = await _resendCode(email);
           if (res.isRight()) {
-            final result =  await getPetProfile1(NoParams());
+           // final result =  await getPetProfile1(NoParams());
            if(result.isRight()) {
              await getPetProfile1(NoParams());
              yield VerificationNeeded();
@@ -83,7 +87,12 @@ final GetUpcomingAppointment getUpcomingAppointment;
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
-await getPetProfile1(NoParams());
+       await getPetProfile1(NoParams());
+       await getSinglePetProfile (NoParams());
+        print("RAKA===============================================");
+        print(result);
+        print("RAKA===============================================");
+//await getPetProfile1(NoParams());
 //await getUpcomingAppointment(NoParams());
 //await getProviders(NoParams());
 //await getReview(NoParams());
@@ -105,9 +114,19 @@ await getPetProfile1(NoParams());
         // yield RegisterSuccess();
         // });
         // }
+
         yield LoginSuccess();
       });
     }
+    // if (event is GetCovidList) {
+    //   final result = await getPetProfile(NoParams());
+    //
+    //   // final result =  await getPetProfile1(NoParams());
+    //   if (result.isRight()) {
+    //     // await getPetProfile1(NoParams());
+    //     yield CovidLoaded(result);
+    //   }
+    // }
     else if (event is ProviderLoginButtonTapped) {
       yield LoginInProgress();
       final result = await _providerEmailSignin.call(EmailAuthParams(
@@ -125,7 +144,7 @@ await getPetProfile1(NoParams());
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
-
+//await getProviderRequest(NoParams());
         yield LoginSuccess();
       });
     }

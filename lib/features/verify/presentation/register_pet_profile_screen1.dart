@@ -40,7 +40,7 @@ class CreateregisterPetProfile1 extends StatefulWidget {
       _CreateregisterPetProfile1State();
 }
 
-class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> with SingleTickerProviderStateMixin {
+class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
   String _image = "";
@@ -144,7 +144,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child:
             BlocBuilder<PetProfileBloc, PetProfileState>(builder: (context, state) {
-              if (state is fakeUserPetProfileButtonTapped) {
+              if (state is UserCreatePetProfileButtonTapped) {
+print(state.toString());
                 AlertManager.showErrorMessage(
                     "otp send your register email", context);
                 SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -361,14 +362,14 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
 
                                       ],
                                     ),
-                                    new SizedBox(
+                                    const SizedBox(
                                       height: 10.0,
                                     ),
                                     DatePicker(),
-                                    new SizedBox(
+                                    const SizedBox(
                                       height: 40.0,
                                     ),
-                                    Center(
+                                    const Center(
                                       child: Text(
                                         'Sex',
                                         style: TextStyle(
@@ -380,59 +381,12 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                   const SizedBox(
                                       height: 10.0,
                                     ),
-                                    //         Padding(
-                                    //             padding: EdgeInsets.only(left: 10),
-                                    //             child: Row(
-                                    //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    //                 children: <Widget>[
-                                    //             Expanded(
-                                    //             child: FlatButton(
-                                    //                 onPressed: () {
-                                    //         setState(() => pressGeoON = !pressGeoON);
-                                    //         },
-                                    //           child: Container(
-                                    //               alignment: Alignment.center,
-                                    //               width: 100,
-                                    //               height: 100,
-                                    //               decoration: BoxDecoration(
-                                    //                   shape: BoxShape.circle,
-                                    //                   border: Border.all(color: Colors.grey[100]),
-                                    //                   color: pressGeoON
-                                    //                       ? MaaruColors.blueColor
-                                    //                       : Color(0xFFffffff)),
-                                    //               child: Text('Neutered',
-                                    //                   style: pressGeoON
-                                    //                       ? GoogleFonts.poppins(
-                                    //                       textStyle: TextStyle(
-                                    //                           fontWeight: FontWeight.normal,
-                                    //                           fontFamily: 'Poppins',
-                                    //                           fontSize: 15,
-                                    //                           color: Color(0xFFffffff)))
-                                    //                   //MaaruStyle.text.greyDisable
-                                    //                   // TextStyle(
-                                    //                   //     color: MaaruColors.textColor,
-                                    //                   //     fontFamily: 'Poppins',
-                                    //                   //     fontSize: 12,
-                                    //                   //     fontWeight: FontWeight.w300
-                                    //                       :   MaaruStyle.text.greyDisable)),
-                                    //         ),
-                                    // ),
-                                    //                   SizedBox(
-                                    //                     width: 10,
-                                    //                   ),
-                                    //                   ReuseCircle1(
-                                    //                     text: 'Spade',
-                                    //                   ),
-                                    //                   ReuseCircle1(
-                                    //                     text: 'Neighter',
-                                    //                   ),
-                                    //                 ])),
 
                                     ToggleButton3(),
-                                    SizedBox(
+                                   const SizedBox(
                                       height: 40.0,
                                     ),
                                     Row(
@@ -450,7 +404,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
                                               alignment: Alignment.center,
                                               height: 50,
                                               width: 60,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                   color: Colors.white12,
                                                   shape: BoxShape.circle),
                                               child: Text(
@@ -461,14 +415,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
                                           ),
                                           InkWell(
                                             onTap: ()  {
-
-
-                                              //  await authSource.emailSignup(params);
-
                                               String petName = _petNameController.text;
                                               String breadType = _breadTypeController.text;
-                                              // String height = _height.text;
-                                              // String width = _weight.text;
 
                                               if (petName.isEmpty) {
                                                 AlertManager.showErrorMessage(
@@ -476,35 +424,18 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
                                               } else if (breadType.isEmpty) {
                                                 AlertManager.showErrorMessage(
                                                     "Please enter Bread Type", context);
-                                                // } else if (height.isEmpty) {
-                                                // AlertManager.showErrorMessage(
-                                                // "Please enter Height", context);
-                                                // } else if (width.isEmpty) {
-                                                //   AlertManager.showErrorMessage(
-                                                //       "Please enter weight",
 
-                                                // context);
 
                                               }else if (breadType.isEmpty) {
                                                 AlertManager.showErrorMessage(
                                                     "Please enter Bread Type", context);
-                                                // } else if (height.isEmpty) {
-                                                // AlertManager.showErrorMessage(
-                                                // "Please enter Height", context);
-                                                // } else if (width.isEmpty) {
-                                                //   AlertManager.showErrorMessage(
-                                                //       "Please enter weight",
-
-                                                // context);
 
                                               }
-                                              else {
+                                              else  {
                                                 BlocProvider.of<PetProfileBloc>(context)
-                                                    .add(RegisterButtonTapped());
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (_) =>
-                                                            CreateRegisterPetProfile2()));
+                                                    .add(CreateRegisterPetProfile());
+
+
                                               }
                                             },
                                             child: Container(
@@ -515,9 +446,18 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> w
                                             ),
                                           ),
                                         ]),
-                                    SizedBox(
+                                   const SizedBox(
                                       height: 70,
-                                    )
+                                    ),
+                                    state is RegisterInProgress
+                                        ? Center(
+                                        child: Container(
+                                          margin: EdgeInsets.only(bottom: 10),
+                                          width: 40,
+                                          height: 40,
+                                          child: CircularProgressIndicator(),
+                                        ))
+                                        : Container(),
                                   ],
                                 )),
                           ),

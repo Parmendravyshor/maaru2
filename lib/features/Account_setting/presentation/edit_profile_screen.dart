@@ -102,9 +102,9 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                   _prefHelper.getStringByKey(MaruConstant.email, "");
               _mobileController.text =
                   _prefHelper.getStringByKey(MaruConstant.phone_number, "");
-              if (state is UserPetProfileButtonTapped) {
-                _status = true;
-              }
+              // if (state is UserPetProfileButtonTapped) {
+              //   _status = true;
+              // }
               return SafeArea(
                   child: SingleChildScrollView(
                       child: Column(children: [
