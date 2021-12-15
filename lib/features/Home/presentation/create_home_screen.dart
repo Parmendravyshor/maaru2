@@ -8,6 +8,7 @@ import 'package:maru/features/Home/presentation/pet_profile.dart';
 import 'package:maru/features/Home/presentation/search_screen.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
+import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:maru/main.dart';
 
@@ -22,11 +23,11 @@ class CreateHomeScreen extends StatefulWidget {
   final selectedIndex;
   const CreateHomeScreen(
       {Key key,
-      this.Color,
-      this.selectedIndex,
-      this.Color1,
-      this.Color2,
-      this.Color3})
+        this.Color,
+        this.selectedIndex,
+        this.Color1,
+        this.Color2,
+        this.Color3})
       : super(key: key);
   // const CreateHomeScreen({@required this.selectedIndex, @required this.Color})
   //     : super();
@@ -39,104 +40,75 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     return
-      BottomNavigationBar(
-      elevation: 0.0,
-      backgroundColor: MaaruColors.darkGrey2,
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-            icon: InkWell(
-              onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => HomeScreen()));
-              },
-              child:Padding(padding: EdgeInsets.only(right: 30,top: 10),
-
-           child:   Image.asset('assets/icons/icon0.png',
-                  height: 30, color: widget.Color
-                  //selectedIndex == 0
-                  ///  ? MaaruColors.textButtonColor
-                  // : Colors.grey[350],
-                  ),
-            )),
-            title: Text('')),
-        BottomNavigationBarItem(
-            icon: InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ProviderSearchScreen()));
-              },
-              child: Padding(padding: EdgeInsets.only(right: 40),
-
-  child:  Image.asset('assets/icons/icon1.png',
-                  height: 40, color: widget.Color1
-                  //selectedIndex == 1
-                  //   ? MaaruColors.textButtonColor
-                  //  : Colors.grey[350],
-                  ),
-            )),
-            title: Text('')),
-
-         BottomNavigationBarItem(
-
-            icon: InkWell(
+      Container(
+        height: size.height*0.09,
+        color: Colors.white,
+        child: Container(
+          margin: EdgeInsets.only(left: 20, right: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  },
+                  child: Image.asset(
+                    'assets/icons/icon0.png',
+                    height: 35,
+                  )),
+              GestureDetector(
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => PetProfile1()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProviderSearchScreen()));
                 },
-
-               child: Padding(
-                 padding:  EdgeInsets.only(right: 20),
-                 child: Image.asset(
-                    'assets/icons/icon4.png',
-                    height: 60,
-                  ),
-               )),
-            title: Text('')),
-        BottomNavigationBarItem(
-            icon: InkWell(
+                child: Image.asset(
+                  'assets/icons/icon1.png',
+                  height: 35,
+                ),
+              ),
+              GestureDetector(
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => Messages()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PetProfile1()));
                 },
-   child: Padding(padding: EdgeInsets.only(),
-                child:
-                Image.asset(
+                child: Image.asset(
+                  'assets/icons/icon4.png',
+                  height: 55,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Messages()));
+                },
+                child: Image.asset(
                   'assets/icons/icon2.png',
-                  height: 30,
-                  color: widget.Color2
-                  //selectedIndex == 3
-                    //  ? MaaruColors.textButtonColor
-                     // : Colors.grey[350],
-                ))),
-            title: Text('')),
-        BottomNavigationBarItem(
-            icon: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => AccountSettingScreen()));
+                  height: 35,
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AccountSettingScreen()));
                 },
-                child: Padding(padding: EdgeInsets.only(),
-
-  child:  Image.asset(
+                child: Image.asset(
                   'assets/icons/icon3.png',
-                  height: 30,
-                  color: widget.Color3
-                  //selectedIndex == 4
-                    //  ? MaaruColors.textButtonColor
-                     // : Colors.grey[350],
-                ))),
-            title: Text('')),
-      ],
-      // currentIndex: selectedIndex,
-      // onTap: (index) => setState(() => selectedIndex = index),
-      //
-    );
+                  height: 35,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
   }
 }
 // class CreateHomeScreen extends StatefulWidget {
 //   @override
-//   _CreateHomeScreenState createState() => _CreateHomeScreenState();
+//   CreateHomeScreenState createState() => CreateHomeScreenState();
 // }
 //
 // class _CreateHomeScreenState extends State<CreateHomeScreen> {

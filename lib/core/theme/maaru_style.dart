@@ -53,6 +53,8 @@ class MaaruColors {
   Color enableButtonColor = Color(0xffFF6D42);
   Color bottomBg = Color(0xffFAFBFF);
   Color borderColor = Color(0xffD8D8D8);
+  static Color textfeildline=Color(0xffd5d5d5);
+
 
   Color get formFieldBorder =>
       _darkTheme ? greyNight.withOpacity(0.1) : darkColor.withOpacity(0.1);
@@ -67,14 +69,25 @@ class MaaruColors {
       ? Color(0xE1E9F0).withOpacity(0.1)
       : Color(0xF0F2F5).withOpacity(0.9);
   Color get divider => _darkTheme ? Color(0x0DE1E9F0) : Color(0xFFD5D9DE);
-  TextStyle get tiny {
+  TextStyle get  tiny {
     return GoogleFonts.poppins(
         textStyle: TextStyle(
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
+            fontSize: 16,
+            color: Color(0xFF000000)));
+  }
+
+
+  TextStyle get  toggel {
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w700,
             fontFamily: 'Poppins',
             fontSize: 15,
             color: Color(0xFF000000)));
   }
+
 
 //regular
   TextStyle get mediumGreen {
@@ -89,9 +102,11 @@ class MaaruColors {
   TextStyle get greyDisable {
     return GoogleFonts.poppins(
         textStyle: TextStyle(
-            fontWeight: FontWeight.normal,
+            fontWeight: FontWeight.w500,
             fontFamily: 'Poppins',
-            fontSize: 12,
+
+            fontSize: 15,
+
             color: Colors.grey[400]));
   }
 
@@ -140,7 +155,7 @@ class MaaruColors {
         textStyle: TextStyle(
             fontWeight: FontWeight.bold,
             fontFamily: 'Poppins',
-            fontSize: 20,
+            fontSize: 15,
             color: MaaruColors.textButtonColor));
   }
 
@@ -175,7 +190,7 @@ class MaaruColors {
     return TextStyle(
         fontWeight: FontWeight.w700,
         fontFamily: 'Quicksand',
-        fontSize: 34,
+        fontSize: 30 ,
         color: _darkTheme
             ? MaaruStyle.colors.textColorWhite
             : MaaruStyle.colors.textColorBlack);

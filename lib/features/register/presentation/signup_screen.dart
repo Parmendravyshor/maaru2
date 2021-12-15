@@ -83,7 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor:MaaruColors.button2Color,
+        backgroundColor:Colors.white,
         body: SingleChildScrollView(
             child: BlocProvider(
                 create: (context) => KiwiContainer().resolve<RegisterBloc>(),
@@ -144,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: GoogleFonts.poppins(
                             textStyle: TextStyle(
                                 color: Colors.black,
-                                fontSize: 20,
+                                fontSize: 15,
                                 fontWeight: FontWeight.w500)),
                       ),
                     ),
@@ -203,45 +203,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            ThemedButton(
-                                text: "Join",
-                                onPressed: () {
-                                  String first_name =
-                                      _first_nameController.text;
-                                  String lname = _lnameController.text;
-                                  String email = _emailController.text;
-                                  String password = _passwordController.text;
+                            Container(
+                              margin: EdgeInsets.only(left: 15,right: 15),
+                              child: ThemedButton(
+                                  text: "JOIN",
+                                  onPressed: () {
+                                    String first_name =
+                                        _first_nameController.text;
+                                    String lname = _lnameController.text;
+                                    String email = _emailController.text;
+                                    String password = _passwordController.text;
 
-                                  if (first_name.isEmpty) {
-                                    AlertManager.showErrorMessage(
-                                        "Please enter first name", context);
-                                  } else if (lname.isEmpty) {
-                                    AlertManager.showErrorMessage(
-                                        "Please enter last name", context);
-                                  } else if (validateEmail(email) != null) {
-                                    AlertManager.showErrorMessage(
-                                        "Please enter valid email", context);
-                                  } else if (password.length < 8) {
-                                    AlertManager.showErrorMessage(
-                                        "Password must be 6 characters long",
-                                        context);
+                                    if (first_name.isEmpty) {
+                                      AlertManager.showErrorMessage(
+                                          "Please enter first name", context);
+                                    } else if (lname.isEmpty) {
+                                      AlertManager.showErrorMessage(
+                                          "Please enter last name", context);
+                                    } else if (validateEmail(email) != null) {
+                                      AlertManager.showErrorMessage(
+                                          "Please enter valid email", context);
+                                    } else if (password.length < 8) {
+                                      AlertManager.showErrorMessage(
+                                          "Password must be 6 characters long",
+                                          context);
 
-                                    //  enabled = true;
-                                  } else {
-                                    BlocProvider.of<RegisterBloc>(context)
-                                        .add(RegisterButtonTapped());
-                                    // Navigator.of(context).push(
-                                    //     MaterialPageRoute(
-                                    //         builder: (_) =>
-                                    //             CreateregisterPetProfile1()));
-                                  }
-                                  // else {
-                                  //   AlertManager.disclaimerPopup(context,
-                                  //       onSuccess: () {
-                                  //
-                                  //       });
-                                  // }
-                                }),
+                                      //  enabled = true;
+                                    } else {
+                                      BlocProvider.of<RegisterBloc>(context)
+                                          .add(RegisterButtonTapped());
+                                      // Navigator.of(context).push(
+                                      //     MaterialPageRoute(
+                                      //         builder: (_) =>
+                                      //             CreateregisterPetProfile1()));
+                                    }
+                                    // else {
+                                    //   AlertManager.disclaimerPopup(context,
+                                    //       onSuccess: () {
+                                    //
+                                    //       });
+                                    // }
+                                  }),
+                            ),
                             SizedBox(
                               height: 20,
                             ),
@@ -284,7 +287,7 @@ class GoToSignInText extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (_) => LoginScreen()));
             },
             child: Text(
-              'Log in',
+              'LOG IN',
               style: MaaruStyle.text.mediumDisable,
             ))
       ],

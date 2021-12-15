@@ -68,18 +68,20 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
           //Text('Person ${cards.length + 1}'),
           if (priceupdate_value)
           TextFormField(
+            style: MaaruStyle.text.tiny,
             textInputAction: TextInputAction.next,
 
             controller: _nameEditingController,
             decoration: InputDecoration(
                 hintText: 'Name',
-                hintStyle: MaaruStyle.text.greyDisable),
+                hintStyle: MaaruStyle.text.tiny),
           ),
           SizedBox(
             height: 30,
           ),
           if (priceupdate_value)
           TextFormField(
+            style: MaaruStyle.text.tiny,
             textInputAction: TextInputAction.next,
             onChanged: (text) {
 
@@ -87,20 +89,21 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
             controller: _nameController,
             decoration: InputDecoration(
                 hintText: 'How many times a day?',
-                hintStyle: MaaruStyle.text.greyDisable),
+                hintStyle: MaaruStyle.text.tiny),
           ),
           SizedBox(
             height: 30,
           ),
           if (priceupdate_value)
             TextFormField(
-              maxLines: 3,
+
+              style: MaaruStyle.text.tiny,
+              maxLines: 2,
               decoration: InputDecoration(
                   hintText: 'Note',
-                  hintStyle: MaaruStyle.text.greyDisable,
+                  hintStyle: MaaruStyle.text.tiny,
                   border: OutlineInputBorder(
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(20.0)),
+
                       borderSide:
                       BorderSide(color: Colors.grey[50]))),
               onChanged: (text) {},
@@ -110,14 +113,16 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
           SizedBox(height: 10,),
           InkWell(onTap: (){
             setState(() {
+              if (priceupdate_value)
               _removeWidget();
             });
           },
          child: Row(children: [
+           if (priceupdate_value)
           ElevatedButton(
 
             onPressed: () {
-
+              if (priceupdate_value);
             },
             child: Icon(Icons.remove, color: Colors.white,),
             style: ElevatedButton.styleFrom(
@@ -127,12 +132,14 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
               onPrimary: Colors.red, // <-- Splash color
             ),
           ),
-            Text('Remove Vaccine',style:GoogleFonts.poppins(
-                textStyle: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'Poppins',
-                    fontSize: 18,
-                    color: Color(0xFFc72019))))
+           if (priceupdate_value)
+           Text('Remove Vaccine',style:GoogleFonts.poppins(
+               textStyle: TextStyle(
+                   fontWeight: FontWeight.w700,
+                   fontFamily: 'Poppins',
+                   fontSize: 18,
+                   color: Color(0xFFc72019)))),
+
         ],
       )),
     ])
@@ -202,21 +209,20 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
               Align(alignment: Alignment.bottomRight, child:
               Container(
                   alignment: Alignment.bottomRight,
-                  height: size.height * 0.25,
+                  height: size.height * 0.20,
                   width: size.width * 0.9,
                   child: BackgroundImage(
                     assetImage: 'assets/images/kutta.png',
                   ))),
 
               Container(
+
                 //  width: 1000,
                 // height: 1300,
                   alignment: FractionalOffset.bottomCenter,
                   decoration: BoxDecoration(
                       color: Color(0xFFffffff),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30))),
+                     ),
                   child: Container(
                       padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
                       child: Column(
@@ -227,8 +233,11 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                 style: MaaruStyle.text.large,
                                 textAlign: TextAlign.left),
                             Text(
+
                               _prefHelper.getStringByKey(MaruConstant.last_name, ''),
                               style: MaaruStyle.text.tiny,
+
+
                             ),
                             SizedBox(
                               width: 20,
@@ -239,21 +248,21 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                             ),
                             Text(
                               'Walking Schedule',
-                              style: MaaruStyle.text.tiniest,
+                              style: MaaruStyle.text.tiny,
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             TextFormField(
-                              maxLines: 3,
+                              style: MaaruStyle.text.tiny,
+                              maxLines: 2,
                               decoration: InputDecoration(
                                   hintText: 'Note',
-                                  hintStyle: MaaruStyle.text.greyDisable,
+                                  hintStyle: MaaruStyle.text.tiny,
                                   border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
+
                                       borderSide:
-                                      BorderSide(color: Colors.grey[50]))),
+                                      BorderSide(color: MaaruColors.textfeildline))),
 onSaved: (text){
 
                                 _walkingController.text;
@@ -266,21 +275,21 @@ onSaved: (text){
                             ),
                             Text(
                               'Feeding Schedule',
-                              style: MaaruStyle.text.tiniest,
+                              style: MaaruStyle.text.tiny,
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             TextFormField(
-                              maxLines: 3,
+                              style: MaaruStyle.text.tiny,
+                              maxLines: 2,
                               decoration: InputDecoration(
                                   hintText: 'Note',
-                                  hintStyle: MaaruStyle.text.greyDisable,
+                                  hintStyle: MaaruStyle.text.tiny,
                                   border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
+
                                       borderSide:
-                                      BorderSide(color: Colors.grey[50]))),
+                                      BorderSide(color: MaaruColors.textfeildline))),
 
                               controller: _feedingController,
                             ),
@@ -289,21 +298,21 @@ onSaved: (text){
                             ),
                             Text(
                               'Temperament',
-                              style: MaaruStyle.text.tiniest,
+                              style: MaaruStyle.text.tiny,
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             TextFormField(
-                              maxLines: 3,
+                              style: MaaruStyle.text.tiny,
+                              maxLines: 2,
                               decoration: InputDecoration(
                                   hintText: 'Note',
-                                  hintStyle: MaaruStyle.text.greyDisable,
+                                  hintStyle: MaaruStyle.text.tiny,
                                   border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
+
                                       borderSide:
-                                      BorderSide(color: Colors.grey[50]))),
+                                      BorderSide(color: MaaruColors.textfeildline))),
 
                               controller: _tempramentController,
                             ),
@@ -317,13 +326,13 @@ onSaved: (text){
                                 children: [
                                   Text(
                                     'Medication',
-                                    style: MaaruStyle.text.tiniest,
+                                    style: MaaruStyle.text.tiny,
                                   ),
                                   SizedBox(
                                     height: 20,
                                     width: 60,
                                   ),
-                                  Text('No', style: MaaruStyle.text.tiniest),
+                                  Text('No', style: MaaruStyle.text.tiny),
 
                                   Switch(
                                     activeColor: MaaruColors.buttonColor,
@@ -344,7 +353,7 @@ onSaved: (text){
                                     },
                                   ),
                                   // ),
-                                  Text('Yes', style: MaaruStyle.text.tiniest),
+                                  Text('Yes', style: MaaruStyle.text.tiny),
                                 ]),
                             if (priceupdate_value)
                               ListView.builder(
@@ -421,11 +430,27 @@ onSaved: (text){
                                                 builder: (_) =>
                                                     CreateRegisterPetProfile3()));
 
+
+                                        BlocProvider.of<PetProfileBloc>(
+                                            context)
+                                            .add(Profile3(
+
+                                         _tempramentController.text,
+                                          _timesController.text,
+                                          _feedingController.text,
+                                          _notesController.text,
+                                          _nameEditingController.text,
+                                           _walkingController.text,
+                                          _nameController.text,
+                                        ));
+                                        print('qkqjww');
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateRegisterPetProfile4()));
+
                                       },
                                       child: Container(
                                         alignment: Alignment.centerRight,
                                         child: Image.asset(
-                                            'assets/images/next (2).png'),
+                                            'assets/images/next (2).png',height: 60,),
                                       )),
                                 ]),
                           ])))
@@ -461,35 +486,37 @@ class showButtomSheetScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   TextFormField(
+                    style: MaaruStyle.text.tiny,
                     textInputAction: TextInputAction.next,
                     onChanged: (text) {},
                     // controller: _nameEditingController,
                     decoration: InputDecoration(
                         hintText: 'Name',
-                        hintStyle: MaaruStyle.text.greyDisable),
+                        hintStyle: MaaruStyle.text.tiny),
                   ),
                   SizedBox(
                     height: 30,
                   ),
                   TextFormField(
+                    style: MaaruStyle.text.tiny,
                     textInputAction: TextInputAction.next,
                     onChanged: (text) {},
                     //   controller: _controller,
                     decoration: InputDecoration(
                         hintText: 'How many times a day?',
-                        hintStyle: MaaruStyle.text.greyDisable),
+                        hintStyle: MaaruStyle.text.tiny),
                   ),
                   SizedBox(
                     height: 30,
                   ),
                   TextFormField(
-                    maxLines: 3,
+                    style: MaaruStyle.text.tiny,
+                    maxLines: 2,
                     decoration: InputDecoration(
                         hintText: 'Note',
                         hintStyle: MaaruStyle.text.greyDisable,
                         border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)))),
+                            )),
                   ),
                   SizedBox(
                     height: 20,

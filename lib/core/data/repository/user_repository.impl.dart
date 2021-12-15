@@ -583,6 +583,7 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, void>> getHomeSearchIcons() {
+
     // TODO: implement getHomeSearchIcons
     throw UnimplementedError();
   }
@@ -617,7 +618,10 @@ class UserRepositoryImpl implements UserRepository {
       // print("verifyOTP TOKEEEEEEEEEEEEEEnnnnnnnnnnnnnnnn:$token");
       var map = Map<String, String>();
 
-      map[MaruConstant.email] = email;
+
+
+      map[ MaruConstant.email] = email;
+
       // map[ MaruConstant.email] = params.email;
       final response = await http.post(MaruConstant.forgetverify, body: map);
       print("Register Success  ${response.body}");

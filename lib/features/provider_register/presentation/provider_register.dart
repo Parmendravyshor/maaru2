@@ -13,6 +13,7 @@ import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
+import 'package:maru/features/provider_login/presentation/login_provider_screen.dart';
 import 'package:maru/features/register/presentation/register_bloc.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
@@ -182,48 +183,51 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                                     SizedBox(
                                       height: 20,
                                     ),
-                                    ThemedButton(
-                                      text: "Register",
-                                      onPressed: () {
-                                        String fname =
-                                            _first_nameController.text;
-                                        String lname = _lnameController.text;
-                                        String email = _emailController.text;
-                                        String password =
-                                            _passwordController.text;
+                                    Container(
+                                      margin: EdgeInsets.only(left: 20,right: 20),
+                                      child: ThemedButton(
+                                        text: "Register",
+                                        onPressed: () {
+                                          String fname =
+                                              _first_nameController.text;
+                                          String lname = _lnameController.text;
+                                          String email = _emailController.text;
+                                          String password =
+                                              _passwordController.text;
 
-                                        if (fname.isEmpty) {
-                                          AlertManager.showErrorMessage(
-                                              "Please enter first name",
-                                              context);
-                                        } else if (lname.isEmpty) {
-                                          AlertManager.showErrorMessage(
-                                              "Please enter last name",
-                                              context);
-                                        } else if (validateEmail(email) !=
-                                            null) {
-                                          AlertManager.showErrorMessage(
-                                              "Please enter valid email",
-                                              context);
-                                        } else if (password.length < 6) {
-                                          AlertManager.showErrorMessage(
-                                              "Password must be 6 characters long",
-                                              context);
+                                          if (fname.isEmpty) {
+                                            AlertManager.showErrorMessage(
+                                                "Please enter first name",
+                                                context);
+                                          } else if (lname.isEmpty) {
+                                            AlertManager.showErrorMessage(
+                                                "Please enter last name",
+                                                context);
+                                          } else if (validateEmail(email) !=
+                                              null) {
+                                            AlertManager.showErrorMessage(
+                                                "Please enter valid email",
+                                                context);
+                                          } else if (password.length < 6) {
+                                            AlertManager.showErrorMessage(
+                                                "Password must be 6 characters long",
+                                                context);
 
-                                          enabled = true;
-                                        }
+                                            enabled = true;
+                                          }
 
-                                        // else if (password != cnfpassword) {
-                                        //   AlertManager.showErrorMessage(
-                                        //       "Password do not match", context);
+                                          // else if (password != cnfpassword) {
+                                          //   AlertManager.showErrorMessage(
+                                          //       "Password do not match", context);
 
-                                        else {
-                                          BlocProvider.of<RegisterBloc>(context)
-                                              .add(ProviderRegisterButtonTapped());
+                                          else {
+                                            BlocProvider.of<RegisterBloc>(context)
+                                                .add(ProviderRegisterButtonTapped());
 
-                                        }
-                                        enabled = false;
-                                      },
+                                          }
+                                          enabled = false;
+                                        },
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 20,
@@ -266,7 +270,7 @@ class GoToSignInText extends StatelessWidget {
         InkWell(
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => LoginScreen()));
+                  .push(MaterialPageRoute(builder: (_) => LoginProviderScreen()));
             },
             child: Text(
               'Log in',

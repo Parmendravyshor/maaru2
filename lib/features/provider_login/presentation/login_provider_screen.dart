@@ -15,6 +15,7 @@ import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
+import 'package:maru/features/provider_register/presentation/provider_register.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
 import 'package:flutter/scheduler.dart';
@@ -166,36 +167,40 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                         SizedBox(
                                           height: 20,
                                         ),
-                                        ThemedButton(
-                                          text: 'Login',
-                                          onPressed: () {
-                                            String email = _emailController.text;
-                                            String password = _passwordController.text;
 
-                                            if (validateEmail(email) != null) {
-                                              AlertManager.showErrorMessage(
-                                                  "Please enter valid email", context);
-                                            } else if (password.length < 6) {
-                                              AlertManager.showErrorMessage(
-                                                  "Password must be 6 characters long",
-                                                  context);
-                                            } else {
-                                              // if (state is LoginFormValidationSuccess ||
-                                              //  state is LoginFormValidationFailure) {
+                                        Container(
+                                          padding: EdgeInsets.only(left: 20,right: 20),
+                                          child: ThemedButton(
+                                            text: 'Login',
+                                            onPressed: () {
+                                              String email = _emailController.text;
+                                              String password = _passwordController.text;
 
-                                              //  }
-                                              if (state
-                                              is LoginFormValidationSuccess ||
-                                                  state
-                                                  is LoginFormValidationFailure) {
-                                                BlocProvider.of<LoginBloc>(context)
-                                                    .add(event.ProviderLoginButtonTapped());
-                                                //  AlertManager.showSuccessMessage( "Login Success", context);
+                                              if (validateEmail(email) != null) {
+                                                AlertManager.showErrorMessage(
+                                                    "Please enter valid email", context);
+                                              } else if (password.length < 6) {
+                                                AlertManager.showErrorMessage(
+                                                    "Password must be 6 characters long",
+                                                    context);
+                                              } else {
+                                                // if (state is LoginFormValidationSuccess ||
+                                                //  state is LoginFormValidationFailure) {
+
+                                                //  }
+                                                if (state
+                                                is LoginFormValidationSuccess ||
+                                                    state
+                                                    is LoginFormValidationFailure) {
+                                                  BlocProvider.of<LoginBloc>(context)
+                                                      .add(event.ProviderLoginButtonTapped());
+                                                  //  AlertManager.showSuccessMessage( "Login Success", context);
 
 
+                                                }
                                               }
-                                            }
-                                          },
+                                            },
+                                          ),
                                         ),
                                         SizedBox(
                                           height: 20,
@@ -238,7 +243,7 @@ class GoToSignInText extends StatelessWidget {
         InkWell(
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => RegisterScreen()));
+                  .push(MaterialPageRoute(builder: (_) =>RegisterPoviderScreen()));
             },
             child: Text(
               'Signup ',

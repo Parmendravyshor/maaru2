@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
@@ -28,12 +26,13 @@ class _BookAppointment1State extends State<BookAppointment1> {
         backgroundColor: Colors.grey,
         resizeToAvoidBottomInset: true,
         bottomNavigationBar: CreateHomeScreen(
-          // Color:MaaruColors.textButtonColor
-        ),
+            // Color:MaaruColors.textButtonColor
+            ),
         body: SafeArea(
-          bottom: false,
+            bottom: false,
             child: SingleChildScrollView(
                 child: Column(
+
           children: [
             Container(
               width: 2000,
@@ -58,47 +57,69 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
+
+
                       children: [
-                     Image.asset(
-                          'assets/icons/Rectangle copy 3.png',
-                          height: 40,
-                          width: 40,
-                        ),
                         SizedBox(
-                          width: 10,
+                          height: size.height * 0.01,
                         ),
-                        InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => BookAppointment2()));
-                            },
-                            child: Image.asset(
-                              'assets/icons/icone-setting-68.png',
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/icons/Rectangle copy 3.png',
                               height: 40,
                               width: 40,
-                              color: Colors.grey[100],
-                            )),
-                        SizedBox(
-                          width: 10,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => BookAppointment2()));
+                                },
+                                child: Image.asset(
+                                  'assets/icons/icone-setting-68.png',
+                                  height: 40,
+                                  width: 40,
+                                  color: Colors.grey[100],
+                                )),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) =>
+                                          BookAppointmentScreen3()));
+                                },
+                                child: Image.asset(
+                                  'assets/icons/icone-setting-68.png',
+                                  height: 40,
+                                  width: 40,
+                                  color: Colors.grey[100],
+                                )),
+                          ],
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => BookAppointmentScreen3()));
-                          },
-                          child:
-                        Image.asset(
-                          'assets/icons/icone-setting-68.png',
-                          height: 40,
-                          width: 40,
-                          color: Colors.grey[100],
-                        )),
-                      ],
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Austin Pet Groomer',
+                              style: MaaruStyle.text.xlarge,
+                            ),
+                            // SizedBox(
+                            //   width: size.width * 0.16,
+                            // ),
+                            // Image.asset(
+                            //   'assets/icons/New Project (2).png',
+                            //   width: size.width * 0.10,
+                            // )
+                          ],
+                        ),
                         Text(
+
                           'shandan',
                           //_prefHelper.getStringByKey(MaruConstant.company_name, ''),
 
@@ -197,39 +218,69 @@ class _BookAppointment1State extends State<BookAppointment1> {
                       children: [
                         Text('sunday',
                             textAlign: TextAlign.start,
+
+
                             style: MaaruStyle.text.greyDisable),
-                        Text('closed', style: MaaruStyle.text.tiniest),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ThemedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => BookAppointmentScreen3()));
-                      },
-                      text: ' Book Appointments',
-                      enabled: true,
-                    ),
-                    // InkWell(
-                    //     onTap: () {
-                    //       Navigator.of(context).push(MaterialPageRoute(
-                    //           builder: (_) => BookAppointmentScreen3()));
-                    //     },
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Hours Of Operation',
+                          style: MaaruStyle.text.tiniest,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('monday-saturday',
+                                textAlign: TextAlign.start,
+                                style: MaaruStyle.text.greyDisable),
+                            Text('9:00 am-6:00 pm',
+                                style: MaaruStyle.text.tiniest),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('sunday',
+                                textAlign: TextAlign.start,
+                                style: MaaruStyle.text.greyDisable),
+                            Text('closed', style: MaaruStyle.text.tiniest),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ThemedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => BookAppointmentScreen3()));
+                          },
+                          text: ' Book Appointments',
+                          enabled: true,
+                        ),
+                        // InkWell(
+                        //     onTap: () {
+                        //       Navigator.of(context).push(MaterialPageRoute(
+                        //           builder: (_) => BookAppointmentScreen3()));
+                        //     },
 
                         // RoundedButton(
                         //   buttonName: 'Book Appointments',
                         //   Color1: MaaruColors.blueColor,
                         //   Color: MaaruColors.primaryColorsuggesion,
                         // ),
-
-                  ],
+                      ],
+                    ),
+                  ]),
                 ),
-              ),
-            ),
-          ],
-        ))));
+            )],
+            ))));
   }
 }
 // icon:SizedBox(

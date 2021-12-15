@@ -62,12 +62,13 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
         // enabledBorder: MaaruStyle.defaultBorder,
         // focusedBorder: MaaruStyle.focusedBorder,
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey[300]),
+          borderSide: BorderSide(color: MaaruColors.textfeildline),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         labelText: widget.placeholder,
         contentPadding: EdgeInsets.only(left: 0),
-        labelStyle: widget.textStyle);
+        labelStyle:  MaaruStyle.text.tiny,
+       );
   }
 
   @override
@@ -93,7 +94,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
                             onChanged: widget.onChanged,
                             autocorrect: false,
                             keyboardType: widget.keyboardType,
-                            style: MaaruStyle.text.tiniest,
+                            style: MaaruStyle.text.tiny,
                             decoration: inputDecoration(widget),
                           )))
                 ]))));

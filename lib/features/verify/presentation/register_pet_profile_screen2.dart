@@ -141,17 +141,18 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                               Container(
                                   alignment: Alignment.bottomRight,
                                   height: size.height * 0.20,
+
                                   width: size.width * 0.9,
                                   child: BackgroundImage(
                                     assetImage: _prefHelper.getStringByKey(MaruConstant.img, ''),
+
+
                                   )),
                               Container(
                                   alignment: FractionalOffset.bottomCenter,
                                   decoration: BoxDecoration(
                                       color: Color(0xFFffffff),
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(30),
-                                          topRight: Radius.circular(30))),
+                                      ),
                                   child: Container(
                                       padding: EdgeInsets.fromLTRB(
                                           30, 20, 30, 10),
@@ -163,8 +164,11 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                 style: MaaruStyle.text.large,
                                                 textAlign: TextAlign.left),
                                             Text(
+
                                               _prefHelper.getStringByKey(MaruConstant.last_name, ''),
                                               style: MaaruStyle.text.tiny,
+
+
                                             ),
                                             SizedBox(
                                               width: 20,
@@ -175,22 +179,20 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                             ),
                                             Text(
                                               'Known allergies',
-                                              style: MaaruStyle.text.tiniest,
+                                              style: MaaruStyle.text.tiny,
                                             ),
                                             SizedBox(
                                               height: 10,
                                             ),
                                             TextFormField(
-                                                maxLines: 3,
+                                              style: MaaruStyle.text.tiny,
+                                                maxLines: 2,
                                                 decoration: InputDecoration(
                                                     hintText: 'Seprated by comma',
                                                     hintStyle: MaaruStyle.text
-                                                        .greyDisable,
+                                                        .tiny,
                                                     border: OutlineInputBorder(
-                                                        borderRadius: BorderRadius
-                                                            .all(
-                                                            Radius.circular(
-                                                                20.0)),
+
                                                         borderSide:
                                                         BorderSide(color: Colors
                                                             .grey[50]))),
@@ -218,7 +220,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                           Text(
                                                             'Pet Vaccines',
                                                             style: MaaruStyle
-                                                                .text.tiniest,
+                                                                .text.tiny,
                                                           ),
                                                         ],),
                                                       SizedBox(
@@ -268,13 +270,11 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
 
                                                 ]),
                                             SizedBox(
-                                              height: 40,
+                                              height: 10,
                                             ),
 
 
-                                            SizedBox(
-                                              height: 30,
-                                            ),
+
                                             Row(
                                                 mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -305,14 +305,16 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                   ),
                                                   InkWell(
                                                       onTap: () {
+                                                        //
                                                         // BlocProvider.of<PetProfileBloc>(context)
                                                         //     .add(RegisterButtonTapped());
+
                                                       },
                                                       child: Container(
                                                         alignment: Alignment
                                                             .centerRight,
                                                         child: Image.asset(
-                                                            'assets/images/next (2).png'),
+                                                            'assets/images/next (2).png',height: 60,),
                                                       )),
                                                 ]),
                                           ]))),

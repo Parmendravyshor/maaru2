@@ -131,8 +131,11 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                   ))
                                 ]),
                             Text(
+
                               _prefHelper.getStringByKey(MaruConstant.last_name, ''),
                               style: MaaruStyle.text.tiny,
+
+
                             ),
                             SizedBox(
                               width: 20,
@@ -253,7 +256,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                 ),
                                Text(
                                     'Known Allergies',
-                                    style: MaaruStyle.text.tiniest,
+                                    style: MaaruStyle.text.tiny,
                                   ),
                                 SizedBox(
                                   height: 20,
@@ -268,7 +271,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                 SizedBox(
                                   height: 30,
                                 ),
-                                Text('Pet Vaccine',style: MaaruStyle.text.tiniest,),
+                                Text('Pet Vaccine',style: MaaruStyle.text.tiny,),
                                 SizedBox(
                                   height: 20,
                                 ),

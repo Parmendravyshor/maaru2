@@ -12,6 +12,7 @@ class AppointmentScreen extends StatefulWidget {
 class _AppointmentScreenState extends State<AppointmentScreen> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Color(0xFFffffff),
         bottomNavigationBar: CreateHomeScreen(
@@ -26,7 +27,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   SizedBox(
                     height: 30,
                   ),
-                  ShowLocation(),
+                  Container(
+                      margin: EdgeInsets.only(right: 10, left: 5),
+                      child: ShowLocation()),
                   const SizedBox(
                     height: 20,
                   ),
@@ -72,9 +75,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                               width: 10,
                               height: 30,
                             ),
-                            Image.asset(
-                              'assets/icons/icon-bl-19.png',
-                              height: 40,
+                            Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Image.asset(
+                                'assets/icons/icon-bl-19.png',
+                                height: 40,
+                              ),
                             )
                           ])),
                   SizedBox(
@@ -84,95 +90,94 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
                       'Upcoming Appoinments',
-                      style: MaaruStyle.text.tiniest,
+                      style: MaaruStyle.text.tiny,
                     ),
                   ),
                   SizedBox(
                     height: 40,
                   ),
                   Padding(
-                      padding: EdgeInsets.only(left: 20, right: 15),
-                      child:  Container(
-                        height: 150,
-                        width: 400,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.grey[300])),
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Expanded(child:
-                              Container(
-                                width: 100,
-
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                ),
-                                child: Image.asset('assets/images/kutta.png',height: 200,),
-                              )),
-
-                              SizedBox(
-                                width: 20,
+                    padding: EdgeInsets.only(left: 20, right: 15),
+                    child: Container(
+                      height: 150,
+                      width: 400,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: MaaruColors.textfeildline)),
+                      child: Container(
+                        margin: EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Container(
+                              width: 100,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
                               ),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                        'Austin pet care',
-                                        style: MaaruStyle.text.tiniestSmall
-                                    ),
-                                    Text(
-                                        'Pet walking',
-                                        style: MaaruStyle.text.tiny
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text(
-                                        '1357 Muno Manor',
-                                        style: MaaruStyle.text.greyDisable
-                                    ),
-                                    Text(
-                                      'Austin,Tx 75923',
-                                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
+                              child: Image.asset(
+                                'assets/images/kutta.png',
+                                height: 200,
                               ),
-                              SizedBox(
-                                //width: 40,
-                              ),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.calendar_today_outlined,
-                                      size: 22,
-                                      color: Colors.yellow,
-                                    ),
-                                    SizedBox(
-                                      height: 36,
-                                    ),
-                                    Text(
-                                      'Aug 21,2021',
-                                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                                    ),
-                                    Text(
-                                      '11:00 am',
+                            )),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Austin pet care',
+                                      style: MaaruStyle.text.tiny),
+                                  Text('Pet walking',
+                                      style: MaaruStyle.text.medium),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text('1357 Muno Manor',
                                       style: TextStyle(
-                                          fontSize: 13, fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
+                                          fontSize: 11, color: Colors.grey)),
+                                  Text(
+                                    'Austin,Tx 75923',
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 11),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                                //width: 40,
                                 ),
-                              )
-                            ],
-                          ),
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Icon(
+                                    Icons.calendar_today_outlined,
+                                    size: 22,
+                                    color: Colors.yellow,
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.06,
+                                  ),
+                                  Text(
+                                    'Aug 21,2021',
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 11),
+                                  ),
+                                  Text(
+                                    '11:00 am',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                      ),),
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 30,
                   ),
@@ -180,95 +185,96 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
                       'Past Appoinments',
-                      style: MaaruStyle.text.tiniest,
+                      style: MaaruStyle.text.tiny,
                     ),
                   ),
                   SizedBox(
                     height: 40,
                   ),
                   Padding(
-                      padding: EdgeInsets.only(left: 20, right: 15),
-                      child:  Container(
-                        height: 150,
-                        width: 400,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.grey[300])),
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              Expanded(child:
-                              Container(
-                                width: 100,
-
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                ),
-                                child: Image.asset('assets/images/kutta.png',height: 200,),
-                              )),
-
-                              SizedBox(
-                                width: 20,
+                    padding: EdgeInsets.only(left: 20, right: 15),
+                    child: Container(
+                      height: size.height * 0.18,
+                      width: 400,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: MaaruColors.textfeildline)),
+                      child: Container(
+                        margin: EdgeInsets.all(10),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: Container(
+                              width: 100,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
                               ),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                        'Austin pet care',
-                                        style: MaaruStyle.text.tiniestSmall
-                                    ),
-                                    Text(
-                                        'Pet walking',
-                                        style: MaaruStyle.text.tiny
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text(
-                                        '1357 Muno Manor',
-                                        style: MaaruStyle.text.greyDisable
-                                    ),
-                                    Text(
-                                      'Austin,Tx 75923',
-                                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
+                              child: Image.asset(
+                                'assets/images/kutta.png',
+                                height: 200,
                               ),
-                              SizedBox(
+                            )),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Austin pet care',
+                                      style: MaaruStyle.text.tiny),
+                                  Text('Pet walking',
+                                      style: MaaruStyle.text.medium),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    '1357 Muno Manor',
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 11),
+                                  ),
+                                  Text(
+                                    'Austin,Tx 75923',
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 11),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
                                 //width: 40,
-                              ),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.calendar_today_outlined,
-                                      size: 22,
-                                      color: Colors.yellow,
-                                    ),
-                                    SizedBox(
-                                      height: 36,
-                                    ),
-                                    Text(
-                                      'Aug 21,2021',
-                                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                                    ),
-                                    Text(
-                                      '12:00 am',
-                                      style: TextStyle(
-                                          fontSize: 13, fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
                                 ),
-                              )
-                            ],
-                          ),
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Icon(
+                                    Icons.calendar_today_outlined,
+                                    size: 22,
+                                    color: Colors.yellow,
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.06,
+                                  ),
+                                  Text(
+                                    'Aug 21,2021',
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 11),
+                                  ),
+                                  Text(
+                                    '12:00 am',
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                      ),),
+                      ),
+                    ),
+                  ),
                 ]))));
   }
 }

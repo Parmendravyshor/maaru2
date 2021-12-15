@@ -34,6 +34,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
             // Color:MaaruColors.textButtonColor
             ),
         body: SafeArea(
+
             bottom: false,
             child: BlocProvider(
                 create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
@@ -54,6 +55,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                         // itemCount: state.covidModel.petProfiles.length,
                         // itemBuilder: (context, index) {
                           child: Column(
+
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
@@ -524,6 +526,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                             .button2Color,
                                                       ))
                                                 ],
+
                                               )
                                             ])))
                               ])
@@ -533,5 +536,6 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                   }
                   ;
                 }))));
+
   }
 }

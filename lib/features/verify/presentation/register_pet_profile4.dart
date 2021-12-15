@@ -60,22 +60,23 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
     return
 
       Scaffold(
-        backgroundColor: MaaruColors.DogsBackground,
+          backgroundColor: MaaruColors.DogsBackground,
 
-        body:SafeArea(
-        top: true,
-bottom: false,
-        child:
-           SingleChildScrollView(
-                child: Column(children: [  SizedBox(
-                  height: 20,
-                ),
-          SkipButtons(),
-          SizedBox(
-            height: 20,
-          ),
+          body:SafeArea(
+              top: true,
+              bottom: false,
+              child:
+              SingleChildScrollView(
+                  child: Column(children: [  SizedBox(
+                    height: 20,
+                  ),
+                    SkipButtons(),
+                    SizedBox(
+                      height: 20,
+                    ),
 
-          Container(
+                    Container(
+
 
 
               alignment: Alignment.bottomRight,
@@ -447,24 +448,25 @@ bottom: false,
                                       shape: BoxShape.circle),
                                   child: Text(
                                     'Back',style: MaaruStyle.text.greyDisable,
-                                  ),
-                                ),
-                              ),
-                              InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                HomeScreen()));
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.centerRight,
-                                    child: Image.asset(
-                                        'assets/images/next (2).png'),
-                                  )),
-                            ]),
-                      ])))
-        ]))));
+
+
+                                  ),),),
+
+                                        InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          HomeScreen()));
+                                            },
+                                            child: Container(
+                                              alignment: Alignment.centerRight,
+                                              child: Image.asset(
+                                                  'assets/images/next (2).png',height: 60,),
+                                            )),
+                                      ]),
+                                ]))
+          )]))));
   }
 }
 

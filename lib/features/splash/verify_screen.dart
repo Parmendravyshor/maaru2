@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
@@ -24,76 +26,58 @@ class _VerifyUserState extends State<VerifyUser> {
 
   @override
   Widget build(BuildContext context) {
-
-    return
-        Stack(
-      children: [
-        Image.asset(
-          'assets/icons/Splash-Provider-or-User-screen-svg-new (3).png',
-          height: 3000,
-          width: 3000,
-          fit: BoxFit.cover,
-        ),
-        Container(
-            padding: EdgeInsets.fromLTRB(10, 0, 10, 100),
-            alignment: Alignment.center,
-            child: BackgroundImage(
-              assetImage: 'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
-              //hight: 10,
-              widt: 200,
-            )),
-        // BackgroundImage(
-        //   assetImage: 'assets/images/splashscreen.png',
-        // ),
-        Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Center(
-              child: Column(
-                children: [
-                  Flexible(
-                    child: Center(),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => AfterSplashScreen()));
-                        },
-                        child: RoundedButton(
-                          buttonName: 'I am a Customer',
-                          Color: MaaruColors.blueColor,
-                          Color1: MaaruColors.button2Color,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => AfterSplashScreen2()));
-                        },
-                        child: RoundedButton(
-                          buttonName: 'I am a Provider',
-                          Color1: MaaruColors.blueColor,
-                          Color: MaaruColors.button2Color,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 170,
-                      ),
-                      //  Navigator.of(context).push(MaterialPageRoute(
-                      //  builder: (context) => AfterSplashScreen2()));
-                    ],
-                  )
-                ],
+final size = MediaQuery.of(context).size;
+     return Scaffold(body:
+      Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                colorFilter: new ColorFilter.mode(
+                    Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                image: AssetImage('assets/icons/Splash-Provider-or-User-screen-svg-new (3).png'))),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
+                height: size.height * 0.08,
               ),
-            ))
-      ],
-    );
+              SizedBox(
+                height: size.height * 0.06,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AfterSplashScreen()));
+                },
+                child: RoundedButton(
+                  buttonName: 'I am a Customer',
+                  Color: MaaruColors.blueColor,
+                  Color1: MaaruColors.button2Color,
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.02,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AfterSplashScreen2()));
+                },
+                child: RoundedButton(
+                  buttonName: 'I am a Provider',
+                  Color1: MaaruColors.blueColor,
+                  Color: MaaruColors.button2Color,
+                ),
+              ),
+            ],
+          ),
+
+        ),
+      ));
+
   }
 }
+
+
