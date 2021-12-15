@@ -43,15 +43,14 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                     assetImage: 'assets/images/kutta.png',
                   )),
               Container(
+
                   //height: size.,
-                  width: 1000,
-                  height: 800,
+                  width: size.width*1,
+
                   alignment: FractionalOffset.bottomCenter,
                   decoration:const  BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20))),
+                      ),
                   child: Container(
                       padding: EdgeInsets.fromLTRB(30, 10, 0, 10),
                       child: Column(
@@ -124,7 +123,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                 ]),
                             Text(
                               'Jack  Russell',
-                              style: MaaruStyle.text.tiny,
+                              style: MaaruStyle.text.medium,
                             ),
                             SizedBox(
                               width: 20,
@@ -291,7 +290,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                 ),
                                 Text(
                                   'Upcoming Appointments',
-                                  style: MaaruStyle.text.tiniest,
+                                  style: MaaruStyle.text.tiny,
                                 ),
                                 SizedBox(
                                   height: 20,
@@ -302,7 +301,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                     height: 150,
                                     width: 400,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
+
                                         border: Border.all(color: Colors.grey[300])),
                                     child: Container(
                                       margin: EdgeInsets.all(10),
@@ -328,18 +327,18 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                               children: [
                                                 Text(
                                                     'Austin pet care',
-                                                    style: MaaruStyle.text.tiniestSmall
+                                                    style: MaaruStyle.text.tiny
                                                 ),
                                                 Text(
                                                     'Pet walking',
-                                                    style: MaaruStyle.text.tiny
+                                                    style: MaaruStyle.text.medium
                                                 ),
                                                 SizedBox(
                                                   height: 20,
                                                 ),
                                                 Text(
                                                     '1357 Muno Manor',
-                                                    style: MaaruStyle.text.greyDisable
+                                                    style: TextStyle(fontSize: 11,color: Colors.grey)
                                                 ),
                                                 Text(
                                                   'Austin,Tx 75923',

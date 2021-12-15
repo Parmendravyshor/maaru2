@@ -51,7 +51,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
       create: (context) => KiwiContainer().resolve<ResetBloc>(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Color(0xFFffffff),
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
             children: [
@@ -60,9 +60,10 @@ class ResetWidget extends State<ResetPasswordScreen> {
                 child:
                 SingleChildScrollView(
                   child: Container(
+                    margin: EdgeInsets.only(left: 10,right: 10),
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
-                    color: MaaruStyle.colors.cardbg,
+                    color: Colors.white,
                     child: BlocBuilder<ResetBloc, ResetState>(
                       builder: (context, state) {
                         int step = BlocProvider.of<ResetBloc>(context).step;
@@ -106,7 +107,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                 height: 20,
                               ),
                               ThemedTextField(
-                                  "Email", TextInputType.emailAddress,
+                                  "EMAIL", TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
                                   onChanged: (text) {
                                     BlocProvider.of<ResetBloc>(context)
@@ -115,16 +116,19 @@ class ResetWidget extends State<ResetPasswordScreen> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              ThemedButton(
-                                  text: "Send Otp",
-                                  onPressed: () {
-                                    if (state
-                                    is ResetFormValidationSuccess) {
-                                      BlocProvider.of<ResetBloc>(context)
-                                          .add(ResetButtonTapped());
-                                    }
-                                  },
-                                  enabled: true),
+                              Container(
+                                child: ThemedButton(
+                                    text: "SEND OTP",
+                                    onPressed: () {
+                                      if (state
+                                      is ResetFormValidationSuccess) {
+                                        BlocProvider.of<ResetBloc>(context)
+                                            .add(ResetButtonTapped());
+                                      }
+                                    },
+                                    enabled: true),
+                                margin: EdgeInsets.only(left: 20,right: 20),
+                              ),
                              const SizedBox(
                                 height: 10,
                               ),
@@ -286,7 +290,7 @@ class GoToSignInText extends StatelessWidget {
       child: FlatButton(
         height: ButtonMinHeight,
         onPressed: () => {Navigator.pop(context)},
-        child: Text("Go to Log in", style: MaaruStyle.text.small),
+        child: Text("GO TO LOG IN", style: MaaruStyle.text.tiny),
       ),
     );
   }

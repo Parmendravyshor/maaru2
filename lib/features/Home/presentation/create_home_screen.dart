@@ -39,96 +39,70 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     return
-      BottomNavigationBar(
-      elevation: 0.0,
-      backgroundColor: MaaruColors.darkGrey2,
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-            icon: InkWell(
-              onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => HomeScreen()));
-              },
-              child:Padding(padding: EdgeInsets.only(top: 10),
-
-           child:   Image.asset('assets/icons/icon0.png',
-                  height: 30, color: widget.Color
-                  //selectedIndex == 0
-                  ///  ? MaaruColors.textButtonColor
-                  // : Colors.grey[350],
-                  ),
-            )),
-            title: Text('')),
-        BottomNavigationBarItem(
-            icon: InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ProviderSearchScreen()));
-              },
-              child: Padding(padding: EdgeInsets.only(right: 30),
-
-  child:  Image.asset('assets/icons/icon1.png',
-                  height: 30, color: widget.Color1
-                  //selectedIndex == 1
-                  //   ? MaaruColors.textButtonColor
-                  //  : Colors.grey[350],
-                  ),
-            )),
-            title: Text('')),
-
-         BottomNavigationBarItem(
-
-            icon: InkWell(
+      Container(
+        height: size.height*0.09,
+        color: Colors.white,
+        child: Container(
+          margin: EdgeInsets.only(left: 20, right: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  },
+                  child: Image.asset(
+                    'assets/icons/icon0.png',
+                    height: 35,
+                  )),
+              GestureDetector(
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => PetProfile()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProviderSearchScreen()));
                 },
-
-               child: Image.asset(
+                child: Image.asset(
+                  'assets/icons/icon1.png',
+                  height: 35,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PetProfile()));
+                },
+                child: Image.asset(
                   'assets/icons/icon4.png',
-                  height: 60,
-                )),
-            title: Text('')),
-        BottomNavigationBarItem(
-            icon: InkWell(
+                  height: 55,
+                ),
+              ),
+              GestureDetector(
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => Messages()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Messages()));
                 },
-   child: Padding(padding: EdgeInsets.only(left: 20),
-                child:
-                Image.asset(
+                child: Image.asset(
                   'assets/icons/icon2.png',
-                  height: 30,
-                  color: widget.Color2
-                  //selectedIndex == 3
-                    //  ? MaaruColors.textButtonColor
-                     // : Colors.grey[350],
-                ))),
-            title: Text('')),
-        BottomNavigationBarItem(
-            icon: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => AccountSettingScreen()));
+                  height: 35,
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AccountSettingScreen()));
                 },
-                child: Padding(padding: EdgeInsets.only(top: 5),
-
-  child:  Image.asset(
+                child: Image.asset(
                   'assets/icons/icon3.png',
-                  height: 30,
-                  color: widget.Color3
-                  //selectedIndex == 4
-                    //  ? MaaruColors.textButtonColor
-                     // : Colors.grey[350],
-                ))),
-            title: Text('')),
-      ],
-      // currentIndex: selectedIndex,
-      // onTap: (index) => setState(() => selectedIndex = index),
-      //
-    );
+                  height: 35,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
   }
 }
 // class CreateHomeScreen extends StatefulWidget {

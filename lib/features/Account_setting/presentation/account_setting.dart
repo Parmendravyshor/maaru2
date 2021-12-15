@@ -21,7 +21,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
   @override
   Widget build(BuildContext context) {
     var selectedIndex;
-    return new WillPopScope(
+    return  WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
             backgroundColor: Colors.white,
@@ -261,8 +261,8 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                 ),
                                 Test3(
                                   image:
-                                      'assets/images/126-1264365_grey-logout-icon-png-transparent-png.png',
-                                  hite: 40,
+                                      'assets/images/126-1264365_grey-logout-icon-png-transparent-png (2).png',
+                                  hite: 35,
                                   size: 130,
                                   text: 'Log Out',
                                   onPressed: () {

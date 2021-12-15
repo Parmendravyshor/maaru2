@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     var selectedIndex = 0;
     return Stack(children: [
       Scaffold(
@@ -60,13 +61,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                           borderRadius:
                                                BorderRadius.circular(10.7),
                                           borderSide:  BorderSide(
-                                              color: Colors.grey[50],
+                                              color: MaaruColors.textfeildline,
                                               width: 1.0)),
                                       focusedBorder:  OutlineInputBorder(
                                           borderRadius:
                                                BorderRadius.circular(10.7),
                                           borderSide:  BorderSide(
-                                              color: Colors.grey[50],
+                                              color: MaaruColors.textfeildline,
                                               width: 1.0)),
                                       hintText: 'Search',
                                       hintStyle: MaaruStyle.text.greyDisable,
@@ -75,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fillColor: Colors.white,
                                       suffixIcon: Image.asset(
                                         'assets/icons/icone-setting-19.png',
-                                        height: 50,
+                                        height: 52,
                                         // width: 30,
                                       )),
                                 )),
@@ -89,24 +90,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                       builder: (_) => ViewPetProfile()));
                                 },
                                 child: HorizList()),
-                           const SizedBox(
-                              height: 30,
+                            SizedBox(
+                              height: size.height*0.03,
                             ),
                             Padding(
                                 padding: const EdgeInsets.only(left: 15),
                                 child: Text(
                                   'Upcoming Appoinments',
-                                  style: MaaruStyle.text.tiniest,
+                                  style: MaaruStyle.text.tiny,
                                 )),
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
                               child:  Container(
-                                height: 150,
-                                width: 400,
+                                height: size.height*0.15,
+                                width: size.width*1,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(color: Colors.grey[300])),
+
+                                    border: Border.all(color: MaaruColors.textfeildline)),
                                 child: Container(
+
                                   margin: EdgeInsets.all(10),
                                   child: Row(
                                     children: [
@@ -130,22 +132,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                           children: [
                                             Text(
                                               'Austin pet care',
-                                              style: MaaruStyle.text.tiniestSmall
+                                              style: MaaruStyle.text.tiny
                                             ),
                                             Text(
                                               'Pet walking',
-                                              style: MaaruStyle.text.tiny
+                                              style: MaaruStyle.text.medium
                                             ),
                                             SizedBox(
-                                              height: 20,
+                                              height: 5,
                                             ),
                                             Text(
                                               '1357 Muno Manor',
-                                              style: MaaruStyle.text.greyDisable
+                                              style: TextStyle(color: Colors.grey, fontSize: 11),
                                             ),
                                             Text(
                                               'Austin,Tx 75923',
-                                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                                              style: TextStyle(color: Colors.grey, fontSize: 11),
                                             ),
                                           ],
                                         ),
@@ -167,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                             Text(
                                               'Aug 21,2021',
-                                              style: TextStyle(color: Colors.grey, fontSize: 12),
+                                              style: TextStyle(color: Colors.grey, fontSize: 11),
                                             ),
                                             Text(
                                               '11:00 am',
@@ -182,13 +184,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            ThemedButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => AppointmentScreen()));
-                              },
-                              text: 'View All Appoinments',
-                              enabled: true,
+                            Container(
+
+                              margin: EdgeInsets.only(left: 10,right: 15),
+                              child: ThemedButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => AppointmentScreen()));
+                                },
+                                text: 'View All Appoinments',
+                                enabled: true,
+                              ),
                             ),
                             SizedBox(
                               height: 30,
@@ -197,15 +203,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: EdgeInsets.only(left: 15),
                                 child: Text(
                                   'Recent Messages',
-                                  style: MaaruStyle.text.tiniest,
+                                  style: MaaruStyle.text.tiny,
                                 )),
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
                               child:    Container(
-                                height: 170,
+                                height: size.height*0.20,
 
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+
                                   border: Border.all(color: Colors.grey),
                                 ),
                                 child: Container(
@@ -218,13 +224,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'Austin Pet Groomings',
-                                            style:MaaruStyle.text. tiniestSmall
+                                            'Austin Pet Groomers',
+                                            style:MaaruStyle.text. tiny
                                           ),
 
                                           Text(
                                             'Aug 8,2021 11:00am',
-                                            style: MaaruStyle.text.greyDisable
+                                            style: TextStyle(color: Colors.grey, fontSize: 11),
                                           ),
                                         ],
 
@@ -243,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       Text(
                                         'Roscoe needs a trim and was wanting to know if we  could move up our appointmenr?',
-                                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                                        style: TextStyle(color: Colors.grey, fontSize: 11),
                                       ),
                                       SizedBox(height: 10,),
 
@@ -270,13 +276,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               )
 
                             ),
-                            ThemedButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => Messages()));
-                              },
-                              text: ' All messages',
-                              enabled: true,
+                            Container(
+                              margin: EdgeInsets.only(left: 10,right: 15),
+                              child: ThemedButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => Messages()));
+                                },
+                                text: ' All messages',
+                                enabled: true,
+                              ),
                             ),
                             const SizedBox(
                               height: 30,
@@ -289,13 +298,15 @@ class _HomeScreenState extends State<HomeScreen> {
 class HorizList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     // ignore: prefer_typing_uninitialized_variables
     final List _hotels = [10];
 
     return
 
       Container(
-        height: 240,
+        height: size.height*0.27,
+
         child: ListView.builder(
           itemCount: 5,
           scrollDirection: Axis.horizontal,
@@ -309,38 +320,53 @@ class HorizList extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(color: Colors.grey[300], width: 1.0),
-                      borderRadius: BorderRadius.circular(20),
+
                     ),
-                    width: 180.0,
+                    width: size.width*0.44,
                     child: Column(children: [
                       Container(
+                        color: MaaruColors.textfeildline,
+
                         alignment: Alignment.centerRight,
                         child: Image.asset(
                           'assets/images/kutta.png',
-                          height: 140,
+                          height:size.height* 0.17,
                         ),
                       ),
-                      Padding(
-                          padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
-                          child: Row(
+
+                      Container(
+                        height: size.height*0.09,
+
+                        margin: EdgeInsets.only(left: 10,right: 10),
+
+
+
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Sally',
                                   style: GoogleFonts.poppins(
-                                    textStyle: MaaruStyle.text.large,
+                                    textStyle: MaaruStyle.text.tiny,
                                   )),
                               Image.asset(
                                 'assets/icons/icone-setting-31.png',
                                 width: 25,
                               )
                             ],
-                          )),
-                      Padding(
-                          padding: EdgeInsets.only(right: 70),
-                          child: Text(
-                            'Scotis Terrior',
-                            style: MaaruStyle.text.tiny,
-                          ))
+                          ),
+                            Text(
+                              'Scotis Terrior',
+                              style: MaaruStyle.text.medium,
+                            ) ,],
+                        )
+                      )
+
+
                     ])
                     // alignment: Alignment.center,
                     ));

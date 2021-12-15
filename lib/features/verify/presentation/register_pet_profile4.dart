@@ -51,219 +51,230 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
     return
 
       Scaffold(
-        backgroundColor: MaaruColors.DogsBackground,
+          backgroundColor: MaaruColors.DogsBackground,
 
-        body:SafeArea(
-        top: true,
-bottom: false,
-        child:
-           SingleChildScrollView(
-                child: Column(children: [  SizedBox(
-                  height: 20,
-                ),
-          SkipButtons(),
-          SizedBox(
-            height: 20,
-          ),
-
-          Container(
-
-              alignment: Alignment.bottomRight,
-
-             height: size.height * 0.25,
-              width: size.width * 0.9,
+          body:SafeArea(
+              top: true,
+              bottom: false,
               child:
-            BackgroundImage(
-                assetImage: 'assets/images/kutta.png',
-              )),
-          Container(
-              width: 1000,
-              height: 600,
-              alignment: FractionalOffset.bottomCenter,
-              decoration: BoxDecoration(
-                  color: Color(0xFFffffff),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30))),
-              child: Container(
-                  padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Max',
-                            style: MaaruStyle.text.large,
-                            textAlign: TextAlign.left),
-                        Text('Jack  Russell',),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          width: 40,
-                          height: 20,
-                        ),
-                        Text(
-                          'Pet Needs',
-                          style: MaaruStyle.text.small,
-                        ),
-                        Container(
-                          height: 350,
-                          width: 360,
-                          child: Stack(
-                            children: <Widget>[
-                              Positioned(
-                                top: 30,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      circlecolor1 == MaaruColors.whiteColor
-                                          ? circlecolor1 =  MaaruColors.buttonColor
-                                          : circlecolor1 =  MaaruColors.whiteColor;
-                                    });
-                                  },
-                                  child: choosecircle(
-                                      Image.asset(
-                                        'assets/icons/icone-setting-77.png',
-                                        height: 35,
-                                      ),
-                                      'Grooming',
-                                      circlecolor1),
-                                ),
-                              ),
-                              Positioned(
-                                  left: 200,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        circlecolor2 == MaaruColors.whiteColor
-                                            ? circlecolor2 = MaaruColors.buttonColor
-                                            : circlecolor2 = MaaruColors.whiteColor;
-                                      });
-                                    },
-                                    child: choosecircle(
-                                        Image.asset(
-                                          'assets/icons/icone-setting-71.png',
-                                          height: 35,
-                                        ),
-                                        'Vet',
-                                        circlecolor2),
-                                  )),
-                              Positioned(
-                                  top: 100,
-                                  left: 110,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        circlecolor3 == MaaruColors.whiteColor
-                                            ? circlecolor3 = MaaruColors.buttonColor
-                                            : circlecolor3 = MaaruColors.whiteColor;
-                                      });
-                                    },
-                                    child: choosecircle(
-                                        Image.asset(
-                                          'assets/icons/icone-setting-73.png',
-                                          height: 35,
-                                        ),
-                                        'Hotel',
-                                        circlecolor3),
-                                  )),
-                              Positioned(
-                                  top: 160,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        circlecolor4 == MaaruColors.whiteColor
-                                            ? circlecolor4 = MaaruColors.buttonColor
-                                            : circlecolor4 = MaaruColors.whiteColor;
-                                      });
-                                    },
-                                    child: choosecircle(
-                                        Image.asset(
-                                          'assets/icons/icone-setting-72.png',
-                                          height: 35,
-                                        ),
-                                        'Walking',
-                                        circlecolor4),
-                                  )),
-                              Positioned(
-                                  top: 130,
-                                  left: 240,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        circlecolor5 == MaaruColors.whiteColor
-                                            ? circlecolor5 = MaaruColors.buttonColor
-                                            : circlecolor5 = MaaruColors.whiteColor;
-                                      });
-                                    },
-                                    child: choosecircle(
-                                        Image.asset(
-                                          'assets/icons/icone-setting-74.png',
-                                          height: 35,
-                                        ),
-                                        'Daycare',
-                                        circlecolor5),
-                                  )),
-                              Positioned(
-                                  top: 230,
-                                  left: 150,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        circlecolor6 == MaaruColors.whiteColor
-                                            ? circlecolor6 = MaaruColors.buttonColor
-                                            : circlecolor6 = MaaruColors.whiteColor;
-                                      });
-                                    },
-                                    child: choosecircle(
-                                        Image.asset(
-                                          'assets/icons/icone-setting-76.png',
-                                          height: 35,
-                                        ),
-                                        'Hospital',
-                                        circlecolor6),
-                                  ))
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) =>
-                                          CreateRegisterPetProfile3()));
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: 50,
-                                  width: 60,
-                                  decoration: BoxDecoration(
-                                      color:  Colors.white12,
-                                      shape: BoxShape.circle),
-                                  child: Text(
-                                    'Back',style: MaaruStyle.text.greyDisable,
+              SingleChildScrollView(
+                  child: Column(children: [  SizedBox(
+                    height: 20,
+                  ),
+                    SkipButtons(),
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    Container(
+
+
+                        alignment: Alignment.bottomRight,
+
+                        height: size.height * 0.25,
+                        width: size.width * 0.9,
+                        child:
+                        BackgroundImage(
+                          assetImage: 'assets/images/kutta.png',
+                        )),
+                    Container(
+                        width: 1000,
+                        height: 600,
+                        alignment: FractionalOffset.bottomCenter,
+                        decoration: BoxDecoration(
+                            color: Color(0xFFffffff),
+                            ),
+                        child: Container(
+
+                            padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Max',
+                                      style: MaaruStyle.text.large,
+                                      textAlign: TextAlign.left),
+                                  Text('Jack  Russell',),
+                                  SizedBox(
+                                    width: 20,
                                   ),
-                                ),
-                              ),
-                              InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (_) =>
-                                                HomeScreen()));
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.centerRight,
-                                    child: Image.asset(
-                                        'assets/images/next (2).png'),
-                                  )),
-                            ]),
-                      ])))
-        ]))));
+                                  SizedBox(
+                                    width: 40,
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    'Pet Needs',
+                                    style: MaaruStyle.text.small,
+                                  ),
+                                  Container(
+                                    height: 350,
+                                    width: 360,
+                                    child: Stack(
+                                      children: <Widget>[
+                                        Positioned(
+                                          top: 30,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                circlecolor1 == MaaruColors.whiteColor
+
+                                                    ? circlecolor1 =  Color(0xff93b7fd)
+
+                                                    : circlecolor1 =  MaaruColors.whiteColor;
+                                              });
+                                            },
+                                            child: choosecircle(
+                                                Image.asset(
+                                                  'assets/icons/Fill 1.png',
+                                                  height: 35,
+                                                ),
+                                                'Grooming',
+                                                circlecolor1),
+                                          ),
+                                        ),
+                                        Positioned(
+                                            left: 200,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  circlecolor2 == MaaruColors.whiteColor
+
+                                                      ? circlecolor2 =Color(0xffff9976)
+
+                                                      : circlecolor2 = MaaruColors.whiteColor;
+                                                });
+                                              },
+                                              child: choosecircle(
+                                                  Image.asset(
+                                                    'assets/icons/Fill 1 (2).png',
+                                                    height: 35,
+                                                  ),
+                                                  'Vet',
+                                                  circlecolor2),
+                                            )),
+                                        Positioned(
+                                            top: 100,
+                                            left: 110,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  circlecolor3 == MaaruColors.whiteColor
+
+                                                      ? circlecolor3 = Color(0xfffff2bf)
+
+                                                      : circlecolor3 = MaaruColors.whiteColor;
+                                                });
+                                              },
+                                              child: choosecircle(
+                                                  Image.asset(
+                                                    'assets/icons/Fill 1 (3).png',
+                                                    height: 35,
+                                                  ),
+                                                  'Hotel',
+                                                  circlecolor3),
+                                            )),
+                                        Positioned(
+                                            top: 160,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  circlecolor4 == MaaruColors.whiteColor
+
+                                                      ? circlecolor4 = MaaruColors.button2Color
+
+
+                                                      : circlecolor4 = MaaruColors.whiteColor;
+                                                });
+                                              },
+                                              child: choosecircle(
+                                                  Image.asset(
+                                                    'assets/icons/Fill 1 (1).png',
+                                                    height: 35,
+                                                  ),
+                                                  'Walking',
+                                                  circlecolor4),
+                                            )),
+                                        Positioned(
+                                            top: 130,
+                                            left: 240,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  circlecolor5 == MaaruColors.whiteColor
+
+                                                      ? circlecolor5 = Color(0xff4f75fe)
+
+                                                      : circlecolor5 = MaaruColors.whiteColor;
+                                                });
+                                              },
+                                              child: choosecircle(
+                                                  Image.asset(
+                                                    'assets/icons/Background.png',
+                                                    height: 35,
+                                                  ),
+                                                  'Daycare',
+                                                  circlecolor5),
+                                            )),
+                                        Positioned(
+                                            top: 230,
+                                            left: 150,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  circlecolor6 == MaaruColors.whiteColor
+
+                                                      ? circlecolor6 = Color(0xffFc744f)
+
+                                                      : circlecolor6 = MaaruColors.whiteColor;
+                                                });
+                                              },
+                                              child: choosecircle(
+                                                  Image.asset(
+                                                    'assets/icons/Background (1).png',
+                                                    height: 35,
+                                                  ),
+                                                  'Hospital',
+                                                  circlecolor6),
+                                            ))
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 40,
+                                  ),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                          Navigator.pop(context);
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 50,
+                                            width: 60,
+                                            decoration: BoxDecoration(
+                                                color:  Colors.white12,
+                                                shape: BoxShape.circle),
+                                            child: Text(
+                                              'Back',style: MaaruStyle.text.greyDisable,
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          HomeScreen()));
+                                            },
+                                            child: Container(
+                                              alignment: Alignment.centerRight,
+                                              child: Image.asset(
+                                                  'assets/images/next (2).png',height: 60,),
+                                            )),
+                                      ]),
+                                ])))
+                  ]))));
   }
 }
 

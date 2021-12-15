@@ -7,13 +7,14 @@ class SkipButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (_) => HomeScreen()));
         },
-        child:Padding(padding: EdgeInsets.only(right: 20,top: 20),child:
+        child:Padding(padding: EdgeInsets.only(right: 20,),child:
         Text(
           'Skip Registration',
           style:TextStyle(color: Colors.white)

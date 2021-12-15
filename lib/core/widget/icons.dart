@@ -3,33 +3,27 @@ import 'package:flutter/material.dart';
 class ScreenIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     return Row(
-     // mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: FlatButton(
-            padding: EdgeInsets.only(left: 20),
-            onPressed: () {},
-            child: Image.asset(
-              "assets/icons/Rectangle copy.png",
-              width: 170,
-            ),
+        InkWell(
+          onTap: (){},
+          child: Image.asset(
+            'assets/icons/Rectangle copy.png',
+            height: size.height * 0.06,
           ),
         ),
-       SizedBox(width: 10,),
-        Expanded(
-          child: FlatButton(
-            padding: EdgeInsets.only(right: 20),
-            onPressed: () {},
-            child: Image.asset(
-              "assets/icons/Rectangle (1).png",
-              width: 170,
-              //  fit: BoxFit.cover,
-
-              // height: 70,
-            ),
-          ),
+        SizedBox(
+          width: size.width * 0.04,
         ),
+        InkWell(
+          onTap: (){},
+          child: Image.asset(
+            'assets/icons/Rectangle (1).png',
+            height: size.height * 0.06,
+          ),
+        )
       ],
     );
   }

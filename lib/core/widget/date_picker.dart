@@ -14,14 +14,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class DatePicker extends StatefulWidget {
-
-
   @override
   _DatePickerState createState() => _DatePickerState();
 }
 
 class _DatePickerState extends State<DatePicker> {
-
   DateTime _selectedDate;
   TextEditingController _ageType;
   TextEditingController _textEditingController = TextEditingController();
@@ -41,44 +38,36 @@ class _DatePickerState extends State<DatePicker> {
 
   @override
   Widget build(BuildContext context) {
-
-    return
-      Padding(
-          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: Column(children: [
-              GestureDetector(
-              child:
-            TextFormField(
-                focusNode: AlwaysDisabledFocusNode(),
-                controller: _textEditingController,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey[300]),
-                  ),
-                  // labelText: "Date of birth",
-                  hintText: 'mm/dd/year',hintStyle: MaaruStyle.text.greyDisable,
-                  prefixIcon:
-                  Icon(Icons.calendar_today_outlined, color: MaaruColors.primaryColorsuggesion),
+    return Padding(
+        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+        child: Column(children: [
+          GestureDetector(
+            child: TextFormField(
+              style: MaaruStyle.text.tiny,
+              focusNode: AlwaysDisabledFocusNode(),
+              controller: _textEditingController,
+              decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: MaaruColors.textfeildline),
                 ),
-                onSaved:(_selectDate){
-
-                },
-                onTap:()
-                 {
-
-                  _selectDate(context);
-
-                },onEditingComplete: (){
-                  print('datepicker on editing complete');
-               },),
-
-              )]));
-
+                // labelText: "Date of birth",
+                hintText: 'BIRTH DATE', hintStyle: MaaruStyle.text.tiny,
+              ),
+              onSaved: (_selectDate) {},
+              onTap: () {
+                _selectDate(context);
+              },
+              onEditingComplete: () {
+                print('datepicker on editing complete');
+              },
+            ),
+          )
+        ]));
   }
 
-  _selectDate(BuildContext context,) async {
-
+  _selectDate(
+    BuildContext context,
+  ) async {
     final _PetProfileBloc = BlocProvider.of<PetProfileBloc>(context);
     DateTime newSelectedDate = await showDatePicker(
         context: context,
@@ -101,16 +90,16 @@ class _DatePickerState extends State<DatePicker> {
         });
 
     if (newSelectedDate != null) {
-
       _selectedDate = newSelectedDate;
       _textEditingController
-        ..text ="${_selectedDate.year.toString()}-${_selectedDate.month.toString().padLeft(2,'0')}-${_selectedDate.day.toString().padLeft(2,'0')}"
-         //   .format(_selectedDate).toString()
+        ..text =
+            "${_selectedDate.month.toString()}-${_selectedDate.day.toString().padLeft(2, '0')}-${_selectedDate.year.toString().padLeft(2, '0')}"
+        //   .format(_selectedDate).toString()
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: _textEditingController.text.length,
             affinity: TextAffinity.upstream));
-      BlocProvider.of<PetProfileBloc>(context).add(BirthChanged(_textEditingController.text));
-
+      BlocProvider.of<PetProfileBloc>(context)
+          .add(BirthChanged(_textEditingController.text));
     }
   }
 }
@@ -131,8 +120,6 @@ class _DynamicEventState extends State<DynamicEvent> {
   List<dynamic> _selectedEvents;
   TextEditingController _eventController;
   SharedPreferences prefs;
-
-
 
   @override
   void initState() {
@@ -159,6 +146,7 @@ class _DynamicEventState extends State<DynamicEvent> {
     });
     return newMap;
   }
+
   Map<DateTime, dynamic> decodeMap(Map<String, dynamic> map) {
     Map<DateTime, dynamic> newMap = {};
     map.forEach((key, value) {
@@ -200,13 +188,11 @@ class _DynamicEventState extends State<DynamicEvent> {
                 formatButtonTextStyle: TextStyle(color: Colors.white),
                 formatButtonShowsNext: false,
               ),
-
-              daysOfWeekStyle:
-              DaysOfWeekStyle(decoration: BoxDecoration(color: Colors.green),),
-
-
+              daysOfWeekStyle: DaysOfWeekStyle(
+                decoration: BoxDecoration(color: Colors.green),
+              ),
               startingDayOfWeek: StartingDayOfWeek.monday,
-              onDaySelected: (date, events,holidays) {
+              onDaySelected: (date, events, holidays) {
                 setState(() {
                   _selectedEvents = events;
                 });
@@ -216,7 +202,7 @@ class _DynamicEventState extends State<DynamicEvent> {
                     margin: const EdgeInsets.all(4.0),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      //  color: Theme.of(context).primaryColor,
+                        //  color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Text(
                       date.day.toString(),
@@ -226,7 +212,7 @@ class _DynamicEventState extends State<DynamicEvent> {
                     margin: const EdgeInsets.all(4.0),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      // color: Colors.orange,
+                        // color: Colors.orange,
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Text(
                       date.day.toString(),
@@ -236,22 +222,24 @@ class _DynamicEventState extends State<DynamicEvent> {
               calendarController: _controller,
             ),
             ..._selectedEvents.map((event) => Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: MediaQuery.of(context).size.height/20,
-                width: MediaQuery.of(context).size.width/2,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.white,
-                    border: Border.all(color: Colors.grey)
-                ),
-                child: Center(
-                    child: Text(event,
-                      style: TextStyle(color: Colors.blue,
-                          fontWeight: FontWeight.bold,fontSize: 16),)
-                ),
-              ),
-            )),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height / 20,
+                    width: MediaQuery.of(context).size.width / 2,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                        border: Border.all(color: Colors.grey)),
+                    child: Center(
+                        child: Text(
+                      event,
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    )),
+                  ),
+                )),
           ],
         ),
       ),
@@ -320,40 +308,40 @@ class CalendarScreenState extends State<CalendarScreen> {
     arr[6] = "Sun";
     return Scaffold(
         body: Center(
-          child: TableCalendar(
-            calendarController: controller,
-            initialCalendarFormat: CalendarFormat.week,
-            headerVisible: false,
-            builders: CalendarBuilders(
-              // week days
-              dowWeekdayBuilder: (context, weekday) {
-                return Container();
-              },
-              // dates
-              dayBuilder: (context, date, events) {
-                print(date.month);
-                return Container(
-                  //  color: Colors.green,
-                  margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(6)),
-                      border: Border.all(color: const Color(0xffd6edff), width: 1)),
+      child: TableCalendar(
+        calendarController: controller,
+        initialCalendarFormat: CalendarFormat.week,
+        headerVisible: false,
+        builders: CalendarBuilders(
+          // week days
+          dowWeekdayBuilder: (context, weekday) {
+            return Container();
+          },
+          // dates
+          dayBuilder: (context, date, events) {
+            print(date.month);
+            return Container(
+              //  color: Colors.green,
+              margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                  border: Border.all(color: const Color(0xffd6edff), width: 1)),
 
-                  child: Column(
-                    children: [
-                      _showDate(date),
-                      _showWeek(date),
-                    ],
-                  ),
+              child: Column(
+                children: [
+                  _showDate(date),
+                  _showWeek(date),
+                ],
+              ),
 
-                  // ),
-                  // )),
-                );
-                //);
-              },
-            ),
-          ),
-        ));
+              // ),
+              // )),
+            );
+            //);
+          },
+        ),
+      ),
+    ));
   }
 
   Widget _showDate(DateTime date) {
@@ -365,10 +353,9 @@ class CalendarScreenState extends State<CalendarScreen> {
     return Card(
         elevation: 14,
         child:
-        Container(padding: EdgeInsets.all(2), child: Text('${date.day}')));
+            Container(padding: EdgeInsets.all(2), child: Text('${date.day}')));
   }
 }
-
 
 List<Appointment> appointmentFromJson(String str) => List<Appointment>.from(
     json.decode(str).map((x) => Appointment.fromJson(x)));
@@ -402,30 +389,30 @@ class Appointment {
   String uid;
 
   factory Appointment.fromJson(Map<String, dynamic> json) => Appointment(
-    date: DateTime.parse(json["date"]),
-    dateChange: DateTime.parse(json["date_change"]),
-    dateCreate: DateTime.parse(json["date_create"]),
-    detail: json["detail"],
-    duration: json["duration"],
-    id: json["id"],
-    note: json["note"],
-    status: json["status"],
-    title: json["title"],
-    uid: json["uid"],
-  );
+        date: DateTime.parse(json["date"]),
+        dateChange: DateTime.parse(json["date_change"]),
+        dateCreate: DateTime.parse(json["date_create"]),
+        detail: json["detail"],
+        duration: json["duration"],
+        id: json["id"],
+        note: json["note"],
+        status: json["status"],
+        title: json["title"],
+        uid: json["uid"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "date": date.toIso8601String(),
-    "date_change": dateChange.toIso8601String(),
-    "date_create": dateCreate.toIso8601String(),
-    "detail": detail,
-    "duration": duration,
-    "id": id,
-    "note": note,
-    "status": status,
-    "title": title,
-    "uid": uid,
-  };
+        "date": date.toIso8601String(),
+        "date_change": dateChange.toIso8601String(),
+        "date_create": dateCreate.toIso8601String(),
+        "detail": detail,
+        "duration": duration,
+        "id": id,
+        "note": note,
+        "status": status,
+        "title": title,
+        "uid": uid,
+      };
 }
 
 class Appointments extends StatefulWidget {
@@ -601,14 +588,12 @@ class _AppointmentsState extends State<Appointments>
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
 
-      startingDayOfWeek:
-      StartingDayOfWeek.sunday,
+      startingDayOfWeek: StartingDayOfWeek.sunday,
       availableGestures: AvailableGestures.all,
       availableCalendarFormats: const {CalendarFormat.month: ''},
 
       calendarStyle: CalendarStyle(
         outsideDaysVisible: false,
-
         weekendStyle: TextStyle().copyWith(color: Colors.grey[800]),
         holidayStyle: TextStyle().copyWith(color: Colors.grey[800]),
       ),
@@ -649,15 +634,13 @@ class _AppointmentsState extends State<Appointments>
                   color: MaaruColors.blueColor,
                   borderRadius: BorderRadius.circular(36.0),
                   border: Border.all(width: 2, color: MaaruColors.blueColor)),
-              child: Text(
-                  '${date.day}',
-                  style:MaaruStyle.text.greyDisable
-                //   TextStyle().copyWith(
-                //       fontSize: 20.0,
-                //       color: Colors.grey[100],
-                //       fontWeight: FontWeight.bold),
-                // ),
-              ));
+              child: Text('${date.day}', style: MaaruStyle.text.greyDisable
+                  //   TextStyle().copyWith(
+                  //       fontSize: 20.0,
+                  //       color: Colors.grey[100],
+                  //       fontWeight: FontWeight.bold),
+                  // ),
+                  ));
         },
         markersBuilder: (context, date, events, holidays) {
           final children = <Widget>[];

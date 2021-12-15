@@ -128,7 +128,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                 ]),
                             Text(
                               'Jack  Russell',
-                              style: MaaruStyle.text.tiny,
+                              style: MaaruStyle.text.medium,
                             ),
                             SizedBox(
                               width: 20,
@@ -249,7 +249,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                 ),
                                Text(
                                     'Known Allergies',
-                                    style: MaaruStyle.text.tiniest,
+                                    style: MaaruStyle.text.tiny,
                                   ),
                                 SizedBox(
                                   height: 20,
@@ -264,7 +264,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                 SizedBox(
                                   height: 30,
                                 ),
-                                Text('Pet Vaccine',style: MaaruStyle.text.tiniest,),
+                                Text('Pet Vaccine',style: MaaruStyle.text.tiny,),
                                 SizedBox(
                                   height: 20,
                                 ),

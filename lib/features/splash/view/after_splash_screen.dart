@@ -70,7 +70,7 @@ class _AfterSplashScreenState extends State<AfterSplashScreen> {
     return Stack(
       children: [
         Image.asset(
-          'assets/icons/Splash-Provider-or-User-screen-svg-new.png',
+          'assets/icons/Splash-Provider-or-User-screen-svg-new (3).png',
           height: 3000,
           width: 3000,
           fit: BoxFit.cover,
