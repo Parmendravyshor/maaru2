@@ -58,10 +58,13 @@ class CreateRegisterPetProfile2 extends StatefulWidget {
 class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
 
   TextEditingController _knowallergiesController;
+  TextEditingController _vaccineController;
+
 
   @override
   void initState() {
     _knowallergiesController = TextEditingController();
+    _vaccineController =  TextEditingController();
     super.initState();
   }
 
@@ -102,7 +105,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
               child:
               BlocBuilder<PetProfileBloc, PetProfileState>(
                   builder: (context, state) {
-                    if (state is PetRegisterSuccess) {
+                    if (state is PetProfile2Saves) {
                       AlertManager.showErrorMessage(
                           "otp send your register email", context);
                       SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -170,10 +173,10 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
 
 
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 20,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 40,
                                               height: 30,
                                             ),
@@ -181,7 +184,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                               'Known allergies',
                                               style: MaaruStyle.text.tiny,
                                             ),
-                                            SizedBox(
+                                           const SizedBox(
                                               height: 10,
                                             ),
                                             TextFormField(
@@ -202,7 +205,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                 },
                                                 controller: _knowallergiesController
                                             ),
-                                            SizedBox(
+                                           const SizedBox(
                                               height: 30,
                                             ),
                                             Stack(fit: StackFit.loose,
@@ -223,10 +226,11 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                                 .text.tiny,
                                                           ),
                                                         ],),
-                                                      SizedBox(
+                                                      const SizedBox(
                                                         height: 10,
                                                       ),
                                                       InkWell(
+
                                                           onTap: getImage,
                                                           //   var picked =
                                                           //       await FilePicker.platform.pickFiles();
@@ -269,12 +273,9 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
 
 
                                                 ]),
-                                            SizedBox(
+                                           const SizedBox(
                                               height: 10,
                                             ),
-
-
-
                                             Row(
                                                 mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -292,7 +293,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                           .center,
                                                       height: 50,
                                                       width: 60,
-                                                      decoration: BoxDecoration(
+                                                      decoration: const BoxDecoration(
                                                           color: Colors.white12,
                                                           shape: BoxShape
                                                               .circle),
@@ -306,8 +307,12 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                   InkWell(
                                                       onTap: () {
                                                         //
-                                                        // BlocProvider.of<PetProfileBloc>(context)
-                                                        //     .add(RegisterButtonTapped());
+                                                        BlocProvider.of<PetProfileBloc>(context)
+                                                            .add(Profile2(
+                                                          _knowallergiesController.text,
+                                                         // getImage()
+_vaccineController.text
+                                                        ));
 
                                                       },
                                                       child: Container(

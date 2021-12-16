@@ -95,13 +95,14 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  
   TextEditingController _weightController;
   TextEditingController _sexController;
   TextEditingController _birthDateContoller;
+  TextEditingController _noteContoller;
   @override
   void initState() {
     _petNameController = TextEditingController();
     _breadTypeController = TextEditingController();
     _ageTypeController = TextEditingController();
     _heightController = TextEditingController();
-
+    _noteContoller = TextEditingController();
     _weightController = TextEditingController();
     _birthDateContoller = TextEditingController();
     _sexController = TextEditingController();
@@ -119,7 +120,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  
     _breadTypeController.dispose();
     _ageTypeController.dispose();
     _heightController.dispose();
-    //_emailController.dispose();
+    _noteContoller.dispose();
     _weightController.dispose();
     _sexController.dispose();
     _birthDateContoller.dispose();
@@ -274,8 +275,7 @@ print(state.toString());
                             ),
                             SizedBox(height: 20),
                             Container(
-                              margin: EdgeInsets.only(left: 18),
-
+                              margin: const EdgeInsets.only(left: 18),
                                 child: ToggleButton2()),
                             new SizedBox(
                               height: 20.0,
@@ -334,54 +334,6 @@ print(state.toString());
                             SizedBox(
                               height: 30.0,
                             ),
-                            //         Padding(
-                            //             padding: EdgeInsets.only(left: 10),
-                            //             child: Row(
-                            //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //                 children: <Widget>[
-                            //             Expanded(
-                            //             child: FlatButton(
-                            //                 onPressed: () {
-                            //         setState(() => pressGeoON = !pressGeoON);
-                            //         },
-                            //           child: Container(
-                            //               alignment: Alignment.center,
-                            //               width: 100,
-                            //               height: 100,
-                            //               decoration: BoxDecoration(
-                            //                   shape: BoxShape.circle,
-                            //                   border: Border.all(color: Colors.grey[100]),
-                            //                   color: pressGeoON
-                            //                       ? MaaruColors.blueColor
-                            //                       : Color(0xFFffffff)),
-                            //               child: Text('Neutered',
-                            //                   style: pressGeoON
-                            //                       ? GoogleFonts.poppins(
-                            //                       textStyle: TextStyle(
-                            //                           fontWeight: FontWeight.normal,
-                            //                           fontFamily: 'Poppins',
-                            //                           fontSize: 15,
-                            //                           color: Color(0xFFffffff)))
-                            //                   //MaaruStyle.text.greyDisable
-                            //                   // TextStyle(
-                            //                   //     color: MaaruColors.textColor,
-                            //                   //     fontFamily: 'Poppins',
-                            //                   //     fontSize: 12,
-                            //                   //     fontWeight: FontWeight.w300
-                            //                       :   MaaruStyle.text.greyDisable)),
-                            //         ),
-                            // ),
-                            //                   SizedBox(
-                            //                     width: 10,
-                            //                   ),
-                            //                   ReuseCircle1(
-                            //                     text: 'Spade',
-                            //                   ),
-                            //                   ReuseCircle1(
-                            //                     text: 'Neighter',
-                            //                   ),
-                            //                 ])),
-
                             Container(
                                 margin: EdgeInsets.only(left: 18),
                                 child: ToggleButton3()),
@@ -389,7 +341,12 @@ print(state.toString());
                               height: 20.0,
                             ),
                             ThemedTextField("NOTES", TextInputType.text, textStyle: TextStyle(color: Colors.black),
-                              textInputAction: TextInputAction.done,),
+                              textInputAction: TextInputAction.done,
+                              onChanged: (text){
+                                BlocProvider.of<PetProfileBloc>(context)
+                                    .add(NoteChanged(text));
+                              },editingController: _noteContoller
+                            ),
                             SizedBox(
                               height: 20.0,
                             ),
@@ -455,8 +412,8 @@ print(state.toString());
                                         // context);
 
                                       } else {
-                                       // BlocProvider.of<PetProfileBloc>(context)
-                                         //   .add(RegisterButtonTapped());
+                                        BlocProvider.of<PetProfileBloc>(context)
+                                            .add(CreateRegisterPetProfile());
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (_) =>

@@ -95,6 +95,30 @@ class SexChanged extends PetProfileEvent {
   @override
   String toString() => "SexChanged";
 }
+class NoteChanged extends PetProfileEvent {
+  final String note;
+
+  NoteChanged(this.note);
+
+  @override
+  String toString() => "NoteChanged";
+}
+class genderChanged extends PetProfileEvent {
+  final String gender;
+
+  genderChanged(this.gender);
+
+  @override
+  String toString() => "genderChanged";
+}
+class PetNeed extends PetProfileEvent {
+  final String petneed;
+
+  PetNeed(this.petneed);
+
+  @override
+  String toString() => "genderChanged";
+}
 class HeightChanged extends PetProfileEvent {
   final  String hight;
 
@@ -174,7 +198,39 @@ class Profile3 extends PetProfileEvent {
   Profile3(this.walking, this.feeding, this.temprament, this.medication, this.name, this.times, this.notes,);
 
   @override
-  String toString() => "SubmitProfileTapped";
+  String toString() => "SubmitProfileTapped3";
+}
+class Profile4 extends PetProfileEvent {
+  final String grooming;
+  final String vet;
+  final String walking;
+  final String hotel;
+  final String hospital;
+  final String daycare;
+  Profile4({this.grooming, this.vet, this.walking, this.hotel, this.hospital, this.daycare});
+
+
+  @override
+  String toString() => "SubmitProfileTapped4";
+}
+class Profile2 extends PetProfileEvent {
+   var know_allergies;
+   var vaccine;
+
+  Profile2(this.know_allergies, this.vaccine);
+
+  @override
+  String toString() => "SubmitProfileTapped2";
+}
+class vaccineUplo extends PetProfileEvent {
+
+  final vaccine;
+  final id;
+
+  vaccineUplo( this.vaccine,this.id);
+
+  @override
+  String toString() => "vaccineUplo";
 }
 class RegisterUser extends PetProfileEvent {
   final String fname;

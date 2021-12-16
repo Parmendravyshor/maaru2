@@ -90,6 +90,14 @@ class pet3rofileButtonTapped extends PetProfileState {
   String toString() => "pet3rofileButtonTapped";
 
 }
+class pet4rofileButtonTapped extends PetProfileState {
+
+  pet4rofileButtonTapped() : super();
+
+  @override
+  String toString() => "pet4rofileButtonTapped";
+
+}
 class UserChangePasswordButtonTapped extends PetProfileState {
   UserChangePasswordButtonTapped() : super();
 
@@ -97,7 +105,20 @@ class UserChangePasswordButtonTapped extends PetProfileState {
   String toString() => "UserPetProfileButtonTapped";
 
 }
+class PetProfile2Saves extends PetProfileState {
+  PetProfile2Saves() : super();
 
+  @override
+  String toString() => "PetProfile2Saves";
+
+}
+class PetVaccineSuccessfull extends PetProfileState {
+  PetVaccineSuccessfull() : super();
+
+  @override
+  String toString() => "PetVaccineSuccessfull";
+
+}
 class CovidLoading extends PetProfileState {
    CovidLoading();
   @override

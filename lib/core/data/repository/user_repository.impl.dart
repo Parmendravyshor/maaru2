@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:maru/features/verify/domain/usecases/create_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/upload_vaccine_record.dart';
 
 import 'dart:convert';
 import 'package:path/path.dart';
@@ -251,19 +252,19 @@ class UserRepositoryImpl implements UserRepository {
           filename: basename(imageFile.path));
       request.files.add(multipartFile);
       request ..fields[ MaruConstant.pet_name] = params.petName
-       // ..fields[MaruConstant.breed_type] = params.age
-        ..fields[MaruConstant.age] = params.age
+        ..fields[MaruConstant.breed_type] = params.breedType
+        ..fields['age'] = params.age
         ..fields[MaruConstant.height] = params.height
         ..fields[MaruConstant.weight] = params.weight
         ..fields[MaruConstant.known_allergies] = 'params.knownAllergies'
         ..fields[MaruConstant.name] = ''
         ..fields[MaruConstant.note] = params.notes
-        ..fields[MaruConstant.pet_needs] = params.petNeeds
+        ..fields[MaruConstant.pet_needs] = ''
         ..fields[MaruConstant.times_a_day] = ''
-        ..fields['sex']= 'spade'
-        ..fields['gender']= 'male'
-        ..fields['breed_type'] = 'dff'
-        ..fields['birth_date'] = '2021-09-07'
+        ..fields[MaruConstant.sex]= 'spade'
+        ..fields[MaruConstant.gender]= 'male'
+        // ..fields['breed_type'] = 'dff'
+         ..fields['birth_date'] = '2021-09-07'
         ..headers.addAll(headers);
       print('request params ${request.fields.toString()}');
       var response = await request.send();
@@ -271,46 +272,24 @@ class UserRepositoryImpl implements UserRepository {
       print("respStr respStr respStr:$respStr");
       Map res = json.decode(respStr);
       print(res);
-//       var request = http.MultipartRequest('POST', MaruConstant.createpProfile)
-//
-//         ..fields[ MaruConstant.pet_name] = params.petName
-//        // ..fields[MaruConstant.breed_type] = params.age
-//         ..fields[MaruConstant.age] = params.age
-//         ..fields[MaruConstant.height] = params.height
-//         ..fields[MaruConstant.weight] = params.weight
-//         ..fields[MaruConstant.known_allergies] = 'params.knownAllergies'
-//         ..fields[MaruConstant.name] = 'params.age'
-//         ..fields[MaruConstant.note] = 'params.notes'
-//         ..fields[MaruConstant.pet_needs] = 'params.petNeeds'
-//         ..fields[MaruConstant.times_a_day] = 'params.times_a_day'
-//         ..fields['sex']= 'spade'
-//         ..fields['gender']= 'male'
-//         ..fields['breed_type'] = 'dff'
-//         ..fields['birth_date'] = '2021-09-07'
-//         ..headers.addAll(headers)
-//         ..files.add(await http.MultipartFile.fromPath(
-//             'img',
-//           '/storage/emulated/0/Android/data/com.example.maru/files/Pictures/scaled_image_picker8972218541099365994.jpg',
-//
-//            ),
-//
-//         );
-//
-// print(headers);
-//      // print('hddhkddj${request.files.add()}');
-//       print('yjjyjryjtrjtrjjkkkkkkkkkkkkk${request.fields}');
-//       print(request.files);
-//
-//       var response = await request.send();
-//       print('dgdjhdgddgdg${response}');
-//       print('eefggg433yt54y546uyh${response.statusCode}');
-//       if (response.statusCode == 200) {
-//         print(await response.stream.bytesToString());
-//       }
-//       else {
-//         print(response.reasonPhrase);
-//       }
+      var kucchu = '',
+       kucchu2 = '';
+      var profile = res['pet_profile'];
+      var profile2 = profile['age'];
 
+     await _prefHelper.saveString(MaruConstant.pet_name, profile['pet_name']);
+      await _prefHelper.saveString(MaruConstant.breed_type, profile['breed_type']);
+      print(res['accessToken']);
+      await  _prefHelper.saveString('age', kucchu ??"");
+      await  _prefHelper.saveString(MaruConstant.height,profile['height']);
+
+      print(res['pet_profile']['height']);
+     // sharedPrefHelper.saveString(ChadbotConstants.fname, fname ?? "");
+      await  _prefHelper.saveString(MaruConstant.weight, profile['weight']);
+      await   _prefHelper.saveString(MaruConstant.sex, profile['sex']);
+      await  _prefHelper.saveString(MaruConstant.gender, profile['gender']);
+      await  _prefHelper.saveString(MaruConstant.birth_date, profile['birth_date']);
+      await _prefHelper.saveString(MaruConstant.id, profile['id']);
       return Right(Void);
     }
     on CognitoClientException catch (e) {
@@ -399,27 +378,45 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, void>> savePetProfile(PetProfile params) async {
     try {
-      var map = new Map<String, String>();
-      map[MaruConstant.age.toString()] = params.age.toString();
-      map[MaruConstant.birth_date] = params.birthDate.toString();
-      // map[ MaruConstant.img] = params.profileImage;
-      // map [MaruConstant.password] = params.password;
-      map[MaruConstant.user_type] = 'User';
-      final response = await http.post(MaruConstant.savepet1, body: map);
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var ss2 = await _prefHelper.getStringByKey(MaruConstant.pet_name, '');
+      print(ss2);
+     var age2= _prefHelper.getStringByKey(MaruConstant.breed_type, '');
+     print('juikodjhfhjfhjfhfjhfjhfjfhjfhfhfhfjh${age2}');
+      var headers = {"access-token": token};
+   //   final response = await http.post(MaruConstant.savepet1, body: {
+      var request = await http.put(MaruConstant.savepet1,
+  headers: headers,
+  body: {
+        MaruConstant.pet_name:_prefHelper.getStringByKey(MaruConstant.pet_name, ''),
+       'age': _prefHelper.getStringByKey('age', ''),
+        MaruConstant.height:
+        _prefHelper.getStringByKey(MaruConstant.height, ''),
+        MaruConstant.weight:
+        _prefHelper.getStringByKey(MaruConstant.weight, ""),
+        MaruConstant.sex: _prefHelper.getStringByKey(MaruConstant.sex, ''),
+        MaruConstant.gender:
+        _prefHelper.getStringByKey(MaruConstant.gender, ''),
+        MaruConstant.breed_type:
+        _prefHelper.getStringByKey(MaruConstant.breed_type, ''),
+         MaruConstant.birth_date:_prefHelper.getStringByKey(MaruConstant.birth_date, ''),
+        //MaruConstant.vaccine: params.vaccine,
+      });
 
-      print("Register Success  ${response.body}");
-      // sharedPrefHelper.saveString(MaruConstant.first_name, params.first_name);
-      // sharedPrefHelper.saveString(MaruConstant.last_name, params.lName);
-      // sharedPrefHelper.saveString(MaruConstant.email, params.email);
-      if (response.statusCode == 200) {
-        //  await authSource.emailSignup(params);
-        return Right(Void);
-      } else {
-        return Left(UnknownFailure("Already registered account"));
-      }
+      var res = json.decode(request.body);
+      print(res);
+
+      return Right(Void);
+    }
+        on CognitoClientException catch (e) {
+
+      return Left(CacheFailure(e.toString()));
     } catch (e) {
-      print("Thrown Exception While signing IN:$e");
-      throw e;
+      print('exception$e');
+      return Left(CacheFailure(e.toString()));
     }
   }
 
@@ -857,6 +854,33 @@ class UserRepositoryImpl implements UserRepository {
     } catch (e) {
       return Left(ApiFailure(e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, void>> uploadVaccineREcord(vacineParams params)async {
+    final token = _prefHelper.getStringByKey(
+      MaruConstant.token,
+      "",
+    );
+    final image = _prefHelper.getStringByKey(MaruConstant.img, '');
+    var headers = {"access-token": token};
+    final File imageFile = File(image);
+    var stream = http.ByteStream(
+        DelegatingStream.typed(imageFile.openRead()));
+    var length = await imageFile.length();
+    var request = http.MultipartRequest("POST", MaruConstant.vaccineRecordUploaded,);
+    var multipartFile = http.MultipartFile('doc_url', stream, length,
+        filename: basename(imageFile.path));
+    request.files.add(multipartFile);
+    request ..fields['pet_id'] = params.pet_id
+     ..fields['doc_url'] = params.doc_url
+      ..headers.addAll(headers);
+    print('request params ${request.fields.toString()}');
+    var response = await request.send();
+    final respStr = await response.stream.bytesToString();
+    print("respStr respStr respStr:$respStr");
+    Map res = json.decode(respStr);
+    print(res);
   }
 // print(data);
 // var profile = data['reviews'];

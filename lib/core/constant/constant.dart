@@ -1,9 +1,14 @@
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
-
+SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 class MaruConstant {
+
   // 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
    static final signup =Uri.parse ('http://18.191.199.31/api/auth/signup');
-   static final savepet1 =Uri.parse ('http://18.191.199.31/api/auth/1');
+   static final vaccineRecordUploaded = Uri.parse('http://18.191.199.31/api/pets/upload-vaccine-record');
+   static final updateprofile1 = _prefHelper.getStringByKey(MaruConstant.id, '');
+   static final savepet1 =Uri.parse ('http://18.191.199.31/api/auth/$updateprofile1');
    static final getupcominapointment =Uri.parse ('http://18.191.199.31/api/bookings?type=upcoming');
    static final getproviders =Uri.parse ('http://18.191.199.31/api/public/providers');
    static final getReview =Uri.parse ('http://18.191.199.31/api/company/reviews');
@@ -24,7 +29,7 @@ class MaruConstant {
    static String pet_name = 'pet_name';
    static String breed_type = 'breed_type';
   // static String token = 'access-token';
-   static String  age = 'age ';
+   static var  age = 'age ';
    static String modelendpoint =
        "xhcz7a3myc.execute-api.us-east-2.amazonaws.com";
    static String corePath = "chadbotcore";
@@ -40,6 +45,7 @@ class MaruConstant {
    static String weight ='weight';
    static String height ='height';
    static String known_allergies ='known_allergies';
+   static var vaccine = 'vaccine';
    static String pet_needs ='pet_needs';
    static String birth_date ='birth_date';
    static String sex = 'sex';

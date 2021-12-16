@@ -30,6 +30,7 @@ import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_registration_id.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
+import 'package:maru/features/verify/domain/usecases/upload_vaccine_record.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
@@ -61,7 +62,7 @@ void _registerBloc(KiwiContainer container) {
   container
       .registerFactory((c) => LoginBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(), c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve()));
    container.registerFactory((c) => ResetBloc(c.resolve(), c.resolve(),c.resolve()));
-   container.registerFactory((c) => PetProfileBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve()));
+   container.registerFactory((c) => PetProfileBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve()));
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
   container.registerFactory(
     (c) => VerifyBloc(c.resolve(), c.resolve(),c.resolve(),c.resolve(), c.resolve() ));
@@ -74,9 +75,9 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => EmailSignup(c.resolve()));
   container.registerFactory((c) => ProviderEmailSignin(c.resolve()));
   container.registerFactory((c) => ProviderEmailSignUp(c.resolve()));
-   container.registerFactory((c) => ResendCode(c.resolve()));
-   container.registerFactory((c) => SendResetPasswordOtp(c.resolve()));
-   container.registerFactory((c) => VerifyCode(c.resolve()));
+  container.registerFactory((c) => ResendCode(c.resolve()));
+  container.registerFactory((c) => SendResetPasswordOtp(c.resolve()));
+  container.registerFactory((c) => VerifyCode(c.resolve()));
    container.registerFactory((c) => SavePetProfile(c.resolve()));
    container.registerFactory((c) => GetPetProfile(c.resolve()));
    container.registerFactory((c) => CreatePetProfile(c.resolve()));
@@ -91,6 +92,7 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => GetReview(c.resolve()));
   container.registerFactory((c) => GetProviderRequest(c.resolve()));
   container.registerFactory((c) => GetSinglePetProfile(c.resolve()));
+  container.registerFactory((c) => UploadVaccineREcord(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 

@@ -24,7 +24,8 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
         backgroundColor: MaaruColors.DogsBackground,bottomNavigationBar: CreateHomeScreen(
       // Color:MaaruColors.textButtonColor
     ),
-        body: SafeArea(
+        body:
+        SafeArea(
           bottom: false,
             child: SingleChildScrollView(
                 child: Column(

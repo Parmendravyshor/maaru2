@@ -10,6 +10,7 @@ import 'package:maru/features/provider_login/domain/usecases/provider_email_logi
 import 'package:maru/features/verify/domain/usecases/create_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
+import 'package:maru/features/verify/domain/usecases/upload_vaccine_record.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
@@ -23,6 +24,7 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> sendPasswordResetEmail(String email);
   Future<Either<Failure, void>> getProviderRequest();
   Future<Either<Failure, void>> getSinglePetProfile();
+  Future<Either<Failure, void>> uploadVaccineREcord(vacineParams params);
   Future<Either<Failure, void>> setNewPassword(
       SetNewPasswordParams params);
   Future<Either<Failure, void>> petCreateProfile(PetProfileAuthParams params);

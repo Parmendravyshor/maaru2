@@ -221,11 +221,10 @@ class PetProfile {
   var weight;
   var height;
   var knownAllergies;
-  var petNeeds;
- var  birthDate;
-var name;
-var times_a_day;
-
+  KnownAllergies petNeeds;
+  var  birthDate;
+  var name;
+  var times_a_day;
   var sex;
   var gender;
   String walkingSchedule;
@@ -236,7 +235,7 @@ var times_a_day;
   var createdAt;
   var updatedAt;
   var notes;
-  List<Vaccine> vaccine;
+ var vaccine;
 
   factory PetProfile.fromJson(Map<String, dynamic> json) => PetProfile(
     id: json["id"],
@@ -250,7 +249,7 @@ var times_a_day;
     weight: json["weight"],
     height: json["height"],
     knownAllergies: json["known_allergies"] == null ? null : knownAllergiesValues.map[json["known_allergies"]],
-    petNeeds: json["pet_needs"] == null ? null : petNeedsValues.map[json["pet_needs"]],
+    petNeeds:knownAllergiesValues.map[json["pet_needs"]],
     birthDate: DateTime.parse(json["birth_date"]),
     sex: sexValues.map[json["sex"]],
     gender: json["gender"],

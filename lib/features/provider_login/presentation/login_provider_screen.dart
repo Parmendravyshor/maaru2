@@ -26,7 +26,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:maru/features/forgot/presentation/forgot_screen.dart';
 
 
-
 class LoginProviderScreen extends StatefulWidget {
   @override
   _LoginProviderScreenState createState() => _LoginProviderScreenState();
@@ -109,20 +108,20 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                               return  Column(children: [
                                 Logo(),
                                 ScreenIcon(),
-                                SizedBox(
+                               const SizedBox(
                                   height: 20,
                                 ),
                                 Center(
                                   child: Text(
                                     'or login with email',
                                     style: GoogleFonts.poppins(
-                                        textStyle: TextStyle(
+                                        textStyle: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 20,
                                             fontWeight: FontWeight.w500)),
                                   ),
                                 ),
-                                SizedBox(
+                               const SizedBox(
                                   height: 20,
                                 ),
 
@@ -136,7 +135,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                             onChanged: (text) {
                                               BlocProvider.of<LoginBloc>(context).add(event.EmailChanged(text));
                                             }, editingController: _emailController),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 5,
                                         ),
                                         ThemedTextField(

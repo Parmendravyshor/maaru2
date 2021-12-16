@@ -163,18 +163,20 @@ class _ToggleButton2State extends State<ToggleButton2> {
                 SelectedGender = Gender.male;
                 if(SelectedGender==Gender.male)
                   {
-                    gender='MALE';
+                    gender='male';
                     print(gender);
                   }else
                     {
                       print('null');
                     }
               });
+              BlocProvider.of<PetProfileBloc>(context)
+                  .add(genderChanged(gender));
             },
             child:ToggleContainer(
                 size.height * 0.060,
                 size.width * 0.45,
-                'MALE',
+                'male',
                 SelectedGender == Gender.male
                     ? MaaruColors.button2Color
                     : malecontainercolor)),
@@ -184,7 +186,7 @@ class _ToggleButton2State extends State<ToggleButton2> {
                 SelectedGender = Gender.female;
                 if(SelectedGender==Gender.female)
                 {
-                  gender='FEMALE';
+                  gender='female';
                   print(gender);
                 }else
                 {
@@ -192,11 +194,13 @@ class _ToggleButton2State extends State<ToggleButton2> {
                   print('null');
                 }
               });
+              BlocProvider.of<PetProfileBloc>(context)
+                  .add(genderChanged(gender));
             },
             child: ToggleContainer(
                 size.height * 0.060,
                 size.width * 0.44,
-                'FEMALE',
+                'female',
                 SelectedGender == Gender.female
                     ? MaaruColors.button2Color
                     : Colors.white)),
@@ -484,6 +488,9 @@ class _ToggleButton3State extends State<ToggleButton3> {
                     }
 
               });
+              BlocProvider.of<PetProfileBloc>(context)
+                  .add(NoteChanged(sex));
+              print('added bloc ${sex}');
             },
             child: ToggleContainer(
                 size.height * 0.060,
@@ -510,6 +517,8 @@ class _ToggleButton3State extends State<ToggleButton3> {
                 }
 
               });
+              BlocProvider.of<PetProfileBloc>(context)
+                  .add(NoteChanged(sex));
             },
             child:ToggleContainer(
                 size.height * 0.060,
@@ -536,6 +545,8 @@ class _ToggleButton3State extends State<ToggleButton3> {
                 }
 
               });
+              BlocProvider.of<PetProfileBloc>(context)
+                  .add(NoteChanged(sex));
             },
             child:ToggleContainer(
                 size.height * 0.060,

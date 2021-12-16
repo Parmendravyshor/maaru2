@@ -137,7 +137,6 @@ class MaaruColors {
             fontSize: 14,
             color: Colors.black));
   }
-
 //semibold large
   TextStyle get large {
     return GoogleFonts.poppins(

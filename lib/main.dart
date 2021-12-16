@@ -121,7 +121,7 @@ class MyApp extends StatelessWidget {
         theme: theme,
         //todo: navigate to SplashScreen
 
-        home: Scaffold(body: ((VerifyUser()))));
+        home: Scaffold(body: ((CreateRegisterPetProfile4()))));
 
   }
 }

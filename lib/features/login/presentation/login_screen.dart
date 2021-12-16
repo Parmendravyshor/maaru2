@@ -16,6 +16,7 @@ import 'package:maru/features/forgot/presentation/forgot_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen2.dart';
 import 'package:maru/features/verify/presentation/verify.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 

@@ -1,20 +1,20 @@
-
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'register_pet_profile_screen3.dart';
-const kRegistration4PlainText = TextStyle(
-    fontWeight: FontWeight.w600, fontSize: 13,color: Colors.black);
+
+const kRegistration4PlainText =
+    TextStyle(fontWeight: FontWeight.w600, fontSize: 13, color: Colors.black);
+
 class CreateRegisterPetProfile4 extends StatefulWidget {
-
-
   @override
   _CreateRegisterPetProfile4State createState() =>
       _CreateRegisterPetProfile4State();
@@ -27,446 +27,380 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
   Color circlecolor4 = MaaruColors.whiteColor;
   Color circlecolor5 = MaaruColors.whiteColor;
   Color circlecolor6 = MaaruColors.whiteColor;
-  bool pressed1 = true;
-  bool pressed2 = true;
-  bool pressed3 = true;
-  bool pressed4 = true;
-  bool pressed5 = true;
-  bool pressed6 = true;
-  Widget choosecircle(Image image, String text, Color color) {
-    return CircleAvatar(
-      radius: 55,
-      backgroundColor: MaaruColors.greyColorText,
-      child: CircleAvatar(
-        backgroundColor: color,
-        radius: 53,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+  var select = '';
+  Widget choosecontainer(
+      BuildContext context, Image image, String text, Color color) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: MaaruColors.textfeildline,
+        ),
+        color: color,
+      ),
+      height: size.height * 0.10,
+      width: size.width * 0.43,
+      child: Container(
+        margin: EdgeInsets.only(left: 12, top: 9, bottom: 9),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             image,
+            SizedBox(
+              width: size.width * 0.02,
+            ),
             Text(
               text,
-              style: kRegistration4PlainText,
+              style: MaaruStyle.text.tiny,
             ),
           ],
         ),
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return
+    return BlocProvider(
+        create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+        child: Scaffold(
+            backgroundColor: MaaruColors.DogsBackground,
+            body: BlocProvider(
+                create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+                child: BlocBuilder<PetProfileBloc, PetProfileState>(
+                    builder: (context, state) {
+                  if (state is pet3rofileButtonTapped) {
+                    AlertManager.showErrorMessage(
+                        "otp send your register email", context);
+                    SchedulerBinding.instance.addPostFrameCallback((_) {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return CreateRegisterPetProfile4();
+                      }));
+                    });
 
-      Scaffold(
-          backgroundColor: MaaruColors.DogsBackground,
-
-          body:SafeArea(
-              top: true,
-              bottom: false,
-              child:
-              SingleChildScrollView(
-                  child: Column(children: [  SizedBox(
-                    height: 20,
-                  ),
-                    SkipButtons(),
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    Container(
-
-
-
-              alignment: Alignment.bottomRight,
-
-             height: size.height * 0.25,
-              width: size.width * 0.9,
-              child:
-            BackgroundImage(
-                assetImage: 'assets/images/kutta.png',
-              )),
-          Container(
-              width: 1000,
-              height: 600,
-              alignment: FractionalOffset.bottomCenter,
-              decoration: BoxDecoration(
-                  color: Color(0xFFffffff),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30))),
-              child: Container(
-
-                  padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Max',
-                            style: MaaruStyle.text.large,
-                            textAlign: TextAlign.left),
-                        Text('Jack  Russell',),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        SizedBox(
-                          width: 40,
-                          height: 20,
-                        ),
-                        Text(
-                          'Pet Needs',
-                          style: MaaruStyle.text.small,
-                        ),
-                        // Container(
-                        //   height: 350,
-                        //   width: 360,
-                        //   child: Stack(
-                        //     children: <Widget>[
-                        //       Positioned(
-                        //         top: 30,
-                        //         child: GestureDetector(
-                        //           onTap: () {
-                        //             setState(() {
-                        //               circlecolor1 == MaaruColors.whiteColor
-                        //
-                        //                   ? circlecolor1 =  Color(0xff93b7fd)
-                        //
-                        //                   : circlecolor1 =  MaaruColors.whiteColor;
-                        //             });
-                        //           },
-                        //           child: choosecircle(
-                        //               Image.asset(
-                        //                 'assets/icons/Fill 1.png',
-                        //                 height: 35,
-                        //               ),
-                        //               'Grooming',
-                        //               circlecolor1),
-                        //         ),
-                        //       ),
-                        //       Positioned(
-                        //           left: 200,
-                        //           child: GestureDetector(
-                        //             onTap: () {
-                        //               setState(() {
-                        //                 circlecolor2 == MaaruColors.whiteColor
-                        //
-                        //                     ? circlecolor2 =Color(0xffff9976)
-                        //
-                        //                     : circlecolor2 = MaaruColors.whiteColor;
-                        //               });
-                        //             },
-                        //             child: choosecircle(
-                        //                 Image.asset(
-                        //                   'assets/icons/Fill 1 (2).png',
-                        //                   height: 35,
-                        //                 ),
-                        //                 'Vet',
-                        //                 circlecolor2),
-                        //           )),
-                        //       Positioned(
-                        //           top: 100,
-                        //           left: 110,
-                        //           child: GestureDetector(
-                        //             onTap: () {
-                        //               setState(() {
-                        //                 circlecolor3 == MaaruColors.whiteColor
-                        //
-                        //                     ? circlecolor3 = Color(0xfffff2bf)
-                        //
-                        //                     : circlecolor3 = MaaruColors.whiteColor;
-                        //               });
-                        //             },
-                        //             child: choosecircle(
-                        //                 Image.asset(
-                        //                   'assets/icons/Fill 1 (3).png',
-                        //                   height: 35,
-                        //                 ),
-                        //                 'Hotel',
-                        //                 circlecolor3),
-                        //           )),
-                        //       Positioned(
-                        //           top: 160,
-                        //           child: GestureDetector(
-                        //             onTap: () {
-                        //               setState(() {
-                        //                 circlecolor4 == MaaruColors.whiteColor
-                        //
-                        //                     ? circlecolor4 = MaaruColors.button2Color
-                        //
-                        //
-                        //                     : circlecolor4 = MaaruColors.whiteColor;
-                        //               });
-                        //             },
-                        //             child: choosecircle(
-                        //                 Image.asset(
-                        //                   'assets/icons/Fill 1 (1).png',
-                        //                   height: 35,
-                        //                 ),
-                        //                 'Walking',
-                        //                 circlecolor4),
-                        //           )),
-                        //       Positioned(
-                        //           top: 130,
-                        //           left: 240,
-                        //           child: GestureDetector(
-                        //             onTap: () {
-                        //               setState(() {
-                        //                 circlecolor5 == MaaruColors.whiteColor
-                        //
-                        //                     ? circlecolor5 = Color(0xff4f75fe)
-                        //
-                        //                     : circlecolor5 = MaaruColors.whiteColor;
-                        //               });
-                        //             },
-                        //             child: choosecircle(
-                        //                 Image.asset(
-                        //                   'assets/icons/Background.png',
-                        //                   height: 35,
-                        //                 ),
-                        //                 'Daycare',
-                        //                 circlecolor5),
-                        //           )),
-                        //       Positioned(
-                        //           top: 230,
-                        //           left: 150,
-                        //           child: GestureDetector(
-                        //             onTap: () {
-                        //               setState(() {
-                        //                 circlecolor6 == MaaruColors.whiteColor
-                        //
-                        //                     ? circlecolor6 = Color(0xffFc744f)
-                        //
-                        //                     : circlecolor6 = MaaruColors.whiteColor;
-                        //               });
-                        //             },
-                        //             child: choosecircle(
-                        //                 Image.asset(
-                        //                   'assets/icons/Background (1).png',
-                        //                   height: 35,
-                        //                 ),
-                        //                 'Hospital',
-                        //                 circlecolor6),
-                        //           ))
-                        //     ],
-                        //   ),
-                      //   ),
-                        SizedBox(height: 10,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                          children: [
-                            InkWell(
-                            onTap: () {
-              setState(() => pressed1 = !pressed1);
-              },
-                  child:
-                            Container(
-                                height: 80,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: pressed1? MaaruColors.whiteColor :MaaruColors.walkingcolor,
-                                  border: Border.all(color: Colors.grey[400]),
-                                ),
-
-                                child: Padding(
-                                  padding:EdgeInsets.only(left: 20),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Image.asset('assets/icons/Fill 1 (1).png',height: 30,),
-                                      SizedBox(width: 10,),
-                                      Text('Walking')
-                                    ],),
-                                )
-                            )),
-                            InkWell(
-                              onTap: () {
-                                setState(() => pressed2 = !pressed2);
-                              },
-                              child:
-                            Container(
-                                height: 80,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: pressed2? MaaruColors.whiteColor :MaaruColors.groomingcolor,
-                                  border: Border.all(color: Colors.grey[400]),
-                                ),
-
-                                child:
-                                Padding(
-                                  padding:EdgeInsets.only(left: 20),
-                                  child: Row(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Image.asset('assets/icons/Fill 1.png',height: 30,),
-                                      SizedBox(width: 10,),
-                                      Text('Grooming')
-                                    ],),
-                                )
-                            ),
-                            )],),
-                        SizedBox(
-                          height: size.height * 0.01,
-                        ),
-                        SizedBox(height: 10,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                          children: [
-                            InkWell(
-                                onTap: () {
-                                  setState(() => pressed3 = !pressed3);
-                                },
-                              child:
-                            Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: pressed3? MaaruColors.whiteColor :MaaruColors.vetcolor,
-                                  border: Border.all(color: Colors.grey[400]),
-                                ),
-                                height: 80,
-                                width: 150,
-
-                                child: Padding(
-                                  padding:EdgeInsets.only(left: 20),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Image.asset('assets/icons/Fill 1 (2).png',height: 30,),
-                                      SizedBox(width: 10,),
-                                      Text('Vet')
-                                    ],),
-                                )
-                            )),
-                            InkWell(
-                              onTap: () {
-                                setState(() => pressed4 = !pressed4);
-                              },
-                              child:
-                            Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: pressed4? MaaruColors.whiteColor :MaaruColors.hotelcolor,
-                                  border: Border.all(color: Colors.grey[400]),
-                                ),
-                                height: 80,
-                                width: 150,
-
-                                child:
-                                Padding(
-                                  padding:EdgeInsets.only(left: 20),
-                                  child: Row(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Image.asset('assets/icons/Fill 1 (3).png',height: 30,),
-                                      SizedBox(width: 10,),
-                                      Text('Hotel')
-                                    ],),
-                                )
-                            ),
-                            )],),
-                        SizedBox(height: 10,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                setState(() => pressed5 = !pressed5);
-                              },
-                         child: Container(
-                            height: 80,
-                            width: 150,
-                             decoration: BoxDecoration(
-                               shape: BoxShape.rectangle,
-                               color: pressed5? MaaruColors.whiteColor :MaaruColors.hospitalcolor,
-                               border: Border.all(color: Colors.grey[400]),
-                             ),
-
-                            child: Padding(
-                              padding:EdgeInsets.only(left: 20),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                Image.asset('assets/icons/Background (1).png',height: 30,),
-                                  SizedBox(width: 10,),
-                                Text('Hospital')
-                              ],),
-                            )
+                    return Container();
+                  } else if (state is RegisterFailure) {
+                    SchedulerBinding.instance.addPostFrameCallback((_) {
+                      Future.delayed(Duration(seconds: 3), () {
+                        Scaffold.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.black,
+                            content: Text('Register Failure ',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'poppins',
+                                    fontSize: 20,
+                                    color: MaaruStyle.colors.textColorWhite)),
                           ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                setState(() => pressed6 = !pressed6);
-                              },
-                           child: Container(
-                                height: 80,
-                                width: 150,
-                               decoration: BoxDecoration(
-                                 shape: BoxShape.rectangle,
-                                 color: pressed6? MaaruColors.whiteColor :MaaruColors.daycarecolor,
-                                 border: Border.all(color: Colors.grey[400]),
-                               ),
+                        );
+                      });
+                    });
+                  }
 
-                                child:
-                                Padding(
-                                  padding:EdgeInsets.only(left: 20),
-                                  child: Row(
-                                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Image.asset('assets/icons/Background.png',height: 30,),
-                                      SizedBox(width: 10,),
-                                      Text('Daycare')
-                                  ],),
-                                )
+                  return Scaffold(
+                      backgroundColor: MaaruColors.DogsBackground,
+                      body: SafeArea(
+                          top: true,
+                          bottom: false,
+                          child: SingleChildScrollView(
+                              child: Column(children: [
+                            SizedBox(
+                              height: 20,
                             ),
-                            )],),
-                         SizedBox(
-                          height: 40,
-                        ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) =>
-                                          HomeScreen()));
-                                },
+                            SkipButtons(),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                                alignment: Alignment.bottomRight,
+                                height: size.height * 0.25,
+                                width: size.width * 0.9,
+                                child: BackgroundImage(
+                                  assetImage: 'assets/images/kutta.png',
+                                )),
+                            Container(
+                                width: 1000,
+                                height: 600,
+                                alignment: FractionalOffset.bottomCenter,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFffffff),
+                                ),
                                 child: Container(
-                                  alignment: Alignment.center,
-                                  height: 50,
-                                  width: 60,
-                                  decoration: BoxDecoration(
-                                      color:  Colors.white12,
-                                      shape: BoxShape.circle),
-                                  child: Text(
-                                    'Back',style: MaaruStyle.text.greyDisable,
-
-
-                                  ),),),
-
-                                        InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          HomeScreen()));
-                                            },
-                                            child: Container(
-                                              alignment: Alignment.centerRight,
-                                              child: Image.asset(
-                                                  'assets/images/next (2).png',height: 60,),
-                                            )),
-                                      ]),
-                                ]))
-          )]))));
+                                    padding:
+                                        EdgeInsets.fromLTRB(20, 20, 20, 10),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Max'.toUpperCase(),
+                                              style: MaaruStyle.text.large,
+                                              textAlign: TextAlign.left),
+                                          Text(
+                                            'Jack  Russell'.toUpperCase(),
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          SizedBox(
+                                            width: 40,
+                                            height: 20,
+                                          ),
+                                          Text(
+                                            'Pet Needs'.toUpperCase(),
+                                            style: MaaruStyle.text.small,
+                                          ),
+                                          Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        circlecolor1 ==
+                                                                MaaruColors
+                                                                    .whiteColor
+                                                            ? circlecolor1 =
+                                                                MaaruColors
+                                                                    .groomingcolor
+                                                            : circlecolor1 =
+                                                                MaaruColors
+                                                                    .whiteColor;
+                                                        if (circlecolor1 ==
+                                                            MaaruColors
+                                                                .groomingcolor) {
+                                                          select = 'Grooming';
+                                                          print(select);
+                                                        }
+                                                      });
+                                                    },
+                                                    child: choosecontainer(
+                                                        context,
+                                                        Image.asset(
+                                                          'assets/icons/Fill 1.png',
+                                                          height: 35,
+                                                        ),
+                                                        'GROOMING',
+                                                        circlecolor1),
+                                                  ),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          circlecolor2 ==
+                                                                  MaaruColors
+                                                                      .whiteColor
+                                                              ? circlecolor2 =
+                                                                  MaaruColors
+                                                                      .vetcolor
+                                                              : circlecolor2 =
+                                                                  MaaruColors
+                                                                      .whiteColor;
+                                                          if (circlecolor2 ==
+                                                              MaaruColors
+                                                                  .vetcolor) {
+                                                            select = 'vet';
+                                                            print(select);
+                                                          }
+                                                        });
+                                                      },
+                                                      child: choosecontainer(
+                                                          context,
+                                                          Image.asset(
+                                                            'assets/icons/Fill 1 (2).png',
+                                                            height: 35,
+                                                          ),
+                                                          'VET',
+                                                          circlecolor2)),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: size.height * 0.02,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          circlecolor3 ==
+                                                                  MaaruColors
+                                                                      .whiteColor
+                                                              ? circlecolor3 =
+                                                                  MaaruColors
+                                                                      .hotelcolor
+                                                              : circlecolor3 =
+                                                                  MaaruColors
+                                                                      .whiteColor;
+                                                          if (circlecolor3 ==
+                                                              MaaruColors
+                                                                  .hotelcolor) {
+                                                            select = 'hotel';
+                                                            print(select);
+                                                          }
+                                                        });
+                                                      },
+                                                      child: choosecontainer(
+                                                          context,
+                                                          Image.asset(
+                                                            'assets/icons/Fill 1 (3).png',
+                                                            height: 35,
+                                                          ),
+                                                          'HOTEL',
+                                                          circlecolor3)),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          circlecolor4 ==
+                                                                  MaaruColors
+                                                                      .whiteColor
+                                                              ? circlecolor4 =
+                                                                  MaaruColors
+                                                                      .walkingcolor
+                                                              : circlecolor4 =
+                                                                  MaaruColors
+                                                                      .whiteColor;
+                                                          if (circlecolor4 ==
+                                                              MaaruColors
+                                                                  .walkingcolor) {
+                                                            select = 'walking';
+                                                            print(select);
+                                                          }
+                                                        });
+                                                      },
+                                                      child: choosecontainer(
+                                                          context,
+                                                          Image.asset(
+                                                            'assets/icons/Fill 1 (1).png',
+                                                            height: 35,
+                                                          ),
+                                                          'WALKING',
+                                                          circlecolor4)),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: size.height * 0.02,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          circlecolor5 ==
+                                                                  MaaruColors
+                                                                      .whiteColor
+                                                              ? circlecolor5 =
+                                                                  MaaruColors
+                                                                      .daycarecolor
+                                                              : circlecolor5 =
+                                                                  MaaruColors
+                                                                      .whiteColor;
+                                                          if (circlecolor5 ==
+                                                              MaaruColors
+                                                                  .daycarecolor) {
+                                                            select = 'daycare';
+                                                            print(select);
+                                                          }
+                                                        });
+                                                      },
+                                                      child: choosecontainer(
+                                                          context,
+                                                          Image.asset(
+                                                            'assets/icons/Background.png',
+                                                            height: 35,
+                                                          ),
+                                                          'DAYCARE',
+                                                          circlecolor5)),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          circlecolor6 ==
+                                                                  MaaruColors
+                                                                      .whiteColor
+                                                              ? circlecolor6 =
+                                                                  MaaruColors
+                                                                      .hospitalcolor
+                                                              : circlecolor6 =
+                                                                  MaaruColors
+                                                                      .whiteColor;
+                                                          if (circlecolor6 ==
+                                                              MaaruColors
+                                                                  .hospitalcolor) {
+                                                            select = 'hospital';
+                                                            print(select);
+                                                          }
+                                                        });
+                                                      },
+                                                      child: choosecontainer(
+                                                          context,
+                                                          Image.asset(
+                                                            'assets/icons/Background (1).png',
+                                                            height: 35,
+                                                          ),
+                                                          'HOSPITAL',
+                                                          circlecolor6)),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 40,
+                                          ),
+                                          Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    height: 50,
+                                                    width: 60,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white12,
+                                                        shape: BoxShape.circle),
+                                                    child: Text(
+                                                      'BACK',
+                                                      style: MaaruStyle
+                                                          .text.greyDisable,
+                                                    ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                    onTap: () {
+                                                      Navigator.of(context).push(
+                                                          MaterialPageRoute(
+                                                              builder: (_) =>
+                                                                  HomeScreen()));
+                                                      BlocProvider.of<PetProfileBloc>(
+                                                          context)
+                                                          .add(Profile4(
+                                                      ));
+                                                    },
+                                                    child: Container(
+                                                      alignment:
+                                                          Alignment.centerRight,
+                                                      child: Image.asset(
+                                                        'assets/images/next (2).png',
+                                                        height: 60,
+                                                      ),
+                                                    )),
+                                              ]),
+                                        ])))
+                          ]))));
+                }))));
   }
 }
 
@@ -497,9 +431,7 @@ class _ImagesggState extends State<Imagesgg> {
             height: 90,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: pressAttention
-                  ? Colors.white
-                  : MaaruColors.blueColor,
+              color: pressAttention ? Colors.white : MaaruColors.blueColor,
               border: Border.all(color: Colors.grey[300]),
             ),
             child: Column(children: [
