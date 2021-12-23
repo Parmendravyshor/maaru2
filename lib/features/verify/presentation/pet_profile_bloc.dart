@@ -15,6 +15,9 @@ import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/verify/domain/usecases/change_password.dart';
 import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/get_provider_by_id.dart';
+import 'package:maru/features/verify/domain/usecases/get_provider_by_id.dart';
+import 'package:maru/features/verify/domain/usecases/get_providers.dart';
 import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
@@ -34,9 +37,13 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       this.sharedPrefHelper,
       this.getSinglePetProfile,
       this.uploadVaccineREcord,
+      this.getProviders,
+      this.getProviderById,
       this._saveUserPayment)
       : super();
   final SharedPrefHelper sharedPrefHelper;
+  final GetProviderById getProviderById;
+  final GetProviders getProviders;
   final UploadVaccineREcord uploadVaccineREcord;
   final GetSinglePetProfile getSinglePetProfile;
   final CreatePetProfile createPetProfile;
@@ -225,7 +232,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
           breedType: breadtype,
           petName: petName,
           sex: sex,
-         // petNeeds: knownAllergies,
+          // petNeeds: knownAllergies,
           gender: gender,
           notes: note,
           knownAllergies: knownAllergies,
@@ -313,7 +320,14 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
     else if (event is Profile4) {
       print('kick');
       PetProfile profileParams4 = PetProfile(
-        knownAllergies:[ event.walking,event.daycare,event.grooming,event.hospital,event.hotel,event.vet]
+          knownAllergies: [
+            event.walking,
+            event.daycare,
+            event.grooming,
+            event.hospital,
+            event.hotel,
+            event.vet
+          ]
         // petNeeds: event.daycare,
         // temperament: event.grooming,
         // medication: event.hospital,
@@ -359,6 +373,25 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       }
       yield SavePaymentButtonTapped();
     }
+    if (event is GetProvider) {
+      final result = await getProviders(NoParams());
+
+      // final result =  await getPetProfile1(NoParams());
+      if (result.isRight()) {
+        await getProviderById(NoParams());
+        await getProviderById(NoParams());
+        yield ProviderLoaded(result.getOrElse(() => null));
+
+      }
+    }
+    if (event is GetSinglePRof) {
+      final result = await getSinglePetProfile(NoParams());
+      if (result.isRight()) {
+        yield SingleProfileLoaded(result.getOrElse(() => null));
+      }
+    }
+
+
     if (event is GetCovidList) {
       final result = await getPetProfile(NoParams());
 
@@ -377,10 +410,16 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
         yield SingleProfileLoaded(result.getOrElse(() => null));
       }
     }
+    if (event is GetSinglePRovider){
+      final result = await getProviderById(NoParams());
+      if(result.isRight()){
+        yield SingleProviderLoaded(result.getOrElse(() => null));
+      }
+    }
   //  if( event is GetProviderBookingRequest ){
    //   final result = await  getPr
   //  }
- }
+  }
 
   bool _isFormValid() {
     return age.isNotEmpty &&

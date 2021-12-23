@@ -244,7 +244,7 @@ class PetProfile {
     userId: json["user_id"],
     petName: json["pet_name"],
     img: json["img"],
-    breedType: breedTypeValues.map[json["breed_type"]],
+    breedType: json["breed_type"],
     age: json["age"],
     weight: json["weight"],
     height: json["height"],
@@ -442,7 +442,6 @@ class Welcome2 {
   Welcome2({
     this.getSinglePe,
   });
-
   GetSinglePe getSinglePe;
 
   factory Welcome2.fromJson(Map<String, dynamic> json) => Welcome2(

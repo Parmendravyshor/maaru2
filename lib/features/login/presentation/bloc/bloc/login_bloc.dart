@@ -10,6 +10,7 @@ import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/provider_home/domain/use_cases/get_provider_request.dart';
 import 'package:maru/features/provider_login/domain/usecases/provider_email_login.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/get_provider_by_id.dart';
 import 'package:maru/features/verify/domain/usecases/get_providers.dart';
 import 'package:maru/features/verify/domain/usecases/get_review_request.dart';
 import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart';
@@ -33,8 +34,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final GetReview getReview;
   final GetProviderRequest getProviderRequest;
 final GetUpcomingAppointment getUpcomingAppointment;
+final GetProviderById getProviderById;
   LoginBloc(this.getSinglePetProfile,
-      this._emailSignin,this.getProviders,this.getReview,this.getProviderRequest,
+      this._emailSignin,this.getProviders,this.getReview,this.getProviderRequest,this.getProviderById,
       this.getPetProfile1,this.getUpcomingAppointment, this._resendCode,this.saveUserProfile,this._providerEmailSignin )
       : super();
   String email = "";
@@ -88,6 +90,7 @@ final GetUpcomingAppointment getUpcomingAppointment;
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
        await getPetProfile1(NoParams());
+
        await getSinglePetProfile (NoParams());
         print("RAKA===============================================");
         print(result);

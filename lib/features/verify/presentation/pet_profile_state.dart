@@ -132,7 +132,13 @@ class CovidLoaded extends PetProfileState {
 
   List<Object> get props => [covidModel];
 }
+class ProviderLoaded extends PetProfileState {
+  //final Welcome _newsBloc = Welcome();
+  final GetProvidersModel getProviderModel;
+  ProviderLoaded(this.getProviderModel);
 
+  List<Object> get props => [getProviderModel];
+}
 class SingleProfileLoaded extends PetProfileState {
   //final Welcome _newsBloc = Welcome();
   final Welcome2 welcome2;
@@ -140,7 +146,15 @@ class SingleProfileLoaded extends PetProfileState {
   List<Object> get props => [welcome2];
 
 }
+class SingleProviderLoaded extends PetProfileState {
+  //final Welcome _newsBloc = Welcome();
+  final Welcome4 welcome4;
 
+  SingleProviderLoaded(this.welcome4);
+
+  List<Object> get props => [Welcome4];
+
+}
 class CovidError extends PetProfileState {
   final String message;
    CovidError(this.message);

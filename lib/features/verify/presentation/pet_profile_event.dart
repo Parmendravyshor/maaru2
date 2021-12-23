@@ -171,9 +171,17 @@ class GetCovidList extends PetProfileEvent {
   @override
   String toString() => "fakeRegisterButtonTapped";
 }
+class GetProvider extends PetProfileEvent {
+  @override
+  String toString() => "GetProvider";
+}
 class GetSinglePRof extends PetProfileEvent {
   @override
   String toString() => "GetSinglePRof";
+}
+class GetSinglePRovider extends PetProfileEvent {
+  @override
+  String toString() => "GetSinglePRovider";
 }
 class GetProviderBookingRequest extends PetProfileEvent {
   @override

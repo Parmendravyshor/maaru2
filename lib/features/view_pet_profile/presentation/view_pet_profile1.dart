@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/background_image.dart';
@@ -21,12 +23,10 @@ class ViewPetProfile extends StatefulWidget {
 }
 
 class _ViewPetProfileState extends State<ViewPetProfile> {
-  final Welcome _newsBloc = Welcome();
-  List<PetProfile> petProfiles;
-
 
   @override
   Widget build(BuildContext context) {
+    SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: MaaruColors.DogsBackground,
@@ -46,14 +46,14 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
 
                     return CircularProgressIndicator();
                   } else if (state is SingleProfileLoaded) {
-                   print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome2.getSinglePe.petName}');
+                 //  print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome2.getSinglePe.petName}');
                     AlertManager.showErrorMessage(
-                        "otp send your register email", context);
+                        "ProfileUpdateSuccessful", context);
 
 
                     return SingleChildScrollView(
-                        // itemCount: state.covidModel.petProfiles.length,
-                        // itemBuilder: (context, index) {
+                      //   itemCount: state.welcome2.getSinglePe[inde]
+                      //   itemBuilder: (context, index) {
                           child: Column(
 
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,8 +65,8 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                     alignment: Alignment.bottomRight,
                                     height: size.height * 0.25,
                                     width: size.width * 0.9,
-                                    child: BackgroundImage(
-                                      assetImage: 'assets/images/kutta.png',
+                                    child:
+                                      Image.network( state.welcome2.getSinglePe.img
                                     )),
                                 Container(
                                     //height: size.,
@@ -135,7 +135,8 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.end,
                                                   children: [
-                                                    Text(state.welcome2.getSinglePe.petName,
+                                                    Text(
+                                                     _prefHelper.getStringByKey(MaruConstant.first_name, ''),
                                                   //  state.covidModel.petProfiles[index].petName,
                                                       // "Country: ${welcome.petProfiles[index].petName}",
                                                       // petProfiles[index].petName,
@@ -158,7 +159,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                         ))
                                                   ]),
                                               Text(
-                                                'Jack  Russell ',
+                                                _prefHelper.getStringByKey(MaruConstant.last_name, ''),
                                                 style: MaaruStyle.text.tiny,
                                               ),
                                              const SizedBox(
@@ -206,7 +207,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                             'Age',
                                                                             style:
                                                                                 MaaruStyle.text.red)),
-                                                                    Text('2',
+                                                                    Text(state.welcome2.getSinglePe.age.toString(),
                                                                         style: MaaruStyle
                                                                             .text
                                                                             .tinyDisable),
@@ -239,7 +240,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                             'Sex',
                                                                             style:
                                                                                 MaaruStyle.text.red)),
-                                                                    Text('Male',
+                                                                    Text(state.welcome2.getSinglePe.sex.toString(),
                                                                         style: MaaruStyle
                                                                             .text
                                                                             .tinyDisable),
@@ -272,7 +273,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                             'Height',
                                                                             style:
                                                                                 MaaruStyle.text.red)),
-                                                                    Text('8"',
+                                                                    Text(state.welcome2.getSinglePe.height.toString(),
                                                                         style: MaaruStyle
                                                                             .text
                                                                             .tinyDisable),
@@ -305,14 +306,14 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                             'Weight',
                                                                             style:
                                                                                 MaaruStyle.text.red)),
-                                                                    Text('4lbs',
+                                                                    Text(state.welcome2.getSinglePe.weight.toString(),
                                                                         style: MaaruStyle
                                                                             .text
                                                                             .tinyDisable),
                                                                   ]),
                                                             ),
                                                           ])),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 20,
                                                   ),
                                                   Container(
@@ -322,7 +323,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                       decoration: BoxDecoration(
                                                         color: Colors.green[50],
                                                         borderRadius:
-                                                            BorderRadius.only(
+                                                            const BorderRadius.only(
                                                                 topLeft: Radius
                                                                     .circular(
                                                                         30),
@@ -332,7 +333,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                       ),
                                                       child: Padding(
                                                           padding:
-                                                              EdgeInsets.only(
+                                                              const EdgeInsets.only(
                                                                   top: 20),
                                                           child: Column(
                                                               crossAxisAlignment:
@@ -340,7 +341,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                       .start,
                                                               children: [
                                                                 Padding(
-                                                                    padding: EdgeInsets
+                                                                    padding: const EdgeInsets
                                                                         .only(
                                                                             left:
                                                                                 43),
@@ -377,7 +378,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                   ],
                                                                 ),
                                                               ]))),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 20,
                                                   ),
                                                   Text(
@@ -385,12 +386,12 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                     style:
                                                         MaaruStyle.text.tiniest,
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 20,
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsets.fromLTRB(
+                                                        const EdgeInsets.fromLTRB(
                                                             0, 20, 20, 20),
                                                     child: Container(
                                                       height: 150,
@@ -532,7 +533,8 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                               ])
                         );
                   } else {
-                    return CircularProgressIndicator();
+                    return
+                      CircularProgressIndicator();
                   }
                   ;
                 }))));

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
+import 'package:flutter/material.dart';
+
+import 'dart:math' as math show sin, pi;
+import 'package:flutter/animation.dart';
 
 class ViewPetProfile2 extends StatefulWidget {
   @override
@@ -20,8 +27,23 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-        backgroundColor: MaaruColors.DogsBackground,bottomNavigationBar: CreateHomeScreen(
+    return BlocProvider(
+        create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+        child: BlocBuilder<PetProfileBloc, PetProfileState>(
+        builder: (context, state) {
+      if (state is PetProfileInitial) {
+        BlocProvider.of<PetProfileBloc>(context)
+            .add(GetSinglePRof());
+
+        return CircularProgressIndicator();
+      } else if (state is SingleProfileLoaded) {
+        //  print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome2.getSinglePe.petName}');
+        AlertManager.showErrorMessage(
+            "Profile2UpdateSuccessful", context);
+
+        return
+      Scaffold(
+        backgroundColor: MaaruColors.DogsBackground,bottomNavigationBar: const CreateHomeScreen(
       // Color:MaaruColors.textButtonColor
     ),
         body:
@@ -38,15 +60,13 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                   alignment: Alignment.bottomRight,
                   height: size.height * 0.25,
                   width: size.width * 0.9,
-                  child: BackgroundImage(
-                    assetImage: 'assets/images/kutta.png',
-                  )),
+                  child:Image.network(state.welcome2.getSinglePe.img)),
               Container(
                   //height: size.,
                   width: 1000,
                   height: 700,
                   alignment: FractionalOffset.bottomCenter,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(20),
@@ -172,7 +192,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                       child: Text('Age',
                                                           style: MaaruStyle
                                                               .text.red)),
-                                                  Text(_prefHelper.getStringByKey(MaruConstant.age, ''),
+                                                  Text(state.welcome2.getSinglePe.age.toString(),
                                                       style: MaaruStyle
                                                           .text.tinyDisable),
                                                 ]),
@@ -196,7 +216,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                       child: Text('Sex',
                                                           style: MaaruStyle
                                                               .text.red)),
-                                                  Text(_prefHelper.getStringByKey(MaruConstant.sex, ''),
+                                                  Text(state.welcome2.getSinglePe.sex,
                                                       style: MaaruStyle
                                                           .text.tinyDisable),
                                                 ]),
@@ -220,7 +240,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                       child: Text('Height',
                                                           style: MaaruStyle
                                                               .text.red)),
-                                                  Text(_prefHelper.getStringByKey(MaruConstant.height, ''),
+                                                  Text(state.welcome2.getSinglePe.height.toString(),
                                                       style: MaaruStyle
                                                           .text.tinyDisable),
                                                 ]),
@@ -245,7 +265,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                           style: MaaruStyle
                                                               .text.red)),
                                                   Text(
-                                                    _prefHelper.getStringByKey(MaruConstant.weight, ''),
+                                                    state.welcome2.getSinglePe.weight.toString(),
                                                     style: MaaruStyle
                                                         .text.tinyDisable,
                                                   ),
@@ -263,7 +283,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                   height: 20,
                                 ),
                                       Text(
-                                        _prefHelper.getStringByKey(MaruConstant.known_allergies, '') ,
+                                       state.welcome2.getSinglePe.knownAllergies,
                                         style: MaaruStyle.text.greyDisable,
                                       ),
 
@@ -313,7 +333,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                             EdgeInsets.only(left: 20),child:
                                               Text('Austin Vet Services',style: MaaruStyle.text.medium,))
                                             ]))),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 Container(
@@ -358,5 +378,11 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                             )
                           ])))
             ]))));
-  }
+      } else {
+        return const Center(child:
+          CircularProgressIndicator(color: Colors.red,backgroundColor: Colors.red,));
+      }}));}
+
 }
+
+

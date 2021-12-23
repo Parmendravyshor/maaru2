@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/background_image.dart';
@@ -58,7 +60,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
       ),
     );
   }
-
+  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -99,7 +101,6 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                       });
                     });
                   }
-
                   return Scaffold(
                       backgroundColor: MaaruColors.DogsBackground,
                       body: SafeArea(
@@ -107,25 +108,23 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                           bottom: false,
                           child: SingleChildScrollView(
                               child: Column(children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             SkipButtons(),
-                            SizedBox(
+                                const SizedBox(
                               height: 20,
                             ),
                             Container(
                                 alignment: Alignment.bottomRight,
                                 height: size.height * 0.25,
                                 width: size.width * 0.9,
-                                child: BackgroundImage(
-                                  assetImage: 'assets/images/kutta.png',
-                                )),
+                                child:Image.network(_prefHelper.getStringByKey(MaruConstant.img, ''))),
                             Container(
                                 width: 1000,
                                 height: 600,
                                 alignment: FractionalOffset.bottomCenter,
-                                decoration: BoxDecoration(
+                                decoration:const BoxDecoration(
                                   color: Color(0xFFffffff),
                                 ),
                                 child: Container(
@@ -141,10 +140,10 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                           Text(
                                             'Jack  Russell'.toUpperCase(),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 20,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 40,
                                             height: 20,
                                           ),
@@ -368,7 +367,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                                     alignment: Alignment.center,
                                                     height: 50,
                                                     width: 60,
-                                                    decoration: BoxDecoration(
+                                                    decoration:const BoxDecoration(
                                                         color: Colors.white12,
                                                         shape: BoxShape.circle),
                                                     child: Text(
@@ -387,6 +386,11 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                                       BlocProvider.of<PetProfileBloc>(
                                                           context)
                                                           .add(Profile4(
+                                                        walking: select,
+                                                        grooming: select,
+                                                        vet: select,
+                                                        hospital: select,
+                                                        hotel: select,
                                                       ));
                                                     },
                                                     child: Container(

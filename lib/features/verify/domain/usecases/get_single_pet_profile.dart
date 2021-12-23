@@ -4,7 +4,7 @@ import '../../../../core/domain/repositories/user_repository.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 
-class GetSinglePetProfile implements UseCase<void, Welcome> {
+class GetSinglePetProfile implements UseCase<void, Welcome2> {
   UserRepository userRepository;
   GetSinglePetProfile(this.userRepository);
 

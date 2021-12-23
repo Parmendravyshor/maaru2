@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
-
+import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -146,11 +146,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                   height: size.height * 0.20,
 
                                   width: size.width * 0.9,
-                                  child: BackgroundImage(
-                                    assetImage: _prefHelper.getStringByKey(MaruConstant.img, ''),
-
-
-                                  )),
+                                  child:Image.network(_prefHelper.getStringByKey(MaruConstant.img, ''))),
                               Container(
                                   alignment: FractionalOffset.bottomCenter,
                                   decoration: BoxDecoration(

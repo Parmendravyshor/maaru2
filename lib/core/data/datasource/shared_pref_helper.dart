@@ -1,6 +1,15 @@
 
+import 'dart:convert';
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:maru/core/constant/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:typed_data';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:convert';
 
 abstract class SharedPrefHelper {
   Future<void> userLogin();
@@ -12,11 +21,12 @@ abstract class SharedPrefHelper {
   Future<void> savePayload(String payload);
   Future<void> saveExpiryTime(String expiryTime);
   Future<void> saveString(String key, String value);
-
+  Future <bool> saveStringList(var key, List<int> value);
   Future<void> saveBoolean(String key, bool value);
   Future<void> saveInt(String key, int value);
-  Future <void>saveImage(String key, value);
+  Future <void>saveImage(List<int> imageBytes);
   Future<void> saveDouble(String key, double value);
+  List<String> getStringList(String key);
   String gettoken();
   String getfname();
   String getlname();
@@ -150,8 +160,9 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
   }
 
   @override
-  Future<bool> saveImage(String key, value) {
-    return sharedPreferences.setString(key, value);
+  Future<bool> saveImage(List<int> imageBytes) {
+    String base64Image = base64Encode(imageBytes);
+    return sharedPreferences.setString(MaruConstant.img, base64Image);
   }
 
   @override
@@ -180,5 +191,45 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
     return sharedPreferences.setString(MaruConstant.last_name, '');
   }
 
+  @override
+  List<String> getStringList(String key) {
+    sharedPreferences.getString(key);
+  }
 
+
+  @override
+  Future<bool> saveStringList(var key, List<int> value) {
+ sharedPreferences.setString(key, value.toString());
+  }
+
+
+}
+class Utility {
+  //
+  static const String KEY = "img";
+
+  static Future<String> getImageFromPreferences() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(KEY) ?? null;
+  }
+
+  static Future<bool> saveImageToPreferences(String value) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString(KEY, value);
+  }
+
+  static Image imageFromBase64String(String base64String) {
+    return Image.memory(
+      base64Decode(base64String),
+      fit: BoxFit.fill,
+    );
+  }
+
+  static Uint8List dataFromBase64String(String base64String) {
+    return base64Decode(base64String);
+  }
+
+  static String base64String(Uint8List data) {
+    return base64Encode(data);
+  }
 }

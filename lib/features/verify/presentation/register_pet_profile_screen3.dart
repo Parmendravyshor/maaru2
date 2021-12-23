@@ -221,11 +221,11 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                   return SingleChildScrollView(
                     //  physics: ScrollPhysics(),
                     child: Column(children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       SkipButtons(),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Align(
@@ -234,15 +234,13 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                               alignment: Alignment.bottomRight,
                               height: size.height * 0.20,
                               width: size.width * 0.9,
-                              child: BackgroundImage(
-                                assetImage: 'assets/images/kutta.png',
-                              ))),
+                              child: Image.network(_prefHelper.getStringByKey(MaruConstant.img, '')))),
                       Container(
 
                           //  width: 1000,
                           // height: 1300,
                           alignment: FractionalOffset.bottomCenter,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color(0xFFffffff),
                           ),
                           child: Container(

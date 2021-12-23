@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SchedulerBinding.instance.addPostFrameCallback((_) {
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (BuildContext context) {
-                                        return CreateregisterPetProfile1();
+                                        return CreateRegisterPetProfile2();
                                       }));
                                 });
                                 return Container();

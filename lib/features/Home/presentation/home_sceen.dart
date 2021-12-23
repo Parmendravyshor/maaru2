@@ -1,16 +1,21 @@
 
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 import 'package:maru/features/Home/presentation/chat_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen3.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'message.dart';
@@ -43,11 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 40,
                             ),
                             ShowLocation(),
-                            SizedBox(
+                            const  SizedBox(
                               height: 20,
                             ),
                             // Container(
@@ -129,8 +134,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         child: Image.asset('assets/images/kutta.png',height: 200,),
                                       )),
-                                      
-                                      SizedBox(
+
+                                      const SizedBox(
                                         width: 20,
                                       ),
                                       Container(
@@ -145,28 +150,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                               'Pet walking',
                                               style: MaaruStyle.text.medium
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 5,
                                             ),
-                                            Text(
+                                            const Text(
                                               '1357 Muno Manor',
                                               style: TextStyle(color: Colors.grey, fontSize: 11),
                                             ),
-                                            Text(
+                                            const Text(
                                               'Austin,Tx 75923',
                                               style: TextStyle(color: Colors.grey, fontSize: 11),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         //width: 40,
                                       ),
                                       Container(
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                            Icon(
+                                          children: const [
+                                             Icon(
                                               Icons.calendar_today_outlined,
                                               size: 22,
                                               color: Colors.yellow,
@@ -203,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 enabled: true,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 30,
                             ),
                             Padding(
@@ -235,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             style:MaaruStyle.text. tiny
                                           ),
 
-                                          Text(
+                                          const Text(
                                             'Aug 8,2021 11:00am',
                                             style: TextStyle(color: Colors.grey, fontSize: 11),
                                           ),
@@ -244,17 +249,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 3,
                                       ),
                                       Text(
                                         'Pet Grooming',
                                         style: MaaruStyle.text.tiny
                                       ),
-                                      SizedBox(
+                                     const SizedBox(
                                         height: 5,
                                       ),
-                                      Text(
+                                     const Text(
                                         'Roscoe needs a trim and was wanting to know if we  could move up our appointmenr?',
                                         style: TextStyle(color: Colors.grey, fontSize: 11),
                                       ),
@@ -268,8 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ChatScreen()));
                                             },
                                             child:
-                                          Text(
-
+                                          const Text(
                                             'Show Message',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold, fontSize: 12,color: MaaruColors.blueColor),
@@ -309,7 +313,7 @@ class HorizList extends StatefulWidget {
 }
 
 class _HorizListState extends State<HorizList> {
-  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+
   bool closedImage = false;
   bool openImage = true;
   bool switchOn = true;
@@ -323,12 +327,28 @@ class _HorizListState extends State<HorizList> {
   List<Container> containers = List <Container>();
   @override
   Widget build(BuildContext context) {
+    SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
     final size=MediaQuery.of(context).size;
 
     // ignore: prefer_typing_uninitialized_variables
     final List Message = [10];
 
-    return
+    return BlocProvider(
+        create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+        child: BlocBuilder<PetProfileBloc, PetProfileState>(
+        builder: (context, state) {
+      if (state is PetProfileInitial) {
+        BlocProvider.of<PetProfileBloc>(context)
+            .add(GetCovidList());
+
+        return CircularProgressIndicator();
+      } else if (state is CovidLoaded) {
+        print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
+        AlertManager.showErrorMessage(
+            "Register pet showing Successful if you wan't view profile pressed on? ", context);
+
+
+        return
 
 
       Container(
@@ -336,7 +356,7 @@ class _HorizListState extends State<HorizList> {
 
 
         child: ListView.builder(
-          itemCount: Message.length,
+          itemCount: state.covidModel.petProfiles.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Padding(
@@ -356,29 +376,31 @@ class _HorizListState extends State<HorizList> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(color: Colors.grey[300], width: 1.0),
-
                     ),
                     width: size.width*0.44,
                     child: Column(children: [
                       Container(
-                        color: MaaruColors.textfeildline,
-
                         alignment: Alignment.centerRight,
-                        child:  switchOn ?
-            Image.asset(
-                          'assets/images/kutta.png',
+                        decoration: BoxDecoration(
+                          color: MaaruColors.textfeildline,
 
-                          height: 140,
-                        ):Image.asset(_prefHelper.getStringByKey(MaruConstant.img, ''))
+                           // shape: BoxShape.circle,
+                          //  image: DecorationImage(
+                             // image:Ass('assets/icons/icone-setting-28.png')
+                              //state.covidModel.petProfiles[index].img.isNotEmpty
+                              //     ? ExactAssetImage(
+                              //     'assets/icons/icone-setting-28.png')
+                              //     : FileImage(File(state.covidModel.petProfiles[index].img)),
+                             // fit: BoxFit.cover,
+                            ),
 
 
+child: Image.asset('assets/images/image_2021_08_31T05_29_55_856Z (1).png'),
 ),
                       Container(
                         height: size.height*0.09,
 
                         margin: EdgeInsets.only(left: 10,right: 10),
-
-
 
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -388,7 +410,7 @@ class _HorizListState extends State<HorizList> {
                             Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(_prefHelper.getStringByKey(MaruConstant.pet_name,''),
+                              Text( _prefHelper.getStringByKey(MaruConstant.first_name,''),
                                   style: GoogleFonts.poppins(
                                     textStyle: MaaruStyle.text.tiny,
                                   )),
@@ -402,7 +424,7 @@ class _HorizListState extends State<HorizList> {
                       Padding(
                           padding: EdgeInsets.only(right: 70),
                           child: Text(
-                            _prefHelper.getStringByKey(MaruConstant.breed_type,''),
+                            state.covidModel.petProfiles[index].petName.toString(),
                             style: MaaruStyle.text.tiny,
                           ))
 
@@ -413,5 +435,10 @@ class _HorizListState extends State<HorizList> {
                     )]))));
           },
         ));
+      } else {
+        return const CircularProgressIndicator();
+      }
   }
-}
+
+
+));}}

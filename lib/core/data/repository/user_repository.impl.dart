@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ffi';
@@ -9,9 +7,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
+import 'package:maru/features/verify/domain/usecases/book_a_provider.dart';
 import 'package:maru/features/verify/domain/usecases/create_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/get_provider_by_id.dart';
+import 'package:maru/features/verify/domain/usecases/get_providers.dart';
 import 'package:maru/features/verify/domain/usecases/upload_vaccine_record.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
 import 'dart:convert';
 import 'package:path/path.dart';
@@ -51,6 +54,7 @@ import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:flutter/scheduler.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as https;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final AuthSource authSource;
@@ -59,7 +63,6 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl(this.sharedPrefHelper, this.authSource);
 
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
-
   @override
   Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
     try {
@@ -81,7 +84,9 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> emailLogin(EmailAuthParams params,) async {
+  Future<Either<Failure, void>> emailLogin(
+    EmailAuthParams params,
+  ) async {
     try {
       var map = new Map<String, String>();
 
@@ -234,24 +239,26 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, void>> createPetProfile(PetProfile params) async {
     try {
-      final img = sharedPrefHelper.getStringByKey(MaruConstant.img, '');
-        print(img);
+      final img1 = sharedPrefHelper.getStringByKey(MaruConstant.img, '');
+      print(img1);
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
         "",
       );
-      var headers = {"access-token": token,
-        'Content-Type': 'json/application'
-      };
-      final File imageFile = File(img);
-      var stream = http.ByteStream(
-          DelegatingStream.typed(imageFile.openRead()));
+      var headers = {"access-token": token, 'Content-Type': 'json/application'};
+      final File imageFile = File(img1);
+      var stream =
+          http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
-      var request = http.MultipartRequest("POST", MaruConstant.createpProfile,);
+      var request = http.MultipartRequest(
+        "POST",
+        MaruConstant.createpProfile,
+      );
       var multipartFile = http.MultipartFile('img', stream, length,
           filename: basename(imageFile.path));
       request.files.add(multipartFile);
-      request ..fields[ MaruConstant.pet_name] = params.petName
+      request
+        ..fields[MaruConstant.pet_name] = params.petName
         ..fields[MaruConstant.breed_type] = params.breedType
         ..fields['age'] = params.age
         ..fields[MaruConstant.height] = params.height
@@ -261,10 +268,10 @@ class UserRepositoryImpl implements UserRepository {
         ..fields[MaruConstant.note] = params.notes
         ..fields[MaruConstant.pet_needs] = ''
         ..fields[MaruConstant.times_a_day] = ''
-        ..fields[MaruConstant.sex]= 'spade'
-        ..fields[MaruConstant.gender]= 'male'
+        ..fields[MaruConstant.sex] = 'spade'
+        ..fields[MaruConstant.gender] = 'male'
         // ..fields['breed_type'] = 'dff'
-         ..fields['birth_date'] = '2021-09-07'
+        ..fields['birth_date'] = '2021-09-07'
         ..headers.addAll(headers);
       print('request params ${request.fields.toString()}');
       var response = await request.send();
@@ -272,32 +279,31 @@ class UserRepositoryImpl implements UserRepository {
       print("respStr respStr respStr:$respStr");
       Map res = json.decode(respStr);
       print(res);
-      var kucchu = '',
-       kucchu2 = '';
+      var kucchu = '', kucchu2 = '';
       var profile = res['pet_profile'];
       var profile2 = profile['age'];
 
-     await _prefHelper.saveString(MaruConstant.pet_name, profile['pet_name']);
-      await _prefHelper.saveString(MaruConstant.breed_type, profile['breed_type']);
+      await _prefHelper.saveString(MaruConstant.pet_name, profile['pet_name']);
+      await _prefHelper.saveString(
+          MaruConstant.breed_type, profile['breed_type']);
       print(res['accessToken']);
-      await  _prefHelper.saveString('age', kucchu ??"");
-      await  _prefHelper.saveString(MaruConstant.height,profile['height']);
-
+      await _prefHelper.saveString('age', kucchu ?? "");
+      await _prefHelper.saveString(MaruConstant.height, profile['height']);
+      await Utility.saveImageToPreferences(profile['img']);
+      await _prefHelper.saveString(MaruConstant.img, '');
       print(res['pet_profile']['height']);
-     // sharedPrefHelper.saveString(ChadbotConstants.fname, fname ?? "");
-      await  _prefHelper.saveString(MaruConstant.weight, profile['weight']);
-      await   _prefHelper.saveString(MaruConstant.sex, profile['sex']);
-      await  _prefHelper.saveString(MaruConstant.gender, profile['gender']);
-      await  _prefHelper.saveString(MaruConstant.birth_date, profile['birth_date']);
+      // sharedPrefHelper.saveString(ChadbotConstants.fname, fname ?? "");
+      await _prefHelper.saveString(MaruConstant.weight, profile['weight']);
+      await _prefHelper.saveString(MaruConstant.sex, profile['sex']);
+      await _prefHelper.saveString(MaruConstant.gender, profile['gender']);
+      await _prefHelper.saveString(
+          MaruConstant.birth_date, profile['birth_date']);
       await _prefHelper.saveString(MaruConstant.id, profile['id']);
       return Right(Void);
-    }
-    on CognitoClientException catch (e) {
+    } on CognitoClientException catch (e) {
       print('exception print  + $e');
       return Left(CacheFailure(e.toString()));
-
-    }
-    catch (e) {
+    } catch (e) {
       print('exception print etrhtjryjhytrytjrnytjjhy5jyjy + $e');
       return Left(CacheFailure(e.toString()));
     }
@@ -321,7 +327,7 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
 
       final response =
-      await http.get(MaruConstant.createpProfile, headers: headers);
+          await http.get(MaruConstant.createpProfile, headers: headers);
 
       var data = convert.jsonDecode(response.body);
       print(data);
@@ -341,7 +347,6 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 
-
   @override
   Future<Either<Failure, void>> getUpcomingAppointment() async {
     try {
@@ -350,9 +355,8 @@ class UserRepositoryImpl implements UserRepository {
         "",
       );
       var headers = {"access-token": token};
-      final response = await http.get(MaruConstant.getupcominapointment,
-          headers: headers
-      );
+      final response =
+          await http.get(MaruConstant.getupcominapointment, headers: headers);
 //print(response.body);
       var data = convert.jsonDecode(response.body);
 
@@ -367,7 +371,6 @@ class UserRepositoryImpl implements UserRepository {
       return Left(ApiFailure(e.toString()));
     }
   }
-
 
   @override
   Future<Either<Failure, void>> getUserProfile() {
@@ -384,25 +387,26 @@ class UserRepositoryImpl implements UserRepository {
       );
       var ss2 = await _prefHelper.getStringByKey(MaruConstant.pet_name, '');
       print(ss2);
-     var age2= _prefHelper.getStringByKey(MaruConstant.breed_type, '');
-     print('juikodjhfhjfhjfhfjhfjhfjfhjfhfhfhfjh${age2}');
+      var age2 = _prefHelper.getStringByKey(MaruConstant.breed_type, '');
+      print('juikodjhfhjfhjfhfjhfjhfjfhjfhfhfhfjh${age2}');
       var headers = {"access-token": token};
-   //   final response = await http.post(MaruConstant.savepet1, body: {
-      var request = await http.put(MaruConstant.savepet1,
-  headers: headers,
-  body: {
-        MaruConstant.pet_name:_prefHelper.getStringByKey(MaruConstant.pet_name, ''),
-       'age': _prefHelper.getStringByKey('age', ''),
+      //   final response = await http.post(MaruConstant.savepet1, body: {
+      var request =
+          await http.put(MaruConstant.savepet1, headers: headers, body: {
+        MaruConstant.pet_name:
+            _prefHelper.getStringByKey(MaruConstant.pet_name, ''),
+        'age': _prefHelper.getStringByKey('age', ''),
         MaruConstant.height:
-        _prefHelper.getStringByKey(MaruConstant.height, ''),
+            _prefHelper.getStringByKey(MaruConstant.height, ''),
         MaruConstant.weight:
-        _prefHelper.getStringByKey(MaruConstant.weight, ""),
+            _prefHelper.getStringByKey(MaruConstant.weight, ""),
         MaruConstant.sex: _prefHelper.getStringByKey(MaruConstant.sex, ''),
         MaruConstant.gender:
-        _prefHelper.getStringByKey(MaruConstant.gender, ''),
+            _prefHelper.getStringByKey(MaruConstant.gender, ''),
         MaruConstant.breed_type:
-        _prefHelper.getStringByKey(MaruConstant.breed_type, ''),
-         MaruConstant.birth_date:_prefHelper.getStringByKey(MaruConstant.birth_date, ''),
+            _prefHelper.getStringByKey(MaruConstant.breed_type, ''),
+        MaruConstant.birth_date:
+            _prefHelper.getStringByKey(MaruConstant.birth_date, ''),
         //MaruConstant.vaccine: params.vaccine,
       });
 
@@ -410,9 +414,7 @@ class UserRepositoryImpl implements UserRepository {
       print(res);
 
       return Right(Void);
-    }
-        on CognitoClientException catch (e) {
-
+    } on CognitoClientException catch (e) {
       return Left(CacheFailure(e.toString()));
     } catch (e) {
       print('exception$e');
@@ -580,7 +582,6 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, void>> getHomeSearchIcons() {
-
     // TODO: implement getHomeSearchIcons
     throw UnimplementedError();
   }
@@ -615,9 +616,7 @@ class UserRepositoryImpl implements UserRepository {
       // print("verifyOTP TOKEEEEEEEEEEEEEEnnnnnnnnnnnnnnnn:$token");
       var map = Map<String, String>();
 
-
-
-      map[ MaruConstant.email] = email;
+      map[MaruConstant.email] = email;
 
       // map[ MaruConstant.email] = params.email;
       final response = await http.post(MaruConstant.forgetverify, body: map);
@@ -745,51 +744,31 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> getProviders() async {
+  Future<Either<Failure, GetProvidersModel>> getProviders() async {
     try {
-      final token = _prefHelper.getStringByKey(
-        MaruConstant.token,
-        "",
-      );
-      var headers = {"access-token": token};
-      final response = await http.get(MaruConstant.getproviders,
-          headers: headers
+      final response = await http.get(
+        MaruConstant.getproviders,
       );
 //print(response.body);
       var data = convert.jsonDecode(response.body);
-
       var profile = data['provider_profiles'];
-      for (int i = 0; i < data['provider_profiles'].length; i++) {
 
+      print(profile);
+
+      return Right(GetProvidersModel.fromJson(data));
+    } on CognitoClientException catch (e) {
+      print(e);
+      if (e.code == 'UserNotConfirmedException') {
+        print(e);
+        return Left(UserNotConfirmedFailure(e.message));
+        print(e);
+      } else {
+        print(e);
+        return Left(CacheFailure(e.message));
       }
-      var comapny = profile[0]['company_name'];
-      var service = profile[0]['provider'] ['company_name'];
-//print($services)
-      var service2 = profile[1]['rating_reviews'];
-      var image1 = profile[1] ['provider'];
-      var comapny1 = image1[1]['company_name'];
-
-      // [MaruConstant.img];
-      var image = profile[0] [MaruConstant.img];
-      var discription = profile[0] [MaruConstant.description];
-      var operations = profile[0][MaruConstant.operation_hours];
-      await sharedPrefHelper.saveString(
-          MaruConstant.operation_hours, '$operations');
-      await sharedPrefHelper.saveString(
-          MaruConstant.company_name, '$discription');
-      await sharedPrefHelper.saveString(MaruConstant.company_name, '$comapny1');
-      await sharedPrefHelper.saveString(
-          MaruConstant.rating_reviews, '$service2');
-      await sharedPrefHelper.saveString(MaruConstant.img, '$image1');
-      await sharedPrefHelper.saveString(MaruConstant.img, '$image');
-      await sharedPrefHelper.saveString(MaruConstant.company_name, '$comapny');
-      await sharedPrefHelper.saveString(
-          MaruConstant.rating_reviews, 's$service');
-      // print('kjhdjkhdjkhjkdhjkdhjkdhjddffffffffffffffh$date');
-
-      return Right(Void);
     } catch (e) {
-      return Left(ApiFailure(e.toString()));
+      print(e);
+      return Left(CacheFailure(e.toString()));
     }
   }
 
@@ -801,11 +780,10 @@ class UserRepositoryImpl implements UserRepository {
         "",
       );
       var headers = {
-        "access-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
+        "access-token":
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
       };
-      final response = await http.get(MaruConstant.getReview,
-          headers: headers
-      );
+      final response = await http.get(MaruConstant.getReview, headers: headers);
 //print(response.body);
       var data = convert.jsonDecode(response.body);
 
@@ -823,19 +801,21 @@ class UserRepositoryImpl implements UserRepository {
         "",
       );
       var headers = {
-        "access-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
+        "access-token":
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
       };
-      final response = await http.get(MaruConstant.getProviderRequest,
-          headers: headers
-      );
+      final response =
+          await http.get(MaruConstant.getProviderRequest, headers: headers);
 //print(response.body);
       var data = convert.jsonDecode(response.body);
-
+      var profile = data['provider_profiles'];
+      await _prefHelper.saveStringList('id', profile['id']);
       return Right(Void);
     } catch (e) {
       return Left(ApiFailure(e.toString()));
     }
   }
+
   @override
   Future<Either<Failure, Welcome2>> getSinglePetProfile() async {
     try {
@@ -844,12 +824,12 @@ class UserRepositoryImpl implements UserRepository {
         "",
       );
       var headers = {"access-token": token};
-      final response = await http.get(MaruConstant.getProviderRequest,
-          headers: headers
-      );
+      final response =
+          await http.get(MaruConstant.getProviderRequest, headers: headers);
 //print(response.body);
       var data = convert.jsonDecode(response.body);
-
+      print(response.body);
+      print(data);
       return Right(Welcome2.fromJson(data));
     } catch (e) {
       return Left(ApiFailure(e.toString()));
@@ -857,7 +837,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> uploadVaccineREcord(vacineParams params)async {
+  Future<Either<Failure, void>> uploadVaccineREcord(vacineParams params) async {
     final token = _prefHelper.getStringByKey(
       MaruConstant.token,
       "",
@@ -865,15 +845,18 @@ class UserRepositoryImpl implements UserRepository {
     final image = _prefHelper.getStringByKey(MaruConstant.img, '');
     var headers = {"access-token": token};
     final File imageFile = File(image);
-    var stream = http.ByteStream(
-        DelegatingStream.typed(imageFile.openRead()));
+    var stream = http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
-    var request = http.MultipartRequest("POST", MaruConstant.vaccineRecordUploaded,);
+    var request = http.MultipartRequest(
+      "POST",
+      MaruConstant.vaccineRecordUploaded,
+    );
     var multipartFile = http.MultipartFile('doc_url', stream, length,
         filename: basename(imageFile.path));
     request.files.add(multipartFile);
-    request ..fields['pet_id'] = params.pet_id
-     ..fields['doc_url'] = params.doc_url
+    request
+      ..fields['pet_id'] = params.pet_id
+      ..fields['doc_url'] = params.doc_url
       ..headers.addAll(headers);
     print('request params ${request.fields.toString()}');
     var response = await request.send();
@@ -882,6 +865,69 @@ class UserRepositoryImpl implements UserRepository {
     Map res = json.decode(respStr);
     print(res);
   }
+
+  @override
+  Future<Either<Failure, Welcome4>> getProviderById() async {
+    try {
+      int abc;
+      final response = await http.get(Uri.parse(
+          'http://18.191.199.31/api/public/provider/${_prefHelper.getIntByKey('id', abc)}'));
+//print(response.body);
+      var data = convert.jsonDecode(response.body);
+//print(data);
+//print('dhjkdhjdjkdhjkdhjkdhjkdjbjbbjhjhfjjfhjfhjfhjfhfjhfjhfjfhjfhjfhjfhjfh$data');
+      return Right(Welcome4.fromJson(data));
+    } on CognitoClientException catch (e) {
+      if (e.code == 'UserNotConfirmedException') {
+        print(e);
+        return Left(UserNotConfirmedFailure(e.message));
+        print(e);
+      } else {
+        print(e);
+        return Left(CacheFailure(e.message));
+        print(e);
+      }
+      print(e);
+    } catch (e) {
+      print(e);
+      return Left(CacheFailure(e.toString()));
+      print(e);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> bookProvider(BookProviderParams params) async {
+    try {
+      final response =
+          await http.post(MaruConstant.providerbookingappointment, body: {
+        'pet_id': params.pet_id,
+        'provider_id': params.provider_id,
+        'booking_date_time': params.booking_date_time,
+        'service_id': params.service_id,
+      });
+
+      var data = convert.jsonDecode(response.body);
+      print(data);
+      return Right(Void);
+    } on CognitoClientException catch (e) {
+      if (e.code == 'UserNotConfirmedException') {
+        print(e);
+        return Left(UserNotConfirmedFailure(e.message));
+        print(e);
+      } else {
+        print(e);
+        return Left(CacheFailure(e.message));
+        print(e);
+      }
+      print(e);
+    } catch (e) {
+      print(e);
+      return Left(CacheFailure(e.toString()));
+      print(e);
+    }
+  }
+
+
 // print(data);
 // var profile = data['reviews'];
 // // // print('fklfjeklfjklfj$profile');
@@ -959,4 +1005,33 @@ class UserRepositoryImpl implements UserRepository {
 //   //  } else {
 //   //    print(res.reasonPhrase);
 //   //  }
+//   var profile = data['provider_profiles'];
+//   for (int i = 0; i < data['provider_profiles'].length; i++) {
+//
+//   }
+//   var comapny = profile[0]['company_name'];
+//   var service = profile[0]['provider'] ['company_name'];
+// //print($services)
+//   var service2 = profile[1]['rating_reviews'];
+//   var image1 = profile[1] ['provider'];
+//   var comapny1 = image1[1]['company_name'];
+//
+//   // [MaruConstant.img];
+//   var image = profile[0] [MaruConstant.img];
+//   var discription = profile[0] [MaruConstant.description];
+//   var operations = profile[0][MaruConstant.operation_hours];
+//   await sharedPrefHelper.saveString(
+//   MaruConstant.operation_hours, '$operations');
+//   await sharedPrefHelper.saveString(
+//   MaruConstant.company_name, '$discription');
+//   await sharedPrefHelper.saveString(MaruConstant.company_name, '$comapny1');
+//   await sharedPrefHelper.saveString(
+//   MaruConstant.rating_reviews, '$service2');
+//   await sharedPrefHelper.saveString(MaruConstant.img, '$image1');
+//   await sharedPrefHelper.saveString(MaruConstant.img, '$image');
+//   await sharedPrefHelper.saveString(MaruConstant.company_name, '$comapny');
+//   await sharedPrefHelper.saveString(
+//   MaruConstant.rating_reviews, 's$service');
+// print('kjhdjkhdjkhjkdhjkdhjkdhjddffffffffffffffh$date');
+
 }

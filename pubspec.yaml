@@ -62,6 +62,8 @@ dependencies:
   json_annotation: ^4.4.0
   webview_flutter: ^3.0.0
 
+  socket_io_client: ^1.0.2
+
 
 
 dev_dependencies:

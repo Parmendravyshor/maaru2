@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
+import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
@@ -620,6 +621,7 @@ class _AppointmentsState extends State<Appointments>
       ),
       builders: CalendarBuilders(
         selectedDayBuilder: (context, date, _) {
+          print(date);
           return FadeTransition(
             opacity: Tween(begin: 0.0, end: 1.0).animate(_animationController),
             child: Container(
@@ -631,15 +633,20 @@ class _AppointmentsState extends State<Appointments>
                   border: Border.all(width: 2, color: MaaruColors.blueColor)),
               child: Text(
                 '${date.day}',
+
                 style: TextStyle().copyWith(
                     fontSize: 20.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
+
             ),
           );
+
         },
         todayDayBuilder: (context, date, _) {
+          BlocProvider.of<BookAppointmentBloc>(context)
+              .add(dateChanged(date.toString()));
           return Container(
               margin: const EdgeInsets.all(4.0),
               alignment: Alignment.center,

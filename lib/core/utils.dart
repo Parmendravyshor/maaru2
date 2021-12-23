@@ -1,11 +1,10 @@
-
-
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/notification.dart';
 import 'package:maru/core/data/datasource/storage.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
+import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 import 'package:maru/features/Home/domain/usecases/get_upcoming_appointment.dart';
 import 'package:maru/features/chat/domain/usecases/get_text_file.dart';
 import 'package:maru/features/chat/presentation/chat_bloc.dart';
@@ -21,9 +20,11 @@ import 'package:maru/features/provider_login/domain/usecases/provider_email_logi
 import 'package:maru/features/provider_register/domain/usecases/provider_email_register.dart';
 import 'package:maru/features/register/domain/usecases/email_signup.dart';
 import 'package:maru/features/register/presentation/register_bloc.dart';
+import 'package:maru/features/verify/domain/usecases/book_a_provider.dart';
 import 'package:maru/features/verify/domain/usecases/change_password.dart';
 import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
+import 'package:maru/features/verify/domain/usecases/get_provider_by_id.dart';
 import 'package:maru/features/verify/domain/usecases/get_providers.dart';
 import 'package:maru/features/verify/domain/usecases/get_review_request.dart';
 import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart';
@@ -56,18 +57,39 @@ Future<void> registerDependencyInjection() async {
 }
 
 void _registerBloc(KiwiContainer container) {
-  container.registerFactory((c) => RegisterBloc(
-        c.resolve(),c.resolve()
-      ));
+  container.registerFactory((c) => RegisterBloc(c.resolve(), c.resolve()));
+  container.registerFactory((c) => LoginBloc(
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve()));
   container
-      .registerFactory((c) => LoginBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(), c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve()));
-   container.registerFactory((c) => ResetBloc(c.resolve(), c.resolve(),c.resolve()));
-   container.registerFactory((c) => PetProfileBloc(c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve(),c.resolve()));
+      .registerFactory((c) => ResetBloc(c.resolve(), c.resolve(), c.resolve()));
+  container.registerFactory((c) => PetProfileBloc(
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve(),
+      c.resolve()));
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
-  container.registerFactory(
-    (c) => VerifyBloc(c.resolve(), c.resolve(),c.resolve(),c.resolve(), c.resolve() ));
-  container.registerFactory(
-          (c) => ChatBloc(c.resolve(), c.resolve(),c.resolve() ));
+  container.registerFactory((c) => VerifyBloc(
+      c.resolve(), c.resolve(), c.resolve(), c.resolve(), c.resolve()));
+  container.registerFactory((c) => BookAppointmentBloc(c.resolve()));
+  container
+      .registerFactory((c) => ChatBloc(c.resolve(), c.resolve(), c.resolve()));
 }
 
 void _registerUseCases(KiwiContainer container) {
@@ -78,11 +100,11 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => ResendCode(c.resolve()));
   container.registerFactory((c) => SendResetPasswordOtp(c.resolve()));
   container.registerFactory((c) => VerifyCode(c.resolve()));
-   container.registerFactory((c) => SavePetProfile(c.resolve()));
-   container.registerFactory((c) => GetPetProfile(c.resolve()));
-   container.registerFactory((c) => CreatePetProfile(c.resolve()));
-   container.registerFactory((c) => ForgetPassword(c.resolve()));
-   container.registerFactory((c) => ResetPassword(c.resolve()));
+  container.registerFactory((c) => SavePetProfile(c.resolve()));
+  container.registerFactory((c) => GetPetProfile(c.resolve()));
+  container.registerFactory((c) => CreatePetProfile(c.resolve()));
+  container.registerFactory((c) => ForgetPassword(c.resolve()));
+  container.registerFactory((c) => ResetPassword(c.resolve()));
   container.registerFactory((c) => SaveUserProfile(c.resolve()));
   container.registerFactory((c) => SaveChangePassword(c.resolve()));
   container.registerFactory((c) => SaveUserPayment(c.resolve()));
@@ -93,20 +115,22 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => GetProviderRequest(c.resolve()));
   container.registerFactory((c) => GetSinglePetProfile(c.resolve()));
   container.registerFactory((c) => UploadVaccineREcord(c.resolve()));
+  container.registerFactory((c) => GetProviderById(c.resolve()));
+  container.registerFactory((c) => BookProvider(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 
 void _registerRepositories(KiwiContainer container) {
   container.registerFactory<UserRepository>(
-      (c) => UserRepositoryImpl(c.resolve(),c.resolve() ));
-}
-_registerDataSources(KiwiContainer container) {
-  container.registerFactory<AuthSource>(
-          (c) => UserService(c.resolve(), c.resolve(), c.resolve()));
-  container.registerFactory<SharedPrefHelper>(
-          (c) => SharedPrefHelperImpl(c.resolve()));
+      (c) => UserRepositoryImpl(c.resolve(), c.resolve()));
 }
 
+_registerDataSources(KiwiContainer container) {
+  container.registerFactory<AuthSource>(
+      (c) => UserService(c.resolve(), c.resolve(), c.resolve()));
+  container.registerFactory<SharedPrefHelper>(
+      (c) => SharedPrefHelperImpl(c.resolve()));
+}
 
 _registerApiClient(KiwiContainer container) {}
 
@@ -114,6 +138,6 @@ _registerMisc(KiwiContainer container) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   container.registerFactory((c) => sharedPreferences);
   container.registerFactory((c) => Storage(sharedPreferences));
-  container.registerFactory((c) => new CognitoUserPool(
-   MaruConstant.poolid, MaruConstant.clientid));
+  container.registerFactory(
+      (c) => new CognitoUserPool(MaruConstant.poolid, MaruConstant.clientid));
 }

@@ -10,10 +10,11 @@ class MaruConstant {
    static final updateprofile1 = _prefHelper.getStringByKey(MaruConstant.id, '');
    static final savepet1 =Uri.parse ('http://18.191.199.31/api/auth/$updateprofile1');
    static final getupcominapointment =Uri.parse ('http://18.191.199.31/api/bookings?type=upcoming');
-   static final getproviders =Uri.parse ('http://18.191.199.31/api/public/providers');
+   static final getproviders =Uri.parse ('http://18.191.199.31/api/public/providers?page=1&limit=100&service=&rating=');
    static final getReview =Uri.parse ('http://18.191.199.31/api/company/reviews');
-   static final getProviderRequest = Uri.parse('http://18.191.199.31/api/bookings/provider?page=1&limit=10');
-   static final getSinglePetProfile = Uri.parse('http://18.191.199.31/api/pets/2');
+   static final getProviderRequest = Uri.parse('http://18.191.199.31/api/pets/$updateprofile1');
+   static final getSinglePetProfile = Uri.parse('http://18.191.199.31/api/pets/$updateprofile1');
+   static final  providerbookingappointment = Uri.parse('http://18.191.199.31/api/bookings');
    static final resend =Uri.parse ('http://18.191.199.31/api/auth/re-send-otp');
    static final reset =Uri.parse ('http://18.191.199.31/api/auth/forget-password');
    static final signin = Uri.parse('http://18.191.199.31/api/auth/signin');
@@ -71,7 +72,7 @@ class MaruConstant {
    static String change_password = 'change_password';
    static String password = 'password';
    static String code = 'code';
-   static String id = 'id';
+   static var id = 'id';
    static String user_type = 'user_type';
    static String token = "accessToken";
    static String poolid = "us-east-2_util3hX7I";

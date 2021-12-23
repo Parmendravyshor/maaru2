@@ -23,6 +23,7 @@ import 'package:maru/features/Account_setting/presentation/change_password_scree
 import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 
@@ -42,6 +43,7 @@ import 'core/utils.dart';
 import 'features/Account_setting/presentation/edit_profile_screen.dart';
 import 'features/Home/presentation/chat_screen.dart';
 import 'features/Home/presentation/home_sceen.dart';
+import 'features/Home/presentation/pet_profile.dart';
 import 'features/Home/presentation/search_screen.dart';
 import 'features/faketest.dart';
 
@@ -50,6 +52,8 @@ import 'features/faketest.dart';
 import 'features/register/presentation/signup_screen.dart';
 import 'features/splash/view/after_splash_screen.dart';
 import 'features/verify/presentation/verify.dart';
+import 'features/view_pet_profile/presentation/view_pet_profile2.dart';
+import 'features/view_pet_profile/presentation/view_pet_profile3.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -121,8 +125,7 @@ class MyApp extends StatelessWidget {
         theme: theme,
         //todo: navigate to SplashScreen
 
-        home: Scaffold(body: ((CreateRegisterPetProfile4()))));
-
+        home: Scaffold(body: ((ProviderSearchScreen()))));
   }
 }
 

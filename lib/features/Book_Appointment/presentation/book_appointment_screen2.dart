@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
@@ -8,6 +9,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
 import 'book_appointment_screen1.dart';
 import 'booked_confirm.dart';
@@ -33,8 +35,24 @@ class _BookAppointment2State extends State<BookAppointment2> {
         bottomNavigationBar: CreateHomeScreen(
           // Color:MaaruColors.textButtonColor
         ),
-        body:SafeArea(bottom: false,
-        child:
+        body:
+        SafeArea(bottom: false,
+        child:Center(
+      child:  BlocProvider(
+        create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+        child: BlocBuilder<PetProfileBloc, PetProfileState>(
+        builder: (context, state) {
+        if (state is PetProfileInitial) {
+        BlocProvider.of<PetProfileBloc>(context)
+            .add(GetSinglePRovider());
+
+        return CircularProgressIndicator();
+        } else if (state is SingleProviderLoaded) {
+        //   print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome4.providerName}');
+        // AlertManager.showErrorMessage(
+        //     "ProfileUpdateSuccessful", context);
+        int abc;
+        return
         ListView(
           children: [
             Flex(direction: Axis.vertical, children: [
@@ -114,7 +132,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('shandan',
+                                Text(state.welcome4.providerDetails[_prefHelper.getIntByKey('id',abc)].companyName.toString(),
                                  //_prefHelper.getStringByKey(MaruConstant.company_name, ''),
                                   style: MaaruStyle.text.tiniest
                                 ),
@@ -124,7 +142,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                               ],
                             ),
                             Text(
-                              '1115 Emihi Grove Austin, Textas 00000',
+                              state.welcome4.providerDetails[_prefHelper.getIntByKey('id',abc)].state.toString(),
                               style:
                                 MaaruStyle.text
                               .tiny,),
@@ -159,10 +177,17 @@ class _BookAppointment2State extends State<BookAppointment2> {
                             SizedBox(
                               height: size.height * 0.02,
                             ),
-                            Row(
+    ListView.builder(
+    scrollDirection: Axis.vertical,
+    shrinkWrap: true,
+    itemCount: state.welcome4.providerDetails.length
+      ,
+    itemBuilder:
+    (BuildContext context, int index) {
+                         return   Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CircleAvatar(
+                                const CircleAvatar(
                                   radius: 20,
                                   backgroundColor: Colors.black,
                                   backgroundImage: NetworkImage(
@@ -171,15 +196,15 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                 SizedBox(
                                   width: size.width * 0.03,
                                 ),
-                                Text(
-                                  'Jimmy Hanks',
+                                Text(state.welcome4.providerDetails[index].providerName.toString()
+                                 ,
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
-                                  width: size.width * 0.40,
+                                //  width: size.width * 0.40,
                                 ),
                                 Icon(
                                   Icons.star,
@@ -187,22 +212,22 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                   color: Colors.yellowAccent,
                                 ),
                                 Text(
-                                 _prefHelper.getStringByKey(MaruConstant.ratings, ''),
+                                  state.welcome4.providerDetails[index].reviewComment.toString(),
                                   style: TextStyle(fontSize: 15),
                                 ),
                               ],
-                            ),
+                            );}),
                             Padding(
                               padding: const EdgeInsets.only(left: 55),
                               child: Text(
-                                  _prefHelper.getStringByKey(MaruConstant.review_comment, ''),
+                                  _prefHelper.getStringByKey(MaruConstant.company_name, ''),
                                 style: MaaruStyle.text.tiny
                               ),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CircleAvatar(
+                                const CircleAvatar(
                                   radius: 20,
                                   backgroundColor: Colors.black,
                                   backgroundImage: NetworkImage(
@@ -256,7 +281,12 @@ class _BookAppointment2State extends State<BookAppointment2> {
 
             ]),
           ],
-        )));
+        );}
+         else {
+    return const CircularProgressIndicator(
+
+    );
+    }})))));
   }
 }
 
