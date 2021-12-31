@@ -107,109 +107,105 @@ class _LoginScreenState extends State<LoginScreen> {
                                 });
                               }
 
-                              return  Container(
-                                margin: EdgeInsets.only(left: 20,right: 20),
-                                child: Column(children: [
-                                  Logo(),
-                                  ScreenIcon(),
-                                  SizedBox(
-                                    height: size.height*0.02,
+                              return  Column(children: [
+                                Logo(),
+                                ScreenIcon(),
+                                SizedBox(
+                                  height: size.height*0.02,
+                                ),
+                                Center(
+                                  child: Text(
+                                    'or login with email',
+                                    style: MaaruStyle.text.tiny
                                   ),
-                                  Center(
-                                    child: Text(
-                                      'or login with email',
-                                      style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w600)),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
 
 
-                                  Column(children: [
-                                    Column(
-                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: [
-                                          ThemedTextField("EMAIL", TextInputType.emailAddress,
-                                              textStyle: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontFamily: 'Quicksand',
-                                                fontSize: 34,
-                                                color:
-                                                Colors.black,
-                                              ),
-                                              textinputaction2: TextInputAction.next,
-                                              onChanged: (text) {
-                                                BlocProvider.of<LoginBloc>(context).add(event.EmailChanged(text));
-                                              }, editingController: _emailController),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          ThemedTextField(
-                                            "PASSWORD",
-                                            TextInputType.text,
-                                            textinputaction2: TextInputAction.done,
-                                            password: true,
+                                Column(children: [
+                                  Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        ThemedTextField("EMAIL", TextInputType.emailAddress,
+                                            textStyle: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: 'Quicksand',
+                                              fontSize: 34,
+                                              color:
+                                              Colors.black,
+                                            ),
+                                            textinputaction2: TextInputAction.next,
                                             onChanged: (text) {
-                                              BlocProvider.of<LoginBloc>(context)
-                                                  .add(event.PasswordChanged(text));
+                                              BlocProvider.of<LoginBloc>(context).add(event.EmailChanged(text));
+                                            }, editingController: _emailController),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        ThemedTextField(
+                                          "PASSWORD",
+                                          TextInputType.text,
+                                          textinputaction2: TextInputAction.done,
+                                          password: true,
+                                          onChanged: (text) {
+                                            BlocProvider.of<LoginBloc>(context)
+                                                .add(event.PasswordChanged(text));
+                                          },
+                                          editingController: _passwordController,
+                                        ),
+                                        InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          ResetPasswordScreen()));
                                             },
-                                            editingController: _passwordController,
-                                          ),
-                                          InkWell(
-                                              onTap: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (_) =>
-                                                            ResetPasswordScreen()));
-                                              },
+                                            child: Container(
+                                              margin: EdgeInsets.only(right: 20),
                                               child: Align(
                                                 alignment: Alignment.centerRight,
                                                 child: Text(
                                                   'Forgot Password?',
                                                   style: MaaruStyle.text.greyDisable,
                                                 ),
-                                              )),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          ThemedButton(
-                                              text: "LOGIN",
-                                              onPressed: () {
-                                                if (state
-                                                is LoginFormValidationSuccess ||
-                                                    state
-                                                    is LoginFormValidationFailure) {
-                                                  BlocProvider.of<LoginBloc>(context)
-                                                      .add(event.LoginButtonTapped());
-                                                }
+                                              ),
+                                            )),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        ThemedButton(
+                                            text: "LOGIN",
+                                            onPressed: () {
+                                              if (state
+                                              is LoginFormValidationSuccess ||
+                                                  state
+                                                  is LoginFormValidationFailure) {
+                                                BlocProvider.of<LoginBloc>(context)
+                                                    .add(event.LoginButtonTapped());
+                                              }
 
-                                              },
-                                              enabled: true),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          state is LoginInProgress
-                                              ? Center(
-                                              child: Container(
-                                                margin: EdgeInsets.only(bottom: 10),
-                                                width: 40,
-                                                height: 40,
-                                                child: CircularProgressIndicator(),
-                                              ))
-                                              : Container(),
-                                          GoToSignInText(),
+                                            },
+                                            enabled: true),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        state is LoginInProgress
+                                            ? Center(
+                                            child: Container(
+                                              margin: EdgeInsets.only(bottom: 10),
+                                              width: 40,
+                                              height: 40,
+                                              child: CircularProgressIndicator(),
+                                            ))
+                                            : Container(),
+                                        GoToSignInText(),
 
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ])
-                                  ])]),
-                              );
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                      ])
+                                ])]);
                             })
                     )))));
   }
@@ -233,7 +229,7 @@ class GoToSignInText extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (_) => RegisterScreen()));
             },
             child: Text(
-              'Signup ',
+              'SIGNUP ',
               style: MaaruStyle.text.mediumDisable,
             ))
       ],

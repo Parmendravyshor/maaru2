@@ -20,6 +20,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
   bool update = true;
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     var selectedIndex;
     return  WillPopScope(
         onWillPop: () async => false,
@@ -64,17 +65,17 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
-                                    'Account Setting',
-                                    style: MaaruStyle.text.large,
+                                    'Account Setting'.toUpperCase(),
+                                    style: MaaruStyle.text.tiny,
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: size.height*0.02,
                                 ),
                                 Test3(
                                   image: 'assets/icons/icone-setting-1.png',
                                   hite: 40,
-                                  text: 'Edit Profile',
+                                  text: 'Edit Profile'.toUpperCase(),
                                   size: 115,
                                   onPressed: () {
                                     Navigator.of(context).push(
@@ -84,7 +85,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   },
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: size.height*0.02,
                                 ),
                                 Test3(
                                   image: 'assets/icons/icone-setting-2.png',
@@ -99,7 +100,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   },
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: size.height*0.02,
                                 ),
                                 Test3(
                                   image: 'assets/icons/icone-setting-3.png',
@@ -113,7 +114,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   },
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: size.height*0.02,
                                 ),
                                 Row(
                                     mainAxisAlignment:
@@ -128,7 +129,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                   width: 400,
                                                   decoration: BoxDecoration(
                                                     color:
-                                                        MaaruColors.darkGrey2,
+                                                        Color(0xfff7f7f7),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.0),
@@ -145,9 +146,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                           height: 40,
                                                         ),
                                                         Text(
-                                                          'Push Notification',
+                                                          'Push Notification'.toUpperCase(),
                                                           style: MaaruStyle
-                                                              .text.tiniest,
+                                                              .text.tiny,
                                                         ),
                                                         SizedBox(
                                                           width: 35,
@@ -179,7 +180,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                       ]))))
                                     ]),
                                 SizedBox(
-                                  height: 20,
+                                  height: size.height*0.02,
                                 ),
                                 Row(
                                     mainAxisAlignment:
@@ -194,7 +195,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                   width: 400,
                                                   decoration: BoxDecoration(
                                                     color:
-                                                        MaaruColors.darkGrey2,
+                                                       Color(0xfff7f7f7),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.0),
@@ -211,9 +212,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                           height: 40,
                                                         ),
                                                         Text(
-                                                          'Email Notification',
+                                                          'Email Notification'.toUpperCase(),
                                                           style: MaaruStyle
-                                                              .text.tiniest,
+                                                              .text.tiny,
                                                         ),
                                                         SizedBox(
                                                           width: 33,
@@ -237,7 +238,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                       ]))))
                                     ]),
                                 SizedBox(
-                                  height: 20,
+                                  height: size.height*0.02,
                                 ),
                                 Test3(
                                   image: 'assets/icons/icone-setting-6.png',
@@ -256,8 +257,8 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   size: 0,
                                   onPressed: () {},
                                 ),
-                                const SizedBox(
-                                  height: 20,
+                                SizedBox(
+                                  height: size.height*0.02,
                                 ),
                                 Test3(
                                   image:
@@ -307,7 +308,7 @@ class Test3 extends StatelessWidget {
                   height: 60,
                   width: 20,
                   decoration: BoxDecoration(
-                    color: MaaruColors.darkGrey2,
+                    color: Color(0xfff7f7f7),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   alignment: Alignment.centerLeft,
@@ -319,8 +320,8 @@ class Test3 extends StatelessWidget {
                           height: hite,
                         ),
                         Text(
-                          text,
-                          style: MaaruStyle.text.tiniest,
+                          text.toUpperCase(),
+                          style: MaaruStyle.text.tiny,
                         ),
                         SizedBox(
                           width: size,

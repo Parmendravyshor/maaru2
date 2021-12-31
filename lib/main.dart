@@ -21,6 +21,7 @@ import 'package:maru/features/Book_Appointment/presentation/book_appointment_scr
 import 'package:maru/features/Book_Appointment/presentation/reviewe_screen.dart';
 import 'package:maru/features/Home/presentation/pet_profile.dart';
 import 'package:maru/features/provider_profile/provider_profile1.dart';
+import 'package:maru/features/provider_profile/provider_profile2.dart';
 import 'package:maru/features/splash/view/splash_screen.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
@@ -31,6 +32,7 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'core/theme/maaru_style.dart';
 import 'core/utils.dart';
 import 'features/Account_setting/presentation/edit_profile_screen.dart';
+import 'features/Book_Appointment/presentation/booked_confirm.dart';
 import 'features/Home/presentation/chat_screen.dart';
 import 'features/Home/presentation/home_sceen.dart';
 import 'features/Home/presentation/search_screen.dart';
@@ -50,6 +52,7 @@ import 'package:location/location.dart';
 import 'dart:math' show cos, sqrt, asin;
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+import 'features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'features/register/presentation/signup_screen.dart';
 import 'features/splash/view/after_splash_screen.dart';
 import 'features/verify/presentation/verify.dart';

@@ -106,7 +106,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                         crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            'Max',
+                                            'Max'.toUpperCase(),
                                             style: MaaruStyle.text.large,
                                           ),
                                           SizedBox(
@@ -125,8 +125,8 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                               ))
                                         ]),
                                     Text(
-                                      'Jack  Russell',
-                                      style: MaaruStyle.text.tiny,
+                                      'Jack  Russell'.toUpperCase(),
+                                      style: MaaruStyle.text.medium,
                                     ),
                                     SizedBox(
                                       width: 20,
@@ -159,7 +159,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                           Padding(
                                                               padding: EdgeInsets.only(
                                                                   top: 20),
-                                                              child: Text('Age',
+                                                              child: Text('Age'.toUpperCase(),
                                                                   style: MaaruStyle
                                                                       .text.red)),
                                                           Text('2',
@@ -183,10 +183,10 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                           Padding(
                                                               padding: EdgeInsets.only(
                                                                   top: 20),
-                                                              child: Text('Sex',
+                                                              child: Text('Sex'.toUpperCase(),
                                                                   style: MaaruStyle
                                                                       .text.red)),
-                                                          Text('Male',
+                                                          Text('Male'.toUpperCase(),
                                                               style: MaaruStyle
                                                                   .text.tinyDisable),
                                                         ]),
@@ -207,7 +207,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                           Padding(
                                                               padding: EdgeInsets.only(
                                                                   top: 20),
-                                                              child: Text('Height',
+                                                              child: Text('Height'.toUpperCase(),
                                                                   style: MaaruStyle
                                                                       .text.red)),
                                                           Text('8"',
@@ -233,10 +233,10 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                               padding: EdgeInsets.only(
                                                                   top: 20),
                                                               child:
-                                                              Text('Weight',
+                                                              Text('Weight'.toUpperCase(),
                                                                   style: MaaruStyle
                                                                       .text.red)),
-                                                          Text('4lbs',
+                                                          Text('4lbs'.toUpperCase(),
                                                               style: MaaruStyle
                                                                   .text.tinyDisable),
                                                         ]),
@@ -246,8 +246,8 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                           height: 20,
                                         ),
                                         Text(
-                                          'Notes',
-                                          style: MaaruStyle.text.tiniest,
+                                          'Notes'.toUpperCase(),
+                                          style: MaaruStyle.text.tiny,
                                         ),
                                         SizedBox(
                                           height: 20,
@@ -269,9 +269,9 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                         CrossAxisAlignment.start,
                                                         children: [
                                                           Text(
-                                                            'Max Additional Information',
+                                                            'Max Additional Information'.toUpperCase(),
                                                             style:
-                                                            MaaruStyle.text.tiniest,
+                                                            MaaruStyle.text.tiny,
                                                           ),
                                                           Text(
                                                             'Aug. 10, 2021',
@@ -283,7 +283,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                           ),
                                                           Text(
                                                             'Lorem ipsum is placeholder text commonly used in the graphic, print,'
-                                                                'and publishing industries for previewing layouts and visual mockups',
+                                                                'and publishing industries for previewing layouts and visual mockups'.toUpperCase(),
                                                             style: MaaruStyle
                                                                 .text.greyDisable,
                                                           )

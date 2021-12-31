@@ -13,6 +13,7 @@ import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
+import 'package:maru/features/provider_login/presentation/login_provider_screen.dart';
 import 'package:maru/features/register/presentation/register_bloc.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
@@ -116,10 +117,7 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                           Center(
                             child: Text(
                               'or sign up with email',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
+                              style: MaaruStyle.text.tiny
                             ),
                           ),
                           SizedBox(
@@ -266,10 +264,10 @@ class GoToSignInText extends StatelessWidget {
         InkWell(
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => LoginScreen()));
+                  .push(MaterialPageRoute(builder: (_) => LoginProviderScreen()));
             },
             child: Text(
-              'Log in',
+              'Login'.toUpperCase(),
               style: MaaruStyle.text.mediumDisable,
             ))
       ],

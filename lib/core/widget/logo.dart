@@ -12,7 +12,7 @@ class Logo extends StatelessWidget {
 
       child: Image.asset(
         "assets/icons/MARU_Logo_B2_Horizontal_03 copy.png",
-        height: size.height*0.12,
+        height: size.height*0.10,
       ),
       //  fit: BoxFit.cover,
     );

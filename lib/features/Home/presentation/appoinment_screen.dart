@@ -89,7 +89,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
-                      'Upcoming Appoinments',
+                      'Upcoming Appoinments'.toUpperCase(),
                       style: MaaruStyle.text.tiny,
                     ),
                   ),
@@ -126,18 +126,18 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Austin pet care',
+                                  Text('Austin pet care'.toUpperCase(),
                                       style: MaaruStyle.text.tiny),
-                                  Text('Pet walking',
+                                  Text('Pet walking'.toUpperCase(),
                                       style: MaaruStyle.text.medium),
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  Text('1357 Muno Manor',
+                                  Text('1357 Muno Manor'.toUpperCase(),
                                       style: TextStyle(
                                           fontSize: 11, color: Colors.grey)),
                                   Text(
-                                    'Austin,Tx 75923',
+                                    'Austin,Tx 75923'.toUpperCase(),
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 11),
                                   ),
@@ -160,12 +160,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                     height: size.height * 0.06,
                                   ),
                                   Text(
-                                    'Aug 21,2021',
+                                    'Aug 21,2021'.toUpperCase(),
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 11),
                                   ),
                                   Text(
-                                    '11:00 am',
+                                    '11:00 am'.toUpperCase(),
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.bold),
@@ -184,7 +184,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                   Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
-                      'Past Appoinments',
+                      'Past Appoinments'.toUpperCase(),
                       style: MaaruStyle.text.tiny,
                     ),
                   ),
@@ -221,20 +221,20 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Austin pet care',
+                                  Text('Austin pet care'.toUpperCase(),
                                       style: MaaruStyle.text.tiny),
-                                  Text('Pet walking',
+                                  Text('Pet walking'.toUpperCase(),
                                       style: MaaruStyle.text.medium),
                                   SizedBox(
                                     height: 20,
                                   ),
                                   Text(
-                                    '1357 Muno Manor',
+                                    '1357 Muno Manor'.toUpperCase(),
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 11),
                                   ),
                                   Text(
-                                    'Austin,Tx 75923',
+                                    'Austin,Tx 75923'.toUpperCase(),
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 11),
                                   ),
@@ -257,12 +257,12 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                     height: size.height * 0.06,
                                   ),
                                   Text(
-                                    'Aug 21,2021',
+                                    'Aug 21,2021'.toUpperCase(),
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 11),
                                   ),
                                   Text(
-                                    '12:00 am',
+                                    '12:00 am'.toUpperCase(),
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.bold),

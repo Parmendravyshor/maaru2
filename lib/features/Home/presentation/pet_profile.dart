@@ -99,7 +99,7 @@ class _PetProfileState extends State<PetProfile> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            'Sally',
+                                            'Sally'.toUpperCase(),
                                             style: MaaruStyle.text.large,
                                           ),
                                           Image.asset(
@@ -109,7 +109,7 @@ class _PetProfileState extends State<PetProfile> {
                                         ],
                                       ),
                                       Text(
-                                        'Scotis Terrior',
+                                        'Scotis Terrior'.toUpperCase(),
                                         style: MaaruStyle.text.tiny,
                                       )
                                     ],
@@ -149,7 +149,7 @@ class _PetProfileState extends State<PetProfile> {
                           builder: (_) => CreateregisterPetProfile1()));
                     },
                     child: Text(
-                      'Add New Pet',
+                      'Add New Pet'.toUpperCase(),
                       style: MaaruStyle.text.mediumGreen,
                     ))
               ]),

@@ -24,22 +24,24 @@ class _BookAppointment1State extends State<BookAppointment1> {
         bottomNavigationBar: CreateHomeScreen(
             // Color:MaaruColors.textButtonColor
             ),
-        body: SafeArea(
-            bottom: false,
-            child: SingleChildScrollView(
-                child: Column(
-              children: [
-                Container(
-                  width: 2000,
-                  child: Image.asset('assets/images/imgdd.jpg'),
-                ),
-                Container(
-                  decoration: const BoxDecoration(color: Colors.white),
-                  height: size.height * 1.1,
-                  width: size.width * 1,
-                  child: Container(
+        body: SingleChildScrollView(
+            child: Column(
+          children: [
+            Container(
+              width: 2000,
+              child: Image.asset('assets/images/imgdd.jpg'),
+            ),
+            Container(
+
+
+              decoration: const BoxDecoration(color: Colors.white),
+              width: size.width * 1,
+
+              child: Column(
+                children: [
+                  Container(
                     margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    color: Colors.white,
+
                     //height: size.height*0.80,
                     width: size.width * 1,
                     child: Column(
@@ -91,7 +93,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Austin Pet Groomer',
+                              'Austin Pet Groomer'.toUpperCase(),
                               style: MaaruStyle.text.xlarge,
                             ),
                             // SizedBox(
@@ -104,8 +106,8 @@ class _BookAppointment1State extends State<BookAppointment1> {
                           ],
                         ),
                         Text(
-                          '1115 Emihi Grove Austin, Textas 00000',
-                          style: MaaruStyle.text.tiny,
+                          '1115 Emihi Grove Austin, Textas 00000'.toUpperCase(),
+                          style: MaaruStyle.text.medium,
                         ),
                         SizedBox(
                           height: size.height * 0.02,
@@ -148,35 +150,34 @@ class _BookAppointment1State extends State<BookAppointment1> {
                           height: size.height * 0.01,
                         ),
                         Text(
-                          'About',
-                          style: MaaruStyle.text.tiniest,
+                          'About'.toUpperCase(),
+                          style: MaaruStyle.text.tiny,
                         ),
                         SizedBox(
                           height: size.height * 0.02,
                         ),
                         Text(
-                            "Lorem ipsum is placeholder text commonly used in\n"
-                            "the graphic, print, and publishing industries \n"
-                            "for previewing layouts and visual mackups.",
+                            "Lorem ipsum is placeholder text commonly used in\nthe graphic, print, and publishing industries \nfor previewing layouts and visual mackups.",
+
                             style: MaaruStyle.text.greyDisable),
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: size.height * 0.02,
                         ),
                         Text(
-                          'Hours Of Operation',
-                          style: MaaruStyle.text.tiniest,
+                          'Hours Of Operation'.toUpperCase(),
+                          style: MaaruStyle.text.tiny,
                         ),
-                        const SizedBox(
-                          height: 20,
+                        SizedBox(
+                          height: size.height * 0.01,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('monday-saturday',
+                            Text('monday-saturday'.toUpperCase(),
                                 textAlign: TextAlign.start,
                                 style: MaaruStyle.text.greyDisable),
-                            Text('9:00 am-6:00 pm',
-                                style: MaaruStyle.text.tiniest),
+                            Text('9:00 am-6:00 pm'.toUpperCase(),
+                                style: MaaruStyle.text.tiny),
                           ],
                         ),
                         SizedBox(
@@ -185,23 +186,16 @@ class _BookAppointment1State extends State<BookAppointment1> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('sunday',
+                            Text('sunday'.toUpperCase(),
                                 textAlign: TextAlign.start,
                                 style: MaaruStyle.text.greyDisable),
-                            Text('closed', style: MaaruStyle.text.tiniest),
+                            Text('closed'.toUpperCase(), style: MaaruStyle.text.tiny),
                           ],
                         ),
                         SizedBox(
-                          height: 20,
+                          height: size.height * 0.02,
                         ),
-                        ThemedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => BookAppointmentScreen3()));
-                          },
-                          text: ' Book Appointments',
-                          enabled: true,
-                        ),
+
                         // InkWell(
                         //     onTap: () {
                         //       Navigator.of(context).push(MaterialPageRoute(
@@ -216,9 +210,19 @@ class _BookAppointment1State extends State<BookAppointment1> {
                       ],
                     ),
                   ),
-                ),
-              ],
-            ))));
+                  ThemedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => BookAppointmentScreen3()));
+                    },
+                    text: ' Book Appointments',
+                    enabled: true,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        )));
   }
 }
 // icon:SizedBox(

@@ -159,11 +159,11 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                           crossAxisAlignment: CrossAxisAlignment
                                               .start,
                                           children: [
-                                            Text('Max',
+                                            Text('Max'.toUpperCase(),
                                                 style: MaaruStyle.text.large,
                                                 textAlign: TextAlign.left),
                                             Text(
-                                              'Jack  Russell',
+                                              'Jack  Russell'.toUpperCase(),
                                               style: MaaruStyle.text.medium,
                                             ),
                                             SizedBox(
@@ -174,7 +174,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                               height: 30,
                                             ),
                                             Text(
-                                              'Known allergies',
+                                              'Known allergies'.toUpperCase(),
                                               style: MaaruStyle.text.tiny,
                                             ),
                                             SizedBox(
@@ -184,7 +184,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                               style: MaaruStyle.text.tiny,
                                                 maxLines: 2,
                                                 decoration: InputDecoration(
-                                                    hintText: 'Seprated by comma',
+                                                    hintText: 'Seprated by comma'.toUpperCase(),
                                                     hintStyle: MaaruStyle.text
                                                         .tiny,
                                                     border: OutlineInputBorder(
@@ -214,7 +214,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                             .start,
                                                         children: [
                                                           Text(
-                                                            'Pet Vaccines',
+                                                            'Pet Vaccines'.toUpperCase(),
                                                             style: MaaruStyle
                                                                 .text.tiny,
                                                           ),
@@ -232,11 +232,11 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                           //   }
 
                                                           child: RoundedButton(
-                                                            buttonName: 'Upload Vaccine Record',
+                                                            buttonName: 'Upload Vaccine Record'.toUpperCase(),
                                                             Color: MaaruColors
                                                                 .primaryColorsuggesion,
                                                             Color1: MaaruColors
-                                                                .button2Color,
+                                                                .whiteColor,
                                                           )),
                                                       GestureDetector(
                                                         child:
@@ -293,7 +293,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                                           shape: BoxShape
                                                               .circle),
                                                       child: Text(
-                                                        'Back',
+                                                        'BACK',
                                                         style: MaaruStyle.text
                                                             .greyDisable,
                                                       ),

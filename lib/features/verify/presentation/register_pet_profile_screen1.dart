@@ -131,6 +131,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>
 
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     // _image = _prefHelper.getStringByKey(MaruConstant.img, "");
 
     return Scaffold(
@@ -180,8 +181,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>
                         children: <Widget>[
                           GestureDetector(
                             child: Container(
-                              width: 200.0,
-                              height: 200.0,
+                              width: size.width*0.50,
+                              height: size.height*0.25,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(

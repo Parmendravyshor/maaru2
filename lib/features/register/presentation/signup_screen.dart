@@ -140,11 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Center(
                       child: Text(
                         'or sign up with email',
-                        style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500)),
+                        style: MaaruStyle.text.tiny
                       ),
                     ),
                     SizedBox(
@@ -156,7 +152,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            ThemedTextField("First Name", TextInputType.name,
+                            ThemedTextField("FIRST NAME", TextInputType.name,
                                 textinputaction2: TextInputAction.next,
                                 onChanged: (text) {
                              BlocProvider.of<RegisterBloc>(context)
@@ -165,7 +161,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             SizedBox(
                               height: 5,
                             ),
-                            ThemedTextField("Last Name", TextInputType.name,
+                            ThemedTextField("LAST NAME", TextInputType.name,
                                 textInputAction: TextInputAction.next,
                                 onChanged: (text) {
                               BlocProvider.of<RegisterBloc>(context)
@@ -174,7 +170,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             SizedBox(
                               height: 5,
                             ),
-                            ThemedTextField("Email", TextInputType.emailAddress,
+                            ThemedTextField("EMAIL", TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
                                 onChanged: (text) {
                               BlocProvider.of<RegisterBloc>(context)
@@ -184,7 +180,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               height: 5,
                             ),
                             ThemedTextField(
-                              "Password",
+                              "PASSWORD",
                               TextInputType.text,
                               textInputAction: TextInputAction.done,
                               password: true,
@@ -202,48 +198,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             SizedBox(
                               height: 20,
                             ),
-                            Container(
-                              margin: EdgeInsets.only(left: 15,right: 15),
-                              child: ThemedButton(
-                                  text: "JOIN",
-                                  onPressed: () {
-                                    String first_name =
-                                        _first_nameController.text;
-                                    String lname = _lnameController.text;
-                                    String email = _emailController.text;
-                                    String password = _passwordController.text;
+                            ThemedButton(
+                                text: "JOIN",
+                                onPressed: () {
+                                  String first_name =
+                                      _first_nameController.text;
+                                  String lname = _lnameController.text;
+                                  String email = _emailController.text;
+                                  String password = _passwordController.text;
 
-                                    if (first_name.isEmpty) {
-                                      AlertManager.showErrorMessage(
-                                          "Please enter first name", context);
-                                    } else if (lname.isEmpty) {
-                                      AlertManager.showErrorMessage(
-                                          "Please enter last name", context);
-                                    } else if (validateEmail(email) != null) {
-                                      AlertManager.showErrorMessage(
-                                          "Please enter valid email", context);
-                                    } else if (password.length < 8) {
-                                      AlertManager.showErrorMessage(
-                                          "Password must be 6 characters long",
-                                          context);
+                                  if (first_name.isEmpty) {
+                                    AlertManager.showErrorMessage(
+                                        "Please enter first name", context);
+                                  } else if (lname.isEmpty) {
+                                    AlertManager.showErrorMessage(
+                                        "Please enter last name", context);
+                                  } else if (validateEmail(email) != null) {
+                                    AlertManager.showErrorMessage(
+                                        "Please enter valid email", context);
+                                  } else if (password.length < 8) {
+                                    AlertManager.showErrorMessage(
+                                        "Password must be 6 characters long",
+                                        context);
 
-                                      //  enabled = true;
-                                    } else {
-                                      BlocProvider.of<RegisterBloc>(context)
-                                          .add(RegisterButtonTapped());
-                                      // Navigator.of(context).push(
-                                      //     MaterialPageRoute(
-                                      //         builder: (_) =>
-                                      //             CreateregisterPetProfile1()));
-                                    }
-                                    // else {
-                                    //   AlertManager.disclaimerPopup(context,
-                                    //       onSuccess: () {
-                                    //
-                                    //       });
-                                    // }
-                                  }),
-                            ),
+                                    //  enabled = true;
+                                  } else {
+                                    BlocProvider.of<RegisterBloc>(context)
+                                        .add(RegisterButtonTapped());
+                                    // Navigator.of(context).push(
+                                    //     MaterialPageRoute(
+                                    //         builder: (_) =>
+                                    //             CreateregisterPetProfile1()));
+                                  }
+                                  // else {
+                                  //   AlertManager.disclaimerPopup(context,
+                                  //       onSuccess: () {
+                                  //
+                                  //       });
+                                  // }
+                                }),
                             SizedBox(
                               height: 20,
                             ),
@@ -286,7 +279,7 @@ class GoToSignInText extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (_) => LoginScreen()));
             },
             child: Text(
-              'LOG IN',
+              'LOGIN',
               style: MaaruStyle.text.mediumDisable,
             ))
       ],

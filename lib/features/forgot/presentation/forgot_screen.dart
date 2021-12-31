@@ -47,6 +47,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     return BlocProvider(
       create: (context) => KiwiContainer().resolve<ResetBloc>(),
       child: Scaffold(
@@ -93,19 +94,24 @@ class ResetWidget extends State<ResetPasswordScreen> {
                           height: MediaQuery.of(context).size.height,
                           child: Column(
                             children: [
-                              Container(
-                                  margin:const EdgeInsets.only(top: 80),
-                                  child: Align(
-                                      alignment: Alignment.center,
-                                      child: Logo())),
-
-                              const   SizedBox(
-                                height: 10,
+                              SizedBox(height: size.height*0.10,),
+                              Text(
+                                'Forgot Your Password?',
+                                style: MaaruStyle.text.tiny,
                               ),
-
-                              const  SizedBox(
-                                height: 20,
+                              SizedBox(height: size.height*0.02,),
+                              Text(
+                                'Enter your registered email below\nto receive password reset instruction',
+                                style: MaaruStyle.text.greyDisable,
+                                textAlign: TextAlign.center,
                               ),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Logo()),
+
+                              SizedBox(height: size.height*0.01,),
+
+
                               ThemedTextField(
                                   "EMAIL", TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
@@ -118,7 +124,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
                               ),
                               Container(
                                 child: ThemedButton(
-                                    text: "SEND OTP",
+                                    text: "SEND",
                                     onPressed: () {
                                       if (state
                                       is ResetFormValidationSuccess) {
@@ -127,10 +133,32 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                       }
                                     },
                                     enabled: true),
-                                margin: EdgeInsets.only(left: 20,right: 20),
+
                               ),
-                             const SizedBox(
-                                height: 10,
+                              SizedBox(
+                                height: size.height*0.03,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Remember Password?',
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => LoginScreen()));
+                                    },
+                                    child: Text(
+                                      'LOGIN',
+                                      style: MaaruStyle.text.mediumDisable,
+                                    ),
+
+                                  ),
+
+                                ],
                               ),
                               state is ResetInProgress
                                   ? Center(
@@ -258,20 +286,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  decoration: new BoxDecoration(
-                      border: Border.all(
-                        color: MaaruStyle.colors.borderColor,
-                        width: 1,
-                      ),
-                      color: MaaruStyle.colors.bottomBg),
-                  child: Center(
-                    child: GoToSignInText(),
-                  ),
-                ),
-              ),
+
             ],
           ),
         ),
@@ -280,18 +295,3 @@ class ResetWidget extends State<ResetPasswordScreen> {
   }
 }
 
-/// Text for showing at bottom of screen
-/// Tapping on it should take user to reset password screen
-class GoToSignInText extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: FlatButton(
-        height: ButtonMinHeight,
-        onPressed: () => {Navigator.pop(context)},
-        child: Text("GO TO LOG IN", style: MaaruStyle.text.tiny),
-      ),
-    );
-  }
-}

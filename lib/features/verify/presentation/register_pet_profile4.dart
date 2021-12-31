@@ -24,21 +24,27 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
   Color circlecolor4 = MaaruColors.whiteColor;
   Color circlecolor5 = MaaruColors.whiteColor;
   Color circlecolor6 = MaaruColors.whiteColor;
-  Widget choosecircle(Image image, String text, Color color) {
-    return CircleAvatar(
-      radius: 55,
-      backgroundColor: MaaruColors.greyColorText,
-      child: CircleAvatar(
-        backgroundColor: color,
-        radius: 53,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+
+  Widget choosecontainer(
+      BuildContext context, Image image, String text, Color color) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: MaaruColors.textfeildline,width: size.width*0.01),
+        color: color,
+      ),
+      height: size.height * 0.10,
+      width: size.width * 0.43,
+      child: Container(
+        margin: EdgeInsets.only(left: 12, top: 9, bottom: 9),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             image,
-            Text(
-              text,
-              style: kRegistration4PlainText,
+            SizedBox(
+              width: size.width * 0.02,
             ),
+            Text(text,style: MaaruStyle.text.tiny,),
           ],
         ),
       ),
@@ -90,10 +96,10 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Max',
+                                  Text('Max'.toUpperCase(),
                                       style: MaaruStyle.text.large,
                                       textAlign: TextAlign.left),
-                                  Text('Jack  Russell',),
+                                  Text('Jack  Russell'.toUpperCase(),),
                                   SizedBox(
                                     width: 20,
                                   ),
@@ -102,141 +108,130 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                     height: 20,
                                   ),
                                   Text(
-                                    'Pet Needs',
+                                    'Pet Needs'.toUpperCase(),
                                     style: MaaruStyle.text.small,
                                   ),
-                                  Container(
-                                    height: 350,
-                                    width: 360,
-                                    child: Stack(
-                                      children: <Widget>[
-                                        Positioned(
-                                          top: 30,
-                                          child: GestureDetector(
+                                  Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          GestureDetector(
                                             onTap: () {
                                               setState(() {
                                                 circlecolor1 == MaaruColors.whiteColor
-
-                                                    ? circlecolor1 =  Color(0xff93b7fd)
-
-                                                    : circlecolor1 =  MaaruColors.whiteColor;
+                                                    ? circlecolor1 = MaaruColors.groomingcolor
+                                                    : circlecolor1 = MaaruColors.whiteColor;
                                               });
                                             },
-                                            child: choosecircle(
+                                            child: choosecontainer(
+                                                context,
                                                 Image.asset(
                                                   'assets/icons/Fill 1.png',
                                                   height: 35,
                                                 ),
-                                                'Grooming',
+                                                'GROOMING',
                                                 circlecolor1),
                                           ),
-                                        ),
-                                        Positioned(
-                                            left: 200,
-                                            child: GestureDetector(
+                                          GestureDetector(
                                               onTap: () {
                                                 setState(() {
                                                   circlecolor2 == MaaruColors.whiteColor
-
-                                                      ? circlecolor2 =Color(0xffff9976)
-
+                                                      ? circlecolor2 = MaaruColors.vetcolor
                                                       : circlecolor2 = MaaruColors.whiteColor;
                                                 });
                                               },
-                                              child: choosecircle(
+                                              child: choosecontainer(
+                                                  context,
                                                   Image.asset(
                                                     'assets/icons/Fill 1 (2).png',
                                                     height: 35,
                                                   ),
-                                                  'Vet',
-                                                  circlecolor2),
-                                            )),
-                                        Positioned(
-                                            top: 100,
-                                            left: 110,
-                                            child: GestureDetector(
+                                                  'VET',
+                                                  circlecolor2)),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: size.height * 0.02,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          GestureDetector(
                                               onTap: () {
                                                 setState(() {
                                                   circlecolor3 == MaaruColors.whiteColor
-
-                                                      ? circlecolor3 = Color(0xfffff2bf)
-
+                                                      ? circlecolor3 = MaaruColors.hotelcolor
                                                       : circlecolor3 = MaaruColors.whiteColor;
                                                 });
                                               },
-                                              child: choosecircle(
+                                              child: choosecontainer(
+                                                  context,
                                                   Image.asset(
                                                     'assets/icons/Fill 1 (3).png',
                                                     height: 35,
                                                   ),
-                                                  'Hotel',
-                                                  circlecolor3),
-                                            )),
-                                        Positioned(
-                                            top: 160,
-                                            child: GestureDetector(
+                                                  'HOTEL',
+                                                  circlecolor3)),
+                                          GestureDetector(
                                               onTap: () {
                                                 setState(() {
                                                   circlecolor4 == MaaruColors.whiteColor
-
-                                                      ? circlecolor4 = MaaruColors.button2Color
-
-
+                                                      ? circlecolor4 = MaaruColors.walkingcolor
                                                       : circlecolor4 = MaaruColors.whiteColor;
                                                 });
                                               },
-                                              child: choosecircle(
+                                              child: choosecontainer(
+                                                  context,
                                                   Image.asset(
                                                     'assets/icons/Fill 1 (1).png',
                                                     height: 35,
                                                   ),
-                                                  'Walking',
-                                                  circlecolor4),
-                                            )),
-                                        Positioned(
-                                            top: 130,
-                                            left: 240,
-                                            child: GestureDetector(
+                                                  'WALKING',
+                                                  circlecolor4)),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: size.height * 0.02,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          GestureDetector(
                                               onTap: () {
                                                 setState(() {
                                                   circlecolor5 == MaaruColors.whiteColor
-
-                                                      ? circlecolor5 = Color(0xff4f75fe)
-
+                                                      ? circlecolor5 = MaaruColors.daycarecolor
                                                       : circlecolor5 = MaaruColors.whiteColor;
                                                 });
                                               },
-                                              child: choosecircle(
+                                              child: choosecontainer(
+                                                  context,
                                                   Image.asset(
                                                     'assets/icons/Background.png',
                                                     height: 35,
                                                   ),
-                                                  'Daycare',
-                                                  circlecolor5),
-                                            )),
-                                        Positioned(
-                                            top: 230,
-                                            left: 150,
-                                            child: GestureDetector(
+                                                  'DAYCARE',
+                                                  circlecolor5)),
+                                          GestureDetector(
                                               onTap: () {
                                                 setState(() {
                                                   circlecolor6 == MaaruColors.whiteColor
-
-                                                      ? circlecolor6 = Color(0xffFc744f)
-
+                                                      ? circlecolor6 = MaaruColors.hospitalcolor
                                                       : circlecolor6 = MaaruColors.whiteColor;
                                                 });
                                               },
-                                              child: choosecircle(
+                                              child: choosecontainer(
+                                                  context,
                                                   Image.asset(
                                                     'assets/icons/Background (1).png',
                                                     height: 35,
                                                   ),
-                                                  'Hospital',
-                                                  circlecolor6),
-                                            ))
-                                      ],
-                                    ),
+                                                  'HOSPITAL',
+                                                  circlecolor6)),
+                                        ],
+                                      )
+                                    ],
                                   ),
                                   const SizedBox(
                                     height: 40,
@@ -256,7 +251,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                                 color:  Colors.white12,
                                                 shape: BoxShape.circle),
                                             child: Text(
-                                              'Back',style: MaaruStyle.text.greyDisable,
+                                              'BACK',style: MaaruStyle.text.greyDisable,
                                             ),
                                           ),
                                         ),

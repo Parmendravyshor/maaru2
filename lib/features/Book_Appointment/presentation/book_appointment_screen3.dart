@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 
@@ -103,32 +104,23 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                                           )),
                                     ],
                                   ),
-                                  Row(
-                                    //  mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Austin Pet Groomer',
-                                        style: MaaruStyle.text.tiniest,
-                                      ),
-                                      SizedBox(
-                                        width: size.width * 0.16,
-                                      ),
-                                      Image.asset(
-                                        'assets/icons/New Project (2).png',
-                                        width: size.width * 0.10,
-                                      )
-                                    ],
+                                  Text(
+                                    'Austin Pet Groomer'.toUpperCase(),
+                                    style: MaaruStyle.text.xlarge,
+                                  ),
+                                  SizedBox(
+                                    width: size.width * 0.16,
                                   ),
                                   Text(
-                                    '1115 Emihi Grove Austin, Textas 00000',
-                                    style: MaaruStyle.text.tiny,
+                                    '1115 Emihi Grove Austin, Textas 00000'.toUpperCase(),
+                                    style: MaaruStyle.text.medium,
                                   ),
                                   SizedBox(
                                     height: 20,
                                   ),
                                   Text(
-                                    'Book Appointments',
-                                    style: MaaruStyle.text.tiniest,
+                                    'Book Appointments'.toUpperCase(),
+                                    style: MaaruStyle.text.tiny,
                                   ),
                                 ],
                               )))
@@ -138,8 +130,8 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Services',
-                      style: MaaruStyle.text.tiniest,
+                      'Services'.toUpperCase(),
+                      style: MaaruStyle.text.tiny,
                     ),
                   ),
                   SizedBox(height: 20,),
@@ -157,7 +149,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                               borderRadius: BorderRadius.circular(10.7),
                               borderSide: BorderSide()),
                           contentPadding: EdgeInsets.only(top: 10),
-                          hintText: 'Select a Services',
+                          hintText: 'Select a Services'.toUpperCase(),
                           hintStyle: MaaruStyle.text.greyDisable,
                           fillColor: Colors.white,
                           suffixIcon: Container(
@@ -173,11 +165,16 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                   SizedBox(
                     height: 20,
                   ),
+
+
+                  SizedBox(
+                    height: 20,
+                  ),
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Provider',
-                      style: MaaruStyle.text.tiniest,
+                      'Pet'.toUpperCase(),
+                      style: MaaruStyle.text.tiny,
                     ),
                   ),
                   SizedBox(
@@ -197,7 +194,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                               borderRadius: BorderRadius.circular(10.7),
                               borderSide: BorderSide()),
                           contentPadding: EdgeInsets.only(top: 10),
-                          hintText: 'Select a Provider',
+                          hintText: 'Select  pet'.toUpperCase(),
                           hintStyle: MaaruStyle.text.greyDisable,
                           fillColor: Colors.white,
                           suffixIcon: Container(
@@ -216,48 +213,8 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Pet',
-                      style: MaaruStyle.text.tiniest,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.only(right: 20, left: 20),
-                    color: Colors.white,
-                    height: 40,
-                    //   width: 200,
-                    child: TextFormField(
-                      textAlign: TextAlign.center,
-                      cursorColor: Colors.black,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.7),
-                              borderSide: BorderSide()),
-                          contentPadding: EdgeInsets.only(top: 10),
-                          hintText: 'Select  pet',
-                          hintStyle: MaaruStyle.text.greyDisable,
-                          fillColor: Colors.white,
-                          suffixIcon: Container(
-                              margin: EdgeInsets.all(10),
-                              child: Image.asset(
-                                'assets/icons/icone-setting-30.png',
-                                height: 10,
-                                width: 20,
-                                // width: 30,
-                              ))),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Morning',
-                      style: MaaruStyle.text.tiniest,
+                      'Morning'.toUpperCase(),
+                      style: MaaruStyle.text.tiny,
                     ),
                   ),
                   SizedBox(
@@ -267,7 +224,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                       height: 40,
                       width: 400,
                       child: Padding(
-                          padding: EdgeInsets.only(right: 0, left: 0),
+                          padding: EdgeInsets.only(right: 20, left: 20),
                           child: ListView(scrollDirection: Axis.horizontal, children: [
                             ChoiceRow(
                               lebal1: '10:00 AM',
@@ -283,8 +240,8 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Afternoon',
-                      style: MaaruStyle.text.tiniest,
+                      'Afternoon'.toUpperCase(),
+                      style: MaaruStyle.text.tiny,
                     ),
                   ),
                   SizedBox(
@@ -312,8 +269,8 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                       child: Container(
                           margin: EdgeInsets.only(left: 20),
                           child: Text(
-                            'Booking Cost',
-                            style: MaaruStyle.text.large,
+                            'Booking Cost'.toUpperCase(),
+                            style: MaaruStyle.text.tiny,
                           ))),
                   SizedBox(
                     height: 20,
@@ -324,11 +281,11 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Booking Total',
+                            'Booking Total'.toUpperCase(),
                             style: MaaruStyle.text.tiny,
                           ),
                           Text(
-                            " \$ 85.0",
+                            " \$ 85.0".toUpperCase(),
                             style: MaaruStyle.text.tiny,
                           )
                         ],
@@ -342,7 +299,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Taxes',
+                            'Taxes'.toUpperCase(),
                             style: MaaruStyle.text.tiny,
                           ),
                           Text(
@@ -363,7 +320,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Total',
+                            'Total'.toUpperCase(),
                             style: MaaruStyle.text.tiny,
                           ),
                           Text(
@@ -379,6 +336,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) => BookedConfirm()));
+
                     },
                     text: 'Book Appointment',
                     enabled: true,
@@ -581,7 +539,7 @@ class _ChoiceButtonState extends State<ChoiceButton> {
           ),
           borderRadius: BorderRadius.all(Radius.circular(10)),
           color: widget.isPressed
-              ? MaaruColors.blueColor
+              ? MaaruColors.button2Color
               : Colors.white,
           // border: Border.all(color: Colors.grey),
         ),

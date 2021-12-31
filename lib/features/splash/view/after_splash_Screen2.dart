@@ -10,82 +10,74 @@ class AfterSplashScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Image.asset(
-          'assets/icons/Splash-Provider-or-User-screen-svg-new (3).png',
-          height: 3000,
-          width: 3000,
-          fit: BoxFit.cover,
-        ),
-        Container(
-            alignment: Alignment.center,
-            child: BackgroundImage(
-              assetImage: 'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
-              //  hight: 200,
-              widt: 300,
-            )),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Column(
-            children: [
-              Flexible(
-                child: Center(),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  InkWell(
-                    onTap: () {
+    return
+      Scaffold(
+        body:Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+
+                  image: AssetImage('assets/icons/Splash-Provider-or-User-screen-svg-new (3).png'))),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Image.asset(
+                  'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
+                  height: size.height * 0.14,
+                ),
+                SizedBox(
+                  height: size.height * 0.25,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LoginProviderScreen()));
+                  },
+                  child: RoundedButton(
+                    buttonName: 'LOGIN',
+                    Color1: MaaruColors.whiteColor,
+                    Color: MaaruColors.blueColor,
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
+                Container(
+                  height: size.height * 0.09,
+                  width: size.width * 0.85,
+                  decoration: BoxDecoration(
+                    color: MaaruColors.button2Color,
+//  borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      width: 2,
+                      color: MaaruColors.whiteColor,
+//    color: MaaruColors.buttonTextColor,
+                    ),
+                  ),
+                  child: FlatButton(
+                    onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LoginProviderScreen()));
+                          builder: (_) => RegisterPoviderScreen()));
                     },
-                    child: RoundedButton(
-                      buttonName: 'Login',
-                      Color1: MaaruColors.blueColor,
-                      Color: MaaruColors.button2Color,
+                    child: Text(
+                      'CREATE ACCOUNT',
+                      style: TextStyle(
+                          color: MaaruColors.buttonColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
                     ),
                   ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    height: size.height * 0.09,
-                    width: size.width * 0.85,
-                    decoration: BoxDecoration(
-                    //  borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        width: 2,
-                        color: MaaruColors.blueColor,
-                        //    color: MaaruColors.buttonTextColor,
-                      ),
-                    ),
-                    child: FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => RegisterPoviderScreen()));
-                      },
-                      child: Text(
-                        'Create account',
-                        style: TextStyle(
-                           color: MaaruColors.buttonColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-            ],
+                ),
+                SizedBox(
+                  height: size.height * 0.15,
+                ),
+              ],
+            ),
           ),
-        )
-      ],
-    );
+        ) ,
+      );
+
   }
 }
+

@@ -79,6 +79,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
   }
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     _image = _prefHelper.getStringByKey(MaruConstant.img, "");
 
     return BlocProvider(
@@ -117,8 +118,8 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                       height: 15,
                     ),
                     Container(
-                      height: 300.0,
-                      color: Colors.white,
+                      height: size.height*0.30,
+                      color: MaaruColors.lightbackground,
                       child: Column(
                         children: <Widget>[
                           BackArrowButton(),
@@ -168,7 +169,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                       ),
                     ),
                     Container(
-                      color: Color(0xffFFFFFF),
+                      color: Colors.white,
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 25.0),
                         child: Column(
@@ -195,7 +196,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                                         mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
                                         Text(
-                                          'Edit Profile',
+                                          'Edit Profile'.toUpperCase(),
                                           style: MaaruStyle.text.tiniest  ,
                                         ),
                                       ],
@@ -225,29 +226,24 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                                       MainAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
-                                        Text(
-                                          'First Name',
-                                          style: MaaruStyle.text.greyDisable,
-                                        ),
+
                                       ],
                                     ),
                                   ],
                                 )),
-                            Padding(
-                                padding: EdgeInsets.only(top: 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
-                                    Flexible(
-                                      child: ThemedTextField(
-                                        "",
-                                        TextInputType.text,
-                                        enabled: !_status,
-                                        editingController: _fnameController,
-                                      ),
-                                    ),
-                                  ],
-                                )),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Flexible(
+                                  child: ThemedTextField(
+                                    "First Name",
+                                    TextInputType.text,
+                                    enabled: !_status,
+                                    editingController: _fnameController,
+                                  ),
+                                ),
+                              ],
+                            ),
                             Padding(
                                 padding: EdgeInsets.only(
                                     top: 0.0,
@@ -262,10 +258,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                                       MainAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
-                                        Text(
-                                          'Last Name',
-                                          style: MaaruStyle.text.greyDisable,
-                                        ),
+
                                       ],
                                     ),
                                   ],
@@ -277,7 +270,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                                   children: <Widget>[
                                     Flexible(
                                       child: ThemedTextField(
-                                        "",
+                                        "last name",
                                         TextInputType.text,
                                         enabled: !_status,
                                         editingController: _lnameController,
@@ -300,8 +293,8 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
                                         Text(
-                                          'Email ID',
-                                          style:  MaaruStyle.text.greyDisable,
+                                          'Email ID'.toUpperCase(),
+                                          style:  MaaruStyle.text.tiny,
                                         ),
                                       ],
                                     ),
@@ -336,10 +329,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                                       MainAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
-                                        Text(
-                                          'Mobile',
-                                          style: MaaruStyle.text.greyDisable,
-                                        ),
+
                                       ],
                                     ),
                                   ],

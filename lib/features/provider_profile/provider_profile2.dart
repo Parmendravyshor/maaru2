@@ -26,7 +26,7 @@ class _ProviderProfile2State extends State<ProviderProfile2> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.white,
         bottomNavigationBar: CreateHomeScreen(
           // Color:MaaruColors.textButtonColor
         ),
@@ -46,187 +46,165 @@ class _ProviderProfile2State extends State<ProviderProfile2> {
                   ),
 
                   Container(
-                    height: size.height * 1.1,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20)),
-                        color: Colors.white),
+                      margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
+                      color: Color(0xffFFFFFF),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
 
-                    child: Container(
-                        margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                        color: Color(0xffFFFFFF),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            // SizedBox(
+                            //   height: size.height * 0.10,
+                            // ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (_) => ProviderProfile1()));
+                                    },
+                                    child:
+                                    Image.asset(
+                                      'assets/icons/Rectangle copy 3.png',
+                                      height: 40,
+                                      width: 40,
+                                    )),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (_) => ProviderProfile2()));
+                                    },
+                                    child: Image.asset(
+                                      'assets/icons/Rectangle copy 3.png',
+                                      height: 40,
+                                      width: 40,
 
-                              // SizedBox(
-                              //   height: size.height * 0.10,
-                              // ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  InkWell(
-                                      onTap: () {
-                                        Navigator.of(context).push(MaterialPageRoute(
-                                            builder: (_) => ProviderProfile1()));
-                                      },
-                                      child:
-                                      Image.asset(
-                                        'assets/icons/Rectangle copy 3.png',
-                                        height: 40,
-                                        width: 40,
-                                      )),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  InkWell(
-                                      onTap: () {
-                                        Navigator.of(context).push(MaterialPageRoute(
-                                            builder: (_) => ProviderProfile2()));
-                                      },
-                                      child: Image.asset(
-                                        'assets/icons/Rectangle copy 3.png',
-                                        height: 40,
-                                        width: 40,
+                                    )),
+                                SizedBox(
+                                  width: 10,
+                                ),
 
-                                      )),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                      'Austin Pet Groomer',
-                                      style: MaaruStyle.text.tiniest
-                                  ),
+                              ],
+                            ),
+                            Text(
+                                'Austin Pet Groomer'.toUpperCase(),
+                                style: MaaruStyle.text.xlarge
+                            ),
 // SizedBox(width: size.width*0.34,),
-                                  Image.asset('assets/icons/New Project (2).png',
-                                      width: size.width * 0.08)
-                                ],
+
+                            Text(
+                              '1115 Emihi Grove Austin, Textas 00000'.toUpperCase(),
+                              style:
+                              MaaruStyle.text.medium,),
+                            SizedBox(
+                              height: size.height * 0.02,
+                            ),
+                            Indicator(
+                              text: ' 5 ',
+                              text2: '(154)  ',
+                              assetImage: 'assets/images/New Project (32).png',
+                            ),
+                            Indicator(
+                              text: ' 4 ',
+                              text2: '(21)    ',
+                              assetImage: 'assets/images/New Project (33).png',
+                            ),
+                            Indicator(
+                              text: ' 3 ',
+                              text2: '(4)      ',
+                              assetImage: 'assets/images/New Project (34).png',
+                            ),
+                            Indicator(
+                              text: ' 2 ',
+                              text2: '(0)      ',
+                              assetImage: 'assets/images/New Project (35).png',
+                            ),
+                            Indicator(
+                              text: ' 1 ',
+                              text2: '(0)      ',
+                              assetImage: 'assets/images/New Project (35).png',
+                            ),
+                            SizedBox(
+                              height: size.height * 0.02,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.black,
+                                  backgroundImage: NetworkImage(
+                                      'https://images.squarespace-cdn.com/content/v1/5ef8f04e964fab1126c5cf8b/1603736695413-4UCKNWV23VVSE63BQ9NR/Less+Professional+Profile.JPG'),
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.03,
+                                ),
+                                Text(
+                                  'Jimmy Hanks'.toUpperCase(),
+                                  style: MaaruStyle.text.tiny,
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.40,
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  size: 20,
+                                  color: Colors.yellowAccent,
+                                ),
+                                Text(
+                                  '5',
+                                 style: MaaruStyle.text.tiny,
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 55),
+                              child: Text(
+                                  'Lorem ipsum dolor sit amet,consectur adipiscing elit,sed do ejusmod tempor incididunt ut labore et dolore magna aliqua.',
+                                  style: MaaruStyle.text.greyDisable
                               ),
-                              Text(
-                                '1115 Emihi Grove Austin, Textas 00000',
-                                style:
-                                MaaruStyle.text
-                                    .tiny,),
-                              SizedBox(
-                                height: size.height * 0.02,
-                              ),
-                              Indicator(
-                                text: ' 5 ',
-                                text2: '(154)  ',
-                                assetImage: 'assets/images/New Project (32).png',
-                              ),
-                              Indicator(
-                                text: ' 4 ',
-                                text2: '(21)    ',
-                                assetImage: 'assets/images/New Project (33).png',
-                              ),
-                              Indicator(
-                                text: ' 3 ',
-                                text2: '(4)      ',
-                                assetImage: 'assets/images/New Project (34).png',
-                              ),
-                              Indicator(
-                                text: ' 2 ',
-                                text2: '(0)      ',
-                                assetImage: 'assets/images/New Project (35).png',
-                              ),
-                              Indicator(
-                                text: ' 1 ',
-                                text2: '(0)      ',
-                                assetImage: 'assets/images/New Project (35).png',
-                              ),
-                              SizedBox(
-                                height: size.height * 0.02,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CircleAvatar(
-                                    radius: 20,
-                                    backgroundColor: Colors.black,
-                                    backgroundImage: NetworkImage(
-                                        'https://images.squarespace-cdn.com/content/v1/5ef8f04e964fab1126c5cf8b/1603736695413-4UCKNWV23VVSE63BQ9NR/Less+Professional+Profile.JPG'),
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.03,
-                                  ),
-                                  Text(
-                                    'Jimmy Hanks',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.40,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    size: 20,
-                                    color: Colors.yellowAccent,
-                                  ),
-                                  Text(
-                                    '5',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                ],
-                              ),
-                              Padding(
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.black,
+                                  backgroundImage: NetworkImage(
+                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU'),
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.03,
+                                ),
+                                Text(
+                                  'Elen Brock'.toUpperCase(),
+                                  style: MaaruStyle.text.tiny,
+                                ),
+                                SizedBox(
+                                  width: size.width * 0.40,
+                                ),
+                                Icon(
+                                  Icons.star,
+                                  size: 20,
+                                  color: Colors.yellowAccent,
+                                ),
+                                Text(
+                                  '5',
+                                  style: MaaruStyle.text.tiny,
+                                ),
+                              ],
+                            ),
+                            Padding(
                                 padding: const EdgeInsets.only(left: 55),
                                 child: Text(
                                     'Lorem ipsum dolor sit amet,consectur adipiscing elit,sed do ejusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                    style: MaaruStyle.text.tiny
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CircleAvatar(
-                                    radius: 20,
-                                    backgroundColor: Colors.black,
-                                    backgroundImage: NetworkImage(
-                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwgu1A5zgPSvfE83nurkuzNEoXs9DMNr8Ww&usqp=CAU'),
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.03,
-                                  ),
-                                  Text(
-                                    'Elen Brock',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: size.width * 0.40,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    size: 20,
-                                    color: Colors.yellowAccent,
-                                  ),
-                                  Text(
-                                    '5',
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                  padding: const EdgeInsets.only(left: 55),
-                                  child: Text(
-                                      'Lorem ipsum dolor sit amet,consectur adipiscing elit,sed do ejusmod tempor incididunt ut labore et dolore magna aliqua.',
-                                      style: MaaruStyle.text.tiny
-                                  )),
-                              SizedBox(height: 10,),
-                            ])),
-                  ),
+                                    style: MaaruStyle.text.greyDisable
+                                )),
+                            SizedBox(height: 10,),
+                          ])),
 
 
                 ]),

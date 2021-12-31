@@ -318,59 +318,63 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
 
   double height = 45;
   double leftpad = 310;
-  Container RepeatContainer(String image) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: MaaruColors.textfeildline, width: 2),
-        ),
-      height: 120,
+  Widget RepeatContainer(String image) {
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>BookAppointment1()));
+      },
       child: Container(
-        color: Colors.white,
-        margin: EdgeInsets.all(13.0),
-        child: Row(
-          children: [
-            Container(
-              height: 100,
-              width: 90,
-              decoration: BoxDecoration(
-                  gradient:LinearGradient(colors: [Colors.black,Colors.grey.shade500]),
-                  borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(
-                      fit: BoxFit.cover, image: AssetImage(image))),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Franks Pet Lounge',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
-                ),
-                Text(
-                  'Pet Daycare',
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  children: [
-                    Image.asset(
-                      'assets/icons/ffth.png',
-                      height: 25,
-                    ),
-                    Text(
-                      '38 Reviews (5.0)',
-                      style:
-                      TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
-                    )
-                  ],
-                )
-              ],
-            )
-          ],
+        decoration: BoxDecoration(
+            border: Border.all(color: MaaruColors.textfeildline, width: 2),
+          ),
+        height: 120,
+        child: Container(
+          color: Colors.white,
+          margin: EdgeInsets.all(13.0),
+          child: Row(
+            children: [
+              Container(
+                height: 100,
+                width: 90,
+                decoration: BoxDecoration(
+                    gradient:LinearGradient(colors: [Colors.black,Colors.grey.shade500]),
+                    image: DecorationImage(
+                        fit: BoxFit.cover, image: AssetImage(image))),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Franks Pet Lounge'.toUpperCase(),
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
+                  ),
+                  Text(
+                    'Pet Daycare'.toUpperCase(),
+                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/icons/ffth.png',
+                        height: 25,
+                      ),
+                      Text(
+                        '38 Reviews (5.0)'.toUpperCase(),
+                        style:
+                        TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
+                      )
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

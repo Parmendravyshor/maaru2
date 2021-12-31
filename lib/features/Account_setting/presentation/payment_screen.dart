@@ -12,6 +12,7 @@ import 'package:maru/core/widget/dialog.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -83,7 +84,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
-                                'Name on Card',
+                                'NAME on Card'.toUpperCase(),
                                 style:
                                 MaaruStyle.text.greyDisable,
                               ),
@@ -123,7 +124,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
-                                'Credit Card Number',
+                                'Credit Card Number'.toUpperCase(),
                                 style:
                                 MaaruStyle.text.greyDisable,
                               ),
@@ -164,7 +165,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
-                                'Cvv',
+                                'Cvv'.toUpperCase(),
                                 style: MaaruStyle.text.greyDisable,
                               ),
                             ],
@@ -181,7 +182,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                                   mainAxisSize: MainAxisSize.max  ,
                                   children: [
                                     Row(children: [
-                                      Text('Exp', style: MaaruStyle.text.greyDisable,),
+                                      Text('Exp'.toUpperCase(), style: MaaruStyle.text.greyDisable,),
 
 
                                     ],)
@@ -241,7 +242,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                         onPrimary: Colors.red, // <-- Splash color
                       ),
                     ),
-                    Text('Remove Card',style:GoogleFonts.poppins(
+                    Text('Remove Card'.toUpperCase(),style:GoogleFonts.poppins(
                         textStyle: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontFamily: 'Poppins',
@@ -626,6 +627,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                                             textColor: Colors.white,
                                             color: MaaruColors.buttonColor,
                                             onPressed: () {
+                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>BookedConfirm()));
                                               // String paword =
                                               // _newController
                                               //     .text;
