@@ -9,6 +9,8 @@ import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
@@ -38,8 +40,6 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
         return CircularProgressIndicator();
       } else if (state is SingleProfileLoaded) {
         //  print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome2.getSinglePe.petName}');
-        AlertManager.showErrorMessage(
-            "Profile2UpdateSuccessful", context);
 
         return
       Scaffold(

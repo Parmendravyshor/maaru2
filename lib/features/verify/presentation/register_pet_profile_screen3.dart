@@ -17,6 +17,7 @@ import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
 
+import 'pet_profile_bloc.dart';
 import '../../../main.dart';
 import 'register_pet_profile_screen2.dart';
 
@@ -191,8 +192,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                 child: BlocBuilder<PetProfileBloc, PetProfileState>(
                     builder: (context, state) {
                   if (state is pet3rofileButtonTapped) {
-                    AlertManager.showErrorMessage(
-                        "otp send your register email", context);
+
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (BuildContext context) {

@@ -374,8 +374,9 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       yield SavePaymentButtonTapped();
     }
     if (event is GetProvider) {
-      final result = await getProviders(NoParams());
 
+      final result = await getProviders(event.text);
+print('ddddd$event.text');
       // final result =  await getPetProfile1(NoParams());
       if (result.isRight()) {
         await getProviderById(NoParams());
@@ -399,17 +400,12 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       if (result.isRight()) {
         print('dkdjddh');
         // await getPetProfile1(NoParams());
-        yield CovidLoaded(result.getOrElse(() => null));
+        yield CovidLoaded3(result.getOrElse(() => null));
         print('dddddddd$CovidLoaded(covidModel)');
         print('445454dkdjddh');
       }
     }
-    if (event is GetSinglePRof){
-      final result = await getSinglePetProfile(NoParams());
-      if(result.isRight()){
-        yield SingleProfileLoaded(result.getOrElse(() => null));
-      }
-    }
+
     if (event is GetSinglePRovider){
       final result = await getProviderById(NoParams());
       if(result.isRight()){

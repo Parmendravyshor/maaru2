@@ -13,9 +13,12 @@ import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile2.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
+import 'package:bloc/bloc.dart';
 
 class ViewPetProfile extends StatefulWidget {
   @override
@@ -47,8 +50,6 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                     return CircularProgressIndicator();
                   } else if (state is SingleProfileLoaded) {
                  //  print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome2.getSinglePe.petName}');
-                    AlertManager.showErrorMessage(
-                        "ProfileUpdateSuccessful", context);
 
 
                     return SingleChildScrollView(
@@ -537,7 +538,9 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                       CircularProgressIndicator();
                   }
                   ;
-                }))));
+                })
+            )
+        ));
 
   }
 }

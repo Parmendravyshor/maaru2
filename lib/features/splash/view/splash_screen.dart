@@ -1,5 +1,6 @@
 
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -61,6 +62,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   getToken() async {
     NotificationHelper helper = NotificationHelper();
+    var token = await FirebaseMessaging.instance.getToken();
+    print('tokendddffffffff: $token');
 
     var fcmToken = await helper.getToken();
     print("fcm fcm fcm fcm fcm fcm fcm:$fcmToken");

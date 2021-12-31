@@ -10,8 +10,10 @@ import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:maru/features/Account_setting/presentation/account_setting.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/Home/presentation/search_screen.dart';
 import 'package:maru/features/forgot/presentation/forgot_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
@@ -76,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SchedulerBinding.instance.addPostFrameCallback((_) {
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (BuildContext context) {
-                                        return CreateRegisterPetProfile2();
+                                        return ProviderSearchScreen();
                                       }));
                                 });
                                 return Container();
@@ -149,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               onChanged: (text) {
                                                 BlocProvider.of<LoginBloc>(context).add(event.EmailChanged(text));
                                               }, editingController: _emailController),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
                                           ThemedTextField(

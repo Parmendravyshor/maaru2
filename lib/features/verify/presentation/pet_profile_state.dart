@@ -125,10 +125,10 @@ class CovidLoading extends PetProfileState {
   List<Object> get props => null;
 }
 
-class CovidLoaded extends PetProfileState {
+class CovidLoaded3 extends PetProfileState {
   //final Welcome _newsBloc = Welcome();
   final Welcome covidModel;
-   CovidLoaded(this.covidModel);
+  CovidLoaded3(this.covidModel);
 
   List<Object> get props => [covidModel];
 }

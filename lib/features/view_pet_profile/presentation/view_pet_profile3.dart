@@ -36,9 +36,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
 
         return CircularProgressIndicator();
       } else if (state is SingleProfileLoaded) {
-        //  print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome2.getSinglePe.petName}');
-        AlertManager.showErrorMessage(
-            "Profile3UpdateSuccessful", context);
+
       var note;
       return  Scaffold(
           backgroundColor: MaaruColors.DogsBackground,

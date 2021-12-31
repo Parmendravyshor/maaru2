@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'package:maru/features/verify/domain/usecases/book_a_provider.dart';
 import 'package:maru/features/verify/domain/usecases/create_user_profile.dart';
@@ -744,16 +745,18 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, GetProvidersModel>> getProviders() async {
+  Future<Either<Failure, GetProvidersModel>> getProviders(text) async {
     try {
+      print('api response text $text');
       final response = await http.get(
-        MaruConstant.getproviders,
-      );
-//print(response.body);
+          Uri.parse ('http://18.191.199.31/api/public/providers?page=1&limit=100&service=$text&rating=',
+          ));
+      print(text);
+print(response.body);
       var data = convert.jsonDecode(response.body);
       var profile = data['provider_profiles'];
 
-      print(profile);
+    //  print(profile);
 
       return Right(GetProvidersModel.fromJson(data));
     } on CognitoClientException catch (e) {
@@ -900,10 +903,10 @@ class UserRepositoryImpl implements UserRepository {
     try {
       final response =
           await http.post(MaruConstant.providerbookingappointment, body: {
-        'pet_id': params.pet_id,
-        'provider_id': params.provider_id,
-        'booking_date_time': params.booking_date_time,
-        'service_id': params.service_id,
+        'pet_id':2,
+        'provider_id': 2,
+        'booking_date_time':['29 December 2021 20:45'],
+        'service_id': 2,
       });
 
       var data = convert.jsonDecode(response.body);
@@ -924,6 +927,40 @@ class UserRepositoryImpl implements UserRepository {
       print(e);
       return Left(CacheFailure(e.toString()));
       print(e);
+    }
+  }
+
+  @override
+  Future<Either<Failure, UpcomingPastAppointmentModel>> getUpcomingAndPastAppointments(text) async{
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+      print('api response text $text');
+      final response = await http.get(
+          Uri.parse ('http://18.191.199.31/api/bookings/filter?service=$text&date=',
+          ),
+        headers: headers
+      );
+      print(text);
+      print(response.body);
+      var data = convert.jsonDecode(response.body);
+      return Right(UpcomingPastAppointmentModel.fromJson(data));
+    } on CognitoClientException catch (e) {
+      print(e);
+      if (e.code == 'UserNotConfirmedException') {
+        print(e);
+        return Left(UserNotConfirmedFailure(e.message));
+        print(e);
+      } else {
+        print(e);
+        return Left(CacheFailure(e.message));
+      }
+    } catch (e) {
+      print(e);
+      return Left(CacheFailure(e.toString()));
     }
   }
 

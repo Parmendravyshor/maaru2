@@ -1,6 +1,8 @@
 part of 'pet_profile_bloc.dart';
 
-abstract class PetProfileEvent {}
+abstract class PetProfileEvent {
+  PetProfileEvent();
+}
 
 class PetProfileRegistered extends PetProfileEvent {
   PetProfileRegistered();
@@ -172,9 +174,16 @@ class GetCovidList extends PetProfileEvent {
   String toString() => "fakeRegisterButtonTapped";
 }
 class GetProvider extends PetProfileEvent {
+
+final String text;
+
+  GetProvider(this.text);
+
   @override
   String toString() => "GetProvider";
+
 }
+
 class GetSinglePRof extends PetProfileEvent {
   @override
   String toString() => "GetSinglePRof";

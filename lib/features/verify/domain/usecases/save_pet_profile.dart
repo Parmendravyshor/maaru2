@@ -209,6 +209,7 @@ class PetProfile {
     this.vaccine,
     this.name,
     this.times_a_day,
+    this.service_cost,
 
   });
 
@@ -227,6 +228,7 @@ class PetProfile {
   var times_a_day;
   var sex;
   var gender;
+  var service_cost;
   String walkingSchedule;
   String feedingSchedule;
   var temperament;
@@ -239,6 +241,7 @@ class PetProfile {
 
   factory PetProfile.fromJson(Map<String, dynamic> json) => PetProfile(
     id: json["id"],
+    service_cost: json['service_cost'],
     name: json['name'],
     times_a_day: json['times_a_day'],
     userId: json["user_id"],
@@ -280,6 +283,7 @@ class PetProfile {
     "birth_date": "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
     "sex": sexValues.reverse[sex],
     "gender": gender,
+    'service_cost':service_cost,
     "walking_schedule": walkingSchedule == null ? null : walkingSchedule,
     "feeding_schedule": feedingSchedule == null ? null : feedingSchedule,
     "temperament": temperament == null ? null : knownAllergiesValues.reverse[temperament],

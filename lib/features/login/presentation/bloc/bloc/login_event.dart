@@ -12,7 +12,12 @@ class LoginOpened extends LoginEvent {
   @override
   String toString() => "LoginOpened";
 }
+class GetProvider extends LoginEvent {
 
+  final String text;
+
+  GetProvider(this.text);
+}
 /// Register Button Tapped
 ///
 /// This event is fired when Register button is tapped
@@ -48,4 +53,15 @@ class PasswordChanged extends LoginEvent {
 
   @override
   String toString() => "PasswordChanged";
+}
+class UpcomingAppointmentChanged extends LoginEvent {
+
+  final String text;
+
+  UpcomingAppointmentChanged({this.text});
+
+  @override
+  String toString() => "UpcomingAppointmentChanged";
+  List<Object> get props => [text];
+
 }

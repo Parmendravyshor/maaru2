@@ -6,15 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'package:maru/features/Home/presentation/chat_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/provider_home/presentation/provider_hat_sreen.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
-
+import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart'as event;
+import 'bloc/book_appointment_bloc.dart';
+import 'bloc/book_appointment_bloc.dart';
 import 'bloc/book_appointment_bloc.dart';
 import 'book_appointment_screen2.dart';
 import 'booked_confirm.dart';
@@ -25,6 +29,7 @@ class BookAppointmentScreen3 extends StatefulWidget {
 }
 
 class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
+  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   bool pressAttention = true;
   bool _debug = false;
   bool _contextoff = false;
@@ -35,7 +40,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
   String _selValue = "SELECT SERVICES";
   String _selValue1 = 'SELECT PET';
   String _selValue2 = 'SELECT PROVIDER';
-
+  int i;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -75,490 +80,532 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3> {
                       });
                     });
                   }
+                  int abc;
                   return SingleChildScrollView(
-                      child: Flex(direction: Axis.vertical, children: [
-                    Column(
+                    child: Flex(
+                      direction: Axis.vertical,
                       children: [
-                        Container(
-                          width: 2000,
-                          child: Image.asset('assets/images/imgdd.jpg'),
-                        ),
-                        Container(
-                            decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(20),
-                                  topLeft: Radius.circular(20),
-                                ),
-                                color: Colors.white),
-                            height: 250,
-                            width: size.width * 1,
-                            child: Container(
-                                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                                color: Colors.white,
-                                //height: size.height*0.80,
+                        Column(
+                          children: [
+                            Container(
+                              width: 2000,
+                              child: Image.network(
+                                _prefHelper.getStringByKey('img', ''),
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                      color: Colors.amber,
+                                      alignment: Alignment.center,
+                                      child: Image.asset(
+                                          'assets/images/kutta.png'));
+                                },
+                              ),
+                            ),
+                            Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(20),
+                                      topLeft: Radius.circular(20),
+                                    ),
+                                    color: Colors.white),
+                                height: 250,
                                 width: size.width * 1,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: size.height * 0.05,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                child: Container(
+                                    margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                    color: Colors.white,
+                                    //height: size.height*0.80,
+                                    width: size.width * 1,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          BookAppointment1()));
-                                            },
-                                            child: Image.asset(
-                                              'assets/icons/Rectangle copy 3.png',
-                                              height: 40,
-                                              width: 40,
-                                            )),
                                         SizedBox(
-                                          width: 10,
+                                          height: size.height * 0.05,
                                         ),
-                                        InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          BookAppointment2()));
-                                            },
-                                            child: Image.asset(
-                                              'assets/icons/Rectangle copy 3.png',
-                                              height: 40,
-                                              width: 40,
-                                            )),
-                                        const SizedBox(
-                                          width: 10,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            InkWell(
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              BookAppointment1()));
+                                                },
+                                                child: Image.asset(
+                                                  'assets/icons/Rectangle copy 3.png',
+                                                  height: 40,
+                                                  width: 40,
+                                                )),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            InkWell(
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              BookAppointment2()));
+                                                },
+                                                child: Image.asset(
+                                                  'assets/icons/Rectangle copy 3.png',
+                                                  height: 40,
+                                                  width: 40,
+                                                )),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            InkWell(
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              BookAppointmentScreen3()));
+                                                },
+                                                child: Image.asset(
+                                                  'assets/icons/Rectangle copy 3.png',
+                                                  height: 40,
+                                                  width: 40,
+                                                )),
+                                          ],
                                         ),
-                                        InkWell(
-                                            onTap: () {
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          BookAppointmentScreen3()));
-                                            },
-                                            child: Image.asset(
-                                              'assets/icons/Rectangle copy 3.png',
-                                              height: 40,
-                                              width: 40,
-                                            )),
-                                      ],
-                                    ),
-
-                                    BlocProvider(
-                                      create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
-                                      child: BlocBuilder<PetProfileBloc, PetProfileState>(
-                                          builder: (context, state) {
+                                        BlocProvider(
+                                          create: (context) => KiwiContainer()
+                                              .resolve<PetProfileBloc>(),
+                                          child: BlocBuilder<PetProfileBloc,
+                                                  PetProfileState>(
+                                              builder: (context, state) {
                                             if (state is PetProfileInitial) {
-                                              BlocProvider.of<PetProfileBloc>(context)
-                                                  .add(GetCovidList());
+                                              BlocProvider.of<PetProfileBloc>(
+                                                      context)
+                                                  .add(GetSinglePRovider());
 
                                               return CircularProgressIndicator();
-                                            } else if (state is CovidLoaded) {
-                                              print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
+                                            } else if (state
+                                                is SingleProviderLoaded) {
+                                              //   print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome4.providerName}');
+                                              // AlertManager.showErrorMessage(
+                                              //     "ProfileUpdateSuccessful", context);
+                                              int abc;
+                                              return Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    //  mainAxisAlignment: MainAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        state
+                                                            .welcome4
+                                                            .providerDetails
+                                                            .provider
+                                                            .companyName,
+                                                        style: MaaruStyle
+                                                            .text.tiniest,
+                                                      ),
+                                                      SizedBox(
+                                                        width:
+                                                            size.width * 0.16,
+                                                      ),
+                                                      // Image.asset(
+                                                      //   'assets/icons/New Project (2).png',
+                                                      //   width: size.width * 0.10,
+                                                      // )
+                                                    ],
+                                                  ),
+                                                  Text(
+                                                    '${state.welcome4.providerDetails.provider.city.toString()} ${state.welcome4.providerDetails.provider.state} ${state.welcome4.providerDetails.provider.zipCode}',
+                                                    style: MaaruStyle.text.tiny,
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  Text(
+                                                    'Book Appointments',
+                                                    style:
+                                                        MaaruStyle.text.tiniest,
+                                                  ),
+                                                ],
+                                              );
+                                            } else {
+                                              return const CircularProgressIndicator();
+                                            }
+                                          }),
+                                        ),
+                                      ],
+                                    )))
+                          ],
+                        ),
+                        Container(
+                            height: 440, width: 400, child: const Appointments()),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Services',
+                            style: MaaruStyle.text.tiniest,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.only(right: 20, left: 20),
+                            child: BlocProvider(
+                                create: (context) =>
+                                    KiwiContainer().resolve<PetProfileBloc>(),
+                                child: BlocBuilder<PetProfileBloc,
+                                    PetProfileState>(builder: (context, state) {
+                                  if (state is PetProfileInitial) {
+                                    String text = '';
+                                    BlocProvider.of<PetProfileBloc>(context)
+                                        .add(GetSinglePRovider());
+
+                                    return CircularProgressIndicator();
+                                  }
+                                  if (state is SingleProviderLoaded) {
+                                    //   print(
+                                    //     '+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${}');
+                                    // AlertManager.showErrorMessage(
+                                    // "ProfileUpdateSuccessful", context);
+                                    var abc2 = [];
 
 
-                                              return Row(
-          //  mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text('',
-          //   state.covidModel.petProfiles[index].c
-              style: MaaruStyle.text.tiniest,
-            ),
-            SizedBox(
-              width: size.width * 0.16,
-            ),
-            Image.asset(
-              'assets/icons/New Project (2).png',
-              width: size.width * 0.10,
-            )
-          ],
-        );
-      }
-                       else {
-                      return
-                      CircularProgressIndicator();
-                      }
-      }
-    ),
-),
-                                    Text(
-                                      '1115 Emihi Grove Austin, Textas 00000',
-                                      style: MaaruStyle.text.tiny,
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text(
-                                      'Book Appointments',
-                                      style: MaaruStyle.text.tiniest,
-                                    ),
-                                  ],
-                                )))
-                      ],
-                    ),
-                    Container(height: 440, width: 400, child: Appointments()),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Services',
-                        style: MaaruStyle.text.tiniest,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(right: 20, left: 20),
-                        child: BlocProvider(
-                            create: (context) =>
-                                KiwiContainer().resolve<PetProfileBloc>(),
-                            child: BlocBuilder<PetProfileBloc, PetProfileState>(
-                                builder: (context, state) {
-                              if (state is PetProfileInitial) {
-                                BlocProvider.of<PetProfileBloc>(context)
-                                    .add(GetProvider());
+                                    for (int i = 0;
+                                        i <=
+                                            state.welcome4.providerDetails
+                                                    .service.length -
+                                                1;
+                                        i++) {
+                                      abc2.add(state.welcome4.providerDetails
+                                          .service[i].title
+                                          .toString());
+                                    }
+                                    return DropdownButton(
+                                      icon: Icon(
+                                        Icons.expand_more,
+                                        color: MaaruColors.textButtonColor,
+                                        size: 40.09,
+                                      ),
+                                      hint: Center(
+                                          child: Text(
+                                        _selValue,
+                                        style: MaaruStyle.text.small,
+                                      )),
+                                      isExpanded: true,
+                                      iconSize: 30.0,
+                                      style: TextStyle(color: Colors.white),
+                                      items: abc2.map(
+                                        (val) {
+                                          return DropdownMenuItem<String>(
+                                              value: val,
+                                              child: Center(
+                                                child: Text(val,
+                                                    style:
+                                                        MaaruStyle.text.small),
+                                              ));
+                                        },
+                                      ).toList(),
+                                      onChanged: (val) {
+                                           print(
+                                        'sdknklncklncklncklncnknc$val');
 
-                                return CircularProgressIndicator();
-                              } else if (state is ProviderLoaded) {
-                                print(
-                                    '+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.getProviderModel.providersListing.length}');
-                                // AlertManager.showErrorMessage(
-                                // "ProfileUpdateSuccessful", context);
-                                var abc = [];
-                                for (int i = 0;
-                                    i <=
-                                        state.getProviderModel.providersListing
-                                                .length -
-                                            1;
-                                    i++) {
-                                  print(state.getProviderModel
-                                      .providersListing[i].serviceType);
-                                  abc.add(state.getProviderModel
-                                      .providersListing[i].serviceType);
-                                }
-                                return DropdownButton(
-                                  icon: Icon(
-                                    Icons.expand_more,
-                                    color: MaaruColors.textButtonColor,
-                                    size: 40.09,
-                                  ),
-                                  hint: Center(
-                                      child: Text(
-                                    _selValue,
-                                    style: MaaruStyle.text.small,
-                                  )),
-                                  isExpanded: true,
-                                  iconSize: 30.0,
-                                  style: TextStyle(color: Colors.white),
-                                  items: abc.map(
-                                    (val) {
-                                      return DropdownMenuItem<String>(
-                                          value: val,
-                                          child: Center(
-                                            child: Text(val,
-                                                style: MaaruStyle.text.small),
-                                          ));
-                                    },
-                                  ).toList(),
-                                  onChanged: (val) {
-                                    setState(
-                                      () {
-                                        _selValue = val;
-                                        if (val == val) {}
-                                        if (val == "SELECT PET") {
-                                          _dropDownValue = 0;
-                                        }
+                                        setState(
+                                          () {
+                                            _selValue = val;
+                                            if (val == val) {}
+                                            if (val == "SELECT PET") {
+                                              _dropDownValue = 0;
+                                              print(_dropDownValue);
+                                            }
 
-                                        if (val == "VET") {
-                                          _dropDownValue = 2;
-                                        }
+                                            if (val == "VET") {
+                                              _dropDownValue = 2;
+                                            }
 
-                                        if (val == "DAYCARE") {
-                                          _dropDownValue = 3;
-                                        }
-                                        if (val == "HOTEL") {
-                                          _dropDownValue = 4;
-                                        }
-                                        if (val == "HOSPITAL") {
-                                          _dropDownValue = 5;
-                                        }
-                                        // if (val == "GPT-3") {
-                                        //   _dropDownValue = 6;
-                                        // }
+                                            // if (val == "DAYCARE") {
+                                            //   _dropDownValue = 3;
+                                            // }
+                                            // if (val == "HOTEL") {
+                                            //   _dropDownValue = 4;
+                                            // }
+                                            // if (val == "HOSPITAL") {
+                                            //   _dropDownValue = 5;
+                                            // }
+                                            // if (val == "GPT-3") {
+                                            //   _dropDownValue = 6;
+                                            // }
+                                          },
+                                        );
                                       },
                                     );
-                                  },
-                                );
-                              } else {
-                                return CircularProgressIndicator();
-                              }
-                            }))),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Pet',
-                        style: MaaruStyle.text.tiniest,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(right: 20, left: 20),
-                        child: BlocProvider(
-                          create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
-                          child: BlocBuilder<PetProfileBloc, PetProfileState>(
-                              builder: (context, state) {
+                                  } else {
+                                    return CircularProgressIndicator();
+                                  }
+                                }))),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Pet',
+                            style: MaaruStyle.text.tiniest,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(right: 20, left: 20),
+                            child: BlocProvider(
+                              create: (context) =>
+                                  KiwiContainer().resolve<PetProfileBloc>(),
+                              child:
+                                  BlocBuilder<PetProfileBloc, PetProfileState>(
+                                      builder: (context, state) {
                                 if (state is PetProfileInitial) {
                                   BlocProvider.of<PetProfileBloc>(context)
                                       .add(GetCovidList());
 
                                   return CircularProgressIndicator();
-                                } else if (state is CovidLoaded) {
-                                  print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
-
-
-                                  var abc1 = [];
+                                } else if (state is CovidLoaded3) {
+                                  print(
+                                      '+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
+                                  //
+                                  List<KeyValueModel> _dates =  [];
+                                  print('dddwddqqdqdd$_dates');
+                                  var abc2 = [];
+                                  String _selectedValue = _dates.first.toString();
+                                  //_prefHelper.getStringByKey(MaruConstant.first_name, '');
+                                  //state.covidModel.petProfiles[0].id.toString();
                                   for (int i = 0;
-                                  i <=
-                                      state.covidModel.petProfiles.length-1;
-                                  i++) {
-                                   // print(state.getProviderModel
-                                     //   .providersListing[i].serviceType);
-                                    abc1.add(state.covidModel
-                                        .petProfiles[i].petName);
+                                      i <=
+                                          state.covidModel.petProfiles.length -
+                                              1;
+                                      i++) {
+                                    _dates.add(  KeyValueModel(key: state.covidModel.petProfiles[i].petName.toString(),
+                                        value: state.covidModel.petProfiles[i].id.toString()),);
+                                    abc2.add(
+                                        state.covidModel.petProfiles[i].id);
+                                   // print(abc2);
+                                    // abc2.add(state.covidModel.petProfiles[i]
+                                    //     .service_cost);
                                   }
 
-
-
-                                return DropdownButton(
-
-                                  icon: Icon(
-                                    Icons.expand_more,
-                                    color: MaaruColors.textButtonColor,
-                                    size: 40.09,
-                                  ),
-                                  hint: Center(
-                                      child: Text(
-                                        _selValue2,
-                                        style: MaaruStyle.text.small,
-                                      )),
-                                  isExpanded: true,
-                                  iconSize: 30.0,
-                                  style: TextStyle(color: Colors.white),
-                                  items: abc1.map(
-                                        (val) {
-                                      return DropdownMenuItem<String>(
-                                          value: val,
-                                          child: Center(
-                                            child: Text(val,
-                                                style: MaaruStyle.text.small),
-                                          ));
+                                  print(_dates.toString());
+                                  return
+                                  DropdownButton(
+                                    value: _selectedValue,
+                                    onTap: (){
+                                      setState(() {
+                                        print('tomer counkt box$abc2');
+                                        abc2.length.toString();
+                                      });
                                     },
-                                  ).toList(),
-                                  onChanged: (val) {
-                                    setState(
-                                          () {
-                                        _selValue2 = val;
-                                        if (val == "TOMMY") {
-                                          _dropDownValue = 1;
-                                        }
-                                        if (val == "SALLY") {
-                                          _dropDownValue = 0;
-                                        }
-                                        //
-                                        // if (val == "VET") {
-                                        //   _dropDownValue = 2;
-                                        // }
-                                        //
-                                        // if (val == "DAYCARE") {
-                                        //   _dropDownValue = 3;
-                                        // }
-                                        // if (val == "HOTEL") {
-                                        //   _dropDownValue = 4;
-                                        // }
-                                        // if (val == "HOSPITAL") {
-                                        //   _dropDownValue = 5;
-                                        // }
-                                        // // if (val == "GPT-3") {
-                                        // //   _dropDownValue = 6;
-                                        // // }
+                                    icon: Icon(
+                                      Icons.expand_more,
+                                      color: MaaruColors.textButtonColor,
+                                      size: 40.09,
+                                    ),
+                                    hint: Center(
+                                        child: Text(
+                                          _selectedValue,
+                                      style: MaaruStyle.text.small,
+                                    )),
+                                    isExpanded: true,
+                                    iconSize: 30.0,
+                                    style: TextStyle(color: Colors.white),
+                                    items: _dates.map(
+                                      (val) {
+
+                                        return DropdownMenuItem<String>(
+
+                                            child: Center(
+                                              child: Text(val.key,
+                                                  style: MaaruStyle.text.small),
+
+                                            ),
+                                          value: val.value,
+                                        );
                                       },
-                                    );
-                                  },
-                                );
-                              }
-                              else{
-                                return
-                                  CircularProgressIndicator();
-                              }
+                                    ).toList(),
+                                    onChanged: (val) {
+                                      print('gdgdhgdhd${val.toString()}');
 
-                            }),
+                                      setState(
+                                        () {
+                                          _selectedValue = val;
 
-                        )),
+                                        },
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                              }),
+                            )),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Morning',
+                            style: MaaruStyle.text.tiniest,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                            height: 40,
+                            width: 400,
+                            child: Padding(
+                                padding: EdgeInsets.only(right: 20, left: 20),
+                                child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: const [
+                                      ChoiceRow(
+                                        lebal1: '10:00 AM',
+                                        lebal2: '10:30 AM',
+                                        lebal3: '11:00 AM',
+                                        lebal4: '11:30 AM',
+                                        lebal5: '12:00 AM',
+                                      ),
+                                    ]))),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Afternoon',
+                            style: MaaruStyle.text.tiniest,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                            height: 40,
+                            width: double.infinity,
+                            child: Padding(
+                                padding: EdgeInsets.only(right: 20, left: 20),
+                                child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: [
+                                      ChoiceRow(
+                                        lebal1: '12:00 PM',
+                                        lebal2: '12:30 PM',
+                                        lebal3: '01:00 PM',
+                                        lebal4: '01:30 PM',
+                                        lebal5: '02:00 PM',
+                                      ),
+                                    ]))),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Text(
+                                  'Booking Cost',
+                                  style: MaaruStyle.text.large,
+                                ))),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Booking  Cost',
+                                  style: MaaruStyle.text.tiny,
+                                ),
+                                Text(
+                                  '',
+                                  //state.covidModel.petProfiles[_prefHelper.getIntByKey('id',abcd  )].service_cost,
 
-                    SizedBox(
-                      height: 20,
+                                  style: MaaruStyle.text.tiny,
+                                )
+                              ],
+                            )),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '',
+                                  //  state.covidModel.petProfiles[_prefHelper.getIntByKey('id',abcd  )].am,
+                                  style: MaaruStyle.text.tiny,
+                                ),
+                                Text(
+                                  '\$ 5.0',
+                                  style: MaaruStyle.text.tiny,
+                                )
+                              ],
+                            )),
+                        Divider(
+                          thickness: 1.0,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Total',
+                                  style: MaaruStyle.text.tiny,
+                                ),
+                                Text(
+                                  '\$ 90.0',
+                                  style: MaaruStyle.text.tiny,
+                                )
+                              ],
+                            )),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ThemedButton(
+                          onPressed: () {
+                            BlocProvider.of<BookAppointmentBloc>(context)
+                                .add(BookRegisterButtonTapped());
+                          },
+                          text: 'Book Appointment',
+                          enabled: true,
+                        ),
+                        SizedBox(
+                          height: 100,
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Morning',
-                        style: MaaruStyle.text.tiniest,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                        height: 40,
-                        width: 400,
-                        child: Padding(
-                            padding: EdgeInsets.only(right: 20, left: 20),
-                            child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: const [
-                                  ChoiceRow(
-                                    lebal1: '10:00 AM',
-                                    lebal2: '10:30 AM',
-                                    lebal3: '11:00 AM',
-                                    lebal4: '11:30 AM',
-                                    lebal5: '12:00 AM',
-                                  ),
-                                ]))),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Afternoon',
-                        style: MaaruStyle.text.tiniest,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                        height: 40,
-                        width: double.infinity,
-                        child: Padding(
-                            padding: EdgeInsets.only(right: 20, left: 20),
-                            child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  ChoiceRow(
-                                    lebal1: '12:00 PM',
-                                    lebal2: '12:30 PM',
-                                    lebal3: '01:00 PM',
-                                    lebal4: '01:30 PM',
-                                    lebal5: '02:00 PM',
-                                  ),
-                                ]))),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Text(
-                              'Booking Cost',
-                              style: MaaruStyle.text.large,
-                            ))),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Booking Total',
-                              style: MaaruStyle.text.tiny,
-                            ),
-                            Text(
-                              " \$ 85.0",
-                              style: MaaruStyle.text.tiny,
-                            )
-                          ],
-                        )),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Taxes',
-                              style: MaaruStyle.text.tiny,
-                            ),
-                            Text(
-                              '\$ 5.0',
-                              style: MaaruStyle.text.tiny,
-                            )
-                          ],
-                        )),
-                    Divider(
-                      thickness: 1.0,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Total',
-                              style: MaaruStyle.text.tiny,
-                            ),
-                            Text(
-                              '\$ 90.0',
-                              style: MaaruStyle.text.tiny,
-                            )
-                          ],
-                        )),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    ThemedButton(
-                      onPressed: () {
-                        BlocProvider.of<BookAppointmentBloc>(context)
-                            .add(BookRegisterButtonTapped());
-                      },
-                      text: 'Book Appointment',
-                      enabled: true,
-                    ),
-                    SizedBox(
-                      height: 100,
-                    )
-                  ]));
+                  );
                 }))));
   }
 }
+class KeyValueModel {
+  String key;
+  String value;
 
+  KeyValueModel({this.key, this.value});
+}
 class ChoiceRow extends StatefulWidget {
   final String lebal1;
   final String lebal2;
@@ -767,3 +814,88 @@ class _ChoiceButtonState extends State<ChoiceButton> {
     );
   }
 }
+
+
+class Dropdown extends StatefulWidget {
+  Dropdown({ this.dropdownlistname,this.dropdownheight,this.dropdownwidth,this.hintText});
+
+  final List<String> dropdownlistname;
+  final double dropdownheight;
+  final double dropdownwidth;
+  final Widget hintText;
+
+  @override
+  _DropdownState createState() => _DropdownState();
+}
+
+class _DropdownState extends State<Dropdown> {
+
+  List<DropdownMenuItem<String>> getDropdownItems(
+      {List<String> dropdownitemname}) {
+    List<DropdownMenuItem<String>> dropdownitems = [];
+    for (int i = 0; i < dropdownitemname.length; i++) {
+      String storyquestion = dropdownitemname[i];
+      var newitem = DropdownMenuItem(
+        child: Center(
+            child: Text(
+              storyquestion,
+
+            )),
+        value: storyquestion,
+      );
+      dropdownitems.add(newitem);
+    }
+    return dropdownitems;
+  }
+
+  String selectedquestion;
+
+  @override
+  Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+
+      ),
+      height: widget.dropdownheight,
+      width: widget.dropdownwidth,
+      child: DropdownButtonHideUnderline(
+        child: ButtonTheme(
+          alignedDropdown: true,
+          child: DropdownButton<String>(
+              hint: Center(
+                  child: widget.hintText),
+
+              icon: Icon(Icons.expand_more,size: 35,),
+              value: selectedquestion,
+              isExpanded: true,
+              items: getDropdownItems(dropdownitemname: widget.dropdownlistname),
+              onChanged: (value) {
+                setState(() {
+                  selectedquestion = value;
+                });
+              }),
+        ),
+      ),
+    );
+  }
+}
+
+const List<String> question = [
+  'Tell us who you are',
+  'Your accomplishments',
+  'Obstacles you’ve overcome'
+];
+
+const List<String> tags = [
+  'Dedication ',
+  'Overcoming obstacles',
+  'Cancer survivor',
+  'Dedication',
+  'Failures',
+  'Faith',
+  'Fear',
+  'Female athlete',
+  'Setbacks',
+];

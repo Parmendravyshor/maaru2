@@ -33,7 +33,7 @@ class _PetProfile1State extends State<PetProfile1> {
                     .add(GetCovidList());
 
                 return CircularProgressIndicator();
-              } else if (state is CovidLoaded) {
+              } else if (state is CovidLoaded3) {
                 print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
                 AlertManager.showErrorMessage(
                     "Register pet showing Successful if you wan't view profile pressed on? ", context);

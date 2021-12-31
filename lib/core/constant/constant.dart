@@ -18,7 +18,7 @@ class MaruConstant {
    static final resend =Uri.parse ('http://18.191.199.31/api/auth/re-send-otp');
    static final reset =Uri.parse ('http://18.191.199.31/api/auth/forget-password');
    static final signin = Uri.parse('http://18.191.199.31/api/auth/signin');
-   static final createpProfile = Uri.parse('http://18.191.199.31/api/pets');
+   static final createpProfile = Uri.parse('http://18.191.199.31/api/pets?pet_name=');
   //static var signin = Uri.parse('$BASE_URL/signin');
    static final verify = Uri.parse('http://18.191.199.31/api/auth/verify-otp');
    static final forgetverify = Uri.parse('http://18.191.199.31/api/auth/re-send-otp-forgot');

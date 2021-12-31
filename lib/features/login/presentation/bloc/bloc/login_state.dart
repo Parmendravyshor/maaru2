@@ -1,3 +1,5 @@
+import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
+import 'package:maru/features/verify/domain/usecases/get_providers.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 
 abstract class LoginState {
@@ -24,7 +26,21 @@ class LoginSuccess extends LoginState {
   @override
   String toString() => "LoginSuccess";
 }
+class ProviderLoaded1 extends LoginState {
+  //final Welcome _newsBloc = Welcome();
+  final GetProvidersModel getProviderModel;
+  ProviderLoaded1(this.getProviderModel);
 
+  @override
+  String toString() => "VerificationNeeded";
+}
+class FetchUpcomingAppointmentModelData extends LoginState {
+  final UpcomingPastAppointmentModel upcomingPastAppointmentModel;
+  FetchUpcomingAppointmentModelData(this.upcomingPastAppointmentModel);
+
+  @override
+  String toString() => "FetchUpcomingAppointmentModelData";
+}
 class VerificationNeeded extends LoginState {
   VerificationNeeded() : super();
 

@@ -3,14 +3,16 @@ import '../../../../core/domain/repositories/user_repository.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import 'dart:convert';
-class GetProviders implements UseCase<void, GetProvidersModel> {
+class GetProviders implements UseCase<void, String> {
   UserRepository userRepository;
   GetProviders(this.userRepository);
-
   @override
-  Future<Either<Failure, GetProvidersModel>> call(void params) async {
-    return userRepository.getProviders();
+  Future<Either<Failure, GetProvidersModel>> call( String text) async {
+    print('getProvidera value $text');
+    return userRepository.getProviders(text);
+
   }
+
 }
 // To parse this JSON data, do
 //
@@ -79,11 +81,13 @@ class ProvidersListing {
     this.description,
     this.averageRating,
     this.reviews,
+    this.title
   });
 
   int id;
   int serviceId;
   int userId;
+  var title;
   String providerName;
   int serviceCost;
   DateTime createdAt;
@@ -109,6 +113,7 @@ class ProvidersListing {
 
   factory ProvidersListing.fromJson(Map<String, dynamic> json) => ProvidersListing(
     id: json["id"],
+    title: json['title'],
     serviceId: json["service_id"],
     userId: json["user_id"],
     providerName: json["provider_name"],
@@ -139,6 +144,7 @@ class ProvidersListing {
     "id": id,
     "service_id": serviceId,
     "user_id": userId,
+    'title':title,
     "provider_name": providerName,
     "service_cost": serviceCost,
     "created_at": createdAt.toIso8601String(),

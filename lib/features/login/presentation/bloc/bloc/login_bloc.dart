@@ -5,6 +5,7 @@ import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/domain/usecases/resend_verification_code.dart';
 import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/usecases/usecase.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Home/domain/usecases/get_upcoming_appointment.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/provider_home/domain/use_cases/get_provider_request.dart';
@@ -33,11 +34,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final GetSinglePetProfile getSinglePetProfile;
   final GetReview getReview;
   final GetProviderRequest getProviderRequest;
-final GetUpcomingAppointment getUpcomingAppointment;
-final GetProviderById getProviderById;
-  LoginBloc(this.getSinglePetProfile,
-      this._emailSignin,this.getProviders,this.getReview,this.getProviderRequest,this.getProviderById,
-      this.getPetProfile1,this.getUpcomingAppointment, this._resendCode,this.saveUserProfile,this._providerEmailSignin )
+  final GetUpcomingAppointment getUpcomingAppointment;
+  final GetProviderById getProviderById;
+final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
+  LoginBloc(this.getSinglePetProfile,this.getUpcomingAndPastAppointments,
+      this._emailSignin, this.getProviders, this.getReview,
+      this.getProviderRequest, this.getProviderById,
+      this.getPetProfile1, this.getUpcomingAppointment, this._resendCode,
+      this.saveUserProfile, this._providerEmailSignin)
       : super();
   String email = "";
   String password = "";
@@ -76,11 +80,11 @@ final GetProviderById getProviderById;
         if (l is UserNotConfirmedFailure) {
           final res = await _resendCode(email);
           if (res.isRight()) {
-           // final result =  await getPetProfile1(NoParams());
-           if(result.isRight()) {
-             await getPetProfile1(NoParams());
-             yield VerificationNeeded();
-           }
+            // final result =  await getPetProfile1(NoParams());
+            if (result.isRight()) {
+              await getPetProfile1(NoParams());
+              yield VerificationNeeded();
+            }
           } else {
             yield LoginFailure("Signin failed..please try again.. $l");
           }
@@ -89,9 +93,9 @@ final GetProviderById getProviderById;
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
-       await getPetProfile1(NoParams());
+        await getPetProfile1(NoParams());
 
-       await getSinglePetProfile (NoParams());
+        await getSinglePetProfile(NoParams());
         print("RAKA===============================================");
         print(result);
         print("RAKA===============================================");
@@ -103,12 +107,12 @@ final GetProviderById getProviderById;
         // yield RegisterInProgress();
         // final result =
         await saveUserProfile(UserProfileParams(
-        city: '',
-        zipCode: '',
-        password: '',
-        state: '',
-        profileImage: '',
-        phone: '',
+          city: '',
+          zipCode: '',
+          password: '',
+          state: '',
+          profileImage: '',
+          phone: '',
         ));
         // yield* result.fold((l) async* {
         // yield RegisterFailure("Profile failed..please try again.. $l");
@@ -151,13 +155,29 @@ final GetProviderById getProviderById;
         yield LoginSuccess();
       });
     }
+    else if (event is GetProvider) {
+      final result = await getProviders.call(event.text);
+      print('ddddd$event.text');
+      if (result.isRight()) {
+        yield ProviderLoaded1(result.getOrElse(() => null));
+      }
+    }
+    if (event is UpcomingAppointmentChanged) {
+      final result = await getUpcomingAndPastAppointments.call(event.text);
+      print('ddddd$event.text');
+      if (result.isRight()) {
+        yield FetchUpcomingAppointmentModelData(result.getOrElse(() => null));
+      }
+    }
   }
+    bool _isFormValid() {
+      return email.isNotEmpty && password.isNotEmpty;
+    }
 
-  bool _isFormValid() {
-    return email.isNotEmpty && password.isNotEmpty;
-  }
 
   @override
   // TODO: implement initialState
   get initialState => LoginInitial();
-}
+  }
+
+

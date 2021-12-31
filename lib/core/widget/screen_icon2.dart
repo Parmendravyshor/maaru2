@@ -69,14 +69,6 @@ class ToggleButton2 extends StatefulWidget {
 }
 
 class _ToggleButton2State extends State<ToggleButton2> {
-
-// <<<<<<< HEAD
-//   List<bool> isSelected;
-//   bool pressed = true;
-//   @override
-//   void initState() {
-//     isSelected = [true, false];
-//     super.initState();
 // =======
   Gender SelectedGender = Gender.none;
   Color malecontainercolor = Colors.white;
@@ -100,61 +92,10 @@ class _ToggleButton2State extends State<ToggleButton2> {
     );
 
   }
-
-
-  // int index =['male','ddd','dddkd'] as int;
-  // List<bool> isSelected;
-  // bool pressed = true;
-  // @override
-  // void initState() {
-  //   isSelected = [true, false];
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final size=MediaQuery.of(context).size;
-    // return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-    //   ToggleButtons(
-    //     borderColor: Colors.grey[300],
-    //     borderWidth: -0.0,
-    //     fillColor: MaaruColors.blueColor,
-    //     selectedBorderColor: Colors.white,
-    //     selectedColor: Colors.white,
-    //     // borderRadius: BorderRadius.circular(
-    //     //   10,
-    //     // ),
-    //     children: <Widget>[
-    //       Padding(
-    //         padding: const EdgeInsets.fromLTRB(40, 10, 100, 15),
-    //         child: Text(
-    //           'Male',
-    //           style: pressed
-    //               ? TextStyle(fontSize: 20, color: Colors.black)
-    //               : TextStyle(fontSize: 20, color: Colors.white),
-    //         ),
-    //       ),
-    //       Padding(
-    //         padding: const EdgeInsets.fromLTRB(54, 10, 54, 15),
-    //         child: Text(
-    //           'Female',
-    //           style: pressed
-    //               ? TextStyle(fontSize: 20, color: Colors.black)
-    //               : TextStyle(fontSize: 20, color: Colors.white),
-    //         ),
-    //       ),
-    //     ],
-    //     onPressed: (int index) {
-    //       setState(() {
-    //         for (int i = 0; i < isSelected.length; i++) {
-    //           isSelected[i] = i == index;
-    //           pressed = !pressed;
-    //         }
-    //       });
-    //     },
-    //     isSelected: isSelected,
-    //   ),
-    // ]);
+
    return Row(
       children: [
         GestureDetector(

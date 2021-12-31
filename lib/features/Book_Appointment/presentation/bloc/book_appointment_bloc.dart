@@ -83,12 +83,12 @@ class BookAppointmentBloc extends Bloc<BookAppointmentEvent, BookAppointmentStat
     else if (event is BookRegisterButtonTapped) {
       yield BookRegisterInProgress();
       final result = await bookProvider(BookProviderParams(
-          pet_id:pet_id,
-           provider_id:provider_id,
-            booking_date_time:booking_date_time,
-           service_id:service_id,
+        pet_id: pet_id,
+        provider_id: provider_id,
+        booking_date_time: booking_date_time,
+        service_id: service_id,
 
-         ));
+      ));
       yield* result.fold((l) async* {
         yield BookRegisterFailure("Signup failed..please try again.. $l");
       }, (r) async* {

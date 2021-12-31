@@ -43,3 +43,14 @@ class BookRegisterButtonTapped extends BookAppointmentEvent {
   List<Object> get props => [BookRegisterButtonTapped];
 
 }
+class UpcomingAppointmentChanged extends BookAppointmentEvent {
+
+  final String text;
+
+  UpcomingAppointmentChanged({this.text});
+
+  @override
+  String toString() => "UpcomingAppointmentChanged";
+  List<Object> get props => [text];
+
+}

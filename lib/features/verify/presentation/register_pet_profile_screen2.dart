@@ -15,7 +15,7 @@ import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
-import 'package:maru/features/faketest.dart';
+
 import '../../../main.dart';
 import 'register_pet_profile_screen1.dart';
 import 'register_pet_profile_screen3.dart';
@@ -23,6 +23,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'pet_profile_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -106,8 +107,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
               BlocBuilder<PetProfileBloc, PetProfileState>(
                   builder: (context, state) {
                     if (state is PetProfile2Saves) {
-                      AlertManager.showErrorMessage(
-                          "otp send your register email", context);
+
                       SchedulerBinding.instance.addPostFrameCallback((_) {
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (BuildContext context) {

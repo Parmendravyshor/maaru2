@@ -4,6 +4,7 @@ import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/notification.dart';
 import 'package:maru/core/data/datasource/storage.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 import 'package:maru/features/Home/domain/usecases/get_upcoming_appointment.dart';
 import 'package:maru/features/chat/domain/usecases/get_text_file.dart';
@@ -69,6 +70,7 @@ void _registerBloc(KiwiContainer container) {
       c.resolve(),
       c.resolve(),
       c.resolve(),
+      c.resolve(),
       c.resolve()));
   container
       .registerFactory((c) => ResetBloc(c.resolve(), c.resolve(), c.resolve()));
@@ -117,6 +119,7 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => UploadVaccineREcord(c.resolve()));
   container.registerFactory((c) => GetProviderById(c.resolve()));
   container.registerFactory((c) => BookProvider(c.resolve()));
+  container.registerFactory((c) => GetUpcomingAndPastAppointments(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 
