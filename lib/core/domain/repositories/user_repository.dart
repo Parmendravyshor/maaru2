@@ -1,3 +1,5 @@
+
+
 import 'dart:ffi';
 
 import 'package:dartz/dartz.dart';
@@ -35,19 +37,19 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> petCreateProfile(PetProfileAuthParams params);
   Future<Either<Failure, void>> getPastAppointment();
   Future<Either<Failure, void>> getUpcomingAppointment();
-  Future<Either<Failure, void>> createPetProfile(PetProfile params);
+  Future<Either<Failure, void>> createPetProfile(PetProfile1 params);
   Future<Either<Failure, void>> getProviders(text);
 
   Future<Either<Failure, void>> getReview();
   Future<Either<Failure, void>> forgetPassword(email);
   Future<Either<Failure, void>> saveRegistrationId();
   Future<Either<Failure, void>> createUserProfile(UserProfile params);
-  Future <Either<Failure, Welcome>> getPetProfile();
+  Future <Either<Failure, Welcome>> getPetProfile(text);
   Future <Either<Failure, Welcome4>> getProviderById();
   Future<Either<Failure, void>> saveChangePassword(UserProfileParams params);
   Future<Either<Failure, void>> bookProvider(BookProviderParams params);
   Future<Either<Failure, void>> getUserProfile();
-  Future<Either<Failure, void>> savePetProfile(PetProfile params);
+  Future<Either<Failure, void>> savePetProfile(PetProfile1 params);
   Future<Either<Failure, void>> saveUserProfile(UserProfileParams params);
   Future<Either<Failure, void>> verifyCode(VerifyParams params);
   Future<Either<Failure, void>> getResentMessages();

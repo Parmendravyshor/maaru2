@@ -263,7 +263,7 @@ class _ToggleButton3State extends State<ToggleButton3> {
   Color NeitherContainerColor = Colors.white;
   Color activeneither = MaaruColors.button2Color;
 
-  String sex='none';
+  String sex1='';
 
 
   Container ToggleContainer(
@@ -421,22 +421,21 @@ class _ToggleButton3State extends State<ToggleButton3> {
 
                 if(NeuteredContainerColor==activenutered)
                   {
-                    sex='NEUTERED';
-                    print(sex);
+                    sex1='neutered';
+                    print(sex1);
                   }else
                     {
                       print('FAILURE');
                     }
-
+                BlocProvider.of<PetProfileBloc>(context)
+                    .add(SexChanged(sex1));
               });
-              BlocProvider.of<PetProfileBloc>(context)
-                  .add(NoteChanged(sex));
-              print('added bloc ${sex}');
+
             },
             child: ToggleContainer(
                 size.height * 0.060,
                 size.width * 0.29,
-                'Neutered',
+                'neutered',
                 NeuteredContainerColor)),
         GestureDetector(
             onTap: () {
@@ -450,21 +449,22 @@ class _ToggleButton3State extends State<ToggleButton3> {
                 }
                 if(SpadeContainerColor==activespade)
                 {
-                  sex='SPADE';
-                  print(sex);
+                  sex1='spade';
+                  print(sex1);
                 }else
                 {
                   print('FAILURE');
                 }
 
               });
+
               BlocProvider.of<PetProfileBloc>(context)
-                  .add(NoteChanged(sex));
+                  .add(SexChanged(sex1));
             },
             child:ToggleContainer(
                 size.height * 0.060,
                 size.width * 0.30,
-                'Spade',
+                'spade',
                 SpadeContainerColor)),
         GestureDetector(
             onTap: () {
@@ -478,21 +478,21 @@ class _ToggleButton3State extends State<ToggleButton3> {
                 }
                 if(NeitherContainerColor==activeneither)
                 {
-                  sex='NEITHER';
-                  print(sex);
+                  sex1='neither';
+                  BlocProvider.of<PetProfileBloc>(context)
+                      .add(SexChanged(sex1));
                 }else
                 {
                   print('FAILURE');
                 }
 
               });
-              BlocProvider.of<PetProfileBloc>(context)
-                  .add(NoteChanged(sex));
+
             },
             child:ToggleContainer(
                 size.height * 0.060,
                 size.width * 0.30,
-                'Neither',
+                'neither',
                 NeitherContainerColor)),
       ],
     );

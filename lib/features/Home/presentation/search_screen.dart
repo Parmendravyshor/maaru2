@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -22,7 +23,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
-    as event;
+as event;
 
 class ProviderSearchScreen extends StatefulWidget {
   @override
@@ -93,13 +94,13 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                       'shandan',
                       // _prefHelper.getStringByKey(MaruConstant.company_name, ''),
                       style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
+                      TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
                     ),
                     Text(
                       'null',
                       //   _prefHelper.getStringByKey(MaruConstant., ''),
                       style:
-                          TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
+                      TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
                     ),
                     SizedBox(
                       height: 15,
@@ -141,288 +142,295 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return Scaffold(
-                    body:
-                    SingleChildScrollView(
-                      child: 
-                      Container(
+                    return Scaffold(
+                        body:
+                        SingleChildScrollView(
+                          child:
+                              
+                          Container(
 
-                          margin: const EdgeInsets.only(
-                              top: 70, bottom: 0, left: 10, right: 20),
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ShowLocation(),
-                                const SizedBox(
-                                  height: 15.0,
-                                ),
-                                Stack(
+                              margin: const EdgeInsets.only(
+                                  top: 70, bottom: 0, left: 10, right: 20),
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    searchUse(context),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 260),
-                                      child: GestureDetector(
-                                        onTap: () {
-
-                                            setState(() {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        MapView()));
-                                          });
-
-                                        },
-                                        child: Image.asset(
-                                          'assets/icons/icone-setting-61.png',
-                                          height: 45,
-                                        ),
-                                      ),
+                                    ShowLocation(),
+                                    const SizedBox(
+                                      height: 15.0,
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(left: leftpad),
-                                      child: GestureDetector(
-                                          onTap: () {
-                                            if  (mounted ){
+                                    Stack(
+                                      children: [
+                                        searchUse(context),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 260),
+                                          child: GestureDetector(
+                                            onTap: () {
 
-                                            }
-                                            if(mounted) {
                                               setState(() {
-                                              switchimage ==
-                                                      'assets/icons/icon-bl-19.png'
-                                                  ? switchimage =
-                                                      'assets/icons/icone-setting-62.png'
-                                                  : switchimage =
-                                                      'assets/icons/icon-bl-19.png';
-                                              height == 45
-                                                  ? height = 180
-                                                  : height = 45;
-                                              leftpad == 310
-                                                  ? leftpad = 0
-                                                  : leftpad = 310;
-                                            });
-                                            }
-
-                                          },
-                                          child: Image.asset(
-                                            switchimage,
-                                            height: height,
-                                          )),
-                                    ),
-                                    Positioned(
-
-                                        child: switchcontainer(context))
-                                  ],
-                                ),
-                                ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    itemCount: state
-                                        .getProviderModel.providersListing.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Column(children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.grey[200],
-                                                  width: 2),
-                                              borderRadius:
-                                                  BorderRadius.circular(25)),
-                                          height: 120,
-                                          child: InkWell(
-                                            onTap: () async {
-                                              if(mounted) {
-                                                setState(() {
-
-                                                Navigator.of(context)
-                                                    .push(MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      BookAppointment1(),
-                                                ));
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            MapView()));
                                               });
-                                              }
-                                              var id3 = state.getProviderModel
-                                                  .providersListing[index].id;
-                                            //  _prefHelper.saveString(, value)
 
-                                              print('gfuiygdhyugdyhugdyuedginlfoi$id3');
-                                              var serviceid1 = state
-                                                  .getProviderModel
-                                                  .providersListing[index]
-                                                  .serviceId;
-                                              await _prefHelper.saveInt(
-                                                  'id', id3);
-                                              await _prefHelper.saveInt(
-                                                  'service_id', serviceid1);
-                                              // final id4 =  _prefHelper.getIntByKey('id',id3);
-
-                                              print(
-                                                  'jhkhffhfkjhfjkhfjkbhejdhfjdbffbfbggggg${state.getProviderModel.providersListing[index].serviceId}');
                                             },
-                                            child: Container(
-                                              color: Colors.white,
-                                              margin: EdgeInsets.all(13.0),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    height: 100,
-                                                    width: 90,
-                                                    // decoration: BoxDecoration(
-                                                    //     gradient: LinearGradient(
-                                                    //         colors: [
-                                                    //           Colors.black,
-                                                    //           Colors.grey.shade500
-                                                    //         ]),
-                                                    //     borderRadius:
-                                                    //         BorderRadius.circular(
-                                                    //             15),
-                                                    //     image: DecorationImage(
-                                                    //         image: state
-                                                    //                 .getProviderModel
-                                                    //                 .providersListing[
-                                                    //                     index]
-                                                    //                 .img
-                                                    //                 .isNotEmpty
-                                                    //             ? const ExactAssetImage(
-                                                    //                 'assets/images/image_2021_08_31T05_29_55_856Z (1).png')
-                                                    //             : Image.network(state
-                                                    //                 .getProviderModel
-                                                    //                 .providersListing[index]
-                                                    //                 .img))
-                                                    // ),
-                                                    child: Image.network(state
-                                                        .getProviderModel
-                                                        .providersListing[
-                                                    index]
-                                                        .img),
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 20,
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        state
-                                                            .getProviderModel
-                                                            .providersListing[
-                                                                index]
-                                                            .companyName
-                                                            .toString(),
+                                            child: Image.asset(
+                                              'assets/icons/icone-setting-61.png',
+                                              height: 45,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: leftpad),
+                                          child: GestureDetector(
+                                              onTap: () {
+                                                if  (mounted ){
 
-                                                        // _prefHelper.getStringByKey(MaruConstant.company_name, ''),
-                                                        style: const TextStyle(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w900),
-                                                      ),
-                                                      Text(
-                                                        state
+                                                }
+                                                if(mounted) {
+                                                  setState(() {
+                                                    switchimage ==
+                                                        'assets/icons/icon-bl-19.png'
+                                                        ? switchimage =
+                                                    'assets/icons/icone-setting-62.png'
+                                                        : switchimage =
+                                                    'assets/icons/icon-bl-19.png';
+                                                    height == 45
+                                                        ? height = 180
+                                                        : height = 45;
+                                                    leftpad == 310
+                                                        ? leftpad = 0
+                                                        : leftpad = 310;
+                                                  });
+                                                }
+
+                                              },
+                                              child: Image.asset(
+                                                switchimage,
+                                                height: height,
+                                              )),
+                                        ),
+                                        Positioned(
+
+                                            child: switchcontainer(context))
+                                      ],
+                                    ),
+                                    ListView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        itemCount: state
+                                            .getProviderModel.providersListing.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return
+                                            Column(children: [
+                                            Container(
+
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.grey[200],
+                                                      width: 2),
+                                                  borderRadius:
+                                                  BorderRadius.circular(25)),
+                                              height: 120,
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  if(mounted) {
+                                                    setState(() {
+
+                                                      Navigator.of(context)
+                                                          .push(MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            BookAppointment1(),
+                                                      ));
+                                                    });
+                                                  }
+                                                  var id3 = state.getProviderModel
+                                                      .providersListing[index].id;
+                                                  //  _prefHelper.saveString(, value)
+
+                                                  print('gfuiygdhyugdyhugdyuedginlfoi$id3');
+                                                  var serviceid1 = state
+                                                      .getProviderModel
+                                                      .providersListing[index]
+                                                      .serviceId;
+                                                  await _prefHelper.saveInt(
+                                                      'id', id3);
+                                                  await _prefHelper.saveInt(
+                                                      'service_id', serviceid1);
+                                                  // final id4 =  _prefHelper.getIntByKey('id',id3);
+
+                                                  print(
+                                                      'jhkhffhfkjhfjkhfjkbhejdhfjdbffbfbggggg${state.getProviderModel.providersListing[index].serviceId}');
+                                                },
+                                                child: Container(
+
+                                                  color: Colors.white,
+                                                  margin: EdgeInsets.all(13.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        height: 100,
+                                                        width: 90,
+                                                        // decoration: BoxDecoration(
+                                                        //     gradient: LinearGradient(
+                                                        //         colors: [
+                                                        //           Colors.black,
+                                                        //           Colors.grey.shade500
+                                                        //         ]),
+                                                        //     borderRadius:
+                                                        //         BorderRadius.circular(
+                                                        //             15),
+                                                        //     image: DecorationImage(
+                                                        //         image: state
+                                                        //                 .getProviderModel
+                                                        //                 .providersListing[
+                                                        //                     index]
+                                                        //                 .img
+                                                        //                 .isNotEmpty
+                                                        //             ? const ExactAssetImage(
+                                                        //                 'assets/images/image_2021_08_31T05_29_55_856Z (1).png')
+                                                        //             : Image.network(state
+                                                        //                 .getProviderModel
+                                                        //                 .providersListing[index]
+                                                        //                 .img))
+                                                        // ),
+                                                        child: Image.network(state
                                                             .getProviderModel
                                                             .providersListing[
-                                                                index]
-                                                            .serviceType
-                                                            .toString(),
-                                                        //   _prefHelper.getStringByKey(MaruConstant., ''),
-                                                        style: TextStyle(
-                                                            fontSize: 10,
-                                                            fontWeight:
-                                                                FontWeight.w900),
+                                                        index]
+                                                            .img),
                                                       ),
-                                                      SizedBox(
-                                                        height: 15,
+                                                      const SizedBox(
+                                                        width: 20,
                                                       ),
-                                                      Row(
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
                                                         children: [
-                                                          Image.asset(
-                                                            'assets/icons/ffth.png',
-                                                            height: 20,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 10,
+                                                          Text(
+                                                            state
+                                                                .getProviderModel
+                                                                .providersListing[
+                                                            index]
+                                                                .companyName
+                                                                .toString(),
+
+                                                            // _prefHelper.getStringByKey(MaruConstant.company_name, ''),
+                                                            style: const TextStyle(
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                FontWeight.w900),
                                                           ),
                                                           Text(
-                                                            '${state.getProviderModel.providersListing[index].reviews} Reviews (${state.getProviderModel.providersListing[index].averageRating})',
-                                                            style: const TextStyle(
+                                                            state
+                                                                .getProviderModel
+                                                                .providersListing[
+                                                            index]
+                                                                .serviceType
+                                                                .toString(),
+                                                            //   _prefHelper.getStringByKey(MaruConstant., ''),
+                                                            style: TextStyle(
                                                                 fontSize: 10,
                                                                 fontWeight:
+                                                                FontWeight.w900),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 15,
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              Image.asset(
+                                                                'assets/icons/ffth.png',
+                                                                height: 20,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Text(
+                                                                '${state.getProviderModel.providersListing[index].reviews} Reviews (${state.getProviderModel.providersListing[index].averageRating})',
+                                                                style: const TextStyle(
+                                                                    fontSize: 10,
+                                                                    fontWeight:
                                                                     FontWeight
                                                                         .w900),
+                                                              )
+                                                            ],
                                                           )
                                                         ],
                                                       )
                                                     ],
-                                                  )
-                                                ],
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        )
-                                      ]);
-                                      // RepeatContainer('assets/images/kutta.png',),
-                                      // SizedBox(
-                                      //   height: size.height * 0.02,
-                                      // ),
-                                      // RepeatContainer('assets/images/kutta.png',),
-                                    })
-                              ])),
-                    ));
+                                            SizedBox(
+                                              height: 20,
+                                            )
+                                          ]);
+                                          // RepeatContainer('assets/images/kutta.png',),
+                                          // SizedBox(
+                                          //   height: size.height * 0.02,
+                                          // ),
+                                          // RepeatContainer('assets/images/kutta.png',),
+                                        })
+                                  ])),
+                        ));
 
-              }));
+                  }));
             });
-             return Container();
+            return Container();
           }
           return
-            Container(
-            decoration: BoxDecoration(
-              //
-              //  color: Colors.red,
-                border: Border.all(color: Color(0xffE8E8E8)),
-                borderRadius: BorderRadius.circular(20)),
-            height: 50,
-            width: 250,
-            child: TextField(
-              textInputAction: TextInputAction.search,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(top: 2.0, left: 20.0),
-                hintText: 'Search',
-                hintStyle: MaaruStyle.text.tiny,
-                suffixIcon: GestureDetector(
-                    onTap: () {
-                      if  (mounted ){
 
-                      }
+            Container(
+              decoration: BoxDecoration(
+                //
+                //  color: Colors.red,
+                  border: Border.all(color: Color(0xffE8E8E8)),
+                  borderRadius: BorderRadius.circular(20)),
+              height: 50,
+              width: 250,
+              child: TextField(
+                textInputAction: TextInputAction.search,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(top: 2.0, left: 20.0),
+                  hintText: 'Search',
+                  hintStyle: MaaruStyle.text.tiny,
+                  suffixIcon: GestureDetector(
+                      onTap: () {
+                        if  (mounted ){
+
+                        }
                         BlocProvider.of<LoginBloc>(context)
                             .add(event.GetProvider(_petNameController.text));
                       },
 
 
-                    child: Image.asset(
-                      'assets/icons/icone-setting-19.png',
-                      height: 100,
-                    )),
-                border: OutlineInputBorder(borderSide: BorderSide.none),
-              ),
+                      child: Image.asset(
+                        'assets/icons/icone-setting-19.png',
+                        height: 100,
+                      )),
+                  border: OutlineInputBorder(borderSide: BorderSide.none),
+                ),
 
-               onSubmitted: (text){
-                 if (mounted) {
-                   BlocProvider.of<LoginBloc>(context)
-                       .add(event.GetProvider(_petNameController.text));
-                 }
-               },
-              controller: _petNameController,
-            ),
-          );
+                onSubmitted: (text){
+                  if (mounted) {
+                    BlocProvider.of<LoginBloc>(context)
+                        .add(event.GetProvider(_petNameController.text));
+                  }
+                },
+                controller: _petNameController,
+              ),
+            );
         }));
   }
 
   Widget use(BuildContext context) {
-    return Container(
+    return
+
+      Container(
         margin: EdgeInsets.only(top: 70, bottom: 0, left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -463,7 +471,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                         setState(() {
                           switchimage == 'assets/icons/icon-bl-19.png'
                               ? switchimage =
-                                  'assets/icons/icone-setting-62.png'
+                          'assets/icons/icone-setting-62.png'
                               : switchimage = 'assets/icons/icon-bl-19.png';
                           height == 45 ? height = 180 : height = 45;
                           leftpad == 310 ? leftpad = 0 : leftpad = 310;
@@ -489,158 +497,164 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                 create: (context) => KiwiContainer().resolve<LoginBloc>(),
                 child: BlocBuilder<LoginBloc, LoginState>(
                     builder: (context, state) {
-                  if (state is LoginInitial) {
-                    BlocProvider.of<LoginBloc>(context)
-                        .add(event.GetProvider(text));
-                    print('figffgfg${text}');
-                    return CircularProgressIndicator();
-                  } else if (state is ProviderLoaded1) {
-                    return ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount:
+                      if (state is LoginInitial) {
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(event.GetProvider(text));
+                        print('figffgfg${text}');
+                        return CircularProgressIndicator();
+                      } else if (state is ProviderLoaded1) {
+                        return ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount:
                             state.getProviderModel.providersListing.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Column(children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.grey[200], width: 2),
-                                  borderRadius: BorderRadius.circular(25)),
-                              height: 120,
-                              child: InkWell(
-                                onTap: () async {
-                                  setState(() {
-                                    if  (mounted ){
+                            itemBuilder: (BuildContext context, int index) {
+                              return
+                                Column(
 
-                                    }
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (context) => BookAppointment1(),
-                                    ));
-                                  });
-                                  var id3 = state.getProviderModel
-                                      .providersListing[index].id;
+                                  children: [
+                                    Column(children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey[200], width: 2),
+                                          borderRadius: BorderRadius.circular(25)),
+                                      height: 120,
+                                      child: InkWell(
+                                        onTap: () async {
+                                          setState(() {
+                                            if  (mounted ){
 
-                                  print(id3);
-                                  var serviceid1 = state.getProviderModel
-                                      .providersListing[index].serviceId;
-                                  await _prefHelper.saveInt('id', id3);
-                                  await _prefHelper.saveInt(
-                                      'service_id', serviceid1);
-                                  // final id4 =  _prefHelper.getIntByKey('id',id3);
+                                            }
+                                            Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                              builder: (context) => BookAppointment1(),
+                                            ));
+                                          });
+                                          var id3 = state.getProviderModel
+                                              .providersListing[index].id;
 
-                                  print(
-                                      'jhkhffhfkjhfjkhfjkbhejdhfjdbffbfbggggg${state.getProviderModel.providersListing[index].id}');
-                                },
-                                child: Container(
-                                  color: Colors.white,
-                                  margin: EdgeInsets.all(13.0),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 100,
-                                        width: 90,
-                                        decoration: BoxDecoration(
-                                            gradient: LinearGradient(colors: [
-                                              Colors.black,
-                                              Colors.grey.shade500
-                                            ]),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            image: DecorationImage(
-                                                image: state
-                                                        .getProviderModel
-                                                        .providersListing[index]
-                                                        .img
-                                                        .isNotEmpty
-                                                    ? const ExactAssetImage(
-                                                        'assets/images/image_2021_08_31T05_29_55_856Z (1).png')
-                                                    : Image.network(state
-                                                        .getProviderModel
-                                                        .providersListing[index]
-                                                        .img))),
-                                      ),
-                                      const SizedBox(
-                                        width: 20,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            state
-                                                .getProviderModel
-                                                .providersListing[index]
-                                                .companyName
-                                                .toString(),
+                                          print(id3);
+                                          var serviceid1 = state.getProviderModel
+                                              .providersListing[index].serviceId;
+                                          await _prefHelper.saveInt('id', id3);
+                                          await _prefHelper.saveInt(
+                                              'service_id', serviceid1);
+                                          // final id4 =  _prefHelper.getIntByKey('id',id3);
 
-                                            // _prefHelper.getStringByKey(MaruConstant.company_name, ''),
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w900),
-                                          ),
-                                          Text(
-                                            state
-                                                .getProviderModel
-                                                .providersListing[index]
-                                                .serviceType
-                                                .toString(),
-                                            //   _prefHelper.getStringByKey(MaruConstant., ''),
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.w900),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Row(
+                                          print(
+                                              'jhkhffhfkjhfjkhfjkbhejdhfjdbffbfbggggg${state.getProviderModel.providersListing[index].id}');
+                                        },
+                                        child: Container(
+                                          color: Colors.white,
+                                          margin: EdgeInsets.all(13.0),
+                                          child: Row(
                                             children: [
-                                              Image.asset(
-                                                'assets/icons/ffth.png',
-                                                height: 20,
+                                              Container(
+                                                height: 100,
+                                                width: 90,
+                                                decoration: BoxDecoration(
+                                                    gradient: LinearGradient(colors: [
+                                                      Colors.black,
+                                                      Colors.grey.shade500
+                                                    ]),
+                                                    borderRadius:
+                                                    BorderRadius.circular(15),
+                                                    image: DecorationImage(
+                                                        image: state
+                                                            .getProviderModel
+                                                            .providersListing[index]
+                                                            .img
+                                                            .isNotEmpty
+                                                            ? const ExactAssetImage(
+                                                            'assets/images/image_2021_08_31T05_29_55_856Z (1).png')
+                                                            : Image.network(state
+                                                            .getProviderModel
+                                                            .providersListing[index]
+                                                            .img))),
                                               ),
-                                              SizedBox(
-                                                width: 10,
+                                              const SizedBox(
+                                                width: 20,
                                               ),
-                                              Text(
-                                                '${state.getProviderModel.providersListing[index].reviews} Reviews (${state.getProviderModel.providersListing[index].averageRating})',
-                                                style: const TextStyle(
-                                                    fontSize: 10,
-                                                    fontWeight:
-                                                        FontWeight.w900),
+                                              Column(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    state
+                                                        .getProviderModel
+                                                        .providersListing[index]
+                                                        .companyName
+                                                        .toString(),
+
+                                                    // _prefHelper.getStringByKey(MaruConstant.company_name, ''),
+                                                    style: const TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.w900),
+                                                  ),
+                                                  Text(
+                                                    state
+                                                        .getProviderModel
+                                                        .providersListing[index]
+                                                        .serviceType
+                                                        .toString(),
+                                                    //   _prefHelper.getStringByKey(MaruConstant., ''),
+                                                    style: TextStyle(
+                                                        fontSize: 10,
+                                                        fontWeight: FontWeight.w900),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 15,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/icons/ffth.png',
+                                                        height: 20,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        '${state.getProviderModel.providersListing[index].reviews} Reviews (${state.getProviderModel.providersListing[index].averageRating})',
+                                                        style: const TextStyle(
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                            FontWeight.w900),
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
                                               )
                                             ],
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            )
-                          ]);
-                          // RepeatContainer('assets/images/kutta.png',),
-                          // SizedBox(
-                          //   height: size.height * 0.02,
-                          // ),
-                          // RepeatContainer('assets/images/kutta.png',),
-                        });
-                  } else {
-                    return CircularProgressIndicator();
-                  }
-                  ;
-                })),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    )
+                              ]),
+                                  ],
+                                );
+                              // RepeatContainer('assets/images/kutta.png',),
+                              // SizedBox(
+                              //   height: size.height * 0.02,
+                              // ),
+                              // RepeatContainer('assets/images/kutta.png',),
+                            });
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                      ;
+                    })),
           ],
         ));
   }
 
   Widget switchcontainer(
-    BuildContext context,
-  ) {
+      BuildContext context,
+      ) {
     final size = MediaQuery.of(context).size;
     return BlocProvider(
         create: (context) => KiwiContainer().resolve<LoginBloc>(),
@@ -649,9 +663,9 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return Scaffold(
-                    body: SingleChildScrollView(child: use(context)));
-              }));
+                    return Scaffold(
+                        body: SingleChildScrollView(child: use(context)));
+                  }));
             });
             return Container();
           }
@@ -811,13 +825,13 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(child: use(context)
 
-            // ListView.builder(
-            // scrollDirection: Axis.vertical,
-            // shrinkWrap: true,
-            // itemCount: 10,
-            // itemBuilder: (BuildContext context,int index){
+          // ListView.builder(
+          // scrollDirection: Axis.vertical,
+          // shrinkWrap: true,
+          // itemCount: 10,
+          // itemBuilder: (BuildContext context,int index){
 
-            ));
+        ));
   }
 
   void submitServices(String text) {

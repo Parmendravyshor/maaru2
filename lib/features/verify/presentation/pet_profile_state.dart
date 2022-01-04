@@ -56,7 +56,7 @@ class RegisterInProgress extends PetProfileState {
 
 }
 class UsergetPetProfileButtonTapped extends PetProfileState {
-  final PetProfile _petProfile;
+  final PetProfile1 _petProfile;
    UsergetPetProfileButtonTapped(this._petProfile);
   @override
   List<Object> get props => [_petProfile];
@@ -68,6 +68,13 @@ class UserCreatePetProfileButtonTapped extends PetProfileState {
   @override
   String toString() => "UserCreatePetProfileButtonTapped";
 
+}
+class CovidLoaded3 extends PetProfileState {
+  //final Welcome _newsBloc = Welcome();
+  final Welcome covidModel;
+  CovidLoaded3(this.covidModel);
+
+  List<Object> get props => [covidModel];
 }
 class fakeUserPetProfileButtonTapped extends PetProfileState {
   fakeUserPetProfileButtonTapped() : super();
@@ -125,13 +132,7 @@ class CovidLoading extends PetProfileState {
   List<Object> get props => null;
 }
 
-class CovidLoaded3 extends PetProfileState {
-  //final Welcome _newsBloc = Welcome();
-  final Welcome covidModel;
-  CovidLoaded3(this.covidModel);
 
-  List<Object> get props => [covidModel];
-}
 class ProviderLoaded extends PetProfileState {
   //final Welcome _newsBloc = Welcome();
   final GetProvidersModel getProviderModel;

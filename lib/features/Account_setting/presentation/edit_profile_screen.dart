@@ -81,6 +81,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
 
   @override
   Widget build(BuildContext context) {
+
     final size = MediaQuery
         .of(context)
         .size;
@@ -112,46 +113,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                         SizedBox(
                           height: 20,
                         ),
-                        Stack(fit: StackFit.loose, children: <Widget>[
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              GestureDetector(
-                                child: Container(
-                                  width: 200.0,
-                                  height: 200.0,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: _image.isEmpty
-                                          ? ExactAssetImage(
-                                          'assets/icons/icone-setting-28.png')
-                                          : FileImage(File(_image)),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                onTap: getImage,
-                              ),
-                            ],
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(
-                                top: 160.0,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  CircleAvatar(
-                                      backgroundColor: Colors.red,
-                                      radius: 15.0,
-                                      child:
-                                      Image.asset(
-                                          'assets/icons/icone-setting-29.png'))
-                                ],
-                              )),
-                        ]),
+//
                         Container(
                           width: 1000,
                           height: 800,

@@ -65,3 +65,10 @@ class UpcomingAppointmentChanged extends LoginEvent {
   List<Object> get props => [text];
 
 }
+// class GetCovidList extends LoginEvent {
+//   final String text;
+//
+//   GetCovidList(this.text);
+//   @override
+//   String toString() => "fakeRegisterButtonTapped";
+// }

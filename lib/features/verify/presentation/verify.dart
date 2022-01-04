@@ -75,7 +75,7 @@ class OtpWidget extends State<Otp> {
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) {
-                              return LoginProviderScreen();
+                              return LoginScreen();
                             }));
                           });
                           return Container();

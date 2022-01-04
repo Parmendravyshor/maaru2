@@ -89,8 +89,8 @@ SizedBox(height: 30,),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                '   Providers',
-                style: MaaruStyle.text.small,
+                '   Providers'.toUpperCase(),
+                style: MaaruStyle.text.tiny,
               ),
             ),
             SizedBox(height: 10,),

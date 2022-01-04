@@ -71,7 +71,8 @@ void _registerBloc(KiwiContainer container) {
       c.resolve(),
       c.resolve(),
       c.resolve(),
-      c.resolve()));
+      c.resolve(),
+     ));
   container
       .registerFactory((c) => ResetBloc(c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory((c) => PetProfileBloc(

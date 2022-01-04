@@ -36,16 +36,20 @@ class ResetBloc extends Bloc<ResetEvent, ResetState> {
       }
     } else if (event is ResetButtonTapped) {
       yield ResetInProgress();
-      final result = await _sendResetPwdOtp(email);
+      final result = await _sendResetPwdOtp.call(email);
       yield* result.fold((l) async* {
         yield ResetFailure(
             "Failed to send reset password link..please try again.");
       },
+
               (r) async* {
-       step = 2;
-        yield ResetPasswordMessageSent(
-            "Password reset link sent to your email");
-      });
+
+                step = 2;
+                yield ResetPasswordMessageSent(
+                    "Password reset link sent to your email");
+              });
+
+
     } else if (event is SetNewPasswordTapped) {
       yield ResetInProgress();
       final result = await _resetpwd.call(SetNewPasswordParams(

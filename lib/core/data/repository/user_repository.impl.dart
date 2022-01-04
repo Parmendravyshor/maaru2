@@ -1,3 +1,4 @@
+
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ffi';
@@ -86,8 +87,8 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, void>> emailLogin(
-    EmailAuthParams params,
-  ) async {
+      EmailAuthParams params,
+      ) async {
     try {
       var map = new Map<String, String>();
 
@@ -100,7 +101,9 @@ class UserRepositoryImpl implements UserRepository {
       print(res);
 
       await sharedPrefHelper.saveString("accessToken", res['accessToken']);
+
       print(res['accessToken']);
+    //  await sharedPrefHelper.saveIdJwtToken('accessToken');
       // await sharedPrefHelper.savePassword(res[MaruConstant.id]);
       //   print(res);
       await sharedPrefHelper.savePassword(
@@ -238,7 +241,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> createPetProfile(PetProfile params) async {
+  Future<Either<Failure, void>> createPetProfile(PetProfile1 params) async {
     try {
       final img1 = sharedPrefHelper.getStringByKey(MaruConstant.img, '');
       print(img1);
@@ -249,7 +252,7 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token, 'Content-Type': 'json/application'};
       final File imageFile = File(img1);
       var stream =
-          http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+      http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
       var request = http.MultipartRequest(
         "POST",
@@ -269,10 +272,10 @@ class UserRepositoryImpl implements UserRepository {
         ..fields[MaruConstant.note] = params.notes
         ..fields[MaruConstant.pet_needs] = ''
         ..fields[MaruConstant.times_a_day] = ''
-        ..fields[MaruConstant.sex] = 'spade'
-        ..fields[MaruConstant.gender] = 'male'
-        // ..fields['breed_type'] = 'dff'
-        ..fields['birth_date'] = '2021-09-07'
+        ..fields[MaruConstant.sex] = params.sex
+        ..fields[MaruConstant.gender] = params.gender
+      // ..fields['breed_type'] = 'dff'
+        ..fields['birth_date'] = params.birthDate
         ..headers.addAll(headers);
       print('request params ${request.fields.toString()}');
       var response = await request.send();
@@ -299,7 +302,7 @@ class UserRepositoryImpl implements UserRepository {
       await _prefHelper.saveString(MaruConstant.gender, profile['gender']);
       await _prefHelper.saveString(
           MaruConstant.birth_date, profile['birth_date']);
-      await _prefHelper.saveString(MaruConstant.id, profile['id']);
+      await _prefHelper.saveInt(MaruConstant.id, profile[id]);
       return Right(Void);
     } on CognitoClientException catch (e) {
       print('exception print  + $e');
@@ -318,7 +321,7 @@ class UserRepositoryImpl implements UserRepository {
 
 //TODO: Ricky
   @override
-  Future<Either<Failure, Welcome>> getPetProfile() async {
+  Future<Either<Failure, Welcome>> getPetProfile(text) async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -328,7 +331,7 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
 
       final response =
-          await http.get(MaruConstant.createpProfile, headers: headers);
+      await http.get(Uri.parse('http://18.191.199.31/api/pets?pet_name=$text'), headers: headers);
 
       var data = convert.jsonDecode(response.body);
       print(data);
@@ -357,7 +360,7 @@ class UserRepositoryImpl implements UserRepository {
       );
       var headers = {"access-token": token};
       final response =
-          await http.get(MaruConstant.getupcominapointment, headers: headers);
+      await http.get(MaruConstant.getupcominapointment, headers: headers);
 //print(response.body);
       var data = convert.jsonDecode(response.body);
 
@@ -380,7 +383,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> savePetProfile(PetProfile params) async {
+  Future<Either<Failure, void>> savePetProfile(PetProfile1 params) async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -393,24 +396,24 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
       //   final response = await http.post(MaruConstant.savepet1, body: {
       var request =
-          await http.put(MaruConstant.savepet1, headers: headers, body: {
+      await http.put(MaruConstant.savepet1, headers: headers, body: {
         MaruConstant.pet_name:
-            _prefHelper.getStringByKey(MaruConstant.pet_name, ''),
+        _prefHelper.getStringByKey(MaruConstant.pet_name, ''),
         'age': _prefHelper.getStringByKey('age', ''),
         MaruConstant.height:
-            _prefHelper.getStringByKey(MaruConstant.height, ''),
+        _prefHelper.getStringByKey(MaruConstant.height, ''),
         MaruConstant.weight:
-            _prefHelper.getStringByKey(MaruConstant.weight, ""),
+        _prefHelper.getStringByKey(MaruConstant.weight, ""),
         MaruConstant.sex: _prefHelper.getStringByKey(MaruConstant.sex, ''),
         MaruConstant.gender:
-            _prefHelper.getStringByKey(MaruConstant.gender, ''),
+        _prefHelper.getStringByKey(MaruConstant.gender, ''),
         MaruConstant.breed_type:
-            _prefHelper.getStringByKey(MaruConstant.breed_type, ''),
+        _prefHelper.getStringByKey(MaruConstant.breed_type, ''),
         MaruConstant.birth_date:
-            _prefHelper.getStringByKey(MaruConstant.birth_date, ''),
+        _prefHelper.getStringByKey(MaruConstant.birth_date, ''),
         //MaruConstant.vaccine: params.vaccine,
       });
-
+      print('request params ${request.body}');
       var res = json.decode(request.body);
       print(res);
 
@@ -752,11 +755,11 @@ class UserRepositoryImpl implements UserRepository {
           Uri.parse ('http://18.191.199.31/api/public/providers?page=1&limit=100&service=$text&rating=',
           ));
       print(text);
-print(response.body);
+      print(response.body);
       var data = convert.jsonDecode(response.body);
       var profile = data['provider_profiles'];
 
-    //  print(profile);
+      //  print(profile);
 
       return Right(GetProvidersModel.fromJson(data));
     } on CognitoClientException catch (e) {
@@ -784,7 +787,7 @@ print(response.body);
       );
       var headers = {
         "access-token":
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
       };
       final response = await http.get(MaruConstant.getReview, headers: headers);
 //print(response.body);
@@ -805,10 +808,10 @@ print(response.body);
       );
       var headers = {
         "access-token":
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
       };
       final response =
-          await http.get(MaruConstant.getProviderRequest, headers: headers);
+      await http.get(MaruConstant.getProviderRequest, headers: headers);
 //print(response.body);
       var data = convert.jsonDecode(response.body);
       var profile = data['provider_profiles'];
@@ -828,7 +831,7 @@ print(response.body);
       );
       var headers = {"access-token": token};
       final response =
-          await http.get(MaruConstant.getProviderRequest, headers: headers);
+      await http.get(MaruConstant.getProviderRequest, headers: headers);
 //print(response.body);
       var data = convert.jsonDecode(response.body);
       print(response.body);
@@ -902,9 +905,9 @@ print(response.body);
   Future<Either<Failure, void>> bookProvider(BookProviderParams params) async {
     try {
       final response =
-          await http.post(MaruConstant.providerbookingappointment, body: {
-        'pet_id':2,
-        'provider_id': 2,
+      await http.post(MaruConstant.providerbookingappointment, body: {
+        'pet_id':4,
+        'provider_id': 4,
         'booking_date_time':['29 December 2021 20:45'],
         'service_id': 2,
       });
@@ -942,7 +945,7 @@ print(response.body);
       final response = await http.get(
           Uri.parse ('http://18.191.199.31/api/bookings/filter?service=$text&date=',
           ),
-        headers: headers
+          headers: headers
       );
       print(text);
       print(response.body);

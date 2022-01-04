@@ -57,11 +57,11 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
     return sharedPreferences.setString(MaruConstant.token, accessToken);
   }
 
-  //
-  // @override
-  // Future<void> userLogin() {
-  //   return sharedPreferences.setBool(MaruConstant.isloggedIn, true);
-  // }
+
+  @override
+  Future<void> userLogin() {
+    return sharedPreferences.setBool('is_verified', true);
+  }
 
   @override
   String getEmail() {
@@ -153,11 +153,11 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
     throw UnimplementedError();
   }
 
-  @override
-  Future<void> userLogin() {
-    // TODO: implement userLogin
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<void> userLogin() {
+  //   // TODO: implement userLogin
+  //   throw UnimplementedError();
+  // }
 
   @override
   Future<bool> saveImage(List<int> imageBytes) {
@@ -232,4 +232,5 @@ class Utility {
   static String base64String(Uint8List data) {
     return base64Encode(data);
   }
+
 }

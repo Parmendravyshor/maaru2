@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -108,7 +110,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                               return  Column(children: [
                                 Logo(),
                                 ScreenIcon(),
-                               const SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 Center(
@@ -121,7 +123,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                             fontWeight: FontWeight.w500)),
                                   ),
                                 ),
-                               const SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
 

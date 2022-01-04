@@ -13,12 +13,12 @@ import 'package:json_annotation/json_annotation.dart';
 //part 'save_pet_profile.g.dart';
 
 //TODO: Ricky
-class SavePetProfile extends UseCase<void, PetProfile> {
+class SavePetProfile extends UseCase<void, PetProfile1> {
   UserRepository userRepository;
   SavePetProfile(this.userRepository);
 
   @override
-  Future<Either<Failure, void>> call(PetProfile params) {
+  Future<Either<Failure, void>> call(PetProfile1 params) {
     return userRepository.savePetProfile(params);
   }
 }
@@ -172,10 +172,10 @@ class Welcome {
     this.petProfiles,
   });
 
-  List<PetProfile> petProfiles;
+  List<PetProfile1> petProfiles;
 
   factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
-    petProfiles: List<PetProfile>.from(json["pet_profiles"].map((x) => PetProfile.fromJson(x))),
+    petProfiles: List<PetProfile1>.from(json["pet_profiles"].map((x) => PetProfile1.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -183,8 +183,8 @@ class Welcome {
   };
 }
 
-class PetProfile {
-  PetProfile({
+class PetProfile1 {
+  PetProfile1({
     this.id,
     this.userId,
     this.petName,
@@ -239,7 +239,7 @@ class PetProfile {
   var notes;
  var vaccine;
 
-  factory PetProfile.fromJson(Map<String, dynamic> json) => PetProfile(
+  factory PetProfile1.fromJson(Map<String, dynamic> json) => PetProfile1(
     id: json["id"],
     service_cost: json['service_cost'],
     name: json['name'],

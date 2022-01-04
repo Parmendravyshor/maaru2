@@ -32,8 +32,6 @@ final size = MediaQuery.of(context).size;
         decoration: BoxDecoration(
             image: DecorationImage(
                 fit: BoxFit.cover,
-                colorFilter: new ColorFilter.mode(
-                    Colors.black.withOpacity(0.2), BlendMode.dstATop),
                 image: AssetImage('assets/icons/Splash-Provider-or-User-screen-svg-new (3).png'))),
         child: Center(
           child: Column(
@@ -41,7 +39,7 @@ final size = MediaQuery.of(context).size;
             children: [
               Image.asset(
                 'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
-                height: size.height * 0.08,
+                height: size.height * 0.10,
               ),
               SizedBox(
                 height: size.height * 0.06,
@@ -52,9 +50,9 @@ final size = MediaQuery.of(context).size;
                       builder: (context) => AfterSplashScreen()));
                 },
                 child: RoundedButton(
-                  buttonName: 'I am a Customer',
+                  buttonName: 'I AM A CUSTOMER',
                   Color: MaaruColors.blueColor,
-                  Color1: MaaruColors.button2Color,
+                  Color1: MaaruColors.whiteColor,
                 ),
               ),
               SizedBox(
@@ -66,7 +64,7 @@ final size = MediaQuery.of(context).size;
                       builder: (context) => AfterSplashScreen2()));
                 },
                 child: RoundedButton(
-                  buttonName: 'I am a Provider',
+                  buttonName: 'I AM A PROVIDER',
                   Color1: MaaruColors.blueColor,
                   Color: MaaruColors.button2Color,
                 ),

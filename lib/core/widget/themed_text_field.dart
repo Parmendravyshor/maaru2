@@ -65,7 +65,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
           borderSide: BorderSide(color: MaaruColors.textfeildline),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
-        labelText: widget.placeholder,
+        labelText: widget.placeholder.toUpperCase(),
         contentPadding: EdgeInsets.only(left: 0),
         labelStyle:  MaaruStyle.text.tiny,
        );
@@ -75,29 +75,27 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
+          margin: EdgeInsets.only(left: 20,right: 20),
             height: TextFieldContainerHeight,
             color: Colors.white,
-            child: FractionallySizedBox(
-                widthFactor: 0.9,
-                heightFactor: 1,
-                child: Column(children: [
-                  Container(
-                      height: TextFieldHeight,
-                      child: Form(
-                          key: _formKey,
-                          child: TextFormField(
-                            focusNode: _focusNode,
-                            obscureText: _obscureText,
-                            enabled: widget.enabled,
-                            controller: widget.editingController,
-                            textInputAction: widget.textinputaction2,
-                            onChanged: widget.onChanged,
-                            autocorrect: false,
-                            keyboardType: widget.keyboardType,
-                            style: MaaruStyle.text.tiny,
-                            decoration: inputDecoration(widget),
-                          )))
-                ]))));
+            child: Column(children: [
+              Container(
+                  height: TextFieldHeight,
+                  child: Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        focusNode: _focusNode,
+                        obscureText: _obscureText,
+                        enabled: widget.enabled,
+                        controller: widget.editingController,
+                        textInputAction: widget.textinputaction2,
+                        onChanged: widget.onChanged,
+                        autocorrect: false,
+                        keyboardType: widget.keyboardType,
+                        style: MaaruStyle.text.tiny,
+                        decoration: inputDecoration(widget),
+                      )))
+            ])));
   }
 }
 

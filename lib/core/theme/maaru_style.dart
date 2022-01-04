@@ -7,6 +7,7 @@ class MaaruColors {
   final bool _darkTheme;
   MaaruColors(this._darkTheme);
   static Color primaryColor = Color(0xffFFC938);
+  static Color lightbackground=Color(0xfff5f4f4);
   static Color primaryColorsuggesion = Color(0xff2e1475);
   static Color primaryColorsuggesion1 = Color(0xff236855);
   static Color buttonColor = Color(0xff2e1475);
@@ -28,7 +29,7 @@ class MaaruColors {
  static const Color button2Color=Color(0xffe2d6b8);
   static Color textButtonColor = Color(0xff2e1475);
   static Color textColor = Color(0xFF6a6a6a);
-
+  static const Color mehrooncolor=Color(0xffcc1d17);
   Color buttonTextColor1 = Color(0xFF367355);
   static Color DogsBackground = Color(0xFFedc8be);
   Color darkColor = Color(0xFF171819);
@@ -56,6 +57,8 @@ class MaaruColors {
   static Color textfeildline=Color(0xffd5d5d5);
 
 
+
+
   Color get formFieldBorder =>
       _darkTheme ? greyNight.withOpacity(0.1) : darkColor.withOpacity(0.1);
   Color get formFieldFill => _darkTheme ? darkColor : whiteColor;
@@ -74,7 +77,7 @@ class MaaruColors {
         textStyle: TextStyle(
             fontWeight: FontWeight.w600,
             fontFamily: 'Poppins',
-            fontSize: 16,
+            fontSize: 15,
             color: Color(0xFF000000)));
   }
 
@@ -95,19 +98,35 @@ class MaaruColors {
         textStyle: TextStyle(
             fontWeight: FontWeight.w600,
             fontFamily: 'Poppins',
-            fontSize: 20,
+            fontSize: 19,
             color: MaaruColors.blueColor));
   }
 
   TextStyle get greyDisable {
     return GoogleFonts.poppins(
         textStyle: TextStyle(
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
             fontFamily: 'Poppins',
+
 
             fontSize: 15,
 
+
             color: Colors.grey[400]));
+
+
+  }
+
+
+  TextStyle get whitetext {
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Poppins',
+            fontSize: 15,
+            color: Colors.white));
+
+
   }
 
   TextStyle get tinyDisable {
@@ -189,7 +208,7 @@ class MaaruColors {
     return TextStyle(
         fontWeight: FontWeight.w700,
         fontFamily: 'Quicksand',
-        fontSize: 30 ,
+        fontSize: 25 ,
         color: _darkTheme
             ? MaaruStyle.colors.textColorWhite
             : MaaruStyle.colors.textColorBlack);

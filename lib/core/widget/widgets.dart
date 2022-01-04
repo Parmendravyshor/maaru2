@@ -46,31 +46,34 @@ class ThemedButton extends StatelessWidget {
 
     final enabledTextColor = MaaruColors.button2Color;
     final disabledTextColor = MaaruStyle.colors.textDisabled;
-    return Center(
-        child: FractionallySizedBox(
-            widthFactor: 0.99,
-            child: Container(
+    return Container(
+      margin: EdgeInsets.only(left: 20,right: 20),
+      child: Center(
+          child: FractionallySizedBox(
+              widthFactor:1.1,
+              child: Container(
 
-                decoration: enabled ? MaaruStyle.buttonShadow : null,
-                child: FlatButton(
-                    minWidth: double.infinity,
-                    height: ButtonMinHeight,
-                    // color: MaaruColors.primaryColor,
-                    shape: enabled
-                        ? MaaruStyle.buttonShapeEnabled
-                        : MaaruStyle.buttonShapeDisabled,
-                    color: enabled ? enabledColor : disabledColor,
-                    textColor: MaaruColors.primaryColorsuggesion,
-                    padding: EdgeInsets.all(18.0),
-                    onPressed: onPressed,
-                    child: Text(text,
-                        //style: TextStyle(color: MaaruColors.buttonTextColor),
+                  decoration: enabled ? MaaruStyle.buttonShadow : null,
+                  child: FlatButton(
+                      minWidth: double.infinity,
+                      height: ButtonMinHeight,
+                      // color: MaaruColors.primaryColor,
+                      shape: enabled
+                          ? MaaruStyle.buttonShapeEnabled
+                          : MaaruStyle.buttonShapeDisabled,
+                      color: enabled ? enabledColor : disabledColor,
+                      textColor: MaaruColors.primaryColorsuggesion,
+                      padding: EdgeInsets.all(18.0),
+                      onPressed: onPressed,
+                      child: Text(text.toUpperCase(),
+                          //style: TextStyle(color: MaaruColors.buttonTextColor),
 
-                        style: MaaruStyle.text.small.copyWith(
-                            fontWeight: FontWeight.w500,
-                            color: enabled
-                                ? disabledColor
-                                : disabledTextColor))))));
+                          style: MaaruStyle.text.tiny.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: enabled
+                                  ? disabledColor
+                                  : disabledTextColor)))))),
+    );
   }
 }
 

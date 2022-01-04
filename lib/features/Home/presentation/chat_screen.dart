@@ -46,7 +46,7 @@ elevation: 0,
                   height: 20,
                 ),
                 Text(
-                  'OSCAR',
+                  'OSCAR'.toUpperCase(),
                   style: MaaruStyle.text.tiniest,
                 )
               ],
@@ -103,6 +103,7 @@ elevation: 0,
                                          ListTile(
                                            title: Text(
                                                'I would like to discuss some monthly subscription with you',
+
                                                style:
                                                    TextStyle(
     fontWeight: FontWeight.w400,
@@ -111,6 +112,8 @@ elevation: 0,
     color: Colors.white))
                                          ),
                                      ],
+
+
                                      )),
                                )
                              ],
@@ -163,7 +166,8 @@ elevation: 0,
                    Align(
                      alignment: Alignment.bottomCenter,
                      child: Row(
-                       //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+
                          children: [
 
                            Container(
@@ -178,6 +182,7 @@ elevation: 0,
                                      keyboardType: TextInputType.multiline,
                                      decoration: InputDecoration(
                                        contentPadding:
+
                                        EdgeInsets.only(right: 60, left: 20),
                                        hintText: 'Type message here',
                                        hintStyle: MaaruStyle.text.greyDisable,
@@ -191,6 +196,8 @@ elevation: 0,
                                        disabledBorder: UnderlineInputBorder(
                                          borderSide:
                                          BorderSide(color: Colors.white),
+
+
                                        ),
                                        prefixIcon: TextButton(
                                          onPressed: () {
@@ -206,8 +213,10 @@ elevation: 0,
                                                        ),
                                                        Row(
                                                            mainAxisAlignment:
+
                                                            MainAxisAlignment
                                                                .spaceEvenly,
+
                                                            children: [
                                                              IconItem(
                                                                Icons
@@ -227,11 +236,14 @@ elevation: 0,
                                                              InkWell(
                                                                onTap: () {
                                                                  Navigator.of(
+
                                                                      context)
                                                                      .push(MaterialPageRoute(
                                                                      builder:
                                                                          (_) =>
                                                                          MapView()));
+
+
                                                                },
                                                                child: IconItem(
                                                                    Icons
@@ -253,10 +265,12 @@ elevation: 0,
                          ]),
                    ),
 
+
                  ],
                  ),
           ),
         ));
+
   }
 
   Widget IconItem(IconData icon, Color color, String text) {

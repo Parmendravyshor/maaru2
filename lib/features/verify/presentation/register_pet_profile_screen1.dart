@@ -136,6 +136,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  
 
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     // _image = _prefHelper.getStringByKey(MaruConstant.img, "");
 
     return Scaffold(
@@ -189,8 +190,8 @@ print(state.toString());
                         children: <Widget>[
                           GestureDetector(
                             child: Container(
-                              width: 200.0,
-                              height: 200.0,
+                              width: size.width*0.50,
+                              height: size.height*0.25,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
@@ -301,14 +302,14 @@ print(state.toString());
                             new SizedBox(
                               height: 10.0,
                             ),
-                            ThemedTextField("AGE", TextInputType.text,
+                            ThemedTextField("AGE", TextInputType.number,
                                 textStyle: TextStyle(color: Colors.black),
                                 textInputAction: TextInputAction.done,
                                 onChanged: (text) {
                               BlocProvider.of<PetProfileBloc>(context)
                                   .add(AgeChanged(text));
                             }, editingController: _ageTypeController),
-                            ThemedTextField("WEIGHT", TextInputType.text,
+                            ThemedTextField("WEIGHT", TextInputType.number,
                                 textStyle: TextStyle(color: Colors.black),
                                 textInputAction: TextInputAction.done,
                                 onChanged: (text) {
@@ -319,7 +320,7 @@ print(state.toString());
                               height: 20.0,
                             ),
                             //  ThemeChanges(),
-                            ThemedTextField("HEIGHT", TextInputType.text,
+                            ThemedTextField("HEIGHT", TextInputType.number,
                                 textStyle: TextStyle(color: Colors.black),
                                 textInputAction: TextInputAction.done,
                                 onChanged: (text) {

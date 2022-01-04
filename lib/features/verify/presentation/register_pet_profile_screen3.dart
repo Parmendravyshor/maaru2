@@ -192,7 +192,6 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                 child: BlocBuilder<PetProfileBloc, PetProfileState>(
                     builder: (context, state) {
                   if (state is pet3rofileButtonTapped) {
-
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (BuildContext context) {
@@ -234,7 +233,16 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                               alignment: Alignment.bottomRight,
                               height: size.height * 0.20,
                               width: size.width * 0.9,
-                              child: Image.network(_prefHelper.getStringByKey(MaruConstant.img, '')))),
+                              child: Image.network(
+                                  _prefHelper.getStringByKey(
+                                      MaruConstant.img, ''),
+                                  errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                    color: Colors.amber,
+                                    alignment: Alignment.center,
+                                    child:
+                                        Image.asset('assets/images/kutta.png'));
+                              }))),
                       Container(
 
                           //  width: 1000,

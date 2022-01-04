@@ -117,10 +117,7 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                           Center(
                             child: Text(
                               'or sign up with email',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
+                              style: MaaruStyle.text.tiny
                             ),
                           ),
                           SizedBox(
@@ -273,7 +270,7 @@ class GoToSignInText extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (_) => LoginProviderScreen()));
             },
             child: Text(
-              'Log in',
+              'Login'.toUpperCase(),
               style: MaaruStyle.text.mediumDisable,
             ))
       ],

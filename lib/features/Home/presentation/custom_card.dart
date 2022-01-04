@@ -51,15 +51,15 @@ class _CustomCardState extends State<CustomCard> {
               Color: Colors.yellow,
             ),
             title: Text(
-              'Austin pet care',
-              style: MaaruStyle.text.tiniest,
+              'Austin pet care'.toUpperCase(),
+              style: MaaruStyle.text.tiny,
             ),
             subtitle:
             Text(
-              'Are we meeting tommarow still pet services',
+              'Are we meeting tommarow still pet services'.toUpperCase(),
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.grey),
             ),
-            trailing: Text('today', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.grey),),
+            trailing: Text('today'.toUpperCase(), style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.grey),),
 
           ),
 
@@ -89,14 +89,14 @@ class _CustomCardState extends State<CustomCard> {
                           Color: Colors.yellow,
                         ),
                         title: Text(
-                          'Austin pet Grooming',
-                          style: MaaruStyle.text.tiniest,
+                          'Austin pet Grooming'.toUpperCase(),
+                          style: MaaruStyle.text.tiny,
                         ),
                         subtitle: Text(
-                          'Are we still meeting tommorrow about the pet services',
+                          'Are we still meeting tommorrow about the pet services'.toUpperCase(),
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.grey),
                         ),
-                        trailing: Text('today', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.grey),),
+                        trailing: Text('today'.toUpperCase(), style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,color: Colors.grey),),
 
                       ),
 

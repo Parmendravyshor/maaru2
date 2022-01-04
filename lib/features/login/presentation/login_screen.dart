@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +19,7 @@ import 'package:maru/features/Home/presentation/search_screen.dart';
 import 'package:maru/features/forgot/presentation/forgot_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen2.dart';
 import 'package:maru/features/verify/presentation/verify.dart';
@@ -78,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SchedulerBinding.instance.addPostFrameCallback((_) {
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (BuildContext context) {
-                                        return ProviderSearchScreen();
+                                        return HomeScreen();
                                       }));
                                 });
                                 return Container();
@@ -101,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Scaffold.of(context).showSnackBar(
                                     SnackBar(
                                       backgroundColor: Colors.black,
-                                      content: Text(state.errorMessage,
+                                      content: Text('Account not register',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w400,
                                               fontFamily: 'Quicksand',
@@ -193,23 +196,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                                       .add(event.LoginButtonTapped());
                                                 }
 
-                                },
-                                enabled: true),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            state is LoginInProgress
-                                ? Center(
-                                child: Container(
-                                  margin: EdgeInsets.only(bottom: 10),
-                                  width: 40,
-                                  height: 40,
-                                  child: CircularProgressIndicator(),
-                                ))
-                                : Container(),
-                            Container(
-                              child: GoToSignInText(),
-                            ),
+                                              },
+                                              enabled: true),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          state is LoginInProgress
+                                              ? Center(
+                                              child: Container(
+                                                margin: EdgeInsets.only(bottom: 10),
+                                                width: 40,
+                                                height: 40,
+                                                child: CircularProgressIndicator(),
+                                              ))
+                                              : Container(),
+                                          Container(
+                                            child: GoToSignInText(),
+                                          ),
 
 
 

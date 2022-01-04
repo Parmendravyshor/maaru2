@@ -31,15 +31,22 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
   Color circlecolor4 = MaaruColors.whiteColor;
   Color circlecolor5 = MaaruColors.whiteColor;
   Color circlecolor6 = MaaruColors.whiteColor;
+
   var select = '';
+
+
+
   Widget choosecontainer(
       BuildContext context, Image image, String text, Color color) {
     final size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
+
         border: Border.all(
           color: MaaruColors.textfeildline,
         ),
+
+
         color: color,
       ),
       height: size.height * 0.10,
@@ -52,11 +59,15 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
             image,
             SizedBox(
               width: size.width * 0.02,
+
             ),
             Text(
               text,
               style: MaaruStyle.text.tiny,
+
+
             ),
+            Text(text,style: MaaruStyle.text.tiny,),
           ],
         ),
       ),
@@ -113,6 +124,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                             const SizedBox(
                               height: 20,
                             ),
+
                             SkipButtons(),
                                 const SizedBox(
                               height: 20,
@@ -355,6 +367,8 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                           ),
                                           const SizedBox(
                                             height: 40,
+
+
                                           ),
                                           Row(
                                               mainAxisAlignment:

@@ -170,6 +170,9 @@ class CreateRegisterPetProfile extends PetProfileEvent {
 
 }
 class GetCovidList extends PetProfileEvent {
+final String text;
+
+  GetCovidList(this.text);
   @override
   String toString() => "fakeRegisterButtonTapped";
 }

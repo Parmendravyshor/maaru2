@@ -8,7 +8,7 @@ class MaruConstant {
    static final signup =Uri.parse ('http://18.191.199.31/api/auth/signup');
    static final vaccineRecordUploaded = Uri.parse('http://18.191.199.31/api/pets/upload-vaccine-record');
    static final updateprofile1 = _prefHelper.getStringByKey(MaruConstant.id, '');
-   static final savepet1 =Uri.parse ('http://18.191.199.31/api/auth/$updateprofile1');
+   static final savepet1 =Uri.parse ('http://18.191.199.31/api/auth/391');
    static final getupcominapointment =Uri.parse ('http://18.191.199.31/api/bookings?type=upcoming');
    static final getproviders =Uri.parse ('http://18.191.199.31/api/public/providers?page=1&limit=100&service=&rating=');
    static final getReview =Uri.parse ('http://18.191.199.31/api/company/reviews');
@@ -16,7 +16,7 @@ class MaruConstant {
    static final getSinglePetProfile = Uri.parse('http://18.191.199.31/api/pets/$updateprofile1');
    static final  providerbookingappointment = Uri.parse('http://18.191.199.31/api/bookings');
    static final resend =Uri.parse ('http://18.191.199.31/api/auth/re-send-otp');
-   static final reset =Uri.parse ('http://18.191.199.31/api/auth/forget-password');
+   static final   reset =Uri.parse ('http://18.191.199.31/api/auth/forget-password');
    static final signin = Uri.parse('http://18.191.199.31/api/auth/signin');
    static final createpProfile = Uri.parse('http://18.191.199.31/api/pets?pet_name=');
   //static var signin = Uri.parse('$BASE_URL/signin');
@@ -49,7 +49,7 @@ class MaruConstant {
    static var vaccine = 'vaccine';
    static String pet_needs ='pet_needs';
    static String birth_date ='birth_date';
-   static String sex = 'sex';
+   static var sex = 'sex';
    static String gender = 'gender';
    static String walking_schedule ='walking_schedule';
    static String feeding_schedule ='feeding_schedule';

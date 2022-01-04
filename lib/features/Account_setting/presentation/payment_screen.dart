@@ -12,6 +12,7 @@ import 'package:maru/core/widget/dialog.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -67,6 +68,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
 
+
                   ThemedTextField(
                     "Name On Card",
                     TextInputType.text,
@@ -101,6 +103,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                               //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
                             },
                             //   editingController: _lnameController
+
                           ),
                         ),
                       ),
@@ -141,6 +144,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                           padding: EdgeInsets.only(
                             left: 20,
                           ),
+
                           child: Row(
                             children: [
                               ElevatedButton(
@@ -155,6 +159,29 @@ class _PaymentScreenState extends State<PaymentScreen>
                                   primary: Colors.red, // <-- Button color
                                   onPrimary: Colors.red, // <-- Splash color
                                 ),
+
+//                         ],
+//                       )),
+//                   Padding(
+//                     padding: EdgeInsets.only(
+//                         top: 0.0,
+//                         left: MediaQuery.of(context).size.width *
+//                             0.1 /
+//                             2),
+//                     child:
+//                     Row(
+//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                         children: [
+//
+//                           Column(
+//                             mainAxisAlignment:
+//                             MainAxisAlignment.spaceBetween,
+//                             mainAxisSize: MainAxisSize.min,
+//                             children: <Widget>[
+//                               Text(
+//                                 'Cvv'.toUpperCase(),
+//                                 style: MaaruStyle.text.greyDisable,
+// >>>>>>> f38077fb070e945e12e76eb4c96ccef8ae6ff65f
                               ),
                               Text('Remove Card',
                                   style: GoogleFonts.poppins(
@@ -164,8 +191,10 @@ class _PaymentScreenState extends State<PaymentScreen>
                                           fontSize: 18,
                                           color: Color(0xFFc72019))))
                             ],
+
                           ))),
                 ])));
+
   }
 
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
@@ -447,6 +476,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                         ThemedButton(
                           text: 'Update Payment',
                                             onPressed: () {
+                                            //  Navigator.push(context, MaterialPageRoute(builder: (context)=>BookedConfirm()));
                                               // String paword =
                                               // _newController
                                               //     .text;
@@ -463,6 +493,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                                                   context,
                                                   _keyLoader,
                                                   "Updating Payment..");
+                                              MyStatefulWidget();
                                               BlocProvider.of<PetProfileBloc>(
                                                       context)
                                                   .add(savePayment(

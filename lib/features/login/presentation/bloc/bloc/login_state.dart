@@ -12,7 +12,13 @@ class LoginInitial extends LoginState {
   @override
   String toString() => "LoginInitial";
 }
-
+// class CovidLoaded3 extends LoginState {
+//   //final Welcome _newsBloc = Welcome();
+//   final Welcome covidModel;
+//   CovidLoaded3(this.covidModel);
+//
+//   List<Object> get props => [covidModel];
+// }
 class LoginInProgress extends LoginState {
   LoginInProgress() : super();
 

@@ -25,7 +25,7 @@ class RoundedButton extends StatelessWidget {
               color: Color1,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w600,
-              fontSize: 20)),
+              fontSize: 16)),
         ),
       ),
     );

@@ -185,6 +185,7 @@ class _TestAppState extends State<TestApp> {
 
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     var selectedIndex;
     return Scaffold(
       backgroundColor: MaaruColors.darkGrey2,
@@ -250,10 +251,10 @@ class _TestAppState extends State<TestApp> {
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Container(
                       padding: EdgeInsets.only(left: 20, right: 20),
-                      height: 150,
+                      height: size.height*0.20,
                       width: 420,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+
                         gradient: LinearGradient(colors: [
                           MaaruColors.blueColor,
                           MaaruColors.blueColor,
@@ -272,17 +273,19 @@ class _TestAppState extends State<TestApp> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       child: Container(
-                        height: 150,
+                        height: size.height*0.20,
                         width: 420,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
+
+
                           color: Colors.white,
                         ),
                         child: Container(
-                            height: 240,
-                            width: 420,
+                            height: size.height*0.20,
+                            width: size.width*0.90,
                             decoration: BoxDecoration(
-                                borderRadius: new BorderRadius.circular(20.7),
+
+
                                 border: Border.all(color: Colors.grey[200])),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -339,8 +342,7 @@ class _TestAppState extends State<TestApp> {
                                       decoration: BoxDecoration(
                                           color: MaaruColors
                                               .blueColor,
-                                          borderRadius:
-                                              new BorderRadius.circular(20),
+
                                           border:
                                               Border.all(color: Colors.white)),
                                       child: Text(
@@ -407,6 +409,7 @@ class _TestAppState extends State<TestApp> {
       ),
     );
   }
-
-
 }
+
+
+

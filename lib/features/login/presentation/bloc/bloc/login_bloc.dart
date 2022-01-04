@@ -37,6 +37,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final GetUpcomingAppointment getUpcomingAppointment;
   final GetProviderById getProviderById;
 final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
+
+  String text;
   LoginBloc(this.getSinglePetProfile,this.getUpcomingAndPastAppointments,
       this._emailSignin, this.getProviders, this.getReview,
       this.getProviderRequest, this.getProviderById,
@@ -82,7 +84,7 @@ final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
           if (res.isRight()) {
             // final result =  await getPetProfile1(NoParams());
             if (result.isRight()) {
-              await getPetProfile1(NoParams());
+              await getPetProfile1(event.toString());
               yield VerificationNeeded();
             }
           } else {
@@ -93,7 +95,7 @@ final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
-        await getPetProfile1(NoParams());
+        await getPetProfile1(text);
 
         await getSinglePetProfile(NoParams());
         print("RAKA===============================================");

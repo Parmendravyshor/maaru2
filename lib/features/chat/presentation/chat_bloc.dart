@@ -59,16 +59,16 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         await _database.insert("message", sentMessage.toMap());
       }
 
-      DateTime expiryTime = DateTime.fromMillisecondsSinceEpoch(
-          int.parse(sharedPrefHelper.getExpiryTime()) * 1000);
-
-      if (expiryTime.isBefore(DateTime.now())) {
-        await emailSignin(EmailAuthParams(
-            email: sharedPrefHelper.getEmail(),
-            password: '',
-            first_name: "",
-            lName: ""));
-      }
+      // DateTime expiryTime = DateTime.fromMillisecondsSinceEpoch(
+      //     int.parse(sharedPrefHelper.getExpiryTime()) * 1000);
+      //
+      // if (expiryTime.isBefore(DateTime.now())) {
+      //   await emailSignin(EmailAuthParams(
+      //       email: sharedPrefHelper.getEmail(),
+      //       password: '',
+      //       first_name: "",
+      //       lName: ""));
+      // }
 
       try {
        final response =

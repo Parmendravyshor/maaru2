@@ -1,20 +1,15 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
-import 'package:maru/core/widget/round_button.dart';
-import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Book_Appointment/presentation/reviewe_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
-
-import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
+import 'package:maru/main.dart';
 
-import '../../../main.dart';
+import 'book_appointment_screen3.dart';
+
+
 
 class BookedConfirm extends StatefulWidget {
   @override
@@ -22,6 +17,25 @@ class BookedConfirm extends StatefulWidget {
 }
 
 class _BookedConfirmState extends State<BookedConfirm> {
+String taskheading='Booking Confirmed';
+ String taskmessage= 'Confirmation email and SMS has been\n'
+ 'sent to your registered details';
+Color actioncolor=MaaruColors.blueColor;
+
+  Widget bottombuttons(BuildContext context, Color color, String text, Function() onpress) {
+
+    final size = MediaQuery.of(context).size;
+    return FlatButton(
+        color: color,
+        height: size.height * 0.08,
+        minWidth: size.width * 0.40,
+        onPressed: onpress,
+        child: Text(
+          text,
+          style: TextStyle(
+              color: MaaruColors.whiteColor, fontSize: 15, fontWeight: FontWeight.w700),
+        ));
+  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -37,7 +51,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
         children: [
           Flex(direction: Axis.vertical, children: [
             Container(
-              color: MaaruColors.buttonColor,
+              color: actioncolor,
               height: size.height * 0.30,
               width: double.infinity,
               child: Column(
@@ -54,7 +68,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                     height: size.height * 0.01,
                   ),
                   Text(
-                    'Booking Confirmed',
+                    taskheading,
                     style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -64,8 +78,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                     height: size.height * 0.02,
                   ),
                   Text(
-                    'Confirmation email and SMS has been\n'
-                    'sent to your registered details',
+                    taskmessage,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),
@@ -75,8 +88,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
           ]),
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+
               color: Colors.white,
             ),
 
@@ -188,7 +200,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                                 children: [
 
                                   Image.asset('assets/icons/caticon.png',height: 20,),
-                                  Text(
+                                  const Text(
                                     '  Max',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold, fontSize: 15),
@@ -209,14 +221,14 @@ class _BookedConfirmState extends State<BookedConfirm> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     'Location',
                     style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         '1357 Muno Manor Austin,Tx 00000',
                         style: TextStyle(fontSize: 8, color: Colors.grey),
                       ),
@@ -240,120 +252,55 @@ class _BookedConfirmState extends State<BookedConfirm> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor:
-                                  MaaruColors.blueColor,
-                              minimumSize: Size(130, 50),
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color:Colors.white,
-
-                                ),
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => ReviewScreen()));
-                          },
-                          child: Text('Done',
-                              style: MaaruStyle.text.small.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: MaaruColors.button2Color))),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      FlatButton(
-                        height: 50,
-                        minWidth: 170,
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => ViewPetProfile()));
+                      bottombuttons(context, MaaruColors.button2Color, 'DONE',(){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewScreen()));
+                      }),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewPetProfile()));
                         },
-                        child: Text('View Profile',
-                            style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                              color: MaaruColors
-                                  .blueColor, //   fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins',
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ))),
-                        textColor: MaaruColors.textButtonColor,
-                        shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                                color: MaaruColors.blueColor,
-                                width: 1,
-                                style: BorderStyle.solid),
-                            borderRadius: BorderRadius.circular(10)),
+                        child: Container(
+                          height: size.height * 0.08,
+                          width: size.width * 0.40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: MaaruColors.button2Color),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'VIEW PROFILE',
+                              style: TextStyle(
+                                  color: MaaruColors.blueColor,
+                                  fontSize: 15,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ),
                       )
+                    ],
+                  ),
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      bottombuttons(context, MaaruColors.mehrooncolor, 'CANCEL',(){
+
+                        setState(() {
+                          actioncolor=MaaruColors.mehrooncolor;
+                          taskheading='Successfully cancelled'.toUpperCase();
+                          taskmessage='The amount deducted will refund you\nwithin 2-3 official days'.toUpperCase();
+                        });
+                      }),
+                      bottombuttons(context, MaaruColors.blueColor, 'RESCHEDULE',(){Navigator.push(context, MaterialPageRoute(builder: (context)=>BookAppointmentScreen3()));})
                     ],
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor: Colors.redAccent,
-                              minimumSize: Size(130, 50),
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                    color:Colors.white,
 
-                                   ),
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
-
-                          onPressed: () {
-
-                                showAlertDialog(context)  ;
-
-
-                          },
-                          child: Text('Cancel',
-                              style: MaaruStyle.text.small.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: MaaruColors.button2Color))),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        height: 50,
-                        width: 170,
-                          decoration: BoxDecoration(
-                              color: MaaruColors.button2Color,
-                              borderRadius: BorderRadius.circular(10)),
-                  child:FlatButton(
-                        height: 50,
-                        minWidth: 170,
-                        color: MaaruColors.button2Color,
-                        onPressed: (){Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => BookAppointmentScreen3()));},
-                        child:
-                            Center(child:
-                        Text('Reschedule',
-                            style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                              color: MaaruColors
-                                  .blueColor, //   fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins',
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            )))),
-                        textColor: MaaruColors.primaryColorsuggesion,
-                    shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          color:Colors.white,
-
-                        ),
-                        borderRadius: BorderRadius.circular(10)),
-                      )
-                      )],
-                  ),
                   SizedBox(height: 20,)
                 ],
               ),

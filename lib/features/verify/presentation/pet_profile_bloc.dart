@@ -59,7 +59,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
   String petName = "";
   String width = "";
   String hight = "";
-  String sex;
+  var sex ='';
   var birthdate = '';
   String breadtype = '';
   String img = '';
@@ -68,7 +68,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
   var note = '';
   var knownAllergies = '';
   var vaccine = '';
-
+var text2 ='';
   @override
   // TODO: implement initialState
   PetProfileState get initialState => PetProfileInitial();
@@ -89,6 +89,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
         yield RegisterFormValidationFailure();
       }
     }
+
     else if (event is AgeChanged) {
       print('djdd');
       if (event.age.isNotEmpty) {
@@ -159,14 +160,14 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
         yield RegisterFormValidationFailure();
       }
     } else if (event is SexChanged) {
-      print('datepicker on BirthChanged event');
+
       if (event.sex.isNotEmpty) {
-        hight = event.sex;
+        sex = event.sex;
       } else {
         sex = "";
-        print(birthdate);
+        print('sssss$sex');
       }
-      print(sex);
+      print('sssd$sex');
       bool isValidated = _isFormValid();
       if (isValidated) {
         yield RegisterFormValidationSuccess();
@@ -180,9 +181,9 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
         note = event.note;
       } else {
         note = "";
-        print(birthdate);
+        print(note);
       }
-      print(sex);
+      print(note);
       bool isValidated = _isFormValid();
       if (isValidated) {
         yield RegisterFormValidationSuccess();
@@ -224,7 +225,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
     }
     else if (event is CreateRegisterPetProfile) {
       yield RegisterInProgress();
-      final result = await createPetProfile(PetProfile(
+      final result = await createPetProfile(PetProfile1(
           age: age,
           weight: width,
           height: hight,
@@ -241,14 +242,14 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       yield* result.fold((l) async* {
         yield RegisterFailure("Signup failed..please try again.. $l");
       }, (r) async* {
-        // await getPetProfile(NoParams());
+       //  await getPetProfile(event.text);
         ///  await savePetProfile(PetProfile());
 
         yield UserCreatePetProfileButtonTapped();
       });
     }
     else if (event is Profile2) {
-      PetProfile petProfile2 = PetProfile(
+      PetProfile1 petProfile2 = PetProfile1(
         knownAllergies: event.know_allergies,
         vaccine: event.vaccine,
       );
@@ -277,7 +278,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       yield PetVaccineSuccessfull();
     }
     if (event is ProfileOpened) {} else if (event is RegisterUser) {
-      await getPetProfile(NoParams());
+     // await getPetProfile(NoParams());
       UserProfileParams profileParams = UserProfileParams(
         email: sharedPrefHelper.getEmail(),
         fname: event.fname,
@@ -299,7 +300,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
     else if (event is Profile3) {
       print('kick');
-      PetProfile profileParams4 = PetProfile(
+      PetProfile1 profileParams4 = PetProfile1(
         walkingSchedule: event.walking,
         feedingSchedule: event.feeding,
         temperament: event.temprament,
@@ -319,7 +320,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
     }
     else if (event is Profile4) {
       print('kick');
-      PetProfile profileParams4 = PetProfile(
+      PetProfile1 profileParams4 = PetProfile1(
           knownAllergies: [
             event.walking,
             event.daycare,
@@ -394,8 +395,14 @@ print('ddddd$event.text');
 
 
     if (event is GetCovidList) {
-      final result = await getPetProfile(NoParams());
-
+      if (event.text.isNotEmpty) {
+        text2 = event.text;
+      } else {
+        text2 = "";
+      }
+print('gdgddgyd$text2');
+      final result = await getPetProfile(event.text);
+print('jhhhhhy${event.text}');
       // final result =  await getPetProfile1(NoParams());
       if (result.isRight()) {
         print('dkdjddh');

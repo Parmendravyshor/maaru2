@@ -6,6 +6,7 @@ import '../../../../core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../core/usecases/usecase.dart';
 import 'dart:convert';
+import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 class GetProviderRequest implements UseCase<void, void> {
   UserRepository userRepository;
   GetProviderRequest(this.userRepository);
@@ -62,7 +63,7 @@ class GetProviderBooking {
     this.createdAt,
     this.updatedAt,
     this.customer,
-    this.pet,
+    //this.pet,
   });
 
   int id;
@@ -77,7 +78,7 @@ class GetProviderBooking {
   DateTime createdAt;
   DateTime updatedAt;
   Customer customer;
-  PetProfile pet;
+ /// PetProfile1 pet;
 
   factory GetProviderBooking.fromJson(Map<String, dynamic> json) => GetProviderBooking(
     id: json["id"],
@@ -92,7 +93,7 @@ class GetProviderBooking {
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     customer: Customer.fromJson(json["customer"]),
-    pet: PetProfile.fromJson(json["pet"]),
+    //pet: PetProfile1.fromJson(json["pet"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -108,7 +109,7 @@ class GetProviderBooking {
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
     "customer": customer.toJson(),
-    "pet": pet.toJson(),
+   // "pet": pet.toJson(),
   };
 }
 

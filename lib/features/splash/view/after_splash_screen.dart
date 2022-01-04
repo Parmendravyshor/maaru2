@@ -99,8 +99,8 @@ class _AfterSplashScreenState extends State<AfterSplashScreen> {
                           builder: (context) => LoginScreen()));
                     },
                     child: RoundedButton(
-                      buttonName: 'Login',
-                      Color1: MaaruColors.button2Color,
+                      buttonName: 'LOGIN',
+                      Color1: MaaruColors.whiteColor,
                       Color: MaaruColors.primaryColorsuggesion,
                     ),
                   ),
@@ -111,6 +111,7 @@ class _AfterSplashScreenState extends State<AfterSplashScreen> {
                     height: size.height * 0.09,
                     width: size.width * 0.85,
                     decoration: BoxDecoration(
+                      color: Colors.white,
                     //  borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         width: 2,
@@ -127,7 +128,7 @@ class _AfterSplashScreenState extends State<AfterSplashScreen> {
                         style: TextStyle(
                             color: MaaruColors.buttonColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 20),
+                            fontSize: 16),
                       ),
                     ),
                   ),

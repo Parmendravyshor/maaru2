@@ -20,6 +20,7 @@ import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 
 import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
     as event;
@@ -48,7 +49,9 @@ import 'package:maru/features/provider_home/presentation/provider_accept_decline
 
 import 'package:maru/features/provider_profile/provider_profile1.dart';
 import 'package:maru/features/provider_profile/provider_profile2.dart';
+
 import 'package:maru/features/splash/verify_screen.dart';
+
 import 'package:maru/features/splash/view/splash_screen.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
@@ -61,13 +64,18 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'core/theme/maaru_style.dart';
 import 'core/utils.dart';
 import 'features/Account_setting/presentation/edit_profile_screen.dart';
+import 'features/Book_Appointment/presentation/booked_confirm.dart';
 import 'features/Home/presentation/chat_screen.dart';
 import 'features/Home/presentation/home_sceen.dart';
 import 'features/Home/presentation/pet_profile.dart';
 import 'features/Home/presentation/search_screen.dart';
 
+
 import 'features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'features/login/presentation/bloc/bloc/login_state.dart';
+
+import 'features/provider_home/presentation/provider_accept_decline_screen.dart';
+
 import 'features/register/presentation/signup_screen.dart';
 import 'features/splash/view/after_splash_screen.dart';
 import 'features/verify/presentation/verify.dart';
@@ -145,7 +153,7 @@ class MyApp extends StatelessWidget {
         theme: theme,
         //todo: navigate to SplashScreen
 
-        home: Scaffold(body: (TestApp())));
+        home: Scaffold(body: (LoginScreen())));
   }
 }
 
