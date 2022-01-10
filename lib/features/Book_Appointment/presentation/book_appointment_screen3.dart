@@ -30,7 +30,9 @@ import 'bloc/book_appointment_bloc.dart';
 import 'bloc/book_appointment_bloc.dart';
 import 'book_appointment_screen2.dart';
 import 'booked_confirm.dart';
+
 enum Use { good, after }
+
 class BookAppointmentScreen3 extends StatefulWidget {
   @override
   _BookAppointmentScreen3State createState() => _BookAppointmentScreen3State();
@@ -50,10 +52,11 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
 
     return values;
   }
+
   Use SelectedUSe = Use.good;
   List<bool> isSelected;
   bool pressed = true;
-String text1;
+  String text1;
   @override
   void initState() {
     _controller1 = AnimationController(
@@ -103,7 +106,8 @@ String text1;
               alignment: Alignment.bottomCenter,
               child: ThemedButton(
                 onPressed: () {
-Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => BookedConfirm()));
                 },
                 text: 'Book Appointment',
               )),
@@ -145,7 +149,6 @@ Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
                     Column(
                       children: [
                         Container(
-
                           child: Image.network(
                             _prefHelper.getStringByKey('img', ''),
                             errorBuilder: (context, error, stackTrace) {
@@ -299,7 +302,6 @@ Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
                         style: MaaruStyle.text.tiniest,
                       ),
                     ),
-
                     Padding(
                         padding: const EdgeInsets.only(right: 20, left: 20),
                         child: BlocProvider(
@@ -331,59 +333,53 @@ Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
                                       .welcome4.providerDetails.service[i].title
                                       .toString());
                                 }
-                                return
-
-                                  DropdownButton(
-                                    icon: Icon(
-                                      Icons.expand_more,
-                                      color: MaaruColors.textButtonColor,
-                                      size: 40.09,
-                                    ),
-                                    hint: Center(
-                                        child: Text(
-                                      _selValue,
-                                      style: MaaruStyle.text.small,
-                                    )),
-                                    isExpanded: true,
-                                    iconSize: 30.0,
-                                    style: TextStyle(color: Colors.white),
-                                    items: abc2.map(
-                                      (val) {
-                                        return DropdownMenuItem<String>(
-
-
-                                            value: val,
-                                            child: Center(
-                                              child: Text(val,
-                                                  style: MaaruStyle.text.small),
-                                            ));
-                                      },
-                                    ).toList(),
-                                    onChanged: (val) {
-                                      print('sdknklncklncklncklncnknc$val');
-
-                                      setState(
-                                        () {
-                                          _selValue = val;
-                                          if (val == val) {}
-                                          if (val == "SELECT PET") {
-                                            _dropDownValue = 0;
-                                            print(_dropDownValue);
-                                          }
-
-                                          if (val == "VET") {
-                                            _dropDownValue = 2;
-                                          }
-                                        },
-                                      );
+                                return DropdownButton(
+                                  icon: Icon(
+                                    Icons.expand_more,
+                                    color: MaaruColors.textButtonColor,
+                                    size: 40.09,
+                                  ),
+                                  hint: Center(
+                                      child: Text(
+                                    _selValue,
+                                    style: MaaruStyle.text.small,
+                                  )),
+                                  isExpanded: true,
+                                  iconSize: 30.0,
+                                  style: TextStyle(color: Colors.white),
+                                  items: abc2.map(
+                                    (val) {
+                                      return DropdownMenuItem<String>(
+                                          value: val,
+                                          child: Center(
+                                            child: Text(val,
+                                                style: MaaruStyle.text.small),
+                                          ));
                                     },
+                                  ).toList(),
+                                  onChanged: (val) {
+                                    print('sdknklncklncklncklncnknc$val');
 
-                                  );
+                                    setState(
+                                      () {
+                                        _selValue = val;
+                                        if (val == val) {}
+                                        if (val == "SELECT PET") {
+                                          _dropDownValue = 0;
+                                          print(_dropDownValue);
+                                        }
+
+                                        if (val == "VET") {
+                                          _dropDownValue = 2;
+                                        }
+                                      },
+                                    );
+                                  },
+                                );
                               } else {
                                 return CircularProgressIndicator();
                               }
                             }))),
-
                     Align(
                       alignment: Alignment.center,
                       child: Text(
@@ -497,70 +493,66 @@ Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
                     SizedBox(
                       height: 20,
                     ),
-
                     Column(children: [
-                    Container(
-                        height: 40,
-                        width: 400,
-                        child: Padding(
-                            padding: EdgeInsets.only(right: 20, left: 20),
-                            child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: const [
-                                  ChoiceRow(
-                                    lebal1: '10:00 AM',
-                                    lebal2: '10:30 AM',
-                                    lebal3: '11:00 AM',
-                                    lebal4: '11:30 AM',
-                                    lebal5: '12:00 AM',
-                                  ),
-                                ]))),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Afternoon',
-                        style: MaaruStyle.text.tiniest,
+                      Container(
+                          height: 40,
+                          width: 400,
+                          child: Padding(
+                              padding: EdgeInsets.only(right: 20, left: 20),
+                              child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: const [
+                                    ChoiceRow(
+                                      lebal1: '10:00 AM',
+                                      lebal2: '10:30 AM',
+                                      lebal3: '11:00 AM',
+                                      lebal4: '11:30 AM',
+                                      lebal5: '12:00 AM',
+                                    ),
+                                  ]))),
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          SelectedUSe = Use.good;
-                          if(SelectedUSe==Use.good)
-                          {
-                            var use='good';
-                            print(Use);
-                          }else
-                          {
-                            print('null');
-                          }
-                        });
-
-                      },
-                   child:
-
-                   Container(
-                        height: 40,
-                        width: double.infinity,
-                        child: Padding(
-                            padding: EdgeInsets.only(right: 20, left: 20),
-                            child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: const [
-                                  ChoiceRow(
-                                    lebal1: '12:00 PM',
-                                    lebal2: '12:30 PM',
-                                    lebal3: '01:00 PM',
-                                    lebal4: '01:30 PM',
-                                    lebal5: '02:00 PM',
-                                  ),
-                                ]))),)]),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Afternoon',
+                          style: MaaruStyle.text.tiniest,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            SelectedUSe = Use.good;
+                            if (SelectedUSe == Use.good) {
+                              var use = 'good';
+                              print(Use);
+                            } else {
+                              print('null');
+                            }
+                          });
+                        },
+                        child: Container(
+                            height: 40,
+                            width: double.infinity,
+                            child: Padding(
+                                padding: EdgeInsets.only(right: 20, left: 20),
+                                child: ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    children: const [
+                                      ChoiceRow(
+                                        lebal1: '12:00 PM',
+                                        lebal2: '12:30 PM',
+                                        lebal3: '01:00 PM',
+                                        lebal4: '01:30 PM',
+                                        lebal5: '02:00 PM',
+                                      ),
+                                    ]))),
+                      )
+                    ]),
                     SizedBox(
                       height: 20,
                     ),
@@ -751,7 +743,7 @@ Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
                                   BlocProvider.of<PetProfileBloc>(context)
                                       .add(petNameChanged(text));
                                 },
-                               // editingController: _petNameController,
+                                // editingController: _petNameController,
                               ),
                               ThemedTextField(
                                 "Credit Card Number   ",
@@ -766,17 +758,16 @@ Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
                               ),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     child: Container(
                                       padding: EdgeInsets.only(left: 15),
                                       child: ThemedTextField(
                                         "Cvv", TextInputType.text,
-                                        textInputAction:
-                                        TextInputAction.next,
-                                        textStyle: TextStyle(
-                                            color: Colors.grey[300]),
+                                        textInputAction: TextInputAction.next,
+                                        textStyle:
+                                            TextStyle(color: Colors.grey[300]),
                                         onChanged: (text) {
                                           //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
                                         },
@@ -796,9 +787,8 @@ Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
                                             // contentPadding: EdgeInsets.only(left: 20),
                                             labelText: 'Exp',
                                             labelStyle:
-                                            MaaruStyle.text.greyDisable,
-                                            enabledBorder:
-                                            UnderlineInputBorder(
+                                                MaaruStyle.text.greyDisable,
+                                            enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
                                                   color: Colors.grey[300]),
                                             ),
@@ -807,10 +797,16 @@ Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
                                   ),
                                 ],
                               ),
-                               Padding(
-                          padding: const EdgeInsets.only(left:15,right:15),
-                               child:ThemedButton(text: 'Payment',onPressed: (){},)),
-                              SizedBox(height: 100,)
+                              Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15, right: 15),
+                                  child: ThemedButton(
+                                    text: 'Payment',
+                                    onPressed: () {},
+                                  )),
+                              SizedBox(
+                                height: 100,
+                              )
                             ],
                           );
                         })
@@ -835,7 +831,7 @@ Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-             MaaruColors.primaryColorsuggesion,
+              MaaruColors.primaryColorsuggesion,
               MaaruColors.primaryColorsuggesion,
             ],
           )),
@@ -850,10 +846,7 @@ Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
   }
 
   void _tapDown(TapDownDetails details) {
-    Dialogs.showLoadingDialog(
-        context,
-        _keyLoader,
-        "Updating Payment..");
+    Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
     _controller1.forward();
   }
 
@@ -1080,8 +1073,6 @@ class _ChoiceButtonState extends State<ChoiceButton> {
   }
 }
 
-
-
 class ChoiceRow2 extends StatefulWidget {
   final String lebal1;
   final String lebal2;
@@ -1091,11 +1082,11 @@ class ChoiceRow2 extends StatefulWidget {
 
   const ChoiceRow2(
       {Key key,
-        this.lebal1,
-        this.lebal2,
-        this.lebal3,
-        this.lebal4,
-        this.lebal5})
+      this.lebal1,
+      this.lebal2,
+      this.lebal3,
+      this.lebal4,
+      this.lebal5})
       : super(key: key);
 
   @override
@@ -1279,11 +1270,11 @@ class _ChoiceButton2State extends State<ChoiceButton2> {
             widget.label2,
             style: widget.isPressed2
                 ? GoogleFonts.poppins(
-                textStyle: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontFamily: 'Poppins',
-                    fontSize: 15,
-                    color: Colors.black))
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Poppins',
+                        fontSize: 15,
+                        color: Colors.black))
                 : MaaruStyle.text.greyDisable,
             textAlign: TextAlign.center,
           ),
@@ -1292,10 +1283,6 @@ class _ChoiceButton2State extends State<ChoiceButton2> {
     );
   }
 }
-
-
-
-
 
 class Dropdown extends StatefulWidget {
   Dropdown(

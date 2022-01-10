@@ -158,7 +158,7 @@ class MyApp extends StatelessWidget {
         theme: theme,
         //todo: navigate to SplashScreen
 
-        home: Scaffold(body: (PaymentScreen1())));
+        home: Scaffold(body: (HomeScreen())));
   }
 }
 

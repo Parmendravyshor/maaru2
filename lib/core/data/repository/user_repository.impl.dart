@@ -306,7 +306,7 @@ class UserRepositoryImpl implements UserRepository {
 
       final response = await http.get(
           Uri.parse(
-              'http://18.191.199.31/api/pets?pet_name=${text.toString()}'),
+              'http://18.191.199.31/api/pets?pet_name=${text}'),
           headers: headers);
 
       var data = convert.jsonDecode(response.body);

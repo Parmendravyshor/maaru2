@@ -43,7 +43,33 @@ import 'package:flutter/services.dart';
 //                 child: Column(
 //                   crossAxisAlignment: CrossAxisAlignment.start,
 //                   children: [
-//
+//                     BackArrowButton(),
+//                     SizedBox(
+//                       height: 30,
+//                     ),
+//                     Align(
+//                       alignment: Alignment.center,
+//                       child: ProfileAvatar(
+//                         imageUrl:
+//                             _prefHelper.getStringByKey(MaruConstant.img, ''),
+//                         errorBuilder: (context, error, stackTrace) {
+//                           return Container(
+//                               decoration: const BoxDecoration(
+//                                 shape: BoxShape.circle,
+//                               ),
+//                               alignment: Alignment.center,
+//                               child:
+//                                   Image.asset('assets/128/CrystalGaskell.png'));
+//                         },
+//                         avatarRadius: 170,
+//                         width: 170,
+//                         Color: Colors.white,
+//                         child: null,
+//                       ),
+//                     ),
+//                     SizedBox(
+//                       height: 40,
+//                     ),
 //                     Container(
 //                         color: Color(0xffFFFFFF),
 //                         child: Padding(
@@ -365,7 +391,6 @@ class _PaymentScreen1State extends State<PaymentScreen1>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-
                   ThemedTextField(
                     "Name On Card",
                     TextInputType.text,
@@ -506,7 +531,8 @@ class _PaymentScreen1State extends State<PaymentScreen1>
       backgroundColor: Colors.white,
         key: _scaffoldKey,
 
-        body:  Container(
+        body:
+        Container(
           padding:  const EdgeInsets.symmetric(horizontal: 15.0),
           child:  Form(
               key: _formKey,
