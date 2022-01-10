@@ -92,7 +92,7 @@ class chatScreenState extends State<chatScreen> {
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                          children: const [
                             Icon(
                               Icons.share,
                               size: 20.0,

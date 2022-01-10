@@ -16,6 +16,7 @@ import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
+import 'package:maru/features/Book_Appointment/presentation/reviewe_screen.dart';
 import 'package:maru/features/Home/presentation/chat_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/provider_home/presentation/provider_hat_sreen.dart';
@@ -102,7 +103,7 @@ String text1;
               alignment: Alignment.bottomCenter,
               child: ThemedButton(
                 onPressed: () {
-
+Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ReviewScreen()));
                 },
                 text: 'Book Appointment',
               )),
@@ -144,7 +145,7 @@ String text1;
                     Column(
                       children: [
                         Container(
-                          width: 2000,
+
                           child: Image.network(
                             _prefHelper.getStringByKey('img', ''),
                             errorBuilder: (context, error, stackTrace) {
@@ -298,9 +299,7 @@ String text1;
                         style: MaaruStyle.text.tiniest,
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+
                     Padding(
                         padding: const EdgeInsets.only(right: 20, left: 20),
                         child: BlocProvider(
@@ -333,9 +332,8 @@ String text1;
                                       .toString());
                                 }
                                 return
-                                  Container(
-                                    height: 200,
-                                    child: DropdownButton(
+
+                                  DropdownButton(
                                     icon: Icon(
                                       Icons.expand_more,
                                       color: MaaruColors.textButtonColor,
@@ -379,18 +377,13 @@ String text1;
                                         },
                                       );
                                     },
-                                ),
+
                                   );
                               } else {
                                 return CircularProgressIndicator();
                               }
                             }))),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+
                     Align(
                       alignment: Alignment.center,
                       child: Text(
@@ -559,14 +552,14 @@ String text1;
                             padding: EdgeInsets.only(right: 20, left: 20),
                             child: ListView(
                                 scrollDirection: Axis.horizontal,
-                                children: [
-                                  // ChoiceRow2(
-                                  //   lebal1: '12:00 PM',
-                                  //   lebal2: '12:30 PM',
-                                  //   lebal3: '01:00 PM',
-                                  //   lebal4: '01:30 PM',
-                                  //   lebal5: '02:00 PM',
-                                  // ),
+                                children: const [
+                                  ChoiceRow(
+                                    lebal1: '12:00 PM',
+                                    lebal2: '12:30 PM',
+                                    lebal3: '01:00 PM',
+                                    lebal4: '01:30 PM',
+                                    lebal5: '02:00 PM',
+                                  ),
                                 ]))),)]),
                     SizedBox(
                       height: 20,

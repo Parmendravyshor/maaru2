@@ -215,25 +215,25 @@ class PetProfile1 {
 
   var id;
   var userId;
-  String petName;
-  String img;
+  var petName;
+  var img;
   var breedType;
   var age;
   var weight;
   var height;
   var knownAllergies;
-  KnownAllergies petNeeds;
+  var petNeeds;
   var  birthDate;
   var name;
   var times_a_day;
-  var sex;
+  String sex;
   var gender;
   var service_cost;
-  String walkingSchedule;
-  String feedingSchedule;
+  var walkingSchedule;
+  var feedingSchedule;
   var temperament;
   var medication;
-  String status;
+  var status;
   var createdAt;
   var updatedAt;
   var notes;
@@ -254,7 +254,7 @@ class PetProfile1 {
     knownAllergies: json["known_allergies"] == null ? null : knownAllergiesValues.map[json["known_allergies"]],
     petNeeds:knownAllergiesValues.map[json["pet_needs"]],
     birthDate: DateTime.parse(json["birth_date"]),
-    sex: sexValues.map[json["sex"]],
+    sex: sexValues.map[json["sex"]].toString(),
     gender: json["gender"],
     walkingSchedule: json["walking_schedule"] == null ? null : json["walking_schedule"],
     feedingSchedule: json["feeding_schedule"] == null ? null : json["feeding_schedule"],

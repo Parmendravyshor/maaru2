@@ -199,7 +199,7 @@ class ThemeChanges2 extends StatelessWidget {
                     //   editingController: _lnameController
                   )),
             ),
-            new Flexible(
+             Flexible(
               child: Container(
                  
                   child: TextFormField(

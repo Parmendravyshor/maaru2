@@ -405,7 +405,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                         style: MaaruStyle.text.tiniest,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 30,
                                     ),
                                     Row(
@@ -417,7 +417,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                       builder: (_) =>
-                                                          CreateRegisterPetProfile4()));
+                                                          CreateRegisterPetProfile2()));
                                             },
                                             child: Container(
                                               alignment: Alignment.center,

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
@@ -19,6 +22,7 @@ class Messages extends StatefulWidget {
 class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
+    SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
     var selectedIndex;
     return Scaffold(
         backgroundColor: Color(0xFFffffff),
@@ -45,15 +49,27 @@ SizedBox(height: 30,),
             //
             //         child:
                     Container(
+                      padding: const EdgeInsets.only(right: 20),
                   alignment: Alignment.centerRight,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
-                  child: Image.asset(
-                    'assets/128/CrystalGaskell.png',
-                    height: 60,
-                   // width: 60,
+                  child: ProfileAvatar(imageUrl:  _prefHelper
+                      .getStringByKey(MaruConstant.img, ''),
+
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+
+                          alignment: Alignment.center,
+                          child: Image.asset('assets/128/CrystalGaskell.png'));
+
+                    },
+                    avatarRadius: 60,width: 40,Color: Colors.white,
+                    child: null,
                   ),
                // )
         ),

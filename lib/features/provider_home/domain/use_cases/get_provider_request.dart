@@ -7,109 +7,97 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/usecases/usecase.dart';
 import 'dart:convert';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
-class GetProviderRequest implements UseCase<void, void> {
+class GetProviderRequest implements UseCase<void, SearchRequestProviderParams> {
   UserRepository userRepository;
   GetProviderRequest(this.userRepository);
   @override
-  Future<Either<Failure, void>> call(params) async {
-    return userRepository.getProviderRequest();
+  Future<Either<Failure, GetProviderRequestModel>> call(SearchRequestProviderParams params) async {
+    return userRepository.getProviderRequest(params);
   }
 }
-// To parse this JSON data, do
-//
-//     final welcome = welcomeFromJson(jsonString);
+class SearchRequestProviderParams{
+  final String name;
+  final String service;
+  final String provider;
+  final String date;
+  final String page;
+  final String limit;
 
-
-
+  SearchRequestProviderParams({this.name, this.service, this.provider, this.date, this.page, this.limit});
+}
 GetProviderRequestModel welcomeFromJson(String str) => GetProviderRequestModel.fromJson(json.decode(str));
 
 String welcomeToJson(GetProviderRequestModel data) => json.encode(data.toJson());
 
 class GetProviderRequestModel {
   GetProviderRequestModel({
-    this.bookings,
+    this.appointmentRequests,
     this.count,
     this.pages,
   });
 
-  List<GetProviderBooking> bookings;
+  List<AppointmentRequest> appointmentRequests;
   int count;
   int pages;
 
   factory GetProviderRequestModel.fromJson(Map<String, dynamic> json) => GetProviderRequestModel(
-    bookings: List<GetProviderBooking>.from(json["bookings"].map((x) => GetProviderBooking.fromJson(x))),
+    appointmentRequests: List<AppointmentRequest>.from(json["appointment_requests"].map((x) => AppointmentRequest.fromJson(x))),
     count: json["count"],
     pages: json["pages"],
   );
 
   Map<String, dynamic> toJson() => {
-    "bookings": List<dynamic>.from(bookings.map((x) => x.toJson())),
+    "appointment_requests": List<dynamic>.from(appointmentRequests.map((x) => x.toJson())),
     "count": count,
     "pages": pages,
   };
 }
 
-class GetProviderBooking {
-  GetProviderBooking({
+class AppointmentRequest {
+  AppointmentRequest({
     this.id,
-    this.userId,
-    this.providerId,
-    this.petId,
-    this.serviceId,
     this.bookingDate,
-    this.bookingStartTime,
-    this.bookingEndTime,
-    this.status,
-    this.createdAt,
-    this.updatedAt,
-    this.customer,
-    //this.pet,
+    this.bookingStatus,
+    this.ownerFName,
+    this.ownerLName,
+    this.petName,
+    this.companyName,
+    this.service,
+    this.userImg,
   });
 
   int id;
-  int userId;
-  int providerId;
-  int petId;
-  int serviceId;
   DateTime bookingDate;
-  String bookingStartTime;
-  String bookingEndTime;
-  String status;
-  DateTime createdAt;
-  DateTime updatedAt;
-  Customer customer;
- /// PetProfile1 pet;
+  String bookingStatus;
+  String ownerFName;
+  String ownerLName;
+  String petName;
+  String companyName;
+  String service;
+  String userImg;
 
-  factory GetProviderBooking.fromJson(Map<String, dynamic> json) => GetProviderBooking(
+  factory AppointmentRequest.fromJson(Map<String, dynamic> json) => AppointmentRequest(
     id: json["id"],
-    userId: json["user_id"],
-    providerId: json["provider_id"],
-    petId: json["pet_id"],
-    serviceId: json["service_id"],
     bookingDate: DateTime.parse(json["booking_date"]),
-    bookingStartTime: json["booking_start_time"],
-    bookingEndTime: json["booking_end_time"],
-    status: json["status"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-    customer: Customer.fromJson(json["customer"]),
-    //pet: PetProfile1.fromJson(json["pet"]),
+    bookingStatus: json["booking_status"],
+    ownerFName: json["owner_f_name"],
+    ownerLName: json["owner_l_name"],
+    petName: json["pet_name"],
+    companyName: json["company_name"],
+    service: json["service"],
+    userImg: json["user_img"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "user_id": userId,
-    "provider_id": providerId,
-    "pet_id": petId,
-    "service_id": serviceId,
     "booking_date": "${bookingDate.year.toString().padLeft(4, '0')}-${bookingDate.month.toString().padLeft(2, '0')}-${bookingDate.day.toString().padLeft(2, '0')}",
-    "booking_start_time": bookingStartTime,
-    "booking_end_time": bookingEndTime,
-    "status": status,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-    "customer": customer.toJson(),
-   // "pet": pet.toJson(),
+    "booking_status": bookingStatus,
+    "owner_f_name": ownerFName,
+    "owner_l_name": ownerLName,
+    "pet_name": petName,
+    "company_name": companyName,
+    "service": service,
+    "user_img": userImg,
   };
 }
 
@@ -169,94 +157,94 @@ class Customer {
   };
 }
 
-// class Pet {
-//   Pet({
-//     this.id,
-//     this.userId,
-//     this.petName,
-//     this.img,
-//     this.breedType,
-//     this.age,
-//     this.weight,
-//     this.height,
-//     this.knownAllergies,
-//     this.petNeeds,
-//     this.birthDate,
-//     this.sex,
-//     this.gender,
-//     this.walkingSchedule,
-//     this.feedingSchedule,
-//     this.temperament,
-//     this.medication,
-//     this.status,
-//     this.createdAt,
-//     this.updatedAt,
-//   });
-//
-//   int id;
-//   int userId;
-//   String petName;
-//   dynamic img;
-//   String breedType;
-//   int age;
-//   int weight;
-//   int height;
-//   String knownAllergies;
-//   String petNeeds;
-//   DateTime birthDate;
-//   String sex;
-//   dynamic gender;
-//   String walkingSchedule;
-//   String feedingSchedule;
-//   String temperament;
-//   String medication;
-//   String status;
-//   DateTime createdAt;
-//   DateTime updatedAt;
-//
-//   factory Pet.fromJson(Map<String, dynamic> json) => Pet(
-//     id: json["id"],
-//     userId: json["user_id"],
-//     petName: json["pet_name"],
-//     img: json["img"],
-//     breedType: json["breed_type"],
-//     age: json["age"],
-//     weight: json["weight"],
-//     height: json["height"],
-//     knownAllergies: json["known_allergies"],
-//     petNeeds: json["pet_needs"],
-//     birthDate: DateTime.parse(json["birth_date"]),
-//     sex: json["sex"],
-//     gender: json["gender"],
-//     walkingSchedule: json["walking_schedule"],
-//     feedingSchedule: json["feeding_schedule"],
-//     temperament: json["temperament"],
-//     medication: json["medication"],
-//     status: json["status"],
-//     createdAt: DateTime.parse(json["createdAt"]),
-//     updatedAt: DateTime.parse(json["updatedAt"]),
-//   );
-//
-//   Map<String, dynamic> toJson() => {
-//     "id": id,
-//     "user_id": userId,
-//     "pet_name": petName,
-//     "img": img,
-//     "breed_type": breedType,
-//     "age": age,
-//     "weight": weight,
-//     "height": height,
-//     "known_allergies": knownAllergies,
-//     "pet_needs": petNeeds,
-//     "birth_date": "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
-//     "sex": sex,
-//     "gender": gender,
-//     "walking_schedule": walkingSchedule,
-//     "feeding_schedule": feedingSchedule,
-//     "temperament": temperament,
-//     "medication": medication,
-//     "status": status,
-//     "createdAt": createdAt.toIso8601String(),
-//     "updatedAt": updatedAt.toIso8601String(),
-//   };
-// }
+class Pet {
+  Pet({
+    this.id,
+    this.userId,
+    this.petName,
+    this.img,
+    this.breedType,
+    this.age,
+    this.weight,
+    this.height,
+    this.knownAllergies,
+    this.petNeeds,
+    this.birthDate,
+    this.sex,
+    this.gender,
+    this.walkingSchedule,
+    this.feedingSchedule,
+    this.temperament,
+    this.medication,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int id;
+  int userId;
+  String petName;
+  dynamic img;
+  String breedType;
+  int age;
+  int weight;
+  int height;
+  String knownAllergies;
+  String petNeeds;
+  DateTime birthDate;
+  String sex;
+  dynamic gender;
+  String walkingSchedule;
+  String feedingSchedule;
+  String temperament;
+  String medication;
+  String status;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory Pet.fromJson(Map<String, dynamic> json) => Pet(
+    id: json["id"],
+    userId: json["user_id"],
+    petName: json["pet_name"],
+    img: json["img"],
+    breedType: json["breed_type"],
+    age: json["age"],
+    weight: json["weight"],
+    height: json["height"],
+    knownAllergies: json["known_allergies"],
+    petNeeds: json["pet_needs"],
+    birthDate: DateTime.parse(json["birth_date"]),
+    sex: json["sex"],
+    gender: json["gender"],
+    walkingSchedule: json["walking_schedule"],
+    feedingSchedule: json["feeding_schedule"],
+    temperament: json["temperament"],
+    medication: json["medication"],
+    status: json["status"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "user_id": userId,
+    "pet_name": petName,
+    "img": img,
+    "breed_type": breedType,
+    "age": age,
+    "weight": weight,
+    "height": height,
+    "known_allergies": knownAllergies,
+    "pet_needs": petNeeds,
+    "birth_date": "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
+    "sex": sex,
+    "gender": gender,
+    "walking_schedule": walkingSchedule,
+    "feeding_schedule": feedingSchedule,
+    "temperament": temperament,
+    "medication": medication,
+    "status": status,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+  };
+}

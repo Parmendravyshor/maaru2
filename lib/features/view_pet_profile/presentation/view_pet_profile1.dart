@@ -45,8 +45,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
 
                           CircularProgressIndicator());
                       } else if (state is SingleProfileLoaded) {
-                        //  print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome2.getSinglePe.petName}');
-
+                          print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome2.getSinglePe.petName}');
 
                         return SingleChildScrollView(
                           //   itemCount: state.welcome2.getSinglePe[inde]

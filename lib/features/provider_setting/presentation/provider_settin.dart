@@ -8,7 +8,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/features/Account_setting/presentation/Account_setting.dart';
 import 'package:maru/features/Account_setting/presentation/change_password_screen.dart';
 import 'package:maru/features/Account_setting/presentation/edit_profile_screen.dart';
-import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
+import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
 import 'package:maru/features/Account_setting/presentation/transition.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/provider_home/presentation/webview.dart';
@@ -127,7 +127,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 size: 60,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => PaymentScreen()));
+                                      builder: (_) => PaymentScreen1()));
                                 },
                               ),
                               SizedBox(

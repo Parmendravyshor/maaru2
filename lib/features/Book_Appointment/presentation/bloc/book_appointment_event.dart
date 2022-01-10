@@ -43,6 +43,18 @@ class BookRegisterButtonTapped extends BookAppointmentEvent {
   List<Object> get props => [BookRegisterButtonTapped];
 
 }
+class PostREviewAfterBooking extends BookAppointmentEvent {
+
+  PostREviewAfterBooking(this.provider_id, this.comment, this.bookingid, this.rating);
+final String provider_id;
+final String comment;
+final String  bookingid;
+final String rating;
+  @override
+  String toString() => "PostREviewAfterBooking";
+
+
+}
 class UpcomingAppointmentChanged extends BookAppointmentEvent {
 
   final String text;

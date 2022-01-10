@@ -13,7 +13,7 @@ import 'package:maru/features/provider_login/domain/usecases/provider_email_logi
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_provider_by_id.dart';
 import 'package:maru/features/verify/domain/usecases/get_providers.dart';
-import 'package:maru/features/verify/domain/usecases/get_review_request.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/get_review_request.dart';
 import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 

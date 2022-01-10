@@ -20,7 +20,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
   bool star3 = true;
   bool star4 = true;
   bool star5 = true;
-
+var a ='';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -58,6 +58,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           onTap: () {
                             setState(() {
                               star1 = !star1;
+                              a = '1';
+                             print(a);
                             });
                           },
                           child: Icon(
@@ -69,6 +71,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           onTap: () {
                             setState(() {
                               star2 = !star2;
+                              a = '2';
+                              print(a);
                             });
                           },
                           child: Icon(
@@ -80,6 +84,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           onTap: () {
                             setState(() {
                               star3 = !star3;
+                              a = '3';
+                              print(a);
                             });
                           },
                           child: Icon(
@@ -91,6 +97,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           onTap: () {
                             setState(() {
                               star4 = !star4;
+                              a = '4';
+                              print(a);
                             });
                           },
                           child: Icon(
@@ -102,6 +110,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           onTap: () {
                             setState(() {
                               star5 = !star5;
+                              a = '5';
+                              print(a);
                             });
                           },
                           child: Icon(

@@ -50,6 +50,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'register_pet_profile_screen2.dart';
 import 'package:http/http.dart' as http;
+
 class CreateRegisterPetProfile2 extends StatefulWidget {
   @override
   _CreateRegisterPetProfile2State createState() =>
@@ -57,15 +58,13 @@ class CreateRegisterPetProfile2 extends StatefulWidget {
 }
 
 class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
-
   TextEditingController _knowallergiesController;
   TextEditingController _vaccineController;
-
 
   @override
   void initState() {
     _knowallergiesController = TextEditingController();
-    _vaccineController =  TextEditingController();
+    _vaccineController = TextEditingController();
     super.initState();
   }
 
@@ -81,8 +80,8 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
   Future getImage() async {
-    FilePickerResult result = await FilePicker.platform.pickFiles(
-        allowMultiple: true);
+    FilePickerResult result =
+        await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (result != null) {
       List<File> files = result.paths.map((path) => File(path)).toList();
@@ -93,235 +92,217 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery
-        .of(context)
-        .size;
-    return
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
+        backgroundColor: MaaruColors.DogsBackground,
+        body: BlocProvider(
+            create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+            child: BlocBuilder<PetProfileBloc, PetProfileState>(
+                builder: (context, state) {
+              if (state is PetProfile2Saves) {
+                SchedulerBinding.instance.addPostFrameCallback((_) {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return CreateRegisterPetProfile3();
+                  }));
+                });
 
-      Scaffold(
-          backgroundColor: MaaruColors.DogsBackground,
-          body:
-          BlocProvider(
-              create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
-              child:
-              BlocBuilder<PetProfileBloc, PetProfileState>(
-                  builder: (context, state) {
-                    if (state is PetProfile2Saves) {
-
-                      SchedulerBinding.instance.addPostFrameCallback((_) {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                              return CreateRegisterPetProfile3();
-                            }));
-                      });
-
-                      return Container();
-                    } else if (state is RegisterFailure) {
-                      SchedulerBinding.instance.addPostFrameCallback((_) {
-                        Future.delayed(Duration(seconds: 3), () {
-                          Scaffold.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Colors.black,
-                              content: Text('Register Failure ',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'poppins',
-                                      fontSize: 20,
-                                      color: MaaruStyle.colors.textColorWhite)),
-                            ),
-                          );
-                        });
-                      });
-                    }
-                    return SafeArea(
-                        bottom: false,
-                        child: SingleChildScrollView(
-                            child: Column(children: [
-                              SkipButtons(),
-                              SizedBox(
-                                height: 40,
-                              ),
-                              Container(
-                                  alignment: Alignment.bottomRight,
-                                  height: size.height * 0.20,
-
-                                  width: size.width * 0.9,
-                                  child:Image.network(_prefHelper.getStringByKey(MaruConstant.img, ''))),
-                              Container(
-                                  alignment: FractionalOffset.bottomCenter,
-                                  decoration: BoxDecoration(
-                                      color: Color(0xFFffffff),
-                                      ),
-                                  child: Container(
-                                      padding: EdgeInsets.fromLTRB(
-                                          30, 20, 30, 10),
-                                      child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment
-                                              .start,
+                return Container();
+              } else if (state is RegisterFailure) {
+                SchedulerBinding.instance.addPostFrameCallback((_) {
+                  Future.delayed(Duration(seconds: 3), () {
+                    Scaffold.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.black,
+                        content: Text('Register Failure ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'poppins',
+                                fontSize: 20,
+                                color: MaaruStyle.colors.textColorWhite)),
+                      ),
+                    );
+                  });
+                });
+              }
+              return SafeArea(
+                  bottom: false,
+                  child: SingleChildScrollView(
+                      child: Column(children: [
+                    SkipButtons(),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                        alignment: Alignment.bottomRight,
+                        height: size.height * 0.20,
+                        width: size.width * 0.9,
+                        child: Image.network(
+                            _prefHelper.getStringByKey(MaruConstant.img, ''),
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                              color: Colors.amber,
+                              alignment: Alignment.center,
+                              child: Image.asset('assets/images/kutta.png'));
+                        })),
+                    Container(
+                        alignment: FractionalOffset.bottomCenter,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFffffff),
+                        ),
+                        child: Container(
+                            padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                      _prefHelper.getStringByKey(
+                                          MaruConstant.first_name, ''),
+                                      style: MaaruStyle.text.large,
+                                      textAlign: TextAlign.left),
+                                  Text(
+                                    _prefHelper.getStringByKey(
+                                        MaruConstant.last_name, ''),
+                                    style: MaaruStyle.text.tiny,
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  const SizedBox(
+                                    width: 40,
+                                    height: 30,
+                                  ),
+                                  Text(
+                                    'Known allergies'.toUpperCase(),
+                                    style: MaaruStyle.text.tiny,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                      style: MaaruStyle.text.tiny,
+                                      maxLines: 2,
+                                      decoration: InputDecoration(
+                                          hintText:
+                                              'Seprated by comma'.toUpperCase(),
+                                          hintStyle: MaaruStyle.text.tiny,
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey[50]))),
+                                      onChanged: (text) {
+                                        BlocProvider.of<PetProfileBloc>(context)
+                                            .add(KnowAllergies(
+                                                _knowallergiesController.text));
+                                      },
+                                      controller: _knowallergiesController),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Stack(fit: StackFit.loose, children: <Widget>[
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
-
-                                            Text(_prefHelper.getStringByKey(MaruConstant.first_name, ''),
-                                                style: MaaruStyle.text.large,
-                                                textAlign: TextAlign.left),
                                             Text(
-
-                                              _prefHelper.getStringByKey(MaruConstant.last_name, ''),
-                                              style: MaaruStyle.text.tiny,
-
-
-                                            ),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            const SizedBox(
-                                              width: 40,
-                                              height: 30,
-                                            ),
-                                            Text(
-                                              'Known allergies'.toUpperCase(),
+                                              'Pet Vaccines'.toUpperCase(),
                                               style: MaaruStyle.text.tiny,
                                             ),
-                                           const SizedBox(
-                                              height: 10,
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        InkWell(
+                                            onTap: getImage,
+                                            //   var picked =
+                                            //       await FilePicker.platform.pickFiles();
+                                            //
+                                            //   if (picked != null) {
+                                            //     print(picked.files.first.name);
+                                            //   }
+
+                                            child: RoundedButton(
+                                              buttonName:
+                                                  'Upload Vaccine Record'
+                                                      .toUpperCase(),
+                                              Color: MaaruColors
+                                                  .primaryColorsuggesion,
+                                              Color1: MaaruColors.whiteColor,
+                                            )),
+                                        GestureDetector(
+                                          child: Container(
+                                            padding: EdgeInsets.only(top: 100),
+                                            width: 100.0,
+                                            height: 100.0,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                image: FileImage(File(_image)),
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                            TextFormField(
-                                              style: MaaruStyle.text.tiny,
-                                                maxLines: 2,
-                                                decoration: InputDecoration(
-                                                    hintText: 'Seprated by comma'.toUpperCase(),
-                                                    hintStyle: MaaruStyle.text
-                                                        .tiny,
-                                                    border: OutlineInputBorder(
-
-                                                        borderSide:
-                                                        BorderSide(color: Colors
-                                                            .grey[50]))),
-                                                onChanged: (text) {
-                                                  BlocProvider.of<PetProfileBloc>(context)
-                                                      .add(KnowAllergies(_knowallergiesController.text));
-                                                },
-                                                controller: _knowallergiesController
+                                          ),
+                                          onTap: getImage,
+                                        ),
+                                      ],
+                                    ),
+                                  ]),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        CreateRegisterPetProfile3()));
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 50,
+                                            width: 60,
+                                            decoration: const BoxDecoration(
+                                                color: Colors.white12,
+                                                shape: BoxShape.circle),
+                                            child: Text(
+                                              'BACK',
+                                              style:
+                                                  MaaruStyle.text.greyDisable,
                                             ),
-                                           const SizedBox(
-                                              height: 30,
-                                            ),
-                                            Stack(fit: StackFit.loose,
-                                                children: <Widget>[
-                                                  Column(
-                                                    crossAxisAlignment: CrossAxisAlignment
-                                                        .center,
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .center,
-                                                    children: <Widget>[
-                                                      Row(
-                                                        mainAxisAlignment: MainAxisAlignment
-                                                            .start,
-                                                        children: [
-                                                          Text(
-                                                            'Pet Vaccines'.toUpperCase(),
-                                                            style: MaaruStyle
-                                                                .text.tiny,
-                                                          ),
-                                                        ],),
-                                                      const SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      InkWell(
-
-                                                          onTap: getImage,
-                                                          //   var picked =
-                                                          //       await FilePicker.platform.pickFiles();
-                                                          //
-                                                          //   if (picked != null) {
-                                                          //     print(picked.files.first.name);
-                                                          //   }
-
-                                                          child: RoundedButton(
-                                                            buttonName: 'Upload Vaccine Record'.toUpperCase(),
-                                                            Color: MaaruColors
-                                                                .primaryColorsuggesion,
-                                                            Color1: MaaruColors
-                                                                .whiteColor,
-                                                          )),
-                                                      GestureDetector(
-                                                        child:
-                                                        Container(
-                                                          padding: EdgeInsets
-                                                              .only(top: 100),
-                                                          width: 100.0,
-                                                          height: 100.0,
-                                                          decoration: BoxDecoration(
-                                                            shape: BoxShape
-                                                                .circle,
-                                                            image: DecorationImage(
-                                                              image:
-
-                                                              FileImage(
-                                                                  File(_image)),
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        onTap: getImage,
-
-                                                      ),
-                                                    ],
-                                                  ),
-
-
-                                                ]),
-                                           const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  InkWell(
-                                                    onTap: () {
-                                                      Navigator.of(context)
-                                                          .push(
-                                                          MaterialPageRoute(
-                                                              builder: (_) =>
-                                                                  CreateRegisterPetProfile3()));
-                                                    },
-                                                    child: Container(
-                                                      alignment: Alignment
-                                                          .center,
-                                                      height: 50,
-                                                      width: 60,
-                                                      decoration: const BoxDecoration(
-                                                          color: Colors.white12,
-                                                          shape: BoxShape
-                                                              .circle),
-                                                      child: Text(
-                                                        'BACK',
-                                                        style: MaaruStyle.text
-                                                            .greyDisable,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                      onTap: () {
-                                                        //
-                                                        BlocProvider.of<PetProfileBloc>(context)
-                                                            .add(Profile2(
-                                                          _knowallergiesController.text,
-                                                         // getImage()
-_vaccineController.text
-                                                        ));
-
-                                                      },
-                                                      child: Container(
-                                                        alignment: Alignment
-                                                            .centerRight,
-                                                        child: Image.asset(
-                                                            'assets/images/next (2).png',height: 60,),
-                                                      )),
-                                                ]),
-                                          ]))),
-                            ]
-                            )));
-                  })));
+                                          ),
+                                        ),
+                                        InkWell(
+                                            onTap: () {
+                                              //
+                                              BlocProvider.of<PetProfileBloc>(
+                                                      context)
+                                                  .add(Profile2(
+                                                      _knowallergiesController
+                                                          .text,
+                                                      // getImage()
+                                                      _vaccineController.text));
+                                            },
+                                            child: Container(
+                                              alignment: Alignment.centerRight,
+                                              child: Image.asset(
+                                                'assets/images/next (2).png',
+                                                height: 60,
+                                              ),
+                                            )),
+                                      ]),
+                                ]))),
+                  ])));
+            })));
   }
 }

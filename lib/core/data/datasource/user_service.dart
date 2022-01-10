@@ -120,4 +120,16 @@ class UserService extends AuthSource {
     // TODO: implement emailSignup
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<void, Unit>> signInWithGoogle() {
+    // TODO: implement signInWithGoogle
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> signOut() {
+    // TODO: implement signOut
+    throw UnimplementedError();
+  }
 }

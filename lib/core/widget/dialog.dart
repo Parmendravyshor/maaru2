@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
+import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
 class Dialogs {
   static Future<void> showLoadingDialog(
 

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/disclaimer.dart';
+import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/features/Account_setting/presentation/change_password_screen.dart';
-import 'package:maru/features/Account_setting/presentation/payment_screen.dart';
+import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/splash/verify_screen.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
@@ -20,6 +24,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
   bool update = true;
   @override
   Widget build(BuildContext context) {
+    SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
     final size=MediaQuery.of(context).size;
     var selectedIndex;
 
@@ -49,19 +54,22 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                         children: [
                           Align(
                               alignment: Alignment.centerRight,
-                              child: Container(
-                                alignment: Alignment.centerRight,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.asset(
-                                  'assets/128/CrystalGaskell.png',
-                                  height: 60,
-                                  width: 60,
-                                ),
-                              )),
+                              child: ProfileAvatar(imageUrl:  _prefHelper
+                                  .getStringByKey(MaruConstant.img, ''),
+
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+
+                                      alignment: Alignment.center,
+                                      child: Image.asset('assets/128/CrystalGaskell.png'));
+
+                                },
+                                avatarRadius: 60,width: 40,Color: Colors.white,
+                                child: null,
+                              ),),
                           Align(
                               alignment: Alignment.centerLeft,
                               child: Column(children: [
@@ -111,9 +119,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   text: 'Payment',
                                   size: 130,
                                   onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (_) => PaymentScreen()));
+                                    // Navigator.of(context).push(
+                                    //     MaterialPageRoute(
+                                    //         builder: (_) => PaymentScreen()));
                                   },
                                 ),
                                 SizedBox(

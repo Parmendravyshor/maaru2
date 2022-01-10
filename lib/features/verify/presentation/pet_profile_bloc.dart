@@ -242,7 +242,7 @@ var text2 ='';
       yield* result.fold((l) async* {
         yield RegisterFailure("Signup failed..please try again.. $l");
       }, (r) async* {
-       //  await getPetProfile(event.text);
+       // await getPetProfile(text);
         ///  await savePetProfile(PetProfile());
 
         yield UserCreatePetProfileButtonTapped();
@@ -277,7 +277,7 @@ var text2 ='';
       }
       yield PetVaccineSuccessfull();
     }
-    if (event is ProfileOpened) {} else if (event is RegisterUser) {
+      if (event is RegisterUser) {
      // await getPetProfile(NoParams());
       UserProfileParams profileParams = UserProfileParams(
         email: sharedPrefHelper.getEmail(),
@@ -359,13 +359,15 @@ var text2 ='';
       yield UserChangePasswordButtonTapped();
     }
 
-    if (event is ProfileOpened) {} else if (event is savePayment) {
+   else if (event is savePayment) {
       PaymentParams profileParams = PaymentParams(
         expDate: event.expDate,
+      //    bankname: event,
         creditCardNumber: event.creditCardNumber,
         nameOnCard: event.nameOnCard,
         cvv: event.cvv,
       );
+      print(event.expDate);
       final result = await _saveUserPayment(profileParams);
       if (result.isRight()) {
         print("Payment  Saved");
@@ -434,6 +436,6 @@ print('jhhhhhy${event.text}');
         gender.isNotEmpty &&
         // img.isNotEmpty &&
         petName.isNotEmpty ;
-    // sex.isNotEmpty;
+     sex.isNotEmpty;
   }
 }

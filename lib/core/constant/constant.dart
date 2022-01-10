@@ -7,12 +7,13 @@ class MaruConstant {
   // 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
    static final signup =Uri.parse ('http://18.191.199.31/api/auth/signup');
    static final vaccineRecordUploaded = Uri.parse('http://18.191.199.31/api/pets/upload-vaccine-record');
-   static final updateprofile1 = _prefHelper.getStringByKey(MaruConstant.id, '');
-   static final savepet1 =Uri.parse ('http://18.191.199.31/api/auth/391');
+   static final updateprofile1 = _prefHelper.getIntByKey('id', id).toString();
+
+   static final savepet1 =Uri.parse ('http://18.191.199.31/api/pets/${updateprofile1.toString()}');
    static final getupcominapointment =Uri.parse ('http://18.191.199.31/api/bookings?type=upcoming');
    static final getproviders =Uri.parse ('http://18.191.199.31/api/public/providers?page=1&limit=100&service=&rating=');
    static final getReview =Uri.parse ('http://18.191.199.31/api/company/reviews');
-   static final getProviderRequest = Uri.parse('http://18.191.199.31/api/pets/$updateprofile1');
+   static final getProviderRequest = Uri.parse('http://18.191.199.31/api/bookings/appointment-requests?name=&service=&provider=&date=&page=1&limit=5');
    static final getSinglePetProfile = Uri.parse('http://18.191.199.31/api/pets/$updateprofile1');
    static final  providerbookingappointment = Uri.parse('http://18.191.199.31/api/bookings');
    static final resend =Uri.parse ('http://18.191.199.31/api/auth/re-send-otp');
@@ -25,7 +26,7 @@ class MaruConstant {
    static final setNewPasword = Uri.parse('http://18.191.199.31/api/auth/update-password');
    static final saveUserPayment = Uri.parse('http://18.191.199.31/api/user/card-details');
    static final changePassword = Uri.parse('http://18.191.199.31/api/user/change-password');
-   static final createUserProfilr = Uri.parse('http://18.191.199.31/api/auth/user');
+   static final createUserProfile = Uri.parse('http://18.191.199.31/api/user');
    static String first_name = 'first_name';
    static String pet_name = 'pet_name';
    static String breed_type = 'breed_type';
@@ -35,8 +36,8 @@ class MaruConstant {
        "xhcz7a3myc.execute-api.us-east-2.amazonaws.com";
    static String corePath = "chadbotcore";
    static String  city = 'city';
-   static String  zip = 'zip';
-   static String   phone_number = 'phone_number';
+   static String  zipcode = 'zipcode';
+   static String   phone_no = 'phone_no';
    static String   state = 'state';
    static String   img = 'img';
    static String   operation_hours = 'operation_hours';
@@ -72,11 +73,13 @@ class MaruConstant {
    static String change_password = 'change_password';
    static String password = 'password';
    static String code = 'code';
-   static var id = 'id';
+
    static String user_type = 'user_type';
    static String token = "accessToken";
    static String poolid = "us-east-2_util3hX7I";
    static String clientid = "3g1dvuoeeqapu83orgenb5f3cp";
+
+  static int get id => null;
 }
 
 const String BASE_URL = 'http://18.191.199.31/api/auth';

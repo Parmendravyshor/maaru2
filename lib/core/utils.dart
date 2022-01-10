@@ -5,18 +5,19 @@ import 'package:maru/core/data/datasource/notification.dart';
 import 'package:maru/core/data/datasource/storage.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 import 'package:maru/features/Home/domain/usecases/get_upcoming_appointment.dart';
 import 'package:maru/features/chat/domain/usecases/get_text_file.dart';
 import 'package:maru/features/chat/presentation/chat_bloc.dart';
 import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
-
 import 'package:maru/features/forgot/Domain/usecases/reset_password.dart';
 import 'package:maru/features/forgot/Domain/usecases/send_reset_otp.dart';
 import 'package:maru/features/forgot/presentation/bloc/reset_bloc.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/provider_home/domain/use_cases/get_provider_request.dart';
+import 'package:maru/features/provider_home/presentation/bloc/provider_home_bloc.dart';
 import 'package:maru/features/provider_login/domain/usecases/provider_email_login.dart';
 import 'package:maru/features/provider_register/domain/usecases/provider_email_register.dart';
 import 'package:maru/features/register/domain/usecases/email_signup.dart';
@@ -27,10 +28,10 @@ import 'package:maru/features/verify/domain/usecases/create_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_provider_by_id.dart';
 import 'package:maru/features/verify/domain/usecases/get_providers.dart';
-import 'package:maru/features/verify/domain/usecases/get_review_request.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/get_review_request.dart';
 import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
-import 'package:maru/features/verify/domain/usecases/save_registration_id.dart';
+
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/upload_vaccine_record.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
@@ -90,7 +91,10 @@ void _registerBloc(KiwiContainer container) {
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
   container.registerFactory((c) => VerifyBloc(
       c.resolve(), c.resolve(), c.resolve(), c.resolve(), c.resolve()));
-  container.registerFactory((c) => BookAppointmentBloc(c.resolve()));
+  container.registerFactory((c) => ProviderHomeBloc(
+c.resolve()
+      ));
+  container.registerFactory((c) => BookAppointmentBloc(c.resolve(),c.resolve()));
   container
       .registerFactory((c) => ChatBloc(c.resolve(), c.resolve(), c.resolve()));
 }
@@ -120,11 +124,12 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => UploadVaccineREcord(c.resolve()));
   container.registerFactory((c) => GetProviderById(c.resolve()));
   container.registerFactory((c) => BookProvider(c.resolve()));
+  container.registerFactory((c) => PostReview(c.resolve()));
   container.registerFactory((c) => GetUpcomingAndPastAppointments(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 
-void _registerRepositories(KiwiContainer container) {
+void      _registerRepositories(KiwiContainer container) {
   container.registerFactory<UserRepository>(
       (c) => UserRepositoryImpl(c.resolve(), c.resolve()));
 }

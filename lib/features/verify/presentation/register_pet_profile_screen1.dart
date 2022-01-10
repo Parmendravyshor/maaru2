@@ -97,6 +97,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  
   TextEditingController _sexController;
   TextEditingController _birthDateContoller;
   TextEditingController _noteContoller;
+ var abac;
+ var abc2;
   @override
   void initState() {
     _petNameController = TextEditingController();
@@ -110,7 +112,6 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  
 
     super.initState();
   }
-
   @override
   void dispose() {
     _petNameController.dispose();
@@ -121,6 +122,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  
     _weightController.dispose();
     _sexController.dispose();
     _birthDateContoller.dispose();
+
     super.dispose();
   }
 
@@ -147,11 +149,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  
             child:
             BlocBuilder<PetProfileBloc, PetProfileState>(builder: (context, state) {
               if (state is UserCreatePetProfileButtonTapped) {
-print(state.toString());
-
-
-                AlertManager.showErrorMessage(
-                    "otp send your register email", context);
+print('create registe instancse call back${state.toString()}');
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (BuildContext context) {
@@ -166,7 +164,7 @@ print(state.toString());
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.black,
-                        content: Text('Register Failure 🤣',
+                        content: Text('Pet Profile Register Failure',
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'poppins',
@@ -412,10 +410,7 @@ print(state.toString());
                                       } else {
                                         BlocProvider.of<PetProfileBloc>(context)
                                             .add(CreateRegisterPetProfile());
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (_) =>
-                                                    CreateRegisterPetProfile2()));
+
                                       }
                                     },
                                     child: Container(
@@ -551,33 +546,3 @@ class _ReuseCircle1State extends State<ReuseCircle1> {
   }
 }
 
-class LocalDataHelper {
-  SharedPreferences prefs;
-
-  saveValue({String key, bool value}) async {
-    prefs = await SharedPreferences.getInstance();
-    prefs.setBool(key, value);
-  }
-
-  saveStringValue({@required String key, @required String value}) async {
-    prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, value);
-  }
-
-  Future<String> getStringValue({@required String key}) async {
-    prefs = await SharedPreferences.getInstance();
-    var getStringVal = prefs.getString(key);
-    return getStringVal;
-  }
-
-  Future<bool> getValue({String key}) async {
-    prefs = await SharedPreferences.getInstance();
-    bool getVal = prefs.getBool(key);
-    return getVal;
-  }
-
-  clearAll() async {
-    prefs = await SharedPreferences.getInstance();
-    prefs.clear();
-  }
-}

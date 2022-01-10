@@ -1,16 +1,18 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
 import 'package:maru/features/verify/domain/usecases/book_a_provider.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:meta/meta.dart';
 part 'book_appointment_event.dart';
 part 'book_appointment_state.dart';
 
-class BookAppointmentBloc extends Bloc<BookAppointmentEvent, BookAppointmentState> {
+class BookAppointmentBloc
+    extends Bloc<BookAppointmentEvent, BookAppointmentState> {
   final BookProvider bookProvider;
-
-  BookAppointmentBloc(this.bookProvider);
+  final PostReview postREviewAfterBooking;
+  BookAppointmentBloc(this.bookProvider, this.postREviewAfterBooking);
 
   @override
   // TODO: implement initialState
@@ -21,7 +23,8 @@ class BookAppointmentBloc extends Bloc<BookAppointmentEvent, BookAppointmentStat
   var service_id;
 
   @override
-  Stream<BookAppointmentState> mapEventToState(BookAppointmentEvent event) async* {
+  Stream<BookAppointmentState> mapEventToState(
+      BookAppointmentEvent event) async* {
     if (event is PetIdChanged) {
       if (event.petId.isNotEmpty) {
         pet_id = event.petId;
@@ -35,9 +38,7 @@ class BookAppointmentBloc extends Bloc<BookAppointmentEvent, BookAppointmentStat
       } else {
         yield BookRegisterFormValidationFailure();
       }
-    }
-
-    else if (event is providerIdChanged) {
+    } else if (event is providerIdChanged) {
       if (event.providerid.isNotEmpty) {
         provider_id = event.providerid;
       } else {
@@ -50,8 +51,7 @@ class BookAppointmentBloc extends Bloc<BookAppointmentEvent, BookAppointmentStat
       } else {
         yield BookRegisterFormValidationFailure();
       }
-    }
-    else if (event is dateChanged) {
+    } else if (event is dateChanged) {
       if (event.date.isNotEmpty) {
         booking_date_time = event.date;
       } else {
@@ -64,9 +64,7 @@ class BookAppointmentBloc extends Bloc<BookAppointmentEvent, BookAppointmentStat
       } else {
         yield BookRegisterFormValidationFailure();
       }
-    }
-
-    else if (event is serviceIdChanged) {
+    } else if (event is serviceIdChanged) {
       if (event.serviceid != null) {
         service_id = event.serviceid;
       } else {
@@ -79,23 +77,31 @@ class BookAppointmentBloc extends Bloc<BookAppointmentEvent, BookAppointmentStat
       } else {
         yield BookRegisterFormValidationFailure();
       }
-    }
-    else if (event is BookRegisterButtonTapped) {
+    } else if (event is BookRegisterButtonTapped) {
       yield BookRegisterInProgress();
       final result = await bookProvider(BookProviderParams(
         pet_id: pet_id,
         provider_id: provider_id,
         booking_date_time: booking_date_time,
         service_id: service_id,
-
       ));
       yield* result.fold((l) async* {
         yield BookRegisterFailure("Signup failed..please try again.. $l");
       }, (r) async* {
         yield BookRegisterSuccess();
       });
+    } else if (event is PostREviewAfterBooking) {
+      UserReviewParamsMOdel profileParams = UserReviewParamsMOdel(
+        providerId: event.provider_id,
+        bookingId: event.bookingid,
+        Comment: event.comment,
+        rating: event.rating,
+      );
+      final result = await postREviewAfterBooking(profileParams);
+      yield RivewPostSuccess();
     }
   }
+
   bool _isFormValid() {
     return pet_id.isNotEmpty &&
         provider_id.isNotEmpty &&

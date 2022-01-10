@@ -70,7 +70,7 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
 
   @override
   int getPassword() {
-    return sharedPreferences.getInt(MaruConstant.id);
+    return sharedPreferences.getInt('id');
   }
 
   @override
@@ -80,7 +80,7 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
 
   @override
   Future<void> savePassword(String password) {
-    return sharedPreferences.setString(MaruConstant.id, password);
+    return sharedPreferences.setString('id', password);
   }
 
   @override

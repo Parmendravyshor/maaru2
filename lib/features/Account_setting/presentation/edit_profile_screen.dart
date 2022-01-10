@@ -93,7 +93,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
             builder: (context, state) {
               try {
                 Navigator.of(_keyLoader.currentContext, rootNavigator: true);
-                Navigator.of(context).pop();
+            //    Navigator.of(context).pop();
               } catch (e) {}
               _fnameController.text =
                   _prefHelper.getStringByKey(MaruConstant.first_name, "");
@@ -102,7 +102,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
               _emailController.text =
                   _prefHelper.getStringByKey(MaruConstant.email, "");
               _mobileController.text =
-                  _prefHelper.getStringByKey(MaruConstant.phone_number, "");
+                  _prefHelper.getStringByKey(MaruConstant.phone_no, "");
               // if (state is UserPetProfileButtonTapped) {
               //   _status = true;
               // }
@@ -110,10 +110,50 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                   child: SingleChildScrollView(
                       child: Column(children: [
                         BackArrowButton(),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-//
+ Stack(fit: StackFit.loose, children: <Widget>[
+
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          GestureDetector(
+                            child: Container(
+                              width: 200.0,
+                              height: 200.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: _image.isEmpty
+                                      ? ExactAssetImage(
+                                      'assets/icons/icone-setting-28.png')
+                                      : FileImage(File(_image)),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            onTap: getImage,
+                          ),
+                        ],
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(
+                            top: 160.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              CircleAvatar(
+                                  backgroundColor: Colors.red,
+                                  radius: 15.0,
+                                  child:
+                                  Image.asset(
+                                      'assets/icons/icone-setting-29.png'))
+                            ],
+                          )),
+                    ]),
                         Container(
                           width: 1000,
                           height: 800,
@@ -164,7 +204,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                                     textInputAction: TextInputAction.next,
                                     textStyle: TextStyle(
                                         color: Colors.grey[300]),
-                                    enabled: !_status,
+                                    enabled: !enabled,
                                     onChanged: (text) {
                                       //  BlocProvider.of<RegisterBloc>(context)
                                       //  .add(PasswordChanged(text));
@@ -181,7 +221,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                                       // BlocProvider.of<RegisterBloc>(context)
                                       // .add(PasswordChanged(text));
                                     },
-                                    // editingController: _phoneController,
+                                     editingController: _mobileController,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment
@@ -221,13 +261,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                                                     BorderSide(color: Colors
                                                         .grey[300]),
                                                   ),
-                                                  suffixIcon: Icon(
-                                                    Icons
-                                                        .keyboard_arrow_down_outlined,
-                                                    size: 40,
-                                                    color: MaaruColors
-                                                        .buttonColor,
-                                                  )),
+                                                ),
                                             )),
                                       ),
                                     ],

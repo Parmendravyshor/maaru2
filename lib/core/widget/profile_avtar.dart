@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maru/core/network/network_info.dart';
 
 class ProfileAvatar extends StatelessWidget {
   final String imageUrl;
@@ -10,7 +11,7 @@ final Color;
       @required this.imageUrl,
       @required this.avatarRadius,
       @required this.width,
-      child, this.Color})
+      child, this.Color, Container Function(dynamic context, dynamic error, dynamic stackTrace) errorBuilder})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ final Color;
                     shape: BoxShape.circle,
                     border: Border.all(color:Color, width: 1.0),
                     image: DecorationImage(
-                        image: AssetImage(imageUrl),
+                        image:NetworkImage(imageUrl),
                         //  NetworkImage(imageUrl),
                         fit: BoxFit.cover)),
               ),

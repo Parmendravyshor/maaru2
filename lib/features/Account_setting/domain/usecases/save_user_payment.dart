@@ -15,10 +15,11 @@ class SaveUserPayment extends UseCase<void, PaymentParams> {
 
 class PaymentParams {
   final String nameOnCard;
+  final String bankname;
   final String creditCardNumber;
   final String expDate;
   final String cvv;
 
   PaymentParams(
-      {this.nameOnCard, this.creditCardNumber, this.expDate, this.cvv});
+      {this.nameOnCard, this.creditCardNumber, this.expDate, this.cvv, this.bankname });
 }

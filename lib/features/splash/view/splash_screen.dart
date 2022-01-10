@@ -15,9 +15,11 @@ import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
+import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'package:maru/features/splash/verify_screen.dart';
 import 'package:maru/features/verify/domain/usecases/save_registration_id.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: todo
 //TODO: Splash Screen
@@ -45,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _getCurrentLocation();
-    getToken();
+    //getToken();
     if (_currentPosition != null)
       Text(
           "LAT: ${_currentPosition.latitude}, LNG: ${_currentPosition.longitude}");
@@ -59,26 +61,40 @@ class _SplashScreenState extends State<SplashScreen> {
 //todo: Navigate to AfterSplashScreen
 //
   navigateToNextScreen() {
-    Future.delayed(Duration(seconds: 3), () async {
-      SharedPrefHelper pref;
-      SharedPrefHelper sharedPrefHelper =
-          pref = KiwiContainer().resolve<SharedPrefHelper>();
-      String token = sharedPrefHelper.gettoken();
-      if (token != null) {
+    Future.delayed(Duration(seconds: 0), () async {
+      SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+      String token = _prefHelper.gettoken();
+      if (token.isNotEmpty) {
         print("token token token token :$token");
         int id;
-        var id1 = sharedPrefHelper.getIntByKey(MaruConstant.id, id);
-        if (id1 != null) {
-          print('id id id :$id1');
-          Navigator.of(context).pushAndRemoveUntil(
+
+        var id1 = _prefHelper.getIntByKey('id', id);
+        print('checkid$id');
+        print('checkfor the id$id');
+
+        if (id1.toString().isNotEmpty) {
+          print('id id id :$id');
+          return Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => HomeScreen()),
               (route) => false);
-        } else {
-          Navigator.of(context).pushAndRemoveUntil(
+        }
+
+        var accessdeniedOrsuccess = _prefHelper.getStringByKey('is_verified', '');
+         if(accessdeniedOrsuccess.isNotEmpty){
+           Navigator.of(context).pushAndRemoveUntil(
+               MaterialPageRoute(
+                   builder: (context) => TestApp()),
+                   (route) => false);
+        }
+        else {
+            Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                   builder: (context) => CreateregisterPetProfile1()),
               (route) => false);
         }
+        // return  Navigator.of(context).pushAndRemoveUntil(
+        //     MaterialPageRoute(builder: (context) => VerifyUser()),
+        //         (route) => false);
       } else {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => VerifyUser()),
@@ -87,14 +103,13 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  getToken() async {
-    NotificationHelper helper = NotificationHelper();
-    var token = await FirebaseMessaging.instance.getToken();
-    print('tokendddffffffff: $token');
-
-    var fcmToken = await helper.getToken();
-    print("fcm fcm fcm fcm fcm fcm fcm:$fcmToken");
-  }
+  // getToken() async {
+  //   NotificationHelper helper = NotificationHelper();
+  //   var token = await FirebaseMessaging.instance.getToken();
+  //   print('tokendddffffffff: $token');
+  //
+  //
+  // }
 
 //todo: showing notificatonon background when app is running
   _getCurrentLocation() {

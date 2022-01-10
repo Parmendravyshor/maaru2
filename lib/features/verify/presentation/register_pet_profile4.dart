@@ -32,7 +32,12 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
   Color circlecolor5 = MaaruColors.whiteColor;
   Color circlecolor6 = MaaruColors.whiteColor;
 
-  var select = '';
+  var select1 = '';
+  var select2 = '';
+  var select3 = '';
+  var select4 = '';
+  var select5 = '';
+  var select6 = '';
 
 
 
@@ -67,7 +72,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
 
 
             ),
-            Text(text,style: MaaruStyle.text.tiny,),
+         //   Text(text,style: MaaruStyle.text.tiny,),
           ],
         ),
       ),
@@ -87,8 +92,6 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                 child: BlocBuilder<PetProfileBloc, PetProfileState>(
                     builder: (context, state) {
                   if (state is pet3rofileButtonTapped) {
-                    AlertManager.showErrorMessage(
-                        "otp send your register email", context);
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (BuildContext context) {
@@ -187,8 +190,8 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                                         if (circlecolor1 ==
                                                             MaaruColors
                                                                 .groomingcolor) {
-                                                          select = 'Grooming';
-                                                          print(select);
+                                                          select1 = 'Grooming';
+                                                          print(select1);
                                                         }
                                                       });
                                                     },
@@ -216,8 +219,8 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                                           if (circlecolor2 ==
                                                               MaaruColors
                                                                   .vetcolor) {
-                                                            select = 'vet';
-                                                            print(select);
+                                                            select2 = 'vet';
+                                                            print(select2);
                                                           }
                                                         });
                                                       },
@@ -254,8 +257,8 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                                           if (circlecolor3 ==
                                                               MaaruColors
                                                                   .hotelcolor) {
-                                                            select = 'hotel';
-                                                            print(select);
+                                                            select3 = 'hotel';
+                                                            print(select3);
                                                           }
                                                         });
                                                       },
@@ -282,8 +285,8 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                                           if (circlecolor4 ==
                                                               MaaruColors
                                                                   .walkingcolor) {
-                                                            select = 'walking';
-                                                            print(select);
+                                                            select4 = 'walking';
+                                                            print(select4);
                                                           }
                                                         });
                                                       },
@@ -320,8 +323,8 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                                           if (circlecolor5 ==
                                                               MaaruColors
                                                                   .daycarecolor) {
-                                                            select = 'daycare';
-                                                            print(select);
+                                                            select5 = 'daycare';
+                                                            print(select5);
                                                           }
                                                         });
                                                       },
@@ -348,8 +351,8 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                                           if (circlecolor6 ==
                                                               MaaruColors
                                                                   .hospitalcolor) {
-                                                            select = 'hospital';
-                                                            print(select);
+                                                            select6 = 'hospital';
+                                                            print(select6);
                                                           }
                                                         });
                                                       },
@@ -402,11 +405,11 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                                       BlocProvider.of<PetProfileBloc>(
                                                           context)
                                                           .add(Profile4(
-                                                        walking: select,
-                                                        grooming: select,
-                                                        vet: select,
-                                                        hospital: select,
-                                                        hotel: select,
+                                                        walking: select1  ,
+                                                        grooming: select2,
+                                                        vet: select3,
+                                                        hospital: select4,
+                                                        hotel: select5,
                                                       ));
                                                     },
                                                     child: Container(
