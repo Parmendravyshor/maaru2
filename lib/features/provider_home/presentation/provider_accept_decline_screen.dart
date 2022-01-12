@@ -207,8 +207,15 @@ class _TestAppState extends State<TestApp> {
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: _textEditingController.text.length,
             affinity: TextAffinity.upstream));
-      // BlocProvider.of<PetProfileBloc>(context)
-      //     .add(BirthChanged(_textEditingController.text));
+      BlocProvider.of<ProviderHomeBloc>(context)
+          .add(getProviderRequest(
+        page,
+        date,
+        date,
+        date,
+        limit,
+        _ageType.text,
+      ));
     }
   }
 
@@ -264,8 +271,8 @@ class _TestAppState extends State<TestApp> {
                 // print('figffgfg${text}');
                 return const Center(child: CircularProgressIndicator());
               } else if (state is RequestLoaded) {
-                print(
-                    'datarequestfprcheckeinguseingstaat${state.getProviderRequestModel.appointmentRequests.length}');
+                //  print(
+                // 'datarequestfprcheckeinguseingstaat${state.getProviderRequestModel.appointmentRequests.length}');
                 return SingleChildScrollView(
                   child: Column(
                     children: [
@@ -331,32 +338,17 @@ class _TestAppState extends State<TestApp> {
                                                   height: 50,
                                                   // width: 30,
                                                 ))),
-                                        onChanged: (text) {
-                                          setState(() {
-                                            BlocProvider.of<ProviderHomeBloc>(
-                                                    context)
-                                                .add(getProviderRequest(
-                                              page,
-                                              date,
-                                              _ageType.text,
-                                              _ageType.text,
-                                              limit,
-                                              _ageType.text,
-                                            ));
-                                          });
-                                        },
-
                                         onSubmitted: (text) {
                                           setState(() {
                                             BlocProvider.of<ProviderHomeBloc>(
                                                     context)
                                                 .add(getProviderRequest(
-                                              page,
+                                              name,
+                                              service,
+                                              provider,
                                               date,
-                                              _ageType.text,
-                                              _ageType.text,
+                                              page,
                                               limit,
-                                              _ageType.text,
                                             ));
                                             print(_ageType);
                                           });
@@ -370,6 +362,15 @@ class _TestAppState extends State<TestApp> {
                                     InkWell(
                                         onTap: () {
                                           _selectDate(context);
+                                          BlocProvider.of<ProviderHomeBloc>(context)
+                                              .add(getProviderRequest(
+                                            page,
+                                            date,
+                                            date,
+                                            date,
+                                            limit,
+                                            _ageType.text,
+                                          ));
                                         },
                                         child: Image.asset(
                                           'assets/icons/New Project (36).png',

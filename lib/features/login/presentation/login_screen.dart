@@ -24,6 +24,7 @@ import 'package:maru/features/verify/presentation/register_pet_profile_screen1.d
 import 'package:maru/features/verify/presentation/register_pet_profile_screen2.dart';
 import 'package:maru/features/verify/presentation/verify.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
+import 'package:maru/main.dart';
 
 import 'bloc/bloc/login_bloc.dart';
 import 'bloc/bloc/login_event.dart';
@@ -81,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SchedulerBinding.instance.addPostFrameCallback((_) {
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (BuildContext context) {
-                                        return HomeScreen();
+                                        return CreateregisterPetProfile1();
                                       }));
                                 });
                                 return Container();
@@ -125,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   Center(
                                     child: Text(
-                                      'or login with email',
+                                      'or login with email'.toUpperCase(),
                                       style: GoogleFonts.poppins(
                                           textStyle: TextStyle(
                                               color: Colors.black,
@@ -236,7 +237,7 @@ class GoToSignInText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Not a member? ',
+          'Not a member? '.toUpperCase(),
           style: MaaruStyle.text.medium,
         ),
         InkWell(

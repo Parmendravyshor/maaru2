@@ -56,7 +56,9 @@ class ShowLocation extends StatelessWidget {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => AccountSettingScreen()));
             },
-            child: ProfileAvatar(imageUrl:  _prefHelper
+            child: ProfileAvatar(
+
+              imageUrl:  _prefHelper
               .getStringByKey(MaruConstant.img, ''),
 
           errorBuilder: (context, error, stackTrace) {

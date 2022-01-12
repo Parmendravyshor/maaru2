@@ -1,9 +1,11 @@
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
-import 'package:maru/core/data/datasource/notification.dart';
 import 'package:maru/core/data/datasource/storage.dart';
+import 'package:maru/features/Account_setting/domain/usecases/do_payment.dart';
+import 'package:maru/features/Account_setting/domain/usecases/get_user_payment.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
+import 'package:maru/features/Account_setting/presentation/payment/bloc/payment_bloc.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
@@ -31,15 +33,12 @@ import 'package:maru/features/verify/domain/usecases/get_providers.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_review_request.dart';
 import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
-
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/upload_vaccine_record.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'data/datasource/auth_source.dart';
 import 'data/datasource/shared_pref_helper.dart';
 import 'data/datasource/user_service.dart';
@@ -57,26 +56,28 @@ Future<void> registerDependencyInjection() async {
   _registerUseCases(container);
   _registerBloc(container);
 }
-
 void _registerBloc(KiwiContainer container) {
   container.registerFactory((c) => RegisterBloc(c.resolve(), c.resolve()));
+  container.registerFactory(
+      (c) => PaymentBloc(c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory((c) => LoginBloc(
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-     ));
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+      ));
   container
       .registerFactory((c) => ResetBloc(c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory((c) => PetProfileBloc(
+      c.resolve(),
       c.resolve(),
       c.resolve(),
       c.resolve(),
@@ -91,14 +92,12 @@ void _registerBloc(KiwiContainer container) {
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
   container.registerFactory((c) => VerifyBloc(
       c.resolve(), c.resolve(), c.resolve(), c.resolve(), c.resolve()));
-  container.registerFactory((c) => ProviderHomeBloc(
-c.resolve()
-      ));
-  container.registerFactory((c) => BookAppointmentBloc(c.resolve(),c.resolve()));
+  container.registerFactory((c) => ProviderHomeBloc(c.resolve()));
+  container
+      .registerFactory((c) => BookAppointmentBloc(c.resolve(), c.resolve()));
   container
       .registerFactory((c) => ChatBloc(c.resolve(), c.resolve(), c.resolve()));
 }
-
 void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => EmailSignin(c.resolve()));
   container.registerFactory((c) => EmailSignup(c.resolve()));
@@ -125,11 +124,13 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => GetProviderById(c.resolve()));
   container.registerFactory((c) => BookProvider(c.resolve()));
   container.registerFactory((c) => PostReview(c.resolve()));
+  container.registerFactory((c) => GetUSerPayment(c.resolve()));
   container.registerFactory((c) => GetUpcomingAndPastAppointments(c.resolve()));
+  container.registerFactory((c) => DoPayment(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 
-void      _registerRepositories(KiwiContainer container) {
+void _registerRepositories(KiwiContainer container) {
   container.registerFactory<UserRepository>(
       (c) => UserRepositoryImpl(c.resolve(), c.resolve()));
 }

@@ -1,9 +1,9 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
@@ -15,6 +15,7 @@ import 'package:maru/core/widget/dialog.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Account_setting/presentation/payment/bloc/payment_bloc.dart';
 import 'package:maru/features/Account_setting/presentation/payment/input_formetters.dart';
 import 'package:maru/features/Account_setting/presentation/payment/my_strings.dart';
 import 'package:maru/features/Account_setting/presentation/payment/payment_card_details.dart';
@@ -344,11 +345,11 @@ import 'package:flutter/services.dart';
 //
 
 class PaymentScreen1 extends StatefulWidget {
- // PaymentScreen1({Key key, this.title}) : super(key: key);
- // final String title;
+  // PaymentScreen1({Key key, this.title}) : super(key: key);
+  // final String title;
 
   @override
-  _PaymentScreen1State createState() =>  _PaymentScreen1State();
+  _PaymentScreen1State createState() => _PaymentScreen1State();
 }
 
 class _PaymentScreen1State extends State<PaymentScreen1>
@@ -362,8 +363,6 @@ class _PaymentScreen1State extends State<PaymentScreen1>
   TextEditingController _nameOnCardController;
   TextEditingController _cvvController;
   TextEditingController _bankNameController;
-
-
 
   TextEditingController _nameEditingController;
   TextEditingController _controller;
@@ -385,123 +384,180 @@ class _PaymentScreen1State extends State<PaymentScreen1>
     jobTECs.add(jobController);
     return Container(
         color: Color(0xffFFFFFF),
-        child: Padding(
-            padding: EdgeInsets.only(top: 0.0),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  ThemedTextField(
-                    "Name On Card",
-                    TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    textStyle: TextStyle(color: Colors.grey[300]),
-                    onChanged: (text) {
-                      //BlocProvider.of<RegisterBloc>(context).add(FNameChanged(text));
-                    },
-                    editingController: _nameOnCardController,
-                  ),
-                  ThemedTextField(
-                    "Credit Card Number",
-                    TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    textStyle: TextStyle(color: Colors.grey[300]),
-                    onChanged: (text) {
-                      //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-                    },
-                    editingController: _creditCardNumberController,
-                  ),
-                  ThemedTextField(
-                    "Bank Name",
-                    TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    textStyle: TextStyle(color: Colors.grey[300]),
-                    onChanged: (text) {
-                      //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-                    },
-                    editingController: _bankNameController,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Container(
-                          padding: EdgeInsets.only(left: 15),
-                          child: ThemedTextField("Cvv", TextInputType.text,
-                              textInputAction: TextInputAction.next,
-                              textStyle: TextStyle(color: Colors.grey[300]),
-                              onChanged: (text) {
-                                //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-                              }, editingController: _cvvController),
-                        ),
-                      ),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
-                      Flexible(
-                        child: Container(
-                          padding: EdgeInsets.only(left: 15, bottom: 30),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              // contentPadding: EdgeInsets.only(left: 20),
-                                hintText: 'Exp',
-                                hintStyle: MaaruStyle.text.greyDisable,
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                  BorderSide(color: Colors.grey[300]),
+        child: BlocProvider(
+            create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+            child: Scaffold(
+                backgroundColor: Colors.white,
+                body: BlocBuilder<PetProfileBloc, PetProfileState>(
+                    builder: (context, state) {
+                  return Padding(
+                      padding: EdgeInsets.only(top: 0.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                fillColor: Colors.white,
+                                hoverColor: Colors.white,
+                                border: UnderlineInputBorder(),
+                                filled: true,
+                                icon: Icon(
+                                  Icons.person,
+                                  size: 40.0,
                                 ),
-                                suffixIcon: Icon(
-                                  Icons.keyboard_arrow_down_outlined,
-                                  size: 40,
-                                  color: MaaruColors.buttonColor,
-                                )),
-                            controller: _expDateController,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          _removeWidget();
-                        });
-                      },
-                      child: Padding(
-                          padding: EdgeInsets.only(
-                            left: 20,
-                          ),
-                          child: Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: Icon(
-                                  Icons.remove,
-                                  color: Colors.white,
+                                hintText: 'What name is written on card?',
+                                labelText: 'Card Name',
+                              ),
+                              onSaved: (String value) {
+                                _card.name = value;
+                              },
+                              keyboardType: TextInputType.text,
+                              validator: (String value) =>
+                                  value.isEmpty ? Strings.fieldReq : null,
+                              controller: _nameOnCardController,
+                            ),
+                            new SizedBox(
+                              height: 30.0,
+                            ),
+                            TextFormField(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                LengthLimitingTextInputFormatter(19),
+                                CardNumberInputFormatter()
+                              ],
+                              controller: _creditCardNumberController,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                hoverColor: Colors.white,
+                                border: const UnderlineInputBorder(),
+                                filled: true,
+                                icon: CardUtils.getCardIcon(_paymentCard.type),
+                                hintText: 'What number is written on card?',
+                                labelText: 'Number',
+                              ),
+                              onSaved: (String value) {
+                                print('onSaved = $value');
+                                print(
+                                    'Num controller has = ${numberController.text}');
+                                _paymentCard.number =
+                                    CardUtils.getCleanedNumber(value);
+                              },
+                              validator: CardUtils.validateCardNum,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  child: Container(
+                                    padding: EdgeInsets.only(),
+                                    child: TextFormField(
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        LengthLimitingTextInputFormatter(4),
+                                      ],
+                                      decoration: const InputDecoration(
+                                        fillColor: Colors.white,
+                                        hoverColor: Colors.white,
+                                        border: UnderlineInputBorder(),
+                                        filled: true,
+                                        icon: Icon(Icons.credit_score),
+                                        hintText: 'Number behind the card',
+                                        labelText: 'CVV',
+                                      ),
+                                      validator: CardUtils.validateCVV,
+                                      keyboardType: TextInputType.number,
+                                      onSaved: (value) {
+                                        _paymentCard.cvv = int.parse(value);
+                                      },
+                                      controller: _cvvController,
+                                    ),
+                                  ),
                                 ),
-                                style: ElevatedButton.styleFrom(
-                                  shape: CircleBorder(),
-                                  padding: EdgeInsets.all(10),
-                                  primary: Colors.red, // <-- Button color
-                                  onPrimary: Colors.red, // <-- Splash color
+                                // SizedBox(
+                                //   width: 10,
+                                // ),
+                                Flexible(
+                                  child: Container(
+                                    padding: const EdgeInsets.only(),
+                                    child: TextFormField(
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        LengthLimitingTextInputFormatter(4),
+                                        CardMonthInputFormatter()
+                                      ],
+                                      decoration: InputDecoration(
+                                        fillColor: Colors.white,
+                                        hoverColor: Colors.white,
+                                        border: const UnderlineInputBorder(),
+                                        filled: true,
+                                        icon: Image.asset(
+                                          'assets/icons/icone-setting-21.png',
+                                          width: 25,
+                                          color: Colors.grey[600],
+                                        ),
+                                        hintText: 'MM/YY',
+                                        labelText: 'Expiry Date',
+                                      ),
+                                      validator: CardUtils.validateDate,
+                                      keyboardType: TextInputType.number,
+                                      onSaved: (value) {
+                                        List<int> expiryDate =
+                                            CardUtils.getExpiryDate(value);
+                                        _paymentCard.month = expiryDate[0];
+                                        _paymentCard.year = expiryDate[1];
+                                      },
+                                      controller: _expDateController,
+                                    ),
+                                  ),
                                 ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    _removeWidget();
+                                  });
+                                },
+                                child: Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 20,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {},
+                                          child: Icon(
+                                            Icons.remove,
+                                            color: Colors.white,
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            shape: CircleBorder(),
+                                            padding: EdgeInsets.all(10),
+                                            primary:
+                                                Colors.red, // <-- Button color
+                                            onPrimary:
+                                                Colors.red, // <-- Splash color
+                                          ),
 
 //                         ],
 //                       )),
-                              ),
-                              Text('Remove Card',
-                                  style: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: 'Poppins',
-                                          fontSize: 18,
-                                          color: Color(0xFFc72019))))
-                            ],
-                          ))),
-                ])));
+                                        ),
+                                        Text('Remove Card',
+                                            style: GoogleFonts.poppins(
+                                                textStyle: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontFamily: 'Poppins',
+                                                    fontSize: 18,
+                                                    color: Color(0xFFc72019))))
+                                      ],
+                                    ))),
+                          ]));
+                }))));
   }
 
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -522,161 +578,416 @@ class _PaymentScreen1State extends State<PaymentScreen1>
     _creditCardNumberController = TextEditingController();
     _nameOnCardController = TextEditingController();
     _cvvController = TextEditingController();
-
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      backgroundColor: Colors.white,
+    return Scaffold(
+        backgroundColor: Colors.white,
         key: _scaffoldKey,
-
-        body:
-        Container(
-          padding:  const EdgeInsets.symmetric(horizontal: 15.0),
-          child:  Form(
-              key: _formKey,
-              autovalidateMode: _autoValidateMode,
-              child:  ListView(
-                children: <Widget>[
-                   SizedBox(
-                    height: 20.0,
-                  ),
-                   TextFormField(
-                    decoration: const InputDecoration(
-                      fillColor: Colors.white,
-                      hoverColor: Colors.white,
-                      border: UnderlineInputBorder(),
-                      filled: true,
-                      icon: Icon(
-                        Icons.person,
-                        size: 40.0,
-                      ),
-                      hintText: 'What name is written on card?',
-                      labelText: 'Card Name',
-                    ),
-                    onSaved: (String value) {
-                      _card.name = value;
-                    },
-                    keyboardType: TextInputType.text,
-                    validator: (String value) =>
-                    value.isEmpty ? Strings.fieldReq : null,
-                  ),
-                  new SizedBox(
-                    height: 30.0,
-                  ),
-
-
-                   TextFormField(
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                       LengthLimitingTextInputFormatter(19),
-                       CardNumberInputFormatter()
-                    ],
-                    controller: numberController,
-                    decoration:  InputDecoration(
-                      fillColor: Colors.white,
-                      hoverColor: Colors.white,
-                      border: const UnderlineInputBorder(),
-                      filled: true,
-                      icon: CardUtils.getCardIcon(_paymentCard.type),
-                      hintText: 'What number is written on card?',
-                      labelText: 'Number',
-                    ),
-                    onSaved: (String value) {
-                      print('onSaved = $value');
-                      print('Num controller has = ${numberController.text}');
-                      _paymentCard.number = CardUtils.getCleanedNumber(value);
-                    },
-                    validator: CardUtils.validateCardNum,
-                  ),
-                  Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Container(
-                          padding: EdgeInsets.only(),
-                          child:  TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(4),
-                            ],
-                            decoration: const InputDecoration(
-                              fillColor: Colors.white,
-                              hoverColor: Colors.white,
-                              border: UnderlineInputBorder(),
-                              filled: true,
-                              icon:
-                             Icon(Icons.eleven_mp),
-                              hintText: 'Number behind the card',
-                              labelText: 'CVV',
+        body: BlocProvider(
+            create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+            child: Scaffold(
+                backgroundColor: Colors.white,
+                body: BlocBuilder<PetProfileBloc, PetProfileState>(
+                    builder: (context, state) {
+                  return Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Form(
+                          key: _formKey,
+                          autovalidateMode: _autoValidateMode,
+                          child: ListView(children: <Widget>[
+                            Padding(
+                                padding: EdgeInsets.only(
+                                  top: 10.0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        radius: 90.0,
+                                        child: Image.asset(
+                                          'assets/images/4970774.png',
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Container(
+                                                decoration: const BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                alignment: Alignment.center,
+                                                child: Image.asset(
+                                                    'assets/128/CrystalGaskell.png'));
+                                          },
+                                        ))
+                                  ],
+                                )),
+                            const Text('Update Payment'),
+                            SizedBox(
+                              height: 20.0,
                             ),
-                            validator: CardUtils.validateCVV,
-                            keyboardType: TextInputType.number,
-                            onSaved: (value) {
-                              _paymentCard.cvv = int.parse(value);
-                            },
-                          ),
-                        ),
-                      ),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
-                      Flexible(
-                        child: Container(
-                          padding: EdgeInsets.only(
-                            ),
-                          child: TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(4),
-                              CardMonthInputFormatter()
-                            ],
-                            decoration:  InputDecoration(
-                              fillColor: Colors.white,
-                              hoverColor: Colors.white,
-                              border: const UnderlineInputBorder(),
-                              filled: true,
-                              icon:  Image.asset(
-                                'assets/icons/icone-setting-21.png',
-                                width: 25 ,
-                                color: Colors.grey[600],
+                            TextFormField(
+                              decoration: const InputDecoration(
+                                fillColor: Colors.white,
+                                hoverColor: Colors.white,
+                                border: UnderlineInputBorder(),
+                                filled: true,
+                                icon: Icon(
+                                  Icons.person,
+                                  size: 40.0,
+                                ),
+                                hintText: 'What name is written on card?',
+                                labelText: 'Card Name',
                               ),
-                              hintText: 'MM/YY',
-                              labelText: 'Expiry Date',
+                              onSaved: (String value) {
+                                _card.name = value;
+                              },
+                              keyboardType: TextInputType.text,
+                              validator: (String value) =>
+                                  value.isEmpty ? Strings.fieldReq : null,
+                              controller: _nameOnCardController,
                             ),
-                            validator: CardUtils.validateDate,
-                            keyboardType: TextInputType.number,
-                            onSaved: (value) {
-                              List<int> expiryDate = CardUtils.getExpiryDate(value);
-                              _paymentCard.month = expiryDate[0];
-                              _paymentCard.year = expiryDate[1];
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  new SizedBox(
-                    height: 30.0,
-                  ),
+                            new SizedBox(
+                              height: 30.0,
+                            ),
+                            TextFormField(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                LengthLimitingTextInputFormatter(19),
+                                CardNumberInputFormatter()
+                              ],
+                              controller: _creditCardNumberController,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                hoverColor: Colors.white,
+                                border: const UnderlineInputBorder(),
+                                filled: true,
+                                icon: CardUtils.getCardIcon(_paymentCard.type),
+                                hintText: 'What number is written on card?',
+                                labelText: 'Number',
+                              ),
+                              onSaved: (String value) {
+                                print('onSaved = $value');
+                                print(
+                                    'Num controller has = ${numberController.text}');
+                                _paymentCard.number =
+                                    CardUtils.getCleanedNumber(value);
+                              },
+                              validator: CardUtils.validateCardNum,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  child: Container(
+                                    padding: EdgeInsets.only(),
+                                    child: TextFormField(
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        LengthLimitingTextInputFormatter(4),
+                                      ],
+                                      decoration: const InputDecoration(
+                                        fillColor: Colors.white,
+                                        hoverColor: Colors.white,
+                                        border: UnderlineInputBorder(),
+                                        filled: true,
+                                        icon: Icon(Icons.eleven_mp),
+                                        hintText: 'Number behind the card',
+                                        labelText: 'CVV',
+                                      ),
+                                      validator: CardUtils.validateCVV,
+                                      keyboardType: TextInputType.number,
+                                      onSaved: (value) {
+                                        _paymentCard.cvv = int.parse(value);
+                                      },
+                                      controller: _cvvController,
+                                    ),
+                                  ),
+                                ),
+                                // SizedBox(
+                                //   width: 10,
+                                // ),
+                                Flexible(
+                                  child: Container(
+                                    padding: EdgeInsets.only(),
+                                    child: TextFormField(
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        LengthLimitingTextInputFormatter(4),
+                                        CardMonthInputFormatter()
+                                      ],
+                                      decoration: InputDecoration(
+                                        fillColor: Colors.white,
+                                        hoverColor: Colors.white,
+                                        border: const UnderlineInputBorder(),
+                                        filled: true,
+                                        icon: Image.asset(
+                                          'assets/icons/icone-setting-21.png',
+                                          width: 25,
+                                          color: Colors.grey[600],
+                                        ),
+                                        hintText: 'MM/YY',
+                                        labelText: 'Expiry Date',
+                                      ),
+                                      validator: CardUtils.validateDate,
+                                      keyboardType: TextInputType.number,
+                                      onSaved: (value) {
+                                        List<int> expiryDate =
+                                            CardUtils.getExpiryDate(value);
+                                        _paymentCard.month = expiryDate[0];
+                                        _paymentCard.year = expiryDate[1];
+                                      },
+                                      controller: _expDateController,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            new SizedBox(
+                              height: 30.0,
+                            ),
+                            ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: containers.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return containers[index];
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            BlocProvider(
+                              create: (context) =>
+                                  KiwiContainer().resolve<PaymentBloc>(),
+                              child: BlocBuilder<PaymentBloc, PaymentState>(
+                                  builder: (context, state) {
+                                if (state is PaymentInitial) {
+                                  BlocProvider.of<PaymentBloc>(context)
+                                      .add(GetUserPayment());
 
-                   SizedBox(
-                    height: 30.0,
-                  ),
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                } else if (state is GetUserPaymentModel) {
+                                  return Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 20, 20, 0),
+                                      child: Column(
+                                        children: [
+                                          ListView.builder(
+                                              scrollDirection: Axis.vertical,
+                                              shrinkWrap: true,
+                                              itemCount: state
+                                                  .fetchCardDetailsModel
+                                                  .getCardDetails
+                                                  .length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 15.0),
+                                                  child: Container(
+                                                      height: 100,
+                                                      width: 380,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors
+                                                              .deepPurple[50],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      20.0)),
+                                                      child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .fromLTRB(
+                                                                  20,
+                                                                  20,
+                                                                  10,
+                                                                  0),
+                                                          child:
+                                                              Column(children: [
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Text(
+                                                                  'Visa Card',
+                                                                  style: MaaruStyle
+                                                                      .text
+                                                                      .tiniest,
+                                                                ),
+                                                                Text(
+                                                                  'Primary Payment',
+                                                                  style: MaaruStyle
+                                                                      .text
+                                                                      .greyDisable,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 20,
+                                                            ),
+                                                            Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            0),
+                                                                child: Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topLeft,
+                                                                  child: Text(
+                                                                    '************${state.fetchCardDetailsModel.getCardDetails[index].cardNumber.substring(state.fetchCardDetailsModel.getCardDetails[index].cardNumber.length - 4)}',
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .start,
+                                                                    style: MaaruStyle
+                                                                        .text
+                                                                        .tiny,
+                                                                  ),
+                                                                ))
+                                                          ]))),
+                                                );
+                                              }),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          Container(
+                                              height: 100,
+                                              width: 380,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                  border: Border.all(
+                                                      color: Colors.grey[100])),
+                                              child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          20, 20, 10, 0),
+                                                  child: Column(children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          'Discover Card',
+                                                          style: MaaruStyle
+                                                              .text.greyDisable,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                right: 150),
+                                                        child: Text(
+                                                          '**** **** **** 9877',
+                                                          style: MaaruStyle
+                                                              .text.greyDisable,
+                                                        ))
+                                                  ]))),
+                                          const SizedBox(
+                                            height: 30,
+                                          ),
+                                          // Row(
+                                          //   children: [
+                                          //     Padding(
+                                          //         padding:
+                                          //             const EdgeInsets
+                                          //                     .only(
+                                          //                 left: 10,
+                                          //                 top: 0),
+                                          //         child: CircleAvatar(
+                                          //           backgroundColor:
+                                          //               Colors.grey[100],
+                                          //           radius: 25,
+                                          //           child: Icon(
+                                          //             Icons.add,
+                                          //             color: MaaruColors
+                                          //                 .buttonColor,
+                                          //             size: 25,
+                                          //           ),
+                                          //         )),
+                                          //     InkWell(
+                                          //         onTap: () async {
+                                          //           !_status;
+                                          //           setState(() =>
+                                          //               containers.add(
+                                          //                   createContainer()));
+                                          //         },
+                                          //         child: Text(
+                                          //           '   Add New Card',
+                                          //           style: MaaruStyle
+                                          //               .text.mediumGreen,
+                                          //         ))
+                                          //   ],
+                                          // ),
+                                          const SizedBox(
+                                            height: 30.0,
+                                          ),
+                                          Container(
+                                              alignment: Alignment.center,
+                                              child: ThemedButton(
+                                                text: 'Update Payment',
+                                                enabled: true,
+                                                onPressed: () {
+                                                  final FormState form =
+                                                      _formKey.currentState;
+                                                  if (!form.validate()) {
+                                                    setState(() {
+                                                      _autoValidateMode =
+                                                          AutovalidateMode
+                                                              .always; // Start validating on every change.
+                                                    });
+                                                    _showInSnackBar(
+                                                        'Please fix the errors in red before submitting.');
+                                                  } else {
+                                                    form.save();
+                                                    MyStatefulWidget();
+                                                    //    Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
+                                                    //  MyStatefulWidget();
+                                                    BlocProvider.of<
+                                                                PaymentBloc>(
+                                                            context)
+                                                        .add(savePayment(
+                                                            _cvvController.text,
+                                                            _creditCardNumberController
+                                                                .text,
+                                                            _cvvController.text,
+                                                            _expDateController
+                                                                .text));
 
-                  new SizedBox(
-                    height: 50.0,
-                  ),
-                  new Container(
-                    alignment: Alignment.center,
-                    child: _getPayButton(),
-                  )
-                ],
-              )),
-        ));
+                                                    // Encrypt and send send payment details to payment gateway
+                                                    _showInSnackBar(
+                                                        'Payment card is valid');
+                                                  }
+                                                },
+                                              )),
+                                          const SizedBox(
+                                            height: 20,
+                                          )
+                                        ],
+                                      ));
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                                ;
+                              }),
+                            )
+                          ])));
+                }))));
   }
 
   @override
@@ -705,6 +1016,14 @@ class _PaymentScreen1State extends State<PaymentScreen1>
       _showInSnackBar('Please fix the errors in red before submitting.');
     } else {
       form.save();
+      Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
+      MyStatefulWidget();
+      BlocProvider.of<PaymentBloc>(context).add(savePayment(
+          _nameOnCardController.text,
+          _creditCardNumberController.text,
+          _expDateController.text,
+          _cvvController.text));
+
       // Encrypt and send send payment details to payment gateway
       _showInSnackBar('Payment card is valid');
     }
@@ -712,21 +1031,16 @@ class _PaymentScreen1State extends State<PaymentScreen1>
 
   Widget _getPayButton() {
     if (Platform.isIOS) {
-      return  FlatButton(
+      return ThemedButton(
+        text: 'Update Payment',
         onPressed: _validateInputs,
-       // color: CupertinoColors.activeBlue,
-        child: const Text(
-          Strings.pay,
-          style: const TextStyle(fontSize: 17.0),
-        ),
+        enabled: true,
       );
     } else {
-      return new ElevatedButton(
+      return ThemedButton(
+        text: 'Update Payment',
         onPressed: _validateInputs,
-        child: new Text(
-          Strings.pay.toUpperCase(),
-          style: const TextStyle(fontSize: 17.0),
-        ),
+        enabled: true,
       );
     }
   }
@@ -737,6 +1051,7 @@ class _PaymentScreen1State extends State<PaymentScreen1>
       duration: new Duration(seconds: 3),
     ));
   }
+
   _removeWidget() {
     if (containers.length > 0) {
       containers.removeLast();

@@ -141,7 +141,8 @@ class _UpcomingAppointmentCalenderState
                                         borderRadius: BorderRadius.circular(20),
                                         color: Colors.white,
                                       ),
-                                        child: Image.network(state.getProviderRequestModel.appointmentRequests[index].userImg.toString(),
+                                        child: Image.network('',
+                                            //state.getProviderRequestModel.appointmentRequests[index].userImg.toString(),
                                             errorBuilder: (context, error, stackTrace) {
                                               return Container(
 

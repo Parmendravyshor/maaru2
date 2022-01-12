@@ -60,12 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => ViewPetProfile()));
-                                },
-                                child: HorizList()),
+
+                              HorizList(),
                             SizedBox(
                               height: size.height * 0.03,
                             ),
@@ -89,156 +85,171 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return CircularProgressIndicator();
                                   } else if (state
                                       is FetchUpcomingAppointmentModelData) {
-                                    return
-                                      StreamBuilder<FetchUpcomingAppointmentModelData>(
-
+                                    return StreamBuilder<
+                                            FetchUpcomingAppointmentModelData>(
                                         stream: null,
                                         builder: (context, snapshot) {
-                                          if(snapshot.hasData){
+                                          if (snapshot.hasData) {
                                             var abc2 = [];
 
                                             for (int i = 0;
-                                            i <=
-                                                state.upcomingPastAppointmentModel.upcomingBookings
-                                                    .length -
-                                                    1;
-                                            i++) {
+                                                i <=
+                                                    state
+                                                            .upcomingPastAppointmentModel
+                                                            .upcomingBookings
+                                                            .length -
+                                                        1;
+                                                i++) {
                                               abc2.add(state
-                                                  .upcomingPastAppointmentModel.upcomingBookings[i]
-                                                 );
+                                                  .upcomingPastAppointmentModel
+                                                  .upcomingBookings[i]);
                                             }
 
-                                          return Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                10, 20, 20, 20),
-                                            child: Container(
-                                                //  height: size.height*0.30,
-                                                width: size.width * 1,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: MaaruColors
-                                                            .textfeildline)),
+                                            return Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        10, 20, 20, 20),
                                                 child: Container(
-                                                    margin:
-                                                        const EdgeInsets.all(10),
-                                                    child: Row(children: [
-                                                      Expanded(
-                                                          child: Container(
-                                                        width: 100,
-                                                        decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  20),
-                                                          color: Colors.white,
-                                                        ),
-                                                        child: Image.asset(
-                                                          'assets/images/kutta.png',
-                                                          height: 100,
-                                                        ),
-                                                      )),
-                                                      SizedBox(
-                                                        width: 20,
-                                                      ),
-                                                      
-                                                      Container(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            if(state.upcomingPastAppointmentModel.upcomingBookings.first.serviceName.isEmpty)
-
-                                                            Text(''
-
-                                                               ,
-                                                                style: MaaruStyle
-                                                                    .text.tiny,
-
+                                                    //  height: size.height*0.30,
+                                                    width: size.width * 1,
+                                                    decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                            color: MaaruColors
+                                                                .textfeildline)),
+                                                    child: Container(
+                                                        margin: const EdgeInsets
+                                                            .all(10),
+                                                        child: Row(children: [
+                                                          Expanded(
+                                                              child: Container(
+                                                            width: 100,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20),
+                                                              color:
+                                                                  Colors.white,
                                                             ),
-                                                            Text(
-                                                                state
-                                                                    .upcomingPastAppointmentModel
-                                                                    .upcomingBookings.firstWhere((element) => Text('ssss')as bool)
-
-                                                                    .serviceName
-                                                                    .toString(),
-                                                                style: MaaruStyle
-                                                                    .text.medium),
-                                                            const SizedBox(
-                                                              height: 5,
+                                                            child: Image.asset(
+                                                              'assets/images/kutta.png',
+                                                              height: 100,
                                                             ),
-                                                            Text(
-                                                              state
-                                                                  .upcomingPastAppointmentModel
-                                                                  .upcomingBookings[
-                                                                      0]
-                                                                  .companyState
-                                                                  .toString(),
-                                                              style:
-                                                                  const TextStyle(
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      fontSize: 11),
-                                                            ),
-                                                            Text(
-                                                              '${state.upcomingPastAppointmentModel.upcomingBookings[0].companyZipCode.toString()}${state.upcomingPastAppointmentModel.upcomingBookings[0].companyCity.toString()}',
-                                                              style:
-                                                                  const TextStyle(
-                                                                      color: Colors
-                                                                          .grey,
-                                                                      fontSize: 11),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                          //width: 40,
+                                                          )),
+                                                          SizedBox(
+                                                            width: 20,
                                                           ),
-                                                      Container(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .end,
-                                                          children:  [
-                                                            const Icon(
-                                                              Icons
-                                                                  .calendar_today_outlined,
-                                                              size: 22,
-                                                              color: Colors.yellow,
-                                                            ),
-                                                            const SizedBox(
-                                                              height: 36,
-                                                            ),
-                                                            Text(
-                                                              state
-                                                                  .upcomingPastAppointmentModel
-                                                                  .upcomingBookings.first
-
-                                                                  .bookingDate
-                                                                  .toString(),
-                                                              style:
-                                                                  const TextStyle(
+                                                          Container(
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                if (state
+                                                                    .upcomingPastAppointmentModel
+                                                                    .upcomingBookings
+                                                                    .first
+                                                                    .serviceName
+                                                                    .isEmpty)
+                                                                  Text(
+                                                                    '',
+                                                                    style: MaaruStyle
+                                                                        .text
+                                                                        .tiny,
+                                                                  ),
+                                                                Text(
+                                                                    state
+                                                                        .upcomingPastAppointmentModel
+                                                                        .upcomingBookings
+                                                                        .firstWhere((element) =>
+                                                                            Text('ssss')
+                                                                                as bool)
+                                                                        .serviceName
+                                                                        .toString(),
+                                                                    style: MaaruStyle
+                                                                        .text
+                                                                        .medium),
+                                                                const SizedBox(
+                                                                  height: 5,
+                                                                ),
+                                                                Text(
+                                                                  state
+                                                                      .upcomingPastAppointmentModel
+                                                                      .upcomingBookings[
+                                                                          0]
+                                                                      .companyState
+                                                                      .toString(),
+                                                                  style: const TextStyle(
                                                                       color: Colors
                                                                           .grey,
-                                                                      fontSize: 11),
+                                                                      fontSize:
+                                                                          11),
+                                                                ),
+                                                                Text(
+                                                                  '${state.upcomingPastAppointmentModel.upcomingBookings[0].companyZipCode.toString()}${state.upcomingPastAppointmentModel.upcomingBookings[0].companyCity.toString()}',
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      fontSize:
+                                                                          11),
+                                                                ),
+                                                              ],
                                                             ),
-                                                            Text(
-                                                            state.upcomingPastAppointmentModel.upcomingBookings[0].bookingTime,
-                                                              style: const TextStyle(
-                                                                  fontSize: 13,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                          ),
+                                                          const SizedBox(
+                                                              //width: 40,
+                                                              ),
+                                                          Container(
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                const Icon(
+                                                                  Icons
+                                                                      .calendar_today_outlined,
+                                                                  size: 22,
+                                                                  color: Colors
+                                                                      .yellow,
+                                                                ),
+                                                                const SizedBox(
+                                                                  height: 36,
+                                                                ),
+                                                                Text(
+                                                                  state
+                                                                      .upcomingPastAppointmentModel
+                                                                      .upcomingBookings
+                                                                      .first
+                                                                      .bookingDate
+                                                                      .toString(),
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .grey,
+                                                                      fontSize:
+                                                                          11),
+                                                                ),
+                                                                Text(
+                                                                  state
+                                                                      .upcomingPastAppointmentModel
+                                                                      .upcomingBookings[
+                                                                          0]
+                                                                      .bookingTime,
+                                                                  style: const TextStyle(
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ],
                                                             ),
-                                                          ],
-                                                        ),
-                                                      )
-                                                    ]))));}
-                                          else{
+                                                          )
+                                                        ]))));
+                                          } else {
                                             return const Text('No Data  Found');
                                           }
-                                        }
-                                      );
+                                        });
                                   } else {
                                     return CircularProgressIndicator();
                                   }
@@ -351,8 +362,12 @@ class _HomeScreenState extends State<HomeScreen> {
     ]);
   }
 }
+
 class HorizList extends StatefulWidget {
+  final int id;
   bool aet;
+
+   HorizList({Key key, this.id}) : super(key: key);
   @override
   State<HorizList> createState() => _HorizListState();
 }
@@ -430,8 +445,7 @@ class _HorizListState extends State<HorizList> {
                                   onTap: () {
                                     setState(() {
                                       BlocProvider.of<PetProfileBloc>(context)
-                                          .add(GetCovidList(
-                                              'ddd'));
+                                          .add(GetCovidList('ddd'));
                                     });
                                   },
                                   child: Image.asset(
@@ -449,118 +463,121 @@ class _HorizListState extends State<HorizList> {
                           },
                           controller: _petNameController,
                         )),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
                         height: size.height * 0.27,
                         child: ListView.builder(
-                          itemCount: state.covidModel.petProfiles.length,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                                padding: index == Message.length - 1
-                                    ? const EdgeInsets.fromLTRB(8, 0, 8, 0)
-                                    : const EdgeInsets.only(left: 8, right: 8),
-                                child: InkWell(
-                                    onTap: () {
-                                      _prefHelper.saveInt('id',state.covidModel.petProfiles[index].id );
-                                      //state.covidModel.petProfiles[index].id;
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (_) =>
-                                                  ViewPetProfile()));
-
-                                    },
-                                    child: 
-                                    Container(
-                                        alignment: FractionalOffset.topLeft,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          border: Border.all(
-                                              color: Colors.grey[300],
-                                              width: 1.0),
-                                        ),
-                                        width: size.width * 0.44,
-
-                                        child: Column(children: [
-                                         Container(
-
-                                           child: Image.network(state.covidModel.petProfiles[index].img.toString(),
-                                            height: 140    ,
-                                               width: 180,
-                                            fit: BoxFit.fitWidth,
-                                            errorBuilder: (context, error, stackTrace) {
-                                              return Container(
-                                                  color: Colors.amber,
-                                                  alignment: Alignment.center,
-                                                  child:
-                                                  Expanded(child: Image.asset('assets/images/kutta.png')));
-                                            }),
-                                         ),
-                                          Container(
-                                              height: size.height * 0.09,
-                                              margin: EdgeInsets.only(
-                                                  left: 10, right: 10),
-                                              child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
+                            itemCount: state.covidModel.petProfiles.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                  padding: index == Message.length - 1
+                                      ? const EdgeInsets.fromLTRB(8, 0, 8, 0)
+                                      : const EdgeInsets.only(
+                                          left: 8, right: 8),
+                                  child: InkWell(
+                                      onTap: () {
+                                      var a =   _prefHelper.saveInt(
+                                            'id',
+                                            state.covidModel.petProfiles[index]
+                                                .id);
+                                        //state.covidModel.petProfiles[index].id;
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    ViewPetProfile(id1:state.covidModel.petProfiles[index].id)));
+                                      },
+                                      child: Container(
+                                          alignment: FractionalOffset.topLeft,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            border: Border.all(
+                                                color: Colors.grey[300],
+                                                width: 1.0),
+                                          ),
+                                          width: size.width * 0.44,
+                                          child: Column(children: [
+                                            Container(
+                                              child: Image.network(
+                                                  state.covidModel
+                                                      .petProfiles[index].img
+                                                      .toString(),
+                                                  height: 140,
+                                                  width: 180,
+                                                  fit: BoxFit.fitWidth,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                return Container(
+                                                    color: Colors.amber,
+                                                    alignment: Alignment.center,
+                                                    child: Expanded(
+                                                        child: Image.asset(
+                                                            'assets/images/kutta.png')));
+                                              }),
+                                            ),
+                                            Container(
+                                                height: size.height * 0.09,
+                                                margin: EdgeInsets.only(
+                                                    left: 10, right: 10),
+                                                child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                              state
+                                                                  .covidModel
+                                                                  .petProfiles[
+                                                                      index]
+                                                                  .petName
+                                                                  .toString(),
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                textStyle:
+                                                                    MaaruStyle
+                                                                        .text
+                                                                        .tiny,
+                                                              )),
+                                                          Image.asset(
+                                                            'assets/icons/icone-setting-31.png',
+                                                            width: 25,
+                                                          )
+                                                        ],
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  right: 70),
+                                                          child: Text(
                                                             state
                                                                 .covidModel
                                                                 .petProfiles[
                                                                     index]
-                                                                .petName
+                                                                .breedType
                                                                 .toString(),
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              textStyle:
-                                                                  MaaruStyle
-                                                                      .text
-                                                                      .tiny,
-                                                            )),
-                                                        Image.asset(
-                                                          'assets/icons/icone-setting-31.png',
-                                                          width: 25,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                right: 70),
-                                                        child: Text(
-                                                          state
-                                                              .covidModel
-                                                              .petProfiles[
-                                                                  index]
-                                                              .breedType
-                                                              .toString(),
-                                                          style: MaaruStyle
-                                                              .text.tiny,
-                                                        ))
-                                                  ])
-                                              // alignment: Alignment.center,
-                                              )
-                                        ]))));
-                          }
-                        ))
-
+                                                            style: MaaruStyle
+                                                                .text.tiny,
+                                                          ))
+                                                    ])
+                                                // alignment: Alignment.center,
+                                                )
+                                          ]))));
+                            }))
                   ]),
                 );
-
               } else {
                 return const Center(child: CircularProgressIndicator());
               }
-
             })));
   }
 }

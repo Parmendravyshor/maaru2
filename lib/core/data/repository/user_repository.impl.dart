@@ -295,7 +295,7 @@ class UserRepositoryImpl implements UserRepository {
 //TODO: Ricky
 
   @override
-  Future<Either<Failure, Welcome>> getPetProfile(text) async {
+  Future<Either<Failure, Welcome>> getPetProfile(String text) async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -305,8 +305,7 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
 
       final response = await http.get(
-          Uri.parse(
-              'http://18.191.199.31/api/pets?pet_name=${text}'),
+          Uri.parse('http://18.191.199.31/api/pets?pet_name=${text}'),
           headers: headers);
 
       var data = convert.jsonDecode(response.body);
@@ -355,11 +354,12 @@ class UserRepositoryImpl implements UserRepository {
         "",
       );
       var headers = {"access-token": token};
-      final response =
-          await http.get(Uri.parse('http://18.191.199.31/api/user/get-user'), headers: headers);
+      final response = await http.get(
+          Uri.parse('http://18.191.199.31/api/user/get-user'),
+          headers: headers);
       var data = convert.jsonDecode(response.body);
 
-   print(data);
+      print(data);
 
       return Right(GetUserProfileMOdel.fromJson(data));
     } catch (e) {
@@ -548,9 +548,28 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> getUserPayment() {
-    // TODO: implement getUserPayment
-    throw UnimplementedError();
+  Future<Either<Failure, FetchCardDetailsModel>> getUserPayment() async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+
+      final response = await http.get(
+        MaruConstant.saveUserPayment,
+        headers: headers,
+      );
+
+      var data = convert.jsonDecode(response.body);
+
+      print(data);
+
+      return Right(FetchCardDetailsModel.fromJson(data));
+    } catch (e) {
+      print("Thrown Exception While signing IN:$e");
+      throw e;
+    }
   }
 
   @override
@@ -562,21 +581,18 @@ class UserRepositoryImpl implements UserRepository {
       );
 
       var headers = {"access-token": token};
-      var map = Map<String, String>();
-      map['bank_name'] = params.creditCardNumber;
-      map['card_holder_name'] = params.nameOnCard;
-      map['card_number'] = params.cvv;
-      map['expiration_date'] = params.expDate;
+      var map = Map<String, dynamic>();
+      map['bank_name'] = '';
+      map['card_holder_name'] = params.cardHolderName;
+      map['card_number'] = params.cardNumber.replaceAll(' ', '');
+      map['expiration_date'] = params.expirationDate;
+
       final response = await http.post(MaruConstant.saveUserPayment,
           headers: headers, body: map);
       print("Register Success  ${response.body}");
-print(map);
-      if (response.statusCode == 200) {
-        sharedPrefHelper.saveIdJwtToken(
-          MaruConstant.token,
-        );
-        return Right(Void);
-      }
+      print(map);
+
+      return Right(Void);
     } catch (e) {
       print("Thrown Exception While signing IN:$e");
       throw e;
@@ -644,6 +660,7 @@ print(map);
       throw e;
     }
   }
+
   @override
   Future<Either<Failure, void>> createUserProfile(UserProfile1 params) {
     // TODO: implement createUserProfile
@@ -793,7 +810,8 @@ print(map);
   }
 
   @override
-  Future<Either<Failure, GetProviderRequestModel>> getProviderRequest(SearchRequestProviderParams params) async {
+  Future<Either<Failure, GetProviderRequestModel>> getProviderRequest(
+      SearchRequestProviderParams params) async {
     try {
       print('dddd${params.service}');
       print('dddd${params.name}');
@@ -805,30 +823,34 @@ print(map);
         "",
       );
       var headers = {"access-token": token};
-      final response =
-          await http.get(Uri.parse('http://18.191.199.31/api/bookings/appointment-requests?name=${params.name}&service=${params.service}&provider=${params.provider}&date=${params.date}&page=1&limit=10'), headers: headers);
+      final response = await http.get(
+          Uri.parse(
+            'http://18.191.199.31/api/bookings/appointment-requests?name=${params.name}&service=${params.service}&provider=${params.provider}&date=${params.date}&page=1&limit=100'),
+          headers: headers);
       print(response.body);
       var data = convert.jsonDecode(response.body);
       print(data);
       return Right(GetProviderRequestModel.fromJson(data));
     } catch (e) {
-      print('ddddd$e');
+      print('get requet error $e');
       return Left(ApiFailure(e.toString()));
     }
   }
 
   @override
-  Future<Either<Failure, Welcome2>> getSinglePetProfile() async {
+  Future<Either<Failure, Welcome2>> getSinglePetProfile(int id1) async {
     try {
+      print('sssssr$id');
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
         "",
       );
-      print(token);
+
       var headers = {"access-token": token};
-      int id;
-      final response =
-          await http.get(Uri.parse('http://18.191.199.31/api/pets/${_prefHelper.getIntByKey('id', id)}'), headers: headers);
+
+      final response = await http.get(
+          Uri.parse('http://18.191.199.31/api/pets/$id1'),
+          headers: headers);
 //print(response.body);
       var data = convert.jsonDecode(response.body);
       print(response.body);
@@ -992,6 +1014,46 @@ print(map);
         print(e);
         return Left(UserNotConfirmedFailure(e.message));
         print(e);
+      } else {
+        print(e);
+        return Left(CacheFailure(e.message));
+      }
+    } catch (e) {
+      print(e);
+      return Left(CacheFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> doPayment(PaymentParams params) async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+
+      final response = await http.post(
+          Uri.parse(
+            'http://18.191.199.31/api/user/payment',
+          ),
+          headers: headers,
+          body: {
+            'account_no': params.cardNumber,
+            'exp_month': params.exp_month,
+            'exp_year': params.exp_year,
+            'cvc': params.cvc,
+            'amount': params.amount,
+            'description': params.description
+          });
+
+      print(response.body);
+      return Right(Void);
+    } on CognitoClientException catch (e) {
+      print(e);
+      if (e.code == 'UserNotConfirmedException') {
+        print(e);
+        return Left(UserNotConfirmedFailure(e.message));
       } else {
         print(e);
         return Left(CacheFailure(e.message));

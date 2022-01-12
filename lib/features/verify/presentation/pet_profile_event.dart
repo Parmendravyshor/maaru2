@@ -23,6 +23,7 @@ class ProfileOpened extends PetProfileEvent {
   @override
   String toString() => "ProfileOpened";
 }
+
 class GetProfileOpened extends PetProfileEvent {
   GetProfileOpened();
 
@@ -188,8 +189,9 @@ final String text;
 }
 
 class GetSinglePRof extends PetProfileEvent {
-  @override
-  String toString() => "GetSinglePRof";
+ final int id;
+
+  GetSinglePRof(this.id);
 }
 class GetSinglePRovider extends PetProfileEvent {
   @override
@@ -264,16 +266,7 @@ class RegisterUser extends PetProfileEvent {
   @override
   String toString() => "SubmitProfileTapped";
 }
-class savePayment extends PetProfileEvent {
-  final String nameOnCard;
-  final String creditCardNumber;
-  final String expDate;
-  final String cvv;
-  savePayment(this.nameOnCard, this.creditCardNumber, this.expDate, this.cvv);
 
-  @override
-  String toString() => "savePayment";
-}
 class ChangePassword extends PetProfileEvent {
   final String oldPassword;
   final String newPasword;

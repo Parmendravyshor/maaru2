@@ -97,7 +97,8 @@ final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
       }, (r) async* {
         await getPetProfile1(text);
 
-        await getSinglePetProfile(NoParams());
+        int text1;
+        await getSinglePetProfile(text1);
         print("RAKA===============================================");
         print(result);
         print("RAKA===============================================");

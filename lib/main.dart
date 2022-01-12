@@ -73,7 +73,6 @@ import 'features/Home/presentation/home_sceen.dart';
 import 'features/Home/presentation/pet_profile.dart';
 import 'features/Home/presentation/search_screen.dart';
 
-
 import 'features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'features/login/presentation/bloc/bloc/login_state.dart';
 
@@ -158,7 +157,7 @@ class MyApp extends StatelessWidget {
         theme: theme,
         //todo: navigate to SplashScreen
 
-        home: Scaffold(body: (HomeScreen())));
+        home: Scaffold(body: (SplashScreen())));
   }
 }
 
@@ -596,276 +595,272 @@ class _MapViewState extends State<MapView> {
     super.initState();
     _getCurrentLocation();
   }
+
   String text = '';
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Container(
-        height: height,
-        width: width,
-        child: Scaffold(
-          
-            floatingActionButton: Padding(
-              padding: EdgeInsets.only(bottom: 20, left: 40),
-              child: Container(
-                decoration: BoxDecoration(
+      height: height,
+      width: width,
+      child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          floatingActionButton: Padding(
+            padding: EdgeInsets.only(bottom: 20, left: 40),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: MaaruColors.darkGrey2,
+                  border: Border.all(
                     color: MaaruColors.darkGrey2,
-                    border: Border.all(
-                      color: MaaruColors.darkGrey2,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                height: 140,
-                child: Center(
-                  child: Column(children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.only(top: 10),
-                      child: Column(children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => ProviderProfile1()));
-                          },
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: 40,
-                                  child: Image.network(
-                                      'https://www.mockofun.com/wp-content/uploads/2019/12/circle-photo.jpg'),
-                                ),
-                                Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Austin Pet Groomer',
-                                        style: MaaruStyle.text.medium,
-                                      ),
-                                      const SizedBox(
-                                        width: 30,
-                                      ),
-                                      Text(
-                                        '781 Lufes Highway',
-                                        style: MaaruStyle.text.greyDisable,
-                                      ),
-                                      Text('Austin, Texas 75483',
-                                          style: MaaruStyle.text.greyDisable),
-                                    ]),
-                                Column(
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              height: 140,
+              child: Center(
+                child: Column(children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.only(top: 10),
+                    child: Column(children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => ProviderProfile1()));
+                        },
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 40,
+                                child: Image.network(
+                                    'https://www.mockofun.com/wp-content/uploads/2019/12/circle-photo.jpg'),
+                              ),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.star,
-                                          color:
-                                              MaaruColors.primaryColorsuggesion,
-                                        ),
-                                        Text('5')
-                                      ],
+                                    Text(
+                                      'Austin Pet Groomer',
+                                      style: MaaruStyle.text.medium,
                                     ),
                                     const SizedBox(
-                                      height: 50,
-                                    )
-                                  ],
-                                ),
-                              ]),
-                        ),
-                      ]),
-                    ),
-                  ]),
-                ),
-              ),
-            ),
-            key: _scaffoldKey,
-            body: Stack(
-                 fit: StackFit.loose,
-             alignment: AlignmentDirectional.topStart,
-                children: <Widget>[
-              // Map View
-              GoogleMap(
-                markers: Set<Marker>.from(markers),
-                initialCameraPosition: _initialLocation,
-                myLocationEnabled: true,
-                myLocationButtonEnabled: false,
-                mapType: MapType.normal,
-                zoomGesturesEnabled: true,
-                zoomControlsEnabled: false,
-                polylines: Set<Polyline>.of(polylines.values),
-                onMapCreated: (GoogleMapController controller) {
-                  mapController = controller;
-                },
-              ),
-
-              // Show zoom buttons
-      BlocProvider(
-          create: (context) =>
-              KiwiContainer().resolve<LoginBloc>(),
-          child: BlocBuilder<LoginBloc, LoginState>(
-              builder: (context, state) {
-                if (state is LoginInitial) {
-                  String text;
-                  BlocProvider.of<LoginBloc>(context)
-                      .add(event.GetProvider(text));
-                  print('figffgfg${text}');
-                  return CircularProgressIndicator();
-                } else if (state is ProviderLoaded1) {
-                  // AnimatedElevationButton()),
-                  return
-              Column(
-
-                    children: <Widget>[
-                      SafeArea(
-                        child:
-                     Container(
-                       alignment: Alignment.topLeft,
-                            decoration: const BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(
-                                  20.0,
-                                ),
-                              ),
-                            ),
-                            //  width: width * 0.9,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 0.0, bottom: 10.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  // ,  Text(
-                                  //     'Places',
-                                  //     style: TextStyle(fontSize: 20.0),
-                                  //   )
-                                  const SizedBox(height: 10),
-                                  _textField(
-                                      label: 'Start',
-                                      hint: 'Choose starting point',
-                                      suffixIcon: IconButton(
-                                        icon: const Icon(Icons.my_location),
-                                        onPressed: _getCurrentLocation,
+                                      width: 30,
+                                    ),
+                                    Text(
+                                      '781 Lufes Highway',
+                                      style: MaaruStyle.text.greyDisable,
+                                    ),
+                                    Text('Austin, Texas 75483',
+                                        style: MaaruStyle.text.greyDisable),
+                                  ]),
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.star,
+                                        color:
+                                            MaaruColors.primaryColorsuggesion,
                                       ),
-                                      prefixIcon: IconButton(
-                                        icon: const Icon(Icons.search),
-                                        onPressed: () {
-                                          startAddressController.text =
-                                              _currentAddress;
-                                          _startAddress = _currentAddress;
-                                          mapController.animateCamera(
-                                            CameraUpdate.newCameraPosition(
-                                              CameraPosition(
-                                                target: LatLng(
-                                                  _currentPosition.latitude,
-                                                  _currentPosition.longitude,
-                                                ),
-                                                zoom: 18.0,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      controller: startAddressController,
-                                      focusNode: startAddressFocusNode,
-                                      width: width,
-                                      locationCallback: (String value) {
-                                        setState(() {
-                                          _startAddress = value;
-                                        });
-                                      }),
-
-                                  const SizedBox(
-                                    width: 10,
+                                      Text('5')
+                                    ],
                                   ),
-                                  InkWell(
-                                      onTap: () => Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (_) =>
-                                                  ProviderSearchScreen())),
-                                      child: Image.asset(
-                                        'assets/icons/scnd.png',
-                                        height: 40,
-                                      ))
+                                  const SizedBox(
+                                    height: 50,
+                                  )
                                 ],
                               ),
+                            ]),
+                      ),
+                    ]),
+                  ),
+                ]),
+              ),
+            ),
+          ),
+          key: _scaffoldKey,
+          body: Stack(
+              fit: StackFit.loose,
+              alignment: AlignmentDirectional.topStart,
+              children: <Widget>[
+                // Map View
+                GoogleMap(
+                  markers: Set<Marker>.from(markers),
+                  initialCameraPosition: _initialLocation,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  mapType: MapType.normal,
+                  zoomGesturesEnabled: true,
+                  zoomControlsEnabled: false,
+                  polylines: Set<Polyline>.of(polylines.values),
+                  onMapCreated: (GoogleMapController controller) {
+                    mapController = controller;
+                  },
+                ),
+                Center(
+                  child: BlocProvider(
+                      create: (context) => KiwiContainer().resolve<LoginBloc>(),
+                      child: BlocBuilder<LoginBloc, LoginState>(
+                          builder: (context, state) {
+                        if (state is LoginInitial) {
+                          String text;
+                          BlocProvider.of<LoginBloc>(context)
+                              .add(event.GetProvider(text));
+                          print('figffgfg${text}');
+                          return CircularProgressIndicator();
+                        } else if (state is ProviderLoaded1) {
+                          // AnimatedElevationButton()),
+                          return Column(children: <Widget>[
+                            SafeArea(
+                              child: Container(
+                                alignment: Alignment.topLeft,
+                                decoration: const BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(
+                                      20.0,
+                                    ),
+                                  ),
+                                ),
+                                //  width: width * 0.9,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 0.0, bottom: 10.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      // ,  Text(
+                                      //     'Places',
+                                      //     style: TextStyle(fontSize: 20.0),
+                                      //   )
+                                      const SizedBox(height: 10),
+                                      _textField(
+                                          label: 'Start',
+                                          hint: 'Choose starting point',
+                                          suffixIcon: IconButton(
+                                            icon: const Icon(Icons.my_location),
+                                            onPressed: _getCurrentLocation,
+                                          ),
+                                          prefixIcon: IconButton(
+                                            icon: const Icon(Icons.search),
+                                            onPressed: () {
+                                              startAddressController.text =
+                                                  _currentAddress;
+                                              _startAddress = _currentAddress;
+                                              mapController.animateCamera(
+                                                CameraUpdate.newCameraPosition(
+                                                  CameraPosition(
+                                                    target: LatLng(
+                                                      _currentPosition.latitude,
+                                                      _currentPosition.longitude,
+                                                    ),
+                                                    zoom: 18.0,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                          controller: startAddressController,
+                                          focusNode: startAddressFocusNode,
+                                          width: width,
+                                          locationCallback: (String value) {
+                                            setState(() {
+                                              _startAddress = value;
+                                            });
+                                          }),
+
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      InkWell(
+                                          onTap: () => Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      ProviderSearchScreen())),
+                                          child: Image.asset(
+                                            'assets/icons/scnd.png',
+                                            height: 40,
+                                          ))
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-
-                      const SizedBox(
-                        height: 10,
-                      ),
-
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      // BlocProvider.of<LoginBloc>(context)
-                                      //     .add(event.GetProvider(text));
-                                    });
-                                  },
-                                  child: InkWell(
-                                    onTap: (){
-                                      setState(() {
-                                       text = 'Grooming';
-                                        BlocProvider.of<LoginBloc>(context)
-                                            .add(event.GetProvider(text));
-                                      });
-                                    },
-                                    child:
-                                  Item('Grooming'),
-                                )),
-                                Item('Walking'),
-                                Item('Hotel'),
-                                Item('Vet')
-                              ],
-                            )),
-                      ),
-                      const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(40, 0, 10, 0),
-                        child:Stack(
-                children:[
-                        ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    itemCount: state.getProviderModel
-                                        .providersListing.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return
-                                      Container(
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              // BlocProvider.of<LoginBloc>(context)
+                                              //     .add(event.GetProvider(text));
+                                            });
+                                          },
+                                          child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                text = 'Grooming';
+                                                BlocProvider.of<LoginBloc>(
+                                                        context)
+                                                    .add(event.GetProvider(text));
+                                              });
+                                            },
+                                            child: Item('Grooming'),
+                                          )),
+                                      Item('Walking'),
+                                      Item('Hotel'),
+                                      Item('Vet')
+                                    ],
+                                  )),
+                            ),
+                            const SizedBox(height: 10),
+                            Padding(
+                                padding: const EdgeInsets.fromLTRB(40, 0, 10, 0),
+                                child: Stack(children: [
+                                  ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      itemCount: state.getProviderModel
+                                          .providersListing.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return Container(
                                           height: 300,
                                           alignment: Alignment.bottomRight,
-                                          padding: const EdgeInsets.fromLTRB(20, 180, 30, 10),
-                                          child: Text(state.getProviderModel.providersListing[index].description.toString()),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              20, 180, 30, 10),
+                                          child: Text(state.getProviderModel
+                                              .providersListing[index].description
+                                              .toString()),
                                           // Image.network(
                                           //  state.getProviderModel.providersListing[index].description.toString(),
                                           //  height: 60,
-                                          );
+                                        );
 
-                                      // RepeatContainer('assets/images/kutta.png',),
-                                    })]))]);
-                              } else {
-                                return CircularProgressIndicator();
-                              }
-                              ;
-                            })),
-    ])
-    ),
-
-            );
+                                        // RepeatContainer('assets/images/kutta.png',),
+                                      })
+                                ]))
+                          ]);
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+                        ;
+                      })),
+                ),
+              ])),
+    );
   }
 
   Widget Item(String text) {
@@ -1249,6 +1244,7 @@ class Secrets {
   // Add your Google Maps API Key here
   static const API_KEY = 'AIzaSyAcwOMoEO8-zDBVGzeGdPspSM3qJepJeUA';
 }
+
 class MapSample extends StatefulWidget {
   @override
   _MapSampleState createState() => _MapSampleState();
@@ -1375,7 +1371,7 @@ class _MapSampleState extends State<MapSample> {
 
     // Convert image to bytes
     final ByteData byteData =
-    await markerAsImage.toByteData(format: ui.ImageByteFormat.png);
+        await markerAsImage.toByteData(format: ui.ImageByteFormat.png);
     final Uint8List uint8List = byteData.buffer.asUint8List();
 
     return BitmapDescriptor.fromBytes(uint8List);
@@ -1411,7 +1407,7 @@ class _MapSampleState extends State<MapSample> {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: geolocator.LocationAccuracy.high);
     print("position position position:$position");
-   // context.read<HomeBloc>().add(UpdateUserLocation(position));
+    // context.read<HomeBloc>().add(UpdateUserLocation(position));
 
     return position;
   }
@@ -1425,7 +1421,7 @@ class _MapSampleState extends State<MapSample> {
 
   addMarkers() async {
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy:geolocator. LocationAccuracy.high);
+        desiredAccuracy: geolocator.LocationAccuracy.high);
     //  var icon = await getMarkerIcon("assets/users/DavidElks.png", Size(150.0, 150.0));
     BitmapDescriptor icon1 = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration.empty, "assets/64/CrystalGaskell.png");
@@ -1470,7 +1466,7 @@ class _MapSampleState extends State<MapSample> {
 
   getIcons() async {
     var icon =
-    await getMarkerIcon("assets/32/DavidElks.png", Size(150.0, 150.0));
+        await getMarkerIcon("assets/32/DavidElks.png", Size(150.0, 150.0));
     print(" icon  icon icon icon icon$icon");
     setState(() {
       icons = icon;
@@ -1494,14 +1490,12 @@ class _MapSampleState extends State<MapSample> {
           return BlocBuilder<PetProfileBloc, PetProfileState>(
             // buildWhen: (previous, current) => previous.status != current.status,
             builder: (context, state) {
-              return
-                   GoogleMap(
+              return GoogleMap(
                 zoomControlsEnabled: false,
                 mapType: MapType.normal,
 
                 initialCameraPosition: CameraPosition(
-                  target:
-                  LatLng(position.latitude, position.longitude),
+                  target: LatLng(position.latitude, position.longitude),
                   zoom: 15.4746,
                 ),
                 //  _kGooglePlex,

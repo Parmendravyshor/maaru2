@@ -19,6 +19,7 @@ import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.da
 import 'create_home_screen.dart';
 
 class PetProfile1 extends StatefulWidget {
+
   @override
   _PetProfile1State createState() => _PetProfile1State();
 }
@@ -161,7 +162,7 @@ class _PetProfile1State extends State<PetProfile1> {
                               onTap: () {
                                 _prefHelper.saveInt('id', state.covidModel.petProfiles[index].id);
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => ViewPetProfile()));
+                                    builder: (_) =>  ViewPetProfile(id1: state.covidModel.petProfiles[index].id,)));
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),

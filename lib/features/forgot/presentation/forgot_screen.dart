@@ -98,11 +98,11 @@ class ResetWidget extends State<ResetPasswordScreen> {
                               SizedBox(height: size.height*0.10,),
                               Text(
                                 'Forgot Your Password?',
-                                style: MaaruStyle.text.tiny,
+                                style: MaaruStyle.text.large,
                               ),
                               SizedBox(height: size.height*0.02,),
                               Text(
-                                'Enter your registered email below\nto receive password reset instruction',
+                                'Enter your registered email below\nto receive password reset instruction'.toUpperCase(),
                                 style: MaaruStyle.text.greyDisable,
                                 textAlign: TextAlign.center,
                               ),
@@ -143,7 +143,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Remember Password?',
+                                    'Remember Password? '.toUpperCase(),
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -233,7 +233,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                 height: 10,
                               ),
                               ThemedButton(
-                                  text: "Set New Password",
+                                  text: "Set New Password".toUpperCase(),
                                   onPressed: () {
                                     String otp = _otpController.text;
                                     String password =

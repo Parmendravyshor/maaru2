@@ -5,6 +5,7 @@ class ScreenIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final size=MediaQuery.of(context).size;
     return Container(
+
       margin: EdgeInsets.only(left: 25,right: 18),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

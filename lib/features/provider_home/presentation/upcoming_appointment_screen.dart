@@ -165,13 +165,13 @@ class _UpcomingAppointmentCalender1State
                                                 borderRadius:
                                                     BorderRadius.circular(20),
                                               ),
-                                              child: Image.network(
-                                                  state
-                                                      .getProviderRequestModel
-                                                      .appointmentRequests[
-                                                          index]
-                                                      .userImg
-                                                      .toString(),
+                                              child: Image.network('',
+                                                  // state
+                                                  //     .getProviderRequestModel
+                                                  //     .appointmentRequests[
+                                                  //         index]
+                                                  //     .userImg
+                                                  //     .toString(),
                                                   errorBuilder: (context, error,
                                                       stackTrace) {
                                                 return Container(

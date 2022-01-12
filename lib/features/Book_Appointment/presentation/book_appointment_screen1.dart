@@ -34,32 +34,36 @@ class _BookAppointment1State extends State<BookAppointment1> {
   Widget choosecontainer(
       BuildContext context, Image image, String text, Color color) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: MaaruColors.textfeildline,
-        ),
-        color: color,
-      ),
-      //  height: size.height * 0.10,
-      // width: size.width * 0.43,
+    return Padding(
+      padding: const EdgeInsets.only(bottom:15.0),
       child: Container(
-        width: 150,
 
-        margin: EdgeInsets.only(left: 12, top: 9, bottom: 9,right: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            image,
-            SizedBox(
-              width: size.width * 0.03,
-            ),
-            Text(
-              text,
-              style: MaaruStyle.text.tiny,
-            ),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: MaaruColors.textfeildline,
+          ),
+          color: color,
+        ),
+        //  height: size.height * 0.10,
+        // width: size.width * 0.43,
+        child: Container(
+          width: 150,
 
-          ],
+          margin: EdgeInsets.only(left: 12, top: 9, bottom: 9,right: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              image,
+              SizedBox(
+                width: size.width * 0.03,
+              ),
+              Text(
+                text,
+                style: MaaruStyle.text.tiny,
+              ),
+
+            ],
+          ),
         ),
       ),
     );
@@ -70,7 +74,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
     final size = MediaQuery.of(context).size;
     SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
     return Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
         bottomNavigationBar: CreateHomeScreen(
             // Color:MaaruColors.textButtonColor
@@ -101,126 +105,6 @@ class _BookAppointment1State extends State<BookAppointment1> {
                             width: 2000,
                             child: Image.network(
                               state.welcome4.providerDetails.provider.img,
-//
-//         body: SingleChildScrollView(
-//             child: Column(
-//           children: [
-//             Container(
-//               width: 2000,
-//               child: Image.asset('assets/images/imgdd.jpg'),
-//             ),
-//             Container(
-//
-//
-//               decoration: const BoxDecoration(color: Colors.white),
-//               width: size.width * 1,
-//
-//               child: Column(
-//                 children: [
-//                   Container(
-//                     margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-//
-//                     //height: size.height*0.80,
-//                     width: size.width * 1,
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         SizedBox(
-//                           height: size.height * 0.01,
-//                         ),
-//                         Row(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             Image.asset(
-//                               'assets/icons/Rectangle copy 3.png',
-//                               height: 40,
-//                               width: 40,
-//                             ),
-//                             SizedBox(
-//                               width: 10,
-//                             ),
-//                             InkWell(
-//                                 onTap: () {
-//                                   Navigator.of(context).push(MaterialPageRoute(
-//                                       builder: (_) => BookAppointment2()));
-//                                 },
-//                                 child: Image.asset(
-//                                   'assets/icons/icone-setting-68.png',
-//                                   height: 40,
-//                                   width: 40,
-//                                   color: Colors.grey[100],
-//                                 )),
-//                             SizedBox(
-//                               width: 10,
-//                             ),
-//                             InkWell(
-//                                 onTap: () {
-//                                   Navigator.of(context).push(MaterialPageRoute(
-//                                       builder: (_) =>
-//                                           BookAppointmentScreen3()));
-//                                 },
-//                                 child: Image.asset(
-//                                   'assets/icons/icone-setting-68.png',
-//                                   height: 40,
-//                                   width: 40,
-//                                   color: Colors.grey[100],
-//                                 )),
-//                           ],
-//                         ),
-//                         Row(
-//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                           children: [
-//                             Text(
-//                               'Austin Pet Groomer'.toUpperCase(),
-//                               style: MaaruStyle.text.xlarge,
-//                             ),
-//                             // SizedBox(
-//                             //   width: size.width * 0.16,
-//                             // ),
-//                             // Image.asset(
-//                             //   'assets/icons/New Project (2).png',
-//                             //   width: size.width * 0.10,
-//                             // )
-//                           ],
-//                         ),
-//                         Text(
-//                           '1115 Emihi Grove Austin, Textas 00000'.toUpperCase(),
-//                           style: MaaruStyle.text.medium,
-//                         ),
-//                         SizedBox(
-//                           height: size.height * 0.02,
-//                         ),
-//                         Row(
-//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                           children: [
-//                             Image.asset(
-//                               'assets/icons/container1.png',
-//                               //width: 180,
-//                               height: size.height * 0.09,
-//                             ),
-//                             Image.asset(
-//                               'assets/icons/container2.png',
-//                               //  width: 180,
-//                               height: size.height * 0.09,
-//                             ),
-//                           ],
-//                         ),
-//                         SizedBox(
-//                           height: size.height * 0.02,
-//                         ),
-//                         Row(
-//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                           children: [
-//                             Image.asset(
-//                               'assets/icons/container3.png',
-//                               // width: 150,
-//                               height: size.height * 0.09,
-//                             ),
-//                             Image.asset(
-//                               'assets/icons/container4.png',
-//                               // width: 150,
-//                               height: size.height * 0.09,
-// >>>>>>> f38077fb070e945e12e76eb4c96ccef8ae6ff65f
                             ),
                           ),
                           Container(
@@ -351,20 +235,21 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                   // SizedBox(
                                   //   height: size.height * 0.02,
                                   // ),
-                                  GridView.builder(
+                                  ListView.builder(
+                                    physics: const NeverScrollableScrollPhysics(),
                                       scrollDirection: Axis.vertical,
-                                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount  : 2 ,
-                                        mainAxisSpacing: 1,
-                                        crossAxisSpacing: 5.0,),
+                                    //  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                      semanticChildCount  : 2 ,
+
+                                     //   crossAxisSpacing: 1.0,),
 
                                       shrinkWrap: true,
                                       itemCount:
-                                          state.welcome4.masterServices.length,
+                                          state.welcome4.masterServices.length - 3,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Row(
-                                          mainAxisAlignment:
+                                         mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
 
@@ -389,6 +274,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                                   });
                                                 },
                                                 child: choosecontainer(
+
                                                     context,
                                                     Image.network(
                                                       state
@@ -402,41 +288,42 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                                         .masterServices[index]
                                                         .serviceType,
                                                     circlecolor3)),
-                                            // GestureDetector(
-                                            //     onTap: () {
-                                            //       setState(() {
-                                            //         circlecolor3 ==
-                                            //                 MaaruColors
-                                            //                     .hotelcolor
-                                            //             ? circlecolor3 =
-                                            //                 MaaruColors
-                                            //                     .hotelcolor
-                                            //             : circlecolor3 =
-                                            //                 MaaruColors
-                                            //                     .hotelcolor;
-                                            //         if (circlecolor3 ==
-                                            //             MaaruColors
-                                            //                 .hotelcolor) {
-                                            //           select = 'hotel';
-                                            //           print(select);
-                                            //         }
-                                            //       });
-                                            //     },
-                                            //     child: choosecontainer(
-                                            //         context,
-                                            //         Image.network(
-                                            //           state
-                                            //               .welcome4
-                                            //               .masterServices[index]
-                                            //               .serviceIcon,
-                                            //           height: 35,
-                                            //         ),
-                                            //         state
-                                            //             .welcome4
-                                            //             .masterServices[index]
-                                            //             .serviceType
-                                            //             .toString(),
-                                            //         circlecolor3)),
+
+                                            GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    circlecolor3 ==
+                                                            MaaruColors
+                                                                .hotelcolor
+                                                        ? circlecolor3 =
+                                                            MaaruColors
+                                                                .hotelcolor
+                                                        : circlecolor3 =
+                                                            MaaruColors
+                                                                .hotelcolor;
+                                                    if (circlecolor3 ==
+                                                        MaaruColors
+                                                            .hotelcolor) {
+                                                      select = 'hotel';
+                                                      print(select);
+                                                    }
+                                                  });
+                                                },
+                                                child: choosecontainer(
+                                                    context,
+                                                    Image.network(
+                                                      state
+                                                          .welcome4
+                                                          .masterServices[index]
+                                                          .serviceIcon,
+                                                      height: 35,
+                                                    ),
+                                                    state
+                                                        .welcome4
+                                                        .masterServices[index]
+                                                        .serviceType
+                                                        .toString(),
+                                                    circlecolor3)),
                                           ],
                                         );
                                       }),
@@ -451,7 +338,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                   //   height: size.height * 0.01,
                                   // ),
                                   Text(
-                                    'About',
+                                    'About'.toUpperCase(),
                                     style: MaaruStyle.text.tiniest,
                                   ),
                                   SizedBox(
@@ -465,7 +352,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                     height: 20,
                                   ),
                                   Text(
-                                    'Hours Of Operation',
+                                    'Hours Of Operation'.toUpperCase(),
                                     style: MaaruStyle.text.tiniest,
                                   ),
                                   const SizedBox(
@@ -475,7 +362,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text('monday-saturday',
+                                      Text('monday-saturday'.toUpperCase(),
                                           textAlign: TextAlign.start,
                                           style: MaaruStyle.text.greyDisable),
                                       Text('',
@@ -490,10 +377,10 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text('sunday',
+                                      Text('sunday'.toUpperCase(),
                                           textAlign: TextAlign.start,
                                           style: MaaruStyle.text.greyDisable),
-                                      Text('closed',
+                                      Text('closed'.toUpperCase(),
                                           style: MaaruStyle.text.tiniest),
                                     ],
                                   ),
@@ -507,7 +394,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                               builder: (_) =>
                                                   BookAppointmentScreen3()));
                                     },
-                                    text: ' Book Appointments',
+                                    text: ' Book Appointments'.toUpperCase(),
                                     enabled: true,
                                   ),
                                   // InkWell(

@@ -68,17 +68,18 @@ class _SplashScreenState extends State<SplashScreen> {
         print("token token token token :$token");
         int id;
 
-        var id1 = _prefHelper.getIntByKey('id', id);
-        print('checkid$id');
-        print('checkfor the id$id');
+  var id1 = _prefHelper.getIntByKey('id', id);
+  print('checkid$id');
+  print('checkfor the id$id');
 
-        if (id1.toString().isNotEmpty) {
-          print('id id id :$id');
-          return Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => HomeScreen()),
-              (route) => false);
-        }
-
+  if (id1
+      .toString()
+      .isNotEmpty) {
+    print('id id id :$id');
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+            (route) => false);
+  }
         var accessdeniedOrsuccess = _prefHelper.getStringByKey('is_verified', '');
          if(accessdeniedOrsuccess.isNotEmpty){
            Navigator.of(context).pushAndRemoveUntil(

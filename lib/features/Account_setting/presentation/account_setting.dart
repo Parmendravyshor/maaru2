@@ -119,9 +119,9 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   text: 'Payment',
                                   size: 130,
                                   onPressed: () {
-                                    // Navigator.of(context).push(
-                                    //     MaterialPageRoute(
-                                    //         builder: (_) => PaymentScreen()));
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (_) => PaymentScreen1()));
                                   },
                                 ),
                                 SizedBox(

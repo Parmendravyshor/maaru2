@@ -10,6 +10,7 @@ import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/data/repository/user_repository.impl.dart';
 import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/usecases/usecase.dart';
+import 'package:maru/features/Account_setting/domain/usecases/get_user_payment.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/verify/domain/usecases/change_password.dart';
@@ -29,7 +30,8 @@ part 'pet_profile_state.dart';
 class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
-  PetProfileBloc(this.getPetProfile,
+  PetProfileBloc(
+      this.getPetProfile,
       this.saveChangePassword,
       this.savePetProfile,
       this.saveUserProfile,
@@ -39,7 +41,8 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       this.uploadVaccineREcord,
       this.getProviders,
       this.getProviderById,
-      this._saveUserPayment)
+      this._saveUserPayment,
+      this._getUSerPayment)
       : super();
   final SharedPrefHelper sharedPrefHelper;
   final GetProviderById getProviderById;
@@ -52,14 +55,14 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
   final SaveUserProfile saveUserProfile;
   final SaveChangePassword saveChangePassword;
   final SaveUserPayment _saveUserPayment;
-
+  final GetUSerPayment _getUSerPayment;
   // int step = 1;
   String age = '';
   var petneed = '';
   String petName = "";
   String width = "";
   String hight = "";
-  var sex ='';
+  var sex = '';
   var birthdate = '';
   String breadtype = '';
   String img = '';
@@ -68,7 +71,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
   var note = '';
   var knownAllergies = '';
   var vaccine = '';
-var text2 ='';
+  var text2 = '';
   @override
   // TODO: implement initialState
   PetProfileState get initialState => PetProfileInitial();
@@ -88,9 +91,7 @@ var text2 ='';
       } else {
         yield RegisterFormValidationFailure();
       }
-    }
-
-    else if (event is AgeChanged) {
+    } else if (event is AgeChanged) {
       print('djdd');
       if (event.age.isNotEmpty) {
         age = event.age;
@@ -160,7 +161,6 @@ var text2 ='';
         yield RegisterFormValidationFailure();
       }
     } else if (event is SexChanged) {
-
       if (event.sex.isNotEmpty) {
         sex = event.sex;
       } else {
@@ -174,8 +174,7 @@ var text2 ='';
       } else {
         yield RegisterFormValidationFailure();
       }
-    }
-    else if (event is NoteChanged) {
+    } else if (event is NoteChanged) {
       print('note event');
       if (event.note.isNotEmpty) {
         note = event.note;
@@ -190,8 +189,7 @@ var text2 ='';
       } else {
         yield RegisterFormValidationFailure();
       }
-    }
-    else if (event is genderChanged) {
+    } else if (event is genderChanged) {
       print(event.gender);
       if (event.gender.isNotEmpty) {
         gender = event.gender;
@@ -206,8 +204,7 @@ var text2 ='';
       } else {
         yield RegisterFormValidationFailure();
       }
-    }
-    else if (event is PetNeed) {
+    } else if (event is PetNeed) {
       print('note event');
       if (event.petneed.isNotEmpty) {
         petneed = event.petneed;
@@ -222,8 +219,7 @@ var text2 ='';
       } else {
         yield RegisterFormValidationFailure();
       }
-    }
-    else if (event is CreateRegisterPetProfile) {
+    } else if (event is CreateRegisterPetProfile) {
       yield RegisterInProgress();
       final result = await createPetProfile(PetProfile1(
           age: age,
@@ -237,18 +233,16 @@ var text2 ='';
           gender: gender,
           notes: note,
           knownAllergies: knownAllergies,
-          vaccine: vaccine
-      ));
+          vaccine: vaccine));
       yield* result.fold((l) async* {
         yield RegisterFailure("Signup failed..please try again.. $l");
       }, (r) async* {
-       // await getPetProfile(text);
+        // await getPetProfile(text);
         ///  await savePetProfile(PetProfile());
 
         yield UserCreatePetProfileButtonTapped();
       });
-    }
-    else if (event is Profile2) {
+    } else if (event is Profile2) {
       PetProfile1 petProfile2 = PetProfile1(
         knownAllergies: event.know_allergies,
         vaccine: event.vaccine,
@@ -260,14 +254,10 @@ var text2 ='';
         print("Password faileddd");
       }
       yield PetProfile2Saves();
-    }
-
-    else if (event is vaccineUplo) {
+    } else if (event is vaccineUplo) {
       vacineParams petprofile2vaccine = vacineParams(
         pet_id: _prefHelper.getStringByKey('id', ''),
         doc_url: event.vaccine,
-
-
       );
       final result = await uploadVaccineREcord(petprofile2vaccine);
       if (result.isRight()) {
@@ -277,8 +267,8 @@ var text2 ='';
       }
       yield PetVaccineSuccessfull();
     }
-      if (event is RegisterUser) {
-     // await getPetProfile(NoParams());
+    if (event is RegisterUser) {
+      // await getPetProfile(NoParams());
       UserProfileParams profileParams = UserProfileParams(
         email: sharedPrefHelper.getEmail(),
         fname: event.fname,
@@ -287,7 +277,6 @@ var text2 ='';
         city: event.city,
         zipCode: event.zip,
         state: event.state,
-
       );
       final result = await saveUserProfile(profileParams);
       if (result.isRight()) {
@@ -296,9 +285,7 @@ var text2 ='';
         print("profileeee faileddd");
       }
       // yield UserPetProfileButtonTapped();
-    }
-
-    else if (event is Profile3) {
+    } else if (event is Profile3) {
       print('kick');
       PetProfile1 profileParams4 = PetProfile1(
         walkingSchedule: event.walking,
@@ -317,24 +304,22 @@ var text2 ='';
       }
       yield pet3rofileButtonTapped();
       print('tapped');
-    }
-    else if (event is Profile4) {
+    } else if (event is Profile4) {
       print('kick');
-      PetProfile1 profileParams4 = PetProfile1(
-          knownAllergies: [
-            event.walking,
-            event.daycare,
-            event.grooming,
-            event.hospital,
-            event.hotel,
-            event.vet
-          ]
-        // petNeeds: event.daycare,
-        // temperament: event.grooming,
-        // medication: event.hospital,
-        // name: event.hotel,
-        // times_a_day: event.vet,
-      );
+      PetProfile1 profileParams4 = PetProfile1(knownAllergies: [
+        event.walking,
+        event.daycare,
+        event.grooming,
+        event.hospital,
+        event.hotel,
+        event.vet
+      ]
+          // petNeeds: event.daycare,
+          // temperament: event.grooming,
+          // medication: event.hospital,
+          // name: event.hotel,
+          // times_a_day: event.vet,
+          );
       final result = await savePetProfile(profileParams4);
       if (result.isRight()) {
         print("Password  Changed");
@@ -344,7 +329,8 @@ var text2 ='';
       yield pet4rofileButtonTapped();
       print('tapped');
     }
-    if (event is ProfileOpened) {} else if (event is ChangePassword) {
+    if (event is ProfileOpened) {
+    } else if (event is ChangePassword) {
       UserProfileParams profileParams = UserProfileParams(
         //email: sharedPrefHelper.getEmail(),
         oldPassword: event.oldPassword,
@@ -358,43 +344,22 @@ var text2 ='';
       }
       yield UserChangePasswordButtonTapped();
     }
-
-   else if (event is savePayment) {
-      PaymentParams profileParams = PaymentParams(
-        expDate: event.expDate,
-      //    bankname: event,
-        creditCardNumber: event.creditCardNumber,
-        nameOnCard: event.nameOnCard,
-        cvv: event.cvv,
-      );
-      print(event.expDate);
-      final result = await _saveUserPayment(profileParams);
-      if (result.isRight()) {
-        print("Payment  Saved");
-      } else {
-        print("Payment faileddd");
-      }
-      yield SavePaymentButtonTapped();
-    }
     if (event is GetProvider) {
-
       final result = await getProviders(event.text);
-print('ddddd$event.text');
+      print('ddddd$event.text');
       // final result =  await getPetProfile1(NoParams());
       if (result.isRight()) {
         await getProviderById(NoParams());
         await getProviderById(NoParams());
         yield ProviderLoaded(result.getOrElse(() => null));
-
       }
     }
     if (event is GetSinglePRof) {
-      final result = await getSinglePetProfile(NoParams());
+      final result = await getSinglePetProfile(event.id);
       if (result.isRight()) {
         yield SingleProfileLoaded(result.getOrElse(() => null));
       }
     }
-
 
     if (event is GetCovidList) {
       if (event.text.isNotEmpty) {
@@ -402,9 +367,9 @@ print('ddddd$event.text');
       } else {
         text2 = "";
       }
-print('gdgddgyd$text2');
+      print('gdgddgyd$text2');
       final result = await getPetProfile(event.text);
-print('jhhhhhy${event.text}');
+      print('jhhhhhy${event.text}');
       // final result =  await getPetProfile1(NoParams());
       if (result.isRight()) {
         print('dkdjddh');
@@ -415,15 +380,15 @@ print('jhhhhhy${event.text}');
       }
     }
 
-    if (event is GetSinglePRovider){
+    if (event is GetSinglePRovider) {
       final result = await getProviderById(NoParams());
-      if(result.isRight()){
+      if (result.isRight()) {
         yield SingleProviderLoaded(result.getOrElse(() => null));
       }
     }
-  //  if( event is GetProviderBookingRequest ){
-   //   final result = await  getPr
-  //  }
+    //  if( event is GetProviderBookingRequest ){
+    //   final result = await  getPr
+    //  }
   }
 
   bool _isFormValid() {
@@ -435,7 +400,7 @@ print('jhhhhhy${event.text}');
         sex.isNotEmpty &&
         gender.isNotEmpty &&
         // img.isNotEmpty &&
-        petName.isNotEmpty ;
-     sex.isNotEmpty;
+        petName.isNotEmpty;
+    sex.isNotEmpty;
   }
 }

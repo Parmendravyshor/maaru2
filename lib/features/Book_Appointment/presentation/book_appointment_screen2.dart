@@ -29,11 +29,10 @@ class _BookAppointment2State extends State<BookAppointment2> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
-        backgroundColor: Colors.grey,
-        bottomNavigationBar: CreateHomeScreen(
-            // Color:MaaruColors.textButtonColor
+        backgroundColor: Colors.white,
+        bottomNavigationBar: const CreateHomeScreen(
+          // Color:MaaruColors.textButtonColor
             ),
         body: SafeArea(
             bottom: false,
@@ -46,12 +45,8 @@ class _BookAppointment2State extends State<BookAppointment2> {
                       if (state is PetProfileInitial) {
                         BlocProvider.of<PetProfileBloc>(context)
                             .add(GetSinglePRovider());
-
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       } else if (state is SingleProviderLoaded) {
-                        //   print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome4.providerName}');
-                        // AlertManager.showErrorMessage(
-                        //     "ProfileUpdateSuccessful", context);
                         int abc;
                         return ListView(
                           children: [
@@ -109,7 +104,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                     height: 40,
                                                     width: 40,
                                                   )),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
                                               InkWell(
@@ -198,8 +193,6 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                   (BuildContext context,
                                                       int index) {
                                                 return
-
-
                                                   Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   mainAxisSize: MainAxisSize.min,

@@ -7,23 +7,31 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
+import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile2.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
-
+import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
+as event;
 
 class ViewPetProfile extends StatefulWidget {
+ final int id1;
+
+  const ViewPetProfile({Key key, this.id1}) : super(key: key);
+
   @override
   _ViewPetProfileState createState() => _ViewPetProfileState();
 }
 
 class _ViewPetProfileState extends State<ViewPetProfile> {
-
+  String text;
   @override
   Widget build(BuildContext context) {
     SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
         backgroundColor: MaaruColors.DogsBackground,
         bottomNavigationBar: CreateHomeScreen(
@@ -38,8 +46,8 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                     builder: (context, state) {
                       if (state is PetProfileInitial) {
                         BlocProvider.of<PetProfileBloc>(context)
-                            .add(GetSinglePRof());
-
+                            .add(GetSinglePRof(widget.id1));
+print('sssss${widget.id1}');
                         return Center(
                           child:
 
@@ -98,7 +106,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                           Navigator.of(context).push(
                                                               MaterialPageRoute(
                                                                   builder: (_) =>
-                                                                      ViewPetProfile2()));
+                                                                      ViewPetProfile2(id2:widget.id1,)));
                                                         },
                                                         child: Image.asset(
                                                           'assets/icons/icone-setting-68.png',
@@ -114,7 +122,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                         Navigator.of(context).push(
                                                             MaterialPageRoute(
                                                                 builder: (_) =>
-                                                                    ViewPetProfile3()));
+                                                                    ViewPetProfile3(id3: widget.id1,)));
                                                       },
                                                       child: Image.asset(
                                                         'assets/icons/icone-setting-68.png',
@@ -382,123 +390,189 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                     const SizedBox(
                                                       height: 20,
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          0, 20, 20, 20),
-                                                      child: Container(
-                                                        height: 150,
-                                                        width: 400,
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                            border: Border.all(
-                                                                color: Colors
-                                                                    .grey[300])),
-                                                        child: Container(
-                                                          margin:
-                                                          EdgeInsets.all(10),
-                                                          child: Row(
-                                                            children: [
-                                                              Expanded(
-                                                                  child:
-                                                                  Container(
-                                                                    width: 100,
-                                                                    decoration:
-                                                                    BoxDecoration(
-                                                                      borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                          20),
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                    child:
-                                                                    Image.asset(
-                                                                      'assets/images/kutta.png',
-                                                                      height: 200,
-                                                                    ),
-                                                                  )),
-                                                              SizedBox(
-                                                                width: 20,
-                                                              ),
-                                                              Container(
-                                                                child: Column(
-                                                                  crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                                  children: [
-                                                                    Text(
-                                                                        'Austin pet care',
-                                                                        style: MaaruStyle
-                                                                            .text
-                                                                            .tiniestSmall),
-                                                                    Text(
-                                                                        'Pet walking',
-                                                                        style: MaaruStyle
-                                                                            .text
-                                                                            .tiny),
-                                                                    SizedBox(
-                                                                      height: 20,
-                                                                    ),
-                                                                    Text(
-                                                                        '1357 Muno Manor',
-                                                                        style: MaaruStyle
-                                                                            .text
-                                                                            .greyDisable),
-                                                                    Text(
-                                                                      'Austin,Tx 75923',
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .grey,
-                                                                          fontSize:
-                                                                          12),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                //width: 40,
-                                                              ),
-                                                              Container(
-                                                                child: Column(
-                                                                  crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .end,
-                                                                  children: const [
-                                                                    Icon(
-                                                                      Icons
-                                                                          .calendar_today_outlined,
-                                                                      size: 22,
-                                                                      color: Colors
-                                                                          .yellow,
-                                                                    ),
-                                                                    SizedBox(
-                                                                      height: 36,
-                                                                    ),
-                                                                    Text(
-                                                                      'Aug 21,2021',
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .grey,
-                                                                          fontSize:
-                                                                          12),
-                                                                    ),
-                                                                    Text(
-                                                                      '11:00 am',
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                          13,
-                                                                          fontWeight:
-                                                                          FontWeight.bold),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
+                                                    Center(
+                                                      child: BlocProvider(
+                                                        create: (context) =>
+                                                            KiwiContainer().resolve<LoginBloc>(),
+                                                        child: BlocBuilder<LoginBloc, LoginState>(
+                                                            builder: (context, state) {
+                                                              if (state is LoginInitial) {
+                                                                BlocProvider.of<LoginBloc>(context).add(
+                                                                    event.UpcomingAppointmentChanged(
+                                                                        text: text));
+                                                                print('figffgfg${text}');
+                                                                return CircularProgressIndicator();
+                                                              } else if (state
+                                                              is FetchUpcomingAppointmentModelData) {
+                                                                return StreamBuilder<
+                                                                    FetchUpcomingAppointmentModelData>(
+                                                                    stream: null,
+                                                                    builder: (context, snapshot) {
+                                                                      if (snapshot.hasData) {
+                                                                        var abc2 = [];
+
+                                                                        for (int i = 0;
+                                                                        i <=
+                                                                            state
+                                                                                .upcomingPastAppointmentModel
+                                                                                .upcomingBookings
+                                                                                .length -
+                                                                                1;
+                                                                        i++) {
+                                                                          abc2.add(state
+                                                                              .upcomingPastAppointmentModel
+                                                                              .upcomingBookings[i]);
+                                                                        }
+
+                                                                        return Padding(
+                                                                            padding:
+                                                                            const EdgeInsets.fromLTRB(
+                                                                                10, 20, 20, 20),
+                                                                            child: Container(
+                                                                              //  height: size.height*0.30,
+                                                                                width: size.width * 1,
+                                                                                decoration: BoxDecoration(
+                                                                                    border: Border.all(
+                                                                                        color: MaaruColors
+                                                                                            .textfeildline)),
+                                                                                child: Container(
+                                                                                    margin: const EdgeInsets
+                                                                                        .all(10),
+                                                                                    child: Row(children: [
+                                                                                      Expanded(
+                                                                                          child: Container(
+                                                                                            width: 100,
+                                                                                            decoration:
+                                                                                            BoxDecoration(
+                                                                                              borderRadius:
+                                                                                              BorderRadius
+                                                                                                  .circular(
+                                                                                                  20),
+                                                                                              color:
+                                                                                              Colors.white,
+                                                                                            ),
+                                                                                            child: Image.asset(
+                                                                                              'assets/images/kutta.png',
+                                                                                              height: 100,
+                                                                                            ),
+                                                                                          )),
+                                                                                      SizedBox(
+                                                                                        width: 20,
+                                                                                      ),
+                                                                                      Container(
+                                                                                        child: Column(
+                                                                                          crossAxisAlignment:
+                                                                                          CrossAxisAlignment
+                                                                                              .start,
+                                                                                          children: [
+                                                                                            if (state
+                                                                                                .upcomingPastAppointmentModel
+                                                                                                .upcomingBookings
+                                                                                                .first
+                                                                                                .serviceName
+                                                                                                .isEmpty)
+                                                                                              Text(
+                                                                                                '',
+                                                                                                style: MaaruStyle
+                                                                                                    .text
+                                                                                                    .tiny,
+                                                                                              ),
+                                                                                            Text(
+                                                                                                state
+                                                                                                    .upcomingPastAppointmentModel
+                                                                                                    .upcomingBookings
+                                                                                                    .firstWhere((element) =>
+                                                                                                Text('ssss')
+                                                                                                as bool)
+                                                                                                    .serviceName
+                                                                                                    .toString(),
+                                                                                                style: MaaruStyle
+                                                                                                    .text
+                                                                                                    .medium),
+                                                                                            const SizedBox(
+                                                                                              height: 5,
+                                                                                            ),
+                                                                                            Text(
+                                                                                              state
+                                                                                                  .upcomingPastAppointmentModel
+                                                                                                  .upcomingBookings[
+                                                                                              0]
+                                                                                                  .companyState
+                                                                                                  .toString(),
+                                                                                              style: const TextStyle(
+                                                                                                  color: Colors
+                                                                                                      .grey,
+                                                                                                  fontSize:
+                                                                                                  11),
+                                                                                            ),
+                                                                                            Text(
+                                                                                              '${state.upcomingPastAppointmentModel.upcomingBookings[0].companyZipCode.toString()}${state.upcomingPastAppointmentModel.upcomingBookings[0].companyCity.toString()}',
+                                                                                              style: const TextStyle(
+                                                                                                  color: Colors
+                                                                                                      .grey,
+                                                                                                  fontSize:
+                                                                                                  11),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                      const SizedBox(
+                                                                                        //width: 40,
+                                                                                      ),
+                                                                                      Container(
+                                                                                        child: Column(
+                                                                                          crossAxisAlignment:
+                                                                                          CrossAxisAlignment
+                                                                                              .end,
+                                                                                          children: [
+                                                                                            const Icon(
+                                                                                              Icons
+                                                                                                  .calendar_today_outlined,
+                                                                                              size: 22,
+                                                                                              color: Colors
+                                                                                                  .yellow,
+                                                                                            ),
+                                                                                            const SizedBox(
+                                                                                              height: 36,
+                                                                                            ),
+                                                                                            Text(
+                                                                                              state
+                                                                                                  .upcomingPastAppointmentModel
+                                                                                                  .upcomingBookings
+                                                                                                  .first
+                                                                                                  .bookingDate
+                                                                                                  .toString(),
+                                                                                              style: const TextStyle(
+                                                                                                  color: Colors
+                                                                                                      .grey,
+                                                                                                  fontSize:
+                                                                                                  11),
+                                                                                            ),
+                                                                                            Text(
+                                                                                              state
+                                                                                                  .upcomingPastAppointmentModel
+                                                                                                  .upcomingBookings[
+                                                                                              0]
+                                                                                                  .bookingTime,
+                                                                                              style: const TextStyle(
+                                                                                                  fontSize:
+                                                                                                  13,
+                                                                                                  fontWeight:
+                                                                                                  FontWeight
+                                                                                                      .bold),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      )
+                                                                                    ]))));
+                                                                      } else {
+                                                                        return const Text('No Data  Found');
+                                                                      }
+                                                                    });
+                                                              } else {
+                                                                return CircularProgressIndicator();
+                                                              }
+                                                            }),
                                                       ),
                                                     ),
                                                     SizedBox(

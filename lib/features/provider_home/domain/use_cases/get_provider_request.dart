@@ -23,11 +23,17 @@ class SearchRequestProviderParams{
   final String page;
   final String limit;
 
-  SearchRequestProviderParams({this.name, this.service, this.provider, this.date, this.page, this.limit});
+  SearchRequestProviderParams({this.name, this.service, this.provider, this.date, this.page , this.limit});
 }
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
+
+
 GetProviderRequestModel welcomeFromJson(String str) => GetProviderRequestModel.fromJson(json.decode(str));
 
-String welcomeToJson(GetProviderRequestModel data) => json.encode(data.toJson());
+String welcomeToJson(Welcome data) => json.encode(data.toJson());
 
 class GetProviderRequestModel {
   GetProviderRequestModel({
@@ -36,68 +42,64 @@ class GetProviderRequestModel {
     this.pages,
   });
 
-  List<AppointmentRequest> appointmentRequests;
+  List<GetBookingsRequest> appointmentRequests;
   int count;
   int pages;
 
   factory GetProviderRequestModel.fromJson(Map<String, dynamic> json) => GetProviderRequestModel(
-    appointmentRequests: List<AppointmentRequest>.from(json["appointment_requests"].map((x) => AppointmentRequest.fromJson(x))),
+    appointmentRequests: List<GetBookingsRequest>.from(json["get_bookings_request"].map((x) => GetBookingsRequest.fromJson(x))),
     count: json["count"],
     pages: json["pages"],
   );
 
   Map<String, dynamic> toJson() => {
-    "appointment_requests": List<dynamic>.from(appointmentRequests.map((x) => x.toJson())),
+    "get_bookings_request": List<dynamic>.from(appointmentRequests.map((x) => x.toJson())),
     "count": count,
     "pages": pages,
   };
 }
 
-class AppointmentRequest {
-  AppointmentRequest({
-    this.id,
+class GetBookingsRequest {
+  GetBookingsRequest({
     this.bookingDate,
+    this.id,
     this.bookingStatus,
     this.ownerFName,
     this.ownerLName,
     this.petName,
     this.companyName,
     this.service,
-    this.userImg,
   });
 
-  int id;
   DateTime bookingDate;
+  int id;
   String bookingStatus;
   String ownerFName;
   String ownerLName;
   String petName;
   String companyName;
   String service;
-  String userImg;
 
-  factory AppointmentRequest.fromJson(Map<String, dynamic> json) => AppointmentRequest(
-    id: json["id"],
+  factory GetBookingsRequest.fromJson(Map<String, dynamic> json) => GetBookingsRequest(
     bookingDate: DateTime.parse(json["booking_date"]),
+    id: json["id"],
     bookingStatus: json["booking_status"],
     ownerFName: json["owner_f_name"],
     ownerLName: json["owner_l_name"],
     petName: json["pet_name"],
     companyName: json["company_name"],
     service: json["service"],
-    userImg: json["user_img"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
     "booking_date": "${bookingDate.year.toString().padLeft(4, '0')}-${bookingDate.month.toString().padLeft(2, '0')}-${bookingDate.day.toString().padLeft(2, '0')}",
+    "id": id,
     "booking_status": bookingStatus,
     "owner_f_name": ownerFName,
     "owner_l_name": ownerLName,
     "pet_name": petName,
     "company_name": companyName,
     "service": service,
-    "user_img": userImg,
   };
 }
 

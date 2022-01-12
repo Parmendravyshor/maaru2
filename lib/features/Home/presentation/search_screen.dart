@@ -55,9 +55,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
   Widget use(BuildContext context) {
-    return
-      Center(
-        child: BlocProvider(
+    return Center(
+      child: BlocProvider(
         create: (context) => KiwiContainer().resolve<LoginBloc>(),
         child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
           if (state is LoginInitial) {
@@ -66,7 +65,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
             return CircularProgressIndicator();
           } else if (state is ProviderLoaded1) {
             return Container(
-                margin: EdgeInsets.only(top: 70, bottom: 0, left: 20, right: 20),
+                margin:
+                    EdgeInsets.only(top: 70, bottom: 0, left: 20, right: 20),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -110,7 +110,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                               onSubmitted: (text) {
                                 if (mounted) {
                                   BlocProvider.of<LoginBloc>(context).add(
-                                      event.GetProvider(_petNameController.text));
+                                      event.GetProvider(
+                                          _petNameController.text));
                                 }
                               },
                               controller: _petNameController,
@@ -146,7 +147,9 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                         : switchimage =
                                             'assets/icons/icon-bl-19.png';
                                     height == 45 ? height = 180 : height = 45;
-                                    leftpad == 310 ? leftpad = 0 : leftpad = 310;
+                                    leftpad == 310
+                                        ? leftpad = 0
+                                        : leftpad = 310;
                                   });
                                 },
                                 child: Image.asset(
@@ -182,7 +185,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                     decoration: BoxDecoration(
                                         border: Border.all(
                                             color: Colors.grey[200], width: 2),
-                                        borderRadius: BorderRadius.circular(25)),
+                                        borderRadius:
+                                            BorderRadius.circular(25)),
                                     height: 120,
                                     child: InkWell(
                                       onTap: () async {
@@ -217,27 +221,25 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                               height: 100,
                                               width: 90,
                                               decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                      colors: [
-                                                        Colors.black,
-                                                        Colors.grey.shade500
-                                                      ]),
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                  image: DecorationImage(
-                                                      image: state
-                                                              .getProviderModel
-                                                              .providersListing[
-                                                                  index]
-                                                              .img
-                                                              .isNotEmpty
-                                                          ? const ExactAssetImage(
-                                                              'assets/images/image_2021_08_31T05_29_55_856Z (1).png')
-                                                          : Image.network(state
-                                                              .getProviderModel
-                                                              .providersListing[
-                                                                  index]
-                                                              .img))),
+                                                gradient: LinearGradient(
+                                                    colors: [
+                                                      Colors.black,
+                                                      Colors.grey.shade500
+                                                    ]),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                              ),
+                                              child: Image.network(
+                                                state
+                                                    .getProviderModel
+                                                    .providersListing[index]
+                                                    .img,
+                                                errorBuilder: (BuildContext,
+                                                    Object, StackTrace) {
+                                                  return Image.asset(
+                                                      'assets/images/kutta.png');
+                                                },
+                                              ),
                                             ),
                                             const SizedBox(
                                               width: 20,
@@ -317,8 +319,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
           }
           ;
         }),
-    ),
-      );
+      ),
+    );
   }
 
   Widget switchcontainer(
@@ -567,6 +569,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
+      bottomNavigationBar: CreateHomeScreen(selectedIndex: 2,),
         body: SingleChildScrollView(child: use(context)
 
             // ListView.builder(

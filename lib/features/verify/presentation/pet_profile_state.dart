@@ -150,25 +150,19 @@ class SingleProfileLoaded extends PetProfileState {
 class SingleProviderLoaded extends PetProfileState {
   //final Welcome _newsBloc = Welcome();
   final Welcome4 welcome4;
-
   SingleProviderLoaded(this.welcome4);
-
   List<Object> get props => [Welcome4];
 
 }
+///
+
 class CovidError extends PetProfileState {
   final String message;
    CovidError(this.message);
   @override
   List<Object> get props => [message];
 }
-class SavePaymentButtonTapped extends PetProfileState {
-  SavePaymentButtonTapped() : super();
 
-  @override
-  String toString() => "SavePaymentButtonTapped";
-
-}
 class PetRegisterSuccess extends PetProfileState {
   PetRegisterSuccess() : super();
 

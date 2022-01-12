@@ -12,6 +12,8 @@ import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/dialog.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Account_setting/presentation/payment/bloc/payment_bloc.dart';
+import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
 
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 
@@ -43,15 +45,6 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   double _scale;
   AnimationController _controller1;
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
-  Future<Welcome4> _getData() async {
-    var values = Welcome4();
-
-    //throw new Exception("Danger Will Robinson!!!");
-
-    await new Future.delayed(new Duration(seconds: 5));
-
-    return values;
-  }
 
   Use SelectedUSe = Use.good;
   List<bool> isSelected;
@@ -239,13 +232,9 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                   context)
                                               .add(GetSinglePRovider());
 
-                                          return CircularProgressIndicator();
+                                          return const CircularProgressIndicator();
                                         } else if (state
                                             is SingleProviderLoaded) {
-                                          //   print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome4.providerName}');
-                                          // AlertManager.showErrorMessage(
-                                          //     "ProfileUpdateSuccessful", context);
-                                          int abc;
                                           return Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -627,68 +616,114 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                     SizedBox(
                       height: 20,
                     ),
-                    FutureBuilder(
-                        future: _getData(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<Welcome4> snapshot) {
-                          if (snapshot.hasData) {
+                    BlocProvider(
+                        create: (context) =>
+                            KiwiContainer().resolve<PaymentBloc>(),
+                        child: BlocBuilder<PaymentBloc, PaymentState>(
+                            builder: (context, state) {
+                          if (state is PaymentInitial) {
+                            BlocProvider.of<PaymentBloc>(context)
+                                .add(GetUserPayment());
+
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (state is GetUserPaymentModel) {
                             return Padding(
                                 padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
                                 child: Column(
                                   children: [
-                                    Container(
-                                        height: 130,
-                                        width: 380,
-                                        decoration: BoxDecoration(
-                                            color: Colors.deepPurple[50],
-                                            borderRadius:
-                                                BorderRadius.circular(20.0)),
-                                        child: Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                20, 20, 10, 0),
-                                            child: Column(children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Text(
-                                                    'Visa Card',
-                                                    style:
-                                                        MaaruStyle.text.tiniest,
-                                                  ),
-                                                  Text(
-                                                    'Primary Payment',
-                                                    style: MaaruStyle
-                                                        .text.greyDisable,
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '**** **** **** 9877',
-                                                      style:
-                                                          MaaruStyle.text.tiny,
-                                                    ),
-                                                    Center(
-                                                        child: GestureDetector(
-                                                      onTapDown: _tapDown,
-                                                      onTapUp: _tapUp,
-                                                      child: Transform.scale(
-                                                        scale: _scale,
-                                                        child:
-                                                            _animatedButton(),
-                                                      ),
-                                                    ))
-                                                  ])
-                                            ]))),
+                                    ListView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        itemCount: state.fetchCardDetailsModel
+                                            .getCardDetails.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          if(state.fetchCardDetailsModel.getCardDetails.isNotEmpty) {
+                                            return
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 20.0),
+                                                child: Container(
+                                                    height: 130,
+                                                    width: 380,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors
+                                                            .deepPurple[50],
+                                                        borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0)),
+                                                    child: Padding(
+                                                        padding: EdgeInsets
+                                                            .fromLTRB(
+                                                            20, 20, 10, 20),
+                                                        child: Column(
+                                                            children: [
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                                children: [
+                                                                  Text(
+                                                                    'Visa Card',
+                                                                    style: MaaruStyle
+                                                                        .text
+                                                                        .tiniest,
+                                                                  ),
+                                                                  Text(
+                                                                    'Primary Payment',
+                                                                    style: MaaruStyle
+                                                                        .text
+                                                                        .greyDisable,
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              SizedBox(
+                                                                height: 20,
+                                                              ),
+                                                              Row(
+                                                                  mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                                  children: [
+                                                                    Text(
+                                                                      '**** **** **** ${state
+                                                                          .fetchCardDetailsModel
+                                                                          .getCardDetails[index]
+                                                                          .cardNumber
+                                                                          .substring(
+                                                                          state
+                                                                              .fetchCardDetailsModel
+                                                                              .getCardDetails[index]
+                                                                              .cardNumber
+                                                                              .length -
+                                                                              4)}',
+                                                                      style: MaaruStyle
+                                                                          .text
+                                                                          .tiny,
+                                                                    ),
+                                                                    Center(
+                                                                        child:
+                                                                        GestureDetector(
+                                                                          onTapDown: _tapDown,
+                                                                          onTapUp: _tapUp,
+                                                                          child:
+                                                                          Transform
+                                                                              .scale(
+                                                                            scale: _scale,
+                                                                            child:
+                                                                            _animatedButton(),
+                                                                          ),
+                                                                        ))
+                                                                  ])
+                                                            ]))),
+                                              );
+
+                                          }
+                                          else{
+                                            return Text('ddd');
+                                          }
+                                        }),
                                     Padding(
                                       padding: EdgeInsets.only(
                                           left: 5, right: 5, top: 10),
@@ -700,7 +735,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                 Navigator.of(context).push(
                                                     MaterialPageRoute(
                                                         builder: (_) =>
-                                                            CreateregisterPetProfile1()));
+                                                            PaymentScreen1()));
                                               },
                                               child: Padding(
                                                   padding:
@@ -809,7 +844,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                               )
                             ],
                           );
-                        })
+                        }))
                   ]));
                 }))));
   }

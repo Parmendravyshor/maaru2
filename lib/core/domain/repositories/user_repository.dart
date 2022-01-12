@@ -33,7 +33,7 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> getTextFile(params);
   Future<Either<Failure, void>> sendPasswordResetEmail(String email);
   Future<Either<Failure, GetProviderRequestModel>> getProviderRequest(SearchRequestProviderParams params);
-  Future<Either<Failure, Welcome2>> getSinglePetProfile();
+  Future<Either<Failure, Welcome2>> getSinglePetProfile(int id1);
   Future<Either<Failure, void>>postReview(UserReviewParamsMOdel params);
   Future<Either<Failure, void>> uploadVaccineREcord(vacineParams params);
   Future<Either<Failure, void>> setNewPassword(
@@ -44,12 +44,11 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> getUpcomingAppointment();
   Future<Either<Failure, void>> createPetProfile(PetProfile1 params);
   Future<Either<Failure, void>> getProviders(text);
-
   Future<Either<Failure, void>> getReview();
   Future<Either<Failure, void>> forgetPassword(email);
   Future<Either<Failure, void>> saveRegistrationId();
   Future<Either<Failure, void>> createUserProfile(UserProfile1 params);
-  Future <Either<Failure, Welcome>> getPetProfile(text);
+  Future <Either<Failure, Welcome>> getPetProfile(String text);
   Future <Either<Failure, Welcome4>> getProviderById();
   Future<Either<Failure, void>> saveChangePassword(UserProfileParams params);
   Future<Either<Failure, void>> bookProvider(BookProviderParams params);
@@ -61,8 +60,9 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> getUserSaveAccountLocation();
   Future<Either<Failure, void>> getHomeSearchBarItems();
   Future<Either<Failure, void>> saveUserPayment(PaymentParams params);
-  Future<Either<Failure, void>> getUserPayment();
+  Future<Either<Failure, FetchCardDetailsModel>> getUserPayment();
   Future<Either<Failure, void>> getHospitalSearchIcons();
+  Future<Either<Failure, void>> doPayment(PaymentParams params);
   Future<Either<Failure, void>> getHomeSearchIcons();
   Future<Either<Failure, void>> getVetSearchIcons();
   Future<Either<Failure, void>> getGroomingSearchIcons();
