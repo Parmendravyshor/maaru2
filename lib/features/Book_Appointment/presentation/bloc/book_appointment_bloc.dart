@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:maru/core/usecases/usecase.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
 import 'package:maru/features/verify/domain/usecases/book_a_provider.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
@@ -12,7 +15,8 @@ class BookAppointmentBloc
     extends Bloc<BookAppointmentEvent, BookAppointmentState> {
   final BookProvider bookProvider;
   final PostReview postREviewAfterBooking;
-  BookAppointmentBloc(this.bookProvider, this.postREviewAfterBooking);
+  final GetDeclineAppointmentRequest getDeclineAppointmentRequest;
+  BookAppointmentBloc(this.bookProvider, this.postREviewAfterBooking,this.getDeclineAppointmentRequest);
 
   @override
   // TODO: implement initialState
@@ -99,6 +103,10 @@ class BookAppointmentBloc
       );
       final result = await postREviewAfterBooking(profileParams);
       yield RivewPostSuccess();
+    }
+    else if (event is DeclineRequestChanged) {
+      final result = await getDeclineAppointmentRequest(NoParams());
+      yield GGetDeclineRequestData(result.getOrElse(() => null));
     }
   }
 

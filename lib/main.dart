@@ -62,6 +62,8 @@ import 'package:maru/features/verify/presentation/register_pet_profile_screen2.d
 import 'package:maru/features/verify/presentation/register_pet_profile_screen3.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
+import 'package:responsive_framework/utils/scroll_behavior.dart';
 
 import 'core/theme/maaru_style.dart';
 import 'core/utils.dart';
@@ -72,7 +74,8 @@ import 'features/Home/presentation/chat_screen.dart';
 import 'features/Home/presentation/home_sceen.dart';
 import 'features/Home/presentation/pet_profile.dart';
 import 'features/Home/presentation/search_screen.dart';
-
+import 'package:socket_io_client/socket_io_client.dart';
+import 'features/chat/presentation/chatt_screen.dart';
 import 'features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'features/login/presentation/bloc/bloc/login_state.dart';
 
@@ -85,11 +88,22 @@ import 'features/splash/view/after_splash_screen.dart';
 import 'features/verify/presentation/verify.dart';
 import 'features/view_pet_profile/presentation/view_pet_profile2.dart';
 import 'features/view_pet_profile/presentation/view_pet_profile3.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await registerDependencyInjection();
   await Firebase.initializeApp();
+
+  IO.Socket socket = IO.io('http://18.191.199.31:8081');
+  socket.onConnect((_) {
+    print('connect');
+    socket.emit('msg', 'test');
+  });
+
+  socket.on('event', (data) => print(data));
+  socket.onDisconnect((_) => print('disconnect'));
+  socket.on('fromServer', (_) => print(_));
   runApp(MyApp());
   Geolocation.loggingEnabled = true;
 
@@ -152,11 +166,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        builder: (context, widget) => ResponsiveWrapper.builder(
+                BouncingScrollWrapper.builder(context, widget),
+                maxWidth: 1200,
+                minWidth: 480,
+                defaultScale: false,
+                breakpoints: [
+                  const ResponsiveBreakpoint.resize(100, name: MOBILE),
+                ]),
         debugShowCheckedModeBanner: false,
+       checkerboardOffscreenLayers: true,
         title: 'Maaru',
         theme: theme,
-        //todo: navigate to SplashScreen
 
+        //todo: navigate to SplashScreen
+//TODO:need to putup scrooll pagination view on the buttom (Provider search screen)
         home: Scaffold(body: (SplashScreen())));
   }
 }
@@ -755,7 +779,8 @@ class _MapViewState extends State<MapView> {
                                                   CameraPosition(
                                                     target: LatLng(
                                                       _currentPosition.latitude,
-                                                      _currentPosition.longitude,
+                                                      _currentPosition
+                                                          .longitude,
                                                     ),
                                                     zoom: 18.0,
                                                   ),
@@ -776,8 +801,8 @@ class _MapViewState extends State<MapView> {
                                         width: 10,
                                       ),
                                       InkWell(
-                                          onTap: () => Navigator.of(context).push(
-                                              MaterialPageRoute(
+                                          onTap: () => Navigator.of(context)
+                                              .push(MaterialPageRoute(
                                                   builder: (_) =>
                                                       ProviderSearchScreen())),
                                           child: Image.asset(
@@ -814,7 +839,8 @@ class _MapViewState extends State<MapView> {
                                                 text = 'Grooming';
                                                 BlocProvider.of<LoginBloc>(
                                                         context)
-                                                    .add(event.GetProvider(text));
+                                                    .add(event.GetProvider(
+                                                        text));
                                               });
                                             },
                                             child: Item('Grooming'),
@@ -827,7 +853,8 @@ class _MapViewState extends State<MapView> {
                             ),
                             const SizedBox(height: 10),
                             Padding(
-                                padding: const EdgeInsets.fromLTRB(40, 0, 10, 0),
+                                padding:
+                                    const EdgeInsets.fromLTRB(40, 0, 10, 0),
                                 child: Stack(children: [
                                   ListView.builder(
                                       scrollDirection: Axis.vertical,
@@ -841,8 +868,10 @@ class _MapViewState extends State<MapView> {
                                           alignment: Alignment.bottomRight,
                                           padding: const EdgeInsets.fromLTRB(
                                               20, 180, 30, 10),
-                                          child: Text(state.getProviderModel
-                                              .providersListing[index].description
+                                          child: Text(state
+                                              .getProviderModel
+                                              .providersListing[index]
+                                              .description
                                               .toString()),
                                           // Image.network(
                                           //  state.getProviderModel.providersListing[index].description.toString(),

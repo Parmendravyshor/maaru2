@@ -1,5 +1,3 @@
-
-
 import 'dart:ffi';
 
 import 'package:dartz/dartz.dart';
@@ -32,13 +30,16 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> resendOtp(String email);
   Future<Either<Failure, void>> getTextFile(params);
   Future<Either<Failure, void>> sendPasswordResetEmail(String email);
-  Future<Either<Failure, GetProviderRequestModel>> getProviderRequest(SearchRequestProviderParams params);
+  Future<Either<Failure, GetProviderRequestModel>> getProviderRequest(
+      SearchRequestProviderParams params);
   Future<Either<Failure, Welcome2>> getSinglePetProfile(int id1);
-  Future<Either<Failure, void>>postReview(UserReviewParamsMOdel params);
+  Future<Either<Failure, void>> postReview(UserReviewParamsMOdel params);
   Future<Either<Failure, void>> uploadVaccineREcord(vacineParams params);
-  Future<Either<Failure, void>> setNewPassword(
-      SetNewPasswordParams params);
-  Future<Either<Failure, UpcomingPastAppointmentModel>> getUpcomingAndPastAppointments(text);
+  Future<Either<Failure, void>> setNewPassword(SetNewPasswordParams params);
+  Future<Either<Failure, UpcomingPastAppointmentModel>>
+      getUpcomingAndPastAppointments(text);
+  Future<Either<Failure, UpcomingPastAppointmentModel>>
+      getDeclineAppointmentRequest();
   Future<Either<Failure, void>> petCreateProfile(PetProfileAuthParams params);
   Future<Either<Failure, void>> getPastAppointment();
   Future<Either<Failure, void>> getUpcomingAppointment();
@@ -48,8 +49,8 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> forgetPassword(email);
   Future<Either<Failure, void>> saveRegistrationId();
   Future<Either<Failure, void>> createUserProfile(UserProfile1 params);
-  Future <Either<Failure, Welcome>> getPetProfile(String text);
-  Future <Either<Failure, Welcome4>> getProviderById();
+  Future<Either<Failure, Welcome>> getPetProfile(String text);
+  Future<Either<Failure, Welcome4>> getProviderById();
   Future<Either<Failure, void>> saveChangePassword(UserProfileParams params);
   Future<Either<Failure, void>> bookProvider(BookProviderParams params);
   Future<Either<Failure, GetUserProfileMOdel>> getUserProfile();
@@ -69,4 +70,3 @@ abstract class UserRepository<T> {
   Future<Either<Failure, void>> getWalkingSearchIcons();
   Future<Either<Failure, void>> getDayCareSearchIcons();
 }
-

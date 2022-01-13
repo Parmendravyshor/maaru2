@@ -6,6 +6,7 @@ import 'package:maru/features/Account_setting/domain/usecases/do_payment.dart';
 import 'package:maru/features/Account_setting/domain/usecases/get_user_payment.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
 import 'package:maru/features/Account_setting/presentation/payment/bloc/payment_bloc.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
@@ -94,9 +95,9 @@ void _registerBloc(KiwiContainer container) {
       c.resolve(), c.resolve(), c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory((c) => ProviderHomeBloc(c.resolve()));
   container
-      .registerFactory((c) => BookAppointmentBloc(c.resolve(), c.resolve()));
+      .registerFactory((c) => BookAppointmentBloc(c.resolve(), c.resolve(),c.resolve()));
   container
-      .registerFactory((c) => ChatBloc(c.resolve(), c.resolve(), c.resolve()));
+      .registerFactory((c) => ChatBloc(c.resolve(), c.resolve(), c.resolve(),));
 }
 void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => EmailSignin(c.resolve()));
@@ -127,6 +128,7 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => GetUSerPayment(c.resolve()));
   container.registerFactory((c) => GetUpcomingAndPastAppointments(c.resolve()));
   container.registerFactory((c) => DoPayment(c.resolve()));
+  container.registerFactory((c) => GetDeclineAppointmentRequest(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 
@@ -149,5 +151,5 @@ _registerMisc(KiwiContainer container) async {
   container.registerFactory((c) => sharedPreferences);
   container.registerFactory((c) => Storage(sharedPreferences));
   container.registerFactory(
-      (c) => new CognitoUserPool(MaruConstant.poolid, MaruConstant.clientid));
+      (c) =>  CognitoUserPool(MaruConstant.poolid, MaruConstant.clientid));
 }

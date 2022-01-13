@@ -28,19 +28,22 @@ class UpcomingPastAppointmentModel {
   UpcomingPastAppointmentModel({
     this.upcomingBookings,
     this.pastBookings,
+    this.getdeclineBookings
   });
 
   List<Booking> upcomingBookings;
   List<Booking> pastBookings;
-
+List<Booking>getdeclineBookings;
   factory UpcomingPastAppointmentModel.fromJson(Map<String, dynamic> json) => UpcomingPastAppointmentModel(
     upcomingBookings: List<Booking>.from(json["Upcoming_bookings"].map((x) => Booking.fromJson(x))),
     pastBookings: List<Booking>.from(json["past_bookings"].map((x) => Booking.fromJson(x))),
+    getdeclineBookings: List<Booking>.from(json["get_cancel_bookings"].map((x) => Booking.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "Upcoming_bookings": List<dynamic>.from(upcomingBookings.map((x) => x.toJson())),
     "past_bookings": List<dynamic>.from(pastBookings.map((x) => x.toJson())),
+    'get_cancel_bookings': List<dynamic>.from(getdeclineBookings.map((x) => x.toJson())),
   };
 }
 
@@ -77,6 +80,7 @@ class Booking {
     bookingTime: json["booking_time"],
     status: json["status"],
     serviceName: json["service_name"],
+
     petImage: json["pet_image"],
     petName: json["pet_name"],
     companyName: json["company_name"],

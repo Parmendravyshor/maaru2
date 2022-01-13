@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'dart:io';
+import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
@@ -10,25 +11,44 @@ import 'package:maru/features/chat/domain/entity/mesage.dart';
 import 'package:maru/features/chat/domain/usecases/get_text_file.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:meta/meta.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-
 import  'chat_event.dart';
 import 'chat_state.dart';
-
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
+  Socket _socket;
   List<Message> messageList = [];
   final SharedPrefHelper sharedPrefHelper;
   final EmailSignin emailSignin;
   final GetTextFile getTextFile;
-  ChatBloc(this.sharedPrefHelper, this.emailSignin, this.getTextFile)
-      : super();
-
+  ChatBloc(this.sharedPrefHelper, this.emailSignin, this.getTextFile,[String address = 'http://18.191.199.31:80'])
+      : super(){
+    print('processing');
+    _socket = io(
+    address,
+    OptionBuilder()
+        .setTransports(['websocket'])
+        .setTimeout(3000)
+        .disableAutoConnect()
+        .disableReconnection()
+        .build(),
+    );
+    _socket.onConnecting((data) => add(OnlineConnectingEvent()));
+    _socket.connect();
+    _socket.onConnect((data) => (e));
+        //add(OnlineConnectedEvent()));
+    _socket.onConnectError((data) =>print('sss'));
+    _socket.onConnectTimeout((data) => print('sss'));
+    _socket.onDisconnect((data) => print('sss'));
+    _socket.onError((data) => print('sss'));
+    _socket.on('joined', (data) => print('sss'));
+    print('pass');
+    }
   Database _database;
   int tried = 0;
   bool isFromException = false;
@@ -91,7 +111,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           }
         }
       } catch (e) {
-        print(e.toString());
+        print('result exception ${e.toString()}');
       }
     }
   }

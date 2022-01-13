@@ -21,6 +21,7 @@ class AccountSettingScreen extends StatefulWidget {
 
 class _AccountSettingScreenState extends State<AccountSettingScreen> {
   bool priceupdate_value = true;
+  String value = '1';
   bool update = true;
   @override
   Widget build(BuildContext context) {
@@ -185,6 +186,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                               setState(() {
                                                                 priceupdate_value =
                                                                     priceupdateValue;
+                                                                print(priceupdateValue);
                                                               });
                                                             },
                                                           ),

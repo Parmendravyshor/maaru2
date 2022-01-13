@@ -35,3 +35,14 @@ class ChatSendFailure extends ChatState {
   @override
   String toString() => "ChatSendFailure";
 }
+class onlineDisconnect extends ChatState{
+  @override
+  String toString() =>'onlineDisconnet';
+  }
+  class OnlineConnectError extends ChatState{
+  @override
+  String toString() {
+    // TODO: implement toString
+    return super.toString();
+  }
+  }

@@ -36,7 +36,14 @@ class BookRegisterSuccess extends BookAppointmentState {
 
 
 }
+class GGetDeclineRequestData extends BookAppointmentState {
+  GGetDeclineRequestData(this.upcomingPastAppointmentModel) : super();
+final UpcomingPastAppointmentModel upcomingPastAppointmentModel;
+  @override
+  String toString() => "GGetDeclineRequestData";
 
+
+}
 class BookRegisterFailure extends BookAppointmentState {
   final String errorMessage;
   BookRegisterFailure(this.errorMessage) : super();

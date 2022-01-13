@@ -66,3 +66,10 @@ class UpcomingAppointmentChanged extends BookAppointmentEvent {
   List<Object> get props => [text];
 
 }
+class DeclineRequestChanged extends BookAppointmentEvent {
+
+  @override
+  String toString() => "UpcomingAppointmentChanged";
+
+
+}

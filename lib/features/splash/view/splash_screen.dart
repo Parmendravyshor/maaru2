@@ -67,41 +67,44 @@ class _SplashScreenState extends State<SplashScreen> {
       if (token.isNotEmpty) {
         print("token token token token :$token");
         int id;
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+                (route) => false);
 
-  var id1 = _prefHelper.getIntByKey('id', id);
-  print('checkid$id');
-  print('checkfor the id$id');
-
-  if (id1
-      .toString()
-      .isNotEmpty) {
-    print('id id id :$id');
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-            (route) => false);
-  }
-        var accessdeniedOrsuccess = _prefHelper.getStringByKey('is_verified', '');
-         if(accessdeniedOrsuccess.isNotEmpty){
-           Navigator.of(context).pushAndRemoveUntil(
-               MaterialPageRoute(
-                   builder: (context) => TestApp()),
-                   (route) => false);
-        }
+      }
         else {
-            Navigator.of(context).pushAndRemoveUntil(
+        int id;
+        var id1 = _prefHelper.getIntByKey('id', id);
+        print('checkid$id');
+        print('checkfor the id$id');
+        if (id1
+            .toString()
+            .isNotEmpty) {
+          print('id id id :$id');
+          Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                   builder: (context) => CreateregisterPetProfile1()),
-              (route) => false);
+                  (route) => false);
         }
+        var accessdeniedOrsuccess = _prefHelper.getStringByKey('is_verified', '');
+        if(accessdeniedOrsuccess.isNotEmpty){
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (context) => TestApp()),
+                  (route) => false);
+        }
+
+
         // return  Navigator.of(context).pushAndRemoveUntil(
         //     MaterialPageRoute(builder: (context) => VerifyUser()),
         //         (route) => false);
-      } else {
+       else {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => VerifyUser()),
             (route) => false);
+
       }
-    });
+    }});
   }
 
   // getToken() async {

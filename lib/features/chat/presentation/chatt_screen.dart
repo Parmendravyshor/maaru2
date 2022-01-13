@@ -18,17 +18,18 @@ import 'package:maru/features/chat/presentation/chat_bloc.dart';
 import 'package:maru/main.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 import 'chat_state.dart';
 import 'chat_event.dart';
 import 'chat_bloc.dart';
 import 'chat_bloc.dart';
 import 'chat_bloc.dart';
 import 'package:progress_indicators/progress_indicators.dart';
-
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 class chatScreen extends StatefulWidget {
   @override
   chatScreenState createState() {
-    return new chatScreenState();
+    return  chatScreenState();
   }
 }
 
@@ -39,17 +40,88 @@ class chatScreenState extends State<chatScreen> {
   new TextEditingController();
   ScreenshotController screenshotController = ScreenshotController();
   final _controller = ScrollController();
-
+  IO.Socket socket;
   final container = KiwiContainer();
   List<Message> messageList = [];
   String _image = "";
-  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
   @override
   void initState() {
     super.initState();
     _image = _prefHelper.getStringByKey(MaruConstant.img, "");
+   connectToServer();
+     socket = IO.io('http://18.191.199.31:80');
+    socket.onConnect((_) {
+      print('connect');
+      socket.emit('msg', 'test');
+    });
   }
+  void connectToServer() {
+    try {
+
+      IO.Socket socket = IO.io('http://18.191.199.31:80');
+      socket.onConnect((_) {
+        print('connect');
+        socket.emit('msg', 'test');
+      });
+      socket.on('event', (data) => print(data));
+      socket.onDisconnect((_) => print('disconnect'));
+      socket.on('fromServer', (_) => print(_));
+
+      // Connect to websocket
+      socket.connect();
+
+      // Handle socket events
+      socket.on('connect', (_) => print('connect: ${socket.id}'));
+      socket.on('location', handleLocationListen);
+      socket.on('typing', handleTyping);
+      socket.on('message', handleMessage);
+      socket.on('disconnect', (_) => print('disconnect'));
+      socket.on('fromServer', (_) => print(_));
+
+    } catch (e) {
+      print(e.toString());
+    }
+
+
+  }
+
+  // Send Location to Server
+  sendLocation(Map<String, dynamic> data) {
+     socket;
+    socket.emit("location", data);
+  }
+
+  // Listen to Location updates of connected usersfrom server
+  handleLocationListen(Map<String, dynamic> data) async {
+    print(data);
+  }
+
+  // Send update of user's typing status
+
+
+  // Listen to update of typing status from connected users
+  void handleTyping(Map<String, dynamic> data) {
+    print(data);
+  }
+
+  // Send a Message to the server
+  // sendMessage(String message) {
+  //   socket.emit("message",
+  //     {
+  //       "id": socket.id,
+  //       "message": message, // Message to be sent
+  //       "timestamp": DateTime.now().millisecondsSinceEpoch,
+  //     },
+  //   );
+  // }
+
+  // Listen to all message events from connected users
+  void handleMessage(Map<String, dynamic> data) {
+    print(data);
+  }
+
 
   @override
   void dispose() {
@@ -188,7 +260,6 @@ class chatScreenState extends State<chatScreen> {
                               }
                             }
                           });
-
                           return ListView.builder(
                             controller: _controller,
                             itemCount: messageList.length,

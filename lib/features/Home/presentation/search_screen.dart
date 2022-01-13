@@ -90,7 +90,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                               textInputAction: TextInputAction.search,
                               decoration: InputDecoration(
                                 contentPadding:
-                                    EdgeInsets.only(top: 2.0, left: 20.0),
+                                      const EdgeInsets.only(top: 2.0, left: 20.0),
                                 hintText: 'Search',
                                 hintStyle: MaaruStyle.text.tiny,
                                 suffixIcon: GestureDetector(
@@ -104,7 +104,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                       'assets/icons/icone-setting-19.png',
                                       height: 100,
                                     )),
-                                border: OutlineInputBorder(
+                                border: const OutlineInputBorder(
                                     borderSide: BorderSide.none),
                               ),
                               onSubmitted: (text) {
@@ -223,22 +223,27 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                               decoration: BoxDecoration(
                                                 gradient: LinearGradient(
                                                     colors: [
-                                                      Colors.black,
-                                                      Colors.grey.shade500
+                                                      Colors.white,
+                                                      Colors.white
                                                     ]),
                                                 borderRadius:
                                                     BorderRadius.circular(15),
                                               ),
-                                              child: Image.network(
-                                                state
-                                                    .getProviderModel
-                                                    .providersListing[index]
-                                                    .img,
-                                                errorBuilder: (BuildContext,
-                                                    Object, StackTrace) {
-                                                  return Image.asset(
-                                                      'assets/images/kutta.png');
-                                                },
+                                              child:
+                                              Container(
+                                                child: Image.network(
+                                                  state
+                                                      .getProviderModel
+                                                      .providersListing[index]
+                                                      .img,
+
+                                                  errorBuilder: (BuildContext,
+                                                      Object, StackTrace) {
+                                                    return Image.asset(
+                                                        'assets/images/kutta.png',
+                                                      fit: BoxFit.contain,);
+                                                  },
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(

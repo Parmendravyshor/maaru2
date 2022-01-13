@@ -825,7 +825,7 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
       final response = await http.get(
           Uri.parse(
-            'http://18.191.199.31/api/bookings/appointment-requests?name=${params.name}&service=${params.service}&provider=${params.provider}&date=${params.date}&page=1&limit=100'),
+              'http://18.191.199.31/api/bookings/appointment-requests?name=${params.name}&service=${params.service}&provider=${params.provider}&date=${params.date}&page=1&limit=100'),
           headers: headers);
       print(response.body);
       var data = convert.jsonDecode(response.body);
@@ -1061,6 +1061,30 @@ class UserRepositoryImpl implements UserRepository {
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UpcomingPastAppointmentModel>>
+      getDeclineAppointmentRequest() async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+
+      final response = await http.get(
+        Uri.parse(
+          'http://18.191.199.31/api/bookings/cancel-booking?name=&service=&date=&page=1&limit=1',
+        ),
+        headers: headers,
+      );
+      var data = jsonDecode(response.body) ;
+      print(response.body);
+      return Right(UpcomingPastAppointmentModel.fromJson(data));
+    } catch (e) {
+      print('ldjddhdhjdhjdhd$e');
     }
   }
 }
