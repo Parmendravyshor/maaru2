@@ -6,7 +6,7 @@ class ScreenIcon extends StatelessWidget {
     final size=MediaQuery.of(context).size;
     return Container(
 
-      margin: EdgeInsets.only(left: 25,right: 18),
+      margin: const EdgeInsets.only(left: 8,right: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -18,7 +18,7 @@ class ScreenIcon extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: size.width * 0.04,
+            width: size.width * 0.03,
           ),
           InkWell(
             onTap: (){},

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+
 import 'package:dartz/dartz.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';

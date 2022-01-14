@@ -26,7 +26,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 import 'package:maru/core/constant/constant.dart';
-import 'package:maru/core/data/datasource/auth_source.dart';
+
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
@@ -128,142 +128,145 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     });
                   }
 
-                  return Container(
-                      child: SafeArea(
-                          child: Column(children: [
-                    //
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 15.0,right: 15),
+                    child: Container(
+                        child: SafeArea(
+                            child: Column(children: [
+                      //
 
-                    Logo(),
-                    ScreenIcon(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: Text(
-                        'or sign up with email',
-                        style: MaaruStyle.text.tiny
+                      Logo(),
+                      ScreenIcon(),
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                      Center(
+                        child: Text(
+                          'or sign up with email',
+                          style: MaaruStyle.text.tiny
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
 
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0,right: 8.0),
-                      child: Column(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              ThemedTextField("FIRST NAME", TextInputType.name,
-                                  textinputaction2: TextInputAction.next,
-                                  onChanged: (text) {
-                               BlocProvider.of<RegisterBloc>(context)
-                                    .add(FNameChanged(text));
-                              }, editingController: _first_nameController),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              ThemedTextField("LAST NAME", TextInputType.name,
-                                  textInputAction: TextInputAction.next,
-                                  onChanged: (text) {
-                                BlocProvider.of<RegisterBloc>(context)
-                                    .add(LNameChanged(text));
-                              }, editingController: _lnameController),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              ThemedTextField("EMAIL", TextInputType.emailAddress,
-                                  textInputAction: TextInputAction.next,
-                                  onChanged: (text) {
-                                BlocProvider.of<RegisterBloc>(context)
-                                    .add(EmailChanged(text));
-                              }, editingController: _emailController),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              ThemedTextField(
-                                "PASSWORD",
-                                TextInputType.text,
-                                textInputAction: TextInputAction.done,
-                                password: true,
-                                onChanged: (text) {
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                        child: Column(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                ThemedTextField("FIRST NAME", TextInputType.name,
+                                    textinputaction2: TextInputAction.next,
+                                    onChanged: (text) {
+                                 BlocProvider.of<RegisterBloc>(context)
+                                      .add(FNameChanged(text));
+                                }, editingController: _first_nameController),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                ThemedTextField("LAST NAME", TextInputType.name,
+                                    textInputAction: TextInputAction.next,
+                                    onChanged: (text) {
                                   BlocProvider.of<RegisterBloc>(context)
-                                      .add(PasswordChanged(text));
-                                },
-                                editingController: _passwordController,
-                              ),
-                            ],
-                          ),
+                                      .add(LNameChanged(text));
+                                }, editingController: _lnameController),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                ThemedTextField("EMAIL", TextInputType.emailAddress,
+                                    textInputAction: TextInputAction.next,
+                                    onChanged: (text) {
+                                  BlocProvider.of<RegisterBloc>(context)
+                                      .add(EmailChanged(text));
+                                }, editingController: _emailController),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                ThemedTextField(
+                                  "PASSWORD",
+                                  TextInputType.text,
+                                  textInputAction: TextInputAction.done,
+                                  password: true,
+                                  onChanged: (text) {
+                                    BlocProvider.of<RegisterBloc>(context)
+                                        .add(PasswordChanged(text));
+                                  },
+                                  editingController: _passwordController,
+                                ),
+                              ],
+                            ),
 
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 15.0,right: 15.0),
-                                child: ThemedButton(
-                                    text: "JOIN",
-                                    onPressed: () {
-                                      String first_name =
-                                          _first_nameController.text;
-                                      String lname = _lnameController.text;
-                                      String email = _emailController.text;
-                                      String password = _passwordController.text;
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0,right: 15.0),
+                                  child: ThemedButton(
+                                      text: "JOIN",
+                                      onPressed: () {
+                                        String first_name =
+                                            _first_nameController.text;
+                                        String lname = _lnameController.text;
+                                        String email = _emailController.text;
+                                        String password = _passwordController.text;
 
-                                      if (first_name.isEmpty) {
-                                        AlertManager.showErrorMessage(
-                                            "Please enter first name", context);
-                                      } else if (lname.isEmpty) {
-                                        AlertManager.showErrorMessage(
-                                            "Please enter last name", context);
-                                      } else if (validateEmail(email) != null) {
-                                        AlertManager.showErrorMessage(
-                                            "Please enter valid email", context);
-                                      } else if (password.length < 8) {
-                                        AlertManager.showErrorMessage(
-                                            "Password must be 6 characters long",
-                                            context);
+                                        if (first_name.isEmpty) {
+                                          AlertManager.showErrorMessage(
+                                              "Please enter first name", context);
+                                        } else if (lname.isEmpty) {
+                                          AlertManager.showErrorMessage(
+                                              "Please enter last name", context);
+                                        } else if (validateEmail(email) != null) {
+                                          AlertManager.showErrorMessage(
+                                              "Please enter valid email", context);
+                                        } else if (password.length < 8) {
+                                          AlertManager.showErrorMessage(
+                                              "Password must be 6 characters long",
+                                              context);
 
-                                        //  enabled = true;
-                                      } else {
-                                        BlocProvider.of<RegisterBloc>(context)
-                                            .add(RegisterButtonTapped());
-                                        // Navigator.of(context).push(
-                                        //     MaterialPageRoute(
-                                        //         builder: (_) =>
-                                        //             CreateregisterPetProfile1()));
-                                      }
-                                      // else {
-                                      //   AlertManager.disclaimerPopup(context,
-                                      //       onSuccess: () {
-                                      //
-                                      //       });
-                                      // }
-                                    }),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              state is RegisterInProgress
-                                  ? Center(
-                                      child: Container(
-                                      width: 5,
-                                      height: 5,
-                                      child: CircularProgressIndicator(),
-                                    ))
-                                  : Container(),
-                              GoToSignInText(),
-                              SizedBox(
-                                height: 30,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ])));
+                                          //  enabled = true;
+                                        } else {
+                                          BlocProvider.of<RegisterBloc>(context)
+                                              .add(RegisterButtonTapped());
+                                          // Navigator.of(context).push(
+                                          //     MaterialPageRoute(
+                                          //         builder: (_) =>
+                                          //             CreateregisterPetProfile1()));
+                                        }
+                                        // else {
+                                        //   AlertManager.disclaimerPopup(context,
+                                        //       onSuccess: () {
+                                        //
+                                        //       });
+                                        // }
+                                      }),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                state is RegisterInProgress
+                                    ? Center(
+                                        child: Container(
+                                        width: 5,
+                                        height: 5,
+                                        child: CircularProgressIndicator(),
+                                      ))
+                                    : Container(),
+                                GoToSignInText(),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    ]))),
+                  );
                 }))));
   }
 }

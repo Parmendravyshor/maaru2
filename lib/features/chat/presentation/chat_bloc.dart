@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
-import 'package:maru/core/data/datasource/data_base.dart';
+
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/features/chat/domain/entity/mesage.dart';
@@ -12,7 +12,7 @@ import 'package:maru/features/chat/domain/usecases/get_text_file.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:meta/meta.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-import 'package:sqflite/sqflite.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,37 +28,42 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final GetTextFile getTextFile;
   ChatBloc(this.sharedPrefHelper, this.emailSignin, this.getTextFile,[String address = 'http://18.191.199.31:80'])
       : super(){
-    print('processing');
+
     _socket = io(
     address,
     OptionBuilder()
-        .setTransports(['websocket'])
-        .setTimeout(3000)
+        .setTransports(['websockets'])
         .disableAutoConnect()
+    .enableAutoConnect()
         .disableReconnection()
         .build(),
+
     );
-    _socket.onConnecting((data) => add(OnlineConnectingEvent()));
-    _socket.connect();
-    _socket.onConnect((data) => (e));
-        //add(OnlineConnectedEvent()));
-    _socket.onConnectError((data) =>print('sss'));
-    _socket.onConnectTimeout((data) => print('sss'));
-    _socket.onDisconnect((data) => print('sss'));
-    _socket.onError((data) => print('sss'));
-    _socket.on('joined', (data) => print('sss'));
-    print('pass');
+    try {
+      _socket.onConnecting((data) => print('success1'));
+      _socket.connect();
+
+      _socket.onConnect((data) => print('succes'));
+      //add(OnlineConnectedEvent()));
+      _socket.onConnectError((data) => print('sss1'));
+      _socket.onConnectTimeout((data) => print('sss2'));
+      _socket.onDisconnect((data) => print('sss3'));
+      _socket.onError((data) => print('sss4'));
+      _socket.on('joined', (data) => print('sss5'));
+      print('pass');
+    } catch(e){
+      print('kkk${e.toString()}');
     }
-  Database _database;
+    }
+
   int tried = 0;
   bool isFromException = false;
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   @override
   Stream<ChatState> mapEventToState(ChatEvent event) async* {
     if (event is ChatOpened) {
-      _database = await DBProvider.db.database;
 
-      final List<Map<String, dynamic>> maps = await _database.query('message');
+      var maps;
       messageList = List.generate(maps.length, (i) {
         return Message(
           maps[i]['message'],
@@ -76,7 +81,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         final sentMessage = Message(event.message, 1);
         messageList.add(sentMessage);
         yield ChatSendInProgress(messageList);
-        await _database.insert("message", sentMessage.toMap());
+
       }
 
       // DateTime expiryTime = DateTime.fromMillisecondsSinceEpoch(
@@ -100,7 +105,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             var message = body['Answer'];
             final receivedMessage = Message(message, 2);
             messageList.add(receivedMessage);
-            await _database.insert("message", receivedMessage.toMap());
+
 
             yield ChatSendSuccess(messageList);
           } catch (e) {}

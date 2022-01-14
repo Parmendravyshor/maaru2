@@ -48,10 +48,12 @@ class chatScreenState extends State<chatScreen> {
 
   @override
   void initState() {
+
     super.initState();
-    _image = _prefHelper.getStringByKey(MaruConstant.img, "");
-   connectToServer();
-     socket = IO.io('http://18.191.199.31:80');
+    IO.Socket socket = IO.io('http://18.191.199.31:80',
+        OptionBuilder()
+            .setTransports(['websocket']).build());
+
     socket.onConnect((_) {
       print('connect');
       socket.emit('msg', 'test');

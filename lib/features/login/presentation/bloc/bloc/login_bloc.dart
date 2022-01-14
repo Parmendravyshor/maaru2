@@ -88,10 +88,10 @@ final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
               yield VerificationNeeded();
             }
           } else {
-            yield LoginFailure("Signin failed..please try again.. $l");
+            yield LoginFailure("Email or password not valid");
           }
         } else {
-          yield LoginFailure("Signin failed..please try again.. $l");
+          yield LoginFailure("Email or password not valid");
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {

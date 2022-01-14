@@ -1,7 +1,7 @@
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
-import 'package:maru/core/data/datasource/storage.dart';
+
 import 'package:maru/features/Account_setting/domain/usecases/do_payment.dart';
 import 'package:maru/features/Account_setting/domain/usecases/get_user_payment.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
@@ -40,9 +40,9 @@ import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'data/datasource/auth_source.dart';
+
 import 'data/datasource/shared_pref_helper.dart';
-import 'data/datasource/user_service.dart';
+
 import 'data/repository/user_repository.impl.dart';
 import 'domain/repositories/user_repository.dart';
 import 'domain/usecases/resend_verification_code.dart';
@@ -134,12 +134,10 @@ void _registerUseCases(KiwiContainer container) {
 
 void _registerRepositories(KiwiContainer container) {
   container.registerFactory<UserRepository>(
-      (c) => UserRepositoryImpl(c.resolve(), c.resolve()));
+      (c) => UserRepositoryImpl(c.resolve(), ));
 }
 
 _registerDataSources(KiwiContainer container) {
-  container.registerFactory<AuthSource>(
-      (c) => UserService(c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory<SharedPrefHelper>(
       (c) => SharedPrefHelperImpl(c.resolve()));
 }
@@ -149,7 +147,6 @@ _registerApiClient(KiwiContainer container) {}
 _registerMisc(KiwiContainer container) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   container.registerFactory((c) => sharedPreferences);
-  container.registerFactory((c) => Storage(sharedPreferences));
-  container.registerFactory(
-      (c) =>  CognitoUserPool(MaruConstant.poolid, MaruConstant.clientid));
+
+
 }

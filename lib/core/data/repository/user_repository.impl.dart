@@ -13,7 +13,7 @@ import 'package:maru/features/verify/domain/usecases/get_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/upload_vaccine_record.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+
 import 'package:dartz/dartz.dart';
 import 'package:kiwi/kiwi.dart';
 import 'dart:convert' as convert;
@@ -21,7 +21,7 @@ import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/error/failure.dart';
 import 'dart:async';
-import 'package:maru/core/data/datasource/auth_source.dart';
+
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
@@ -31,10 +31,10 @@ import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  final AuthSource authSource;
+
   final SharedPrefHelper sharedPrefHelper;
 
-  UserRepositoryImpl(this.sharedPrefHelper, this.authSource);
+  UserRepositoryImpl(this.sharedPrefHelper, );
 
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
@@ -49,10 +49,9 @@ class UserRepositoryImpl implements UserRepository {
       map[MaruConstant.user_type] = 'user';
       final response = await http.post(MaruConstant.signup, body: map);
       Map res = json.decode(response.body);
-
+print(res);
       return Right('Otp sent your register email');
-    } on CognitoClientException catch (e) {
-      return Left(CacheFailure(e.message));
+
     } catch (e) {
       return Left(CacheFailure(e.toString()));
     }
@@ -82,7 +81,6 @@ class UserRepositoryImpl implements UserRepository {
       await sharedPrefHelper.savePassword(
         MaruConstant.password,
       );
-
       await sharedPrefHelper.savelname(
           MaruConstant.last_name, res['last_name']);
       await sharedPrefHelper.saveEmail(res[MaruConstant.email]);
@@ -95,14 +93,11 @@ class UserRepositoryImpl implements UserRepository {
       await sharedPrefHelper.saveString("last_name", res['last_name']);
       print(res['last_name']);
       return Right(Void);
-    } on CognitoClientException catch (e) {
-      if (e.code == 'UserNotConfirmedException') {
-        return Left(UserNotConfirmedFailure(e.message));
-      } else {
-        return Left(CacheFailure(e.message));
-      }
-    } catch (e) {
-      return Left(CacheFailure(e.toString()));
+    }
+
+
+     catch (e) {
+      return Left(ApiFailure('aa'));
     }
   }
 
@@ -241,7 +236,7 @@ class UserRepositoryImpl implements UserRepository {
         ..fields['age'] = params.age
         ..fields[MaruConstant.height] = params.height
         ..fields[MaruConstant.weight] = params.weight
-        ..fields[MaruConstant.known_allergies] = 'params.knownAllergies'
+        ..fields[MaruConstant.known_allergies] = params.knownAllergies
         ..fields[MaruConstant.name] = ''
         ..fields[MaruConstant.note] = params.notes
         ..fields[MaruConstant.pet_needs] = ''
@@ -277,9 +272,7 @@ class UserRepositoryImpl implements UserRepository {
           MaruConstant.birth_date, profile['birth_date']);
 
       return Right(Void);
-    } on CognitoClientException catch (e) {
-      print('exception print  + $e');
-      return Left(CacheFailure(e.toString()));
+
     } catch (e) {
       print('exception print etrhtjryjhytrytjrnytjjhy5jyjy + $e');
       return Left(CacheFailure(e.toString()));
@@ -314,9 +307,7 @@ class UserRepositoryImpl implements UserRepository {
       print('dj sir');
       print(response);
       return Right(Welcome.fromJson(data));
-    } on CognitoClientException catch (e) {
-      print('Ricky sir ');
-      return Left(CacheFailure(e.toString()));
+
     } catch (e) {
       print('Harinder sir $e');
       return Left(CacheFailure(e.toString()));
@@ -421,10 +412,6 @@ class UserRepositoryImpl implements UserRepository {
       print("respStr respStr respStr:$respStr");
 
       return const Right(Void);
-    } on CognitoClientException catch (e) {
-      print('exception$e');
-      return Left(CacheFailure(e.toString()));
-      print('exception$e');
     } catch (e) {
       print('exception$e');
       return Left(CacheFailure(e.toString()));
@@ -473,10 +460,7 @@ class UserRepositoryImpl implements UserRepository {
       print(res);
 
       return const Right(Void);
-    } on CognitoClientException catch (e) {
-      print('exception1$e');
-      return Left(CacheFailure(e.toString()));
-      print('exception$e');
+
     } catch (e) {
       print('exception2$e');
       return Left(CacheFailure(e.toString()));
@@ -719,12 +703,7 @@ class UserRepositoryImpl implements UserRepository {
       await sharedPrefHelper.saveEmail(res[MaruConstant.email]);
       print("Register Success  ${response.body}");
       return Right(Void);
-    } on CognitoClientException catch (e) {
-      if (e.code == 'UserNotConfirmedException') {
-        return Left(UserNotConfirmedFailure(e.message));
-      } else {
-        return Left(CacheFailure(e.message));
-      }
+
     } catch (e) {
       return Left(CacheFailure(e.toString()));
     }
@@ -744,8 +723,7 @@ class UserRepositoryImpl implements UserRepository {
       Map res = json.decode(response.body);
       print(res);
       return Right('Otp sent your register email');
-    } on CognitoClientException catch (e) {
-      return Left(CacheFailure(e.message));
+
     } catch (e) {
       return Left(CacheFailure(e.toString()));
     }
@@ -772,16 +750,8 @@ class UserRepositoryImpl implements UserRepository {
       //  print(profile);
 
       return Right(GetProvidersModel.fromJson(data));
-    } on CognitoClientException catch (e) {
-      print(e);
-      if (e.code == 'UserNotConfirmedException') {
-        print(e);
-        return Left(UserNotConfirmedFailure(e.message));
-        print(e);
-      } else {
-        print(e);
-        return Left(CacheFailure(e.message));
-      }
+
+
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -902,17 +872,7 @@ class UserRepositoryImpl implements UserRepository {
 //print(data);
 //print('dhjkdhjdjkdhjkdhjkdhjkdjbjbbjhjhfjjfhjfhjfhjfhfjhfjhfjfhjfhjfhjfhjfh$data');
       return Right(Welcome4.fromJson(data));
-    } on CognitoClientException catch (e) {
-      if (e.code == 'UserNotConfirmedException') {
-        print(e);
-        return Left(UserNotConfirmedFailure(e.message));
-        print(e);
-      } else {
-        print(e);
-        return Left(CacheFailure(e.message));
-        print(e);
-      }
-      print(e);
+
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -934,17 +894,7 @@ class UserRepositoryImpl implements UserRepository {
       var data = convert.jsonDecode(response.body);
       print(data);
       return Right(Void);
-    } on CognitoClientException catch (e) {
-      if (e.code == 'UserNotConfirmedException') {
-        print(e);
-        return Left(UserNotConfirmedFailure(e.message));
-        print(e);
-      } else {
-        print(e);
-        return Left(CacheFailure(e.message));
-        print(e);
-      }
-      print(e);
+
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -971,16 +921,7 @@ class UserRepositoryImpl implements UserRepository {
       print(response.body);
       var data = convert.jsonDecode(response.body);
       return Right(UpcomingPastAppointmentModel.fromJson(data));
-    } on CognitoClientException catch (e) {
-      print(e);
-      if (e.code == 'UserNotConfirmedException') {
-        print(e);
-        return Left(UserNotConfirmedFailure(e.message));
-        print(e);
-      } else {
-        print(e);
-        return Left(CacheFailure(e.message));
-      }
+
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -1008,16 +949,7 @@ class UserRepositoryImpl implements UserRepository {
       print(response.body);
       var data = convert.jsonDecode(response.body);
       return Right(UpcomingPastAppointmentModel.fromJson(data));
-    } on CognitoClientException catch (e) {
-      print(e);
-      if (e.code == 'UserNotConfirmedException') {
-        print(e);
-        return Left(UserNotConfirmedFailure(e.message));
-        print(e);
-      } else {
-        print(e);
-        return Left(CacheFailure(e.message));
-      }
+
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -1049,15 +981,7 @@ class UserRepositoryImpl implements UserRepository {
 
       print(response.body);
       return Right(Void);
-    } on CognitoClientException catch (e) {
-      print(e);
-      if (e.code == 'UserNotConfirmedException') {
-        print(e);
-        return Left(UserNotConfirmedFailure(e.message));
-      } else {
-        print(e);
-        return Left(CacheFailure(e.message));
-      }
+
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));

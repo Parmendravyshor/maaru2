@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/icons.dart';
@@ -105,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Scaffold.of(context).showSnackBar(
                                     SnackBar(
                                       backgroundColor: Colors.black,
-                                      content: Text('Account not register',
+                                      content: Text(state.errorMessage,
                                           style: TextStyle(
                                               fontWeight: FontWeight.w400,
                                               fontFamily: 'Quicksand',
@@ -116,112 +117,115 @@ class _LoginScreenState extends State<LoginScreen> {
                                 });
                               }
 
-                              return  Container(
-                                margin: EdgeInsets.only(left: 20,right: 20),
-                                child: Column(children: [
-                                  Logo(),
-                                  ScreenIcon(),
-                                  SizedBox(
-                                    height: size.height*0.02,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'or login with email'.toUpperCase(),
-                                      style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w600)),
+                              return  Padding(
+                                padding: const EdgeInsets.only(left: 10.0,right: 10.0),
+                                child: Container(
+                                  margin: EdgeInsets.only(left: 0,right: 0),
+                                  child: Column(children: [
+                                    Logo(),
+                                    ScreenIcon(),
+                                    SizedBox(
+                                      height: size.height*0.02,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                    Center(
+                                      child: Text(
+                                        'or login with email'.toUpperCase(),
+                                        style: GoogleFonts.poppins(
+                                            textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600)),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
 
 
-                                  Column(children: [
-                                    Column(
-                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: [
-                                          ThemedTextField("EMAIL", TextInputType.emailAddress,
-                                              textStyle: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontFamily: 'Quicksand',
-                                                fontSize: 34,
-                                                color:
-                                                Colors.black,
-                                              ),
-                                              textinputaction2: TextInputAction.next,
-                                              onChanged: (text) {
-                                                BlocProvider.of<LoginBloc>(context).add(event.EmailChanged(text));
-                                              }, editingController: _emailController),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          ThemedTextField(
-                                            "PASSWORD",
-                                            TextInputType.text,
-                                            textinputaction2: TextInputAction.done,
-                                            password: true,
-                                            onChanged: (text) {
-                                              BlocProvider.of<LoginBloc>(context)
-                                                  .add(event.PasswordChanged(text));
-                                            },
-                                            editingController: _passwordController,
-                                          ),
-                                          InkWell(
-                                              onTap: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (_) =>
-                                                            ResetPasswordScreen()));
-                                              },
-                                              child: Align(
-                                                alignment: Alignment.centerRight,
-                                                child: Text(
-                                                  'Forgot Password?',
-                                                  style: MaaruStyle.text.greyDisable,
+                                    Column(children: [
+                                      Column(
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          children: [
+                                            ThemedTextField("EMAIL", TextInputType.emailAddress,
+                                                textStyle: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontFamily: 'Quicksand',
+                                                  fontSize: 34,
+                                                  color:
+                                                  Colors.black,
                                                 ),
-                                              )),
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          ThemedButton(
-                                              text: "LOGIN",
-                                              onPressed: () {
-                                                if (state
-                                                is LoginFormValidationSuccess ||
-                                                    state
-                                                    is LoginFormValidationFailure) {
-                                                  BlocProvider.of<LoginBloc>(context)
-                                                      .add(event.LoginButtonTapped());
-                                                }
-
+                                                textinputaction2: TextInputAction.next,
+                                                onChanged: (text) {
+                                                  BlocProvider.of<LoginBloc>(context).add(event.EmailChanged(text));
+                                                }, editingController: _emailController),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            ThemedTextField(
+                                              "PASSWORD",
+                                              TextInputType.text,
+                                              textinputaction2: TextInputAction.done,
+                                              password: true,
+                                              onChanged: (text) {
+                                                BlocProvider.of<LoginBloc>(context)
+                                                    .add(event.PasswordChanged(text));
                                               },
-                                              enabled: true),
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
-                                          state is LoginInProgress
-                                              ? Center(
-                                              child: Container(
-                                                margin: EdgeInsets.only(bottom: 10),
-                                                width: 40,
-                                                height: 40,
-                                                child: CircularProgressIndicator(),
-                                              ))
-                                              : Container(),
-                                          Container(
-                                            child: GoToSignInText(),
-                                          ),
+                                              editingController: _passwordController,
+                                            ),
+                                            InkWell(
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              ResetPasswordScreen()));
+                                                },
+                                                child: Align(
+                                                  alignment: Alignment.centerRight,
+                                                  child: Text(
+                                                    'Forgot Password?',
+                                                    style: MaaruStyle.text.greyDisable,
+                                                  ),
+                                                )),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            ThemedButton(
+                                                text: "LOGIN",
+                                                onPressed: () {
+                                                  if (state
+                                                  is LoginFormValidationSuccess ||
+                                                      state
+                                                      is LoginFormValidationFailure) {
+                                                    BlocProvider.of<LoginBloc>(context)
+                                                        .add(event.LoginButtonTapped());
+                                                  }
+
+                                                },
+                                                enabled: true),
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
+                                            state is LoginInProgress
+                                                ? Center(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(bottom: 10),
+                                                  width: 40,
+                                                  height: 40,
+                                                  child: CircularProgressIndicator(),
+                                                ))
+                                                : Container(),
+                                            Container(
+                                              child: GoToSignInText(),
+                                            ),
 
 
 
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                        ])
-                                  ])]),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ])
+                                    ])]),
+                                ),
                               );
                             })
                     )))));

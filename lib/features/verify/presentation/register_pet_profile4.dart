@@ -91,11 +91,11 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                 create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
                 child: BlocBuilder<PetProfileBloc, PetProfileState>(
                     builder: (context, state) {
-                  if (state is pet3rofileButtonTapped) {
+                  if (state is pet4rofileButtonTapped) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return CreateRegisterPetProfile4();
+                        return HomeScreen();
                       }));
                     });
 
