@@ -20,7 +20,10 @@ import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:maru/features/Account_setting/presentation/account_setting.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 
 import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
@@ -34,12 +37,16 @@ import 'package:geolocator/geolocator.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:location/location.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
+import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
+import 'package:maru/features/provider_login/presentation/login_provider_screen.dart';
 import 'package:maru/features/provider_profile/provider_profile1.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 
 import 'package:maru/features/splash/view/splash_screen.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen2.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
@@ -51,6 +58,8 @@ import 'features/chat/presentation/chatt_screen.dart';
 import 'features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+
+import 'features/provider_home/presentation/upcoming_appointment_calender.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -147,11 +156,10 @@ class MyApp extends StatelessWidget {
        checkerboardOffscreenLayers: true,
         title: 'Maaru',
         theme: theme,
-
         //todo: navigate to SplashScreen
 //TODO:need to putup scrooll pagination vie
 // w on the buttom (Provider search screen)
-        home: Scaffold(body: ( LoginScreen ())));
+        home: Scaffold(body: ( LoginProviderScreen ())));
   }
 }
 
@@ -164,7 +172,6 @@ class HomePage4 extends StatefulWidget {
 
 class _HomePage4State extends State<HomePage4> {
   var isMovedUp = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

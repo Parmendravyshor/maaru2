@@ -74,7 +74,7 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                 ),
               ]),
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
                       topLeft: Radius.circular(20)),
@@ -89,7 +89,7 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                       SizedBox(
                         height: size.height * 0.03,
                       ),
-                      Text(
+                      const Text(
                         'Appointment Details',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -133,8 +133,8 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                       Container(
                           height: size.height * 0.13,
                           width: size.width * 1,
-                          padding: EdgeInsets.only(right: 20, left: 20),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.only(right: 20, left: 20),
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(
                               Radius.circular(20),
                             ),
@@ -143,7 +143,7 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Row(
@@ -154,18 +154,18 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                                       'assets/icons/icone-setting-21.png',
                                       height: 20,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Text(
                                       'Date & Time ',
                                       style: MaaruStyle.text.greyDisable,
                                     ),
-                                    SizedBox(
-                                      width: 100,
+                                    const SizedBox(
+                                      width: 85,
                                     ),
                                     Text(
-                                      'Aug. 21,2021 ',
+                                      'Aug 2021 ',
                                       style: MaaruStyle.text.greyDisable,
                                     )
                                   ]),
@@ -178,14 +178,14 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                                       MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Text(
                                       'Austin Pety Grooming ',
                                       style: MaaruStyle.text.tiny,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 20,
                                     ),
                                     Text(
@@ -217,7 +217,7 @@ class _ProviderBookedConfirmState extends State<ProviderBookedConfirm> {
                             height: size.height * 0.20,
                             width: size.width * 1,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(

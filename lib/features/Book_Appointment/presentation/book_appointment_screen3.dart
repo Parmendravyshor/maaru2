@@ -1,5 +1,28 @@
 import 'dart:ui';
+import 'dart:io';
+import 'dart:ui';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
+import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/alert_manager.dart';
+import 'package:maru/core/widget/back_arrow.dart';
+import 'package:maru/core/widget/dialog.dart';
+import 'package:maru/core/widget/profile_avtar.dart';
+import 'package:maru/core/widget/themed_text_field.dart';
+import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Account_setting/presentation/payment/bloc/payment_bloc.dart';
+import 'package:maru/features/Account_setting/presentation/payment/input_formetters.dart';
+import 'package:maru/features/Account_setting/presentation/payment/my_strings.dart';
+import 'package:maru/features/Account_setting/presentation/payment/payment_card_details.dart';
+import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +36,7 @@ import 'package:maru/core/widget/dialog.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Account_setting/presentation/payment/bloc/payment_bloc.dart';
+import 'package:maru/features/Account_setting/presentation/payment/payment_card_details.dart';
 import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
 
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
@@ -42,9 +66,27 @@ class BookAppointmentScreen3 extends StatefulWidget {
 
 class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
     with SingleTickerProviderStateMixin {
+  bool enabled = false;
+  bool _status = true;
+  final FocusNode myFocusNode = FocusNode();
+  final GlobalKey<State> _keyLoader = GlobalKey<State>();
+  TextEditingController _expDateController;
+  TextEditingController _creditCardNumberController;
+  TextEditingController _nameOnCardController;
+  TextEditingController _cvvController;
+  TextEditingController _bankNameController;
+  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  var _formKey = new GlobalKey<FormState>();
+  var numberController = new TextEditingController();
+  var _paymentCard = PaymentCard();
+  var _autoValidateMode = AutovalidateMode.disabled;
+
+  var _card = new PaymentCard();
+  TextEditingController _nameEditingController;
+  TextEditingController _controller;
   double _scale;
   AnimationController _controller1;
-  final GlobalKey<State> _keyLoader = GlobalKey<State>();
+
 
   Use SelectedUSe = Use.good;
   List<bool> isSelected;
@@ -77,7 +119,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   bool _contextoff = false;
   bool _contextrand = false;
 
-  TextEditingController _controller;
+
   int _dropDownValue = 0;
   String _selValue = "SELECT SERVICES";
   String _selValue1 = 'SELECT PET';
@@ -724,43 +766,170 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                             return Text('ddd');
                                           }
                                         }),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 5, right: 5, top: 10),
-                                      child: Row(children: [
-                                        Padding(
-                                            padding: EdgeInsets.only(left: 70),
-                                            child: InkWell(
-                                              onTap: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (_) =>
-                                                            PaymentScreen1()));
-                                              },
-                                              child: Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 20),
-                                                  child: CircleAvatar(
-                                                    backgroundColor:
-                                                        Colors.grey[100],
-                                                    radius: 30,
-                                                    child: Icon(
-                                                      Icons.add,
-                                                      color: MaaruColors
-                                                          .buttonColor,
-                                                      size: 35,
-                                                    ),
-                                                  )),
-                                            )),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        Text(
-                                          'Add New Card',
-                                          style: MaaruStyle.text.mediumGreen,
-                                        ),
-                                      ]),
+                              Column(
+                                children: [
+                                  TextFormField(
+                                    decoration: const InputDecoration(
+                                      fillColor: Colors.white,
+                                      hoverColor: Colors.white,
+                                      border: UnderlineInputBorder(),
+                                      filled: true,
+                                      icon: Icon(
+                                        Icons.person,
+                                        size: 40.0,
+                                      ),
+                                      hintText: 'What name is written on card?',
+                                      labelText: 'Card Name',
                                     ),
+                                    onSaved: (String value) {
+                                      _card.name = value;
+                                    },
+                                    keyboardType: TextInputType.text,
+                                    validator: (String value) =>
+                                    value.isEmpty ? Strings.fieldReq : null,
+                                    controller: _nameOnCardController,
+                                  ),
+                                  new SizedBox(
+                                    height: 30.0,
+                                  ),
+                                  TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      LengthLimitingTextInputFormatter(19),
+                                      CardNumberInputFormatter()
+                                    ],
+                                    controller: _creditCardNumberController,
+                                    decoration: InputDecoration(
+                                      fillColor: Colors.white,
+                                      hoverColor: Colors.white,
+                                      border: const UnderlineInputBorder(),
+                                      filled: true,
+                                      icon: CardUtils.getCardIcon(_paymentCard.type),
+                                      hintText: 'What number is written on card?',
+                                      labelText: 'Number',
+                                    ),
+                                    onSaved: (String value) {
+                                      print('onSaved = $value');
+                                      print(
+                                          'Num controller has = ${numberController.text}');
+                                      _paymentCard.number =
+                                          CardUtils.getCleanedNumber(value);
+                                    },
+                                    validator: CardUtils.validateCardNum,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Flexible(
+                                        child: Container(
+                                          padding: EdgeInsets.only(),
+                                          child: TextFormField(
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.digitsOnly,
+                                              LengthLimitingTextInputFormatter(4),
+                                            ],
+                                            decoration: const InputDecoration(
+                                              fillColor: Colors.white,
+                                              hoverColor: Colors.white,
+                                              border: UnderlineInputBorder(),
+                                              filled: true,
+                                              icon: Icon(Icons.eleven_mp),
+                                              hintText: 'Number behind the card',
+                                              labelText: 'CVV',
+                                            ),
+                                            validator: CardUtils.validateCVV,
+                                            keyboardType: TextInputType.number,
+                                            onSaved: (value) {
+                                              _paymentCard.cvv = int.parse(value);
+                                            },
+                                            controller: _cvvController,
+                                          ),
+                                        ),
+                                      ),
+                                      // SizedBox(
+                                      //   width: 10,
+                                      // ),
+                                      Flexible(
+                                        child: Container(
+                                          padding: EdgeInsets.only(),
+                                          child: TextFormField(
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.digitsOnly,
+                                              LengthLimitingTextInputFormatter(4),
+                                              CardMonthInputFormatter()
+                                            ],
+                                            decoration: InputDecoration(
+                                              fillColor: Colors.white,
+                                              hoverColor: Colors.white,
+                                              border: const UnderlineInputBorder(),
+                                              filled: true,
+                                              icon: Image.asset(
+                                                'assets/icons/icone-setting-21.png',
+                                                width: 25,
+                                                color: Colors.grey[600],
+                                              ),
+                                              hintText: 'MM/YY',
+                                              labelText: 'Expiry Date',
+                                            ),
+                                            validator: CardUtils.validateDate,
+                                            keyboardType: TextInputType.number,
+                                            onSaved: (value) {
+                                              List<int> expiryDate =
+                                              CardUtils.getExpiryDate(value);
+                                              _paymentCard.month = expiryDate[0];
+                                              _paymentCard.year = expiryDate[1];
+                                            },
+                                            controller: _expDateController,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 30.0,
+                                  ),
+                                  Container(
+                                      alignment: Alignment.center,
+                                      child: ThemedButton(
+                                        text: 'Update Payment',
+                                        enabled: true,
+                                        onPressed: () {
+                                          final FormState form =
+                                              _formKey.currentState;
+                                          if (!form.validate()) {
+                                            setState(() {
+                                              _autoValidateMode =
+                                                  AutovalidateMode
+                                                      .always; // Start validating on every change.
+                                            });
+
+                                          } else {
+                                            form.save();
+                                            MyStatefulWidget();
+                                            //    Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
+                                            //  MyStatefulWidget();
+                                            BlocProvider.of<
+                                                PaymentBloc>(
+                                                context)
+                                                .add(savePayment(
+                                                _cvvController.text,
+                                                _creditCardNumberController
+                                                    .text,
+                                                _cvvController.text,
+                                                _expDateController
+                                                    .text));
+
+                                            // Encrypt and send send payment details to payment gateway
+
+                                          }
+                                        },
+                                      )),
+                                  SizedBox(
+                                    height: 100,
+                                  )
+                                ],
+                              ),
                                     SizedBox(
                                       height: 100,
                                     ),
@@ -834,10 +1003,11 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                               ),
                               Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 15, right: 15),
+                                      left: 10, right: 10),
                                   child: ThemedButton(
-                                    text: 'Payment',
+                                    text: 'Add',
                                     onPressed: () {},
+                                    enabled: true,
                                   )),
                               SizedBox(
                                 height: 100,
@@ -872,7 +1042,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
           )),
       child: const Center(
         child: Text(
-          'Payment',
+          'Add',
           style: TextStyle(
               fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
         ),

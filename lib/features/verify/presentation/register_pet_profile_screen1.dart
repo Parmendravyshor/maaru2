@@ -41,9 +41,7 @@ class CreateregisterPetProfile1 extends StatefulWidget {
       _CreateregisterPetProfile1State();
 }
 
-
-class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  {
-
+class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
   String _image = "";
@@ -97,8 +95,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  
   TextEditingController _sexController;
   TextEditingController _birthDateContoller;
   TextEditingController _noteContoller;
- var abac;
- var abc2;
+  var abac;
+  var abc2;
   @override
   void initState() {
     _petNameController = TextEditingController();
@@ -112,6 +110,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  
 
     super.initState();
   }
+
   @override
   void dispose() {
     _petNameController.dispose();
@@ -138,18 +137,17 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1>  
 
   @override
   Widget build(BuildContext context) {
-    final size=MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     // _image = _prefHelper.getStringByKey(MaruConstant.img, "");
 
     return Scaffold(
         backgroundColor: Colors.grey[100],
         body: BlocProvider(
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
-
-            child:
-            BlocBuilder<PetProfileBloc, PetProfileState>(builder: (context, state) {
+            child: BlocBuilder<PetProfileBloc, PetProfileState>(
+                builder: (context, state) {
               if (state is UserCreatePetProfileButtonTapped) {
-print('create registe instancse call back${state.toString()}');
+                print('create registe instancse call back${state.toString()}');
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (BuildContext context) {
@@ -164,7 +162,7 @@ print('create registe instancse call back${state.toString()}');
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.black,
-                        content: Text('Pet Profile Register Failure',
+                        content: Text('Fill all fields',
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'poppins',
@@ -177,259 +175,274 @@ print('create registe instancse call back${state.toString()}');
               }
 
               return SafeArea(
-                  child: SingleChildScrollView(
-                      child: Column(children: [
-                Padding(
-                    padding: EdgeInsets.only(top: 5.0),
-                    child: Stack(fit: StackFit.loose, children: <Widget>[
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          GestureDetector(
-                            child: Container(
-                              width: size.width*0.50,
-                              height: size.height*0.25,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: _image.isEmpty
-                                      ? ExactAssetImage('assets/icons/Oval.png')
-                                      : FileImage(File(_image)),
-                                  fit: BoxFit.cover,
+                child: SingleChildScrollView(
+                  child: Column(children: [
+                    Padding(
+                        padding: EdgeInsets.only(top: 5.0),
+                        child: Stack(fit: StackFit.loose, children: <Widget>[
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              GestureDetector(
+                                child: Container(
+                                  width: size.width * 0.50,
+                                  height: size.height * 0.25,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: _image.isEmpty
+                                          ? ExactAssetImage(
+                                              'assets/icons/Oval.png')
+                                          : FileImage(File(_image)),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
+                                onTap: getImage,
                               ),
-                            ),
-                            onTap: getImage,
+                            ],
                           ),
-                        ],
-                      ),
-
-                    ])),
-                Padding(
-                    padding: EdgeInsets.only(left: 40, right: 40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image.asset(
-                          'assets/icons/Rectangle copy 3.png',
-                          height: 40,
-                          width: 40,
-                        ),
-
-                        Image.asset(
-                          'assets/icons/icone-setting-68.png',
-                          height: 40,
-                          width: 40,
-                          color: Colors.white,
-                        ),
-                        Image.asset(
-                          'assets/icons/icone-setting-68.png',
-                          height: 40,
-                          width: 40,
-                          color: Colors.white,
-                        ),
-                        Image.asset(
-                          'assets/icons/icone-setting-68.png',
-                          height: 40,
-                          width: 40,
-                          color: Colors.white,
-                        ),
-                        Image.asset(
-                          'assets/icons/icone-setting-68.png',
-                          color: Colors.white,
-                          height: 40,
-                          width: 40,
-                        ),
-                      ],
-                    )),
-                SizedBox(
-                  width: 20,
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    //  width: 1000,
-                    // height: 880,
-                    alignment: FractionalOffset.bottomCenter,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: Padding(
-                        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Column(
+                        ])),
+                    Padding(
+                        padding: EdgeInsets.only(left: 40, right: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
-                              height: 20,
+                            Image.asset(
+                              'assets/icons/Rectangle copy 3.png',
+                              height: 40,
+                              width: 40,
                             ),
-                            Container(
-                              margin: EdgeInsets.only(right: 270),
-                              child: Text(
-                                "GENDER",
-                                style: MaaruStyle.text.tiny,
-                              ),
+                            Image.asset(
+                              'assets/icons/icone-setting-68.png',
+                              height: 40,
+                              width: 40,
+                              color: Colors.white,
                             ),
-                            SizedBox(height: 20),
-                            Container(
-                              margin: const EdgeInsets.only(left: 18),
-                                child: ToggleButton2()),
-                            new SizedBox(
-                              height: 20.0,
+                            Image.asset(
+                              'assets/icons/icone-setting-68.png',
+                              height: 40,
+                              width: 40,
+                              color: Colors.white,
                             ),
-                            ThemedTextField(
-                              "PET NAME   ",
-                              TextInputType.text,
-                              textStyle: TextStyle(color: Colors.black),
-                              textinputaction2: TextInputAction.next,
-                              onChanged: (text) {
-                                BlocProvider.of<PetProfileBloc>(context)
-                                    .add(petNameChanged(text));
-                              },
-                              editingController: _petNameController,
+                            Image.asset(
+                              'assets/icons/icone-setting-68.png',
+                              height: 40,
+                              width: 40,
+                              color: Colors.white,
                             ),
-                            SizedBox(
-                              height: 10.0,
+                            Image.asset(
+                              'assets/icons/icone-setting-68.png',
+                              color: Colors.white,
+                              height: 40,
+                              width: 40,
                             ),
-                            ThemedTextField("BREED TYPE", TextInputType.text,
-                                textStyle: TextStyle(color: Colors.black),
-                                textInputAction: TextInputAction.done,
-                                onChanged: (text) {
-                              BlocProvider.of<PetProfileBloc>(context)
-                                  .add(BreadChanged(text));
-                            }, editingController: _breadTypeController),
-                            new SizedBox(
-                              height: 10.0,
+                          ],
+                        )),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                            //  width: 1000,
+                            // height: 880,
+                            alignment: FractionalOffset.bottomCenter,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
                             ),
-                            ThemedTextField("AGE", TextInputType.number,
-                                textStyle: TextStyle(color: Colors.black),
-                                textInputAction: TextInputAction.done,
-                                onChanged: (text) {
-                              BlocProvider.of<PetProfileBloc>(context)
-                                  .add(AgeChanged(text));
-                            }, editingController: _ageTypeController),
-                            ThemedTextField("WEIGHT", TextInputType.number,
-                                textStyle: TextStyle(color: Colors.black),
-                                textInputAction: TextInputAction.done,
-                                onChanged: (text) {
-                              BlocProvider.of<PetProfileBloc>(context)
-                                  .add(WidthChanged(text));
-                            }, editingController: _weightController),
-                            new SizedBox(
-                              height: 20.0,
-                            ),
-                            //  ThemeChanges(),
-                            ThemedTextField("HEIGHT", TextInputType.number,
-                                textStyle: TextStyle(color: Colors.black),
-                                textInputAction: TextInputAction.done,
-                                onChanged: (text) {
-                              BlocProvider.of<PetProfileBloc>(context)
-                                  .add(HeightChanged(text));
-                            }, editingController: _heightController),
-
-                            DatePicker(),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            Container(
-                                margin: EdgeInsets.only(left: 18),
-                                child: ToggleButton3()),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            ThemedTextField("NOTES", TextInputType.text, textStyle: TextStyle(color: Colors.black),
-                              textInputAction: TextInputAction.done,
-                              onChanged: (text){
-                                BlocProvider.of<PetProfileBloc>(context)
-                                    .add(NoteChanged(text));
-                              },editingController: _noteContoller
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (_) =>
-                                                  RegisterScreen()));
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 50,
-                                      width: 60,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white12,
-                                          shape: BoxShape.circle),
+                            child: Padding(
+                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(right: 270),
                                       child: Text(
-                                        '',
-                                        style: MaaruStyle.text.greyDisable,
+                                        "GENDER",
+                                        style: MaaruStyle.text.tiny,
                                       ),
                                     ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      //  await authSource.emailSignup(params);
-
-                                      String petName = _petNameController.text;
-                                      String breadType =
-                                          _breadTypeController.text;
-                                      // String height = _height.text;
-                                      // String width = _weight.text;
-
-                                      if (petName.isEmpty) {
-                                        AlertManager.showErrorMessage(
-                                            "Please enter Pet name", context);
-                                      } else if (breadType.isEmpty) {
-                                        AlertManager.showErrorMessage(
-                                            "Please enter Bread Type", context);
-                                        // } else if (height.isEmpty) {
-                                        // AlertManager.showErrorMessage(
-                                        // "Please enter Height", context);
-                                        // } else if (width.isEmpty) {
-                                        //   AlertManager.showErrorMessage(
-                                        //       "Please enter weight",
-
-                                        // context);
-
-                                      } else if (breadType.isEmpty) {
-                                        AlertManager.showErrorMessage(
-                                            "Please enter Bread Type", context);
-                                        // } else if (height.isEmpty) {
-                                        // AlertManager.showErrorMessage(
-                                        // "Please enter Height", context);
-                                        // } else if (width.isEmpty) {
-                                        //   AlertManager.showErrorMessage(
-                                        //       "Please enter weight",
-
-                                        // context);
-
-                                      } else {
-                                        BlocProvider.of<PetProfileBloc>(context)
-                                            .add(CreateRegisterPetProfile());
-
-                                      }
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.only(right: 20),
-                                      // alignment: Alignment.centerRight,
-                                      child: Image.asset(
-                                        'assets/images/next (2).png',height:60,),
+                                    const SizedBox(height: 20),
+                                    Container(
+                                        margin: const EdgeInsets.only(left: 18),
+                                        child: ToggleButton2()),
+                                    const SizedBox(
+                                      height: 20.0,
                                     ),
-                                  ),
-                                ]),
+                                    ThemedTextField(
+                                      "PET NAME   ",
+                                      TextInputType.text,
+                                      textStyle: TextStyle(color: Colors.black),
+                                      textinputaction2: TextInputAction.next,
+                                      onChanged: (text) {
+                                        BlocProvider.of<PetProfileBloc>(context)
+                                            .add(petNameChanged(text));
+                                      },
+                                      editingController: _petNameController,
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    ThemedTextField(
+                                        "BREED TYPE", TextInputType.text,
+                                        textStyle:
+                                            TextStyle(color: Colors.black),
+                                        textInputAction: TextInputAction.done,
+                                        onChanged: (text) {
+                                      BlocProvider.of<PetProfileBloc>(context)
+                                          .add(BreadChanged(text));
+                                    }, editingController: _breadTypeController),
+                                    new SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    ThemedTextField("AGE", TextInputType.number,
+                                        textStyle:
+                                            TextStyle(color: Colors.black),
+                                        textInputAction: TextInputAction.done,
+                                        onChanged: (text) {
+                                      BlocProvider.of<PetProfileBloc>(context)
+                                          .add(AgeChanged(text));
+                                    }, editingController: _ageTypeController),
+                                    ThemedTextField(
+                                        "WEIGHT", TextInputType.number,
+                                        textStyle:
+                                            TextStyle(color: Colors.black),
+                                        textInputAction: TextInputAction.done,
+                                        onChanged: (text) {
+                                      BlocProvider.of<PetProfileBloc>(context)
+                                          .add(WidthChanged(text));
+                                    }, editingController: _weightController),
+                                    new SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    //  ThemeChanges(),
+                                    ThemedTextField(
+                                        "HEIGHT", TextInputType.number,
+                                        textStyle:
+                                            TextStyle(color: Colors.black),
+                                        textInputAction: TextInputAction.done,
+                                        onChanged: (text) {
+                                      BlocProvider.of<PetProfileBloc>(context)
+                                          .add(HeightChanged(text));
+                                    }, editingController: _heightController),
+
+                                    DatePicker(),
+                                    SizedBox(
+                                      height: 30.0,
+                                    ),
+                                    Container(
+                                        margin: EdgeInsets.only(left: 18),
+                                        child: ToggleButton3()),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    ThemedTextField("NOTES", TextInputType.text,
+                                        textStyle:
+                                            TextStyle(color: Colors.black),
+                                        textInputAction: TextInputAction.done,
+                                        onChanged: (text) {
+                                      BlocProvider.of<PetProfileBloc>(context)
+                                          .add(NoteChanged(text));
+                                    }, editingController: _noteContoller),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
+                                    Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          RegisterScreen()));
+                                            },
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              height: 50,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white12,
+                                                  shape: BoxShape.circle),
+                                              child: Text(
+                                                '',
+                                                style:
+                                                    MaaruStyle.text.greyDisable,
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              //  await authSource.emailSignup(params);
+
+                                              String petName =
+                                                  _petNameController.text;
+                                              String breadType =
+                                                  _breadTypeController.text;
+                                              String height = _heightController.text;
+                                              String width = _weightController.text;
+
+                                              if (petName.isEmpty) {
+                                                AlertManager.showErrorMessage(
+                                                    "Please enter Pet name",
+                                                    context);
+                                              } else if (breadType.isEmpty) {
+                                                AlertManager.showErrorMessage(
+                                                    "Please enter Bread Type",
+                                                    context);
+                                                } else if (height.isEmpty) {
+                                                AlertManager.showErrorMessage(
+                                                "Please enter Height", context);
+                                                } else if (width.isEmpty) {
+                                                  AlertManager.showErrorMessage(
+                                                      "Please enter weight",
+
+                                                context);
+
+                                              } else if (breadType.isEmpty) {
+                                                AlertManager.showErrorMessage(
+                                                    "Please enter Bread Type",
+                                                    context);
+                                                // } else if (height.isEmpty) {
+                                                // AlertManager.showErrorMessage(
+                                                // "Please enter Height", context);
+                                                // } else if (width.isEmpty) {
+                                                //   AlertManager.showErrorMessage(
+                                                //       "Please enter weight",
+
+                                                // context);
+
+                                              } else {
+                                                BlocProvider.of<PetProfileBloc>(
+                                                        context)
+                                                    .add(
+                                                        CreateRegisterPetProfile());
+                                              }
+                                            },
+                                            child: Container(
+                                              padding:
+                                                  EdgeInsets.only(right: 20),
+                                              // alignment: Alignment.centerRight,
+                                              child: Image.asset(
+                                                'assets/images/next (2).png',
+                                                height: 60,
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
                                   ],
-                                ))))]),
-                          ),
-                          // SizedBox(
-                          //    height: 20,
-                          //  ),
-                        );
-
-
+                                ))))
+                  ]),
+                ),
+                // SizedBox(
+                //    height: 20,
+                //  ),
+              );
             })));
   }
 }
@@ -545,4 +558,3 @@ class _ReuseCircle1State extends State<ReuseCircle1> {
     );
   }
 }
-

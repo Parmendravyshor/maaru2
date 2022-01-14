@@ -77,9 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: SafeArea(
                         child:   BlocBuilder<LoginBloc, LoginState>(
                             builder: (context, state) {
-
                               if (state is LoginSuccess) {
-
                                 SchedulerBinding.instance.addPostFrameCallback((_) {
                                   Navigator.pushReplacement(context,
                                       MaterialPageRoute(builder: (BuildContext context) {

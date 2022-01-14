@@ -221,7 +221,7 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                     BlocProvider.of<ResetBloc>(context)
                                         .add(EmailChanged(text));
                                   }, editingController: _emailController),
-                              ThemedTextField("Otp", TextInputType.number,
+                              ThemedTextField("Otp", TextInputType.text,
                                   onChanged: (text) {},
                                   editingController: _otpController),
                               ThemedTextField("Enter new password",

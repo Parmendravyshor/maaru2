@@ -38,7 +38,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
   Color hotelcolor = Color(0xff5e34d1);
   Color daycarecolor = Color(0xff5e34d1);
 
-  String switchimage = 'assets/icons/icon-bl-19.png';
+  String switchimage =
+      'assets/icons/icon-bl-19.png';
 
   double height = 45;
   double leftpad = 310;
@@ -85,7 +86,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                 border: Border.all(color: Color(0xffE8E8E8)),
                                 borderRadius: BorderRadius.circular(20)),
                             height: 50,
-                            width: 250,
+                            width: 220,
                             child: TextField(
                               textInputAction: TextInputAction.search,
                               decoration: InputDecoration(
@@ -117,8 +118,9 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                               controller: _petNameController,
                             ),
                           ),
+
                           Padding(
-                            padding: const EdgeInsets.only(left: 260),
+                            padding: const EdgeInsets.only(left: 230),
                             child: GestureDetector(
                               onTap: () {
                                 if (mounted) {}
@@ -129,7 +131,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                           builder: (context) => MapView()));
                                 });
                               },
-                              child: Image.asset(
+                              child:
+                              Image.asset(
                                 'assets/icons/icone-setting-61.png',
                                 height: 45,
                               ),
@@ -147,7 +150,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                         : switchimage =
                                             'assets/icons/icon-bl-19.png';
                                     height == 45 ? height = 180 : height = 45;
-                                    leftpad == 310
+                                    leftpad == 100
                                         ? leftpad = 0
                                         : leftpad = 310;
                                   });
@@ -158,7 +161,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                 )),
                           ),
                           Positioned(
-                              left: 20,
+                              left: 10,
                               top: 50,
                               child: Padding(
                                   padding: EdgeInsets.only(top: 10),

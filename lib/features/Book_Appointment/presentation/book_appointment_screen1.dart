@@ -24,7 +24,7 @@ class BookAppointment1 extends StatefulWidget {
 
 class _BookAppointment1State extends State<BookAppointment1> {
   int abc;
-  Color circlecolor1 = MaaruColors.whiteColor;
+  Color circlecolor1 = MaaruColors.walkingcolor;
   Color circlecolor2 = MaaruColors.hotelcolor;
   Color circlecolor3 = MaaruColors.hotelcolor;
   Color circlecolor4 = MaaruColors.hotelcolor;
@@ -49,7 +49,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
         child: Container(
           width: 150,
 
-          margin: EdgeInsets.only(left: 12, top: 9, bottom: 9,right: 10),
+          margin: EdgeInsets.only(left: 5, top: 9, bottom: 9,right: 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -256,16 +256,8 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                             GestureDetector(
                                                 onTap: () {
                                                   setState(() {
-                                                    circlecolor3 ==
-                                                            MaaruColors
-                                                                .hotelcolor
-                                                        ? circlecolor3 =
-                                                            MaaruColors
-                                                                .hotelcolor
-                                                        : circlecolor3 =
-                                                            MaaruColors
-                                                                .whiteColor;
-                                                    if (circlecolor3 ==
+
+                                                    if (circlecolor1 ==
                                                         MaaruColors
                                                             .hotelcolor) {
                                                       select = 'hotel';

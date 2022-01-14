@@ -137,15 +137,18 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                         alignment: Alignment.bottomRight,
                         height: size.height * 0.20,
                         width: size.width * 0.9,
-                        child: Image.network(
-                            _prefHelper.getStringByKey(MaruConstant.img, ''),
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                              color: Colors.amber,
-                              alignment: Alignment.center,
-                              child: Image.asset('assets/images/kutta.png'));
-                        })),
+                        child:
+                        Center(
+                          child: Image.network(
+                              _prefHelper.getStringByKey(MaruConstant.img, ''),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                                color: Colors.transparent,
+                                alignment: Alignment.center,
+                                child: Image.asset('assets/images/kutta.png'));
+                          }),
+                        )),
                     Container(
                         alignment: FractionalOffset.bottomCenter,
                         decoration: BoxDecoration(

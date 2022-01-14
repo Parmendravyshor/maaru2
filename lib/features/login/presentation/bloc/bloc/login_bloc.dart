@@ -147,10 +147,10 @@ final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
           if (res.isRight()) {
             yield VerificationNeeded();
           } else {
-            yield LoginFailure("Signin failed..please try again.. $l");
+            yield LoginFailure("email or password not valid");
           }
         } else {
-          yield LoginFailure("Signin failed..please try again.. $l");
+          yield LoginFailure("email or password not valid.. $l");
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {

@@ -203,8 +203,8 @@ class _UpcomingAppointmentCalenderState
                                             height: 36,
                                           ),
 
-                                          Text(
-                                            state.getProviderRequestModel.appointmentRequests[index].bookingDate.toString(),
+                                          Text('',
+                                            //state.getProviderRequestModel.appointmentRequests[index].bookingDate.toString(),
                                             style: TextStyle(
                                                 color: Colors.grey,
                                                 fontSize: 12),

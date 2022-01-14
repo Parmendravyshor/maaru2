@@ -3,6 +3,8 @@ import 'package:flutter_bloc/src/bloc_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+
+import 'alert_manager.dart';
 class ToggleButton extends StatefulWidget {
   @override
   _ToggleButtonState createState() => _ToggleButtonState();
@@ -123,6 +125,10 @@ class _ToggleButton2State extends State<ToggleButton2> {
                     : malecontainercolor)),
         GestureDetector(
             onTap: () {
+              if (gender == 'male') {
+                AlertManager.showErrorMessage(
+                    "Please enter first name", context);
+              }
               setState(() {
                 SelectedGender = Gender.female;
                 if(SelectedGender==Gender.female)
@@ -135,6 +141,7 @@ class _ToggleButton2State extends State<ToggleButton2> {
                   print('null');
                 }
               });
+
               BlocProvider.of<PetProfileBloc>(context)
                   .add(genderChanged(gender));
             },
