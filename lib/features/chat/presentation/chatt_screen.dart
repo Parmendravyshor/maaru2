@@ -41,7 +41,7 @@ class chatScreenState extends State<chatScreen> {
   new TextEditingController();
   ScreenshotController screenshotController = ScreenshotController();
   final _controller = ScrollController();
-  IO.Socket socket;
+
   final container = KiwiContainer();
   List<Message> messageList = [];
   String _image = "";
@@ -51,16 +51,7 @@ class chatScreenState extends State<chatScreen> {
   void initState() {
 
     super.initState();
-    IO.Socket socket = IO.io('http://18.191.199.31:80',
-        OptionBuilder()
-            .setTransports(['websocket']).build());
 
-    socket.onConnect((_) {
-      print('ddconnect');
-      socket.emit('msg', 'test');
-    });
-    socket.emit('connect_user', {'userId': 29});
-    socket.connect();
   }
 
   @override
@@ -254,7 +245,7 @@ class chatScreenState extends State<chatScreen> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 20,
                                       ),
                                       _image.isEmpty
@@ -268,9 +259,9 @@ class chatScreenState extends State<chatScreen> {
                                                 .size
                                                 .width *
                                                 0.70),
-                                        padding: EdgeInsets.all(10),
-                                        margin: EdgeInsets.only(left: 20),
-                                        decoration: BoxDecoration(
+                                        padding: const EdgeInsets.all(10),
+                                        margin: const EdgeInsets.only(left: 20),
+                                        decoration: const BoxDecoration(
                                           color: Color.fromRGBO(
                                               225, 255, 199, 1.0),
                                           borderRadius: BorderRadius.only(

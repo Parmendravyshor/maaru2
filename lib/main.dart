@@ -53,6 +53,7 @@ import 'package:responsive_framework/utils/scroll_behavior.dart';
 
 import 'core/theme/maaru_style.dart';
 import 'core/utils.dart';
+import 'features/Account_setting/presentation/payment/payment_screen.dart';
 import 'features/Home/presentation/search_screen.dart';
 import 'features/chat/presentation/chatt_screen.dart';
 import 'features/login/presentation/bloc/bloc/login_bloc.dart';
@@ -159,7 +160,7 @@ class MyApp extends StatelessWidget {
         //todo: navigate to SplashScreen
 //TODO:need to putup scrooll pagination vie
 // w on the buttom (Provider search screen)
-        home: Scaffold(body: ( LoginProviderScreen ())));
+        home: Scaffold(body: (PaymentScreen1 ())));
   }
 }
 

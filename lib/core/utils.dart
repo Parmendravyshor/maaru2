@@ -1,4 +1,3 @@
-
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 
@@ -57,6 +56,7 @@ Future<void> registerDependencyInjection() async {
   _registerUseCases(container);
   _registerBloc(container);
 }
+
 void _registerBloc(KiwiContainer container) {
   container.registerFactory((c) => RegisterBloc(c.resolve(), c.resolve()));
   container.registerFactory(
@@ -94,11 +94,15 @@ void _registerBloc(KiwiContainer container) {
   container.registerFactory((c) => VerifyBloc(
       c.resolve(), c.resolve(), c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory((c) => ProviderHomeBloc(c.resolve()));
-  container
-      .registerFactory((c) => BookAppointmentBloc(c.resolve(), c.resolve(),c.resolve()));
-  container
-      .registerFactory((c) => ChatBloc(c.resolve(), c.resolve(), c.resolve(),));
+  container.registerFactory(
+      (c) => BookAppointmentBloc(c.resolve(), c.resolve(), c.resolve()));
+  container.registerFactory((c) => ChatBloc(
+        c.resolve(),
+        c.resolve(),
+        c.resolve(),
+      ));
 }
+
 void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => EmailSignin(c.resolve()));
   container.registerFactory((c) => EmailSignup(c.resolve()));
@@ -133,8 +137,9 @@ void _registerUseCases(KiwiContainer container) {
 }
 
 void _registerRepositories(KiwiContainer container) {
-  container.registerFactory<UserRepository>(
-      (c) => UserRepositoryImpl(c.resolve(), ));
+  container.registerFactory<UserRepository>((c) => UserRepositoryImpl(
+        c.resolve(),
+      ));
 }
 
 _registerDataSources(KiwiContainer container) {
@@ -147,6 +152,4 @@ _registerApiClient(KiwiContainer container) {}
 _registerMisc(KiwiContainer container) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   container.registerFactory((c) => sharedPreferences);
-
-
 }

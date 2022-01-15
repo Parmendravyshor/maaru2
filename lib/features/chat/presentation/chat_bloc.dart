@@ -12,7 +12,7 @@ import 'package:maru/features/chat/domain/usecases/get_text_file.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:meta/meta.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,35 +27,24 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   final EmailSignin emailSignin;
   final GetTextFile getTextFile;
   ChatBloc(this.sharedPrefHelper, this.emailSignin, this.getTextFile,[String address = 'http://18.191.199.31:80'])
-      : super(){
+      : super() {
 
-    _socket = io(
-    address,
-    OptionBuilder()
-        .setTransports(['websockets'])
-        .disableAutoConnect()
-    .enableAutoConnect()
-        .disableReconnection()
-        .build(),
+      IO.Socket socket = IO.io(address, <String, dynamic>{
+        'transports': ['websocket'],
+        'autoConnect': true,
+      });
 
-    );
-    try {
-      _socket.onConnecting((data) => print('success1'));
-      _socket.connect();
+// Dart client
+      socket.on('connect', (_) {
+        print('connect');
+      });
+      socket.on('event', (data) => print(data));
+      socket.on('disconnect', (_) => print('disconnect'));
+      socket.on('fromServer', (_) => print(_));
 
-      _socket.onConnect((data) => print('succes'));
-      //add(OnlineConnectedEvent()));
-      _socket.onConnectError((data) => print('sss1'));
-      _socket.onConnectTimeout((data) => print('sss2'));
-      _socket.onDisconnect((data) => print('sss3'));
-      _socket.onError((data) => print('sss4'));
-      _socket.on('joined', (data) => print('sss5'));
-      print('pass');
-    } catch(e){
-      print('kkk${e.toString()}');
-    }
-    }
+      print(e);
 
+  }
   int tried = 0;
   bool isFromException = false;
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
@@ -84,16 +73,16 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
       }
 
-      // DateTime expiryTime = DateTime.fromMillisecondsSinceEpoch(
-      //     int.parse(sharedPrefHelper.getExpiryTime()) * 1000);
-      //
-      // if (expiryTime.isBefore(DateTime.now())) {
-      //   await emailSignin(EmailAuthParams(
-      //       email: sharedPrefHelper.getEmail(),
-      //       password: '',
-      //       first_name: "",
-      //       lName: ""));
-      // }
+      DateTime expiryTime = DateTime.fromMillisecondsSinceEpoch(
+          int.parse(sharedPrefHelper.getExpiryTime()) * 1000);
+
+      if (expiryTime.isBefore(DateTime.now())) {
+        await emailSignin(EmailAuthParams(
+            email: sharedPrefHelper.getEmail(),
+            password: '',
+            first_name: "",
+            lName: ""));
+      }
 
       try {
        final response =
