@@ -32,17 +32,14 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
   PetProfileBloc(
       this.getPetProfile,
-      this.saveChangePassword,
       this.savePetProfile,
-      this.saveUserProfile,
       this.createPetProfile,
       this.sharedPrefHelper,
       this.getSinglePetProfile,
       this.uploadVaccineREcord,
       this.getProviders,
       this.getProviderById,
-      this._saveUserPayment,
-      this._getUSerPayment)
+   )
       : super();
   final SharedPrefHelper sharedPrefHelper;
   final GetProviderById getProviderById;
@@ -52,10 +49,8 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
   final CreatePetProfile createPetProfile;
   final SavePetProfile savePetProfile;
   final GetPetProfile getPetProfile;
-  final SaveUserProfile saveUserProfile;
-  final SaveChangePassword saveChangePassword;
-  final SaveUserPayment _saveUserPayment;
-  final GetUSerPayment _getUSerPayment;
+
+
   // int step = 1;
   String age = '';
   var petneed = '';
@@ -267,25 +262,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       }
       yield PetVaccineSuccessfull();
     }
-    if (event is RegisterUser) {
-      // await getPetProfile(NoParams());
-      UserProfileParams profileParams = UserProfileParams(
-        email: sharedPrefHelper.getEmail(),
-        fname: event.fname,
-        lname: event.lname,
-        phone: event.phone,
-        city: event.city,
-        zipCode: event.zip,
-        state: event.state,
-      );
-      final result = await saveUserProfile(profileParams);
-      if (result.isRight()) {
-        print("profileeee saveddd");
-      } else {
-        print("profileeee faileddd");
-      }
-      // yield UserPetProfileButtonTapped();
-    } else if (event is Profile3) {
+   else if (event is Profile3) {
       print('kick');
       PetProfile1 profileParams4 = PetProfile1(
         walkingSchedule: event.walking,
@@ -329,21 +306,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       yield pet4rofileButtonTapped();
       print('tapped');
     }
-    if (event is ProfileOpened) {
-    } else if (event is ChangePassword) {
-      UserProfileParams profileParams = UserProfileParams(
-        //email: sharedPrefHelper.getEmail(),
-        oldPassword: event.oldPassword,
-        NewPassword: event.newPasword,
-      );
-      final result = await saveChangePassword(profileParams);
-      if (result.isRight()) {
-        print("Password  Changed");
-      } else {
-        print("Password faileddd");
-      }
-      yield UserChangePasswordButtonTapped();
-    }
+
     if (event is GetProvider) {
       final result = await getProviders(event.text);
       print('ddddd$event.text');

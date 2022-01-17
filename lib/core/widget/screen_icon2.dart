@@ -118,7 +118,7 @@ class _ToggleButton2State extends State<ToggleButton2> {
             },
             child:ToggleContainer(
                 size.height * 0.060,
-                size.width * 0.45,
+                size.width * 0.43,
                 'male',
                 SelectedGender == Gender.male
                     ? MaaruColors.button2Color
@@ -147,7 +147,7 @@ class _ToggleButton2State extends State<ToggleButton2> {
             },
             child: ToggleContainer(
                 size.height * 0.060,
-                size.width * 0.44,
+                size.width * 0.43,
                 'female',
                 SelectedGender == Gender.female
                     ? MaaruColors.button2Color

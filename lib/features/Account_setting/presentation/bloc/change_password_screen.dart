@@ -14,9 +14,12 @@ import 'package:maru/core/widget/dialog.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Account_setting/presentation/bloc/setting_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
+  const ChangePasswordScreen({Key key}) : super(key: key);
+
   @override
   _ChangePasswordScreenState createState() => _ChangePasswordScreenState();
 }
@@ -72,10 +75,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  ProfileAvatar(imageUrl:  _prefHelper
-                      .getStringByKey(MaruConstant.img, ''),
+
+                  ProfileAvatar(
+                    imageUrl:'assets/128/CrystalGaskell.png  ',
 
                     errorBuilder: (context, error, stackTrace) {
+
                       return Container(
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
@@ -135,8 +140,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen>
                         onPressed: () {
                           Dialogs.showLoadingDialog(
                               context, _keyLoader, "Change Password..");
-                          BlocProvider.of<PetProfileBloc>(context).add(
-                              ChangePassword(_currentController.text,
+                          BlocProvider.of<SettingBloc>(context).add(
+                             ChangePassword(_currentController.text,
                                   _newController.text));
                         },
                         text: 'Update Password',

@@ -7,6 +7,7 @@ import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/features/Home/presentation/chat_screen.dart';
+import 'package:maru/features/chat/presentation/chatt_screen.dart';
 
 class CustomCard extends StatefulWidget {
   const CustomCard({Key key,this.chatModel}) : super(key: key);
@@ -22,7 +23,7 @@ class _CustomCardState extends State<CustomCard> {
       InkWell(
         onTap: (){
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => ChatScreen()));
+              builder: (_) => chatScreen()));
         },
         child: Column(
         children: [

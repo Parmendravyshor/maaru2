@@ -12,7 +12,7 @@ import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:maru/features/Account_setting/presentation/account_setting.dart';
+import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
@@ -116,9 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               }
 
                               return  Padding(
-                                padding: const EdgeInsets.only(left: 10.0,right: 10.0),
+                                padding: const EdgeInsets.only(left: 15.0,right: 15.0),
                                 child: Container(
-                                  margin: EdgeInsets.only(left: 0,right: 0),
                                   child: Column(children: [
                                     Logo(),
                                     ScreenIcon(),

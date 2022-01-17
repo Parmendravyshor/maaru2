@@ -1,6 +1,6 @@
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
-import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+
 SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 class MaruConstant {
 
@@ -27,44 +27,41 @@ class MaruConstant {
    static final saveUserPayment = Uri.parse('http://18.191.199.31/api/user/card-details');
    static final changePassword = Uri.parse('http://18.191.199.31/api/user/change-password');
    static final createUserProfile = Uri.parse('http://18.191.199.31/api/user');
-   static String first_name = 'first_name';
-   static String pet_name = 'pet_name';
-   static String breed_type = 'breed_type';
+   static String firstName = 'first_name';
+   static String petName = 'pet_name';
+   static String breedType = 'breed_type';
   // static String token = 'access-token';
    static var  age = 'age ';
-   static String modelendpoint =
-       "xhcz7a3myc.execute-api.us-east-2.amazonaws.com";
-   static String corePath = "chadbotcore";
    static String  city = 'city';
    static String  zipcode = 'zipcode';
-   static String   phone_no = 'phone_no';
+   static String   phoneNO = 'phone_no';
    static String   state = 'state';
    static String   img = 'img';
-   static String   operation_hours = 'operation_hours';
-   static String   review_comment = 'review_comment';
+   static String   operationsHours = 'operation_hours';
+   static String   reviewsComment = 'review_comment';
    static String   description = 'description';
-   static String  rating_reviews = ' rating_reviews ';
+   static String  ratingReviews = ' rating_reviews ';
    static String weight ='weight';
    static String height ='height';
-   static String known_allergies ='known_allergies';
+   static String knownAllergies ='known_allergies';
    static var vaccine = 'vaccine';
-   static String pet_needs ='pet_needs';
-   static String birth_date ='birth_date';
+   static String petNeeds ='pet_needs';
+   static String birthdate ='birth_date';
    static var sex = 'sex';
    static String gender = 'gender';
-   static String walking_schedule ='walking_schedule';
-   static String feeding_schedule ='feeding_schedule';
+   static String walkingSchedule ='walking_schedule';
+   static String feedingSchedule ='feeding_schedule';
    static String temperament ='temperament';
-   static String company_name ='company_name';
+   static String companyName ='company_name';
    static String ratings ='ratings';
    static String medication = 'medication';
    static String name ='name';
 //static String img ='img';
-   static var times_a_day ='times_a_day';
+   static var timesADay ='times_a_day';
    static String note ='note';
-   static String last_name = 'last_name';
+   static String lastName = 'last_name';
    static String otp = 'otp';
-   static String name_on_card = 'name_on_card';
+   static String nameOnCard = 'name_on_card';
    static String credit_card_no = 'credit_card_no';
    static String exp_date = 'exp_date';
    static String cvv = 'cvv';

@@ -18,7 +18,10 @@ class ChatOpened extends ChatEvent {
 /// This event is fired when Chat is opened
 class ChatMessageSent extends ChatEvent {
   final String message;
-  ChatMessageSent(this.message);
+  // final int userid;
+  // final String userid2;
+  // final String mesageType;
+  ChatMessageSent(this.message,);
 
   @override
   String toString() => "ChatMessageSent";

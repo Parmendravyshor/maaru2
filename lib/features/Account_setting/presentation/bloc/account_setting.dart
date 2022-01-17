@@ -6,13 +6,16 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/disclaimer.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
-import 'package:maru/features/Account_setting/presentation/change_password_screen.dart';
+
 import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/splash/verify_screen.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
 import 'package:maru/features/splash/view/view.dart';
+
+import 'change_password_screen.dart';
 import 'edit_profile_screen.dart';
+
 
 class AccountSettingScreen extends StatefulWidget {
   @override
@@ -141,7 +144,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                   width: 400,
                                                   decoration: BoxDecoration(
                                                     color:
-                                                        Color(0xfff7f7f7),
+                                                        const Color(0xfff7f7f7),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.0),
@@ -209,7 +212,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                   width: 400,
                                                   decoration: BoxDecoration(
                                                     color:
-                                                       Color(0xfff7f7f7),
+                                                     const  Color(0xfff7f7f7),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.0),
@@ -326,7 +329,7 @@ class Test3 extends StatelessWidget {
                       height: 60,
                       width: 20,
                       decoration: BoxDecoration(
-                        color: Color(0xfff7f7f7),
+                        color: const Color(0xfff7f7f7),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       alignment: Alignment.centerLeft,

@@ -134,9 +134,18 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                             ),
                             Container(
                                 alignment: Alignment.bottomRight,
-                                height: size.height * 0.25,
+                              //  height: size.height * 0.25,
                                 width: size.width * 0.9,
-                                child:Image.network(_prefHelper.getStringByKey(MaruConstant.img, ''))),
+                                child:Image.network(_prefHelper.getStringByKey(MaruConstant.img, '',
+
+                                ),
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                          color: Colors.transparent,
+                                          alignment: Alignment.center,
+                                          child:
+                                          Image.asset('assets/images/kutta.png'));
+                                    })),
                             Container(
                                 width: 1000,
                                 height: 600,

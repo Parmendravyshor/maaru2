@@ -107,71 +107,71 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                 });
                               }
 
-                              return  Column(children: [
-                                Logo(),
-                                ScreenIcon(),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Center(
-                                  child: Text(
-                                    'or login with email',
-                                    style: GoogleFonts.poppins(
-                                        textStyle: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500)),
+                              return  Padding(
+                                padding: const EdgeInsets.only(left: 15.0,right: 15),
+                                child: Column(children: [
+                                  Logo(),
+                                  ScreenIcon(),
+                                  const SizedBox(
+                                    height: 20,
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
+                                  Center(
+                                    child: Text(
+                                      'or login with email',
+                                      style: GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500)),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
 
 
-                                Column(children: [
-                                  Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        ThemedTextField("Email", TextInputType.emailAddress,
-                                            textinputaction2: TextInputAction.next,
+                                  Column(children: [
+                                    Column(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          ThemedTextField("Email", TextInputType.emailAddress,
+                                              textinputaction2: TextInputAction.next,
+                                              onChanged: (text) {
+                                                BlocProvider.of<LoginBloc>(context).add(event.EmailChanged(text));
+                                              }, editingController: _emailController),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          ThemedTextField(
+                                            "Password",
+                                            TextInputType.text,
+                                            textinputaction2: TextInputAction.done,
+                                            password: true,
                                             onChanged: (text) {
-                                              BlocProvider.of<LoginBloc>(context).add(event.EmailChanged(text));
-                                            }, editingController: _emailController),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        ThemedTextField(
-                                          "Password",
-                                          TextInputType.text,
-                                          textinputaction2: TextInputAction.done,
-                                          password: true,
-                                          onChanged: (text) {
-                                            BlocProvider.of<LoginBloc>(context)
-                                                .add(event.PasswordChanged(text));
-                                          },
-                                          editingController: _passwordController,
-                                        ),
-                                        Container(
-                                            alignment: Alignment.centerRight,
-                                            padding: EdgeInsets.only(right: 20),
-                                            child: InkWell(
-                                                onTap: () {
-                                                  Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder: (_) =>
-                                                              ResetPasswordScreen()));
-                                                },
-                                                child: Text(
-                                                  'Forgot Password',
-                                                  style: MaaruStyle.text.greyDisable,
-                                                ))),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
+                                              BlocProvider.of<LoginBloc>(context)
+                                                  .add(event.PasswordChanged(text));
+                                            },
+                                            editingController: _passwordController,
+                                          ),
+                                          Container(
+                                              alignment: Alignment.centerRight,
+                                              padding: EdgeInsets.only(right: 20),
+                                              child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (_) =>
+                                                                ResetPasswordScreen()));
+                                                  },
+                                                  child: Text(
+                                                    'Forgot Password',
+                                                    style: MaaruStyle.text.greyDisable,
+                                                  ))),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
 
-                                        Container(
-                                          padding: EdgeInsets.only(left: 20,right: 20),
-                                          child: ThemedButton(
+                                          ThemedButton(
                                             text: 'Login',
                                             onPressed: () {
                                               String email = _emailController.text;
@@ -202,28 +202,28 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                               }
                                             },
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        state is LoginInProgress
-                                            ? Center(
-                                            child: Container(
-                                              margin: EdgeInsets.only(bottom: 10),
-                                              width: 40,
-                                              height: 40,
-                                              child: CircularProgressIndicator(),
-                                            ))
-                                            : Container(),
-                                        Container(
-                                          child: GoToSignInText(),
-                                        ),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          state is LoginInProgress
+                                              ? Center(
+                                              child: Container(
+                                                margin: EdgeInsets.only(bottom: 10),
+                                                width: 40,
+                                                height: 40,
+                                                child: CircularProgressIndicator(),
+                                              ))
+                                              : Container(),
+                                          Container(
+                                            child: GoToSignInText(),
+                                          ),
 
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                      ])
-                                ])]);
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                        ])
+                                  ])]),
+                              );
                             })
                     )))));
   }

@@ -583,7 +583,7 @@ class _PaymentScreen1State extends State<PaymentScreen1>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[360],
         key: _scaffoldKey,
         body: BlocProvider(
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
@@ -608,7 +608,7 @@ class _PaymentScreen1State extends State<PaymentScreen1>
                                         backgroundColor: Colors.white,
                                         radius: 90.0,
                                         child: Image.asset(
-                                          'assets/images/4970774.png',
+                                          'assets/128/CrystalGaskell.png',
                                           errorBuilder:
                                               (context, error, stackTrace) {
                                             return Container(
@@ -622,7 +622,7 @@ class _PaymentScreen1State extends State<PaymentScreen1>
                                         ))
                                   ],
                                 )),
-                            const Text('Update Payment'),
+                             Text('Update Payment',style: MaaruStyle.text.tiniest,),
                             SizedBox(
                               height: 20.0,
                             ),
@@ -937,44 +937,42 @@ class _PaymentScreen1State extends State<PaymentScreen1>
                                           const SizedBox(
                                             height: 30.0,
                                           ),
-                                          Container(
-                                              alignment: Alignment.center,
-                                              child: ThemedButton(
-                                                text: 'Update Payment',
-                                                enabled: true,
-                                                onPressed: () {
-                                                  final FormState form =
-                                                      _formKey.currentState;
-                                                  if (!form.validate()) {
-                                                    setState(() {
-                                                      _autoValidateMode =
-                                                          AutovalidateMode
-                                                              .always; // Start validating on every change.
-                                                    });
-                                                    _showInSnackBar(
-                                                        'Please fix the errors in red before submitting.');
-                                                  } else {
-                                                    form.save();
-                                                    MyStatefulWidget();
-                                                    //    Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
-                                                    //  MyStatefulWidget();
-                                                    BlocProvider.of<
-                                                                PaymentBloc>(
-                                                            context)
-                                                        .add(savePayment(
-                                                            _cvvController.text,
-                                                            _creditCardNumberController
-                                                                .text,
-                                                            _cvvController.text,
-                                                            _expDateController
-                                                                .text));
+                                          ThemedButton(
+                                            text: 'Update Payment',
+                                            enabled: true,
+                                            onPressed: () {
+                                              final FormState form =
+                                                  _formKey.currentState;
+                                              if (!form.validate()) {
+                                                setState(() {
+                                                  _autoValidateMode =
+                                                      AutovalidateMode
+                                                          .always; // Start validating on every change.
+                                                });
+                                                _showInSnackBar(
+                                                    'Please fix the errors in red before submitting.');
+                                              } else {
+                                                form.save();
+                                                MyStatefulWidget();
+                                                //    Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
+                                                //  MyStatefulWidget();
+                                                BlocProvider.of<
+                                                            PaymentBloc>(
+                                                        context)
+                                                    .add(savePayment(
+                                                        _cvvController.text,
+                                                        _creditCardNumberController
+                                                            .text,
+                                                        _cvvController.text,
+                                                        _expDateController
+                                                            .text));
 
-                                                    // Encrypt and send send payment details to payment gateway
-                                                    _showInSnackBar(
-                                                        'Payment card is valid');
-                                                  }
-                                                },
-                                              )),
+                                                // Encrypt and send send payment details to payment gateway
+                                                _showInSnackBar(
+                                                    'Payment card is valid');
+                                              }
+                                            },
+                                          ),
                                           const SizedBox(
                                             height: 20,
                                           )

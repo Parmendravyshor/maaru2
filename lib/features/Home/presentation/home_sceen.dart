@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
           body: SafeArea(
               child: SingleChildScrollView(
                   child: Padding(
-                      padding: EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.only(left: 20,right: 10),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -60,13 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-
-                              HorizList(),
+                            HorizList(),
                             SizedBox(
                               height: size.height * 0.03,
                             ),
                             Padding(
-                                padding: const EdgeInsets.only(left: 15),
+                                padding: const EdgeInsets.only(left: 10),
                                 child: Text(
                                   'Upcoming Appoinments',
                                   style: MaaruStyle.text.tiny,
@@ -256,16 +255,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 }),
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(left: 10, right: 15),
-                              child: ThemedButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => AppointmentScreen()));
-                                },
-                                text: 'View All Appoinments',
-                                enabled: true,
-                              ),
+                            ThemedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => AppointmentScreen()));
+                              },
+                              text: 'View All Appoinments',
+                              enabled: true,
                             ),
                             const SizedBox(
                               height: 30,
@@ -277,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style: MaaruStyle.text.tiny,
                                 )),
                             Padding(
-                                padding: EdgeInsets.fromLTRB(10, 20, 20, 20),
+                                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     border: Border.all(color: Colors.grey),
@@ -315,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           style: TextStyle(
                                               color: Colors.grey, fontSize: 11),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
                                         Row(
@@ -344,16 +340,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                 )),
-                            Container(
-                              margin: EdgeInsets.only(left: 10, right: 15),
-                              child: ThemedButton(
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => Messages()));
-                                },
-                                text: ' All messages',
-                                enabled: true,
-                              ),
+                            ThemedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => Messages()));
+                              },
+                              text: ' All messages',
+                              enabled: true,
                             ),
                             const SizedBox(
                               height: 30,
@@ -367,7 +360,7 @@ class HorizList extends StatefulWidget {
   final int id;
   bool aet;
 
-   HorizList({Key key, this.id}) : super(key: key);
+  HorizList({Key key, this.id}) : super(key: key);
   @override
   State<HorizList> createState() => _HorizListState();
 }
@@ -405,179 +398,185 @@ class _HorizListState extends State<HorizList> {
     final size = MediaQuery.of(context).size;
     final List Message = [10];
     return Center(
-        child: BlocProvider(
-            create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
-            child: BlocBuilder<PetProfileBloc, PetProfileState>(
-                builder: (context, state) {
-              if (state is PetProfileInitial) {
-                BlocProvider.of<PetProfileBloc>(context)
-                    .add(GetCovidList(_petNameController.text));
+        child: Container(
+            color: Colors.white,
+            child: BlocProvider(
+                create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+                child: BlocBuilder<PetProfileBloc, PetProfileState>(
+                    builder: (context, state) {
+                  if (state is PetProfileInitial) {
+                    BlocProvider.of<PetProfileBloc>(context)
+                        .add(GetCovidList(_petNameController.text));
 
-                return CircularProgressIndicator();
-              } else if (state is CovidLoaded3) {
-                print(
-                    '+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
+                    return CircularProgressIndicator();
+                  } else if (state is CovidLoaded3) {
+                    print(
+                        '+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
 
-                return Container(
-                  color: Colors.white,
-                  child: Column(children: [
-                    Padding(
-                        padding: EdgeInsets.only(top: 15, right: 10, left: 5),
-                        child: TextFormField(
-                          // cursorColor: Colors.black,
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.7),
-                                  borderSide: BorderSide(
-                                      color: MaaruColors.textfeildline,
-                                      width: 1.0)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.7),
-                                  borderSide: BorderSide(
-                                      color: MaaruColors.textfeildline,
-                                      width: 1.0)),
-                              hintText: 'Search',
-                              hintStyle: MaaruStyle.text.greyDisable,
-                              contentPadding: const EdgeInsets.fromLTRB(
-                                  20.0, 15.0, 25.0, 10.0),
-                              fillColor: Colors.white,
-                              suffixIcon: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      BlocProvider.of<PetProfileBloc>(context)
-                                          .add(GetCovidList('ddd'));
-                                    });
-                                  },
-                                  child: Image.asset(
-                                    'assets/icons/icone-setting-19.png',
-                                    height: 52,
-                                    // width: 30,
-                                  ))),
-                          // onFieldSubmitted: (text) {
-                          //   BlocProvider.of<PetProfileBloc>(context)
-                          //       .add(GetCovidList(text));
-                          // },
-                          onChanged: (text) {
-                            BlocProvider.of<PetProfileBloc>(context)
-                                .add(GetCovidList(text));
-                          },
-                          controller: _petNameController,
-                        )),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                        height: size.height * 0.27,
-                        child: ListView.builder(
-                            itemCount: state.covidModel.petProfiles.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                  padding: index == Message.length - 1
-                                      ? const EdgeInsets.fromLTRB(8, 0, 8, 0)
-                                      : const EdgeInsets.only(
-                                          left: 8, right: 8),
-                                  child: InkWell(
-                                      onTap: () {
-                                      var a =   _prefHelper.saveInt(
-                                            'id',
-                                            state.covidModel.petProfiles[index]
-                                                .id);
-                                        //state.covidModel.petProfiles[index].id;
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (_) =>
-                                                    ViewPetProfile(id1:state.covidModel.petProfiles[index].id)));
-                                      },
-                                      child: Container(
-                                          alignment: FractionalOffset.topLeft,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            border: Border.all(
-                                                color: Colors.grey[300],
-                                                width: 1.0),
-                                          ),
-                                          width: size.width * 0.44,
-                                          child: Column(children: [
-                                            Container(
-                                              child: Image.network(
-                                                  state.covidModel
-                                                      .petProfiles[index].img
-                                                      .toString(),
-                                                  height: 140,
-                                                  width: 180,
-                                                  fit: BoxFit.fitWidth,
-                                                  errorBuilder: (context, error,
-                                                      stackTrace) {
-                                                return Container(
-                                                    color: Colors.amber,
-                                                    alignment: Alignment.center,
-                                                    child: Expanded(
-                                                        child: Image.asset(
-                                                            'assets/images/kutta.png')));
-                                              }),
+                    return Column(children: [
+                      Padding(
+                          padding: EdgeInsets.only(top: 15, right: 10, left: 10),
+                          child: TextFormField(
+                            // cursorColor: Colors.black,
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0.0),
+                                    borderSide: BorderSide(
+                                        color: MaaruColors.textfeildline,
+                                        width: 1.0)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(0.0),
+                                    borderSide: BorderSide(
+                                        color: MaaruColors.textfeildline,
+                                        width: 1.0)),
+                                hintText: 'Search',
+                                hintStyle: MaaruStyle.text.greyDisable,
+                                contentPadding: const EdgeInsets.fromLTRB(
+                                    20.0, 15.0, 25.0, 10.0),
+                                fillColor: Colors.white,
+                                suffixIcon: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        BlocProvider.of<PetProfileBloc>(context)
+                                            .add(GetCovidList('ddd'));
+                                      });
+                                    },
+                                    child: Image.asset(
+                                      'assets/icons/icone-setting-19.png',
+                                      height: 52,
+                                      // width: 30,
+                                    ))),
+                            // onFieldSubmitted: (text) {
+                            //   BlocProvider.of<PetProfileBloc>(context)
+                            //       .add(GetCovidList(text));
+                            // },
+                            onChanged: (text) {
+                              BlocProvider.of<PetProfileBloc>(context)
+                                  .add(GetCovidList(text));
+                            },
+                            controller: _petNameController,
+                          )),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                          height: size.height * 0.27,
+                          child: ListView.builder(
+                              itemCount: state.covidModel.petProfiles.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                    padding: index == Message.length - 1
+                                        ? const EdgeInsets.fromLTRB(8, 0, 8, 0)
+                                        : const EdgeInsets.only(
+                                            left: 8, right: 8),
+                                    child: InkWell(
+                                        onTap: () {
+                                          var a = _prefHelper.saveInt(
+                                              'id',
+                                              state.covidModel
+                                                  .petProfiles[index].id);
+                                          //state.covidModel.petProfiles[index].id;
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      ViewPetProfile(
+                                                          id1: state
+                                                              .covidModel
+                                                              .petProfiles[
+                                                                  index]
+                                                              .id)));
+                                        },
+                                        child: Container(
+                                            alignment: FractionalOffset.topLeft,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              border: Border.all(
+                                                  color: Colors.grey[300],
+                                                  width: 1.0),
                                             ),
-                                            Container(
-                                                height: size.height * 0.09,
-                                                margin: EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(
+                                            width: size.width * 0.44,
+                                            child: Column(children: [
+                                              Container(
+                                                child: Image.network(
+                                                    state.covidModel
+                                                        .petProfiles[index].img
+                                                        .toString(),
+                                                    height: 140,
+                                                    width: 180,
+                                                    fit: BoxFit.fitWidth,
+                                                    errorBuilder: (context,
+                                                        error, stackTrace) {
+                                                  return Container(
+                                                      color: Colors.amber,
+                                                      alignment:
+                                                          Alignment.center,
+                                                      child: Expanded(
+                                                          child: Image.asset(
+                                                              'assets/images/kutta.png')));
+                                                }),
+                                              ),
+                                              Container(
+                                                  height: size.height * 0.09,
+                                                  margin: const EdgeInsets.only(
+                                                      left: 10, right: 10),
+                                                  child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                                state
+                                                                    .covidModel
+                                                                    .petProfiles[
+                                                                        index]
+                                                                    .petName
+                                                                    .toString(),
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .poppins(
+                                                                  textStyle:
+                                                                      MaaruStyle
+                                                                          .text
+                                                                          .tiny,
+                                                                )),
+                                                            Image.asset(
+                                                              'assets/icons/icone-setting-31.png',
+                                                              width: 25,
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Padding(
+                                                            padding:
+                                                                const EdgeInsets.only(
+                                                                    right: 70),
+                                                            child: Text(
                                                               state
                                                                   .covidModel
                                                                   .petProfiles[
                                                                       index]
-                                                                  .petName
+                                                                  .breedType
                                                                   .toString(),
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                textStyle:
-                                                                    MaaruStyle
-                                                                        .text
-                                                                        .tiny,
-                                                              )),
-                                                          Image.asset(
-                                                            'assets/icons/icone-setting-31.png',
-                                                            width: 25,
-                                                          )
-                                                        ],
-                                                      ),
-                                                      Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  right: 70),
-                                                          child: Text(
-                                                            state
-                                                                .covidModel
-                                                                .petProfiles[
-                                                                    index]
-                                                                .breedType
-                                                                .toString(),
-                                                            style: MaaruStyle
-                                                                .text.tiny,
-                                                          ))
-                                                    ])
-                                                // alignment: Alignment.center,
-                                                )
-                                          ]))));
-                            }))
-                  ]),
-                );
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            })));
+                                                              style: MaaruStyle
+                                                                  .text.tiny,
+                                                            ))
+                                                      ])
+                                                  // alignment: Alignment.center,
+                                                  )
+                                            ]))));
+                              }))
+                    ]);
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                }))));
   }
 }

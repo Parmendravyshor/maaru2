@@ -140,7 +140,7 @@ print('sssss${widget.id1}');
                                                     CrossAxisAlignment.end,
                                                     children: [
                                                       Text(
-                                                        _prefHelper.getStringByKey(MaruConstant.first_name, ''),
+                                                        _prefHelper.getStringByKey(MaruConstant.firstName, ''),
                                                         style:
                                                         MaaruStyle.text.large,
                                                       ),
@@ -160,7 +160,7 @@ print('sssss${widget.id1}');
                                                           ))
                                                     ]),
                                                 Text(
-                                                  _prefHelper.getStringByKey(MaruConstant.last_name, ''),
+                                                  _prefHelper.getStringByKey(MaruConstant.lastName, ''),
                                                   style: MaaruStyle.text.tiny,
                                                 ),
                                                 const SizedBox(

@@ -238,13 +238,12 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                       MaruConstant.img, ''),
                                   errorBuilder: (context, error, stackTrace) {
                                 return Container(
-                                    color: Colors.amber,
+                                    color: Colors.transparent,
                                     alignment: Alignment.center,
                                     child:
                                         Image.asset('assets/images/kutta.png'));
                               }))),
                       Container(
-
                           //  width: 1000,
                           // height: 1300,
                           alignment: FractionalOffset.bottomCenter,
@@ -252,18 +251,18 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                             color: Color(0xFFffffff),
                           ),
                           child: Container(
-                              padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
+                              padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                         _prefHelper.getStringByKey(
-                                            MaruConstant.first_name, ''),
+                                            MaruConstant.firstName, ''),
                                         style: MaaruStyle.text.large,
                                         textAlign: TextAlign.left),
                                     Text(
                                       _prefHelper.getStringByKey(
-                                          MaruConstant.last_name, ''),
+                                          MaruConstant.lastName, ''),
                                       style: MaaruStyle.text.tiny,
                                     ),
                                     SizedBox(

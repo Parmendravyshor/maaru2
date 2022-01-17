@@ -5,7 +5,7 @@ import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
-import 'package:maru/features/Account_setting/presentation/account_setting.dart';
+import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
 
 
 class ShowLocation extends StatelessWidget {
@@ -23,12 +23,12 @@ class ShowLocation extends StatelessWidget {
             child: TextFormField(
               cursorColor: Colors.black,
               decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(25.0),
-                  borderSide: const BorderSide(color: Colors.white, width: 0.0),
+                enabledBorder:  OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(0.0),
+                  borderSide: BorderSide(color: Colors.white, width: 0.0),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: new BorderRadius.circular(25.0),
+                  borderRadius: BorderRadius.circular(0.0),
                   borderSide: const BorderSide(color: Colors.white, width: 0.0)),
                 hintText: 'Search Location',hintStyle: MaaruStyle.text.greyDisable,
                 fillColor: Colors.grey[100],
@@ -55,6 +55,7 @@ class ShowLocation extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => AccountSettingScreen()));
+
             },
             child: ProfileAvatar(
 

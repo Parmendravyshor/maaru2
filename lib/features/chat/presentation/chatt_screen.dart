@@ -41,7 +41,7 @@ class chatScreenState extends State<chatScreen> {
   new TextEditingController();
   ScreenshotController screenshotController = ScreenshotController();
   final _controller = ScrollController();
-
+  IO.Socket socket;
   final container = KiwiContainer();
   List<Message> messageList = [];
   String _image = "";
@@ -51,8 +51,84 @@ class chatScreenState extends State<chatScreen> {
   void initState() {
 
     super.initState();
+    IO.Socket socket = IO.io('http://18.191.199.31:80',
+        OptionBuilder()
+            .setTransports(['websocket']).build());
 
+    socket.onConnect((_) {
+      print('connect');
+      print('ddconnect');
+      socket.emit('msg', 'test');
+    });
   }
+  void connectToServer() {
+    try {
+
+      IO.Socket socket = IO.io('http://18.191.199.31:80');
+      socket.onConnect((_) {
+        print('connect');
+        socket.emit('userId', '73');
+      });
+      socket.on('event', (data) => print(data));
+      socket.onDisconnect((_) => print('disconnect'));
+      socket.on('fromServer', (_) => print(_));
+
+      // Connect to websocket
+      socket.connect();
+
+      // Handle socket events
+      socket.on('connect', (_) => print('connect: ${socket.id}'));
+      socket.on('location', handleLocationListen);
+      socket.on('typing', handleTyping);
+      socket.on('message', handleMessage);
+      socket.on('disconnect', (_) => print('disconnect'));
+      socket.on('fromServer', (_) => print(_));
+
+    } catch (e) {
+      print(e.toString());
+    }
+
+
+    socket.emit('connect_user', {'userId': 29},
+    );
+    socket.connect();
+  }
+
+  // Send Location to Server
+  sendLocation(Map<String, dynamic> data) {
+    socket;
+    socket.emit("location", data);
+  }
+
+  // Listen to Location updates of connected usersfrom server
+  handleLocationListen(Map<String, dynamic> data) async {
+    print(data);
+  }
+
+  // Send update of user's typing status
+
+
+  // Listen to update of typing status from connected users
+  void handleTyping(Map<String, dynamic> data) {
+    print(data);
+  }
+
+  // Send a Message to the server
+  // sendMessage(String message) {
+  //   socket.emit("message",
+  //     {
+  //       "id": socket.id,
+  //       "message": message, // Message to be sent
+  //       "timestamp": DateTime.now().millisecondsSinceEpoch,
+  //     },
+  //   );
+  // }
+
+  // Listen to all message events from connected users
+  void handleMessage(Map<String, dynamic> data) {
+    print(data);
+  }
+
 
   @override
   void dispose() {
@@ -245,7 +321,7 @@ class chatScreenState extends State<chatScreen> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      const SizedBox(
+                                      SizedBox(
                                         width: 20,
                                       ),
                                       _image.isEmpty
@@ -259,9 +335,9 @@ class chatScreenState extends State<chatScreen> {
                                                 .size
                                                 .width *
                                                 0.70),
-                                        padding: const EdgeInsets.all(10),
-                                        margin: const EdgeInsets.only(left: 20),
-                                        decoration: const BoxDecoration(
+                                        padding: EdgeInsets.all(10),
+                                        margin: EdgeInsets.only(left: 20),
+                                        decoration: BoxDecoration(
                                           color: Color.fromRGBO(
                                               225, 255, 199, 1.0),
                                           borderRadius: BorderRadius.only(
@@ -398,7 +474,7 @@ class chatScreenState extends State<chatScreen> {
                 onChanged: (String messageText) {},
 
                 decoration:
-                 InputDecoration.collapsed(hintText: "Send a message"),
+                 const InputDecoration.collapsed(hintText: "Send a message"),
 
               ),
             ),

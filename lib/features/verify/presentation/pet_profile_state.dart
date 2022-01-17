@@ -105,13 +105,7 @@ class pet4rofileButtonTapped extends PetProfileState {
   String toString() => "pet4rofileButtonTapped";
 
 }
-class UserChangePasswordButtonTapped extends PetProfileState {
-  UserChangePasswordButtonTapped() : super();
 
-  @override
-  String toString() => "UserPetProfileButtonTapped";
-
-}
 class PetProfile2Saves extends PetProfileState {
   PetProfile2Saves() : super();
 

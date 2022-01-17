@@ -13,7 +13,6 @@ import 'package:maru/features/verify/domain/usecases/get_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/upload_vaccine_record.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
-
 import 'package:dartz/dartz.dart';
 import 'package:kiwi/kiwi.dart';
 import 'dart:convert' as convert;
@@ -42,8 +41,8 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Failure, void>> emailSignup(EmailAuthParams params) async {
     try {
       var map = new Map<String, String>();
-      map[MaruConstant.first_name] = params.first_name;
-      map[MaruConstant.last_name] = params.lName;
+      map[MaruConstant.firstName] = params.first_name;
+      map[MaruConstant.lastName] = params.lName;
       map[MaruConstant.email] = params.email;
       map[MaruConstant.password] = params.password;
       map[MaruConstant.user_type] = 'user';
@@ -62,7 +61,7 @@ print(res);
     EmailAuthParams params,
   ) async {
     try {
-      var map = new Map<String, String>();
+      var map =  Map<String, String>();
 
       map[MaruConstant.email] = params.email;
       map[MaruConstant.password] = params.password;
@@ -82,13 +81,13 @@ print(res);
         MaruConstant.password,
       );
       await sharedPrefHelper.savelname(
-          MaruConstant.last_name, res['last_name']);
+          MaruConstant.lastName, res['last_name']);
       await sharedPrefHelper.saveEmail(res[MaruConstant.email]);
       print("Register Success  ${response.body}");
       //  await sharedPrefHelper.saveString( "first_name",res['first_name']);
       var fname = '';
       if (res.containsKey("first_name")) fname = res['first_name'] ?? "";
-      sharedPrefHelper.saveString(MaruConstant.first_name, fname ?? "");
+      sharedPrefHelper.saveString(MaruConstant.firstName, fname ?? "");
       print(res['first_name']);
       await sharedPrefHelper.saveString("last_name", res['last_name']);
       print(res['last_name']);
@@ -218,7 +217,6 @@ print(res);
         "",
       );
       var headers = {"access-token": token, 'Content-Type': 'json/application'};
-
       final File imageFile = File(img1);
       var stream =
           http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
@@ -231,16 +229,16 @@ print(res);
           filename: basename(imageFile.path));
       request.files.add(multipartFile);
       request
-        ..fields[MaruConstant.pet_name] = params.petName
-        ..fields[MaruConstant.breed_type] = params.breedType
+        ..fields[MaruConstant.petName] = params.petName
+        ..fields[MaruConstant.breedType] = params.breedType
         ..fields['age'] = params.age
         ..fields[MaruConstant.height] = params.height
         ..fields[MaruConstant.weight] = params.weight
-        ..fields[MaruConstant.known_allergies] = params.knownAllergies
+        ..fields[MaruConstant.knownAllergies] = params.knownAllergies
         ..fields[MaruConstant.name] = ''
         ..fields[MaruConstant.note] = params.notes
-        ..fields[MaruConstant.pet_needs] = ''
-        ..fields[MaruConstant.times_a_day] = ''
+        ..fields[MaruConstant.petNeeds] = ''
+        ..fields[MaruConstant.timesADay] = ''
         ..fields[MaruConstant.sex] = params.sex
         ..fields[MaruConstant.gender] = params.gender
         // ..fields['breed_type'] = 'dff'
@@ -252,24 +250,21 @@ print(res);
       print("respStr respStr respStr:$respStr");
       Map res = json.decode(respStr);
       print(res);
-      var kucchu = '', kucchu2 = '';
       var profile = res['pet_profile'];
       var profile2 = profile['id'];
       print('sssss$profile2');
-
-//
       await _prefHelper.saveInt('id', profile2);
       await _prefHelper.saveString(MaruConstant.height, profile['height']);
       await _prefHelper.saveString(MaruConstant.age, profile['age']);
-      await _prefHelper.saveString(MaruConstant.pet_name, profile['pet_name']);
+      await _prefHelper.saveString(MaruConstant.petName, profile['pet_name']);
       await _prefHelper.saveString(
-          MaruConstant.breed_type, profile['breed_type']);
+          MaruConstant.breedType, profile['breed_type']);
       await _prefHelper.saveString(MaruConstant.weight, profile['weight']);
       await _prefHelper.saveString(MaruConstant.sex, profile['sex']);
       await _prefHelper.saveString(MaruConstant.gender, profile['gender']);
       await _prefHelper.saveString(MaruConstant.img, profile['img']);
       await _prefHelper.saveString(
-          MaruConstant.birth_date, profile['birth_date']);
+          MaruConstant.birthdate, profile['birth_date']);
 
       return Right(Void);
 
@@ -298,7 +293,7 @@ print(res);
       var headers = {"access-token": token};
 
       final response = await http.get(
-          Uri.parse('http://18.191.199.31/api/pets?pet_name=${text}'),
+          Uri.parse('http://18.191.199.31/api/pets?pet_name=$text'),
           headers: headers);
 
       var data = convert.jsonDecode(response.body);
@@ -363,16 +358,16 @@ print(res);
     try {
       int abc;
       final token = _prefHelper.gettoken();
-      var ss2 = await _prefHelper.getStringByKey(MaruConstant.pet_name, '');
+      var ss2 = await _prefHelper.getStringByKey(MaruConstant.petName, '');
       print(ss2);
-      var age2 = _prefHelper.getStringByKey(MaruConstant.breed_type, '');
+      var age2 = _prefHelper.getStringByKey(MaruConstant.breedType, '');
       print('juikodjhfhjfhjfhfjhfjhfjfhjfhfhfhfjh${age2}');
       var headers = {
         "access-token": token,
       };
       var requetBodyPArams = {
-        MaruConstant.pet_name:
-            _prefHelper.getStringByKey(MaruConstant.pet_name, ''),
+        MaruConstant.petName:
+            _prefHelper.getStringByKey(MaruConstant.petName, ''),
         'age': _prefHelper.getStringByKey(MaruConstant.age, ''),
         MaruConstant.height:
             _prefHelper.getStringByKey(MaruConstant.height, ''),
@@ -381,21 +376,21 @@ print(res);
         MaruConstant.sex: _prefHelper.getStringByKey(MaruConstant.sex, ''),
         MaruConstant.gender:
             _prefHelper.getStringByKey(MaruConstant.gender, ''),
-        MaruConstant.breed_type:
-            _prefHelper.getStringByKey(MaruConstant.breed_type, ''),
-        'birth_date': _prefHelper.getStringByKey(MaruConstant.birth_date, ''),
-        MaruConstant.known_allergies.toString():
+        MaruConstant.breedType:
+            _prefHelper.getStringByKey(MaruConstant.breedType, ''),
+        'birth_date': _prefHelper.getStringByKey(MaruConstant.birthdate, ''),
+        MaruConstant.knownAllergies.toString():
             params.knownAllergies.toString(),
-        MaruConstant.pet_needs.toString(): params.petNeeds.toString(),
-        MaruConstant.walking_schedule.toString():
+        MaruConstant.petNeeds.toString(): params.petNeeds.toString(),
+        MaruConstant.walkingSchedule.toString():
             params.walkingSchedule.toString(),
-        MaruConstant.feeding_schedule.toString():
+        MaruConstant.feedingSchedule.toString():
             params.feedingSchedule.toString(),
         MaruConstant.temperament.toString(): params.temperament.toString(),
         MaruConstant.medication.toString(): params.medication.toString(),
         MaruConstant.name.toString(): params.name.toString(),
         MaruConstant.name.toString(): params.name.toString(),
-        MaruConstant.times_a_day.toString(): params.times_a_day.toString(),
+        MaruConstant.timesADay.toString(): params.times_a_day.toString(),
         MaruConstant.note.toString(): params.notes.toString(),
       };
       var petid3 = _prefHelper.getIntByKey('id', abc);
@@ -442,9 +437,9 @@ print(res);
           filename: basename(imageFile.path));
       request.files.add(multipartFile);
       request
-        ..fields[MaruConstant.first_name] = params.fname
-        ..fields[MaruConstant.last_name] = params.lname
-        ..fields[MaruConstant.phone_no] = params.phone
+        ..fields[MaruConstant.firstName] = params.fname
+        ..fields[MaruConstant.lastName] = params.lname
+        ..fields[MaruConstant.phoneNO] = params.phone
         ..fields[MaruConstant.city] = params.city
         ..fields[MaruConstant.state] = params.state
         ..fields[MaruConstant.zipcode] = params.zipCode
@@ -699,7 +694,7 @@ print(res);
       );
       await sharedPrefHelper.saveString('is_verified', res['is_verified']);
       await sharedPrefHelper.savelname(
-          MaruConstant.last_name, res['last_name']);
+          MaruConstant.lastName, res['last_name']);
       await sharedPrefHelper.saveEmail(res[MaruConstant.email]);
       print("Register Success  ${response.body}");
       return Right(Void);
@@ -714,8 +709,8 @@ print(res);
       EmailAuthParams params) async {
     try {
       var map = new Map<String, String>();
-      map[MaruConstant.first_name] = params.first_name;
-      map[MaruConstant.last_name] = params.lName;
+      map[MaruConstant.firstName] = params.first_name;
+      map[MaruConstant.lastName] = params.lName;
       map[MaruConstant.email] = params.email;
       map[MaruConstant.password] = params.password;
       map[MaruConstant.user_type] = 'provider';

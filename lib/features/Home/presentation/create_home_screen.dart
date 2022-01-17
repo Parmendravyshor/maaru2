@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maru/features/Account_setting/presentation/account_setting.dart';
+import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/Home/presentation/message.dart';
 import 'package:maru/features/Home/presentation/pet_profile.dart';

@@ -172,23 +172,23 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
 
   @override
   Future<void> savefname(String key, String value) {
-    return sharedPreferences.setString(MaruConstant.first_name, '');
+    return sharedPreferences.setString(MaruConstant.firstName, '');
   }
 
   @override
   String getfname() {
     // TODO: implement getfname
-    return sharedPreferences.getString(MaruConstant.first_name,);
+    return sharedPreferences.getString(MaruConstant.firstName,);
   }
 
   @override
   String getlname() {
-    sharedPreferences.getString(MaruConstant.last_name,);
+    sharedPreferences.getString(MaruConstant.lastName,);
   }
 
   @override
   Future<void> savelname(String key, String value) {
-    return sharedPreferences.setString(MaruConstant.last_name, '');
+    return sharedPreferences.setString(MaruConstant.lastName, '');
   }
 
   @override

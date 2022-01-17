@@ -50,7 +50,7 @@ class ThemedButton extends StatelessWidget {
       margin: EdgeInsets.only(left: 20,right: 20),
       child: Center(
           child: FractionallySizedBox(
-              widthFactor:1.1,
+              widthFactor:1.022,
               child: Container(
 
                   decoration: enabled ? MaaruStyle.buttonShadow : null,
@@ -91,7 +91,7 @@ class ThemedButtonGey extends StatelessWidget {
 
     return Center(
         child: FractionallySizedBox(
-            widthFactor: 0.9,
+            widthFactor: 0.8,
             child: Container(
                 decoration: enabled ? MaaruStyle.buttonShadow : null,
                 child: FlatButton(

@@ -293,7 +293,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                 const EdgeInsets.only(left: 55),
                                             child: Text(
                                                 _prefHelper.getStringByKey(
-                                                    MaruConstant.company_name,
+                                                    MaruConstant.companyName,
                                                     ''),
                                                 style: MaaruStyle.text.tiny),
                                           ),

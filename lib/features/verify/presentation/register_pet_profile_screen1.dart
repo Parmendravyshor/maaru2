@@ -148,17 +148,16 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                 builder: (context, state) {
               if (state is UserCreatePetProfileButtonTapped) {
                 print('create registe instancse call back${state.toString()}');
-                SchedulerBinding.instance.addPostFrameCallback((_) {
+
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (BuildContext context) {
                     return CreateRegisterPetProfile2();
                   }));
-                });
+
 
                 return Container();
               } else if (state is RegisterFailure) {
-                SchedulerBinding.instance.addPostFrameCallback((_) {
-                  Future.delayed(Duration(seconds: 3), () {
+                  Future.delayed(const Duration(seconds: 3), () {
                     Scaffold.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.black,
@@ -171,7 +170,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                       ),
                     );
                   });
-                });
+
               }
 
               return SafeArea(
@@ -253,14 +252,15 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                               color: Colors.white,
                             ),
                             child: Padding(
-                                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                 child: Column(
                                   children: [
                                     SizedBox(
                                       height: 20,
                                     ),
                                     Container(
-                                      margin: EdgeInsets.only(right: 270),
+                                      padding: const EdgeInsets.only(left: 20),
+                                    alignment: Alignment.topLeft,
                                       child: Text(
                                         "GENDER",
                                         style: MaaruStyle.text.tiny,
@@ -268,7 +268,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                     ),
                                     const SizedBox(height: 20),
                                     Container(
-                                        margin: const EdgeInsets.only(left: 18),
+                                        margin: const EdgeInsets.only(left: 18,right: 10),
                                         child: ToggleButton2()),
                                     const SizedBox(
                                       height: 20.0,
@@ -379,7 +379,6 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                           InkWell(
                                             onTap: () {
                                               //  await authSource.emailSignup(params);
-
                                               String petName =
                                                   _petNameController.text;
                                               String breadType =

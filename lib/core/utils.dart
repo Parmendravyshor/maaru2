@@ -85,10 +85,6 @@ void _registerBloc(KiwiContainer container) {
       c.resolve(),
       c.resolve(),
       c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
-      c.resolve(),
       c.resolve()));
   // container.registerFactory((c) => KProfileBloc(c.resolve(), c.resolve()));
   container.registerFactory((c) => VerifyBloc(

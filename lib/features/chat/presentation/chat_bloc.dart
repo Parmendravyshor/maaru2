@@ -12,51 +12,64 @@ import 'package:maru/features/chat/domain/usecases/get_text_file.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:meta/meta.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
-import  'chat_event.dart';
+import 'chat_event.dart';
 import 'chat_state.dart';
+
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   Socket _socket;
   List<Message> messageList = [];
   final SharedPrefHelper sharedPrefHelper;
   final EmailSignin emailSignin;
   final GetTextFile getTextFile;
-  ChatBloc(this.sharedPrefHelper, this.emailSignin, this.getTextFile,[String address = 'http://18.191.199.31:80'])
+  ChatBloc(this.sharedPrefHelper, this.emailSignin, this.getTextFile,
+      [String address = 'http://18.191.199.31:80'])
       : super() {
-
-      IO.Socket socket = IO.io(address, <String, dynamic>{
-        'transports': ['websocket'],
-        'autoConnect': true,
-      });
-
-// Dart client
-      socket.on('connect', (_) {
+    _socket = io(
+      address,
+      OptionBuilder()
+          .setTransports(['websockets'])
+          .disableAutoConnect()
+          .enableAutoConnect()
+          .disableReconnection()
+          .build(),
+    );
+    try {
+      _socket.on('connect', (_) {
         print('connect');
       });
-      socket.on('event', (data) => print(data));
-      socket.on('disconnect', (_) => print('disconnect'));
-      socket.on('fromServer', (_) => print(_));
-
-      print(e);
-
+      _socket.on('event', (data) => print(data));
+      _socket.on('disconnect', (_) => print('disconnect'));
+      _socket.on('fromServer', (_) => print(_));
+      _socket.onConnect((data) => print('succes'));
+      //add(OnlineConnectedEvent()));
+      _socket.onConnectError((data) => print('sss1'));
+      _socket.onConnectTimeout((data) => print('sss2'));
+      _socket.onDisconnect((data) => print('sss3'));
+      _socket.onError((data) => print('sss4'));
+      _socket.on('joined', (data) => print('sss5'));
+      print('pass');
+    } catch (e) {
+      print('kkk${e.toString()}');
+    }
   }
+
   int tried = 0;
   bool isFromException = false;
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   @override
   Stream<ChatState> mapEventToState(ChatEvent event) async* {
     if (event is ChatOpened) {
-
       var maps;
       messageList = List.generate(maps.length, (i) {
         return Message(
           maps[i]['message'],
-          maps[i]['type'],
+          maps[i]['messageType'],
         );
       });
 
@@ -67,10 +80,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       if (isFromException) {
         isFromException = false;
       } else {
-        final sentMessage = Message(event.message, 1);
+        final sentMessage = Message(
+          event.message,
+          1,
+        );
         messageList.add(sentMessage);
         yield ChatSendInProgress(messageList);
-
       }
 
       DateTime expiryTime = DateTime.fromMillisecondsSinceEpoch(
@@ -85,16 +100,22 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       }
 
       try {
-       final response =
-       await getData(event.message, _prefHelper.getStringByKey(MaruConstant.token, "",));
-       if (response.statusCode == 200) {
+        final response = await getData(
+            event.message,
+            _prefHelper.getStringByKey(
+              MaruConstant.token,
+              "",
+            ));
+        if (response.statusCode == 200) {
           try {
             var jsonResponse = convert.jsonDecode(response.body);
             var body = convert.jsonDecode(jsonResponse['body']);
             var message = body['Answer'];
-            final receivedMessage = Message(message, 2);
+            final receivedMessage = Message(
+              message,
+              2,
+            );
             messageList.add(receivedMessage);
-
 
             yield ChatSendSuccess(messageList);
           } catch (e) {}
@@ -112,22 +133,23 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   @override
   // TODO: implement initialState
-  ChatState get initialState =>ChatSendInitial() ;
+  ChatState get initialState => ChatSendInitial();
 }
+
 SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 Future<http.Response> getData(String question, String jwtToken) {
-  final token = _prefHelper.getStringByKey(MaruConstant.token, "",);
+  final token = _prefHelper.getStringByKey(
+    MaruConstant.token,
+    "",
+  );
 
-  var headers = {
-    "access-token": token
-  };
+  var headers = {"access-token": token};
   return http
-      .get(
-    Uri.parse('http://18.191.199.31/api/chat/get-chats/5'),
-    headers: headers
-    // body: jsonEncode(
-    //     <String, String>{"utterance": question, "jwttoken": jwtToken}),
-  )
+      .get(Uri.parse('http://18.191.199.31/api/chat/get-chats/5'),
+          headers: headers
+          // body: jsonEncode(
+          //     <String, String>{"utterance": question, "jwttoken": jwtToken}),
+          )
       .timeout(Duration(seconds: 30), onTimeout: () {
     throw TimeoutException("timeout occurred");
   });

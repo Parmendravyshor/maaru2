@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 
 
 import 'package:maru/core/theme/maaru_style.dart';
-import 'package:maru/features/Account_setting/presentation/Account_setting.dart';
-import 'package:maru/features/Account_setting/presentation/change_password_screen.dart';
-import 'package:maru/features/Account_setting/presentation/edit_profile_screen.dart';
+import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
+
+import 'package:maru/features/Account_setting/presentation/bloc/change_password_screen.dart';
+import 'package:maru/features/Account_setting/presentation/bloc/edit_profile_screen.dart';
+
 import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
 import 'package:maru/features/Account_setting/presentation/transition.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
@@ -144,7 +146,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                 height: 60,
                                                 width: 400,
                                                 decoration: BoxDecoration(
-                                                  color: MaaruColors.darkGrey2,
+                                                  color: Color(0xfff7f7f7),
                                                   borderRadius:
                                                   BorderRadius.circular(10.0),
                                                 ),
@@ -202,7 +204,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                 height: 60,
                                                 width: 400,
                                                 decoration: BoxDecoration(
-                                                  color: MaaruColors.darkGrey2,
+                                                  color: Colors.grey[300],
                                                   borderRadius:
                                                   BorderRadius.circular(10.0),
                                                 ),
@@ -268,7 +270,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                               ),
                               Test3(
                                 image:
-                                'assets/images/126-1264365_grey-logout-icon-png-transparent-png.png',
+                                'assets/images/126-1264365_grey-logout-icon-png-transparent-png (2).png',
                                 hite: 40,
                                 size: 130,
                                 text: 'Log Out',

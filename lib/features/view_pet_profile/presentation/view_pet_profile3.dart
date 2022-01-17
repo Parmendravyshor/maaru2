@@ -151,7 +151,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                 children: [
                                                   Text(
                                                     _prefHelper.getStringByKey(
-                                                        MaruConstant.first_name,
+                                                        MaruConstant.firstName,
                                                         ''),
                                                     style: MaaruStyle.text.large,
                                                   ),
@@ -172,7 +172,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                 ]),
                                             Text(
                                               _prefHelper.getStringByKey(
-                                                  MaruConstant.last_name, ''),
+                                                  MaruConstant.lastName, ''),
                                               style: MaaruStyle.text.tiny,
                                             ),
                                             SizedBox(

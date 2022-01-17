@@ -1,7 +1,9 @@
 class Message {
   final String message;
   final int messageType;
-  Message(this.message, this.messageType);
+  // final String userId;
+  // final String user2Id;
+  Message(this.message, this.messageType, );
 
   String get text => message;
   int get typeOfMsg => messageType;
@@ -9,7 +11,9 @@ class Message {
   Map<String, dynamic> toMap() {
     return {
       'message': message,
-      'type': messageType,
+      'messageType': messageType,
+     // 'userId':userId,
+     // 'user2Id':user2Id
     };
   }
 

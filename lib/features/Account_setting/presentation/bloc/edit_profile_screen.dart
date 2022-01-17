@@ -14,6 +14,7 @@ import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:flutter/painting.dart';
+import 'package:maru/features/Account_setting/presentation/bloc/setting_bloc.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
@@ -93,13 +94,13 @@ class _CreateUserProfileState extends State<CreateUserProfile>
             //    Navigator.of(context).pop();
           } catch (e) {}
           _fnameController.text =
-              _prefHelper.getStringByKey(MaruConstant.first_name, "");
+              _prefHelper.getStringByKey(MaruConstant.firstName, "");
           _lnameController.text =
-              _prefHelper.getStringByKey(MaruConstant.last_name, "");
+              _prefHelper.getStringByKey(MaruConstant.lastName, "");
           _emailController.text =
               _prefHelper.getStringByKey(MaruConstant.email, "");
           _mobileController.text =
-              _prefHelper.getStringByKey(MaruConstant.phone_no, "");
+              _prefHelper.getStringByKey(MaruConstant.phoneNO, "");
           // if (state is UserPetProfileButtonTapped) {
           //   _status = true;
           // }
@@ -136,7 +137,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
               ),
               Padding(
                   padding: EdgeInsets.only(
-                    top: 160.0,
+                    top: 160.0,bottom: 10
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -154,7 +155,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
               height: 800,
               alignment: FractionalOffset.bottomCenter,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                  color: Colors.white, ),
               child: Container(
                 padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
                 child: Column(
@@ -264,7 +265,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                         onPressed: () {
                           Dialogs.showLoadingDialog(
                               context, _keyLoader, "Updating profile..");
-                          BlocProvider.of<PetProfileBloc>(context)
+                          BlocProvider.of<SettingBloc>(context)
                               .add(RegisterUser(
                             _fnameController.text,
                             _lnameController.text,

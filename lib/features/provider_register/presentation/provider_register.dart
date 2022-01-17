@@ -107,82 +107,82 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                         });
                       }
 
-                      return Column(
-                        children: [
-                          Logo(),
-                          ScreenIcon(),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Center(
-                            child: Text(
-                              'or sign up with email',
-                              style: MaaruStyle.text.tiny
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 15.0,right: 15.0),
+                        child: Column(
+                          children: [
+                            Logo(),
+                            ScreenIcon(),
+                            SizedBox(
+                              height: 20,
                             ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            // padding: const EdgeInsets.symmetric(horizontal: 40),
-                            child: Column(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    ThemedTextField(
-                                        "First Name", TextInputType.text,
-                                        textInputAction: TextInputAction.next,
-                                        onChanged: (text) {
-                                       BlocProvider.of<RegisterBloc>(context)
-                                        .add(FNameChanged(text));
-                                    },
-                                        editingController:
-                                            _first_nameController),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    ThemedTextField(
-                                        "Last Name", TextInputType.text,
-                                        textInputAction: TextInputAction.next,
-                                        onChanged: (text) {
+                            Center(
+                              child: Text(
+                                'or sign up with email',
+                                style: MaaruStyle.text.tiny
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              // padding: const EdgeInsets.symmetric(horizontal: 40),
+                              child: Column(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      ThemedTextField(
+                                          "First Name", TextInputType.text,
+                                          textInputAction: TextInputAction.next,
+                                          onChanged: (text) {
                                          BlocProvider.of<RegisterBloc>(context)
-                                       .add(LNameChanged(text));
-                                    }, editingController: _lnameController),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    ThemedTextField(
-                                        "Email", TextInputType.emailAddress,
-                                        textInputAction: TextInputAction.next,
-                                        onChanged: (text) {
-                                       BlocProvider.of<RegisterBloc>(context)
-                                       .add(EmailChanged(text));
-                                    }, editingController: _emailController),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    ThemedTextField(
-                                      "Password",
-                                      TextInputType.visiblePassword,
-                                      textInputAction: TextInputAction.next,
-                                      password: true,
-                                      onChanged: (text) {
-                                          BlocProvider.of<RegisterBloc>(context)
-                                           .add(PasswordChanged(text));
+                                          .add(FNameChanged(text));
                                       },
-                                      editingController: _passwordController,
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(left: 20,right: 20),
-                                      child: ThemedButton(
+                                          editingController:
+                                              _first_nameController),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      ThemedTextField(
+                                          "Last Name", TextInputType.text,
+                                          textInputAction: TextInputAction.next,
+                                          onChanged: (text) {
+                                           BlocProvider.of<RegisterBloc>(context)
+                                         .add(LNameChanged(text));
+                                      }, editingController: _lnameController),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      ThemedTextField(
+                                          "Email", TextInputType.emailAddress,
+                                          textInputAction: TextInputAction.next,
+                                          onChanged: (text) {
+                                         BlocProvider.of<RegisterBloc>(context)
+                                         .add(EmailChanged(text));
+                                      }, editingController: _emailController),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      ThemedTextField(
+                                        "Password",
+                                        TextInputType.visiblePassword,
+                                        textInputAction: TextInputAction.next,
+                                        password: true,
+                                        onChanged: (text) {
+                                            BlocProvider.of<RegisterBloc>(context)
+                                             .add(PasswordChanged(text));
+                                        },
+                                        editingController: _passwordController,
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      ThemedButton(
                                         text: "Register",
                                         onPressed: () {
                                           String fname =
@@ -225,28 +225,28 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                                           enabled = false;
                                         },
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    state is RegisterInProgress
-                                        ? Center(
-                                        child: Container(
-                                          width: 5,
-                                          height: 5,
-                                          child: CircularProgressIndicator(),
-                                        ))
-                                        : Container(),
-                                    GoToSignInText(),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
-                        ],
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      state is RegisterInProgress
+                                          ? Center(
+                                          child: Container(
+                                            width: 5,
+                                            height: 5,
+                                            child: CircularProgressIndicator(),
+                                          ))
+                                          : Container(),
+                                      GoToSignInText(),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       );
                     })))));
   }
