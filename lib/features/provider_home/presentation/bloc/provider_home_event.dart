@@ -7,8 +7,18 @@ final String name;
 final String service;
 final String provider;
 final String date;
-final String page;
-final String limit;
 
-  getProviderRequest(this.name, this.service, this.provider, this.date, this.page, this.limit);
+  getProviderRequest(this.name, this.service, this.provider, this.date, );
+}
+class AcceptRequested extends ProviderHomeEvent{
+  final int id;
+  AcceptRequested(this.id);
+  @override
+  String toString() =>'AcceptRequested';
+  }
+class Decline extends ProviderHomeEvent{
+  final int id;
+  Decline(this.id);
+  @override
+  String toString() =>'Decline';
 }

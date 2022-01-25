@@ -10,7 +10,7 @@ class MaruConstant {
    static final updateprofile1 = _prefHelper.getIntByKey('id', id).toString();
 
    static final savepet1 =Uri.parse ('http://18.191.199.31/api/pets/${updateprofile1.toString()}');
-   static final getupcominapointment =Uri.parse ('http://18.191.199.31/api/bookings?type=upcoming');
+
    static final getproviders =Uri.parse ('http://18.191.199.31/api/public/providers?page=1&limit=100&service=&rating=');
    static final getReview =Uri.parse ('http://18.191.199.31/api/company/reviews');
    static final getProviderRequest = Uri.parse('http://18.191.199.31/api/bookings/appointment-requests?name=&service=&provider=&date=&page=1&limit=5');

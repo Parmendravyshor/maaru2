@@ -14,6 +14,8 @@ import 'package:maru/features/Account_setting/presentation/payment/payment_scree
 import 'package:maru/features/Account_setting/presentation/transition.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/provider_home/presentation/webview.dart';
+import 'package:maru/features/provider_setting/presentation/change_pasword.dart';
+import 'package:maru/features/provider_setting/presentation/edit_profile.dart';
 import 'package:maru/features/splash/verify_screen.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +91,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 size: 115,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => CreateUserProfile()));
+                                      builder: (_) => const ProviderEditProfile()));
                                 },
                               ),
                               SizedBox(
@@ -102,7 +104,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 size: 35,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => ChangePasswordScreen()));
+                                      builder: (_) => ChangePaswordProviderSideScreen()));
                                 },
                               ),
                               SizedBox(

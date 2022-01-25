@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 
 import 'my_strings.dart';
@@ -35,7 +36,7 @@ enum CardType {
 class CardUtils {
   static String validateCVV(String value) {
     if (value == null || value.isEmpty) {
-      return Strings.fieldReq;
+      return 'enter valid cvv';
     }
 
     if (value.length < 3 || value.length > 4) {
@@ -136,13 +137,13 @@ class CardUtils {
     Icon icon;
     switch (cardType) {
       case CardType.Master:
-        img = 'kutta.png';
+        img = 'mastercard.png';
         break;
       case CardType.Visa:
-        img = 'akutta.png';
+        img = 'visa.png';
         break;
       case CardType.Verve:
-        img = 'kutta.png';
+        img = 'verve.png';
         break;
       case CardType.AmericanExpress:
         img = 'american_express.png';
@@ -157,7 +158,7 @@ class CardUtils {
         img = 'jcb.png';
         break;
       case CardType.Others:
-        icon = new Icon(
+        icon =  Icon(
           Icons.credit_card,
           size: 40.0,
           color: Colors.grey[600],
@@ -218,7 +219,7 @@ class CardUtils {
 
   static CardType getCardTypeFrmNumber(String input) {
     CardType cardType;
-    if (input.startsWith(new RegExp(
+    if (input.startsWith(RegExp(
         r'((5[1-5])|(222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720))'))) {
       cardType = CardType.Master;
     } else if (input.startsWith(new RegExp(r'[4]'))) {

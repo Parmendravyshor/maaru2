@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:bloc/bloc.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -312,8 +311,6 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       print('ddddd$event.text');
       // final result =  await getPetProfile1(NoParams());
       if (result.isRight()) {
-        await getProviderById(NoParams());
-        await getProviderById(NoParams());
         yield ProviderLoaded(result.getOrElse(() => null));
       }
     }
@@ -344,7 +341,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
     }
 
     if (event is GetSinglePRovider) {
-      final result = await getProviderById(NoParams());
+      final result = await getProviderById(event.id1);
       if (result.isRight()) {
         yield SingleProviderLoaded(result.getOrElse(() => null));
       }
@@ -362,8 +359,8 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
         birthdate.isNotEmpty &&
         sex.isNotEmpty &&
         gender.isNotEmpty &&
-        // img.isNotEmpty &&
+         img.isNotEmpty &&
         petName.isNotEmpty;
-    sex.isNotEmpty;
+
   }
 }

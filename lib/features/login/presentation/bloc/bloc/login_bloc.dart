@@ -1,10 +1,10 @@
 
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/domain/usecases/resend_verification_code.dart';
 import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/usecases/usecase.dart';
+import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Home/domain/usecases/get_upcoming_appointment.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
@@ -16,8 +16,6 @@ import 'package:maru/features/verify/domain/usecases/get_providers.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_review_request.dart';
 import 'package:maru/features/verify/domain/usecases/get_single_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
-
-
 import 'login_event.dart';
 import 'login_state.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
@@ -34,16 +32,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final GetSinglePetProfile getSinglePetProfile;
   final GetReview getReview;
   final GetProviderRequest getProviderRequest;
-  final GetUpcomingAppointment getUpcomingAppointment;
+
   final GetProviderById getProviderById;
-final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
+  final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
 
   String text;
-  LoginBloc(this.getSinglePetProfile,this.getUpcomingAndPastAppointments,
-      this._emailSignin, this.getProviders, this.getReview,
-      this.getProviderRequest, this.getProviderById,
-      this.getPetProfile1, this.getUpcomingAppointment, this._resendCode,
-      this.saveUserProfile, this._providerEmailSignin)
+  LoginBloc(
+      this.getSinglePetProfile,
+      this.getUpcomingAndPastAppointments,
+      this._emailSignin,
+      this.getProviders,
+      this.getReview,
+      this.getProviderRequest,
+      this.getProviderById,
+      this.getPetProfile1,
+      this._resendCode,
+      this.saveUserProfile,
+      this._providerEmailSignin)
       : super();
   String email = "";
   String password = "";
@@ -51,7 +56,7 @@ final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is EmailChanged) {
-      if (event.email.isNotEmpty && EmailValidator.validate(event.email)) {
+      if (event.email.isNotEmpty && validateEmail(email) != null) {
         email = event.email;
       } else {
         email = "";
@@ -157,30 +162,21 @@ final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
 //await getProviderRequest(NoParams());
         yield LoginSuccess();
       });
-    }
-    else if (event is GetProvider) {
+    } else if (event is GetProvider) {
       final result = await getProviders.call(event.text);
       print('ddddd$event.text');
       if (result.isRight()) {
         yield ProviderLoaded1(result.getOrElse(() => null));
       }
     }
-    if (event is UpcomingAppointmentChanged) {
-      final result = await getUpcomingAndPastAppointments.call(event.text);
-      print('ddddd$event.text');
-      if (result.isRight()) {
-        yield FetchUpcomingAppointmentModelData(result.getOrElse(() => null));
-      }
-    }
-  }
-    bool _isFormValid() {
-      return email.isNotEmpty && password.isNotEmpty;
-    }
 
+  }
+
+  bool _isFormValid() {
+    return email.isNotEmpty && password.isNotEmpty;
+  }
 
   @override
   // TODO: implement initialState
   get initialState => LoginInitial();
-  }
-
-
+}

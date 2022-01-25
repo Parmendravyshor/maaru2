@@ -5,13 +5,12 @@ import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import 'get_providers.dart';
 import 'dart:convert';
-class GetProviderById implements UseCase<void, Welcome4> {
+class GetProviderById implements UseCase<void, int> {
   UserRepository userRepository;
   GetProviderById(this.userRepository);
-
   @override
-  Future<Either<Failure, Welcome4>> call(void params) async {
-    return userRepository.getProviderById();
+  Future<Either<Failure, Welcome4>> call(int id1) async {
+    return userRepository.getProviderById(id1);
   }
 }
 /// To parse this JSON data, do
@@ -56,7 +55,7 @@ class Welcome4 {
 
   ProviderDetails providerDetails;
   List<Review> reviews;
-  List<MasterService> masterServices;
+  List<MasterServiceElement> masterServices;
   int reviewCount;
   int fiveStarView;
   String average;
@@ -64,7 +63,7 @@ class Welcome4 {
   factory Welcome4.fromJson(Map<String, dynamic> json) => Welcome4(
     providerDetails: ProviderDetails.fromJson(json["provider_details"]),
     reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
-    masterServices: List<MasterService>.from(json["master_services"].map((x) => MasterService.fromJson(x))),
+    masterServices: List<MasterServiceElement>.from(json["master_services"].map((x) => MasterServiceElement.fromJson(x))),
     reviewCount: json["review_count"],
     fiveStarView: json["five_Star_View"],
     average: json["average"],
@@ -80,8 +79,8 @@ class Welcome4 {
   };
 }
 
-class MasterService {
-  MasterService({
+class MasterServiceElement {
+  MasterServiceElement({
     this.serviceIcon,
     this.id,
     this.serviceType,
@@ -95,7 +94,7 @@ class MasterService {
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory MasterService.fromJson(Map<String, dynamic> json) => MasterService(
+  factory MasterServiceElement.fromJson(Map<String, dynamic> json) => MasterServiceElement(
     serviceIcon: json["service_icon"],
     id: json["id"],
     serviceType: json["service_type"],
@@ -121,6 +120,8 @@ class ProviderDetails {
     this.email,
     this.token,
     this.password,
+    this.deviceToken,
+    this.deviceType,
     this.otp,
     this.isVerified,
     this.mailNotifications,
@@ -136,8 +137,10 @@ class ProviderDetails {
   String lastName;
   String userType;
   String email;
-  String token;
+  dynamic token;
   String password;
+  String deviceToken;
+  dynamic deviceType;
   String otp;
   String isVerified;
   int mailNotifications;
@@ -145,7 +148,7 @@ class ProviderDetails {
   DateTime createdAt;
   DateTime updatedAt;
   Provider provider;
-  List<Service> service;
+  List<ProviderDetailsService> service;
 
   factory ProviderDetails.fromJson(Map<String, dynamic> json) => ProviderDetails(
     id: json["id"],
@@ -155,6 +158,8 @@ class ProviderDetails {
     email: json["email"],
     token: json["token"],
     password: json["password"],
+    deviceToken: json["device_token"],
+    deviceType: json["device_type"],
     otp: json["otp"],
     isVerified: json["is_verified"],
     mailNotifications: json["mail_notifications"],
@@ -162,7 +167,7 @@ class ProviderDetails {
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
     provider: Provider.fromJson(json["provider"]),
-    service: List<Service>.from(json["service"].map((x) => Service.fromJson(x))),
+    service: List<ProviderDetailsService>.from(json["service"].map((x) => ProviderDetailsService.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -173,6 +178,8 @@ class ProviderDetails {
     "email": email,
     "token": token,
     "password": password,
+    "device_token": deviceToken,
+    "device_type": deviceType,
     "otp": otp,
     "is_verified": isVerified,
     "mail_notifications": mailNotifications,
@@ -219,11 +226,11 @@ class Provider {
   String city;
   String state;
   int zipCode;
-  String longitude;
-  String latitude;
+  dynamic longitude;
+  dynamic latitude;
   String description;
   String operationHours;
-  String specialOperationHours;
+  dynamic specialOperationHours;
   String averageRating;
   String reviews;
   DateTime createdAt;
@@ -276,8 +283,8 @@ class Provider {
   };
 }
 
-class Service {
-  Service({
+class ProviderDetailsService {
+  ProviderDetailsService({
     this.id,
     this.serviceId,
     this.userId,
@@ -285,7 +292,7 @@ class Service {
     this.serviceCost,
     this.createdAt,
     this.updatedAt,
-    this.title,
+    this.service,
   });
 
   int id;
@@ -295,9 +302,9 @@ class Service {
   int serviceCost;
   DateTime createdAt;
   DateTime updatedAt;
-  String title;
+  MasterServiceElement service;
 
-  factory Service.fromJson(Map<String, dynamic> json) => Service(
+  factory ProviderDetailsService.fromJson(Map<String, dynamic> json) => ProviderDetailsService(
     id: json["id"],
     serviceId: json["service_id"],
     userId: json["user_id"],
@@ -305,7 +312,7 @@ class Service {
     serviceCost: json["service_cost"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
-    title: json["title"],
+    service: MasterServiceElement.fromJson(json["service"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -316,7 +323,7 @@ class Service {
     "service_cost": serviceCost,
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
-    "title": title,
+    "service": service.toJson(),
   };
 }
 
@@ -348,11 +355,11 @@ class Review {
     userId: json["user_id"],
     providerId: json["provider_id"],
     bookingId: json["booking_id"],
-    serviceId: json["service_id"] == null ? null : json["service_id"],
+    serviceId: json["service_id"],
     reviewComment: json["review_comment"],
     ratings: json["ratings"],
     createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -360,10 +367,11 @@ class Review {
     "user_id": userId,
     "provider_id": providerId,
     "booking_id": bookingId,
-    "service_id": serviceId == null ? null : serviceId,
+    "service_id": serviceId,
     "review_comment": reviewComment,
     "ratings": ratings,
     "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt == null ? null : updatedAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
   };
 }
+

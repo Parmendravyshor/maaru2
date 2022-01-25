@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
 import 'package:maru/features/provider_home/domain/use_cases/get_provider_request.dart';
@@ -20,7 +21,6 @@ import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/domain/repositories/user_repository.dart';
 import 'package:maru/core/error/failure.dart';
 import 'dart:async';
-
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
@@ -30,10 +30,11 @@ import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 
 class UserRepositoryImpl implements UserRepository {
-
   final SharedPrefHelper sharedPrefHelper;
 
-  UserRepositoryImpl(this.sharedPrefHelper, );
+  UserRepositoryImpl(
+    this.sharedPrefHelper,
+  );
 
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
@@ -48,9 +49,8 @@ class UserRepositoryImpl implements UserRepository {
       map[MaruConstant.user_type] = 'user';
       final response = await http.post(MaruConstant.signup, body: map);
       Map res = json.decode(response.body);
-print(res);
+      print(res);
       return Right('Otp sent your register email');
-
     } catch (e) {
       return Left(CacheFailure(e.toString()));
     }
@@ -61,7 +61,7 @@ print(res);
     EmailAuthParams params,
   ) async {
     try {
-      var map =  Map<String, String>();
+      var map = Map<String, String>();
 
       map[MaruConstant.email] = params.email;
       map[MaruConstant.password] = params.password;
@@ -80,8 +80,7 @@ print(res);
       await sharedPrefHelper.savePassword(
         MaruConstant.password,
       );
-      await sharedPrefHelper.savelname(
-          MaruConstant.lastName, res['last_name']);
+      await sharedPrefHelper.savelname(MaruConstant.lastName, res['last_name']);
       await sharedPrefHelper.saveEmail(res[MaruConstant.email]);
       print("Register Success  ${response.body}");
       //  await sharedPrefHelper.saveString( "first_name",res['first_name']);
@@ -92,10 +91,7 @@ print(res);
       await sharedPrefHelper.saveString("last_name", res['last_name']);
       print(res['last_name']);
       return Right(Void);
-    }
-
-
-     catch (e) {
+    } catch (e) {
       return Left(ApiFailure('aa'));
     }
   }
@@ -267,7 +263,6 @@ print(res);
           MaruConstant.birthdate, profile['birth_date']);
 
       return Right(Void);
-
     } catch (e) {
       print('exception print etrhtjryjhytrytjrnytjjhy5jyjy + $e');
       return Left(CacheFailure(e.toString()));
@@ -302,7 +297,6 @@ print(res);
       print('dj sir');
       print(response);
       return Right(Welcome.fromJson(data));
-
     } catch (e) {
       print('Harinder sir $e');
       return Left(CacheFailure(e.toString()));
@@ -310,20 +304,21 @@ print(res);
   }
 
   @override
-  Future<Either<Failure, void>> getUpcomingAppointment() async {
+  Future<Either<Failure, void>> getUpcomingAppointmentUserSide(
+      String date) async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
         "",
       );
       var headers = {"access-token": token};
-      final response =
-          await http.get(MaruConstant.getupcominapointment, headers: headers);
+      final response = await http.get(
+          Uri.parse('http://18.191.199.31/api/bookings?type=upcoming$date'),
+          headers: headers);
       var data = convert.jsonDecode(response.body);
 
-      var profile = data['Upcoming_bookings'];
-      var index;
-      var date = profile[index]['booking_date'];
+      print(data);
+
       print('kjhdjkhdjkhjkdhjkdhjkdhjdh$date');
 
       return Right(Void);
@@ -455,7 +450,6 @@ print(res);
       print(res);
 
       return const Right(Void);
-
     } catch (e) {
       print('exception2$e');
       return Left(CacheFailure(e.toString()));
@@ -693,12 +687,10 @@ print(res);
         MaruConstant.password,
       );
       await sharedPrefHelper.saveString('is_verified', res['is_verified']);
-      await sharedPrefHelper.savelname(
-          MaruConstant.lastName, res['last_name']);
+      await sharedPrefHelper.savelname(MaruConstant.lastName, res['last_name']);
       await sharedPrefHelper.saveEmail(res[MaruConstant.email]);
       print("Register Success  ${response.body}");
       return Right(Void);
-
     } catch (e) {
       return Left(CacheFailure(e.toString()));
     }
@@ -718,7 +710,6 @@ print(res);
       Map res = json.decode(response.body);
       print(res);
       return Right('Otp sent your register email');
-
     } catch (e) {
       return Left(CacheFailure(e.toString()));
     }
@@ -745,8 +736,6 @@ print(res);
       //  print(profile);
 
       return Right(GetProvidersModel.fromJson(data));
-
-
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -857,17 +846,15 @@ print(res);
   }
 
   @override
-  Future<Either<Failure, Welcome4>> getProviderById() async {
+  Future<Either<Failure, Welcome4>> getProviderById(int id1) async {
     try {
-      int abc;
-      final response = await http.get(Uri.parse(
-          'http://18.191.199.31/api/public/provider/${_prefHelper.getIntByKey('id', abc)}'));
+      final response = await http
+          .get(Uri.parse('http://18.191.199.31/api/public/provider/$id1'));
 //print(response.body);
-      var data = convert.jsonDecode(response.body);
-//print(data);
+      Map data = convert.jsonDecode(response.body);
+      print(data);
 //print('dhjkdhjdjkdhjkdhjkdhjkdjbjbbjhjhfjjfhjfhjfhjfhfjhfjhfjfhjfhjfhjfhjfh$data');
       return Right(Welcome4.fromJson(data));
-
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -878,18 +865,24 @@ print(res);
   @override
   Future<Either<Failure, void>> bookProvider(BookProviderParams params) async {
     try {
+      var map = new Map<String, String>();
+      map['pet_id'] = params.pet_id;
+      map['provider_id'] = params.provider_id;
+      map['booking_date_time'] = '19january 2022 23:55';
+      map['service_id'] = '8';
+      map['card_number'] ='5105105105105100';
+      map['exp_month'] = '12';
+      map['exp_year'] = '2023';
+      print(map);
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
       final response =
-          await http.post(MaruConstant.providerbookingappointment, body: {
-        'pet_id': 4,
-        'provider_id': 4,
-        'booking_date_time': ['29 December 2021 20:45'],
-        'service_id': 2,
-      });
-
-      var data = convert.jsonDecode(response.body);
-      print(data);
+          await http.post(MaruConstant.providerbookingappointment, body: map,headers: headers);
+      print(response.body);
       return Right(Void);
-
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -899,24 +892,22 @@ print(res);
 
   @override
   Future<Either<Failure, UpcomingPastAppointmentModel>>
-      getUpcomingAndPastAppointments(text) async {
+      getUpcomingAndPastAppointments(UpcomingBooking params) async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
         "",
       );
       var headers = {"access-token": token};
-      print('api response text $text');
       final response = await http.get(
           Uri.parse(
-            'http://18.191.199.31/api/bookings/filter?service=$text&date=',
+            'http://18.191.199.31/api/bookings/filter?service=&date=',
           ),
           headers: headers);
-      print(text);
       print(response.body);
       var data = convert.jsonDecode(response.body);
+      print(data);
       return Right(UpcomingPastAppointmentModel.fromJson(data));
-
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -944,7 +935,6 @@ print(res);
       print(response.body);
       var data = convert.jsonDecode(response.body);
       return Right(UpcomingPastAppointmentModel.fromJson(data));
-
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -976,7 +966,6 @@ print(res);
 
       print(response.body);
       return Right(Void);
-
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
@@ -984,8 +973,7 @@ print(res);
   }
 
   @override
-  Future<Either<Failure, UpcomingPastAppointmentModel>>
-      getDeclineAppointmentRequest() async {
+  Future<Either<Failure, void>> acceptRquest(int value) async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -995,15 +983,60 @@ print(res);
 
       final response = await http.get(
         Uri.parse(
-          'http://18.191.199.31/api/bookings/cancel-booking?name=&service=&date=&page=1&limit=1',
+          'http://18.191.199.31/api/bookings/provider/accept/$value',
         ),
         headers: headers,
       );
-      var data = jsonDecode(response.body) ;
+      var data = jsonDecode(response.body);
+      print(data);
       print(response.body);
-      return Right(UpcomingPastAppointmentModel.fromJson(data));
+      return Right(Void);
+    } catch (e) {}
+  }
+
+  @override
+  Future<Either<Failure, void>> declineRequest(int value) async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+
+      final response = await http.get(
+        Uri.parse(
+          'http://18.191.199.31/api/bookings/provider/decline/$value',
+        ),
+        headers: headers,
+      );
+      var data = jsonDecode(response.body);
+      print(data);
+      print(response.body);
+      return Right(Void);
+    } catch (e) {}
+  }
+
+  @override
+  Future<Either<Failure, GetAllAppointmentProvider>>
+      getUpcomingPastAndDeclineAppointment(SearchParams params) async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+      final response = await http.get(
+          Uri.parse(
+            'http://18.191.199.31/api/bookings/appointment-filter?name=${params.text1}&service=${params.text1}&date=${params.date}&page=1&limit=8',
+          ),
+          headers: headers);
+      print(response.body);
+      var data = convert.jsonDecode(response.body);
+      print(data);
+      return Right(GetAllAppointmentProvider.fromJson(data));
     } catch (e) {
-      print('ldjddhdhjdhjdhd$e');
+      print(e);
+      return Left(CacheFailure(e.toString()));
     }
   }
 }

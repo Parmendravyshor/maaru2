@@ -10,6 +10,7 @@ import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
@@ -86,7 +87,7 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
     return BlocProvider(
         create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
         child: Scaffold(
-            backgroundColor: MaaruColors.DogsBackground,
+            backgroundColor:Colors.white,
             body: BlocProvider(
                 create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
                 child: BlocBuilder<PetProfileBloc, PetProfileState>(
@@ -118,35 +119,46 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                     });
                   }
                   return Scaffold(
-                      backgroundColor: MaaruColors.DogsBackground,
+                      backgroundColor: MaaruColors.whiteColor,
                       body: SafeArea(
                           top: true,
                           bottom: false,
                           child: SingleChildScrollView(
                               child: Column(children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
+                                Stack(fit: StackFit.loose, children: <Widget>[
+                                  Container(
+                                      alignment: Alignment.bottomRight,
+                                      // height: size.height * 0.20,
+                                      // width: size.width * 0.9,
+                                      child:
+                                      Center(
+                                        child: Image.network(
+                                            _prefHelper.getStringByKey('img', ''),
+                                            width:450,
+                                            height: 250,
+                                            fit: BoxFit.fitWidth,
+                                            errorBuilder: (context, error, stackTrace) {
+                                              return Container(
+                                                  color: MaaruColors.DogsBackground,
+                                                  alignment: Alignment.center,
+                                                  child: Image.asset('assets/images/kutta.png'));
+                                            }),
+                                      )),
+                                  Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 30.0,bottom: 10
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: <Widget>[
+                                          SkipButtons(),
+                                        ],
+                                      )),
+                                ]),
 
-                            SkipButtons(),
-                                const SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                                alignment: Alignment.bottomRight,
-                              //  height: size.height * 0.25,
-                                width: size.width * 0.9,
-                                child:Image.network(_prefHelper.getStringByKey(MaruConstant.img, '',
 
-                                ),
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Container(
-                                          color: Colors.transparent,
-                                          alignment: Alignment.center,
-                                          child:
-                                          Image.asset('assets/images/kutta.png'));
-                                    })),
-                            Container(
+
+                                Container(
                                 width: 1000,
                                 height: 600,
                                 alignment: FractionalOffset.bottomCenter,

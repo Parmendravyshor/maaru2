@@ -194,6 +194,9 @@ class GetSinglePRof extends PetProfileEvent {
   GetSinglePRof(this.id);
 }
 class GetSinglePRovider extends PetProfileEvent {
+  final int id1;
+
+  GetSinglePRovider(this.id1);
   @override
   String toString() => "GetSinglePRovider";
 }

@@ -4,35 +4,37 @@ class ScreenIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size=MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0,right: 8.0),
-      child: Container(
+    return
+      Container(
 
-        margin: const EdgeInsets.only(left: 10,right: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: (){},
-              child: Image.asset(
-                'assets/icons/Rectangle copy.png',
-                height: size.height * 0.06,
+alignment: Alignment.center,
+        child:
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0,right: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: (){},
+                child: Image.asset(
+                  'assets/icons/Rectangle copy.png',
+                  height: size.height * 0.05,
+                ),
               ),
-            ),
-            SizedBox(
-              width: size.width * 0.02,
-            ),
-            InkWell(
-              onTap: (){},
-              child: Image.asset(
-                'assets/icons/Rectangle (1).png',
-                height: size.height * 0.06,
+              SizedBox(
+                width: size.width * 0.02,
               ),
-            )
-          ],
+              InkWell(
+                onTap: (){},
+                child: Image.asset(
+                  'assets/icons/Rectangle (1).png',
+                  height: size.height * 0.05,
+                ),
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
   }
 }
 

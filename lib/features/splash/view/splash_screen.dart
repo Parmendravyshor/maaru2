@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
   String _currentAddress;
 
   // final String _heading = "Standing up as a community\nagainst sexual violence";
- // LocalDataHelper localDataHelper = LocalDataHelper();
+  // LocalDataHelper localDataHelper = LocalDataHelper();
   String latitude = 'waiting...';
   String longitude = 'waiting...';
   String altitude = 'waiting...';
@@ -61,50 +61,39 @@ class _SplashScreenState extends State<SplashScreen> {
 //todo: Navigate to AfterSplashScreen
 //
   navigateToNextScreen() {
-    Future.delayed(Duration(seconds: 0), () async {
-      SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+    Future.delayed(const Duration(seconds: 3), () async {
+      SharedPrefHelper _prefHelper =
+          KiwiContainer().resolve<SharedPrefHelper>();
       String token = _prefHelper.gettoken();
       if (token.isNotEmpty) {
-        print("token token token token :$token");
-        int id;
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-                (route) => false);
-
-      }
-        else {
-        int id;
-        var id1 = _prefHelper.getIntByKey('id', id);
-        print('checkid$id');
-        print('checkfor the id$id');
-        if (id1
-            .toString()
-            .isNotEmpty) {
-          print('id id id :$id');
+        var id1 = _prefHelper.getStringByKey('pet_name', '');
+        if (id1.isNotEmpty) {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              (route) => false);
+        } else {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                   builder: (context) => CreateregisterPetProfile1()),
-                  (route) => false);
-        }
-        var accessdeniedOrsuccess = _prefHelper.getStringByKey('is_verified', '');
-        if(accessdeniedOrsuccess.isNotEmpty){
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                  builder: (context) => TestApp()),
-                  (route) => false);
-        }
+              (route) => false);
+
+          var accessdeniedOrsuccess =
+              _prefHelper.getStringByKey('is_verified', '');
+          if (accessdeniedOrsuccess.isNotEmpty) {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => TestApp()),
+                (route) => false);
+          }
 
 
-        // return  Navigator.of(context).pushAndRemoveUntil(
-        //     MaterialPageRoute(builder: (context) => VerifyUser()),
-        //         (route) => false);
-       else {
+        }
+
+      } else {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => VerifyUser()),
-            (route) => false);
-
+                (route) => false);
       }
-    }});
+    });
   }
 
   // getToken() async {

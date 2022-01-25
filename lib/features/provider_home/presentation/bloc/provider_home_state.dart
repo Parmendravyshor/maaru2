@@ -44,3 +44,13 @@ class RegisterFormValidationSuccess extends ProviderHomeState {
   String toString() => "RegisterFormValidationSuccess";
 
 }
+class AcceptRequestSuccessful extends ProviderHomeState{
+  AcceptRequestSuccessful():super();
+  @override
+  String toString() =>'AcceptRequestSuccessful';
+}
+class DeclineRequestSuccessful extends ProviderHomeState{
+  DeclineRequestSuccessful():super();
+  @override
+  String toString() =>'DeclineRequestSuccessful';
+}

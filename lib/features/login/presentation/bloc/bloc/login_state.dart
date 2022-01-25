@@ -40,13 +40,7 @@ class ProviderLoaded1 extends LoginState {
   @override
   String toString() => "VerificationNeeded";
 }
-class FetchUpcomingAppointmentModelData extends LoginState {
-  final UpcomingPastAppointmentModel upcomingPastAppointmentModel;
-  FetchUpcomingAppointmentModelData(this.upcomingPastAppointmentModel);
 
-  @override
-  String toString() => "FetchUpcomingAppointmentModelData";
-}
 class VerificationNeeded extends LoginState {
   VerificationNeeded() : super();
 

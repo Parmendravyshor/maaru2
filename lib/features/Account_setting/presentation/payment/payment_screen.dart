@@ -22,327 +22,6 @@ import 'package:maru/features/Account_setting/presentation/payment/payment_card_
 import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:flutter/services.dart';
-// class PaymentScreen extends StatefulWidget {
-//   @override
-//   _PaymentScreenState createState() => _PaymentScreenState();
-// }
-//
-// class _PaymentScreenState extends State<PaymentScreen>
-//
-//   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//         create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
-//         child: Scaffold(
-//             backgroundColor: Colors.white,
-//             body: BlocBuilder<PetProfileBloc, PetProfileState>(
-//                 builder: (context, state) {
-//               return SafeArea(
-//                   child: SingleChildScrollView(
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     BackArrowButton(),
-//                     SizedBox(
-//                       height: 30,
-//                     ),
-//                     Align(
-//                       alignment: Alignment.center,
-//                       child: ProfileAvatar(
-//                         imageUrl:
-//                             _prefHelper.getStringByKey(MaruConstant.img, ''),
-//                         errorBuilder: (context, error, stackTrace) {
-//                           return Container(
-//                               decoration: const BoxDecoration(
-//                                 shape: BoxShape.circle,
-//                               ),
-//                               alignment: Alignment.center,
-//                               child:
-//                                   Image.asset('assets/128/CrystalGaskell.png'));
-//                         },
-//                         avatarRadius: 170,
-//                         width: 170,
-//                         Color: Colors.white,
-//                         child: null,
-//                       ),
-//                     ),
-//                     SizedBox(
-//                       height: 40,
-//                     ),
-//                     Container(
-//                         color: Color(0xffFFFFFF),
-//                         child: Padding(
-//                             padding: EdgeInsets.only(top: 70.0),
-//                             child: Column(
-//                                 crossAxisAlignment: CrossAxisAlignment.start,
-//                                 mainAxisAlignment: MainAxisAlignment.start,
-//                                 children: <Widget>[
-//                                   Padding(
-//                                       padding: EdgeInsets.only(
-//                                         left:
-//                                             MediaQuery.of(context).size.width *
-//                                                 0.1 /
-//                                                 2,
-//                                         right:
-//                                             MediaQuery.of(context).size.width *
-//                                                 0.1 /
-//                                                 2,
-//                                       ),
-//                                       child: Row(
-//                                         mainAxisAlignment:
-//                                             MainAxisAlignment.spaceBetween,
-//                                         mainAxisSize: MainAxisSize.max,
-//                                         children: <Widget>[
-//                                           Column(
-//                                             mainAxisAlignment:
-//                                                 MainAxisAlignment.start,
-//                                             mainAxisSize: MainAxisSize.min,
-//                                             children: <Widget>[
-//                                               Text(
-//                                                 'Payment Information',
-//                                                 style: MaaruStyle.text.tiniest,
-//                                               ),
-//                                             ],
-//                                           ),
-//                                           //   Row(
-//                                           //     mainAxisAlignment:
-//                                           //     MainAxisAlignment.spaceBetween,
-//                                           //     mainAxisSize: MainAxisSize.min,
-//                                           //     children: <Widget>[
-//                                           //       _status
-//                                           //           ? _getEditIcon()
-//                                           //           : Container(),
-//                                           //     ],
-//                                           //   )
-//                                         ],
-//                                       )),
-//                                   ThemedTextField(
-//                                     "Name On Card",
-//                                     TextInputType.text,
-//                                     textInputAction: TextInputAction.next,
-//                                     textStyle:
-//                                         TextStyle(color: Colors.grey[300]),
-//                                     onChanged: (text) {
-//                                       //BlocProvider.of<RegisterBloc>(context).add(FNameChanged(text));
-//                                     },
-//                                     editingController: _nameOnCardController,
-//                                   ),
-//                                   ThemedTextField(
-//                                     "Credit Card Number",
-//                                     TextInputType.text,
-//                                     textInputAction: TextInputAction.next,
-//                                     textStyle:
-//                                         TextStyle(color: Colors.grey[300]),
-//                                     onChanged: (text) {
-//                                       //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-//                                     },
-//                                     editingController:
-//                                         _creditCardNumberController,
-//                                   ),
-//                                   ThemedTextField(
-//                                     "Bank Name",
-//                                     TextInputType.text,
-//                                     textInputAction: TextInputAction.next,
-//                                     textStyle:
-//                                         TextStyle(color: Colors.grey[300]),
-//                                     onChanged: (text) {
-//                                       //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-//                                     },
-//                                     editingController: _bankNameController,
-//                                   ),
-//                                   Row(
-//                                     mainAxisAlignment:
-//                                         MainAxisAlignment.spaceBetween,
-//                                     children: [
-//                                       Flexible(
-//                                         child: Container(
-//                                           padding: EdgeInsets.only(left: 15),
-//                                           child: ThemedTextField(
-//                                               "Cvv", TextInputType.text,
-//                                               textInputAction:
-//                                                   TextInputAction.next,
-//                                               textStyle: TextStyle(
-//                                                   color: Colors.grey[300]),
-//                                               onChanged: (text) {
-//                                             //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
-//                                           }, editingController: _cvvController),
-//                                         ),
-//                                       ),
-//                                       // SizedBox(
-//                                       //   width: 10,
-//                                       // ),
-//                                       Flexible(
-//                                         child: Container(
-//                                           padding: const EdgeInsets.only(
-//                                               left: 15, bottom: 40),
-//                                           child: TextFormField(
-//                                             decoration: InputDecoration(
-//                                               // contentPadding: EdgeInsets.only(left: 20),
-//                                               labelText: 'Exp',
-//                                               labelStyle:
-//                                                   MaaruStyle.text.greyDisable,
-//                                               enabledBorder:
-//                                                   UnderlineInputBorder(
-//                                                 borderSide: BorderSide(
-//                                                     color: Colors.grey[300]),
-//                                               ),
-//                                             ),
-//                                             controller: _expDateController,
-//                                           ),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                 ]))),
-//                     ListView.builder(
-//                       physics: NeverScrollableScrollPhysics(),
-//                       shrinkWrap: true,
-//                       itemCount: containers.length,
-//                       itemBuilder: (BuildContext context, int index) {
-//                         return containers[index];
-//                       },
-//                     ),
-//                     Row(
-//                       children: [
-//                         Padding(
-//                             padding: EdgeInsets.only(left: 20, top: 0),
-//                             child: CircleAvatar(
-//                               backgroundColor: Colors.grey[100],
-//                               radius: 25,
-//                               child: Icon(
-//                                 Icons.add,
-//                                 color: MaaruColors.buttonColor,
-//                                 size: 25,
-//                               ),
-//                             )),
-//                         InkWell(
-//                             onTap: () async {
-//                               !_status;
-//                               setState(() => containers.add(createContainer()));
-//                             },
-//                             child: Text(
-//                               'Add New Card',
-//                               style: MaaruStyle.text.mediumGreen,
-//                             ))
-//                       ],
-//                     ),
-//                     SizedBox(
-//                       height: 10,
-//                     ),
-//                     Padding(
-//                       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-//                       child: Column(
-//                         children: [
-//                           Container(
-//                               height: 100,
-//                               width: 380,
-//                               decoration: BoxDecoration(
-//                                   color: Colors.deepPurple[50],
-//                                   borderRadius: BorderRadius.circular(20.0)),
-//                               child: Padding(
-//                                   padding: EdgeInsets.fromLTRB(20, 20, 10, 0),
-//                                   child: Column(children: [
-//                                     Row(
-//                                       mainAxisAlignment:
-//                                           MainAxisAlignment.spaceBetween,
-//                                       children: [
-//                                         Text(
-//                                           'Visa Card',
-//                                           style: MaaruStyle.text.tiniest,
-//                                         ),
-//                                         Text(
-//                                           'Primary Payment',
-//                                           style: MaaruStyle.text.greyDisable,
-//                                         ),
-//                                       ],
-//                                     ),
-//                                     SizedBox(
-//                                       height: 20,
-//                                     ),
-//                                     Padding(
-//                                         padding: EdgeInsets.only(right: 150),
-//                                         child: Text(
-//                                           '**** **** **** 9877',
-//                                           style: MaaruStyle.text.tiny,
-//                                         ))
-//                                   ]))),
-//                           SizedBox(
-//                             height: 20,
-//                           ),
-//                           Container(
-//                               height: 100,
-//                               width: 380,
-//                               decoration: BoxDecoration(
-//                                   color: Colors.white,
-//                                   borderRadius: BorderRadius.circular(20.0),
-//                                   border: Border.all(color: Colors.grey[100])),
-//                               child: Padding(
-//                                   padding: EdgeInsets.fromLTRB(20, 20, 10, 0),
-//                                   child: Column(children: [
-//                                     Row(
-//                                       mainAxisAlignment:
-//                                           MainAxisAlignment.spaceBetween,
-//                                       children: [
-//                                         Text(
-//                                           'Discover Card',
-//                                           style: MaaruStyle.text.greyDisable,
-//                                         ),
-//                                       ],
-//                                     ),
-//                                     SizedBox(
-//                                       height: 20,
-//                                     ),
-//                                     Padding(
-//                                         padding: EdgeInsets.only(right: 150),
-//                                         child: Text(
-//                                           '**** **** **** 9877',
-//                                           style: MaaruStyle.text.greyDisable,
-//                                         ))
-//                                   ]))),
-//                           SizedBox(
-//                             height: 30,
-//                           ),
-//                           ThemedButton(
-//                             text: 'Update Payment',
-//                             onPressed: () {
-//                               //  Navigator.push(context, MaterialPageRoute(builder: (context)=>BookedConfirm()));
-//                               // String paword =
-//                               // _newController
-//                               //     .text;
-//                               //
-//                               // if (paword.length <
-//                               // 8) {
-//                               // AlertManager
-//                               //     .showErrorMessage(
-//                               // "Password must be 8 characters long",
-//                               // context);
-//                               // }
-//                               // else {
-//                               Dialogs.showLoadingDialog(
-//                                   context, _keyLoader, "Updating Payment..");
-//                               MyStatefulWidget();
-//                               BlocProvider.of<PetProfileBloc>(context).add(
-//                                   savePayment(
-//                                       _cvvController.text,
-//                                       _creditCardNumberController.text,
-//                                       _nameOnCardController.text,
-//                                       _expDateController.text));
-//                             },
-//                           ),
-//                           SizedBox(
-//                             height: 40,
-//                           )
-//                         ],
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ));
-//             })));
-//   }
-//
 
 class PaymentScreen1 extends StatefulWidget {
   // PaymentScreen1({Key key, this.title}) : super(key: key);
@@ -564,7 +243,7 @@ class _PaymentScreen1State extends State<PaymentScreen1>
   var _formKey = new GlobalKey<FormState>();
   var numberController = new TextEditingController();
   var _paymentCard = PaymentCard();
-  var _autoValidateMode = AutovalidateMode.disabled;
+    var _autoValidateMode = AutovalidateMode.disabled;
 
   var _card = new PaymentCard();
 
@@ -591,6 +270,7 @@ class _PaymentScreen1State extends State<PaymentScreen1>
                 backgroundColor: Colors.white,
                 body: BlocBuilder<PetProfileBloc, PetProfileState>(
                     builder: (context, state) {
+                      if(state is SavePaymentButtonTapped){}
                   return Container(
                       padding: const EdgeInsets.symmetric(horizontal: 15.0),
                       child: Form(
@@ -623,7 +303,7 @@ class _PaymentScreen1State extends State<PaymentScreen1>
                                   ],
                                 )),
                              Text('Update Payment',style: MaaruStyle.text.tiniest,),
-                            SizedBox(
+                            const SizedBox(
                               height: 20.0,
                             ),
                             TextFormField(
@@ -645,9 +325,12 @@ class _PaymentScreen1State extends State<PaymentScreen1>
                               keyboardType: TextInputType.text,
                               validator: (String value) =>
                                   value.isEmpty ? Strings.fieldReq : null,
+                              onChanged: (text){
+
+                              },
                               controller: _nameOnCardController,
                             ),
-                            new SizedBox(
+                             const SizedBox(
                               height: 30.0,
                             ),
                             TextFormField(
@@ -687,12 +370,16 @@ class _PaymentScreen1State extends State<PaymentScreen1>
                                         FilteringTextInputFormatter.digitsOnly,
                                         LengthLimitingTextInputFormatter(4),
                                       ],
-                                      decoration: const InputDecoration(
+                                      decoration:  InputDecoration(
                                         fillColor: Colors.white,
                                         hoverColor: Colors.white,
                                         border: UnderlineInputBorder(),
                                         filled: true,
-                                        icon: Icon(Icons.eleven_mp),
+                                        icon:Image.asset(
+                                          'assets/images/card_cvv.png',
+                                          width: 40.0,
+                                          color: Colors.grey[600],
+                                        ),
                                         hintText: 'Number behind the card',
                                         labelText: 'CVV',
                                       ),

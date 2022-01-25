@@ -1,8 +1,6 @@
 
 import 'dart:convert';
 import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:maru/core/constant/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:typed_data';
@@ -10,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
-
 abstract class SharedPrefHelper {
   Future<void> userLogin();
   Future<void> saveIdJwtToken(String accessToken);

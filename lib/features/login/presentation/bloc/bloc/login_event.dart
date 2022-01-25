@@ -12,12 +12,13 @@ class LoginOpened extends LoginEvent {
   @override
   String toString() => "LoginOpened";
 }
-class GetProvider extends LoginEvent {
 
+class GetProvider extends LoginEvent {
   final String text;
 
   GetProvider(this.text);
 }
+
 /// Register Button Tapped
 ///
 /// This event is fired when Register button is tapped
@@ -27,12 +28,14 @@ class LoginButtonTapped extends LoginEvent {
   @override
   String toString() => "LoginButtonTapped";
 }
+
 class ProviderLoginButtonTapped extends LoginEvent {
   ProviderLoginButtonTapped();
 
   @override
   String toString() => "ProviderLoginButtonTapped";
 }
+
 /// Email Changed
 ///
 /// This event is fired when Email is changed
@@ -54,17 +57,8 @@ class PasswordChanged extends LoginEvent {
   @override
   String toString() => "PasswordChanged";
 }
-class UpcomingAppointmentChanged extends LoginEvent {
 
-  final String text;
 
-  UpcomingAppointmentChanged({this.text});
-
-  @override
-  String toString() => "UpcomingAppointmentChanged";
-  List<Object> get props => [text];
-
-}
 // class GetCovidList extends LoginEvent {
 //   final String text;
 //

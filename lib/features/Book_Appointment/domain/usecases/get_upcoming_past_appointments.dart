@@ -5,13 +5,12 @@ import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 
 import 'dart:convert';
-class GetUpcomingAndPastAppointments implements UseCase<void, String> {
+class GetUpcomingAndPastAppointments implements UseCase<void, UpcomingBooking> {
   UserRepository userRepository;
   GetUpcomingAndPastAppointments(this.userRepository);
-
   @override
-  Future<Either<Failure, UpcomingPastAppointmentModel>> call(String text) async {
-    return userRepository.getUpcomingAndPastAppointments(text);
+  Future<Either<Failure, UpcomingPastAppointmentModel>> call(UpcomingBooking params) async {
+    return userRepository.getUpcomingAndPastAppointments(params);
   }
 }
 // To parse this JSON data, do
@@ -20,35 +19,34 @@ class GetUpcomingAndPastAppointments implements UseCase<void, String> {
 
 
 
-Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+UpcomingPastAppointmentModel welcomeFromJson(String str) => UpcomingPastAppointmentModel.fromJson(json.decode(str));
 
-String welcomeToJson(Welcome data) => json.encode(data.toJson());
+String welcomeToJson(UpcomingPastAppointmentModel data) => json.encode(data.toJson());
+
+
 
 class UpcomingPastAppointmentModel {
   UpcomingPastAppointmentModel({
     this.upcomingBookings,
     this.pastBookings,
-    this.getdeclineBookings
   });
 
-  List<Booking> upcomingBookings;
-  List<Booking> pastBookings;
-List<Booking>getdeclineBookings;
+  List<UpcomingBooking> upcomingBookings;
+  List<UpcomingBooking> pastBookings;
+
   factory UpcomingPastAppointmentModel.fromJson(Map<String, dynamic> json) => UpcomingPastAppointmentModel(
-    upcomingBookings: List<Booking>.from(json["Upcoming_bookings"].map((x) => Booking.fromJson(x))),
-    pastBookings: List<Booking>.from(json["past_bookings"].map((x) => Booking.fromJson(x))),
-    getdeclineBookings: List<Booking>.from(json["get_cancel_bookings"].map((x) => Booking.fromJson(x))),
+    upcomingBookings: List<UpcomingBooking>.from(json["Upcoming_bookings"].map((x) => UpcomingBooking.fromJson(x))),
+    pastBookings: List<UpcomingBooking>.from(json["past_bookings"].map((x) => UpcomingBooking.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "Upcoming_bookings": List<dynamic>.from(upcomingBookings.map((x) => x.toJson())),
     "past_bookings": List<dynamic>.from(pastBookings.map((x) => x.toJson())),
-    'get_cancel_bookings': List<dynamic>.from(getdeclineBookings.map((x) => x.toJson())),
   };
 }
 
-class Booking {
-  Booking({
+class UpcomingBooking {
+  UpcomingBooking({
     this.bookingId,
     this.bookingDate,
     this.bookingTime,
@@ -63,7 +61,7 @@ class Booking {
   });
 
   int bookingId;
-  String bookingDate;
+  DateTime bookingDate;
   String bookingTime;
   String status;
   String serviceName;
@@ -74,13 +72,12 @@ class Booking {
   String companyState;
   int companyZipCode;
 
-  factory Booking.fromJson(Map<String, dynamic> json) => Booking(
+  factory UpcomingBooking.fromJson(Map<String, dynamic> json) => UpcomingBooking(
     bookingId: json["booking_id"],
-    bookingDate: json["booking_date"],
+    bookingDate: DateTime.parse(json["booking_date"]),
     bookingTime: json["booking_time"],
     status: json["status"],
     serviceName: json["service_name"],
-
     petImage: json["pet_image"],
     petName: json["pet_name"],
     companyName: json["company_name"],
@@ -91,8 +88,7 @@ class Booking {
 
   Map<String, dynamic> toJson() => {
     "booking_id": bookingId,
-    "booking_date": bookingDate,
-
+    "booking_date": "${bookingDate.year.toString().padLeft(4, '0')}-${bookingDate.month.toString().padLeft(2, '0')}-${bookingDate.day.toString().padLeft(2, '0')}",
     "booking_time": bookingTime,
     "status": status,
     "service_name": serviceName,

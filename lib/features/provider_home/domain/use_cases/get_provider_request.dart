@@ -7,15 +7,18 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/usecases/usecase.dart';
 import 'dart:convert';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
+
 class GetProviderRequest implements UseCase<void, SearchRequestProviderParams> {
   UserRepository userRepository;
   GetProviderRequest(this.userRepository);
   @override
-  Future<Either<Failure, GetProviderRequestModel>> call(SearchRequestProviderParams params) async {
+  Future<Either<Failure, GetProviderRequestModel>> call(
+      SearchRequestProviderParams params) async {
     return userRepository.getProviderRequest(params);
   }
 }
-class SearchRequestProviderParams{
+
+class SearchRequestProviderParams {
   final String name;
   final String service;
   final String provider;
@@ -23,15 +26,20 @@ class SearchRequestProviderParams{
   final String page;
   final String limit;
 
-  SearchRequestProviderParams({this.name, this.service, this.provider, this.date, this.page , this.limit});
+  SearchRequestProviderParams(
+      {this.name,
+      this.service,
+      this.provider,
+      this.date,
+      this.page,
+      this.limit});
 }
 // To parse this JSON data, do
 //
 //     final welcome = welcomeFromJson(jsonString);
 
-
-
-GetProviderRequestModel welcomeFromJson(String str) => GetProviderRequestModel.fromJson(json.decode(str));
+GetProviderRequestModel welcomeFromJson(String str) =>
+    GetProviderRequestModel.fromJson(json.decode(str));
 
 String welcomeToJson(Welcome data) => json.encode(data.toJson());
 
@@ -46,207 +54,85 @@ class GetProviderRequestModel {
   int count;
   int pages;
 
-  factory GetProviderRequestModel.fromJson(Map<String, dynamic> json) => GetProviderRequestModel(
-    appointmentRequests: List<GetBookingsRequest>.from(json["get_bookings_request"].map((x) => GetBookingsRequest.fromJson(x))),
-    count: json["count"],
-    pages: json["pages"],
-  );
+  factory GetProviderRequestModel.fromJson(Map<String, dynamic> json) =>
+      GetProviderRequestModel(
+        appointmentRequests: List<GetBookingsRequest>.from(
+            json["get_bookings_request"]
+                .map((x) => GetBookingsRequest.fromJson(x))),
+        count: json["count"],
+        pages: json["pages"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "get_bookings_request": List<dynamic>.from(appointmentRequests.map((x) => x.toJson())),
-    "count": count,
-    "pages": pages,
-  };
+        "get_bookings_request":
+            List<dynamic>.from(appointmentRequests.map((x) => x.toJson())),
+        "count": count,
+        "pages": pages,
+      };
 }
 
 class GetBookingsRequest {
   GetBookingsRequest({
-    this.bookingDate,
     this.id,
+    this.bookingDate,
+    this.bookingStartTime,
     this.bookingStatus,
     this.ownerFName,
     this.ownerLName,
     this.petName,
+    this.petImg,
     this.companyName,
+    this.companyCity,
+    this.companyState,
+    this.companyZipCode,
     this.service,
   });
 
-  DateTime bookingDate;
   int id;
+  DateTime bookingDate;
+  String bookingStartTime;
   String bookingStatus;
   String ownerFName;
   String ownerLName;
   String petName;
+  String petImg;
   String companyName;
+  String companyCity;
+  String companyState;
+  int companyZipCode;
   String service;
 
-  factory GetBookingsRequest.fromJson(Map<String, dynamic> json) => GetBookingsRequest(
-    bookingDate: DateTime.parse(json["booking_date"]),
-    id: json["id"],
-    bookingStatus: json["booking_status"],
-    ownerFName: json["owner_f_name"],
-    ownerLName: json["owner_l_name"],
-    petName: json["pet_name"],
-    companyName: json["company_name"],
-    service: json["service"],
-  );
+  factory GetBookingsRequest.fromJson(Map<String, dynamic> json) =>
+      GetBookingsRequest(
+        id: json["id"],
+        bookingDate: DateTime.parse(json["booking_date"]),
+        bookingStartTime: json["booking_start_time"],
+        bookingStatus: json["booking_status"],
+        ownerFName: json["owner_f_name"],
+        ownerLName: json["owner_l_name"],
+        petName: json["pet_name"],
+        petImg: json["pet_img"],
+        companyName: json["company_name"],
+        companyCity: json["company_city"],
+        companyState: json["company_state"],
+        companyZipCode: json["company_zip_code"],
+        service: json["service"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "booking_date": "${bookingDate.year.toString().padLeft(4, '0')}-${bookingDate.month.toString().padLeft(2, '0')}-${bookingDate.day.toString().padLeft(2, '0')}",
-    "id": id,
-    "booking_status": bookingStatus,
-    "owner_f_name": ownerFName,
-    "owner_l_name": ownerLName,
-    "pet_name": petName,
-    "company_name": companyName,
-    "service": service,
-  };
-}
-
-class Customer {
-  Customer({
-    this.id,
-    this.firstName,
-    this.lastName,
-    this.userType,
-    this.email,
-    this.token,
-    this.password,
-    this.otp,
-    this.isVerified,
-    this.createdAt,
-    this.updatedAt,
-  });
-
-  int id;
-  String firstName;
-  String lastName;
-  String userType;
-  String email;
-  String token;
-  String password;
-  String otp;
-  String isVerified;
-  DateTime createdAt;
-  DateTime updatedAt;
-
-  factory Customer.fromJson(Map<String, dynamic> json) => Customer(
-    id: json["id"],
-    firstName: json["first_name"],
-    lastName: json["last_name"],
-    userType: json["user_type"],
-    email: json["email"],
-    token: json["token"],
-    password: json["password"],
-    otp: json["otp"],
-    isVerified: json["is_verified"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "first_name": firstName,
-    "last_name": lastName,
-    "user_type": userType,
-    "email": email,
-    "token": token,
-    "password": password,
-    "otp": otp,
-    "is_verified": isVerified,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-  };
-}
-
-class Pet {
-  Pet({
-    this.id,
-    this.userId,
-    this.petName,
-    this.img,
-    this.breedType,
-    this.age,
-    this.weight,
-    this.height,
-    this.knownAllergies,
-    this.petNeeds,
-    this.birthDate,
-    this.sex,
-    this.gender,
-    this.walkingSchedule,
-    this.feedingSchedule,
-    this.temperament,
-    this.medication,
-    this.status,
-    this.createdAt,
-    this.updatedAt,
-  });
-
-  int id;
-  int userId;
-  String petName;
-  dynamic img;
-  String breedType;
-  int age;
-  int weight;
-  int height;
-  String knownAllergies;
-  String petNeeds;
-  DateTime birthDate;
-  String sex;
-  dynamic gender;
-  String walkingSchedule;
-  String feedingSchedule;
-  String temperament;
-  String medication;
-  String status;
-  DateTime createdAt;
-  DateTime updatedAt;
-
-  factory Pet.fromJson(Map<String, dynamic> json) => Pet(
-    id: json["id"],
-    userId: json["user_id"],
-    petName: json["pet_name"],
-    img: json["img"],
-    breedType: json["breed_type"],
-    age: json["age"],
-    weight: json["weight"],
-    height: json["height"],
-    knownAllergies: json["known_allergies"],
-    petNeeds: json["pet_needs"],
-    birthDate: DateTime.parse(json["birth_date"]),
-    sex: json["sex"],
-    gender: json["gender"],
-    walkingSchedule: json["walking_schedule"],
-    feedingSchedule: json["feeding_schedule"],
-    temperament: json["temperament"],
-    medication: json["medication"],
-    status: json["status"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "user_id": userId,
-    "pet_name": petName,
-    "img": img,
-    "breed_type": breedType,
-    "age": age,
-    "weight": weight,
-    "height": height,
-    "known_allergies": knownAllergies,
-    "pet_needs": petNeeds,
-    "birth_date": "${birthDate.year.toString().padLeft(4, '0')}-${birthDate.month.toString().padLeft(2, '0')}-${birthDate.day.toString().padLeft(2, '0')}",
-    "sex": sex,
-    "gender": gender,
-    "walking_schedule": walkingSchedule,
-    "feeding_schedule": feedingSchedule,
-    "temperament": temperament,
-    "medication": medication,
-    "status": status,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-  };
+        "id": id,
+        "booking_date":
+            "${bookingDate.year.toString().padLeft(4, '0')}-${bookingDate.month.toString().padLeft(2, '0')}-${bookingDate.day.toString().padLeft(2, '0')}",
+        "booking_start_time": bookingStartTime,
+        "booking_status": bookingStatus,
+        "owner_f_name": ownerFName,
+        "owner_l_name": ownerLName,
+        "pet_name": petName,
+        "pet_img": petImg,
+        "company_name": companyName,
+        "company_city": companyCity,
+        "company_state": companyState,
+        "company_zip_code": companyZipCode,
+        "service": service,
+      };
 }

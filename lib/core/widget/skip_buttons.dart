@@ -6,8 +6,8 @@ import 'package:maru/features/Home/presentation/home_sceen.dart';
 class SkipButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return
+      Container(
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () {

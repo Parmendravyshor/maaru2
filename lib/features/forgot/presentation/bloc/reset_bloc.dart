@@ -1,6 +1,6 @@
 
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
 import 'package:maru/features/forgot/Domain/usecases/reset_password.dart';
 import 'package:maru/features/forgot/Domain/usecases/send_reset_otp.dart';
@@ -27,7 +27,7 @@ class ResetBloc extends Bloc<ResetEvent, ResetState> {
   @override
   Stream<ResetState> mapEventToState(ResetEvent event) async* {
     if (event is EmailChanged) {
-      if (event.email.isNotEmpty && EmailValidator.validate(event.email)) {
+      if (event.email.isNotEmpty && validateEmail(email) != null) {
         email = event.email;
         yield ResetFormValidationSuccess();
       } else {

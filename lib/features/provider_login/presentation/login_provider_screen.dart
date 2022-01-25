@@ -178,28 +178,27 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                               String password = _passwordController.text;
 
                                               if (validateEmail(email) != null) {
-                                                AlertManager.showErrorMessage(
-                                                    "Please enter valid email", context);
+                                                _showDialog(context,
+                                                    "Please enter valid email", );
                                               } else if (password.length < 6) {
-                                                AlertManager.showErrorMessage(
-                                                    "Password must be 6 characters long",
-                                                    context);
+                                                _showDialog(context,
+                                                    "Password must be 6 characters long"
+                                                 );
                                               } else {
-                                                // if (state is LoginFormValidationSuccess ||
-                                                //  state is LoginFormValidationFailure) {
-
-                                                //  }
                                                 if (state
                                                 is LoginFormValidationSuccess ||
                                                     state
                                                     is LoginFormValidationFailure) {
-                                                  BlocProvider.of<LoginBloc>(context)
-                                                      .add(event.ProviderLoginButtonTapped());
+                                                  BlocProvider.of<LoginBloc>(
+                                                      context)
+                                                      .add(event
+                                                      .ProviderLoginButtonTapped());
                                                   //  AlertManager.showSuccessMessage( "Login Success", context);
 
 
                                                 }
                                               }
+
                                             },
                                           ),
                                           SizedBox(
@@ -226,6 +225,45 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                               );
                             })
                     )))));
+  }
+  void _showDialog(BuildContext context, String text) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+            padding: EdgeInsets.all(20.0),
+            child: AlertDialog(actions: <Widget>[
+              Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: MaaruStyle.colors.textColorWhite,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding:
+                            const EdgeInsets.only(left: 20.0, right: 20),
+                            child: Text(text),
+                          ),
+                          Divider(
+                            color: Colors.grey[360],
+                          ),
+                          InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'ok',
+                                style:
+                                TextStyle(color: MaaruColors.buttonColor),
+                              ))
+                        ],
+                      )))
+            ]));
+      },
+    );
   }
 }
 

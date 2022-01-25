@@ -1,6 +1,4 @@
 
-
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -68,9 +66,9 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                     child: BlocBuilder<RegisterBloc, RegisterState>(
                         builder: (context, state) {
                       if (state is RegisterSuccess) {
-                        AlertManager.showErrorMessage(
-                            "otp send your register email", context);
                         SchedulerBinding.instance.addPostFrameCallback((_) {
+                          AlertManager.showErrorMessage(
+                            "otp send your register email", context,);
                           Navigator.pushReplacement(context, MaterialPageRoute(
                               builder: (BuildContext context) {
                             return BlocProvider(
@@ -108,7 +106,7 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                       }
 
                       return Padding(
-                        padding: const EdgeInsets.only(left: 15.0,right: 15.0),
+                        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                         child: Column(
                           children: [
                             Logo(),
@@ -117,10 +115,8 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                               height: 20,
                             ),
                             Center(
-                              child: Text(
-                                'or sign up with email',
-                                style: MaaruStyle.text.tiny
-                              ),
+                              child: Text('or sign up with email',
+                                  style: MaaruStyle.text.tiny),
                             ),
                             SizedBox(
                               height: 20,
@@ -136,8 +132,8 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                                           "First Name", TextInputType.text,
                                           textInputAction: TextInputAction.next,
                                           onChanged: (text) {
-                                         BlocProvider.of<RegisterBloc>(context)
-                                          .add(FNameChanged(text));
+                                        BlocProvider.of<RegisterBloc>(context)
+                                            .add(FNameChanged(text));
                                       },
                                           editingController:
                                               _first_nameController),
@@ -148,8 +144,8 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                                           "Last Name", TextInputType.text,
                                           textInputAction: TextInputAction.next,
                                           onChanged: (text) {
-                                           BlocProvider.of<RegisterBloc>(context)
-                                         .add(LNameChanged(text));
+                                        BlocProvider.of<RegisterBloc>(context)
+                                            .add(LNameChanged(text));
                                       }, editingController: _lnameController),
                                       SizedBox(
                                         height: 5,
@@ -158,8 +154,8 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                                           "Email", TextInputType.emailAddress,
                                           textInputAction: TextInputAction.next,
                                           onChanged: (text) {
-                                         BlocProvider.of<RegisterBloc>(context)
-                                         .add(EmailChanged(text));
+                                        BlocProvider.of<RegisterBloc>(context)
+                                            .add(EmailChanged(text));
                                       }, editingController: _emailController),
                                       SizedBox(
                                         height: 5,
@@ -170,8 +166,8 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                                         textInputAction: TextInputAction.next,
                                         password: true,
                                         onChanged: (text) {
-                                            BlocProvider.of<RegisterBloc>(context)
-                                             .add(PasswordChanged(text));
+                                          BlocProvider.of<RegisterBloc>(context)
+                                              .add(PasswordChanged(text));
                                         },
                                         editingController: _passwordController,
                                       ),
@@ -193,34 +189,36 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                                               _passwordController.text;
 
                                           if (fname.isEmpty) {
-                                            AlertManager.showErrorMessage(
-                                                "Please enter first name",
-                                                context);
+                                            _showDialog(context,
+                                                'Please enter pet name');
                                           } else if (lname.isEmpty) {
-                                            AlertManager.showErrorMessage(
-                                                "Please enter last name",
-                                                context);
+                                            _showDialog(
+                                              context,
+                                              "Please enter last name",
+                                            );
                                           } else if (validateEmail(email) !=
                                               null) {
-                                            AlertManager.showErrorMessage(
-                                                "Please enter valid email",
-                                                context);
+                                            _showDialog(
+                                              context,
+                                              "Please enter valid email",
+                                            );
                                           } else if (password.length < 6) {
-                                            AlertManager.showErrorMessage(
-                                                "Password must be 6 characters long",
-                                                context);
+                                            _showDialog(
+                                              context,
+                                              "Password must be 6 characters long",
+                                            );
 
                                             enabled = true;
-                                          }
-
-                                          // else if (password != cnfpassword) {
-                                          //   AlertManager.showErrorMessage(
-                                          //       "Password do not match", context);
-
-                                          else {
-                                            BlocProvider.of<RegisterBloc>(context)
-                                                .add(ProviderRegisterButtonTapped());
-
+                                          } else {
+                                            if (state
+                                            is RegisterFormValidationSuccess ||
+                                                state
+                                                is RegisterFormValidationFailure) {
+                                              BlocProvider.of<RegisterBloc>(
+                                                  context)
+                                                  .add(
+                                                  ProviderRegisterButtonTapped());
+                                            }
                                           }
                                           enabled = false;
                                         },
@@ -230,11 +228,12 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                                       ),
                                       state is RegisterInProgress
                                           ? Center(
-                                          child: Container(
-                                            width: 5,
-                                            height: 5,
-                                            child: CircularProgressIndicator(),
-                                          ))
+                                              child: Container(
+                                              width: 5,
+                                              height: 5,
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            ))
                                           : Container(),
                                       GoToSignInText(),
                                       SizedBox(
@@ -249,6 +248,46 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                         ),
                       );
                     })))));
+  }
+
+  void _showDialog(BuildContext context, String text) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+            padding: EdgeInsets.all(20.0),
+            child: AlertDialog(actions: <Widget>[
+              Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: MaaruStyle.colors.textColorWhite,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 20),
+                            child: Text(text),
+                          ),
+                          Divider(
+                            color: Colors.grey[360],
+                          ),
+                          InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'ok',
+                                style:
+                                    TextStyle(color: MaaruColors.buttonColor),
+                              ))
+                        ],
+                      )))
+            ]));
+      },
+    );
   }
 }
 
@@ -266,8 +305,8 @@ class GoToSignInText extends StatelessWidget {
         ),
         InkWell(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => LoginProviderScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => LoginProviderScreen()));
             },
             child: Text(
               'Login'.toUpperCase(),

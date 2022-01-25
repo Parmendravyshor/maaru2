@@ -18,6 +18,9 @@ import 'book_appointment_screen2.dart';
 import 'booked_confirm.dart';
 
 class BookAppointment1 extends StatefulWidget {
+  final int id1;
+
+   BookAppointment1( {this.id1});
   @override
   _BookAppointment1State createState() => _BookAppointment1State();
 }
@@ -25,11 +28,11 @@ class BookAppointment1 extends StatefulWidget {
 class _BookAppointment1State extends State<BookAppointment1> {
   int abc;
   Color circlecolor1 = MaaruColors.walkingcolor;
-  Color circlecolor2 = MaaruColors.hotelcolor;
+  Color circlecolor2 = MaaruColors.vetcolor;
   Color circlecolor3 = MaaruColors.hotelcolor;
-  Color circlecolor4 = MaaruColors.hotelcolor;
-  Color circlecolor5 = MaaruColors.hotelcolor;
-  Color circlecolor6 = MaaruColors.hotelcolor;
+  Color circlecolor4 = MaaruColors.hospitalcolor;
+  Color circlecolor5 = MaaruColors.daycarecolor;
+  Color circlecolor6 = MaaruColors.groomingcolor;
   var select = '';
   Widget choosecontainer(
       BuildContext context, Image image, String text, Color color) {
@@ -88,7 +91,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     builder: (context, state) {
                   if (state is PetProfileInitial) {
                     BlocProvider.of<PetProfileBloc>(context)
-                        .add(GetSinglePRovider());
+                        .add(GetSinglePRovider(widget.id1));
 
                     return CircularProgressIndicator();
                   } else if (state is SingleProviderLoaded) {
@@ -102,9 +105,18 @@ class _BookAppointment1State extends State<BookAppointment1> {
                           child: Column(
                         children: [
                           Container(
-                            width: 2000,
+                            height: 200,
+                            width: 400,
                             child: Image.network(
                               state.welcome4.providerDetails.provider.img,
+                              fit: BoxFit.fitWidth,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                    color: Colors.amber,
+                                    alignment: Alignment.center,
+                                    child:
+                                    Image.asset('assets/images/kutta.png'));
+                              },
                             ),
                           ),
                           Container(
@@ -145,7 +157,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (_) =>
-                                                        BookAppointment2()));
+                                                        BookAppointment2(id2: widget.id1,)));
                                           },
                                           child: Image.asset(
                                             'assets/icons/icone-setting-68.png',
@@ -161,7 +173,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (_) =>
-                                                        BookAppointmentScreen3()));
+                                                        BookAppointmentScreen3(id3: widget.id1,)));
                                           },
                                           child: Image.asset(
                                             'assets/icons/icone-setting-68.png',
@@ -191,37 +203,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                         // state.welcome4.providerDetails.
                                         style: MaaruStyle.text.xlarge,
                                       ),
-                                      // SizedBox(
-                                      //   width: size.width * 0.16,
-                                      // ),
-                                      // GestureDetector(
-                                      //     onTap: () {
-                                      //       setState(() {
-                                      //         circlecolor3 ==
-                                      //             MaaruColors
-                                      //                 .whiteColor
-                                      //             ? circlecolor3 =
-                                      //             MaaruColors
-                                      //                 .hotelcolor
-                                      //             : circlecolor3 =
-                                      //             MaaruColors
-                                      //                 .whiteColor;
-                                      //         if (circlecolor3 ==
-                                      //             MaaruColors
-                                      //                 .hotelcolor) {
-                                      //           select = 'hotel';
-                                      //           print(select);
-                                      //         }
-                                      //       });
-                                      //     },
-                                      //     child: choosecontainer(
-                                      //         context,
-                                      //         Image.network(
-                                      //          state.welcome4.providerDetails[index].serviceIcon,
-                                      //           height: 35,
-                                      //         ),
-                                      //        state.welcome4.providerDetails[index].serviceType.toString(),
-                                      //         circlecolor3)),
+
                                     ],
                                   ),
                                   //   }
@@ -256,8 +238,16 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                             GestureDetector(
                                                 onTap: () {
                                                   setState(() {
-
-                                                    if (circlecolor1 ==
+                                                    circlecolor3 ==
+                                                        MaaruColors
+                                                            .hotelcolor
+                                                        ? circlecolor3 =
+                                                        MaaruColors
+                                                            .hotelcolor
+                                                        : circlecolor3 =
+                                                        MaaruColors
+                                                            .hotelcolor;
+                                                    if (circlecolor3 ==
                                                         MaaruColors
                                                             .hotelcolor) {
                                                       select = 'hotel';
@@ -284,18 +274,18 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                             GestureDetector(
                                                 onTap: () {
                                                   setState(() {
-                                                    circlecolor3 ==
+                                                    circlecolor2 ==
                                                             MaaruColors
-                                                                .hotelcolor
-                                                        ? circlecolor3 =
+                                                                .vetcolor
+                                                        ? circlecolor2 =
                                                             MaaruColors
-                                                                .hotelcolor
-                                                        : circlecolor3 =
+                                                                .vetcolor
+                                                        : circlecolor2 =
                                                             MaaruColors
-                                                                .hotelcolor;
-                                                    if (circlecolor3 ==
+                                                                .vetcolor;
+                                                    if (circlecolor2 ==
                                                         MaaruColors
-                                                            .hotelcolor) {
+                                                            .vetcolor) {
                                                       select = 'hotel';
                                                       print(select);
                                                     }
@@ -315,7 +305,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                                         .masterServices[index]
                                                         .serviceType
                                                         .toString(),
-                                                    circlecolor3)),
+                                                    circlecolor2)),
                                           ],
                                         );
                                       }),
@@ -357,8 +347,8 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                       Text('monday-saturday'.toUpperCase(),
                                           textAlign: TextAlign.start,
                                           style: MaaruStyle.text.greyDisable),
-                                      Text('',
-                                          //state.welcome4.providerDetails[_prefHelper.getIntByKey('id',abc)].operationHours,
+                                      Text(
+                                         '',
                                           style: MaaruStyle.text.tiniest),
                                     ],
                                   ),

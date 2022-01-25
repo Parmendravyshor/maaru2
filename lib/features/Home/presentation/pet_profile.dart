@@ -19,13 +19,26 @@ import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.da
 import 'create_home_screen.dart';
 
 class PetProfile1 extends StatefulWidget {
-
   @override
   _PetProfile1State createState() => _PetProfile1State();
 }
 
 class _PetProfile1State extends State<PetProfile1> {
   String text = '';
+  TextEditingController _textEditingController;
+////
+  @override
+  void initState() {
+    _textEditingController = TextEditingController();
+
+    super.initState();
+  }
+
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
@@ -85,9 +98,10 @@ class _PetProfile1State extends State<PetProfile1> {
                   bottom: false,
                   child: SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 15.0,right: 30,bottom: 15),
-                        child: Column(children: [
-                    Row(
+                    padding: const EdgeInsets.only(
+                        left: 15.0, right: 30, bottom: 15),
+                    child: Column(children: [
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           InkWell(
@@ -116,13 +130,13 @@ class _PetProfile1State extends State<PetProfile1> {
                                 ),
                               )),
                         ],
-                    ),
-                    const SizedBox(
+                      ),
+                      const SizedBox(
                         height: 20,
-                    ),
-                    Padding(
-                          padding:
-                              const EdgeInsets.only(top: 15, right: 10, left: 20),
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.only(
+                              top: 15, right: 10, left: 20),
                           child: TextFormField(
                             // cursorColor: Colors.black,
                             decoration: InputDecoration(
@@ -131,24 +145,42 @@ class _PetProfile1State extends State<PetProfile1> {
                                     borderSide: BorderSide(
                                         color: Colors.grey[300], width: 1.0)),
                                 focusedBorder: OutlineInputBorder(
-                                    borderRadius: new BorderRadius.circular(10.7),
-                                    borderSide: new BorderSide(
+                                    borderRadius:
+                                         BorderRadius.circular(10.7),
+                                    borderSide:  BorderSide(
                                         color: Colors.grey[300], width: 1.0)),
                                 hintText: 'Search',
                                 hintStyle: MaaruStyle.text.greyDisable,
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(20.0, 15.0, 25.0, 10.0),
+                                contentPadding: const EdgeInsets.fromLTRB(
+                                    20.0, 15.0, 25.0, 10.0),
                                 fillColor: Colors.white,
-                                suffixIcon: Image.asset(
-                                  'assets/icons/icone-setting-19.png',
-                                  height: 50,
-                                  // width: 30,
-                                )),
+                                suffixIcon: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        BlocProvider.of<PetProfileBloc>(context)
+                                            .add(GetCovidList(
+                                                _textEditingController.text));
+                                      });
+                                    },
+                                    child: Image.asset(
+                                      'assets/icons/icone-setting-19.png',
+                                      height: 52,
+                                      // width: 30,
+                                    ))),
+                            // onFieldSubmitted: (text) {
+                            //   BlocProvider.of<PetProfileBloc>(context)
+                            //       .add(GetCovidList(text));
+                            // },
+                            onChanged: (text) {
+                              BlocProvider.of<PetProfileBloc>(context).add(
+                                  GetCovidList(_textEditingController.text));
+                            },
+                            controller: _textEditingController,
                           )),
-                    SizedBox(
+                      const SizedBox(
                         height: 20,
-                    ),
-                    Container(
+                      ),
+                      Container(
                           // alignment: Alignment.center,
                           height: 470,
                           width: 250,
@@ -162,9 +194,13 @@ class _PetProfile1State extends State<PetProfile1> {
 
                                   InkWell(
                                 onTap: () {
-                                  _prefHelper.saveInt('id', state.covidModel.petProfiles[index].id);
+                                  _prefHelper.saveInt('id',
+                                      state.covidModel.petProfiles[index].id);
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) =>  ViewPetProfile(id1: state.covidModel.petProfiles[index].id,)));
+                                      builder: (_) => ViewPetProfile(
+                                            id1: state.covidModel
+                                                .petProfiles[index].id,
+                                          )));
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -181,8 +217,8 @@ class _PetProfile1State extends State<PetProfile1> {
                                           //width: 300,
                                           alignment: Alignment.center,
                                           child: Image.network(
-                                            state
-                                                .covidModel.petProfiles[index].img
+                                            state.covidModel.petProfiles[index]
+                                                .img
                                                 .toString(),
                                             height: 150,
                                             width: 232,
@@ -190,7 +226,8 @@ class _PetProfile1State extends State<PetProfile1> {
                                             errorBuilder:
                                                 (context, error, stackTrace) {
                                               return Container(
-                                                  decoration: const BoxDecoration(
+                                                  decoration:
+                                                      const BoxDecoration(
                                                     shape: BoxShape.circle,
                                                   ),
                                                   alignment: Alignment.center,
@@ -199,19 +236,22 @@ class _PetProfile1State extends State<PetProfile1> {
                                             },
                                           )),
                                       Container(
-                                        margin:
-                                            EdgeInsets.only(left: 20, right: 20),
+                                        margin: EdgeInsets.only(
+                                            left: 20, right: 20),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Text(
-                                                  state.covidModel
-                                                      .petProfiles[index].petName,
+                                                  state
+                                                      .covidModel
+                                                      .petProfiles[index]
+                                                      .petName,
                                                   style: MaaruStyle.text.large,
                                                 ),
                                                 Image.asset(
@@ -221,8 +261,8 @@ class _PetProfile1State extends State<PetProfile1> {
                                               ],
                                             ),
                                             Text(
-                                              state.covidModel.petProfiles[index]
-                                                  .breedType,
+                                              state.covidModel
+                                                  .petProfiles[index].breedType,
                                               style: MaaruStyle.text.tiny,
                                             ),
                                             SizedBox(height: 10)
@@ -237,8 +277,8 @@ class _PetProfile1State extends State<PetProfile1> {
                               );
                             },
                           )),
-                  ]),
-                      )),
+                    ]),
+                  )),
                 );
               } else {
                 return Center(child: CircularProgressIndicator());

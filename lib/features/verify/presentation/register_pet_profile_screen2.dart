@@ -14,7 +14,7 @@ import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
-import 'package:maru/features/Home/presentation/home_sceen.dart';
+
 
 import '../../../main.dart';
 import 'register_pet_profile_screen1.dart';
@@ -39,7 +39,7 @@ import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/screen_icon2.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
-import 'package:maru/features/Home/presentation/home_sceen.dart';
+
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_event.dart';
@@ -94,7 +94,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: MaaruColors.DogsBackground,
+        backgroundColor: Colors.white,
         body: BlocProvider(
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child: BlocBuilder<PetProfileBloc, PetProfileState>(
@@ -129,26 +129,37 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                   bottom: false,
                   child: SingleChildScrollView(
                       child: Column(children: [
-                    SkipButtons(),
-                    SizedBox(
-                      height: 40,
-                    ),
+                          Stack(fit: StackFit.loose, children: <Widget>[
                     Container(
                         alignment: Alignment.bottomRight,
-                        height: size.height * 0.20,
-                        width: size.width * 0.9,
+                        // height: size.height * 0.20,
+                        // width: size.width * 0.9,
                         child:
                         Center(
                           child: Image.network(
-                              _prefHelper.getStringByKey(MaruConstant.img, ''),
-                              fit: BoxFit.cover,
+                              _prefHelper.getStringByKey('img', ''),
+                              width:450,
+                              height: 250,
+                              fit: BoxFit.fitWidth,
                               errorBuilder: (context, error, stackTrace) {
                             return Container(
-                                color: Colors.transparent,
+                                color: MaaruColors.DogsBackground,
                                 alignment: Alignment.center,
                                 child: Image.asset('assets/images/kutta.png'));
                           }),
                         )),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    top: 30.0,bottom: 10
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: <Widget>[
+                                    SkipButtons(),
+                                  ],
+                                )),
+                          ]),
+
                     Container(
                         alignment: FractionalOffset.bottomCenter,
                         decoration: BoxDecoration(

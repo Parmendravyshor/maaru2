@@ -235,6 +235,45 @@ class ProviderOtpWidget extends State<ProviderOtp> {
       ),
     );
   }
+  void _showDialog(BuildContext context, String text) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+            padding: EdgeInsets.all(20.0),
+            child: AlertDialog(actions: <Widget>[
+              Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: MaaruStyle.colors.textColorWhite,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding:
+                            const EdgeInsets.only(left: 20.0, right: 20),
+                            child: Text(text),
+                          ),
+                          Divider(
+                            color: Colors.grey[360],
+                          ),
+                          InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'ok',
+                                style:
+                                TextStyle(color: MaaruColors.buttonColor),
+                              ))
+                        ],
+                      )))
+            ]));
+      },
+    );
+  }
 }
 
 /// Text for showing at bottom of screen

@@ -11,24 +11,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:geolocator/geolocator.dart';
-// import 'package:flutter_map/flutter_map.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import 'dart:async';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
-import 'package:maru/features/Account_setting/presentation/bloc/change_password_screen.dart';
-import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
-import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
-import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
-import 'package:maru/features/Home/presentation/appoinment_screen.dart';
-import 'package:maru/features/Home/presentation/home_sceen.dart';
-
 import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
     as event;
 import 'package:geocoding/geocoding.dart';
@@ -74,11 +64,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await registerDependencyInjection();
   await Firebase.initializeApp();
- // Socket socket = io('http://18.191.199.31:80', <String, dynamic> { 'transports':['websocket'],
+  // Socket socket = io('http://18.191.199.31:80', <String, dynamic> { 'transports':['websocket'],
   try {
     IO.Socket socket = IO.io('http://18.191.199.31:80', <String, dynamic>{
       'transports': ['websocket'],
-      'autoConnect': false,
+      'autoConnect': true,
     });
 
 // Dart client
@@ -88,7 +78,7 @@ void main() async {
     socket.on('event', (data) => print(data));
     socket.on('disconnect', (_) => print('disconnect'));
     socket.on('fromServer', (_) => print(_));
-  } catch(e){
+  } catch (e) {
     print(e);
   }
   runApp(MyApp());
@@ -162,13 +152,13 @@ class MyApp extends StatelessWidget {
         //           const ResponsiveBreakpoint.resize(100, name: MOBILE),
         //         ]),
         debugShowCheckedModeBanner: false,
-       checkerboardOffscreenLayers: true,
+        checkerboardOffscreenLayers: true,
         title: 'Maaru',
         theme: theme,
         //todo: navigate to SplashScreen
 //TODO:need to putup scrooll pagination vie
 // w on the buttom (Provider search screen)
-        home:  Scaffold(body: (CreateregisterPetProfile1())));
+        home: Scaffold(body: (LoginScreen())));
   }
 }
 
@@ -843,6 +833,7 @@ class _MapViewState extends State<MapView> {
                                     const EdgeInsets.fromLTRB(40, 0, 10, 0),
                                 child: Stack(children: [
                                   ListView.builder(
+                                    physics: const ScrollPhysics(),
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: true,
                                       itemCount: state.getProviderModel
@@ -854,11 +845,7 @@ class _MapViewState extends State<MapView> {
                                           alignment: Alignment.bottomRight,
                                           padding: const EdgeInsets.fromLTRB(
                                               20, 180, 30, 10),
-                                          child: Text(state
-                                              .getProviderModel
-                                              .providersListing[index]
-                                              .description
-                                              .toString()),
+                                          child: Text(''),
                                           // Image.network(
                                           //  state.getProviderModel.providersListing[index].description.toString(),
                                           //  height: 60,

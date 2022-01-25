@@ -8,6 +8,7 @@ import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/grooming_search.dart';
@@ -37,12 +38,12 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
   Color Walkingcolor = Color(0xff5e34d1);
   Color hotelcolor = Color(0xff5e34d1);
   Color daycarecolor = Color(0xff5e34d1);
+  Color filterone = MaaruColors.greyColorText;
+  Color filtertwo = MaaruColors.greyColorText;
+  String switchimage = 'assets/icons/icon-bl-19.png';
 
-  String switchimage =
-      'assets/icons/icon-bl-19.png';
-
-  double height = 45;
-  double leftpad = 310;
+  double height = 40;
+  double leftpad = 0.9;
   String text = '';
   TextEditingController _petNameController;
 
@@ -53,9 +54,11 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
     super.initState();
   }
 
-  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  final SharedPrefHelper _prefHelper =
+      KiwiContainer().resolve<SharedPrefHelper>();
 
   Widget use(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Center(
       child: BlocProvider(
         create: (context) => KiwiContainer().resolve<LoginBloc>(),
@@ -63,67 +66,43 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
           if (state is LoginInitial) {
             BlocProvider.of<LoginBloc>(context).add(event.GetProvider(text));
             print('figffgfg${text}');
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else if (state is ProviderLoaded1) {
             return Container(
-                margin:
-                    EdgeInsets.only(top: 70, bottom: 0, left: 20, right: 20),
+                margin: const EdgeInsets.only(
+                    top: 70, bottom: 0, left: 20, right: 20),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ShowLocation(),
-
-                      SizedBox(
+                      const SizedBox(
                         height: 15.0,
                       ),
-
                       Stack(
                         children: [
                           Container(
-                            decoration: BoxDecoration(
-                                //
-                                //  color: Colors.red,
-                                border: Border.all(color: Color(0xffE8E8E8)),
-                                borderRadius: BorderRadius.circular(20)),
-                            height: 50,
-                            width: 220,
-                            child: TextField(
-                              textInputAction: TextInputAction.search,
-                              decoration: InputDecoration(
-                                contentPadding:
-                                      const EdgeInsets.only(top: 2.0, left: 20.0),
-                                hintText: 'Search',
-                                hintStyle: MaaruStyle.text.tiny,
-                                suffixIcon: GestureDetector(
-                                    onTap: () {
-                                      if (mounted) {}
-                                      BlocProvider.of<LoginBloc>(context).add(
-                                          event.GetProvider(
-                                              _petNameController.text));
-                                    },
-                                    child: Image.asset(
-                                      'assets/icons/icone-setting-19.png',
-                                      height: 100,
-                                    )),
-                                border: const OutlineInputBorder(
-                                    borderSide: BorderSide.none),
-                              ),
-                              onSubmitted: (text) {
-                                if (mounted) {
-                                  BlocProvider.of<LoginBloc>(context).add(
-                                      event.GetProvider(
-                                          _petNameController.text));
-                                }
-                              },
-                              controller: _petNameController,
-                            ),
-                          ),
-
-                          Padding(
-                            padding: const EdgeInsets.only(left: 230),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Color(0xffE8E8E8)),
+                                  borderRadius: BorderRadius.circular(15)),
+                              height: size.height * 0.06,
+                              width: size.width * 0.62,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.only(top: 2.0, left: 20.0),
+                                  hintText: 'Search',
+                                  hintStyle: MaaruStyle.text.tiny,
+                                  suffixIcon: Image.asset(
+                                    'assets/icons/icone-setting-19.png',
+                                  ),
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide.none),
+                                ),
+                              )),
+                          Align(
+                            alignment: Alignment(0.6, 0),
                             child: GestureDetector(
                               onTap: () {
-                                if (mounted) {}
                                 setState(() {
                                   Navigator.push(
                                       context,
@@ -131,28 +110,32 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                           builder: (context) => MapView()));
                                 });
                               },
-                              child:
-                              Image.asset(
+                              child: Image.asset(
                                 'assets/icons/icone-setting-61.png',
-                                height: 45,
+                                height: 40,
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(left: leftpad),
+                          SizedBox(
+                            width: size.width * 0.05,
+                          ),
+                          Align(
+                            alignment: Alignment(leftpad, 0),
                             child: GestureDetector(
                                 onTap: () {
-                                  if (mounted) {}
                                   setState(() {
                                     switchimage == 'assets/icons/icon-bl-19.png'
                                         ? switchimage =
                                             'assets/icons/icone-setting-62.png'
                                         : switchimage =
                                             'assets/icons/icon-bl-19.png';
-                                    height == 45 ? height = 180 : height = 45;
-                                    leftpad == 100
+                                    height == 40 ? height = 165 : height = 40;
+                                    leftpad == 0.9
                                         ? leftpad = 0
-                                        : leftpad = 310;
+                                        : leftpad = 0.9;
+                                    Switchcontainerheight == 0
+                                        ? Switchcontainerheight = 80
+                                        : Switchcontainerheight = 0;
                                   });
                                 },
                                 child: Image.asset(
@@ -161,20 +144,12 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                 )),
                           ),
                           Positioned(
-                              left: 10,
-                              top: 50,
-                              child: Padding(
-                                  padding: EdgeInsets.only(top: 10),
-                                  child: switchcontainer(context)))
+                              left: 20,
+                              bottom: 20,
+                              child: switchcontainer(context,
+                                  height: Switchcontainerheight)),
                         ],
                       ),
-                      // SizedBox(
-                      //   height: size.height * 0.02,
-                      // ),
-                      // //RepeatContainer('assets/images/kutta.png',),
-                      // SizedBox(
-                      //   height: size.height * 0.02,
-                      // ),
                       ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
@@ -184,45 +159,34 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                             return Column(
                               children: [
                                 Column(children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey[200], width: 2),
-                                        borderRadius:
-                                            BorderRadius.circular(25)),
-                                    height: 120,
-                                    child: InkWell(
-                                      onTap: () async {
-                                        setState(() {
-                                          if (mounted) {}
-                                          Navigator.of(context)
-                                              .push(MaterialPageRoute(
-                                            builder: (context) =>
-                                                BookAppointment1(),
-                                          ));
-                                        });
-                                        var id3 = state.getProviderModel
-                                            .providersListing[index].id;
+                                  InkWell(
+                                    onTap:(){
 
-                                        print(id3);
-                                        var serviceid1 = state.getProviderModel
-                                            .providersListing[index].serviceId;
-                                        await _prefHelper.saveInt('id', id3);
-                                        await _prefHelper.saveInt(
-                                            'service_id', serviceid1);
-                                        // final id4 =  _prefHelper.getIntByKey('id',id3);
+                                      setState(() {
+                                        if (mounted) {}
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) =>
+                                              BookAppointment1(id1:state.getProviderModel.providersListing[index].id),
+                                        ));
+                                      });
 
-                                        print(
-                                            'jhkhffhfkjhfjkhfjkbhejdhfjdbffbfbggggg${state.getProviderModel.providersListing[index].id}');
-                                      },
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey[200], width: 2),
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                      height: 120,
                                       child: Container(
                                         color: Colors.white,
                                         margin: EdgeInsets.all(13.0),
                                         child: Row(
                                           children: [
                                             Container(
-                                              height: 100,
-                                              width: 90,
+                                              height: 120,
+                                              width: 120,
                                               decoration: BoxDecoration(
                                                 gradient: LinearGradient(
                                                     colors: [
@@ -232,19 +196,19 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(15),
                                               ),
-                                              child:
-                                              Container(
+                                              child: Container(
+                                                width: 120,
                                                 child: Image.network(
                                                   state
                                                       .getProviderModel
                                                       .providersListing[index]
                                                       .img,
-
                                                   errorBuilder: (BuildContext,
                                                       Object, StackTrace) {
                                                     return Image.asset(
-                                                        'assets/images/kutta.png',
-                                                      fit: BoxFit.contain,);
+                                                      'assets/images/kutta.png',
+                                                      fit: BoxFit.fitWidth,
+                                                    );
                                                   },
                                                 ),
                                               ),
@@ -256,20 +220,23 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(
-                                                  state
-                                                      .getProviderModel
-                                                      .providersListing[index]
-                                                      .companyName
-                                                      .toString(),
+                                                Expanded(
+                                                  child: Text(
+                                                    state
+                                                        .getProviderModel
+                                                        .providersListing[index]
+                                                        .companyName
+                                                        .toString(),
 
-                                                  // _prefHelper.getStringByKey(MaruConstant.company_name, ''),
-                                                  style: const TextStyle(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w900),
+                                                    // _prefHelper.getStringByKey(MaruConstant.company_name, ''),
+                                                    style: const TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w900),
+                                                  ),
                                                 ),
-                                                Text(
+                                                Expanded(
+                                                    child: Text(
                                                   state
                                                       .getProviderModel
                                                       .providersListing[index]
@@ -280,27 +247,27 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                                       fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.w900),
-                                                ),
-                                                const SizedBox(
-                                                  height: 15,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Image.asset(
-                                                      'assets/icons/ffth.png',
-                                                      height: 20,
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Text(
-                                                      '${state.getProviderModel.providersListing[index].reviews} Reviews (${state.getProviderModel.providersListing[index].averageRating})',
-                                                      style: const TextStyle(
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.w900),
-                                                    )
-                                                  ],
+                                                )),
+                                                Expanded(
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/icons/ffth.png',
+                                                        height: 20,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        '${state.getProviderModel.providersListing[index].reviews} Reviews (${state.getProviderModel.providersListing[index].averageRating})',
+                                                        style: const TextStyle(
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w900),
+                                                      )
+                                                    ],
+                                                  ),
                                                 )
                                               ],
                                             )
@@ -309,7 +276,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                   )
                                 ]),
@@ -323,7 +290,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                           })
                     ]));
           } else {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
           ;
         }),
@@ -331,9 +298,251 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
     );
   }
 
-  Widget switchcontainer(
-    BuildContext context,
-  ) {
+  // Widget switchcontainer(
+  //   BuildContext context,
+  // ) {
+  //   final size = MediaQuery.of(context).size;
+  //   return BlocProvider(
+  //       create: (context) => KiwiContainer().resolve<LoginBloc>(),
+  //       child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+  //         if (state is ProviderLoaded1) {
+  //           SchedulerBinding.instance.addPostFrameCallback((_) {
+  //             Navigator.pushReplacement(context,
+  //                 MaterialPageRoute(builder: (BuildContext context) {
+  //               return Scaffold(
+  //                   body: SingleChildScrollView(child: use(context)));
+  //             }));
+  //           });
+  //           return Container();
+  //         }
+  //         return Column(
+  //           children: [
+  //             SizedBox(
+  //               height: 20,
+  //             ),
+  //             Padding(
+  //               padding: const EdgeInsets.only(
+  //                 top: 0.0,
+  //               ),
+  //               child: Row(
+  //                 children: [
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           Groomingcolor == Color(0xff5e34d1)
+  //                               ? Groomingcolor = Colors.red
+  //                               : Groomingcolor = Color(0xff5e34d1);
+  //                         });
+  //                         text = 'grooming';
+  //                         print(text);
+  //
+  //                         BlocProvider.of<LoginBloc>(context)
+  //                             .add(event.GetProvider(text));
+  //                       }
+  //                     },
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           color: Groomingcolor),
+  //                       height: size.height * 0.05,
+  //                       width: size.width * 0.11,
+  //                       child: Image.asset(
+  //                         'assets/icons/icone-setting-55.png',
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: size.width * 0.10,
+  //                   ),
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           Vetcolor == Color(0xff5e34d1)
+  //                               ? Vetcolor = Colors.red
+  //                               : Vetcolor = Color(0xff5e34d1);
+  //                         });
+  //                       }
+  //                       text = 'Walking';
+  //                       print(text);
+  //
+  //                       BlocProvider.of<LoginBloc>(context)
+  //                           .add(event.GetProvider(text));
+  //                     },
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           color: Vetcolor),
+  //                       height: size.height * 0.05,
+  //                       width: size.width * 0.11,
+  //                       child: Image.asset(
+  //                         'assets/icons/icone-setting-56.png',
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: size.width * 0.05,
+  //                   ),
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           hotelcolor == Color(0xff5e34d1)
+  //                               ? hotelcolor = Colors.red
+  //                               : hotelcolor = Color(0xff5e34d1);
+  //                         });
+  //                       }
+  //                       text = 'Vet';
+  //                       print(text);
+  //
+  //                       BlocProvider.of<LoginBloc>(context)
+  //                           .add(event.GetProvider(text));
+  //                     },
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           color: hotelcolor),
+  //                       height: size.height * 0.05,
+  //                       width: size.width * 0.11,
+  //                       child: Image.asset(
+  //                         'assets/icons/icone-setting-57.png',
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: size.width * 0.05,
+  //                   ),
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           daycarecolor == Color(0xff5e34d1)
+  //                               ? daycarecolor = Colors.red
+  //                               : daycarecolor = Color(0xff5e34d1);
+  //                         });
+  //                       }
+  //                       text = 'Hotel';
+  //                       print(text);
+  //
+  //                       BlocProvider.of<LoginBloc>(context)
+  //                           .add(event.GetProvider(text));
+  //                     },
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           color: daycarecolor),
+  //                       height: size.height * 0.05,
+  //                       width: size.width * 0.11,
+  //                       child: Image.asset(
+  //                         'assets/icons/icone-setting-58.png',
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: size.width * 0.05,
+  //                   ),
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           Walkingcolor == Color(0xff5e34d1)
+  //                               ? Walkingcolor = Colors.red
+  //                               : Walkingcolor = Color(0xff5e34d1);
+  //                         });
+  //                       }
+  //                       text = 'Hospital';
+  //                       print(text);
+  //
+  //                       BlocProvider.of<LoginBloc>(context)
+  //                           .add(event.GetProvider(text));
+  //                     },
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           color: Walkingcolor),
+  //                       height: size.height * 0.05,
+  //                       width: size.width * 0.11,
+  //                       child: Image.asset('assets/icons/icone-setting-59.png'),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: size.height * 0.05,
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //             SizedBox(
+  //               height: 15,
+  //             ),
+  //             Row(
+  //               mainAxisAlignment: MainAxisAlignment.start,
+  //               children: <Widget>[
+  //                 GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           Walkingcolor == Color(0xff5e34d1)
+  //                               ? Walkingcolor = Colors.red
+  //                               : Walkingcolor = Color(0xff5e34d1);
+  //                         });
+  //                       }
+  //                       text = '2-3 ratings ';
+  //                       print(text);
+  //
+  //                       BlocProvider.of<LoginBloc>(context)
+  //                           .add(event.GetProvider(text));
+  //                     },
+  //                     child: Container(
+  //                       height: 20,
+  //                       width: 100,
+  //                       decoration: BoxDecoration(
+  //                           border: Border.all(color: Colors.grey)),
+  //                       child: Text('  2-3 ratings ',
+  //                           style: MaaruStyle.text.greyDisable,
+  //                           textAlign: TextAlign.center),
+  //                     )),
+  //                 SizedBox(
+  //                   width: 40,
+  //                 ),
+  //                 GestureDetector(
+  //                   onTap: () {
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         Walkingcolor == Color(0xff5e34d1)
+  //                             ? Walkingcolor = Colors.red
+  //                             : Walkingcolor = Color(0xff5e34d1);
+  //                       });
+  //                     }
+  //                     text = '3-4 ratings ';
+  //                     print(text);
+  //
+  //                     BlocProvider.of<LoginBloc>(context)
+  //                         .add(event.GetProvider(text));
+  //                   },
+  //                   child: Container(
+  //                     height: 20,
+  //                     width: 100,
+  //                     decoration:
+  //                         BoxDecoration(border: Border.all(color: Colors.grey)),
+  //                     child: Text(
+  //                       '  3-4 ratings ',
+  //                       style: MaaruStyle.text.greyDisable,
+  //                       textAlign: TextAlign.center,
+  //                     ),
+  //                   ),
+  //                 )
+  //               ],
+  //             )
+  //           ],
+  //         );
+  //       }));
+  // }
+  Color switchcolor = Color(0xff5e34d1);
+  Color activecolor = Colors.red;
+  double Switchcontainerheight = 0;
+
+  Widget switchcontainer(BuildContext context, {double height}) {
     final size = MediaQuery.of(context).size;
     return BlocProvider(
         create: (context) => KiwiContainer().resolve<LoginBloc>(),
@@ -348,31 +557,26 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
             });
             return Container();
           }
-          return Column(
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 0.0,
-                ),
-                child: Row(
+          return Container(
+            height: height,
+            child: Column(
+              children: [
+                Row(
                   children: [
                     GestureDetector(
                       onTap: () {
-                        if (mounted) {
+                        if(mounted) {
                           setState(() {
-                            Groomingcolor == Color(0xff5e34d1)
-                                ? Groomingcolor = Colors.red
-                                : Groomingcolor = Color(0xff5e34d1);
-                          });
-                          text = 'grooming';
-                          print(text);
-
-                          BlocProvider.of<LoginBloc>(context)
-                              .add(event.GetProvider(text));
+                          Groomingcolor == Color(0xff5e34d1)
+                              ? Groomingcolor = Colors.red
+                              : Groomingcolor = Color(0xff5e34d1);
+                        });
                         }
+                        text = 'grooming';
+                        print(text);
+
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(event.GetProvider(text));
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -386,18 +590,18 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                       ),
                     ),
                     SizedBox(
-                      width: size.width * 0.10,
+                      width: size.width * 0.05,
                     ),
                     GestureDetector(
                       onTap: () {
-                        if (mounted) {
+                        if(mounted) {
                           setState(() {
-                            Vetcolor == Color(0xff5e34d1)
-                                ? Vetcolor = Colors.red
-                                : Vetcolor = Color(0xff5e34d1);
-                          });
+                          Vetcolor == Color(0xff5e34d1)
+                              ? Vetcolor = Colors.red
+                              : Vetcolor = Color(0xff5e34d1);
+                        });
                         }
-                        text = 'Walking';
+                        text = 'vet';
                         print(text);
 
                         BlocProvider.of<LoginBloc>(context)
@@ -419,14 +623,14 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        if (mounted) {
+                        if(mounted) {
                           setState(() {
-                            hotelcolor == Color(0xff5e34d1)
-                                ? hotelcolor = Colors.red
-                                : hotelcolor = Color(0xff5e34d1);
-                          });
+                          hotelcolor == Color(0xff5e34d1)
+                              ? hotelcolor = Colors.red
+                              : hotelcolor = Color(0xff5e34d1);
+                        });
                         }
-                        text = 'Vet';
+                        text = 'hotel';
                         print(text);
 
                         BlocProvider.of<LoginBloc>(context)
@@ -448,14 +652,14 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        if (mounted) {
+                        if(mounted) {
                           setState(() {
-                            daycarecolor == Color(0xff5e34d1)
-                                ? daycarecolor = Colors.red
-                                : daycarecolor = Color(0xff5e34d1);
-                          });
+                          daycarecolor == Color(0xff5e34d1)
+                              ? daycarecolor = Colors.red
+                              : daycarecolor = Color(0xff5e34d1);
+                        });
                         }
-                        text = 'Hotel';
+                        text = 'daycare';
                         print(text);
 
                         BlocProvider.of<LoginBloc>(context)
@@ -477,14 +681,14 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        if (mounted) {
+                        if(mounted) {
                           setState(() {
-                            Walkingcolor == Color(0xff5e34d1)
-                                ? Walkingcolor = Colors.red
-                                : Walkingcolor = Color(0xff5e34d1);
-                          });
+                          Walkingcolor == Color(0xff5e34d1)
+                              ? Walkingcolor = Colors.red
+                              : Walkingcolor = Color(0xff5e34d1);
+                        });
                         }
-                        text = 'Hospital';
+                        text = 'walking';
                         print(text);
 
                         BlocProvider.of<LoginBloc>(context)
@@ -500,74 +704,78 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                       ),
                     ),
                     SizedBox(
-                      width: size.height * 0.05,
+                      width: size.width * 0.05,
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  GestureDetector(
+                SizedBox(
+                  height: size.height * 0.01,
+                ),
+                Row(
+                  children: [
+                    GestureDetector(
                       onTap: () {
-                        if (mounted) {
+                        if(mounted) {
                           setState(() {
-                            Walkingcolor == Color(0xff5e34d1)
-                                ? Walkingcolor = Colors.red
-                                : Walkingcolor = Color(0xff5e34d1);
-                          });
+                          filterone == MaaruColors.greyColorText
+                              ? filterone = MaaruColors.whiteColor
+                              : filterone = MaaruColors.greyColorText;
+                        });
                         }
-                        text = '2-3 ratings ';
+                        text = '3-4  rating';
                         print(text);
 
                         BlocProvider.of<LoginBloc>(context)
                             .add(event.GetProvider(text));
                       },
                       child: Container(
-                        height: 20,
-                        width: 100,
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey)),
-                        child: Text('  2-3 ratings ',
-                            style: MaaruStyle.text.greyDisable,
-                            textAlign: TextAlign.center),
-                      )),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      if (mounted) {
-                        setState(() {
-                          Walkingcolor == Color(0xff5e34d1)
-                              ? Walkingcolor = Colors.red
-                              : Walkingcolor = Color(0xff5e34d1);
-                        });
-                      }
-                      text = '3-4 ratings ';
-                      print(text);
-
-                      BlocProvider.of<LoginBloc>(context)
-                          .add(event.GetProvider(text));
-                    },
-                    child: Container(
-                      height: 20,
-                      width: 100,
-                      decoration:
-                          BoxDecoration(border: Border.all(color: Colors.grey)),
-                      child: Text(
-                        '  3-4 ratings ',
-                        style: MaaruStyle.text.greyDisable,
-                        textAlign: TextAlign.center,
+                            border: Border.all(color: filterone),
+                            borderRadius: BorderRadius.circular(5.0)),
+                        height: size.height * 0.03,
+                        width: size.width * 0.30,
+                        child: Center(
+                            child: Text(
+                          '3-4 rating',
+                          style: TextStyle(fontSize: 10, color: filterone),
+                        )),
                       ),
                     ),
-                  )
-                ],
-              )
-            ],
+                    SizedBox(
+                      width: size.width * 0.04,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if(mounted) {
+                          setState(() {
+                          filtertwo == MaaruColors.greyColorText
+                              ? filtertwo = MaaruColors.whiteColor
+                              : filtertwo = MaaruColors.greyColorText;
+                        });
+                        }
+                        text = '4+ rating';
+                        print(text);
+
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(event.GetProvider(text));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: filtertwo),
+                            borderRadius: BorderRadius.circular(5.0)),
+                        height: size.height * 0.03,
+                        width: size.width * 0.28,
+                        child: Center(
+                            child: Text(
+                          '4+ rating',
+                          style: TextStyle(fontSize: 10, color: filtertwo),
+                        )),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           );
         }));
   }
@@ -577,14 +785,10 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
-      bottomNavigationBar: CreateHomeScreen(selectedIndex: 2,),
+        bottomNavigationBar: CreateHomeScreen(
+          selectedIndex: 2,
+        ),
         body: SingleChildScrollView(child: use(context)
-
-            // ListView.builder(
-            // scrollDirection: Axis.vertical,
-            // shrinkWrap: true,
-            // itemCount: 10,
-            // itemBuilder: (BuildContext context,int index){
 
             ));
   }

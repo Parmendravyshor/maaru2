@@ -4,12 +4,14 @@ part of 'book_appointment_bloc.dart';
 abstract class BookAppointmentEvent {}
 class dateChanged extends BookAppointmentEvent {
   final String date;
-  dateChanged(this.date);
+  final String time;
+  dateChanged(this.date,this.time);
 
   @override
   String toString() => "dateChanged";
-  List<Object> get props => [date];
+  List<Object> get props => [date,time];
 }
+
 class PetIdChanged extends BookAppointmentEvent {
   final String petId;
   PetIdChanged(this.petId);
@@ -55,21 +57,23 @@ final String rating;
 
 
 }
-class UpcomingAppointmentChanged extends BookAppointmentEvent {
 
-  final String text;
+class DeclineRequestChanged extends BookAppointmentEvent {
+final String text;
+final String date;
 
-  UpcomingAppointmentChanged({this.text});
-
+  DeclineRequestChanged(this.text, this.date);
   @override
   String toString() => "UpcomingAppointmentChanged";
-  List<Object> get props => [text];
+
 
 }
-class DeclineRequestChanged extends BookAppointmentEvent {
+class UpcomingAppointmentChanged extends BookAppointmentEvent {
+  final String Date;
+  final String name;
+  UpcomingAppointmentChanged(
+      this.Date, this.name);
 
   @override
   String toString() => "UpcomingAppointmentChanged";
-
-
 }

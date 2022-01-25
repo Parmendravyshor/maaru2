@@ -3,12 +3,12 @@ import '../../../../core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../core/usecases/usecase.dart';
 
-class GetUpcomingAppointment extends UseCase<void, void> {
+class GetUpcomingAppointmentUserSide extends UseCase<void, String> {
   UserRepository userRepository;
-  GetUpcomingAppointment(this.userRepository);
+  GetUpcomingAppointmentUserSide(this.userRepository);
 
   @override
-  Future<Either<Failure, void>> call(void params) {
-    return userRepository.getUpcomingAppointment();
+  Future<Either<Failure, void>> call(String date) {
+    return userRepository.getUpcomingAppointmentUserSide(date);
   }
 }
