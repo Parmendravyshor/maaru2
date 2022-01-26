@@ -865,23 +865,26 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<Either<Failure, void>> bookProvider(BookProviderParams params) async {
     try {
-      var map = new Map<String, String>();
-      map['pet_id'] = params.pet_id;
-      map['provider_id'] = params.provider_id;
-      map['booking_date_time'] = '19january 2022 23:55';
-      map['service_id'] = '8';
-      map['card_number'] ='5105105105105100';
-      map['exp_month'] = '12';
-      map['exp_year'] = '2023';
-      print(map);
+      var map = new Map<String, dynamic>();
+      map['pet_id'] = params.pet_id.toString();
+      map['provider_id'] = params.provider_id.toString();
+      map['booking_date'] = params.booking_date.toString();
+      map['service_id'] = params.service_id.toString();
+      map['card_number'] = params.cardno.replaceAll(' ', '');
+      map['exp_date'] = params.expdate.toString();
+      map['booking_time'] = params.bookingTime.toString();
+      map['card_id'] = params.cardId.toString();
+      map['cvv'] = params.cvv.toString();
+      map['card_holder_name'] = params.cardHolderName.toString();
+      print('singh${map}');
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
         "",
       );
       var headers = {"access-token": token};
-      final response =
-          await http.post(MaruConstant.providerbookingappointment, body: map,headers: headers);
-      print(response.body);
+      final response = await http.post(MaruConstant.providerbookingappointment,
+          body: map, headers: headers);
+      print('respose of body ${response.body}');
       return Right(Void);
     } catch (e) {
       print(e);

@@ -16,27 +16,37 @@ class BookAppointmentBloc
   final BookProvider bookProvider;
   final PostReview postREviewAfterBooking;
   final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
-final GetUpcomingPastAndDeclineAppointment getUpcomingPastAndDeclineAppointment;
-  BookAppointmentBloc(this.bookProvider,this.getUpcomingPastAndDeclineAppointment, this.postREviewAfterBooking, this.getUpcomingAndPastAppointments);
+  final GetUpcomingPastAndDeclineAppointment
+      getUpcomingPastAndDeclineAppointment;
+  BookAppointmentBloc(
+      this.bookProvider,
+      this.getUpcomingPastAndDeclineAppointment,
+      this.postREviewAfterBooking,
+      this.getUpcomingAndPastAppointments);
 
   @override
   // TODO: implement initialState
   BookAppointmentState get initialState => BookAppointmentInitial();
   var pet_id;
   var provider_id;
-  var booking_date_time;
+  var booking_date;
   var service_id;
-
+  var cardno;
+  var expdate;
+  var cardHolderNAme;
+  var bookingtime;
+  var cvv;
+  var cardid;
   @override
   Stream<BookAppointmentState> mapEventToState(
       BookAppointmentEvent event) async* {
     if (event is PetIdChanged) {
-      if (event.petId.isNotEmpty) {
+      if (event.petId != null) {
         pet_id = event.petId;
       } else {
         pet_id;
       }
-      print('djdkdjd${booking_date_time}');
+      print('djdkdjd${booking_date}');
       bool isValidated = _isFormValid();
       if (isValidated) {
         yield BookRegisterFormValidationSuccess();
@@ -44,7 +54,7 @@ final GetUpcomingPastAndDeclineAppointment getUpcomingPastAndDeclineAppointment;
         yield BookRegisterFormValidationFailure();
       }
     } else if (event is providerIdChanged) {
-      if (event.providerid.isNotEmpty) {
+      if (event.providerid !=null) {
         provider_id = event.providerid;
       } else {
         provider_id;
@@ -56,12 +66,12 @@ final GetUpcomingPastAndDeclineAppointment getUpcomingPastAndDeclineAppointment;
       } else {
         yield BookRegisterFormValidationFailure();
       }
-    } else if (event is dateChanged  ) {
+    } else if (event is dateChanged) {
       if (event.date.isNotEmpty) {
-        booking_date_time = '${event.date}${event.time}';
+        booking_date = '${event.date}${event.time}';
       } else {
-        booking_date_time;
-        print('djdkdjd${booking_date_time}');
+        booking_date;
+        print('djdkdjd${booking_date}');
       }
       print(provider_id);
       bool isValidated = _isFormValid();
@@ -70,29 +80,112 @@ final GetUpcomingPastAndDeclineAppointment getUpcomingPastAndDeclineAppointment;
       } else {
         yield BookRegisterFormValidationFailure();
       }
-    } else if (event is serviceIdChanged ) {
-      if (event.serviceid != null ) {
+    } else if (event is serviceIdChanged) {
+      if (event.serviceid != null) {
         service_id = event.serviceid;
       } else {
         service_id;
       }
-      print('djdkdjd${booking_date_time}');
+      print('djdkdjd${booking_date}');
       bool isValidated = _isFormValid();
       if (isValidated) {
         yield BookRegisterFormValidationSuccess();
       } else {
         yield BookRegisterFormValidationFailure();
       }
-    } else if (event is BookRegisterButtonTapped) {
+
+    }  else if (event is BookingTimeChaned) {
+      if (event.BookingTime.isNotEmpty) {
+        bookingtime = event.BookingTime;
+      } else {
+        bookingtime;
+      }
+      print('djdkdjd${bookingtime}');
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield BookRegisterFormValidationSuccess();
+      } else {
+        yield BookRegisterFormValidationFailure();
+      }
+
+    }
+    else if (event is CardHolderNameChanged) {
+      if (event.cardHolderName.isNotEmpty) {
+        cardHolderNAme = event.cardHolderName;
+      } else {
+        cardHolderNAme;
+      }
+      print('card holder name${cardHolderNAme}');
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield BookRegisterFormValidationSuccess();
+      } else {
+        yield BookRegisterFormValidationFailure();
+      }
+    }
+    else if (event is CardNumberChanged) {
+      if (event.cardno != null) {
+        cardno = event.cardno;
+      } else {
+        cardno;
+      }
+      print('djdkdjd${cardno}');
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield BookRegisterFormValidationSuccess();
+      } else {
+        yield BookRegisterFormValidationFailure();
+      }
+
+    }
+    else if (event is CvvIdChanged) {
+      if (event.cvv.isNotEmpty) {
+        cvv = event.cvv;
+      } else {
+        cvv;
+      }
+      print('djdkdjd${cvv}');
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield BookRegisterFormValidationSuccess();
+      } else {
+        yield BookRegisterFormValidationFailure();
+      }
+
+    }
+    else if (event is ExpDateChanged) {
+      if (event.expDate.isNotEmpty) {
+        expdate = event.expDate;
+      } else {
+        expdate;
+      }
+      print('djdkdjd${expdate}');
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield BookRegisterFormValidationSuccess();
+      } else {
+        yield BookRegisterFormValidationFailure();
+      }
+
+    }
+    else if (event is  BookRegisterButtonTapped) {
       yield BookRegisterInProgress();
+      print('check card ${pet_id}');
       final result = await bookProvider(BookProviderParams(
-        pet_id: pet_id,
-        provider_id: provider_id,
-        booking_date_time: booking_date_time,
-        service_id: service_id,
-      ));
+
+          pet_id: pet_id,
+          provider_id: provider_id,
+          booking_date: booking_date,
+          service_id: service_id,
+          cardno: cardno,
+          expdate: expdate,
+          cardHolderName: cardHolderNAme,
+          bookingTime: bookingtime,
+          cardId: cardid,
+          cvv: cvv));
+
       yield* result.fold((l) async* {
-        yield BookRegisterFailure("Signup failed..please try again.. $l");
+        yield BookRegisterFailure('Something went wrong.. $l');
       }, (r) async* {
         yield BookRegisterSuccess();
       });
@@ -105,8 +198,7 @@ final GetUpcomingPastAndDeclineAppointment getUpcomingPastAndDeclineAppointment;
       );
       final result = await postREviewAfterBooking(profileParams);
       yield RivewPostSuccess();
-    }
-    else if (event is DeclineRequestChanged) {
+    } else if (event is DeclineRequestChanged) {
       final result = await getUpcomingPastAndDeclineAppointment(SearchParams(
         text1: event.text,
         date: event.date,
@@ -118,7 +210,6 @@ final GetUpcomingPastAndDeclineAppointment getUpcomingPastAndDeclineAppointment;
           bookingDate: DateTime.parse(event.Date),
           serviceName: event.name.toString()));
 
-
       // print('ddddd$event.text');
       if (result.isRight()) {
         yield FetchUpcomingAppointmentModelData(result.getOrElse(() => null));
@@ -129,7 +220,7 @@ final GetUpcomingPastAndDeclineAppointment getUpcomingPastAndDeclineAppointment;
   bool _isFormValid() {
     return pet_id.isNotEmpty &&
         provider_id.isNotEmpty &&
-        booking_date_time.isNotEmpty &&
-        service_id.isNotEmpty;
+        booking_date.isNotEmpty &&
+        service_id.isNotEmpty && bookingtime;
   }
 }

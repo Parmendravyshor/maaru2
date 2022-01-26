@@ -62,7 +62,7 @@ import 'booked_confirm.dart';
 
 class BookAppointmentScreen3 extends StatefulWidget {
   final int id3;
-  BookAppointmentScreen3({this.id3});
+  BookAppointmentScreen3({this.id3, this.text});
   String text = '';
 
   @override
@@ -72,6 +72,11 @@ class BookAppointmentScreen3 extends StatefulWidget {
 class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
     with SingleTickerProviderStateMixin {
   String date1 = '';
+  TextEditingController _expDateController = TextEditingController();
+  final TextEditingController _creditCardNumberController =
+      TextEditingController();
+  TextEditingController textController = TextEditingController();
+  TextEditingController _cvvController = TextEditingController();
   List<KeyValueModel1> _dates1 = [];
   bool enabled = false;
   bool viewVisible1 = false;
@@ -80,185 +85,58 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   bool _status = true;
   String date2;
   Widget card(List<int> list) {
-    return Visibility(
-        maintainSize: false,
-        maintainAnimation: false,
-        maintainState: false,
-        visible: viewVisible1,
-        child: Container(
-          height: 40,
-          width: 130,
-          child: TextFormField(
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(4),
-            ],
-            decoration: InputDecoration(
-              fillColor: Colors.white,
-              hoverColor: Colors.white,
-              icon: Image.asset(
-                'assets/images/card_cvv.png',
-                width: 25,
-                color: Colors.grey[600],
-              ),
-              border: UnderlineInputBorder(),
-              filled: true,
-              hintText: 'Number behind the card',
-              labelText: 'CVV',
-            ),
-            validator: CardUtils.validateCVV,
-            keyboardType: TextInputType.number,
-            onSaved: (value) {
-              _paymentCard.cvv = int.parse(value);
-            },
-            controller: _cvvController,
-          ),
-        ));
-  }
-
-  Widget AddPayment() {
-    return Visibility(
-      maintainSize: false,
-      maintainAnimation: false,
-      maintainState: false,
-      visible: viewVisible2,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: const InputDecoration(
-              fillColor: Colors.white,
-              hoverColor: Colors.white,
-              border: UnderlineInputBorder(),
-              filled: true,
-              icon: Icon(
-                Icons.person,
-                size: 40.0,
-              ),
-              hintText: 'What name is written on card?',
-              labelText: 'Card Name',
-            ),
-            onSaved: (String value) {
-              _card.name = value;
-            },
-            keyboardType: TextInputType.text,
-            validator: (String value) =>
-                value.isEmpty ? Strings.fieldReq : null,
-            controller: _nameOnCardController,
-          ),
-          const SizedBox(
-            height: 30.0,
-          ),
-          TextFormField(
-            keyboardType: TextInputType.number,
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(19),
-              CardNumberInputFormatter()
-            ],
-            controller: _creditCardNumberController,
-            decoration: InputDecoration(
-              fillColor: Colors.white,
-              hoverColor: Colors.white,
-              border: const UnderlineInputBorder(),
-              filled: true,
-              icon: CardUtils.getCardIcon(_paymentCard.type),
-              hintText: 'What number is written on card?',
-              labelText: 'Number',
-            ),
-            onSaved: (String value) {
-              print('onSaved = $value');
-              print('Num controller has = ${numberController.text}');
-              _paymentCard.number = CardUtils.getCleanedNumber(value);
-            },
-            validator: CardUtils.validateCardNum,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Container(
-                  padding: EdgeInsets.only(),
-                  child: TextFormField(
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(4),
-                    ],
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      hoverColor: Colors.white,
-                      icon: Image.asset(
-                        'assets/images/card_cvv.png',
-                        width: 25,
-                        color: Colors.grey[600],
-                      ),
-                      border: UnderlineInputBorder(),
-                      filled: true,
-                      hintText: 'Number behind the card',
-                      labelText: 'CVV',
+    return BlocProvider(
+      create: (context) => KiwiContainer().resolve<BookAppointmentBloc>(),
+      child: BlocBuilder<BookAppointmentBloc, BookAppointmentState>(
+        builder: (context, state) {
+          return Visibility(
+              maintainSize: false,
+              maintainAnimation: false,
+              maintainState: false,
+              visible: viewVisible1,
+              child: Container(
+                height: 40,
+                width: 130,
+                child: TextFormField(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(4),
+                  ],
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    hoverColor: Colors.white,
+                    icon: Image.asset(
+                      'assets/images/card_cvv.png',
+                      width: 25,
+                      color: Colors.grey[600],
                     ),
-                    validator: CardUtils.validateCVV,
-                    keyboardType: TextInputType.number,
-                    onSaved: (value) {
-                      _paymentCard.cvv = int.parse(value);
-                    },
-                    controller: _cvvController,
+                    border: UnderlineInputBorder(),
+                    filled: true,
+                    hintText: 'Number behind the card',
+                    labelText: 'CVV',
                   ),
+                  validator: CardUtils.validateCVV,
+                  keyboardType: TextInputType.number,
+                  onSaved: (value) {
+                    _paymentCard.cvv = int.parse(value);
+                  },
+                  controller: _cvvController,
                 ),
-              ),
-              // SizedBox(
-              //   width: 10,
-              // ),
-              Flexible(
-                child: Container(
-                  padding: EdgeInsets.only(),
-                  child: TextFormField(
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(4),
-                      CardMonthInputFormatter()
-                    ],
-                    decoration: InputDecoration(
-                      fillColor: Colors.white,
-                      hoverColor: Colors.white,
-                      border: const UnderlineInputBorder(),
-                      filled: true,
-                      icon: Image.asset(
-                        'assets/icons/icone-setting-21.png',
-                        width: 25,
-                        color: Colors.grey[600],
-                      ),
-                      hintText: 'MM/YY',
-                      labelText: 'Expiry Date',
-                    ),
-                    validator: CardUtils.validateDate,
-                    keyboardType: TextInputType.number,
-                    onChanged: (value) {
-                      List<int> expiryDate = CardUtils.getExpiryDate(value);
-                      _paymentCard.month = expiryDate[0];
-                      _paymentCard.year = expiryDate[1];
-                      print(expiryDate);
-                    },
-                    controller: _expDateController,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+              ));
+        },
       ),
     );
   }
 
+
+
   final FocusNode myFocusNode = FocusNode();
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
-  TextEditingController _expDateController;
-  TextEditingController _creditCardNumberController;
-  TextEditingController _nameOnCardController;
-  TextEditingController _cvvController;
+
   TextEditingController _bankNameController;
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
   var _formKey = new GlobalKey<FormState>();
-  var numberController = new TextEditingController();
+
   var _paymentCard = PaymentCard();
   var _autoValidateMode = AutovalidateMode.disabled;
 
@@ -286,7 +164,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   @override
   void initState() {
     calendarController = CalendarController();
-
+    // _nameOnCardController = TextEditingController();
     // getSameMonthAppointments();
     animationController = AnimationController(
       vsync: this,
@@ -295,7 +173,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
     animationController.forward();
     setState(() {
       _paymentCard.type = CardType.Others;
-      numberController.addListener(_getCardTypeFrmNumber);
+      _creditCardNumberController.addListener(_getCardTypeFrmNumber);
     });
 
     super.initState();
@@ -304,7 +182,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   String text;
 
   void _getCardTypeFrmNumber() {
-    String input = CardUtils.getCleanedNumber(numberController.text);
+    String input = CardUtils.getCleanedNumber(_creditCardNumberController.text);
     CardType cardType = CardUtils.getCardTypeFrmNumber(input);
     setState(() {
       this._paymentCard.type = cardType;
@@ -328,8 +206,8 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   String _selValue1 = 'SELECT PET';
   String _selValue2 = 'SELECT PROVIDER';
   int i;
-String parmendra = '';
-String singh = '';
+  String parmendra = '';
+  String singh = '';
   var calendarController;
   // Map<DateTime, List> _events;
   AnimationController animationController;
@@ -475,7 +353,7 @@ String singh = '';
             SchedulerBinding.instance.addPostFrameCallback((_) {
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return ChatScreen();
+                return BookedConfirm();
               }));
             });
             return Container();
@@ -670,7 +548,7 @@ String singh = '';
                             return CircularProgressIndicator();
                           }
                           if (state is SingleProviderLoaded) {
-                            var abc2 = [];
+
 
                             String _selectedValue =
                                 //_prefHelper.getStringByKey(MaruConstant.first_name, '');
@@ -692,8 +570,7 @@ String singh = '';
                                         .service[i].serviceId
                                         .toString()),
                               );
-                              abc2.add(state.welcome4.providerDetails.service[i]
-                                  .service.serviceType);
+
                               // print(abc2);
                               // abc2.add(state.covidModel.petProfiles[i]
                               //     .service_cost);
@@ -731,14 +608,15 @@ String singh = '';
                                         child: Center(
                                             child: InkWell(
                                           onTap: () {
+
                                             singh = val.value1;
                                             print(
                                                 'singham is back ${val.value1}');
                                             BlocProvider.of<
                                                         BookAppointmentBloc>(
                                                     context)
-                                                .add(PetIdChanged(
-                                              val.value1.toString(),
+                                                .add(serviceIdChanged(
+                                              int.parse(val.value1),
                                             ));
                                             setState(() {
                                               _selValue = val.key1;
@@ -778,7 +656,7 @@ String singh = '';
                                     BlocProvider.of<BookAppointmentBloc>(
                                             context)
                                         .add(PetIdChanged(
-                                      value.toString(),
+                                      value,
                                     ));
                                     print('gdgdhgdhd${value.toString()}');
 
@@ -892,7 +770,7 @@ String singh = '';
                                           BlocProvider.of<BookAppointmentBloc>(
                                                   context)
                                               .add(PetIdChanged(
-                                            val.value.toString(),
+                                            int.parse(val.value),
                                           ));
                                           setState(() {
                                             _selValue1 = val.key;
@@ -930,7 +808,7 @@ String singh = '';
                                   _selValue1 = value;
                                   BlocProvider.of<BookAppointmentBloc>(context)
                                       .add(PetIdChanged(
-                                    value.toString(),
+                                    value,
                                   ));
                                   print('gdgdhgdhd${value.toString()}');
 
@@ -938,7 +816,6 @@ String singh = '';
                                   setState(
                                     () {
                                       _selValue1 = value;
-
                                       if (value == value) {}
                                       if (value == "SELECT PET") {
                                         _dropDownValue = 0;
@@ -976,23 +853,30 @@ String singh = '';
                   height: 20,
                 ),
                 Column(children: [
-                  Container(
-                      height: 40,
-                      width: 400,
-                      child: Padding(
-                          padding: EdgeInsets.only(right: 20, left: 20),
-                          child:
-                          ListView(
-                              scrollDirection: Axis.horizontal,
-                              children:  [
-                                ChoiceRow(
-                                  lebal1: '10:00 AM',
-                                  lebal2: '10:30 AM',
-                                  lebal3: '11:00 AM',
-                                  lebal4: '11:30 AM',
-                                  lebal5: '12:00 AM',
-                                ),
-                              ]))),
+                  InkWell(
+                    onTap: () {
+                      tomer = 'pressd';
+                    },
+                    child: Container(
+                      height: 100,
+                      child: Container(
+                          height: 40,
+                          width: 400,
+                          child: Padding(
+                              padding: EdgeInsets.only(right: 20, left: 20),
+                              child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    ChoiceRow(
+                                      lebal1: '10:00 AM',
+                                      lebal2: '10:30 AM',
+                                      lebal3: '11:00 AM',
+                                      lebal4: '11:30 AM',
+                                      lebal5: '12:00 AM',
+                                    ),
+                                  ]))),
+                    ),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -1006,40 +890,22 @@ String singh = '';
                   const SizedBox(
                     height: 20,
                   ),
-                  InkWell(
-                    onTap: () {
-                      print('null    jkljkldfjk1');
-                      setState(() {
-                        // SelectedUSe = Use.good;
-                        // if (SelectedUSe == Use.good) {
-                        //   var use = 'good';
-                        //   print('ass${Use}');
-                        // } else {
-                        //   print('null1');
-                        // }
-                      });
-                    },
-
-                      child: Container(
-                          height: 40,
-                          width: double.infinity,
-                          child: Padding(
-                              padding: EdgeInsets.only(right: 20, left: 20),
-                              child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children:   [
-
-                                       ChoiceRow(
-                                        lebal1: '12:00 PM',
-                                        lebal2: '12:30 PM',
-                                        lebal3: '01:00 PM',
-                                        lebal4: '01:30 PM',
-                                        lebal5: '02:00 PM',
-                                      ),
-
-                                  ]))),
-
-                  )
+                  Container(
+                      height: 40,
+                      width: double.infinity,
+                      child: Padding(
+                          padding: EdgeInsets.only(right: 20, left: 20),
+                          child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                ChoiceRow(
+                                  lebal1: '12:00 PM',
+                                  lebal2: '12:30 PM',
+                                  lebal3: '01:00 PM',
+                                  lebal4: '01:30 PM',
+                                  lebal5: '02:00 PM',
+                                ),
+                              ])))
                 ]),
                 SizedBox(
                   height: 20,
@@ -1148,7 +1014,7 @@ String singh = '';
                                           padding: const EdgeInsets.only(
                                               bottom: 20.0),
                                           child: Container(
-                                              height: 180,
+                                              height: 150,
                                               width: 380,
                                               decoration: BoxDecoration(
                                                   color: Colors.deepPurple[50],
@@ -1243,81 +1109,295 @@ String singh = '';
                                             ),
                                           ),
                                         ),
-                                        AddPayment(),
+
+                                        Visibility(
+                                            maintainSize: false,
+                                            maintainAnimation: false,
+                                            maintainState: false,
+                                            visible: viewVisible2,
+                                            child: Column(
+                                              children: <Widget>[
+                                                TextFormField(
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    hoverColor: Colors.white,
+                                                    border:
+                                                        UnderlineInputBorder(),
+                                                    filled: true,
+                                                    icon: Icon(
+                                                      Icons.person,
+                                                      size: 40.0,
+                                                    ),
+                                                    hintText:
+                                                        'What name is written on card?',
+                                                    labelText: 'Card Name',
+                                                  ),
+                                                  onChanged: (text) {
+                                                    BlocProvider.of<
+                                                                BookAppointmentBloc>(
+                                                            context)
+                                                        .add(
+                                                            CardHolderNameChanged(
+                                                                textController
+                                                                    .text));
+                                                  },
+                                                  onSaved: (String value) {
+                                                    _card.name = value;
+                                                  },
+                                                  keyboardType:
+                                                      TextInputType.text,
+                                                  validator: (String value) =>
+                                                      value.isEmpty
+                                                          ? Strings.fieldReq
+                                                          : null,
+                                                  controller: textController,
+                                                ),
+                                                const SizedBox(
+                                                  height: 30.0,
+                                                ),
+                                                TextFormField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly,
+                                                    LengthLimitingTextInputFormatter(
+                                                        19),
+                                                    CardNumberInputFormatter()
+                                                  ],
+                                                  // onChanged: (text) {
+                                                  //   BlocProvider.of<
+                                                  //       BookAppointmentBloc>(
+                                                  //       context)
+                                                  //       .add(CardNumberChanged(
+                                                  //       int.parse(
+                                                  //           _creditCardNumberController
+                                                  //               .text)));
+                                                  // },
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    hoverColor: Colors.white,
+                                                    border:
+                                                        const UnderlineInputBorder(),
+                                                    filled: true,
+                                                    icon: CardUtils.getCardIcon(
+                                                        _paymentCard.type),
+                                                    hintText:
+                                                        'What number is written on card?',
+                                                    labelText: 'Number',
+                                                  ),
+                                                  onSaved: (String value) {
+                                                    print('onSaved = $value');
+                                                    print(
+                                                        'Num controller has = ${_creditCardNumberController.text}');
+                                                    _paymentCard.number =
+                                                        CardUtils
+                                                            .getCleanedNumber(
+                                                                value);
+                                                    BlocProvider.of<
+                                                        BookAppointmentBloc>(
+                                                        context)
+                                                        .add(CardNumberChanged(
+                                                  value.toString()
+                                                           ));
+                                                  },
+                                                  validator:
+                                                      CardUtils.validateCardNum,
+
+                                                  controller:
+                                                      _creditCardNumberController,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Flexible(
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.only(),
+                                                        child: TextFormField(
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly,
+                                                            LengthLimitingTextInputFormatter(
+                                                                4),
+                                                          ],
+                                                          decoration:
+                                                              InputDecoration(
+                                                            fillColor:
+                                                                Colors.white,
+                                                            hoverColor:
+                                                                Colors.white,
+                                                            icon: Image.asset(
+                                                              'assets/images/card_cvv.png',
+                                                              width: 25,
+                                                              color: Colors
+                                                                  .grey[600],
+                                                            ),
+                                                            border:
+                                                                UnderlineInputBorder(),
+                                                            filled: true,
+                                                            hintText:
+                                                                'Number behind the card',
+                                                            labelText: 'CVV',
+                                                          ),
+                                                          validator: CardUtils
+                                                              .validateCVV,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          onSaved: (value) {
+                                                            _paymentCard.cvv =
+                                                                int.parse(
+                                                                    value);
+                                                          },
+                                                          onChanged: (text) {
+                                                            BlocProvider.of<
+                                                                        BookAppointmentBloc>(
+                                                                    context)
+                                                                .add(CvvIdChanged(
+                                                                    _cvvController
+                                                                        .text));
+                                                          },
+                                                          controller:
+                                                              _cvvController,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    // SizedBox(
+                                                    //   width: 10,
+                                                    // ),
+                                                    Flexible(
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.only(),
+                                                        child: TextFormField(
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly,
+                                                            LengthLimitingTextInputFormatter(
+                                                                4),
+                                                            CardMonthInputFormatter()
+                                                          ],
+                                                          decoration:
+                                                              InputDecoration(
+                                                            fillColor:
+                                                                Colors.white,
+                                                            hoverColor:
+                                                                Colors.white,
+                                                            border:
+                                                                const UnderlineInputBorder(),
+                                                            filled: true,
+                                                            icon: Image.asset(
+                                                              'assets/icons/icone-setting-21.png',
+                                                              width: 25,
+                                                              color: Colors
+                                                                  .grey[600],
+                                                            ),
+                                                            hintText: 'MM/YY',
+                                                            labelText:
+                                                                'Expiry Date',
+                                                          ),
+                                                          validator: CardUtils
+                                                              .validateDate,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          onChanged: (value) {
+                                                            List<int>
+                                                                expiryDate =
+                                                                CardUtils
+                                                                    .getExpiryDate(
+                                                                        value);
+                                                            _paymentCard.month =
+                                                                expiryDate[0];
+                                                            _paymentCard.year =
+                                                                expiryDate[1];
+                                                            print(expiryDate);
+                                                            BlocProvider.of<
+                                                                        BookAppointmentBloc>(
+                                                                    context)
+                                                                .add(ExpDateChanged(
+                                                                    _expDateController
+                                                                        .text));
+                                                          },
+                                                          controller:
+                                                              _expDateController,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            )),
                                         SizedBox(
                                           height: 40,
                                         ),
                                         ThemedButton(
-
                                           onPressed: () {
+                                            BlocProvider.of<
+                                                        BookAppointmentBloc>(
+                                                    context)
+                                                .add(providerIdChanged(
+                                                    widget.id3));
+                                            print('ram sita${widget.id3}');
                                             var daa = _dates1;
                                             print('ssss1${daa}');
                                             print('sss');
                                             print(date1);
                                             if (date1.isEmpty) {
                                               print('ssss${date1}');
-                                              _showDialog(
-                                                  context, 'Please Select Date');
-                                            }
-                                            else if(singh.isEmpty){
+                                              _showDialog(context,
+                                                  'Please Select Date');
+                                            } else if (singh.isEmpty) {
                                               print('ssss1${daa}');
-                                              _showDialog(
-                                                  context, 'Please Select Services');
-                                            }
-                                            else if(parmendra.isEmpty){
+                                              _showDialog(context,
+                                                  'Please Select Services');
+                                            } else if (parmendra.isEmpty) {
                                               print('ssss1${daa}');
                                               _showDialog(
                                                   context, 'Please Select Pet');
+                                              setState(() {});
                                             }
                                             // else if((){
                                             //   print('ssss1${daa}');
                                             //   _showDialog(
                                             //       context, 'Please Select Date');
                                             // }
-                                            else {}
-                                            //   setState(() {
-                                            //     BlocProvider.of<
-                                            //                 BookAppointmentBloc>(
-                                            //             context)
-                                            //         .add(providerIdChanged(
-                                            //       widget.id3.toString(),
-                                            //     ));
-                                            //   });
-                                            //   final FormState form =
-                                            //       _formKey.currentState;
-                                            //   if (!form.validate()) {
-                                            //     setState(() {
-                                            //       _autoValidateMode =
-                                            //           AutovalidateMode
-                                            //               .always; // Start validating on every change.
-                                            //     });
-                                            //   } else {
-                                            //     form.save();
-                                            //     MyStatefulWidget();
-                                            //     //    Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
-                                            //     //  MyStatefulWidget();
-                                            //     BlocProvider.of<PaymentBloc>(
-                                            //             context)
-                                            //         .add(savePayment(
-                                            //             _cvvController.text,
-                                            //             _creditCardNumberController
-                                            //                 .text,
-                                            //             _cvvController.text,
-                                            //             _expDateController
-                                            //                 .text));
-                                            //
-                                            //     // Encrypt and send send payment details to payment gateway
-                                            //
+                                            else {
+                                              final FormState form =
+                                                  _formKey.currentState;
+                                              if (!form.validate()) {
+                                                setState(() {
+                                                  _autoValidateMode =
+                                                      AutovalidateMode
+                                                          .always; // Start validating on every change.
+                                                });
+                                              } else {
+                                                form.save();
+                                                MyStatefulWidget();
+                                             //  if( state is BookRegisterFormValidationSuccess) {
+                                                 BlocProvider.of<
+                                                     BookAppointmentBloc>(
+                                                     context).add(
+                                                     BookRegisterButtonTapped());
                                             //   }
-                                            //   BlocProvider.of<
-                                            //               BookAppointmentBloc>(
-                                            //           context)
-                                            //       .add(
-                                            //           BookRegisterButtonTapped());
-                                            // }
+                                              }
+                                            }
                                           },
                                           text: 'Book Appointment',
                                         ),
+                                        state is BookRegisterInProgress
+                                            ? Center(
+                                            child: Container(
+                                              margin: EdgeInsets.only(bottom: 10),
+                                              width: 40,
+                                              height: 40,
+                                              child: CircularProgressIndicator(),
+                                            ))
+                                            : Container(),
                                       ],
                                     )),
                                 SizedBox(
@@ -1349,7 +1429,7 @@ String singh = '';
                               keyboardType: TextInputType.text,
                               validator: (String value) =>
                                   value.isEmpty ? Strings.fieldReq : null,
-                              controller: _nameOnCardController,
+                              controller: textController,
                             ),
                             new SizedBox(
                               height: 30.0,
@@ -1374,7 +1454,7 @@ String singh = '';
                               onSaved: (String value) {
                                 print('onSaved = $value');
                                 print(
-                                    'Num controller has = ${numberController.text}');
+                                    'Num controller has = ${_creditCardNumberController.text}');
                                 _paymentCard.number =
                                     CardUtils.getCleanedNumber(value);
                               },
@@ -1461,28 +1541,29 @@ String singh = '';
                                   text: 'Update Payment',
                                   enabled: true,
                                   onPressed: () {
-                                    final FormState form =
-                                        _formKey.currentState;
-                                    if (!form.validate()) {
-                                      setState(() {
-                                        _autoValidateMode = AutovalidateMode
-                                            .always; // Start validating on every change.
-                                      });
-                                    } else {
-                                      form.save();
-                                      MyStatefulWidget();
-                                      //    Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
-                                      //  MyStatefulWidget();
-                                      BlocProvider.of<PaymentBloc>(context).add(
-                                          savePayment(
-                                              _cvvController.text,
-                                              _creditCardNumberController.text,
-                                              _cvvController.text,
-                                              _expDateController.text));
+                                    BlocProvider.of<BookAppointmentBloc>(
+                                            context)
+                                        .add(BookRegisterButtonTapped());
+                                    // final FormState form =
+                                    //     _formKey.currentState;
+                                    // if (!form.validate()) {
+                                    //   setState(() {
+                                    //     _autoValidateMode = AutovalidateMode
+                                    //         .always; // Start validating on every change.
+                                    //   });
+                                    // } else {
+                                    //   form.save();
+                                    //   MyStatefulWidget();
+                                    //   //    Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
+                                    //   //  MyStatefulWidget();
+                                    //   BlocProvider.of<PaymentBloc>(context).add(
+                                    //       savePayment(
+                                    //           _cvvController.text,
+                                    //           _creditCardNumberController.text,
+                                    //           _cvvController.text,
+                                    //           _expDateController.text));
 
-                                      // Encrypt and send send payment details to payment gateway
-
-                                    }
+                                    // Encrypt and send send payment details to payment gateway
                                   },
                                 )),
                             SizedBox(
@@ -1522,7 +1603,16 @@ String singh = '';
         child: InkWell(
           onTap: () {
             setState(() {
-              addpayment(context, '');
+              if (date1.isEmpty) {
+                print('ssss${date1}');
+                _showDialog(context, 'Please Select Date');
+              } else if (singh.isEmpty) {
+                _showDialog(context, 'Please Select Services');
+              } else if (parmendra.isEmpty) {
+                _showDialog(context, 'Please Select Pet');
+              } else {
+                addpayment(context, '');
+              }
               // viewVisible1 = true;
             });
           },
@@ -1580,65 +1670,101 @@ String singh = '';
 
   void addpayment(BuildContext context, String text) {
     showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Padding(
-            padding: EdgeInsets.all(20.0),
-            child: AlertDialog(actions: <Widget>[
-              Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                      decoration: BoxDecoration(
-                        color: MaaruStyle.colors.textColorWhite,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 20.0, right: 20),
-                            child: TextFormField(
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
-                                LengthLimitingTextInputFormatter(4),
-                              ],
-                              decoration: InputDecoration(
-                                fillColor: Colors.white,
-                                hoverColor: Colors.white,
-                                icon: Image.asset(
-                                  'assets/images/card_cvv.png',
-                                  width: 40.0,
-                                  color: Colors.grey[600],
+        context: context,
+        builder: (BuildContext context) {
+          return BlocProvider(
+              create: (context) =>
+                  KiwiContainer().resolve<BookAppointmentBloc>(),
+              child: BlocBuilder<BookAppointmentBloc, BookAppointmentState>(
+                builder: (context, state) {
+                  if (state is BookRegisterSuccess) {
+                    SchedulerBinding.instance.addPostFrameCallback((_) {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return ChatScreen();
+                      }));
+                    });
+                    return Container();
+                  } else if (state is BookRegisterFailure) {
+                    SchedulerBinding.instance.addPostFrameCallback((_) {
+                      Future.delayed(const Duration(seconds: 1), () {
+                        Scaffold.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.black,
+                            content: Text(state.errorMessage,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'poppins',
+                                    fontSize: 20,
+                                    color: MaaruStyle.colors.textColorWhite)),
+                          ),
+                        );
+                      });
+                    });
+                  }
+                  return Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: AlertDialog(actions: <Widget>[
+                        Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  color: MaaruStyle.colors.textColorWhite,
                                 ),
-                                border: UnderlineInputBorder(),
-                                filled: true,
-                                hintText: 'Number behind the card',
-                                labelText: 'CVV',
-                              ),
-                              // validator: CardUtils.validateCVV,
-                              // keyboardType: TextInputType.number,
-                              // onSaved: (value) {
-                              //   _paymentCard.cvv = int.parse(value);
-                              // },
-                              controller: _cvvController,
-                            ),
-                          ),
-                          Divider(
-                            color: Colors.grey[360],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(1.0),
-                            child: ThemedButton(
-                              text: 'Book Appointment',
-                              onPressed: () {},
-                              enabled: true,
-                            ),
-                          )
-                        ],
-                      )))
-            ]));
-      },
-    );
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20.0, right: 20),
+                                      child: TextFormField(
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          LengthLimitingTextInputFormatter(4),
+                                        ],
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          hoverColor: Colors.white,
+                                          icon: Image.asset(
+                                            'assets/images/card_cvv.png',
+                                            width: 40.0,
+                                            color: Colors.grey[600],
+                                          ),
+                                          border: UnderlineInputBorder(),
+                                          filled: true,
+                                          hintText: 'Number behind the card',
+                                          labelText: 'CVV',
+                                        ),
+                                        // validator: CardUtils.validateCVV,
+                                        // keyboardType: TextInputType.number,
+                                        // onSaved: (value) {
+                                        //   _paymentCard.cvv = int.parse(value);
+                                        // },
+                                        controller: _cvvController,
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: Colors.grey[360],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(1.0),
+                                      child: ThemedButton(
+                                        text: 'Book Appointment',
+                                        onPressed: () {
+                                          BlocProvider.of<BookAppointmentBloc>(
+                                                  context)
+                                              .add(BookRegisterButtonTapped());
+                                        },
+                                        enabled: true,
+                                      ),
+                                    )
+                                  ],
+                                )))
+                      ]));
+                },
+              ));
+        });
   }
 }
 
@@ -1663,7 +1789,7 @@ class ChoiceRow extends StatefulWidget {
   final String lebal4;
   final String lebal5;
 
-   ChoiceRow(
+  ChoiceRow(
       {Key key,
       this.lebal1,
       this.lebal2,
@@ -1709,7 +1835,7 @@ class _ChoiceRowState extends State<ChoiceRow> {
               }
             });
             BlocProvider.of<BookAppointmentBloc>(context)
-                .add(dateChanged('', widget.lebal1));
+                .add(BookingTimeChaned(widget.lebal1));
           },
           child: ChoiceButton(
             isPressed: isPressedList[0],
@@ -1738,7 +1864,7 @@ class _ChoiceRowState extends State<ChoiceRow> {
               }
             });
             BlocProvider.of<BookAppointmentBloc>(context)
-                .add(dateChanged('', widget.lebal2));
+                .add(BookingTimeChaned(widget.lebal2));
           },
           child: ChoiceButton(
             isPressed: isPressedList[1],
@@ -1764,7 +1890,7 @@ class _ChoiceRowState extends State<ChoiceRow> {
               }
             });
             BlocProvider.of<BookAppointmentBloc>(context)
-                .add(dateChanged('', widget.lebal3));
+                .add(BookingTimeChaned(widget.lebal3));
           },
           child: ChoiceButton(
             isPressed: isPressedList[2],
@@ -1792,7 +1918,7 @@ class _ChoiceRowState extends State<ChoiceRow> {
               }
             });
             BlocProvider.of<BookAppointmentBloc>(context)
-                .add(dateChanged('', widget.lebal4));
+                .add(BookingTimeChaned(widget.lebal4));
           },
           child: ChoiceButton(
             isPressed: isPressedList[3],
@@ -1820,7 +1946,7 @@ class _ChoiceRowState extends State<ChoiceRow> {
               }
             });
             BlocProvider.of<BookAppointmentBloc>(context)
-                .add(dateChanged('', widget.lebal5));
+                .add(BookingTimeChaned(widget.lebal5));
           },
           child: ChoiceButton(
             isPressed: isPressedList[4],

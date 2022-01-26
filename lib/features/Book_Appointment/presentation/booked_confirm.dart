@@ -4,6 +4,7 @@ import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/features/Book_Appointment/presentation/reviewe_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/verify/domain/usecases/book_a_provider.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:maru/main.dart';
 
@@ -17,7 +18,8 @@ class BookedConfirm extends StatefulWidget {
 }
 
 class _BookedConfirmState extends State<BookedConfirm> {
-String taskheading='Booking Confirmed';
+  BookProviderParams bookProviderParams = BookProviderParams();
+ String taskheading='Booking Confirmed';
  String taskmessage= 'Confirmation email and SMS has been\n'
  'sent to your registered details';
 Color actioncolor=MaaruColors.blueColor;
@@ -102,8 +104,8 @@ Color actioncolor=MaaruColors.blueColor;
                   SizedBox(
                     height: size.height * 0.03,
                   ),
-                  Text(
-                    'Appointment Details',
+                  Text(bookProviderParams.expdate.toString(),
+                 //   'Appointment Details',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
@@ -134,7 +136,7 @@ Color actioncolor=MaaruColors.blueColor;
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Austin Pet Groomming',
+                               bookProviderParams.bookingTime.toString(),
                                 style: TextStyle(
                                     fontSize: 13, fontWeight: FontWeight.bold),
                               ),
