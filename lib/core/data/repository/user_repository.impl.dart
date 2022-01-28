@@ -50,12 +50,19 @@ class UserRepositoryImpl implements UserRepository {
       final response = await http.post(MaruConstant.signup, body: map);
       Map res = json.decode(response.body);
       print(res);
-      return Right('Otp sent your register email');
+      print(response.statusCode);
+      if(response.statusCode ==200 ) {
+        return Right('Otp sent your register email');
+      }
+      else{
+        return Left(CacheFailure('sss'));
+      }
+    } on ServerFailure catch (e) {
+      return Left(CacheFailure(e.message));
     } catch (e) {
       return Left(CacheFailure(e.toString()));
     }
   }
-
   @override
   Future<Either<Failure, void>> emailLogin(
     EmailAuthParams params,
@@ -80,16 +87,12 @@ class UserRepositoryImpl implements UserRepository {
       await sharedPrefHelper.savePassword(
         MaruConstant.password,
       );
-      await sharedPrefHelper.savelname(MaruConstant.lastName, res['last_name']);
+    //  await sharedPrefHelper.savelname(MaruConstant.lastName, res['last_name']);
       await sharedPrefHelper.saveEmail(res[MaruConstant.email]);
       print("Register Success  ${response.body}");
       //  await sharedPrefHelper.saveString( "first_name",res['first_name']);
-      var fname = '';
-      if (res.containsKey("first_name")) fname = res['first_name'] ?? "";
-      sharedPrefHelper.saveString(MaruConstant.firstName, fname ?? "");
-      print(res['first_name']);
-      await sharedPrefHelper.saveString("last_name", res['last_name']);
-      print(res['last_name']);
+      await sharedPrefHelper.saveString("first_name", res['first_name']);
+    //  print(res['last_name']);
       return Right(Void);
     } catch (e) {
       return Left(ApiFailure('aa'));
@@ -118,8 +121,12 @@ class UserRepositoryImpl implements UserRepository {
       map[MaruConstant.email] = email;
       final response = await http.post(MaruConstant.reset, body: map);
       print("Register Success  ${response.body}");
-
-      return Right(Void);
+if(response.statusCode ==200) {
+  return Right(Void);
+}
+else{
+  return Left(ServerFailure('Please enter valid otp'));
+}
     } catch (e) {
       print("Thrown Exception While signing IN:$e");
       throw e;
@@ -567,7 +574,7 @@ class UserRepositoryImpl implements UserRepository {
 
       return Right(Void);
     } catch (e) {
-      print("Thrown Exception While signing IN:$e");
+      return Left(CacheFailure(e.toString()));
       throw e;
     }
   }
@@ -687,7 +694,7 @@ class UserRepositoryImpl implements UserRepository {
         MaruConstant.password,
       );
       await sharedPrefHelper.saveString('is_verified', res['is_verified']);
-      await sharedPrefHelper.savelname(MaruConstant.lastName, res['last_name']);
+      await sharedPrefHelper.saveString(MaruConstant.lastName, res['last_name']);
       await sharedPrefHelper.saveEmail(res[MaruConstant.email]);
       print("Register Success  ${response.body}");
       return Right(Void);
@@ -884,7 +891,31 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
       final response = await http.post(MaruConstant.providerbookingappointment,
           body: map, headers: headers);
-      print('respose of body ${response.body}');
+      Map data1 = jsonDecode(response.body);
+      print('singh${response.body}');
+      print('tomer${data1}');
+      var date2 = data1['data'];
+      print(date2);
+
+      var user_id;
+      var date3 = date2[0];
+      print('singham${date3}');
+      await _prefHelper.saveString('booking_id', date3['booking_id'].toString());
+      await _prefHelper.saveString('booking_id', date3['booking_id'].toString());
+      await _prefHelper.saveString('booking_date', date3['booking_date'].toString());
+      await _prefHelper.saveString('booking_time', date3['booking_time'].toString());
+      await _prefHelper.saveString('service_name', date3['service_name'].toString());
+      await _prefHelper.saveString('total_amount', date3['total_amount'].toString());
+      await _prefHelper.saveString('pet_image', date3['pet_image'].toString());
+      await _prefHelper.saveString('company_name', date3['company_name'].toString());
+      await _prefHelper.saveString('company_city', date3['company_city'].toString());
+      await _prefHelper.saveString('company_state', date3['company_state'].toString());
+      await _prefHelper.saveString(
+          'company_zip_code', date3['company_zip_code'].toString());
+      // await _prefHelper.saveStringList(
+      //     'date3', date3);
+      // _prefHelper.getStringList(date3.toString());
+      print(data1);
       return Right(Void);
     } catch (e) {
       print(e);
@@ -1037,6 +1068,29 @@ class UserRepositoryImpl implements UserRepository {
       var data = convert.jsonDecode(response.body);
       print(data);
       return Right(GetAllAppointmentProvider.fromJson(data));
+    } catch (e) {
+      print(e);
+      return Left(CacheFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> bookProviderCancel(String id1) async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+      final response = await http.get(
+          Uri.parse(
+            'http://18.191.199.31/api/bookings/cancel-booking/$id1',
+          ),
+          headers: headers);
+      print(response.body);
+      var data = convert.jsonDecode(response.body);
+      print(data);
+      return Right(Void);
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));

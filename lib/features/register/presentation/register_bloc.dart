@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
+import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/provider_register/domain/usecases/provider_email_register.dart';
 import 'package:maru/features/register/domain/usecases/email_signup.dart';
@@ -18,7 +19,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   String email = "";
   String password = "";
 
-  RegisterBloc(this._emailSignup,this._providerEmailSignUp) : super();
+  RegisterBloc(this._emailSignup, this._providerEmailSignUp) : super();
 
   @override
   RegisterState get initialState => RegisterInitial();
@@ -73,26 +74,28 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       } else {
         yield RegisterFormValidationFailure();
       }
-    }
-    else if (event is RegisterButtonTapped) {
+    } else if (event is RegisterButtonTapped) {
       yield RegisterInProgress();
-      final result = await _emailSignup(EmailAuthParams(
+      final result = await _emailSignup.call(EmailAuthParams(
           email: email,
           password: password,
-          first_name:  first_name,
+          first_name: first_name,
           lName: lname));
       yield* result.fold((l) async* {
-        yield RegisterFailure("Signup failed..please try again.. $l");
+        if (l is ServerFailure) {
+          yield RegisterFailure("Signup failed..please try again.. $l");
+        } else {
+          yield RegisterFailure("Signup failed..please try again.. $l");
+        }
       }, (r) async* {
         yield RegisterSuccess();
       });
-    }
-    else if (event is ProviderRegisterButtonTapped) {
+    } else if (event is ProviderRegisterButtonTapped) {
       yield RegisterInProgress();
       final result = await _providerEmailSignUp(EmailAuthParams(
           email: email,
           password: password,
-          first_name:  first_name,
+          first_name: first_name,
           lName: lname));
       yield* result.fold((l) async* {
         yield RegisterFailure("Signup failed..please try again.. $l");

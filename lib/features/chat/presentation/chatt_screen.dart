@@ -27,10 +27,11 @@ import 'chat_bloc.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+
 class chatScreen extends StatefulWidget {
   @override
   chatScreenState createState() {
-    return  chatScreenState();
+    return chatScreenState();
   }
 }
 
@@ -38,36 +39,35 @@ class chatScreenState extends State<chatScreen> {
   bool isAppodealInitialized = true;
   bool isfirst = true;
   final TextEditingController _textEditingController =
-  new TextEditingController();
+      new TextEditingController();
   ScreenshotController screenshotController = ScreenshotController();
   final _controller = ScrollController();
   IO.Socket socket;
   final container = KiwiContainer();
   List<Message> messageList = [];
   String _image = "";
-  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  final SharedPrefHelper _prefHelper =
+      KiwiContainer().resolve<SharedPrefHelper>();
 
   @override
   void initState() {
-
     super.initState();
+    connectToServer();
     IO.Socket socket = IO.io('http://18.191.199.31:80',
-        OptionBuilder()
-            .setTransports(['websocket']).build());
+        OptionBuilder().setTransports(['websocket']).build());
 
     socket.onConnect((_) {
       print('connect');
       print('ddconnect');
-      socket.emit('msg', 'test');
-    });
+   });
   }
+
   void connectToServer() {
     try {
-
       IO.Socket socket = IO.io('http://18.191.199.31:80');
       socket.onConnect((_) {
         print('connect');
-        socket.emit('userId', '73');
+        socket.emit('userId', '183');
       });
       socket.on('event', (data) => print(data));
       socket.onDisconnect((_) => print('disconnect'));
@@ -83,13 +83,13 @@ class chatScreenState extends State<chatScreen> {
       socket.on('message', handleMessage);
       socket.on('disconnect', (_) => print('disconnect'));
       socket.on('fromServer', (_) => print(_));
-
     } catch (e) {
       print(e.toString());
     }
 
-
-    socket.emit('connect_user', {'userId': 29},
+    socket.emit(
+      'connect_user',
+      {'userId': 29},
     );
     socket.connect();
   }
@@ -106,7 +106,6 @@ class chatScreenState extends State<chatScreen> {
   }
 
   // Send update of user's typing status
-
 
   // Listen to update of typing status from connected users
   void handleTyping(Map<String, dynamic> data) {
@@ -128,7 +127,6 @@ class chatScreenState extends State<chatScreen> {
   void handleMessage(Map<String, dynamic> data) {
     print(data);
   }
-
 
   @override
   void dispose() {
@@ -153,21 +151,21 @@ class chatScreenState extends State<chatScreen> {
                         onTap: () async {
                           //from path_provide package
                           final directory =
-                          await getApplicationDocumentsDirectory();
+                              await getApplicationDocumentsDirectory();
 
                           String fName =
                               '${DateTime.now().microsecondsSinceEpoch}.png';
                           String path = directory.path;
 
                           final savePath =
-                          await screenshotController.captureAndSave(
-                              path, //set path where screenshot will be saved
-                              fileName: fName,
-                              pixelRatio: MediaQuery.of(context)
-                                  .devicePixelRatio);
+                              await screenshotController.captureAndSave(
+                                  path, //set path where screenshot will be saved
+                                  fileName: fName,
+                                  pixelRatio:
+                                      MediaQuery.of(context).devicePixelRatio);
                           List<String> paths = [];
                           paths.add(savePath);
-                         // await Share.shareFiles(paths);
+                          // await Share.shareFiles(paths);
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -189,11 +187,10 @@ class chatScreenState extends State<chatScreen> {
                 child: Column(
                   children: [
                     SizedBox(height: 30),
-
                     BackArrowButton(),
-
                     ProfileAvatar(
-                      imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
+                      imageUrl:
+                          ('assets/images/istockphoto-1179420343-612x612.jpg'),
                       width: 60,
                       avatarRadius: 60,
                       Color: Colors.yellow,
@@ -209,7 +206,6 @@ class chatScreenState extends State<chatScreen> {
                 ),
               ),
             ),
-
             body: SafeArea(
               child: Column(
                 children: [
@@ -237,19 +233,19 @@ class chatScreenState extends State<chatScreen> {
                             if (messageList.length == 0) {
                               messageList = state.messageList;
                             }
-                            final typeMessage = Message("typing", 3);
+                            final typeMessage = Message();
                             messageList.add(typeMessage);
                           }
                           if (state is ChatSendSuccess) {
                             messageList.removeWhere(
-                                    (element) => element.typeOfMsg == 3);
+                                (element) => element.messageType == 3);
                             messageList = state.messageList;
                           }
 
                           if (messageList.length > 2) {
                             messageList.removeWhere(
-                                    (element) => element.typeOfMsg == 4);
-                            final sentMessage = Message("", 4);
+                                (element) => element.messageType == 4);
+                            final sentMessage = Message();
                             messageList.add(sentMessage);
                           }
 
@@ -272,7 +268,7 @@ class chatScreenState extends State<chatScreen> {
                             itemCount: messageList.length,
                             itemBuilder: (BuildContext ctxt, int index) {
                               Message message = messageList.elementAt(index);
-                              if (message.typeOfMsg == 1) {
+                              if (message.messageType == 1) {
                                 return Container(
                                   margin: EdgeInsets.only(top: 15),
                                   child: Row(
@@ -281,13 +277,13 @@ class chatScreenState extends State<chatScreen> {
                                       Container(
                                         constraints: BoxConstraints(
                                             maxWidth: MediaQuery.of(context)
-                                                .size
-                                                .width *
+                                                    .size
+                                                    .width *
                                                 0.70),
                                         padding: EdgeInsets.all(10),
                                         margin: EdgeInsets.only(right: 20),
                                         decoration: BoxDecoration(
-                                           color:MaaruColors.buttonColor,
+                                          color: MaaruColors.buttonColor,
                                           // Color.fromRGBO(
                                           //     212, 234, 244, 1.0),
                                           borderRadius: BorderRadius.only(
@@ -296,18 +292,15 @@ class chatScreenState extends State<chatScreen> {
                                               topRight: Radius.circular(15)),
                                         ),
                                         child: Text(
-                                          message.text,
+                                          message.message,
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ),
                                       AvatarImage(
-
                                           KiwiContainer()
                                               .resolve<SharedPrefHelper>()
                                               .getStringByKey(
-                                              MaruConstant
-                                                  .img,
-                                             ''),
+                                                  MaruConstant.img, ''),
                                           false),
                                       SizedBox(
                                         width: 20,
@@ -315,7 +308,7 @@ class chatScreenState extends State<chatScreen> {
                                     ],
                                   ),
                                 );
-                              } else if (message.typeOfMsg == 2) {
+                              } else if (message.message == 2) {
                                 return Container(
                                   margin: EdgeInsets.only(top: 15),
                                   child: Row(
@@ -326,14 +319,14 @@ class chatScreenState extends State<chatScreen> {
                                       ),
                                       _image.isEmpty
                                           ? AvatarImage(
-                                          "assets/images/chat_avatar.png",
-                                          false)
+                                              "assets/images/chat_avatar.png",
+                                              false)
                                           : AvatarImage(_image, true),
                                       Container(
                                         constraints: BoxConstraints(
                                             maxWidth: MediaQuery.of(context)
-                                                .size
-                                                .width *
+                                                    .size
+                                                    .width *
                                                 0.70),
                                         padding: EdgeInsets.all(10),
                                         margin: EdgeInsets.only(left: 20),
@@ -345,13 +338,14 @@ class chatScreenState extends State<chatScreen> {
                                               bottomRight: Radius.circular(15),
                                               topRight: Radius.circular(15)),
                                         ),
-                                        child: Text(message.text,
-                                           ),
+                                        child: Text(
+                                          message.message,
+                                        ),
                                       ),
                                     ],
                                   ),
                                 );
-                              } else if (message.typeOfMsg == 3) {
+                              } else if (message.messageType == 3) {
                                 return Align(
                                   alignment: Alignment.topLeft,
                                   child: Container(
@@ -378,7 +372,7 @@ class chatScreenState extends State<chatScreen> {
                     alignment: Alignment.bottomCenter,
                     child: Container(
                       decoration:
-                      new BoxDecoration(color: Theme.of(context).cardColor),
+                          new BoxDecoration(color: Theme.of(context).cardColor),
                       child: _buildTextComposer(),
                     ),
                   ),
@@ -407,102 +401,94 @@ class chatScreenState extends State<chatScreen> {
     return BlocBuilder<ChatBloc, ChatState>(builder: (context, state) {
       return Container(
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        child:  Row(
+        child: Row(
           children: <Widget>[
             InkWell(
-        onTap:(){
-          showModalBottomSheet<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return Container(
-                    height: 130,
-                    color: Colors.white,
-                    child: Column(children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment
-                              .spaceEvenly,
-                          children: [
-                            IconItem(
-                              Icons
-                                  .insert_drive_file,
-                              Colors.indigo,
-                              'Document',
-                            ),
-                            IconItem(
-                                Icons.camera_alt,
-                                Colors.pink,
-                                'Camera'),
-                            IconItem(
-                                Icons
-                                    .insert_photo,
-                                Colors.purple,
-                                'Gallery'),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(
-                                    context)
-                                    .push(MaterialPageRoute(
-                                    builder:
-                                        (_) =>
-                                        MapView()));
-                              },
-                              child: IconItem(
-                                  Icons
-                                      .location_pin,
-                                  Colors.yellow,
-                                  'Location'),
-                            )
-                          ])
-                    ]));
-              });
-        },
-        child:
-        Image.asset(
-        'assets/icons/icone-setting-64.png',
-          height: 40,
-        )),
-             SizedBox(width: 10,),
-             Flexible(
-              child:
-              TextFormField(
+                onTap: () {
+                  showModalBottomSheet<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Container(
+                            height: 130,
+                            color: Colors.white,
+                            child: Column(children: [
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    IconItem(
+                                      Icons.insert_drive_file,
+                                      Colors.indigo,
+                                      'Document',
+                                    ),
+                                    IconItem(Icons.camera_alt, Colors.pink,
+                                        'Camera'),
+                                    IconItem(Icons.insert_photo, Colors.purple,
+                                        'Gallery'),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (_) => MapView()));
+                                      },
+                                      child: IconItem(Icons.location_pin,
+                                          Colors.yellow, 'Location'),
+                                    )
+                                  ])
+                            ]));
+                      });
+                },
+                child: Image.asset(
+                  'assets/icons/icone-setting-64.png',
+                  height: 40,
+                )),
+            SizedBox(
+              width: 10,
+            ),
+            Flexible(
+              child: TextFormField(
                 controller: _textEditingController,
-              //  style: ChadbotStyle.text.small,
+                //  style: ChadbotStyle.text.small,
                 onChanged: (String messageText) {},
 
                 decoration:
-                 const InputDecoration.collapsed(hintText: "Send a message"),
-
+                    const InputDecoration.collapsed(hintText: "Send a message"),
               ),
             ),
-             Stack(
+            Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 40),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: InkWell(
+                      child: Image.asset(
+                        'assets/icons/icone-setting-65.png',
+                        height: 60,
+                      ),
+                      onTap: () {
+                        if (_textEditingController.text.isEmpty) return;
+                        BlocProvider.of<ChatBloc>(context).isFromException =
+                            false;
 
-               children: [
-                 Padding(padding:EdgeInsets.only(bottom: 40 ),
-             child:
-             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: InkWell(
-     child:  Image.asset('assets/icons/icone-setting-65.png',height: 60,),
-                onTap: () {
-                  if (_textEditingController.text.isEmpty) return;
-                  BlocProvider.of<ChatBloc>(context).isFromException = false;
-                  BlocProvider.of<ChatBloc>(context)
-                      .add(ChatMessageSent(_textEditingController.text));
-                  _textEditingController.clear();
-                },
-              ),
-            ),)
-             ],)
+                        BlocProvider.of<ChatBloc>(context)
+                            .add(ChatMessageSent(_textEditingController.text,183,184,0));
+                        _textEditingController.clear();
+                      },
+                    ),
+                  ),
+                )
+              ],
+            )
           ],
         ),
       );
     });
-
   }
+
   Widget IconItem(IconData icon, Color color, String text) {
     return Column(
       children: [
@@ -521,6 +507,7 @@ class chatScreenState extends State<chatScreen> {
       ],
     );
   }
+
   void _onButtonPressed() {
     _textEditingController.clear();
   }
@@ -538,7 +525,10 @@ class AvatarImage extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
-            image: isfile ? FileImage(File(imagepath)) : AssetImage('assets/images/istockphoto-1179420343-612x612.jpg'),
+            image: isfile
+                ? FileImage(File(imagepath))
+                : AssetImage(
+                    'assets/images/istockphoto-1179420343-612x612.jpg'),
             fit: BoxFit.cover,
           ),
         ));

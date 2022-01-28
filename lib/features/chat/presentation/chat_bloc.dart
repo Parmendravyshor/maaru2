@@ -68,8 +68,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       var maps;
       messageList = List.generate(maps.length, (i) {
         return Message(
-          maps[i]['message'],
-          maps[i]['messageType'],
+          message:maps[i]['message'],
+          messageType: maps[i]['messageType'],
+          senderId: maps[i]['senderId'],
+          receiverId: maps[i]['receiverId'],
         );
       });
 
@@ -81,10 +83,13 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         isFromException = false;
       } else {
         final sentMessage = Message(
-          event.message,
-          1,
+          message :event.message,
+          messageType: event.mesageType,
+          senderId: event.userid,
+          receiverId: event.userid2,
         );
         messageList.add(sentMessage);
+        _socket.emit('send_message',sentMessage);
         yield ChatSendInProgress(messageList);
       }
 
@@ -112,8 +117,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             var body = convert.jsonDecode(jsonResponse['body']);
             var message = body['Answer'];
             final receivedMessage = Message(
-              message,
-              2,
+              receiverId: message,
+
             );
             messageList.add(receivedMessage);
 

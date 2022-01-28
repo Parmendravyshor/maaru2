@@ -61,37 +61,38 @@ class _SplashScreenState extends State<SplashScreen> {
 //todo: Navigate to AfterSplashScreen
 //
   navigateToNextScreen() {
-    Future.delayed(const Duration(seconds: 3), () async {
+    Future.delayed(const Duration(seconds: 0), () async {
       SharedPrefHelper _prefHelper =
           KiwiContainer().resolve<SharedPrefHelper>();
-      String token = _prefHelper.gettoken();
-      if (token.isNotEmpty) {
+      String token = _prefHelper.getfname();
+      print('ffff${token}');
+      if (token != null) {
         var id1 = _prefHelper.getStringByKey('pet_name', '');
-        if (id1.isNotEmpty) {
+        print('ddddd${id1}');
+         if (id1.isNotEmpty) {
+           var accessdeniedOrsuccess = _prefHelper.getStringByKey('last_name', '');
+           print('abced${accessdeniedOrsuccess}');
+           if (accessdeniedOrsuccess.isNotEmpty) {
+            return Navigator.of(context).pushAndRemoveUntil(
+                 MaterialPageRoute(builder: (context) => TestApp()),
+                     (route) => false);
+           }
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => const HomeScreen()),
               (route) => false);
-        } else {
+        } if(id1.isEmpty) {
+           print('ddd');
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                   builder: (context) => CreateregisterPetProfile1()),
               (route) => false);
 
-          var accessdeniedOrsuccess =
-              _prefHelper.getStringByKey('is_verified', '');
-          if (accessdeniedOrsuccess.isNotEmpty) {
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => TestApp()),
-                (route) => false);
-          }
-
 
         }
-
       } else {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => VerifyUser()),
-                (route) => false);
+            (route) => false);
       }
     });
   }

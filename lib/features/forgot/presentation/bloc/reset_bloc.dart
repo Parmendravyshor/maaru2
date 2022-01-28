@@ -39,7 +39,7 @@ class ResetBloc extends Bloc<ResetEvent, ResetState> {
       final result = await _sendResetPwdOtp.call(email);
       yield* result.fold((l) async* {
         yield ResetFailure(
-            "Failed to send reset password link..please try again.");
+            "Enter Register email");
       },
 
               (r) async* {

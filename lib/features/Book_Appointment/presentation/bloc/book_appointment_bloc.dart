@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:maru/core/usecases/usecase.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/book_provider_cancel.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
@@ -17,11 +18,13 @@ class BookAppointmentBloc
   final PostReview postREviewAfterBooking;
   final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
   final GetUpcomingPastAndDeclineAppointment
-      getUpcomingPastAndDeclineAppointment;
-  BookAppointmentBloc(
-      this.bookProvider,
+  getUpcomingPastAndDeclineAppointment;
+  final BookProviderCancel bookProviderCancel;
+
+  BookAppointmentBloc(this.bookProvider,
       this.getUpcomingPastAndDeclineAppointment,
       this.postREviewAfterBooking,
+      this.bookProviderCancel,
       this.getUpcomingAndPastAppointments);
 
   @override
@@ -37,6 +40,7 @@ class BookAppointmentBloc
   var bookingtime;
   var cvv;
   var cardid;
+
   @override
   Stream<BookAppointmentState> mapEventToState(
       BookAppointmentEvent event) async* {
@@ -54,7 +58,7 @@ class BookAppointmentBloc
         yield BookRegisterFormValidationFailure();
       }
     } else if (event is providerIdChanged) {
-      if (event.providerid !=null) {
+      if (event.providerid != null) {
         provider_id = event.providerid;
       } else {
         provider_id;
@@ -93,8 +97,7 @@ class BookAppointmentBloc
       } else {
         yield BookRegisterFormValidationFailure();
       }
-
-    }  else if (event is BookingTimeChaned) {
+    } else if (event is BookingTimeChaned) {
       if (event.BookingTime.isNotEmpty) {
         bookingtime = event.BookingTime;
       } else {
@@ -107,9 +110,7 @@ class BookAppointmentBloc
       } else {
         yield BookRegisterFormValidationFailure();
       }
-
-    }
-    else if (event is CardHolderNameChanged) {
+    } else if (event is CardHolderNameChanged) {
       if (event.cardHolderName.isNotEmpty) {
         cardHolderNAme = event.cardHolderName;
       } else {
@@ -122,8 +123,7 @@ class BookAppointmentBloc
       } else {
         yield BookRegisterFormValidationFailure();
       }
-    }
-    else if (event is CardNumberChanged) {
+    } else if (event is CardNumberChanged) {
       if (event.cardno != null) {
         cardno = event.cardno;
       } else {
@@ -136,9 +136,7 @@ class BookAppointmentBloc
       } else {
         yield BookRegisterFormValidationFailure();
       }
-
-    }
-    else if (event is CvvIdChanged) {
+    } else if (event is CvvIdChanged) {
       if (event.cvv.isNotEmpty) {
         cvv = event.cvv;
       } else {
@@ -151,9 +149,7 @@ class BookAppointmentBloc
       } else {
         yield BookRegisterFormValidationFailure();
       }
-
-    }
-    else if (event is ExpDateChanged) {
+    } else if (event is ExpDateChanged) {
       if (event.expDate.isNotEmpty) {
         expdate = event.expDate;
       } else {
@@ -166,13 +162,10 @@ class BookAppointmentBloc
       } else {
         yield BookRegisterFormValidationFailure();
       }
-
-    }
-    else if (event is  BookRegisterButtonTapped) {
+    } else if (event is BookRegisterButtonTapped) {
       yield BookRegisterInProgress();
       print('check card ${pet_id}');
       final result = await bookProvider(BookProviderParams(
-
           pet_id: pet_id,
           provider_id: provider_id,
           booking_date: booking_date,
@@ -183,12 +176,16 @@ class BookAppointmentBloc
           bookingTime: bookingtime,
           cardId: cardid,
           cvv: cvv));
-
-      yield* result.fold((l) async* {
-        yield BookRegisterFailure('Something went wrong.. $l');
-      }, (r) async* {
+      if (result.isRight()) {
         yield BookRegisterSuccess();
-      });
+      } else {
+        yield BookRegisterFailure('Something went wrong.. ');
+      }
+      // yield* result.fold((l) async* {
+      //
+      // }, (r) async* {
+      //   yield BookRegisterSuccess();
+      // });
     } else if (event is PostREviewAfterBooking) {
       UserReviewParamsMOdel profileParams = UserReviewParamsMOdel(
         providerId: event.provider_id,
@@ -206,7 +203,7 @@ class BookAppointmentBloc
       yield GGetDeclineRequestData(result.getOrElse(() => null));
     }
     if (event is UpcomingAppointmentChanged) {
-      final result = await getUpcomingAndPastAppointments.call(UpcomingBooking(
+      final result = await getUpcomingAndPastAppointments(UpcomingBooking(
           bookingDate: DateTime.parse(event.Date),
           serviceName: event.name.toString()));
 
@@ -215,12 +212,18 @@ class BookAppointmentBloc
         yield FetchUpcomingAppointmentModelData(result.getOrElse(() => null));
       }
     }
+  if (event is CancelbookedProvider) {
+  final result = await bookProviderCancel.call(event.id1);
+  if (result.isRight()) {
+  yield CancelbookedProviderButtonTapped();
   }
-
+  }
+}
   bool _isFormValid() {
     return pet_id.isNotEmpty &&
         provider_id.isNotEmpty &&
         booking_date.isNotEmpty &&
-        service_id.isNotEmpty && bookingtime;
+        service_id.isNotEmpty &&
+        bookingtime;
   }
 }

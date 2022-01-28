@@ -35,6 +35,7 @@ abstract class UserRepository<T> {
       SearchRequestProviderParams params);
   Future<Either<Failure, Welcome2>> getSinglePetProfile(int id1);
   Future<Either<Failure, void>> postReview(UserReviewParamsMOdel params);
+  Future<Either<Failure, void>> bookProviderCancel(String id1);
   Future<Either<Failure, void>> uploadVaccineREcord(vacineParams params);
   Future<Either<Failure, void>> setNewPassword(SetNewPasswordParams params);
   Future<Either<Failure, void>>  acceptRquest(int value);

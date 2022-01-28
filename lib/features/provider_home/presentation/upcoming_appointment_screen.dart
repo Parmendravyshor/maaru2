@@ -245,7 +245,7 @@ class _UpcomingAppointmentCalender1State
                                                           state
                                                               .upcomingPastAppointmentModel
                                                               .confirmed[index]
-                                                              .companyName,
+                                                              .companyName.toString(),
                                                           style: MaaruStyle
                                                               .text.tiniest,
                                                         ),
@@ -253,7 +253,7 @@ class _UpcomingAppointmentCalender1State
                                                           state
                                                               .upcomingPastAppointmentModel
                                                               .confirmed[index]
-                                                              .service,
+                                                              .service.toString(),
                                                           style: MaaruStyle
                                                               .text.tiny,
                                                         ),
@@ -381,13 +381,11 @@ class _UpcomingAppointmentCalender1State
                                                             BorderRadius
                                                                 .circular(20),
                                                       ),
-                                                      child: Image.network('',
-                                                          // state
-                                                          //     .getProviderRequestModel
-                                                          //     .appointmentRequests[
-                                                          //         index]
-                                                          //     .petImage
-                                                          //     .toString(),
+                                                      child: Image.network(
+                                                          state
+                                                              .upcomingPastAppointmentModel.completed[index].petImg
+
+                                                              .toString(),
                                                           errorBuilder:
                                                               (context, error,
                                                                   stackTrace) {

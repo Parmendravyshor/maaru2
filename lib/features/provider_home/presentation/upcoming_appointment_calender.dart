@@ -1,3 +1,8 @@
+import 'dart:core';
+import 'dart:core';
+import 'dart:core';
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -61,8 +66,8 @@ class _UpcomingAppointmentCalenderState
             child: BlocBuilder<BookAppointmentBloc, BookAppointmentState>(
                 builder: (context, state) {
               if (state is BookAppointmentInitial) {
-                BlocProvider.of<BookAppointmentBloc>(context)
-                    .add(DeclineRequestChanged(_textEditingController.text,''));
+                BlocProvider.of<BookAppointmentBloc>(context).add(
+                    DeclineRequestChanged(_textEditingController.text, ''));
                 // print('figffgfg${text}');
                 return const Center(child: CircularProgressIndicator());
               } else if (state is GGetDeclineRequestData) {
@@ -87,7 +92,7 @@ class _UpcomingAppointmentCalenderState
                                     child: Flexible(
                                   child: TextField(
                                     // cursorColor: Colors.black,
-                                   textInputAction:TextInputAction.search ,
+                                    textInputAction: TextInputAction.search,
                                     decoration: InputDecoration(
                                         enabledBorder: OutlineInputBorder(
                                             borderRadius:
@@ -105,12 +110,16 @@ class _UpcomingAppointmentCalenderState
                                             const EdgeInsets.fromLTRB(
                                                 20.0, 15.0, 25.0, 10.0),
                                         fillColor: Colors.white,
-                                        suffixIcon:
-                                        InkWell(
-                                          onTap: (){
+                                        suffixIcon: InkWell(
+                                          onTap: () {
                                             setState(() {
-                                              BlocProvider.of<BookAppointmentBloc>(context)
-                                                  .add(DeclineRequestChanged(_textEditingController.text,''));
+                                              BlocProvider.of<
+                                                          BookAppointmentBloc>(
+                                                      context)
+                                                  .add(DeclineRequestChanged(
+                                                      _textEditingController
+                                                          .text,
+                                                      ''));
                                             });
                                           },
                                           child: Image.asset(
@@ -119,13 +128,17 @@ class _UpcomingAppointmentCalenderState
                                             // width: 30,
                                           ),
                                         )),
-                                    onChanged: (text){
-                                      BlocProvider.of<BookAppointmentBloc>(context)
-                                          .add(DeclineRequestChanged(_textEditingController.text,''));
+                                    onChanged: (text) {
+                                      BlocProvider.of<BookAppointmentBloc>(
+                                              context)
+                                          .add(DeclineRequestChanged(
+                                              _textEditingController.text, ''));
                                     },
-                                    onSubmitted: (text){
-                                      BlocProvider.of<BookAppointmentBloc>(context)
-                                          .add(DeclineRequestChanged(_textEditingController.text,''));
+                                    onSubmitted: (text) {
+                                      BlocProvider.of<BookAppointmentBloc>(
+                                              context)
+                                          .add(DeclineRequestChanged(
+                                              _textEditingController.text, ''));
                                     },
 
                                     controller: _textEditingController,
@@ -149,42 +162,9 @@ class _UpcomingAppointmentCalenderState
                           height: 440,
                           width: 400,
                           color: Colors.white,
+                          child: Appointments(widget.text)),
 
-                           child: Appointments(widget.text)),
-                  //Container(
-                          //   height: 440, width: 400, child:  TableCalendar(
-                          //   calendarController: controller,
-                          //   initialCalendarFormat: CalendarFormat.week,
-                          //   headerVisible: false,
-                          //   builders: CalendarBuilders(
-                          //     // week days
-                          //     dowWeekdayBuilder: (context, weekday) {
-                          //       return Container();
-                          //     },
-                          //     // dates
-                          //     dayBuilder: (context, date, events) {
-                          //       print(date.month);
-                          //       return Container(
-                          //         //  color: Colors.green,
-                          //         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                          //         decoration: BoxDecoration(
-                          //             borderRadius: BorderRadius.all(Radius.circular(6)),
-                          //             border: Border.all(color: const Color(0xffd6edff), width: 1)),
-                          //
-                          //         child: Column(
-                          //           children: [
-                          //             _showDate(date),
-                          //             _showWeek(date),
-                          //           ],
-                          //         ),
-                          //
-                          //         // ),
-                          //         // )),
-                          //       );
-                          //       //);
-                          //     },
-                          //   ),
-                          // ),),),
+                      // ),),),
                       const SizedBox(
                         height: 20,
                       ),
@@ -202,6 +182,7 @@ class _UpcomingAppointmentCalenderState
                           itemCount: state
                               .upcomingPastAppointmentModel.cancelled.length,
                           itemBuilder: (BuildContext context, int index) {
+
                             return Container(
                               margin: const EdgeInsets.all(10),
                               height: 170,
@@ -242,9 +223,8 @@ class _UpcomingAppointmentCalenderState
                                               Text(
                                                 state
                                                     .upcomingPastAppointmentModel
-                                                    .cancelled[index]
-                                                    .companyName
-                                                    ,
+                                                    .confirmed[index]
+                                                    .companyName,
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 15),
@@ -252,22 +232,21 @@ class _UpcomingAppointmentCalenderState
                                               Text(
                                                 state
                                                     .upcomingPastAppointmentModel
-                                                    .cancelled[index]
-                                                    .service
-                                                    ,
+                                                    .confirmed[index]
+                                                    .service,
                                                 style: TextStyle(fontSize: 14),
                                               ),
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              const Text(
-                                                '1357 Muno Manor',
+                                              Text(
+                                                '${state.upcomingPastAppointmentModel.confirmed[index].state.toString()}${state.upcomingPastAppointmentModel.confirmed[index].city.toString()}',
                                                 style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 12),
                                               ),
                                               Text(
-                                                'Austin,Tx 75923',
+                                                '${state.upcomingPastAppointmentModel.confirmed[index].zipCode.toString()}',
                                                 style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 12),
@@ -293,18 +272,22 @@ class _UpcomingAppointmentCalenderState
                                               height: 36,
                                             ),
                                             Text(
-                                              '',
-                                              //state.getProviderRequestModel.appointmentRequests[index].bookingDate.toString(),
+                                              "${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.month.toString().padLeft(2, '0')}-${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.day.toString().padLeft(2, '0')}-${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.year.toString().padLeft(2, '0')}",
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 12),
                                             ),
                                             Text(
-                                              '',
+                                              state
+                                                  .upcomingPastAppointmentModel
+                                                  .cancelled[index]
+                                                  .bookingStartTime
+                                                  .toString(),
+
                                               //   state.getProviderRequestModel.appointmentRequests[index]
                                               style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.bold),
+                                                  color: Colors.grey,
+                                                  fontSize: 12),
                                             ),
                                           ],
                                         ),
@@ -354,6 +337,6 @@ class _UpcomingAppointmentCalenderState
     return Card(
         elevation: 14,
         child:
-        Container(padding: EdgeInsets.all(2), child: Text('${date.day}')));
+            Container(padding: EdgeInsets.all(2), child: Text('${date.day}')));
   }
 }

@@ -36,6 +36,12 @@ class BookRegisterSuccess extends BookAppointmentState {
 
 
 }
+class CancelbookedProviderButtonTapped extends BookAppointmentState{
+  CancelbookedProviderButtonTapped() : super();
+
+  @override
+  String toString() => "BookRegisterSuccess";
+}
 class GGetDeclineRequestData extends BookAppointmentState {
   GGetDeclineRequestData(this.upcomingPastAppointmentModel) : super();
 final GetAllAppointmentProvider upcomingPastAppointmentModel;

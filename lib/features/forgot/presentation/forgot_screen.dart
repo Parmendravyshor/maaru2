@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/theme/style.dart';
@@ -94,24 +95,27 @@ class ResetWidget extends State<ResetPasswordScreen> {
                                     SizedBox(
                                       height: size.height * 0.10,
                                     ),
-                                    Text(
-                                      'Forgot Your Password?',
-                                      style: MaaruStyle.text.large,
-                                    ),
+
                                     SizedBox(
                                       height: size.height * 0.02,
                                     ),
-                                    Text(
-                                      'Enter your registered email below\nto receive password reset instruction'
-                                          .toUpperCase(),
-                                      style: MaaruStyle.text.greyDisable,
-                                      textAlign: TextAlign.center,
-                                    ),
+
                                     Align(
                                         alignment: Alignment.center,
                                         child: Logo()),
                                     SizedBox(
                                       height: size.height * 0.01,
+                                    ),
+                                    Padding(
+                                      padding:EdgeInsets.only(left: 20,bottom: 10),
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+
+                                        child: Text(
+                                          'Forgot Your Password?',
+                                          style: MaaruStyle.text.large,
+                                        ),
+                                      ),
                                     ),
                                     ThemedTextField(
                                         "EMAIL", TextInputType.emailAddress,

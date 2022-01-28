@@ -4,7 +4,9 @@ import 'package:maru/core/constant/constant.dart';
 import 'package:maru/features/Account_setting/domain/usecases/do_payment.dart';
 import 'package:maru/features/Account_setting/domain/usecases/get_user_payment.dart';
 import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.dart';
+import 'package:maru/features/Account_setting/presentation/bloc/setting_bloc.dart';
 import 'package:maru/features/Account_setting/presentation/payment/bloc/payment_bloc.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/book_provider_cancel.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
@@ -93,12 +95,19 @@ void _registerBloc(KiwiContainer container) {
       c.resolve(), c.resolve(), c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory((c) => ProviderHomeBloc(c.resolve(),c.resolve(),c.resolve()));
   container.registerFactory(
-      (c) => BookAppointmentBloc(c.resolve(), c.resolve(), c.resolve(),c.resolve()));
+      (c) => BookAppointmentBloc(c.resolve(), c.resolve(), c.resolve(),c.resolve(),c.resolve()));
   container.registerFactory((c) => ChatBloc(
         c.resolve(),
         c.resolve(),
         c.resolve(),
       ));
+  //container.registerFactory(
+     //     (c) => BookAppointmentBloc(c.resolve(), c.resolve(), c.resolve(),c.resolve(),c.resolve()));
+  container.registerFactory((c) => SettingBloc(
+    c.resolve(),
+    c.resolve(),
+
+  ));
 }
 
 void _registerUseCases(KiwiContainer container) {
@@ -133,6 +142,7 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => AcceptRequest(c.resolve()));
   container.registerFactory((c) => DeclineRequest(c.resolve()));
   container.registerFactory((c) => GetUpcomingPastAndDeclineAppointment(c.resolve()));
+  container.registerFactory((c) => BookProviderCancel(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 

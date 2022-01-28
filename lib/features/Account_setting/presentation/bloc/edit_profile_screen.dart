@@ -32,13 +32,13 @@ class _CreateUserProfileState extends State<CreateUserProfile>
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
-  TextEditingController _fnameController;
-  TextEditingController _lnameController;
-  TextEditingController _cityController;
-  TextEditingController _stateController;
-  TextEditingController _emailController;
-  TextEditingController _zipCodeController;
-  TextEditingController _mobileController;
+  TextEditingController _fnameController = TextEditingController();
+  TextEditingController _lnameController = TextEditingController();
+  TextEditingController _cityController = TextEditingController();
+  TextEditingController _stateController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _zipCodeController = TextEditingController();
+  TextEditingController _mobileController = TextEditingController();
 
   @override
   void initState() {
@@ -84,11 +84,13 @@ class _CreateUserProfileState extends State<CreateUserProfile>
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
+      create: (context) => KiwiContainer().resolve<SettingBloc>(),
       child: Scaffold(
         backgroundColor: Colors.grey[360],
-        body: BlocBuilder<PetProfileBloc, PetProfileState>(
-            builder: (context, state) {
+        body: BlocBuilder<SettingBloc, SettingState>(builder: (context, state) {
+          if (state is saveUserProfileSuccess) {
+            AlertManager.showErrorMessage('Profile Updated Successfull', context);
+          }
           try {
             Navigator.of(_keyLoader.currentContext, rootNavigator: true);
             //    Navigator.of(context).pop();
@@ -136,9 +138,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                 ],
               ),
               Padding(
-                  padding: EdgeInsets.only(
-                    top: 160.0,bottom: 10
-                  ),
+                  padding: EdgeInsets.only(top: 160.0, bottom: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -155,7 +155,8 @@ class _CreateUserProfileState extends State<CreateUserProfile>
               height: 800,
               alignment: FractionalOffset.bottomCenter,
               decoration: BoxDecoration(
-                  color: Colors.white, ),
+                color: Colors.white,
+              ),
               child: Container(
                 padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
                 child: Column(
@@ -263,8 +264,6 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                       ),
                       ThemedButton(
                         onPressed: () {
-                          Dialogs.showLoadingDialog(
-                              context, _keyLoader, "Updating profile..");
                           BlocProvider.of<SettingBloc>(context)
                               .add(RegisterUser(
                             _fnameController.text,

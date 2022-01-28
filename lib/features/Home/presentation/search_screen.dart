@@ -160,11 +160,11 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                               children: [
                                 Column(children: [
                                   InkWell(
-                                    onTap:(){
+                                    onTap:()async{
 
-                                      setState(() {
+                                      setState(() async {
                                         if (mounted) {}
-                                        Navigator.of(context)
+                                       await Navigator.of(context)
                                             .push(MaterialPageRoute(
                                           builder: (context) =>
                                               BookAppointment1(id1:state.getProviderModel.providersListing[index].id),

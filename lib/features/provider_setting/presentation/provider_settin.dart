@@ -201,45 +201,64 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                   children: [
                                     Expanded(
                                         child: Padding(
-                                            padding: EdgeInsets.only(right: 30),
+                                            padding:
+                                            EdgeInsets.only(right: 30),
                                             child: Container(
                                                 height: 60,
                                                 width: 400,
                                                 decoration: BoxDecoration(
-                                                  color: Colors.grey[300],
+                                                  color:
+                                                  const Color(0xfff7f7f7),
                                                   borderRadius:
-                                                  BorderRadius.circular(10.0),
+                                                  BorderRadius.circular(
+                                                      10.0),
                                                 ),
-                                                alignment: Alignment.centerLeft,
-                                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                alignment:
+                                                Alignment.centerLeft,
+                                                child: Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                     children: [
-                                                  Image.asset(
-                                                    'assets/icons/icone-setting-5.png',
-                                                    height: 40,
-                                                  ),
-                                                  Text(
-                                                    'Email Notification',
-                                                    style: MaaruStyle.text.tiniest,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 33,
-                                                  ),
-                                                  Switch(
-                                                    activeColor: MaaruColors
-                                                        .buttonTextColor,
-                                                    inactiveThumbColor:
-                                                    MaaruColors
-                                                        .buttonTextColor,
-                                                    // title: Text("Do you want to update your price?"),
-                                                    // controlAffinity: ListTileControlAffinity.leading,
-                                                    value: update,
-                                                    onChanged: (Update) {
-                                                      setState(() {
-                                                        update = Update;
-                                                      });
-                                                    },
-                                                  ),
-                                                ]))))
+                                                      Image.asset(
+                                                        'assets/icons/icone-setting-5.png',
+                                                        height: 40,
+                                                      ),
+                                                      Text(
+                                                        'Email Notification'.toUpperCase(),
+                                                        style: MaaruStyle
+                                                            .text.tiny,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 35,
+                                                      ),
+                                                      Align(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        // child: Transform.scale(
+                                                        //   scale: 1.2,
+                                                        child: Switch(
+                                                          activeColor:
+                                                          MaaruColors
+                                                              .buttonColor,
+                                                          inactiveThumbColor:
+                                                          MaaruColors
+                                                              .buttonColor,
+                                                          // title: Text("Do you want to update your price?"),
+                                                          // controlAffinity: ListTileControlAffinity.leading,
+                                                          value:
+                                                          priceupdate_value,
+                                                          onChanged: (bool
+                                                          priceupdateValue) {
+                                                            setState(() {
+                                                              priceupdate_value =
+                                                                  priceupdateValue;
+                                                              print(priceupdateValue);
+                                                            });
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ]))))
                                   ]),
                               SizedBox(
                                 height: 20,

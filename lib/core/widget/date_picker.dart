@@ -471,8 +471,8 @@ class _AppointmentsState extends State<Appointments>
         selectedDayBuilder: (context, date, _) {
            var date2 = '${date.month.toString()}-${date.day.toString().padLeft(2, '0')}-${date.year.toString().padLeft(2, '0')}';
           print(date2);
-          BlocProvider.of<BookAppointmentBloc>(context)
-              .add(dateChanged(date2.toString(),''));
+          // BlocProvider.of<BookAppointmentBloc>(context)
+            //   .add(DeclineRequestChanged('',date2));
           return FadeTransition(
             opacity: Tween(begin: 0.0, end: 1.0).animate(animationController),
             child: Container(
@@ -481,7 +481,7 @@ class _AppointmentsState extends State<Appointments>
               decoration: BoxDecoration(
                   color: MaaruColors.blueColor,
                   borderRadius: BorderRadius.circular(36.0),
-                  border: Border.all(width: 2, color: MaaruColors.blueColor)),
+                  border: Border.all(width: 2, color: MaaruColors.whiteColor)),
               child: Text(
                 '${date.day}',
 
@@ -498,14 +498,15 @@ class _AppointmentsState extends State<Appointments>
         todayDayBuilder: (context, date, _) {
           var date1 = '${date.month.toString()}-${date.day.toString().padLeft(2, '0')}-${date.year.toString().padLeft(2, '0')}';
           print(date1);
-
+          BlocProvider.of<BookAppointmentBloc>(context)
+              .add(DeclineRequestChanged('',date1));
           return Container(
               margin: const EdgeInsets.all(4.0),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: MaaruColors.blueColor,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(36.0),
-                  border: Border.all(width: 2, color: MaaruColors.blueColor)),
+                  border: Border.all(width: 2, color: Colors.grey[100])),
               child: Text('${date.day}', style: MaaruStyle.text.greyDisable
                   //   TextStyle().copyWith(
                   //       fontSize: 20.0,

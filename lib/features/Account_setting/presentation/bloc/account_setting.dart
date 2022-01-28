@@ -201,28 +201,28 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                 ),
                                 Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                           child: Padding(
                                               padding:
-                                                  const EdgeInsets.only(right: 30),
+                                              EdgeInsets.only(right: 30),
                                               child: Container(
                                                   height: 60,
                                                   width: 400,
                                                   decoration: BoxDecoration(
                                                     color:
-                                                     const  Color(0xfff7f7f7),
+                                                    const Color(0xfff7f7f7),
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
+                                                    BorderRadius.circular(
+                                                        10.0),
                                                   ),
                                                   alignment:
-                                                      Alignment.centerLeft,
+                                                  Alignment.centerLeft,
                                                   child: Row(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                       children: [
                                                         Image.asset(
                                                           'assets/icons/icone-setting-5.png',
@@ -233,25 +233,34 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                           style: MaaruStyle
                                                               .text.tiny,
                                                         ),
-                                                        const SizedBox(
-                                                          width: 33,
+                                                        SizedBox(
+                                                          width: 35,
                                                         ),
-                                                        Switch(
-                                                          activeColor:
-                                                              MaaruColors
-                                                                  .buttonColor,
-                                                          inactiveThumbColor:
-                                                              MaaruColors
-                                                                  .buttonColor,
-                                                          // title: Text("Do you want to update your price?"),
-                                                          // controlAffinity: ListTileControlAffinity.leading,
-                                                          value: update,
-                                                          onChanged:
-                                                              (bool Update) {
-                                                            setState(() {
-                                                              update = Update;
-                                                            });
-                                                          },
+                                                        Align(
+                                                          alignment: Alignment
+                                                              .centerLeft,
+                                                          // child: Transform.scale(
+                                                          //   scale: 1.2,
+                                                          child: Switch(
+                                                            activeColor:
+                                                            MaaruColors
+                                                                .buttonColor,
+                                                            inactiveThumbColor:
+                                                            MaaruColors
+                                                                .buttonColor,
+                                                            // title: Text("Do you want to update your price?"),
+                                                            // controlAffinity: ListTileControlAffinity.leading,
+                                                            value:
+                                                            priceupdate_value,
+                                                            onChanged: (bool
+                                                            priceupdateValue) {
+                                                              setState(() {
+                                                                priceupdate_value =
+                                                                    priceupdateValue;
+                                                                print(priceupdateValue);
+                                                              });
+                                                            },
+                                                          ),
                                                         ),
                                                       ]))))
                                     ]),

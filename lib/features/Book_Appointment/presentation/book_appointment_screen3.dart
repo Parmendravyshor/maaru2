@@ -249,9 +249,11 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
       ),
       builders: CalendarBuilders(
         selectedDayBuilder: (context, date, _) {
-          date2 =
-              'singh${date.month.toString()}-${date.day.toString().padLeft(2, '0')}-${date.year.toString().padLeft(2, '0')}';
-          print(date2);
+          date1 =
+          '${date.month.toString()}-${date.day.toString().padLeft(2, '0')}-${date.year.toString().padLeft(2, '0')}';
+          print('gfgffhjgfhj${date1}');
+          BlocProvider.of<BookAppointmentBloc>(context)
+              .add(dateChanged(date1.toString(), ''));
 
           return FadeTransition(
             opacity: Tween(begin: 0.0, end: 1.0).animate(animationController),
@@ -351,9 +353,10 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
             builder: (context, state) {
           if (state is BookRegisterSuccess) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
+              AlertManager.showErrorMessage('Appointment Booked Successful', context);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return BookedConfirm();
+                return BookedConfirm(id1: widget.id3);
               }));
             });
             return Container();
@@ -363,7 +366,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                 Scaffold.of(context).showSnackBar(
                   SnackBar(
                     backgroundColor: Colors.black,
-                    content: Text(state.errorMessage,
+                    content: Text('Slot are Booked Change time or date',
                         style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontFamily: 'poppins',
@@ -1389,6 +1392,9 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                           },
                                           text: 'Book Appointment',
                                         ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
                                         state is BookRegisterInProgress
                                             ? Center(
                                             child: Container(
@@ -1401,8 +1407,17 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                       ],
                                     )),
                                 SizedBox(
-                                  height: 100,
+                                  height: 50,
                                 ),
+                                state is BookRegisterInProgress
+                                    ? Center(
+                                    child: Container(
+                                      margin: EdgeInsets.only(bottom: 10),
+                                      width: 40,
+                                      height: 40,
+                                      child: CircularProgressIndicator(),
+                                    ))
+                                    : Container(),
                               ],
                             ));
                       }

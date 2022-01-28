@@ -48,6 +48,15 @@ class CardNumberChanged extends BookAppointmentEvent {
     return 'CardNumberChanged';
   }
 }
+class CancelbookedProvider extends BookAppointmentEvent {
+  final String id1;
+  CancelbookedProvider(this.id1);
+  @override
+  String toString() {
+    // TODO: implement toString
+    return 'CardNumberChanged';
+  }
+}
 
 class ExpDateChanged extends BookAppointmentEvent {
   final String expDate;

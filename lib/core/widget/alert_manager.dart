@@ -61,7 +61,7 @@ class AlertManager {
           reverseAnimation: StyledToastAnimation.slideToBottomFade,
           dismissOtherToast: true,
 
-          duration: Duration(seconds:3));
+          duration: const Duration(seconds:3));
     });
 
   }

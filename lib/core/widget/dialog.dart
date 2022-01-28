@@ -11,6 +11,7 @@ class Dialogs {
     });
     return
       showDialog<void>(
+
           context: context,
           barrierDismissible: false,
           builder: (BuildContext context) {
@@ -18,6 +19,7 @@ class Dialogs {
                 onWillPop: () async => false,
                 child: SimpleDialog(
                     key: key,
+
                     backgroundColor: Colors.black54,
                     children: <Widget>[
                       Center(

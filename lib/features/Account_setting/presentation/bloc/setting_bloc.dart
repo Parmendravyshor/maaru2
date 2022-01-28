@@ -17,7 +17,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
 
   @override
   // TODO: implement initialState
-  SettingState get initialState => throw UnimplementedError();
+  SettingState get initialState => SettingInitial();
 
   @override
   Stream<SettingState> mapEventToState(SettingEvent event) async* {
@@ -34,9 +34,6 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       );
       final result = await saveUserProfile(profileParams);
       if (result.isRight()) {
-        yield saveUserProfileSuccess();
-        print("profileeee saveddd");
-      } else {
         yield saveUserProfileSuccess();
       }
     }

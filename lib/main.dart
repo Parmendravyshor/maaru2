@@ -19,6 +19,7 @@ import 'dart:typed_data';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
+import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
     as event;
 import 'package:geocoding/geocoding.dart';
@@ -49,6 +50,7 @@ import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'core/theme/maaru_style.dart';
 import 'core/utils.dart';
 import 'features/Account_setting/presentation/bloc/edit_profile_screen.dart';
+import 'features/Book_Appointment/presentation/booked_confirm.dart';
 import 'features/Home/presentation/pet_profile.dart';
 import 'features/Home/presentation/search_screen.dart';
 import 'features/chat/presentation/chatt_screen.dart';
@@ -73,7 +75,7 @@ void main() async {
 
 // Dart client
     socket.on('connect', (_) {
-      print('connect');
+      print('ss${socket.id}');
     });
     socket.on('event', (data) => print(data));
     socket.on('disconnect', (_) => print('disconnect'));
@@ -158,7 +160,7 @@ class MyApp extends StatelessWidget {
         //todo: navigate to SplashScreen
 //TODO:need to putup scrooll pagination vie
 // w on the buttom (Provider search screen)
-        home: Scaffold(body: (LoginScreen())));
+        home: Scaffold(body: (SplashScreen())));
   }
 }
 
@@ -183,7 +185,7 @@ class _HomePage4State extends State<HomePage4> {
             alignment: Alignment.center,
             children: [
               Image.network('https://bit.ly/2VcCSow'),
-              Text(
+              const Text(
                 'Summer 😎',
                 style: TextStyle(
                   fontSize: 30,

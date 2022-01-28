@@ -79,9 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     KiwiContainer().resolve<BookAppointmentBloc>(),
                                 child: BlocBuilder<BookAppointmentBloc, BookAppointmentState>(
                                     builder: (context, state) {
-                                  if (state is LoginInitial) {
+                                  if (state is BookAppointmentInitial) {
                                     String text;
-                                    BlocProvider.of<BookAppointmentBloc>(context).add(
+                                   BlocProvider.of<BookAppointmentBloc>(context).add(
                                         UpcomingAppointmentChanged(
                                           text,text
                                           ));
@@ -89,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     return CircularProgressIndicator();
                                   } else if (state
                                       is FetchUpcomingAppointmentModelData) {
+                                    print(state.upcomingPastAppointmentModel.upcomingBookings.length);
                                     return ListView.builder(
                                         scrollDirection: Axis.vertical,
                                         shrinkWrap: true,
@@ -236,6 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ),
                                                         )
                                                       ]))));
+
                                         });
                                   } else {
                                     return const CircularProgressIndicator();

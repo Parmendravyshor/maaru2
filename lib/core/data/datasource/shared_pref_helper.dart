@@ -18,7 +18,7 @@ abstract class SharedPrefHelper {
   Future<void> savePayload(String payload);
   Future<void> saveExpiryTime(String expiryTime);
   Future<void> saveString(String key, String value);
-  Future <bool> saveStringList(var key, List<int> value);
+  Future <void> saveStringList(var key, List<int> value);
   Future<void> saveBoolean(String key, bool value);
   Future<void> saveInt(String key, int value);
   Future <void>saveImage(List<int> imageBytes);
@@ -34,6 +34,7 @@ abstract class SharedPrefHelper {
   String getExpiryTime();
   double getDouble(String key, double defaultValue);
   String getStringByKey(String key, String defaultValue);
+  void getList(String key, List<int> value);
   bool isLoggedin();
   bool getBoolByKey(String key, bool defaultValue);
   int getIntByKey(String key, int defaultValue);
@@ -190,13 +191,19 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
 
   @override
   List<String> getStringList(String key) {
-    sharedPreferences.getString(key);
+    sharedPreferences.getStringList(key);
   }
 
 
   @override
   Future<bool> saveStringList(var key, List<int> value) {
  sharedPreferences.setString(key, value.toString());
+  }
+
+  @override
+  bool getList(String key, List<int> value) {
+    // TODO: implement getList
+    sharedPreferences.getStringList(key);
   }
 
 

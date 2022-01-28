@@ -328,7 +328,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                   ),
                                   Text(
                                       state.welcome4.providerDetails.provider
-                                          .description,
+                                          .description.toString(),
                                       style: MaaruStyle.text.greyDisable),
                                   const SizedBox(
                                     height: 20,

@@ -172,12 +172,12 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                 children: [
                                   Text(
                                       _prefHelper.getStringByKey(
-                                          MaruConstant.firstName, ''),
+                                          MaruConstant.petName, ''),
                                       style: MaaruStyle.text.large,
                                       textAlign: TextAlign.left),
                                   Text(
                                     _prefHelper.getStringByKey(
-                                        MaruConstant.lastName, ''),
+                                        MaruConstant.breedType, ''),
                                     style: MaaruStyle.text.tiny,
                                   ),
                                   const SizedBox(
