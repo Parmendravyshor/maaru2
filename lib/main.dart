@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:geocoder/geocoder.dart';
@@ -24,7 +25,6 @@ import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
     as event;
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocation/geolocation.dart' as geolocation;
-
 import 'package:geolocation/geolocation.dart';
 import 'package:geolocator/geolocator.dart' as geolocator;
 import 'package:geolocator/geolocator.dart';
@@ -46,6 +46,7 @@ import 'package:maru/features/verify/presentation/register_pet_profile_screen3.d
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
+import 'package:wifi_configuration_2/wifi_configuration_2.dart';
 
 import 'core/theme/maaru_style.dart';
 import 'core/utils.dart';
@@ -53,12 +54,12 @@ import 'features/Account_setting/presentation/bloc/edit_profile_screen.dart';
 import 'features/Book_Appointment/presentation/booked_confirm.dart';
 import 'features/Home/presentation/pet_profile.dart';
 import 'features/Home/presentation/search_screen.dart';
+import 'features/chat/domain/entity/mesage.dart';
 import 'features/chat/presentation/chatt_screen.dart';
 import 'features/forgot/presentation/forgot_screen.dart';
 import 'features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
-
 import 'features/provider_home/presentation/upcoming_appointment_calender.dart';
 import 'features/provider_register/presentation/provider_register.dart';
 

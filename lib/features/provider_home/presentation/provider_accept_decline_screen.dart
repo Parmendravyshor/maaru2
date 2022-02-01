@@ -35,19 +35,18 @@ class _TestAppState extends State<TestApp> {
         firstDate: DateTime(2000),
         lastDate: DateTime(2040),
         builder: (BuildContext context, Widget child) {
-          return Expanded(
-              child: Theme(
+          return Theme(
             data: ThemeData.dark().copyWith(
-              colorScheme: ColorScheme.dark(
-                primary: Colors.deepPurple,
-                onPrimary: Colors.white,
-                surface: Colors.blueGrey,
-                onSurface: Colors.yellow,
-              ),
-              dialogBackgroundColor: Colors.blue[500],
+          colorScheme: ColorScheme.dark(
+            primary: Colors.deepPurple,
+            onPrimary: Colors.white,
+            surface: Colors.blueGrey,
+            onSurface: Colors.yellow,
+          ),
+          dialogBackgroundColor: Colors.blue[500],
             ),
             child: child,
-          ));
+          );
         });
 
     if (newSelectedDate != null) {

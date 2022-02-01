@@ -22,13 +22,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.0"
-  asn1lib:
-    dependency: transitive
-    description:
-      name: asn1lib
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.3"
   async:
     dependency: transitive
     description:
@@ -211,27 +204,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.6"
-  dio:
-    dependency: "direct main"
-    description:
-      name: dio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.4"
-  encrypt:
-    dependency: transitive
-    description:
-      name: encrypt
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.1"
-  encrypted_shared_preferences:
-    dependency: "direct main"
-    description:
-      name: encrypted_shared_preferences
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   equatable:
     dependency: "direct main"
     description:
@@ -349,6 +321,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
+  flutter_chat_bubble:
+    dependency: "direct main"
+    description:
+      name: flutter_chat_bubble
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   flutter_facebook_login:
     dependency: "direct main"
     description:
@@ -659,7 +638,7 @@ packages:
     source: hosted
     version: "0.7.3"
   json_annotation:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: json_annotation
       url: "https://pub.dartlang.org"
@@ -840,13 +819,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
-  pointycastle:
-    dependency: transitive
-    description:
-      name: pointycastle
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.4.0"
   pool:
     dependency: transitive
     description:
@@ -1160,6 +1132,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.7.1"
+  wifi_configuration_2:
+    dependency: "direct main"
+    description:
+      name: wifi_configuration_2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.2+1"
   win32:
     dependency: transitive
     description:

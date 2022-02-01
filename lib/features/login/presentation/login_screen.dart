@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
@@ -15,6 +16,7 @@ import 'package:maru/features/Book_Appointment/presentation/book_appointment_scr
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/Home/presentation/search_screen.dart';
+import 'package:maru/features/chat/presentation/chatt_screen.dart';
 import 'package:maru/features/forgot/presentation/forgot_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
@@ -35,6 +37,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   TextEditingController _passwordController;
   TextEditingController _emailController;
   int count = 0;
@@ -43,6 +46,12 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     _passwordController = TextEditingController();
     _emailController = TextEditingController();
+    var id1 = _prefHelper.getStringByKey('pet_name', '');
+    if(id1.isNotEmpty){
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+              (route) => false);
+    }
     super.initState();
   }
 

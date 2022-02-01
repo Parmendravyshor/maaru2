@@ -868,7 +868,6 @@ else{
       print(e);
     }
   }
-
   @override
   Future<Either<Failure, void>> bookProvider(BookProviderParams params) async {
     try {

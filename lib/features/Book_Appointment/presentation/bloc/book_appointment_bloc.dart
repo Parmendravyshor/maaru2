@@ -164,8 +164,9 @@ class BookAppointmentBloc
       }
     } else if (event is BookRegisterButtonTapped) {
       yield BookRegisterInProgress();
-      print('check card ${pet_id}');
-      final result = await bookProvider(BookProviderParams(
+       print('check card $pet_id');
+      final result = await bookProvider(
+          BookProviderParams(
           pet_id: pet_id,
           provider_id: provider_id,
           booking_date: booking_date,
@@ -224,6 +225,6 @@ class BookAppointmentBloc
         provider_id.isNotEmpty &&
         booking_date.isNotEmpty &&
         service_id.isNotEmpty &&
-        bookingtime;
+        bookingtime.isNotEmpty;
   }
 }

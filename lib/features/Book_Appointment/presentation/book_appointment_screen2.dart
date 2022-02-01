@@ -56,10 +56,18 @@ class _BookAppointment2State extends State<BookAppointment2> {
                               children: [
                                 Flex(direction: Axis.vertical, children: [
                                   Container(
-                                    color: Colors.red,
+                                    height: 200,
+                                    width: 500,
                                     child: Image.network(
                                       state.welcome4.providerDetails.provider.img,
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fitWidth,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return Container(
+                                            color: Colors.amber,
+                                            alignment: Alignment.bottomCenter,
+                                            child:
+                                            Image.asset('assets/images/kutta.png'));
+                                      },
                                     ),
                                   ),
                                   Container(
@@ -307,7 +315,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                   Navigator.of(context).push(
                                                       MaterialPageRoute(
                                                           builder: (_) =>
-                                                              BookAppointmentScreen3()));
+                                                              BookAppointmentScreen3(id3: widget.id2,)));
                                                 },
                                                 enabled: true,
                                               ),

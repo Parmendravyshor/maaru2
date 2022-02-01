@@ -106,14 +106,14 @@ class _BookAppointment1State extends State<BookAppointment1> {
                         children: [
                           Container(
                             height: 200,
-                            width: 400,
+                            width: 500,
                             child: Image.network(
                               state.welcome4.providerDetails.provider.img,
                               fit: BoxFit.fitWidth,
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
                                     color: Colors.amber,
-                                    alignment: Alignment.center,
+                                    alignment: Alignment.bottomCenter,
                                     child:
                                     Image.asset('assets/images/kutta.png'));
                               },
@@ -374,7 +374,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (_) =>
-                                                  BookAppointmentScreen3()));
+                                                  BookAppointmentScreen3(id3: widget.id1,)));
                                     },
                                     text: ' Book Appointments'.toUpperCase(),
                                     enabled: true,

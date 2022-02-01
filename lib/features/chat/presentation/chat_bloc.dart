@@ -58,22 +58,20 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       print('kkk${e.toString()}');
     }
   }
-
   int tried = 0;
   bool isFromException = false;
-  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
   @override
   Stream<ChatState> mapEventToState(ChatEvent event) async* {
     if (event is ChatOpened) {
       var maps;
       messageList = List.generate(maps.length, (i) {
         return Message(
-          message:maps[i]['message'],
-          messageType: maps[i]['messageType'],
-          senderId: maps[i]['senderId'],
-          receiverId: maps[i]['receiverId'],
-        );
-      });
+              message:maps[i]['message'],
+              messageType: maps[i]['messageType'],
+              senderId: maps[i]['senderId'],
+              receiverId: maps[i]['receiverId']
+        );});
 
       yield ChatSendSuccess(messageList);
     } else if (event is ChatMessageSent) {
@@ -85,11 +83,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         final sentMessage = Message(
           message :event.message,
           messageType: event.mesageType,
-          senderId: event.userid,
+          senderId:4,
           receiverId: event.userid2,
         );
         messageList.add(sentMessage);
-        _socket.emit('send_message',sentMessage);
+    //    _socket.emit('send_message',sentMessage);
         yield ChatSendInProgress(messageList);
       }
 
@@ -105,57 +103,60 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       }
 
       try {
-        final response = await getData(
-            event.message,
-            _prefHelper.getStringByKey(
-              MaruConstant.token,
-              "",
-            ));
-        if (response.statusCode == 200) {
-          try {
-            var jsonResponse = convert.jsonDecode(response.body);
-            var body = convert.jsonDecode(jsonResponse['body']);
-            var message = body['Answer'];
+        _socket.emit('get_message',{
+          'userId':29
+        });
             final receivedMessage = Message(
-              receiverId: message,
+              receiverId: 4,
+              senderId: 0,
 
             );
             messageList.add(receivedMessage);
-
+        _socket.on('connect_listener', (Message) => {
+         // getChatt()
+        });
             yield ChatSendSuccess(messageList);
           } catch (e) {}
-        } else {
-          if (tried % 3 != 0) {
-            isFromException = true;
-            add(event);
-          }
-        }
-      } catch (e) {
+
         print('result exception ${e.toString()}');
       }
     }
-  }
 
   @override
   // TODO: implement initialState
   ChatState get initialState => ChatSendInitial();
-}
+  }
 
-SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
-Future<http.Response> getData(String question, String jwtToken) {
-  final token = _prefHelper.getStringByKey(
-    MaruConstant.token,
-    "",
-  );
 
-  var headers = {"access-token": token};
-  return http
-      .get(Uri.parse('http://18.191.199.31/api/chat/get-chats/5'),
-          headers: headers
-          // body: jsonEncode(
-          //     <String, String>{"utterance": question, "jwttoken": jwtToken}),
-          )
-      .timeout(Duration(seconds: 30), onTimeout: () {
-    throw TimeoutException("timeout occurred");
-  });
-}
+
+// let data = {
+//   "userId" : info.id
+// };
+// socket.current.emit('connect_user', data);
+// socket.current.on("connect_listener",function(data){
+//   getChat();
+//   console.log(data, '============>data in connect_listener');
+// });
+// const getChat = () => {
+// socket.current.emit('get_chat', {
+// userId : userId,
+// user2Id : currentChat ? currentChat.id : '',
+// });
+//
+// socket.current.on("my_chat", (chat) => {
+// if(chat){
+// setConversations(chat);
+// }
+// });
+// };
+// const handleSubmit = async (e) => {
+// e.preventDefault();
+// //send_messages
+// socket.current.emit('send_messages',  {
+// userId : userId,
+// user2Id : currentChat ? currentChat.id : '',
+// message :newMessage,
+// messageType :'0',
+// });
+// setNewMessage("");
+// };
