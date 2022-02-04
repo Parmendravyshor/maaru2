@@ -29,6 +29,10 @@ final DeclineRequest _declineRequest;
         date: event.date,
         provider: event.provider,
       ));
+      print('tonmer1${event.name}');
+      print('tonmer2${event.service}');
+      print('tonmer1${event.date}');
+      print('tonmer1${event.provider}');
       if (result.isRight()) {
         yield RequestLoaded(result.getOrElse(() => null));
       }

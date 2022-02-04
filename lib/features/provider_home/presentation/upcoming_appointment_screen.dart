@@ -181,8 +181,9 @@ class _UpcomingAppointmentCalender1State
                                   physics: ScrollPhysics(),
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
+                                  reverse: true,
                                   itemCount: state.upcomingPastAppointmentModel
-                                      .cancelled.length,
+                                      .confirmed.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Padding(
@@ -198,7 +199,7 @@ class _UpcomingAppointmentCalender1State
                                         height: size.height * 0.18,
                                         width: 360,
                                         child: Container(
-                                          padding: EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                               left: 12, right: 12, top: 12),
                                           child: Column(
                                             children: [

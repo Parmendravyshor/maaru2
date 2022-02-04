@@ -4,7 +4,8 @@ abstract class SettingState {}
 
 class SettingInitial extends SettingState {}
 class saveUserProfileSuccess extends SettingState{
-  saveUserProfileSuccess():super();
+  final String text;
+  saveUserProfileSuccess(this.text):super();
   @override
   String toString() {
     // TODO: implement toString
@@ -17,10 +18,23 @@ class saveUserProfileFailure extends SettingState{
   String toString() =>'saveUserProfileFailure';
 
 }
+class saveUserProfileLoading extends SettingState{
+  saveUserProfileLoading():super();
+  @override
+  String toString() =>'saveUserProfileLoading';
+
+}
 class UserChangePasswordButtonTapped extends SettingState {
   UserChangePasswordButtonTapped() : super();
 
   @override
   String toString() => "UserPetProfileButtonTapped";
+
+}
+class UserChangePasswordButtonTappedFailure extends SettingState {
+  UserChangePasswordButtonTappedFailure() : super();
+
+  @override
+  String toString() => "UserChangePasswordButtonTappedFailure";
 
 }

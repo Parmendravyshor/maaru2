@@ -34,8 +34,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -75,34 +73,39 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )),
                             Center(
                               child: BlocProvider(
-                                create: (context) =>
-                                    KiwiContainer().resolve<BookAppointmentBloc>(),
-                                child: BlocBuilder<BookAppointmentBloc, BookAppointmentState>(
+                                create: (context) => KiwiContainer()
+                                    .resolve<BookAppointmentBloc>(),
+                                child: BlocBuilder<BookAppointmentBloc,
+                                        BookAppointmentState>(
                                     builder: (context, state) {
                                   if (state is BookAppointmentInitial) {
-                                    String text;
-                                   BlocProvider.of<BookAppointmentBloc>(context).add(
-                                        UpcomingAppointmentChanged(
-                                          text,text
-                                          ));
-                                    print('figffgfg${text}');
+
+                                    BlocProvider.of<BookAppointmentBloc>(
+                                            context)
+                                        .add(UpcomingAppointmentChanged(
+                                            '', '')
+                                    );
+                                    print('figffgfg123');
                                     return CircularProgressIndicator();
                                   } else if (state
                                       is FetchUpcomingAppointmentModelData) {
-                                    print(state.upcomingPastAppointmentModel.upcomingBookings.length);
+                                    print('ssss ${state.upcomingPastAppointmentModel
+                                        .upcomingBookings.length}');
                                     return ListView.builder(
                                         scrollDirection: Axis.vertical,
+                                        physics: const ScrollPhysics(),
                                         shrinkWrap: true,
+                                        reverse: true,
                                         itemCount: state
                                             .upcomingPastAppointmentModel
                                             .upcomingBookings
                                             .length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
+                                        itemBuilder: (BuildContext context,
+                                            int index) {
                                           return Padding(
                                               padding:
                                                   const EdgeInsets.fromLTRB(
-                                                      10, 20, 20, 20),
+                                                      10, 20, 20, 10),
                                               child: Container(
                                                   //  height: size.height*0.30,
                                                   width: size.width * 1,
@@ -111,9 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           color: MaaruColors
                                                               .textfeildline)),
                                                   child: Container(
-                                                      margin:
-                                                          const EdgeInsets.all(
-                                                              10),
+                                                      margin: const EdgeInsets
+                                                          .all(10),
                                                       child: Row(children: [
                                                         Expanded(
                                                             child: Container(
@@ -124,7 +126,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 BorderRadius
                                                                     .circular(
                                                                         20),
-                                                            color: Colors.white,
+                                                            color:
+                                                                Colors.white,
                                                           ),
                                                           child: Image.asset(
                                                             'assets/images/kutta.png',
@@ -237,7 +240,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ),
                                                         )
                                                       ]))));
-
                                         });
                                   } else {
                                     return const CircularProgressIndicator();
@@ -430,7 +432,8 @@ class _HorizListState extends State<HorizList> {
                                     onTap: () {
                                       setState(() {
                                         BlocProvider.of<PetProfileBloc>(context)
-                                            .add(GetCovidList(_petNameController.text));
+                                            .add(GetCovidList(
+                                                _petNameController.text));
                                       });
                                     },
                                     child: Image.asset(
@@ -454,8 +457,11 @@ class _HorizListState extends State<HorizList> {
                       Container(
                           height: size.height * 0.27,
                           child: ListView.builder(
+
                               itemCount: state.covidModel.petProfiles.length,
                               scrollDirection: Axis.horizontal,
+
+                              reverse: true,
                               itemBuilder: (context, index) {
                                 return Padding(
                                     padding: index == Message.length - 1

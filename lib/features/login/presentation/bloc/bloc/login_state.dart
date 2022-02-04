@@ -1,4 +1,5 @@
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
+import 'package:maru/features/provider_home/domain/use_cases/get_user.dart';
 import 'package:maru/features/verify/domain/usecases/get_providers.dart';
 import 'package:maru/features/verify/domain/usecases/save_pet_profile.dart';
 
@@ -40,7 +41,14 @@ class ProviderLoaded1 extends LoginState {
   @override
   String toString() => "VerificationNeeded";
 }
+class CustomerLoaded extends LoginState {
+  //final Welcome _newsBloc = Welcome();
+  final GetUserModel getUserModel;
+  CustomerLoaded(this.getUserModel);
 
+  @override
+  String toString() => "VerificationNeeded";
+}
 class VerificationNeeded extends LoginState {
   VerificationNeeded() : super();
 

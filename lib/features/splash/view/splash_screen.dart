@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
 //todo: Navigate to AfterSplashScreen
 //
   navigateToNextScreen() {
-    Future.delayed(const Duration(seconds: 5), () async {
+    Future.delayed(const Duration(seconds: 0), () async {
       SharedPrefHelper _prefHelper =
           KiwiContainer().resolve<SharedPrefHelper>();
       String token = _prefHelper.getfname();

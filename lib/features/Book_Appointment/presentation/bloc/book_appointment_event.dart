@@ -136,9 +136,9 @@ class DeclineRequestChanged extends BookAppointmentEvent {
 }
 
 class UpcomingAppointmentChanged extends BookAppointmentEvent {
-  final String Date;
+  final String av;
   final String name;
-  UpcomingAppointmentChanged(this.Date, this.name);
+  UpcomingAppointmentChanged(this.av, this.name);
 
   @override
   String toString() => "UpcomingAppointmentChanged";

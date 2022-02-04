@@ -10,6 +10,9 @@ import 'package:maru/features/provider_home/presentation/create_provider_home.da
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 
 class ReviewScreen extends StatefulWidget {
+  final int id4;
+
+  const ReviewScreen({Key key, this.id4}) : super(key: key);
   @override
   _ReviewScreenState createState() => _ReviewScreenState();
 }
@@ -20,15 +23,15 @@ class _ReviewScreenState extends State<ReviewScreen> {
   bool star3 = true;
   bool star4 = true;
   bool star5 = true;
-var a ='';
+  var a = '';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: CreateProviderHome(
-        // Color:MaaruColors.textButtonColor
-      ),
+          // Color:MaaruColors.textButtonColor
+          ),
       body: SingleChildScrollView(
         child: Flex(
           direction: Axis.vertical,
@@ -59,12 +62,13 @@ var a ='';
                             setState(() {
                               star1 = !star1;
                               a = '1';
-                             print(a);
+                              print(a);
                             });
                           },
                           child: Icon(
                             star1 ? Icons.star_border : Icons.star,
-                            color: star1 ? Colors.grey : MaaruColors.buttonColor,
+                            color:
+                                star1 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
@@ -77,7 +81,8 @@ var a ='';
                           },
                           child: Icon(
                             star2 ? Icons.star_border : Icons.star,
-                            color: star2 ? Colors.grey : MaaruColors.buttonColor,
+                            color:
+                                star2 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
@@ -90,7 +95,8 @@ var a ='';
                           },
                           child: Icon(
                             star3 ? Icons.star_border : Icons.star,
-                            color: star3 ? Colors.grey : MaaruColors.buttonColor,
+                            color:
+                                star3 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
@@ -103,7 +109,8 @@ var a ='';
                           },
                           child: Icon(
                             star4 ? Icons.star_border : Icons.star,
-                            color: star4 ? Colors.grey : MaaruColors.buttonColor,
+                            color:
+                                star4 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
@@ -116,7 +123,8 @@ var a ='';
                           },
                           child: Icon(
                             star5 ? Icons.star_border : Icons.star,
-                            color: star5 ? Colors.grey : MaaruColors.buttonColor,
+                            color:
+                                star5 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                     ],
@@ -141,9 +149,15 @@ var a ='';
                   ),
                   InkWell(
                       onTap: () {
-                        AlertManager.showSuccessMessage('Thank you for Review', context);
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => ViewPetProfile()));
+                        Future.delayed(
+                          const Duration(seconds: 3),
+                          () {
+                            AlertManager.showSuccessMessage(
+                                'Thank you for Review', context);
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => ViewPetProfile()));
+                          },
+                        );
                       },
                       child: RoundedButton(
                         buttonName: 'Submit Review',

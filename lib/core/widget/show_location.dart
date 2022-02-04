@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
@@ -56,46 +58,24 @@ class ShowLocation extends StatelessWidget {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (_) => AccountSettingScreen()));
           },
-          child: ProfileAvatar(
-            imageUrl: _prefHelper.getStringByKey(MaruConstant.img, ''),
 
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  alignment: Alignment.center,
-                  child: Image.asset('assets/128/CrystalGaskell.png'));
-            },
-            avatarRadius: 60,
-            width: 40,
-            Color: Colors.white,
-            child: null,
+
+        child:Container(
+          height: 40,
+          width: 40,
+          decoration:  BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: _prefHelper.getStringByKey('img', '').isEmpty
+                  ? const ExactAssetImage(
+                  'assets/icons/Oval.png')
+                  : FileImage(File(_prefHelper.getStringByKey('img', ''))),
+              fit: BoxFit.cover,
+            ),
           ),
-        )
-        // Container(
-        //   height: 40,
-        //   decoration: const BoxDecoration(
-        //     color: Colors.white,
-        //     shape: BoxShape.circle,
-        //   ),
-        //   child:
-        //   Image.network(
-        //       _prefHelper
-        //           .getStringByKey(MaruConstant.img, ''),
-        //       height: 60,
-        //       width: 60,
-        //       errorBuilder: (context, error, stackTrace) {
-        //         return Container(
-        //             decoration: const BoxDecoration(
-        //               shape: BoxShape.circle,
-        //             ),
-        //
-        //             alignment: Alignment.center,
-        //             child: Image.asset('assets/128/CrystalGaskell.png'));
-        //       }),
-        // ),
-      ],
+        ),
+        )],
     );
   }
 }

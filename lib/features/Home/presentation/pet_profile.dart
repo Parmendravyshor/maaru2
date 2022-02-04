@@ -187,6 +187,7 @@ class _PetProfile1State extends State<PetProfile1> {
                           child: ListView.builder(
                             itemCount: state.covidModel.petProfiles.length,
                             scrollDirection: Axis.vertical,
+                            reverse: true,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return

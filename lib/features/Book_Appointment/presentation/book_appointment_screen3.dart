@@ -5,7 +5,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
@@ -62,7 +61,8 @@ import 'booked_confirm.dart';
 
 class BookAppointmentScreen3 extends StatefulWidget {
   final int id3;
-  BookAppointmentScreen3({this.id3, this.text});
+  final String image;
+  BookAppointmentScreen3({this.id3, this.text, this.image});
   String text = '';
 
   @override
@@ -191,6 +191,10 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
 
   @override
   void dispose() {
+    _creditCardNumberController.dispose();
+    _cvvController.dispose();
+    _expDateController.dispose();
+    _nameEditingController.dispose();
     super.dispose();
     _controller.dispose();
   }
@@ -353,16 +357,16 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
             builder: (context, state) {
           if (state is BookRegisterSuccess) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
-              AlertManager.showErrorMessage('Appointment Booked Successful', context);
+             // AlertManager.showErrorMessage('Appointment Booked Successful', context);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return BookedConfirm(id1: widget.id3);
+                return BookedConfirm(id4: widget.id3,);
               }));
             });
             return Container();
           } else if (state is BookRegisterFailure) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
-              Future.delayed(const Duration(seconds: 1), () {
+              Future.delayed(const Duration(seconds: 3), () {
                 Scaffold.of(context).showSnackBar(
                   SnackBar(
                     backgroundColor: Colors.black,
@@ -388,13 +392,16 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                 Column(
                   children: [
                     Container(
-                      child: Image.network(
-                        _prefHelper.getStringByKey('img', ''),
+                      height: 200,
+                      width: 500,
+                      child: Image.network(widget.image,
+                        fit: BoxFit.fitWidth,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
                               color: Colors.amber,
-                              alignment: Alignment.center,
-                              child: Image.asset('assets/images/kutta.png'));
+                              alignment: Alignment.bottomCenter,
+                              child:
+                              Image.asset('assets/images/kutta.png'));
                         },
                       ),
                     ),
@@ -614,7 +621,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
 
                                             singh = val.value1;
                                             print(
-                                                'singham is back ${val.value1}');
+                                                'gingham is back ${val.value1}');
                                             BlocProvider.of<
                                                         BookAppointmentBloc>(
                                                     context)
@@ -1338,69 +1345,83 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                         SizedBox(
                                           height: 40,
                                         ),
-                                        ThemedButton(
-                                          onPressed: () {
-                                            BlocProvider.of<
-                                                        BookAppointmentBloc>(
-                                                    context)
-                                                .add(providerIdChanged(
-                                                    widget.id3));
-                                            print('ram sita${widget.id3}');
-                                            var daa = _dates1;
-                                            print('ssss1${daa}');
-                                            print('sss');
-                                            print(date1);
-                                            if (date1.isEmpty) {
-                                              print('ssss${date1}');
-                                              _showDialog(context,
-                                                  'Please Select Date');
-                                            } else if (singh.isEmpty) {
-                                              print('ssss1${daa}');
-                                              _showDialog(context,
-                                                  'Please Select Services');
-                                            } else if (parmendra.isEmpty) {
-                                              print('ssss1${daa}');
-                                              _showDialog(
-                                                  context, 'Please Select Pet');
-                                              setState(() {});
-                                            }
-                                            // else if((){
-                                            //   print('ssss1${daa}');
-                                            //   _showDialog(
-                                            //       context, 'Please Select Date');
-                                            // }
-                                            else {
-                                              final FormState form =
-                                                  _formKey.currentState;
-                                              if (!form.validate()) {
-                                                setState(() {
-                                                  _autoValidateMode =
-                                                      AutovalidateMode
-                                                          .always; // Start validating on every change.
-                                                });
-                                              } else {
-                                                form.save();
-                                                MyStatefulWidget();
-                                             //  if( state is BookRegisterFormValidationSuccess) {
-                                                 BlocProvider.of<
-                                                     BookAppointmentBloc>(
-                                                     context).add(
-                                                     BookRegisterButtonTapped());
-                                            //   }
-                                              }
-                                            }
-                                          },
-                                          text: 'Book Appointment',
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
+                                        Column(
+                                          children: [
+                                            ThemedButton(
+                                              onPressed: () {
+                                                BlocProvider.of<
+                                                            BookAppointmentBloc>(
+                                                        context)
+                                                    .add(providerIdChanged(
+                                                        widget.id3));
+                                                print('ram sita${widget.id3}');
+                                                var daa = _dates1;
+                                                print('ssss1${daa}');
+                                                print('sss');
+                                                print(date1);
+                                                if (date1.isEmpty) {
+                                                  print('ssss${date1}');
+                                                  _showDialog(context,
+                                                      'Please Select Date');
+                                                } else if (singh.isEmpty) {
+                                                  print('ssss1${daa}');
+                                                  _showDialog(context,
+                                                      'Please Select Services');
+                                                } else if (parmendra.isEmpty) {
+                                                  print('ssss1${daa}');
+                                                  _showDialog(
+                                                      context, 'Please Select Pet');
+                                                  setState(() {});
+                                                }
+                                                // else if((){
+                                                //   print('ssss1${daa}');
+                                                //   _showDialog(
+                                                //       context, 'Please Select Date');
+                                                // }
+                                                else {
+                                                  final FormState form =
+                                                      _formKey.currentState;
+                                                  if (!form.validate()) {
+                                                    setState(() {
+                                                      _autoValidateMode =
+                                                          AutovalidateMode
+                                                              .always; // Start validating on every change.
+                                                    });
+                                                  } else {
+                                                    form.save();
+                                                    MyStatefulWidget();
+                                                 //  if( state is BookRegisterFormValidationSuccess) {
+                                                     BlocProvider.of<
+                                                         BookAppointmentBloc>(
+                                                         context).add(
+                                                         BookRegisterButtonTapped());
+
+                                                //   }
+                                                  }
+                                                }
+                                              },
+                                              text: 'Book Appointment',
+                                            ),
+                                            const SizedBox(
+                                              height: 20,
+                                            ),
+                                            state is BookRegisterInProgress
+                                                ? Center(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(bottom: 20),
+                                                  width: 40,
+                                                  height: 100,
+                                                  child: CircularProgressIndicator(),
+                                                ))
+                                                : Container(),
+                                          ],
                                         ),
                                         state is BookRegisterInProgress
                                             ? Center(
                                             child: Container(
-                                              margin: EdgeInsets.only(bottom: 10),
+                                              margin: EdgeInsets.only(bottom: 20),
                                               width: 40,
-                                              height: 40,
+                                              height: 100,
                                               child: CircularProgressIndicator(),
                                             ))
                                             : Container(),
@@ -1409,15 +1430,6 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                 SizedBox(
                                   height: 50,
                                 ),
-                                state is BookRegisterInProgress
-                                    ? Center(
-                                    child: Container(
-                                      margin: EdgeInsets.only(bottom: 10),
-                                      width: 40,
-                                      height: 40,
-                                      child: CircularProgressIndicator(),
-                                    ))
-                                    : Container(),
                               ],
                             ));
                       }
@@ -1702,11 +1714,11 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                     return Container();
                   } else if (state is BookRegisterFailure) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
-                      Future.delayed(const Duration(seconds: 1), () {
+                      Future.delayed(const Duration(seconds: 3), () {
                         Scaffold.of(context).showSnackBar(
                           SnackBar(
                             backgroundColor: Colors.black,
-                            content: Text(state.errorMessage,
+                            content: Text('slot are booked please change time or date',
                                 style: TextStyle(
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'poppins',

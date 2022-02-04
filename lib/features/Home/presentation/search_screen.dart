@@ -11,7 +11,7 @@ import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
-import 'package:maru/features/Home/presentation/grooming_search.dart';
+
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
@@ -153,6 +153,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                       ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
+                          reverse: true,
                           itemCount:
                               state.getProviderModel.providersListing.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -188,7 +189,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                               height: 120,
                                               width: 120,
                                               decoration: BoxDecoration(
-                                                gradient: LinearGradient(
+                                                gradient: const LinearGradient(
                                                     colors: [
                                                       Colors.white,
                                                       Colors.white
@@ -235,19 +236,19 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                                             FontWeight.w900),
                                                   ),
                                                 ),
-                                                Expanded(
-                                                    child: Text(
-                                                  state
-                                                      .getProviderModel
-                                                      .providersListing[index]
-                                                      .serviceType
-                                                      .toString(),
-                                                  //   _prefHelper.getStringByKey(MaruConstant., ''),
-                                                  style: const TextStyle(
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.w900),
-                                                )),
+                                                // Expanded(
+                                                //     child: Text(
+                                                //   state
+                                                //       .getProviderModel
+                                                //       .providersListing[index]
+                                                //       .serviceType
+                                                //       .toString(),
+                                                //   //   _prefHelper.getStringByKey(MaruConstant., ''),
+                                                //   style: const TextStyle(
+                                                //       fontSize: 10,
+                                                //       fontWeight:
+                                                //           FontWeight.w900),
+                                                // )),
                                                 Expanded(
                                                   child: Row(
                                                     children: [

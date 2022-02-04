@@ -18,7 +18,12 @@ class GetProvider extends LoginEvent {
 
   GetProvider(this.text);
 }
+class GetCustomers extends LoginEvent {
+  GetCustomers();
 
+  @override
+  String toString() => "LoginButtonTapped";
+}
 /// Register Button Tapped
 ///
 /// This event is fired when Register button is tapped

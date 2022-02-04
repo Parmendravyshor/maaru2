@@ -62,8 +62,9 @@ class _TestAppState extends State<TestApp> {
         page,
         date,
         date,
-        date,
+        _textEditingController.text
       ));
+
     }
   }
 
@@ -212,25 +213,25 @@ class _TestAppState extends State<TestApp> {
                                                     _ageType.text,
                                                     _ageType.text,
                                                     _ageType.text,
-                                                    _textEditingController.text,
+                                                    '',
                                                   ));
                                                   print(_ageType);
                                                 });
                                               },
-                                              onSubmitted: (text) {
-                                                setState(() {
-                                                  BlocProvider.of<
-                                                              ProviderHomeBloc>(
-                                                          context)
-                                                      .add(getProviderRequest(
-                                                    _ageType.text,
-                                                    _ageType.text,
-                                                    _ageType.text,
-                                                    _textEditingController.text,
-                                                  ));
-                                                  print(_ageType);
-                                                });
-                                              },
+                                              // onSubmitted: (text) {
+                                              //   setState(() {
+                                              //     BlocProvider.of<
+                                              //                 ProviderHomeBloc>(
+                                              //             context)
+                                              //         .add(getProviderRequest(
+                                              //       _ageType.text,
+                                              //       _ageType.text,
+                                              //       _ageType.text,
+                                              //       _textEditingController.text,
+                                              //     ));
+                                              //     print(_ageType);
+                                              //   });
+                                              // },
                                               controller: _ageType,
                                             ),
                                           )),
@@ -260,289 +261,282 @@ class _TestAppState extends State<TestApp> {
                             const SizedBox(
                               height: 20,
                             ),
-                            BlocProvider(
-                                create: (context) => KiwiContainer()
-                                    .resolve<ProviderHomeBloc>(),
-                                child: BlocBuilder<ProviderHomeBloc,
-                                        ProviderHomeState>(
-                                    builder: (context, state) {
-                                  if (state is ProviderHomeInitial) {
-                                    BlocProvider.of<ProviderHomeBloc>(
-                                            context)
-                                        .add(getProviderRequest(
-                                      _ageType.text,
-                                      _ageType.text,
-                                      _ageType.text,
-                                      _textEditingController.text,
-                                    ));
-                                    // print('figffgfg${text}');
-                                    return const Center(
-                                        child: CircularProgressIndicator());
-                                  } else if (state is RequestLoaded) {
-                                    print(
-                                        'datarequestfprcheckeinguseingstaat${state.getProviderRequestModel.appointmentRequests.length}');
-                                    return ListView.builder(
-                                        physics:
-                                            NeverScrollableScrollPhysics(),
-                                        scrollDirection: Axis.vertical,
-                                        shrinkWrap: true,
-                                        itemCount: state
+                           ListView.builder(
+                                    physics:
+                                        NeverScrollableScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    reverse: true,
+                                    itemCount: state
+                                        .getProviderRequestModel
+                                        .appointmentRequests
+                                        .length,
+                                    itemBuilder: (BuildContext context,
+                                        int index) {
+                                      if(state.getProviderRequestModel.appointmentRequests.isNotEmpty) {
+                                        var a = state
                                             .getProviderRequestModel
-                                            .appointmentRequests
-                                            .length,
-                                        itemBuilder: (BuildContext context,
-                                            int index) {
-                                          if(state.getProviderRequestModel.appointmentRequests.isNotEmpty) {
-                                            var a = state
-                                                .getProviderRequestModel
-                                                .appointmentRequests;
+                                            .appointmentRequests;
 
-                                            return Slidable(
-                                                actionPane:
-                                                SlidableDrawerActionPane(),
-                                                actions: <Widget>[
-                                                  Stack(children: [
-                                                    IconSlideAction(
-                                                      caption: 'Accept',
-                                                      color: Colors.blue,
-                                                      icon: Icons.done,
-                                                      onTap: () {
-                                                        BlocProvider.of<
-                                                            ProviderHomeBloc>(
-                                                            context)
-                                                            .add(
-                                                            AcceptRequested(
-                                                                state
-                                                                    .getProviderRequestModel
-                                                                    .appointmentRequests[
-                                                                index]
-                                                                    .id));
-                                                        Navigator.of(
-                                                            context).push(
-                                                            MaterialPageRoute(
-                                                                builder: (
-                                                                    _) =>
-                                                                    UpcomingAppointmentCalender1()));
-                                                      },
-                                                    ),
-                                                  ])
-                                                ],
-                                                secondaryActions: <Widget>[
-                                                  IconSlideAction(
-                                                    caption: 'Delete',
-                                                    color: Colors.red,
-                                                    icon: Icons.delete,
-                                                    onTap: () {
-                                                      BlocProvider.of<
-                                                          ProviderHomeBloc>(
-                                                          context)
-                                                          .add(Decline(state
-                                                          .getProviderRequestModel
-                                                          .appointmentRequests[
-                                                      index]
-                                                          .id));
-                                                      Navigator.of(context)
-                                                          .push(
-                                                          MaterialPageRoute(
-                                                              builder: (
-                                                                  _) =>
-                                                                  UpcomingAppointmentCalender1()));
-                                                    },
-                                                  ),
-                                                ],
-                                                child: Padding(
-                                                  padding:
-                                                  const EdgeInsets.only(
-                                                      left: 15.0,
-                                                      right: 15.0,
-                                                      bottom: 15,top: 10),
-                                                  child: 
-                                                  Column(
-                                                      mainAxisSize:
-                                                      MainAxisSize.min,
-                                                      children: [
-                                                        Container(
-                                                          padding: EdgeInsets.only(top: 10),
-                                                            height: 150,
-                                                            decoration: BoxDecoration(
-                                                                border: Border
-                                                                    .all(
-                                                                    color: Colors
-                                                                        .grey[
-                                                                    200])),
-                                                            child:
-                                                            Column(
-                                                              mainAxisSize:
-                                                              MainAxisSize
-                                                                  .min,
+                                        return Slidable(
+                                            actionPane:
+                                            SlidableDrawerActionPane(),
+                                            actions: <Widget>[
+                                              Stack(children: [
+                                                IconSlideAction(
+                                                  caption: 'Accept',
+                                                  color: Colors.blue,
+                                                  icon: Icons.done,
+                                                  onTap: () {
+                                                    BlocProvider.of<
+                                                        ProviderHomeBloc>(
+                                                        context)
+                                                        .add(
+                                                        AcceptRequested(
+                                                            state
+                                                                .getProviderRequestModel
+                                                                .appointmentRequests[
+                                                            index]
+                                                                .id));
+                                                    Navigator.of(
+                                                        context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (
+                                                                _) =>
+                                                                UpcomingAppointmentCalender1()));
+                                                  },
+                                                ),
+                                              ])
+                                            ],
+                                            secondaryActions: <Widget>[
+                                              IconSlideAction(
+                                                caption: 'Delete',
+                                                color: Colors.red,
+                                                icon: Icons.delete,
+                                                onTap: () {
+                                                  BlocProvider.of<
+                                                      ProviderHomeBloc>(
+                                                      context)
+                                                      .add(Decline(state
+                                                      .getProviderRequestModel
+                                                      .appointmentRequests[
+                                                  index]
+                                                      .id));
+                                                  Navigator.of(context)
+                                                      .push(
+                                                      MaterialPageRoute(
+                                                          builder: (
+                                                              _) =>
+                                                              UpcomingAppointmentCalender1()));
+                                                },
+                                              ),
+                                            ],
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsets.only(
+                                                  left: 15.0,
+                                                  right: 15.0,
+                                                  bottom: 15,top: 10),
+                                              child:
+                                              Column(
+                                                  mainAxisSize:
+                                                  MainAxisSize.min,
+                                                  children: [
+                                                    Container(
+                                                      padding: EdgeInsets.only(top: 10,right: 10),
+                                                        height: 150,
+                                                        decoration: BoxDecoration(
+                                                            border: Border
+                                                                .all(
+                                                                color: Colors
+                                                                    .grey[
+                                                                200])),
+                                                        child:
+                                                        Column(
+                                                          mainAxisSize:
+                                                          MainAxisSize
+                                                              .min,
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                          crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                          children: [
+                                                            Row(
                                                               mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                              crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .center,
+                                                                  .spaceAround,
                                                               children: [
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child: Padding(
-                                                                        padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                            left: 15.0),
-                                                                        child: Text(
-                                                                            state
-                                                                                .getProviderRequestModel
-                                                                                .appointmentRequests[index]
-                                                                                .companyName
-                                                                                .toString(),
-                                                                            style:
-                                                                            MaaruStyle
-                                                                                .text
-                                                                                .tiniest,
-                                                                            textAlign: TextAlign
-                                                                                .justify),
-                                                                      ),
-                                                                    ),
-                                                                    SizedBox(
-                                                                      width:
-                                                                      10,
-                                                                    ),
-                                                                    Expanded(
-                                                                      child: Align(
-                                                                        alignment:
-                                                                        Alignment
-                                                                            .topRight,
-                                                                        child:
-                                                                        Text(
-                                                                            state
-                                                                                .getProviderRequestModel
-                                                                                .appointmentRequests[index]
-                                                                                .bookingDate
-                                                                                .toString()),
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceAround,
-                                                                  children: [
-                                                                   Expanded(child: Padding(
-                                                                      padding:
-                                                                      const EdgeInsets
-                                                                          .only(
-                                                                          left: 15.0),
-                                                                      child:
-                                                                      Text(
+                                                                Expanded(
+                                                                  child: Padding(
+                                                                    padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left: 15.0),
+                                                                    child: Text(
                                                                         state
                                                                             .getProviderRequestModel
                                                                             .appointmentRequests[index]
-                                                                            .service
+                                                                            .companyName
                                                                             .toString(),
                                                                         style:
                                                                         MaaruStyle
                                                                             .text
                                                                             .tiniest,
+                                                                        textAlign: TextAlign
+                                                                            .justify),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width:
+                                                                  10,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Align(
+                                                                    alignment:
+                                                                    Alignment
+                                                                        .centerRight,
+                                                                    child:
+                                                                    Text(
+
+                                                                        '${state
+                                                                            .getProviderRequestModel
+                                                                            .appointmentRequests[index]
+                                                                            .bookingDate.year.toString()}-${state
+                                                                            .getProviderRequestModel
+                                                                            .appointmentRequests[index]
+                                                                            .bookingDate.month.toString()}-${state
+                                                                            .getProviderRequestModel
+                                                                            .appointmentRequests[index]
+                                                                            .bookingDate.day.toString()}'),
+
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                              children: [
+                                                               Expanded(child: Padding(
+                                                                  padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 15.0),
+                                                                  child:
+                                                                  Text(
+                                                                    state
+                                                                        .getProviderRequestModel
+                                                                        .appointmentRequests[index]
+                                                                        .service
+                                                                        .toString(),
+                                                                    style:
+                                                                    MaaruStyle
+                                                                        .text
+                                                                        .tiniest,
+                                                                  ),
+                                                                )),
+                                                                const SizedBox(
+                                                                  width:
+                                                                  20,
+                                                                ),
+                                                                Text(
+                                                                  state
+                                                                    .getProviderRequestModel
+                                                                    .appointmentRequests[index]
+                                                                    .bookingStartTime
+                                                                    .toString(),)
+                                                              ],
+                                                            ),
+                                                            Expanded(
+
+                                                              child: Align(
+                                                                  alignment:
+                                                                  Alignment
+                                                                      .topLeft,
+                                                                  child:
+                                                                  Padding(
+                                                                    padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left: 15.0),
+                                                                    child:
+                                                                    Text(
+                                                                        '${state
+                                                                            .getProviderRequestModel
+                                                                            .appointmentRequests[index]
+                                                                            .companyCity
+                                                                            .toString()} ${a[index]
+                                                                            .companyZipCode
+                                                                            .toString()} ${a[index]
+                                                                            .companyState
+                                                                            .toString()}'),
+                                                                  )),
+                                                            ),
+                                                            Expanded(
+                                                              child: Align(
+                                                                alignment: Alignment.centerRight,
+                                                                child: Container(
+                                                                    alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                    transformAlignment: Alignment.centerRight,
+                                                                    margin: const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                        120,bottom: 10),
+                                                                    height:
+                                                                    35,
+                                                                    width:
+                                                                    150,
+                                                                    decoration: BoxDecoration(
+                                                                        color: MaaruColors
+                                                                            .blueColor,
+                                                                        borderRadius: BorderRadius
+                                                                            .circular(
+                                                                            10.7),
+                                                                        border:
+                                                                        Border
+                                                                            .all(
+                                                                            color: Colors
+                                                                                .white)),
+                                                                    child: InkWell(
+                                                                      onTap:
+                                                                          () {
+                                                                        Navigator
+                                                                            .of(
+                                                                            context)
+                                                                            .push(
+                                                                            MaterialPageRoute(
+                                                                                builder: (
+                                                                                    _) =>
+                                                                                    ProviderBookedConfirm()));
+                                                                      },
+                                                                      child:
+                                                                      const Text(
+                                                                        'View Details',
+                                                                        style: TextStyle(
+                                                                            color: Colors
+                                                                                .white,
+                                                                            fontWeight: FontWeight
+                                                                                .w700),
                                                                       ),
                                                                     )),
-                                                                    const SizedBox(
-                                                                      width:
-                                                                      20,
-                                                                    ),
-                                                                    Text('')
-                                                                  ],
-                                                                ),
-                                                                Expanded(
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      //Text('Item Data$index'),
+                                                    ),
+                                                  ]),
+                                            ));
 
-                                                                  child: Align(
-                                                                      alignment:
-                                                                      Alignment
-                                                                          .topLeft,
-                                                                      child:
-                                                                      Padding(
-                                                                        padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                            left: 15.0),
-                                                                        child:
-                                                                        Text(
-                                                                            '${state
-                                                                                .getProviderRequestModel
-                                                                                .appointmentRequests[index]
-                                                                                .companyCity
-                                                                                .toString()} ${a[index]
-                                                                                .companyZipCode
-                                                                                .toString()} ${a[index]
-                                                                                .companyState
-                                                                                .toString()}'),
-                                                                      )),
-                                                                ),
-                                                                Expanded(
-                                                                  child: Container(
-                                                                      alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                      margin: const EdgeInsets
-                                                                          .only(
-                                                                          left:
-                                                                          120,bottom: 10),
-                                                                      height:
-                                                                      35,
-                                                                      width:
-                                                                      150,
-                                                                      decoration: BoxDecoration(
-                                                                          color: MaaruColors
-                                                                              .blueColor,
-                                                                          borderRadius: BorderRadius
-                                                                              .circular(
-                                                                              10.7),
-                                                                          border:
-                                                                          Border
-                                                                              .all(
-                                                                              color: Colors
-                                                                                  .white)),
-                                                                      child: InkWell(
-                                                                        onTap:
-                                                                            () {
-                                                                          Navigator
-                                                                              .of(
-                                                                              context)
-                                                                              .push(
-                                                                              MaterialPageRoute(
-                                                                                  builder: (
-                                                                                      _) =>
-                                                                                      ProviderBookedConfirm()));
-                                                                        },
-                                                                        child:
-                                                                        const Text(
-                                                                          'View Details',
-                                                                          style: TextStyle(
-                                                                              color: Colors
-                                                                                  .white,
-                                                                              fontWeight: FontWeight
-                                                                                  .w700),
-                                                                        ),
-                                                                      )),
-                                                                ),
-                                                              ],
-                                                            )
-                                                          //Text('Item Data$index'),
-                                                        ),
-                                                      ]),
-                                                ));
-
-                                        }else{
-                                          return Center(child: Text('Appointment Request Not Found '));
-                                    }});
-                                  } else {
-                                    return const CircularProgressIndicator();
-                                  }
-                                })),
+                              } else {
+                                return const CircularProgressIndicator();
+                              }
+                            }),
                           ]),
                         ),
                       );

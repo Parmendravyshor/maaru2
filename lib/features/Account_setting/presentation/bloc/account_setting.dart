@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
@@ -54,26 +56,23 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                       left: 20,
                     ),
                     child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Align(
-                              alignment: Alignment.centerRight,
-                              child: ProfileAvatar(imageUrl:  _prefHelper
-                                  .getStringByKey(MaruConstant.img, ''),
-
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Container(
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-
-                                      alignment: Alignment.center,
-                                      child: Image.asset('assets/128/CrystalGaskell.png'));
-
-                                },
-                                avatarRadius: 60,width: 40,Color: Colors.white,
-                                child: null,
-                              ),),
+                          Container(
+                            height: 40,
+                            width: 40,
+                            decoration:  BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: _prefHelper.getStringByKey('img', '').isEmpty
+                                    ? const ExactAssetImage(
+                                    'assets/icons/Oval.png')
+                                    : FileImage(File(_prefHelper.getStringByKey('img', ''))),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                           Align(
                               alignment: Alignment.centerLeft,
                               child: Column(children: [
@@ -183,11 +182,11 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                                             // title: Text("Do you want to update your price?"),
                                                             // controlAffinity: ListTileControlAffinity.leading,
                                                             value:
-                                                                priceupdate_value,
+                                                            update,
                                                             onChanged: (bool
                                                                 priceupdateValue) {
                                                               setState(() {
-                                                                priceupdate_value =
+                                                                update =
                                                                     priceupdateValue;
                                                                 print(priceupdateValue);
                                                               });
@@ -289,7 +288,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                 ),
                                 Test3(
 
-                                  image: 'assets/icons/Background.png',
+                                  image: 'assets/images/126-1264365_grey-logout-icon-png-transparent-png (2).png',
                                   hite: 30,
                                   size: 120,
 

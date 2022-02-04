@@ -64,7 +64,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _emailController = TextEditingController();
     _lnameController = TextEditingController();
     _cnfpasswordController = TextEditingController();
-
     super.initState();
   }
 
@@ -75,6 +74,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _first_nameController.dispose();
     _lnameController.dispose();
     _cnfpasswordController.dispose();
+   // final RegisterBloc drawerBloc = BlocProvider.of<RegisterBloc>(context);
+    //RegisterBloc.dispatch(EventHere());
     super.dispose();
   }
 

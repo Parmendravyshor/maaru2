@@ -20,114 +20,102 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'chat_event.dart';
 import 'chat_state.dart';
-
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
-  Socket _socket;
-  List<Message> messageList = [];
-  final SharedPrefHelper sharedPrefHelper;
-  final EmailSignin emailSignin;
-  final GetTextFile getTextFile;
-  ChatBloc(this.sharedPrefHelper, this.emailSignin, this.getTextFile,
-      [String address = 'http://18.191.199.31:80'])
-      : super() {
-    _socket = io(
-      address,
-      OptionBuilder()
-          .setTransports(['websockets'])
-          .disableAutoConnect()
-          .enableAutoConnect()
-          .disableReconnection()
-          .build(),
-    );
-    try {
-      _socket.on('connect', (_) {
-        print('connect');
-      });
-      _socket.on('event', (data) => print(data));
-      _socket.on('disconnect', (_) => print('disconnect'));
-      _socket.on('fromServer', (_) => print(_));
-      _socket.onConnect((data) => print('succes'));
-      //add(OnlineConnectedEvent()));
-      _socket.onConnectError((data) => print('sss1'));
-      _socket.onConnectTimeout((data) => print('sss2'));
-      _socket.onDisconnect((data) => print('sss3'));
-      _socket.onError((data) => print('sss4'));
-      _socket.on('joined', (data) => print('sss5'));
-      print('pass');
-    } catch (e) {
-      print('kkk${e.toString()}');
-    }
-  }
-  int tried = 0;
-  bool isFromException = false;
-  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
-  @override
-  Stream<ChatState> mapEventToState(ChatEvent event) async* {
-    if (event is ChatOpened) {
-      var maps;
-      messageList = List.generate(maps.length, (i) {
-        return Message(
-              message:maps[i]['message'],
-              messageType: maps[i]['messageType'],
-              senderId: maps[i]['senderId'],
-              receiverId: maps[i]['receiverId']
-        );});
-
-      yield ChatSendSuccess(messageList);
-    } else if (event is ChatMessageSent) {
-      tried++;
-
-      if (isFromException) {
-        isFromException = false;
-      } else {
-        final sentMessage = Message(
-          message :event.message,
-          messageType: event.mesageType,
-          senderId:4,
-          receiverId: event.userid2,
-        );
-        messageList.add(sentMessage);
-    //    _socket.emit('send_message',sentMessage);
-        yield ChatSendInProgress(messageList);
-      }
-
-      DateTime expiryTime = DateTime.fromMillisecondsSinceEpoch(
-          int.parse(sharedPrefHelper.getExpiryTime()) * 1000);
-
-      if (expiryTime.isBefore(DateTime.now())) {
-        await emailSignin(EmailAuthParams(
-            email: sharedPrefHelper.getEmail(),
-            password: '',
-            first_name: "",
-            lName: ""));
-      }
-
-      try {
-        _socket.emit('get_message',{
-          'userId':29
-        });
-            final receivedMessage = Message(
-              receiverId: 4,
-              senderId: 0,
-
-            );
-            messageList.add(receivedMessage);
-        _socket.on('connect_listener', (Message) => {
-         // getChatt()
-        });
-            yield ChatSendSuccess(messageList);
-          } catch (e) {}
-
-        print('result exception ${e.toString()}');
-      }
-    }
 
   @override
   // TODO: implement initialState
   ChatState get initialState => ChatSendInitial();
+  Socket _socket;
+  final SharedPrefHelper sharedPrefHelper;
+  final EmailSignin emailSignin;
+  final GetTextFile getTextFile;
+
+
+  Future<void> initSocket() async {
+    print('Connecting to chat service' + 4.toString());
+    // String registrationToken = await getFCMToken();
+    _socket = IO.io('http://18.191.199.31:80', <String, dynamic>{
+      'transports': ['websocket'],
+      'autoConnect': false,
+      'query': {
+        'userName':'4',
+        // 'registrationToken': registrationToken
+      }
+    });
+
+    _socket.connect();
+    _socket.onConnect((_) {
+      print('connected to websocket');
+    });
+    var data = {"userId": 29};
+    _socket.emit('connect_user', data);
+    _socket.on("connect_listener", (message) {
+      print('============>data in connect_listener' + message.toString());
+    });
+
+    // socket.on('newChat', (message) {
+    //   print(message);
+    //   setState(() {
+    //     MessagesModel.messages.add(message);
+    //   });
+    // });
+    // socket.on('allChats', (messages) {
+    //   print(messages);
+    //   setState(() {
+    //     MessagesModel.messages.addAll(messages);
+    //   });
+    // });
   }
+  ChatBloc(this.sharedPrefHelper, this.emailSignin, this.getTextFile,
+     )
+      : super() ;
 
 
+  List<MessagesModel> messageList;
+
+  int tried = 0;
+  bool isFromException = false;
+  final SharedPrefHelper _prefHelper =
+      KiwiContainer().resolve<SharedPrefHelper>();
+  @override
+  Stream<ChatState> mapEventToState(ChatEvent event) async* {
+    if (event is ChatMessageSent) {
+      yield ChatSendInProgress(MessagesModel.messages);
+      var messagePost = {
+        'userId': 4,
+        'user2Id': 29,
+        'SenderID': 4,
+        'message': '',
+        'messageType': '0'
+      };
+      _socket.emit('send_messages', messagePost);
+
+      _socket.on('send_new_message', (message) {
+        print('send_new_message>>>>>>' + message.toString());
+
+        {
+          MessagesModel.messages.add(message);
+        }
+      });
+      yield ChatSendSuccess(MessagesModel.messages);
+    } else if (event is ChatOpened) {
+      _socket.emit('get_chat', {
+        'userId': 4,
+        'user2Id': 29,
+
+      });
+   _socket.on(
+          "my_chat",
+              (messages) =>
+          {
+            MessagesModel.messages.clear(),
+            MessagesModel.messages.addAll(messages)
+          });
+      yield ChatGet(messageList);
+    }
+  }
+}
 
 // let data = {
 //   "userId" : info.id

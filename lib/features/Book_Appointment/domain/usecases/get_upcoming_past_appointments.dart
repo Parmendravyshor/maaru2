@@ -5,19 +5,19 @@ import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 
 import 'dart:convert';
-class GetUpcomingAndPastAppointments implements UseCase<void, UpcomingBooking> {
+class GetUpcomingAndPastAppointmentdddddd implements UseCase<void, UpcomingBooking> {
   UserRepository userRepository;
-  GetUpcomingAndPastAppointments(this.userRepository);
+  GetUpcomingAndPastAppointmentdddddd(this.userRepository);
+
   @override
   Future<Either<Failure, UpcomingPastAppointmentModel>> call(UpcomingBooking params) async {
-    return userRepository.getUpcomingAndPastAppointments(params);
+    print('parmendra');
+    print('dkjdhjkdhjkdhjkdhdjkhd');
+    return userRepository.getUpcomingAndPastAppointment(params);
+
   }
+
 }
-// To parse this JSON data, do
-//
-//     final welcome = welcomeFromJson(jsonString);
-
-
 
 UpcomingPastAppointmentModel welcomeFromJson(String str) => UpcomingPastAppointmentModel.fromJson(json.decode(str));
 
@@ -61,7 +61,7 @@ class UpcomingBooking {
   });
 
   int bookingId;
-  DateTime bookingDate;
+  String bookingDate;
   String bookingTime;
   String status;
   String serviceName;
@@ -74,7 +74,7 @@ class UpcomingBooking {
 
   factory UpcomingBooking.fromJson(Map<String, dynamic> json) => UpcomingBooking(
     bookingId: json["booking_id"],
-    bookingDate: DateTime.parse(json["booking_date"]),
+    bookingDate: json["booking_date"],
     bookingTime: json["booking_time"],
     status: json["status"],
     serviceName: json["service_name"],
@@ -88,7 +88,7 @@ class UpcomingBooking {
 
   Map<String, dynamic> toJson() => {
     "booking_id": bookingId,
-    "booking_date": "${bookingDate.year.toString().padLeft(4, '0')}-${bookingDate.month.toString().padLeft(2, '0')}-${bookingDate.day.toString().padLeft(2, '0')}",
+    "booking_date": bookingDate,
     "booking_time": bookingTime,
     "status": status,
     "service_name": serviceName,

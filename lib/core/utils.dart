@@ -23,6 +23,7 @@ import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/provider_home/domain/use_cases/accept_request_by_id.dart';
 import 'package:maru/features/provider_home/domain/use_cases/decline_request_by_id.dart';
 import 'package:maru/features/provider_home/domain/use_cases/get_provider_request.dart';
+import 'package:maru/features/provider_home/domain/use_cases/get_user.dart';
 import 'package:maru/features/provider_home/presentation/bloc/provider_home_bloc.dart';
 import 'package:maru/features/provider_login/domain/usecases/provider_email_login.dart';
 import 'package:maru/features/provider_register/domain/usecases/provider_email_register.dart';
@@ -77,6 +78,8 @@ void _registerBloc(KiwiContainer container) {
         c.resolve(),
         c.resolve(),
         c.resolve(),
+        c.resolve(),
+
 
       ));
   container
@@ -137,12 +140,13 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => BookProvider(c.resolve()));
   container.registerFactory((c) => PostReview(c.resolve()));
   container.registerFactory((c) => GetUSerPayment(c.resolve()));
-  container.registerFactory((c) => GetUpcomingAndPastAppointments(c.resolve()));
+  container.registerFactory((c) => GetUpcomingAndPastAppointmentdddddd(c.resolve()));
   container.registerFactory((c) => DoPayment(c.resolve()));
   container.registerFactory((c) => AcceptRequest(c.resolve()));
   container.registerFactory((c) => DeclineRequest(c.resolve()));
   container.registerFactory((c) => GetUpcomingPastAndDeclineAppointment(c.resolve()));
   container.registerFactory((c) => BookProviderCancel(c.resolve()));
+  container.registerFactory((c) => GetUsers(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
 

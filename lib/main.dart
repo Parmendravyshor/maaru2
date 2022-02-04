@@ -9,8 +9,6 @@ import 'package:geocoder/geocoder.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:geolocator/geolocator.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +17,7 @@ import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
@@ -31,12 +30,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:location/location.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
-import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'package:maru/features/provider_login/presentation/login_provider_screen.dart';
 import 'package:maru/features/provider_profile/provider_profile1.dart';
-import 'package:maru/features/provider_setting/presentation/provider_settin.dart';
-import 'package:maru/features/register/presentation/signup_screen.dart';
-
 import 'package:maru/features/splash/view/splash_screen.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
@@ -161,7 +156,7 @@ class MyApp extends StatelessWidget {
         //todo: navigate to SplashScreen
 //TODO:need to putup scrooll pagination vie
 // w on the buttom (Provider search screen)
-        home: Scaffold(body: (SplashScreen())));
+        home:   Scaffold(body: (SplashScreen())));
   }
 }
 
@@ -629,9 +624,10 @@ class _MapViewState extends State<MapView> {
                         height: 20,
                       ),
                       InkWell(
+                        //TODO:HFHFFF NEED CHANGE
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => ProviderProfile1()));
+                              builder: (_) => BookAppointment1(id1: 4,)));
                         },
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,

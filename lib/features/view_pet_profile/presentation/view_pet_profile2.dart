@@ -35,7 +35,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: MaaruColors.DogsBackground,
+        backgroundColor: Colors.white,
         bottomNavigationBar: const CreateHomeScreen(
             // Color:MaaruColors.textButtonColor
             ),
@@ -57,22 +57,21 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                                alignment: Alignment.bottomRight,
-                                height: size.height * 0.25,
-                                width: size.width * 0.9,
-                                child: Image.network(
+                                Container(
+                                  height: 200,
+                                  width: 430,
+                                  child: Image.network(
                                     state.welcome2.getSinglePe.img,
+                                    fit: BoxFit.fitWidth,
                                     errorBuilder: (context, error, stackTrace) {
-                                  return Container(
-                                      color: Colors.amber,
-                                      alignment: Alignment.center,
-                                      child: Image.asset(
-                                          'assets/images/kutta.png'));
-                                })),
+                                      return Container(
+                                          color: Colors.amber,
+                                          alignment: Alignment.center,
+                                          child:
+                                          Image.asset('assets/images/kutta.png'));
+                                    },
+                                  ),
+                                ),
                             Container(
                                 //height: size.,
                                 width: 1000,

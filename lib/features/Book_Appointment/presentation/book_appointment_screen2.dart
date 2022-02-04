@@ -124,7 +124,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                         Navigator.of(context).push(
                                                             MaterialPageRoute(
                                                                 builder: (_) =>
-                                                                    BookAppointmentScreen3(id3: widget.id2,)));
+                                                                    BookAppointmentScreen3(id3: widget.id2,image:  state.welcome4.providerDetails.provider.img,)));
                                                       },
                                                       child: Image.asset(
                                                         'assets/icons/icone-setting-68.png',
@@ -198,7 +198,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                   itemCount: state
                                                       .welcome4
                                                       .providerDetails
-                                                      .service
+                                                      .provider.reviews
                                                       .length -1,
                                                   //state.welcome4.providerDetails.provider.reviews.length,
                                                   itemBuilder:
@@ -266,17 +266,17 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                                 color: Colors
                                                                     .yellowAccent,
                                                               ),
-                                                              Expanded(
-                                                                  child: Text(
-                                                                    state
-                                                                        .welcome4
-                                                                        .reviews[index]
-                                                                        .ratings
-                                                                        .toString(),
-                                                                    //state.
-                                                                    style: TextStyle(
-                                                                        fontSize: 15),
-                                                                  )),
+                                                              // Expanded(
+                                                              //     child: Text(
+                                                              //       state
+                                                              //           .welcome4
+                                                              //           .reviews[index]
+                                                              //           .ratings
+                                                              //           .toString(),
+                                                              //       //state.
+                                                              //       style: TextStyle(
+                                                              //           fontSize: 15),
+                                                              //     )),
                                                             ],
                                                           ),
 
@@ -315,7 +315,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                   Navigator.of(context).push(
                                                       MaterialPageRoute(
                                                           builder: (_) =>
-                                                              BookAppointmentScreen3(id3: widget.id2,)));
+                                                              BookAppointmentScreen3(id3: widget.id2,image: state.welcome4.providerDetails.provider.img,)));
                                                 },
                                                 enabled: true,
                                               ),

@@ -632,9 +632,9 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                     SizedBox(
                                       height: 20.0,
                                     ),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                    Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           InkWell(
                                             onTap: () {
@@ -743,7 +743,16 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                               ),
                                             ),
                                           ),
+                                          state is RegisterInProgress
+                                              ? Center(
+                                              child: Container(
+                                                width: 5,
+                                                height: 5,
+                                                child: const CircularProgressIndicator(),
+                                              ))
+                                              : Container(),
                                         ]),
+
                                   ],
                                 ))))
                   ]),

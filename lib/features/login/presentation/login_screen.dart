@@ -18,6 +18,7 @@ import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/Home/presentation/search_screen.dart';
 import 'package:maru/features/chat/presentation/chatt_screen.dart';
 import 'package:maru/features/forgot/presentation/forgot_screen.dart';
+import 'package:maru/features/provider_setting/presentation/edit_profile.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
@@ -46,12 +47,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     _passwordController = TextEditingController();
     _emailController = TextEditingController();
-    var id1 = _prefHelper.getStringByKey('pet_name', '');
-    if(id1.isNotEmpty){
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-              (route) => false);
-    }
     super.initState();
   }
 
@@ -59,11 +54,12 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _passwordController.dispose();
     _emailController.dispose();
+
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
+
     final size = MediaQuery.of(context).size;
     return BlocProvider(
         create: (context) => KiwiContainer().resolve<LoginBloc>(),
@@ -79,6 +75,15 @@ class _LoginScreenState extends State<LoginScreen> {
             }, child: SingleChildScrollView(child: SafeArea(child:
                 BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
               if (state is LoginSuccess) {
+                var id1 = _prefHelper.getStringByKey('pet_name', '');
+print(id1);
+                if (id1.isNotEmpty) {
+                  print('ddddd');
+                  Future.delayed(const Duration(microseconds: 0), () async {
+                  return Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                          (route) => false);
+                });}else{
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (BuildContext context) {
@@ -86,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   }));
                 });
                 return Container();
-              } else if (state is VerificationNeeded) {
+              }} else if (state is VerificationNeeded) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (BuildContext context) {

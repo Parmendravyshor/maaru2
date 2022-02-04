@@ -23,7 +23,7 @@ class _CustomCardState extends State<CustomCard> {
       InkWell(
         onTap: (){
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => Chat()));
+              builder: (_) => Chat1()));
         },
         child: Column(
         children: [

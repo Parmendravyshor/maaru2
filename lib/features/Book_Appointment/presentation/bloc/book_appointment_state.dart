@@ -11,7 +11,14 @@ class BookAppointmentInitial extends BookAppointmentState {
   String toString() => "BookAppointmentInitial";
 }
 
+class BookRegisterFailure extends BookAppointmentState {
+  final String text;
+  BookRegisterFailure(this.text) : super();
 
+  @override
+  String toString() => "BookRegisterFailure";
+
+}
 
 class BookRegisterInProgress extends BookAppointmentState {
   BookRegisterInProgress() : super();
@@ -50,14 +57,7 @@ final GetAllAppointmentProvider upcomingPastAppointmentModel;
 
 
 }
-class BookRegisterFailure extends BookAppointmentState {
-  final String errorMessage;
-  BookRegisterFailure(this.errorMessage) : super();
-  @override
-  String toString() => "BookRegisterFailure";
 
-
-}
 
 class BookRegisterFormValidationSuccess extends BookAppointmentState {
   BookRegisterFormValidationSuccess() : super();

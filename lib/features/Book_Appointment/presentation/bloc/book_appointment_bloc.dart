@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/book_provider_cancel.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
@@ -16,7 +17,7 @@ class BookAppointmentBloc
     extends Bloc<BookAppointmentEvent, BookAppointmentState> {
   final BookProvider bookProvider;
   final PostReview postREviewAfterBooking;
-  final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
+  final GetUpcomingAndPastAppointmentdddddd getUpcomingAndPastAppointments;
   final GetUpcomingPastAndDeclineAppointment
   getUpcomingPastAndDeclineAppointment;
   final BookProviderCancel bookProviderCancel;
@@ -177,11 +178,15 @@ class BookAppointmentBloc
           bookingTime: bookingtime,
           cardId: cardid,
           cvv: cvv));
-      if (result.isRight()) {
+      yield* result.fold((l) async* {
+        if (l is ServerFailure) {
+          yield BookRegisterFailure("Signup failed..please try again.. $l");
+        } else {
+          yield BookRegisterFailure("Signup failed..please try again.. $l");
+        }
+      }, (r) async* {
         yield BookRegisterSuccess();
-      } else {
-        yield BookRegisterFailure('Something went wrong.. ');
-      }
+      });
       // yield* result.fold((l) async* {
       //
       // }, (r) async* {
@@ -203,15 +208,20 @@ class BookAppointmentBloc
       ));
       yield GGetDeclineRequestData(result.getOrElse(() => null));
     }
-    if (event is UpcomingAppointmentChanged) {
-      final result = await getUpcomingAndPastAppointments(UpcomingBooking(
-          bookingDate: DateTime.parse(event.Date),
+     if (event is UpcomingAppointmentChanged) {
+      print('djdfjlkfjf');
+      final result = await getUpcomingAndPastAppointments(
+          UpcomingBooking(
+          bookingDate: event.av.toString(),
           serviceName: event.name.toString()));
-
-      // print('ddddd$event.text');
+print('singh find out ${event.av}');
+      print('Tomer find out ${event.name}');
       if (result.isRight()) {
+        print('djdfjlkfjf');
         yield FetchUpcomingAppointmentModelData(result.getOrElse(() => null));
+        print('dddalfa');
       }
+
     }
   if (event is CancelbookedProvider) {
   final result = await bookProviderCancel.call(event.id1);

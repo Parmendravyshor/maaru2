@@ -178,9 +178,10 @@ class _UpcomingAppointmentCalenderState
                       ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
+                          reverse: true,
                           shrinkWrap: true,
                           itemCount: state
-                              .upcomingPastAppointmentModel.cancelled.length,
+                              .upcomingPastAppointmentModel.confirmed.length,
                           itemBuilder: (BuildContext context, int index) {
 
                             return Container(
@@ -224,7 +225,7 @@ class _UpcomingAppointmentCalenderState
                                                 state
                                                     .upcomingPastAppointmentModel
                                                     .confirmed[index]
-                                                    .companyName,
+                                                    .companyName.toString(),
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 15),

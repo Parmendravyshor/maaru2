@@ -10,6 +10,7 @@ class GetPetProfile implements UseCase<void, String> {
 
   @override
   Future<Either<Failure, Welcome>> call(String text) async {
+    print('ssss');
     return userRepository.getPetProfile(text);
   }
 }

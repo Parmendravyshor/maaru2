@@ -129,7 +129,7 @@ class ThemedTextField extends StatefulWidget {
     this.password = false,
     this.textStyle,
     TextInputAction textInputAction,
-    bool autovalidate,
+    bool autovalidate, Null Function(dynamic val) onSaved, Null Function(dynamic val) validator,
   });
 
   @override

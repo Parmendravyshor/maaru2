@@ -13,13 +13,14 @@ import 'package:maru/core/widget/dialog.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
-import 'package:flutter/painting.dart';
+import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
 import 'package:maru/features/Account_setting/presentation/bloc/setting_bloc.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
+import 'package:flutter/scheduler.dart';
 
 class CreateUserProfile extends StatefulWidget {
   @override
@@ -80,6 +81,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
     }
   }
 
+  var textt2;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -89,20 +91,26 @@ class _CreateUserProfileState extends State<CreateUserProfile>
         backgroundColor: Colors.grey[360],
         body: BlocBuilder<SettingBloc, SettingState>(builder: (context, state) {
           if (state is saveUserProfileSuccess) {
-            AlertManager.showErrorMessage('Profile Updated Successfull', context);
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              AlertManager.showErrorMessage(
+                  'Profile Updated Successfull', context);
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (BuildContext context) {
+                return AccountSettingScreen();
+              }));
+            });
           }
           try {
             Navigator.of(_keyLoader.currentContext, rootNavigator: true);
             //    Navigator.of(context).pop();
           } catch (e) {}
-          _fnameController.text =
-              _prefHelper.getStringByKey(MaruConstant.firstName, "");
-          _lnameController.text =
-              _prefHelper.getStringByKey(MaruConstant.lastName, "");
-          _emailController.text =
-              _prefHelper.getStringByKey(MaruConstant.email, "");
+          _image = _prefHelper.getStringByKey('img', '');
+          _fnameController.text =  _prefHelper.getStringByKey('first_name', "");
           _mobileController.text =
-              _prefHelper.getStringByKey(MaruConstant.phoneNO, "");
+              _prefHelper.getStringByKey('phone_no', "");
+          _lnameController.text =  _prefHelper.getStringByKey('last_name', "");
+          _cityController.text =
+              _prefHelper.getStringByKey('city', "");
           // if (state is UserPetProfileButtonTapped) {
           //   _status = true;
           // }
@@ -179,6 +187,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                         onChanged: (text) {
                           //BlocProvider.of<RegisterBloc>(context).add(FNameChanged(text));
                         },
+                        onSaved: (textt2),
                         editingController: _fnameController,
                       ),
                       ThemedTextField(
@@ -189,6 +198,9 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                         onChanged: (text) {
                           //BlocProvider.of<RegisterBloc>(context).add(LNameChanged(text));
                         },
+                        onSaved: (text) {
+                          text = _lnameController.text;
+                        },
                         editingController: _lnameController,
                       ),
                       ThemedTextField(
@@ -196,12 +208,19 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                         TextInputType.text,
                         textInputAction: TextInputAction.next,
                         textStyle: TextStyle(color: Colors.grey[300]),
-                        enabled: !enabled,
+                        enabled: enabled,
                         onChanged: (text) {
                           //  BlocProvider.of<RegisterBloc>(context)
                           //  .add(PasswordChanged(text));
                         },
                         editingController: _emailController,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                        child: Divider(
+                          thickness: 2.0,
+                          color: Colors.grey[300],
+                        ),
                       ),
                       ThemedTextField(
                         "Phone Number",
@@ -211,6 +230,9 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                         onChanged: (text) {
                           // BlocProvider.of<RegisterBloc>(context)
                           // .add(PasswordChanged(text));
+                        },
+                        onSaved: (text) {
+                          text = _mobileController.text;
                         },
                         editingController: _mobileController,
                       ),
@@ -264,18 +286,46 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                       ),
                       ThemedButton(
                         onPressed: () {
-                          BlocProvider.of<SettingBloc>(context)
-                              .add(RegisterUser(
-                            _fnameController.text,
-                            _lnameController.text,
-                            _mobileController.text,
-                            _cityController.text,
-                            _stateController.text,
-                            _zipCodeController.text,
-                          ));
+                          if (_image.isEmpty) {
+                            Future.delayed(Duration(seconds: 1), () {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.black,
+                                  content: Text('please select image',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'poppins',
+                                          fontSize: 20,
+                                          color: MaaruStyle
+                                              .colors.textColorWhite)),
+                                ),
+                              );
+                            });
+                          } else {
+                            BlocProvider.of<SettingBloc>(context)
+                                .add(RegisterUser(
+                              _fnameController.text,
+                              _lnameController.text,
+                              _mobileController.text,
+                              _cityController.text,
+                              _stateController.text,
+                              _zipCodeController.text,
+                            ));
+                            AlertManager.showErrorMessage(
+                                'Profile Updated Successfull', context);
+                            // Navigator.pushReplacement(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) =>
+                            //             AccountSettingScreen()));
+                          }
                         },
                         text: 'Update Profile',
-                      )
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+
                     ]),
               ),
             ),

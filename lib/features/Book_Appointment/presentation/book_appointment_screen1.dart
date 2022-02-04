@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
@@ -79,7 +78,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
     return Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
-        bottomNavigationBar: CreateHomeScreen(
+        bottomNavigationBar: const CreateHomeScreen(
             // Color:MaaruColors.textButtonColor
             ),
 
@@ -92,7 +91,6 @@ class _BookAppointment1State extends State<BookAppointment1> {
                   if (state is PetProfileInitial) {
                     BlocProvider.of<PetProfileBloc>(context)
                         .add(GetSinglePRovider(widget.id1));
-
                     return CircularProgressIndicator();
                   } else if (state is SingleProviderLoaded) {
                     //   print('+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome4.providerName}');
@@ -173,7 +171,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (_) =>
-                                                        BookAppointmentScreen3(id3: widget.id1,)));
+                                                        BookAppointmentScreen3(id3: widget.id1,image:  state.welcome4.providerDetails.provider.img,)));
                                           },
                                           child: Image.asset(
                                             'assets/icons/icone-setting-68.png',
@@ -222,90 +220,29 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                       scrollDirection: Axis.vertical,
                                     //  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                       semanticChildCount  : 2 ,
-
                                      //   crossAxisSpacing: 1.0,),
-
                                       shrinkWrap: true,
                                       itemCount:
-                                          state.welcome4.masterServices.length - 3,
+                                          state.welcome4.providerDetails.service.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Row(
                                          mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
+                                            choosecontainer(
+                                                context,
+                                                Image.network(
+                                                  state
+                                                      .welcome4
+                                                      .providerDetails.service[index].service.serviceIcon.toString(),
 
-                                            GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    circlecolor3 ==
-                                                        MaaruColors
-                                                            .hotelcolor
-                                                        ? circlecolor3 =
-                                                        MaaruColors
-                                                            .hotelcolor
-                                                        : circlecolor3 =
-                                                        MaaruColors
-                                                            .hotelcolor;
-                                                    if (circlecolor3 ==
-                                                        MaaruColors
-                                                            .hotelcolor) {
-                                                      select = 'hotel';
-                                                      print(select);
-                                                    }
-                                                  });
-                                                },
-                                                child: choosecontainer(
-
-                                                    context,
-                                                    Image.network(
-                                                      state
-                                                          .welcome4
-                                                          .masterServices[index]
-                                                          .serviceIcon,
-                                                      height: 35,
-                                                    ),
-                                                    state
-                                                        .welcome4
-                                                        .masterServices[index]
-                                                        .serviceType,
-                                                    circlecolor3)),
-
-                                            GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    circlecolor2 ==
-                                                            MaaruColors
-                                                                .vetcolor
-                                                        ? circlecolor2 =
-                                                            MaaruColors
-                                                                .vetcolor
-                                                        : circlecolor2 =
-                                                            MaaruColors
-                                                                .vetcolor;
-                                                    if (circlecolor2 ==
-                                                        MaaruColors
-                                                            .vetcolor) {
-                                                      select = 'hotel';
-                                                      print(select);
-                                                    }
-                                                  });
-                                                },
-                                                child: choosecontainer(
-                                                    context,
-                                                    Image.network(
-                                                      state
-                                                          .welcome4
-                                                          .masterServices[index]
-                                                          .serviceIcon,
-                                                      height: 35,
-                                                    ),
-                                                    state
-                                                        .welcome4
-                                                        .masterServices[index]
-                                                        .serviceType
-                                                        .toString(),
-                                                    circlecolor2)),
+                                                  height: 35,
+                                                ),
+                                                state
+                                                    .welcome4
+                                                    .providerDetails.service[index].service.serviceType.toString(),
+                                                circlecolor3)
                                           ],
                                         );
                                       }),
@@ -374,7 +311,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (_) =>
-                                                  BookAppointmentScreen3(id3: widget.id1,)));
+                                                  BookAppointmentScreen3(id3: widget.id1,image:  state.welcome4.providerDetails.provider.img,)));
                                     },
                                     text: ' Book Appointments'.toUpperCase(),
                                     enabled: true,

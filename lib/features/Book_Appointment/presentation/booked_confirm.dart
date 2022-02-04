@@ -15,9 +15,9 @@ import 'bloc/book_appointment_bloc.dart';
 import 'book_appointment_screen3.dart';
 
 class BookedConfirm extends StatefulWidget {
-  final int id1;
+  final int id4;
 
-  const BookedConfirm({Key key, this.id1}) : super(key: key);
+  const BookedConfirm({Key key, this.id4}) : super(key: key);
   @override
   _BookedConfirmState createState() => _BookedConfirmState();
 }
@@ -301,7 +301,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ReviewScreen()));
+                                              ReviewScreen(id4: widget.id4,)));
                                 }),
                                 GestureDetector(
                                   onTap: () {
@@ -310,7 +310,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 ViewPetProfile(
-                                                  id1: widget.id1,
+                                                  id1: widget.id4,
                                                 )));
                                   },
                                   child: Container(
@@ -357,7 +357,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              BookAppointmentScreen3()));
+                                              BookAppointmentScreen3(id3: widget.id4,)));
                                 })
                               ],
                             ),
@@ -409,7 +409,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                   'Booking Cancel Successful', context);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return HomeScreen();
+                return const HomeScreen();
               }));
             }
             //  });

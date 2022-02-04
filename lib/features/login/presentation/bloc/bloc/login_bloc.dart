@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/domain/usecases/resend_verification_code.dart';
@@ -9,6 +8,7 @@ import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past
 import 'package:maru/features/Home/domain/usecases/get_upcoming_appointment.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/provider_home/domain/use_cases/get_provider_request.dart';
+import 'package:maru/features/provider_home/domain/use_cases/get_user.dart';
 import 'package:maru/features/provider_login/domain/usecases/provider_email_login.dart';
 import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
 import 'package:maru/features/verify/domain/usecases/get_provider_by_id.dart';
@@ -26,20 +26,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final EmailSignin _emailSignin;
   final ProviderEmailSignin _providerEmailSignin;
   final ResendCode _resendCode;
+
   final GetPetProfile getPetProfile1;
   final SaveUserProfile saveUserProfile;
   final GetProviders getProviders;
   final GetSinglePetProfile getSinglePetProfile;
+  final GetPetProfile getPetProfile;
   final GetReview getReview;
   final GetProviderRequest getProviderRequest;
-
+  final GetUsers getUsers;
   final GetProviderById getProviderById;
-  final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
+ // final GetUpcomingAndPastAppointments getUpcomingAndPastAppointments;
 
   String text;
   LoginBloc(
       this.getSinglePetProfile,
-      this.getUpcomingAndPastAppointments,
+     // this.getUpcomingAndPastAppointments,
       this._emailSignin,
       this.getProviders,
       this.getReview,
@@ -48,7 +50,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       this.getPetProfile1,
       this._resendCode,
       this.saveUserProfile,
-      this._providerEmailSignin)
+      this.getUsers,
+      this._providerEmailSignin, this.getPetProfile)
       : super();
   String email = "";
   String password = "";
@@ -100,7 +103,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
-        await getPetProfile1(text);
+        await getPetProfile('');
 
         int text1;
         await getSinglePetProfile(text1);
@@ -129,7 +132,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         // yield RegisterSuccess();
         // });
         // }
-
+        await getSinglePetProfile(text1);
         yield LoginSuccess();
       });
     }
@@ -168,8 +171,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (result.isRight()) {
         yield ProviderLoaded1(result.getOrElse(() => null));
       }
+    } else if (event is GetCustomers) {
+      final result = await getUsers(NoParams());
+      if (result.isRight()) {
+        yield CustomerLoaded(result.getOrElse(() => null));
+      }
     }
-
   }
 
   bool _isFormValid() {

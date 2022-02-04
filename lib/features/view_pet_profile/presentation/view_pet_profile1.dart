@@ -34,7 +34,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: MaaruColors.DogsBackground,
+        backgroundColor: Colors.white,
         bottomNavigationBar: CreateHomeScreen(
             // Color:MaaruColors.textButtonColor
             ),
@@ -59,12 +59,9 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                          SizedBox(
-                            height: 20,
-                          ),
                           Container(
                             height: 200,
-                            width: 400,
+                            width: 430,
                             child: Image.network(
                               state.welcome2.getSinglePe.img,
                               fit: BoxFit.fitWidth,
@@ -80,7 +77,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                           Container(
                               //height: size.,
                               width: 1000,
-                              height: 800,
+                            //  height: 800,
                               alignment: FractionalOffset.bottomCenter,
                               decoration: const BoxDecoration(
                                   color: Colors.white,
@@ -423,52 +420,35 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                               height: 20,
                                             ),
                                             Center(
-                                              child: BlocProvider(
-                                                create: (context) =>
-                                                    KiwiContainer().resolve<
-                                                        BookAppointmentBloc>(),
-                                                child: BlocBuilder<
-                                                        BookAppointmentBloc,
-                                                        BookAppointmentState>(
-                                                    builder: (context, state) {
-                                                  if (state
-                                                      is BookAppointmentInitial) {
-                                                    BlocProvider.of<
-                                                                BookAppointmentBloc>(
-                                                            context)
-                                                        .add(
-                                                            DeclineRequestChanged(
-                                                                '', ''));
-                                                    // print('figffgfg${text}');
-                                                    return const Center(
-                                                        child:
-                                                            CircularProgressIndicator());
-                                                  } else if (state
-                                                      is GGetDeclineRequestData) {
-                                                    //  print(
-                                                    //  'datarequestfprcheckeinguseingstaat${state.getProviderRequestModel.appointmentRequests.length}');
-                                                    return StreamBuilder<
-                                                            GGetDeclineRequestData>(
-                                                        stream: null,
-                                                        builder: (context,
-                                                            snapshot) {
-                                                          if (snapshot
-                                                              .hasData) {
-                                                            var abc2 = [];
+                                              child:    BlocProvider(
+                                                create: (context) => KiwiContainer().resolve<BookAppointmentBloc>(),
+                                                child: BlocBuilder<BookAppointmentBloc, BookAppointmentState>(builder: (context, state) {
+                                                  if (state is BookAppointmentInitial) {
+                                                    BlocProvider.of<BookAppointmentBloc>(context).add(
+                                                        UpcomingAppointmentChanged(
+                                                          '','',
+                                                        ));
 
-                                                            for (int i = 0;
-                                                                i <=
-                                                                    state
-                                                                            .upcomingPastAppointmentModel
-                                                                            .confirmed
-                                                                            .length -
-                                                                        1;
-                                                                i++) {
-                                                              abc2.add(state
+                                                    return Center(child: CircularProgressIndicator());
+                                                  } else if (state is FetchUpcomingAppointmentModelData) {
+                                                    return ListView.builder(
+                                                        scrollDirection:
+                                                            Axis.vertical,
+                                                        shrinkWrap: true,
+                                                        physics: ScrollPhysics(),
+                                                        itemCount: state
+                                                            .upcomingPastAppointmentModel
+                                                            .upcomingBookings
+                                                            .length,
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          if (state
                                                                   .upcomingPastAppointmentModel
-                                                                  .confirmed[i]);
-                                                            }
-
+                                                                  .upcomingBookings
+                                                                  .length !=
+                                                              null) {
                                                             return Padding(
                                                                 padding:
                                                                     const EdgeInsets
@@ -476,7 +456,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                         10,
                                                                         20,
                                                                         20,
-                                                                        20),
+                                                                        10),
                                                                 child: Container(
                                                                     //  height: size.height*0.30,
                                                                     width: size.width * 1,
@@ -508,21 +488,20 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                                 Column(
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                               children: [
-                                                                                if (state.upcomingPastAppointmentModel.confirmed.first.service.isEmpty)
-                                                                                  Text(
-                                                                                    '',
-                                                                                    style: MaaruStyle.text.tiny,
-                                                                                  ),
-                                                                                Text(state.upcomingPastAppointmentModel.confirmed.firstWhere((element) => Text('ssss') as bool).service.toString(), style: MaaruStyle.text.medium),
+                                                                                Text(
+                                                                                  state.upcomingPastAppointmentModel.upcomingBookings[index].companyName,
+                                                                                  style: MaaruStyle.text.tiny,
+                                                                                ),
+                                                                                Text(state.upcomingPastAppointmentModel.upcomingBookings[index].serviceName.toString(), style: MaaruStyle.text.medium),
                                                                                 const SizedBox(
                                                                                   height: 5,
                                                                                 ),
                                                                                 Text(
-                                                                                  state.upcomingPastAppointmentModel.confirmed[0].state.toString(),
+                                                                                  state.upcomingPastAppointmentModel.upcomingBookings[index].companyState.toString(),
                                                                                   style: const TextStyle(color: Colors.grey, fontSize: 11),
                                                                                 ),
                                                                                 Text(
-                                                                                  '${state.upcomingPastAppointmentModel.confirmed[0].zipCode.toString()}${state.upcomingPastAppointmentModel.confirmed[0].city.toString()}',
+                                                                                  '${state.upcomingPastAppointmentModel.upcomingBookings[index].companyZipCode.toString()}${state.upcomingPastAppointmentModel.upcomingBookings[index].companyCity.toString()}',
                                                                                   style: const TextStyle(color: Colors.grey, fontSize: 11),
                                                                                 ),
                                                                               ],
@@ -545,11 +524,11 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                                   height: 36,
                                                                                 ),
                                                                                 Text(
-                                                                                  state.upcomingPastAppointmentModel.confirmed.first.bookingDate.toString(),
+                                                                                  state.upcomingPastAppointmentModel.upcomingBookings[index].bookingDate.toString(),
                                                                                   style: const TextStyle(color: Colors.grey, fontSize: 11),
                                                                                 ),
                                                                                 Text(
-                                                                                  state.upcomingPastAppointmentModel.confirmed[0].bookingStartTime,
+                                                                                  state.upcomingPastAppointmentModel.upcomingBookings[index].bookingTime,
                                                                                   style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                                                 ),
                                                                               ],

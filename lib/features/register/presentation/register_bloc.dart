@@ -18,6 +18,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   String lname = "";
   String email = "";
   String password = "";
+  @override
+  @override
 
   RegisterBloc(this._emailSignup, this._providerEmailSignUp) : super();
 
@@ -26,6 +28,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
+
     if (event is FNameChanged) {
       if (event.name.isNotEmpty) {
         first_name = event.name;
@@ -102,6 +105,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       }, (r) async* {
         yield RegisterSuccess();
       });
+
     }
   }
 

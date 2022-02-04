@@ -9,6 +9,7 @@ import 'package:meta/meta.dart';
 import 'package:maru/features/Account_setting/presentation/bloc/change_password_screen.dart';
 part 'setting_event.dart';
 part 'setting_state.dart';
+
 class SettingBloc extends Bloc<SettingEvent, SettingState> {
   SettingBloc(this.saveUserProfile, this._saveChangePassword);
   final SaveUserProfile saveUserProfile;
@@ -21,8 +22,8 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
 
   @override
   Stream<SettingState> mapEventToState(SettingEvent event) async* {
-
     if (event is RegisterUser) {
+      yield saveUserProfileLoading();
       UserProfileParams profileParams = UserProfileParams(
         email: _prefHelper.getEmail(),
         fname: event.fname,
@@ -34,11 +35,11 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       );
       final result = await saveUserProfile(profileParams);
       if (result.isRight()) {
-        yield saveUserProfileSuccess();
+        yield saveUserProfileSuccess('Profile Update Successful');
+      } else {
+        saveUserProfileFailure();
       }
-    }
-
-     else if (event is ChangePassword) {
+    } else if (event is ChangePassword) {
       UserProfileParams profileParams = UserProfileParams(
         //email: sharedPrefHelper.getEmail(),
         oldPassword: event.oldPassword,
@@ -46,11 +47,11 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       );
       final result = await _saveChangePassword(profileParams);
       if (result.isRight()) {
-        print("Password  Changed");
+        yield UserChangePasswordButtonTapped();
       } else {
-        print("Password faileddd");
+        yield UserChangePasswordButtonTappedFailure();
       }
-      yield UserChangePasswordButtonTapped();
+
     }
   }
 }
