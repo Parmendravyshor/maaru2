@@ -8,7 +8,6 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/disclaimer.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
-
 import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/splash/verify_screen.dart';
@@ -294,7 +293,10 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
 
 
                                   text: 'Log Out',
-                                  onPressed: () {
+                                  onPressed: () async{
+                                    await _prefHelper.clear('pet_name');
+                                    await _prefHelper.clear('last_name');
+                                    await _prefHelper.clear('first_name');
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
                                             builder: (context) => VerifyUser()),

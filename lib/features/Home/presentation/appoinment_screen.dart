@@ -237,6 +237,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                       SizedBox(
                         height: 40,
                       ),
+                      state.upcomingPastAppointmentModel.upcomingBookings.isNotEmpty?
                       ListView.builder(
                           scrollDirection: Axis.vertical,
                           reverse: true,
@@ -365,7 +366,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                 ),
                               ),
                             );
-                          }),
+                          }):Center(child: const Text('No Appointment found')),
                       const SizedBox(
                         height: 30,
                       ),
@@ -376,9 +377,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                           style: MaaruStyle.text.tiny,
                         ),
                       ),
+
                       const SizedBox(
                         height: 40,
                       ),
+                      state.upcomingPastAppointmentModel.pastBookings.isNotEmpty ?
                       ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
@@ -598,7 +601,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 // >>>>>>> f38077fb070e945e12e76eb4c96ccef8ae6ff65f
                               ),
                             );
-                          }),
+                          }):Center(child: const Text('No Appointment Found')),
                     ])));
           } else {
             return CircularProgressIndicator();

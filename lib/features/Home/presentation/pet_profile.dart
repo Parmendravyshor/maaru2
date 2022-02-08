@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -111,23 +113,21 @@ class _PetProfile1State extends State<PetProfile1> {
                               },
                               child: Align(
                                 alignment: Alignment.topLeft,
-                                child: ProfileAvatar(
-                                  imageUrl: _prefHelper.getStringByKey(
-                                      MaruConstant.img, ''),
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Container(
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        alignment: Alignment.center,
-                                        child: Image.asset(
-                                            'assets/128/CrystalGaskell.png'));
-                                  },
-                                  avatarRadius: 60,
+                                child:   Container(
+                                  height: 40,
                                   width: 40,
-                                  Color: Colors.white,
-                                  child: null,
-                                ),
+                                  decoration:  BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: _prefHelper.getStringByKey('img', '').isEmpty
+                                          ? const ExactAssetImage(
+                                          'assets/128/CrystalGaskell.png')
+                                          : FileImage(File(_prefHelper.getStringByKey('img', ''))),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )
                               )),
                         ],
                       ),

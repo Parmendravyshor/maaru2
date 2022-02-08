@@ -24,6 +24,7 @@ abstract class SharedPrefHelper {
   Future <void>saveImage(List<int> imageBytes);
   Future<void> saveDouble(String key, double value);
   List<String> getStringList(String key);
+  Future<bool>clear(String key);
   String gettoken();
   String getfname();
   String getlname();
@@ -204,6 +205,11 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
   bool getList(String key, List<int> value) {
     // TODO: implement getList
     sharedPreferences.getStringList(key);
+  }
+
+  @override
+  Future<bool> clear(String key) {
+    sharedPreferences.clear();
   }
 
 

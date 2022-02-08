@@ -12,6 +12,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
+import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/Book_Appointment/presentation/provider_confirm_book.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -71,6 +72,7 @@ class _UpcomingAppointmentCalenderState
                 // print('figffgfg${text}');
                 return const Center(child: CircularProgressIndicator());
               } else if (state is GGetDeclineRequestData) {
+                print(state.upcomingPastAppointmentModel.confirmed.length);
                 return SafeArea(
                   bottom: false,
                   child: SingleChildScrollView(
@@ -175,13 +177,14 @@ class _UpcomingAppointmentCalenderState
                             'Upcoming Appointment',
                             style: MaaruStyle.text.tiniest,
                           )),
+                      state.upcomingPastAppointmentModel.confirmed.isNotEmpty?
                       ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           reverse: true,
                           shrinkWrap: true,
                           itemCount: state
-                              .upcomingPastAppointmentModel.confirmed.length,
+                              .upcomingPastAppointmentModel.cancelled.length,
                           itemBuilder: (BuildContext context, int index) {
 
                             return Container(
@@ -295,32 +298,45 @@ class _UpcomingAppointmentCalenderState
                                       )
                                     ],
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 220),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      //  padding: EdgeInsets.only(right: 80),
-                                      height: 35,
-                                      width: 140,
-                                      decoration: BoxDecoration(
-                                          color: MaaruColors.blueColor,
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border:
-                                              Border.all(color: Colors.white)),
-                                      child: const Text(
-                                        'View Details',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700),
+                                  InkWell(
+                                    onTap:
+                                        () {
+                                      Navigator
+                                          .of(
+                                          context)
+                                          .push(
+                                          MaterialPageRoute(
+                                              builder: (
+                                                  _) =>
+                                                  BookedConfirm()));
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.only(left: 220),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        //  padding: EdgeInsets.only(right: 80),
+                                        height: 35,
+                                        width: 140,
+                                        decoration: BoxDecoration(
+                                            color: MaaruColors.blueColor,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            border:
+                                                Border.all(color: Colors.white)),
+                                        child: const Text(
+                                          'View Details',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w700),
+                                        ),
                                       ),
                                     ),
                                   )
                                 ]),
                               ),
                             );
-                          }),
-                    ],
+                          }):const Center(child: Text('No data found'))]
+
                   )),
                 );
               } else {

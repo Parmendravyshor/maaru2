@@ -67,7 +67,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
 
   String _image = "";
   final picker = ImagePicker();
-  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
   Future getImage() async {
     final pickedFile = await picker.getImage(
@@ -105,12 +105,11 @@ class _CreateUserProfileState extends State<CreateUserProfile>
             //    Navigator.of(context).pop();
           } catch (e) {}
           _image = _prefHelper.getStringByKey('img', '');
-          _fnameController.text =  _prefHelper.getStringByKey('first_name', "");
-          _mobileController.text =
-              _prefHelper.getStringByKey('phone_no', "");
-          _lnameController.text =  _prefHelper.getStringByKey('last_name', "");
-          _cityController.text =
-              _prefHelper.getStringByKey('city', "");
+          _fnameController.text = _prefHelper.getStringByKey('first_name', "");
+          _mobileController.text = _prefHelper.getStringByKey('phone_no', "");
+          _lnameController.text = _prefHelper.getStringByKey('last_name', "");
+          _cityController.text = _prefHelper.getStringByKey('city', "");
+          _emailController.text =_prefHelper.getEmail();
           // if (state is UserPetProfileButtonTapped) {
           //   _status = true;
           // }
@@ -286,6 +285,8 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                       ),
                       ThemedButton(
                         onPressed: () {
+                          String name = _fnameController.text;
+                          String b = _lnameController.text;
                           if (_image.isEmpty) {
                             Future.delayed(Duration(seconds: 1), () {
                               Scaffold.of(context).showSnackBar(
@@ -301,6 +302,12 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                                 ),
                               );
                             });
+                          } else if (name.isEmpty) {
+                            _showDialog(
+                                context, 'please enter fname for credential');
+                          } else if (b.isEmpty) {
+                            _showDialog(
+                                context, 'please enter lname for credential');
                           } else {
                             BlocProvider.of<SettingBloc>(context)
                                 .add(RegisterUser(
@@ -325,13 +332,52 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                       SizedBox(
                         height: 20,
                       ),
-
                     ]),
               ),
             ),
           ])));
         }),
       ),
+    );
+  }
+
+  void _showDialog(BuildContext context, String text) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+            padding: EdgeInsets.all(20.0),
+            child: AlertDialog(actions: <Widget>[
+              Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: MaaruStyle.colors.textColorWhite,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 20),
+                            child: Text(text),
+                          ),
+                          Divider(
+                            color: Colors.grey[360],
+                          ),
+                          InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'ok',
+                                style:
+                                    TextStyle(color: MaaruColors.buttonColor),
+                              ))
+                        ],
+                      )))
+            ]));
+      },
     );
   }
 }

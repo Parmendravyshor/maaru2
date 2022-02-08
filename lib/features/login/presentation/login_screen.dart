@@ -13,6 +13,7 @@ import 'package:maru/core/widget/widgets.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
+import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/Home/presentation/search_screen.dart';
@@ -81,7 +82,7 @@ print(id1);
                   print('ddddd');
                   Future.delayed(const Duration(microseconds: 0), () async {
                   return Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                      MaterialPageRoute(builder: (context) =>  const HomeScreen()),
                           (route) => false);
                 });}else{
                 SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -109,7 +110,7 @@ print(id1);
                   Scaffold.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: Colors.black,
-                      content: Text(state.errorMessage,
+                      content: Text('please check your email or password',
                           style: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontFamily: 'Quicksand',

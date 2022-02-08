@@ -1,7 +1,12 @@
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'package:maru/core/data/datasource/firebase_auth.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/get_bookings.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
@@ -31,11 +36,13 @@ import 'package:maru/features/verify/domain/usecases/save_user_profile.dart';
 import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 
 class UserRepositoryImpl implements UserRepository {
+  final IAuthFacade iAuthFacade;
   final SharedPrefHelper sharedPrefHelper;
-
-  UserRepositoryImpl(
-    this.sharedPrefHelper,
-  );
+ // final FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn;
+final FacebookLogin _facebookLogin;
+  UserRepositoryImpl(this.sharedPrefHelper, this.iAuthFacade,this._facebookLogin,
+     this._googleSignIn,);
 
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
@@ -65,9 +72,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, void>> emailLogin(
-    EmailAuthParams params,
-  ) async {
+  Future<Either<Failure, void>> emailLogin(EmailAuthParams params,) async {
     try {
       var map = Map<String, String>();
 
@@ -78,27 +83,33 @@ class UserRepositoryImpl implements UserRepository {
 
       Map res = json.decode(response.body);
       print(res);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        print('dddd');
+        await sharedPrefHelper.saveString("accessToken", res['accessToken']);
 
-      await sharedPrefHelper.saveString("accessToken", res['accessToken']);
+        print(res['accessToken']);
+        //  await sharedPrefHelper.saveIdJwtToken('accessToken');
+        // await sharedPrefHelper.savePassword(res[MaruConstant.id]);
+        //   print(res);
+        await sharedPrefHelper.savePassword(
+          MaruConstant.password,
+        );
 
-      print(res['accessToken']);
-      //  await sharedPrefHelper.saveIdJwtToken('accessToken');
-      // await sharedPrefHelper.savePassword(res[MaruConstant.id]);
-      //   print(res);
-      await sharedPrefHelper.savePassword(
-        MaruConstant.password,
-      );
-      //  await sharedPrefHelper.savelname(MaruConstant.lastName, res['last_name']);
-      await sharedPrefHelper.saveEmail(res[MaruConstant.email]);
-      print("Register Success  ${response.body}");
-      //  await sharedPrefHelper.saveString( "first_name",res['first_name']);
-      await sharedPrefHelper.saveString("first_name", res['first_name']);
-      var profile2 = res['id'];
-      print(profile2);
-      await sharedPrefHelper.saveInt("id", profile2);
+        //  await sharedPrefHelper.savelname(MaruConstant.lastName, res['last_name']);
+        await sharedPrefHelper.saveEmail(res[MaruConstant.email]);
+        print("Register Success  ${response.body}");
+        //  await sharedPrefHelper.saveString( "first_name",res['first_name']);
+        await sharedPrefHelper.saveString("first_name", res['first_name']);
+        var profile2 = res['id'];
+        print(profile2);
+        await sharedPrefHelper.saveInt("id", profile2);
 
-      //  print(res['last_name']);
-      return Right(Void);
+        //  print(res['last_name']);
+        return Right(Void);
+      } else {
+        return Left(ApiFailure('aa'));
+      }
     } catch (e) {
       print(e);
       return Left(ApiFailure('aa'));
@@ -127,13 +138,15 @@ class UserRepositoryImpl implements UserRepository {
       map[MaruConstant.email] = email;
       final response = await http.post(MaruConstant.reset, body: map);
       print("Register Success  ${response.body}");
+      print(response.statusCode);
       if (response.statusCode == 200) {
         return Right(Void);
       } else {
-        return Left(ServerFailure('Please enter valid otp'));
+        return Left(ApiFailure('Please enter valid otp'));
       }
     } catch (e) {
       print("Thrown Exception While signing IN:$e");
+      return Left(ApiFailure('Please enter valid otp'));
       throw e;
     }
   }
@@ -228,7 +241,7 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token, 'Content-Type': 'json/application'};
       final File imageFile = File(img1);
       var stream =
-          http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+      http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
       var request = http.MultipartRequest(
         "POST",
@@ -250,7 +263,7 @@ class UserRepositoryImpl implements UserRepository {
         ..fields[MaruConstant.timesADay] = ''
         ..fields[MaruConstant.sex] = params.sex
         ..fields[MaruConstant.gender] = params.gender
-        // ..fields['breed_type'] = 'dff'
+      // ..fields['breed_type'] = 'dff'
         ..fields['birth_date'] = params.birthDate
         ..headers.addAll(headers);
       print('request params ${request.fields.toString()}');
@@ -379,25 +392,25 @@ class UserRepositoryImpl implements UserRepository {
       };
       var requetBodyPArams = {
         MaruConstant.petName:
-            _prefHelper.getStringByKey(MaruConstant.petName, ''),
+        _prefHelper.getStringByKey(MaruConstant.petName, ''),
         'age': _prefHelper.getStringByKey(MaruConstant.age, ''),
         MaruConstant.height:
-            _prefHelper.getStringByKey(MaruConstant.height, ''),
+        _prefHelper.getStringByKey(MaruConstant.height, ''),
         MaruConstant.weight:
-            _prefHelper.getStringByKey(MaruConstant.weight, ""),
+        _prefHelper.getStringByKey(MaruConstant.weight, ""),
         MaruConstant.sex: _prefHelper.getStringByKey(MaruConstant.sex, ''),
         MaruConstant.gender:
-            _prefHelper.getStringByKey(MaruConstant.gender, ''),
+        _prefHelper.getStringByKey(MaruConstant.gender, ''),
         MaruConstant.breedType:
-            _prefHelper.getStringByKey(MaruConstant.breedType, ''),
+        _prefHelper.getStringByKey(MaruConstant.breedType, ''),
         'birth_date': _prefHelper.getStringByKey(MaruConstant.birthdate, ''),
         MaruConstant.knownAllergies.toString():
-            params.knownAllergies.toString(),
+        params.knownAllergies.toString(),
         MaruConstant.petNeeds.toString(): params.petNeeds.toString(),
         MaruConstant.walkingSchedule.toString():
-            params.walkingSchedule.toString(),
+        params.walkingSchedule.toString(),
         MaruConstant.feedingSchedule.toString():
-            params.feedingSchedule.toString(),
+        params.feedingSchedule.toString(),
         MaruConstant.temperament.toString(): params.temperament.toString(),
         MaruConstant.medication.toString(): params.medication.toString(),
         MaruConstant.name.toString(): params.name.toString(),
@@ -438,7 +451,7 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
       final File imageFile = File(image);
       var stream =
-          http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+      http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
       var request = http.MultipartRequest(
         "Put",
@@ -776,7 +789,7 @@ class UserRepositoryImpl implements UserRepository {
       );
       var headers = {
         "access-token":
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
       };
       final response = await http.get(MaruConstant.getReview, headers: headers);
 //print(response.body);
@@ -804,7 +817,9 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
       final response = await http.get(
           Uri.parse(
-              'http://18.191.199.31/api/bookings/appointment-requests?name=${params.name}&service=${params.service}&provider=${params.provider}&date=${params.date}&page=1&limit=100'),
+              'http://18.191.199.31/api/bookings/appointment-requests?name=${params
+                  .name}&service=${params.service}&provider=${params
+                  .provider}&date=${params.date}&page=1&limit=100'),
           headers: headers);
       print(response.body);
       var data = convert.jsonDecode(response.body);
@@ -874,7 +889,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<Either<Failure, Welcome4>> getProviderById(int id1) async {
     try {
       final response = await http
-          .get(Uri.parse('http://18.191.199.31/api/public/provider/$id1'));
+          .get(Uri.parse('http://18.191.199.31/api/public/provider/4'));
 //print(response.body);
       Map data = convert.jsonDecode(response.body);
       print(data);
@@ -914,35 +929,38 @@ class UserRepositoryImpl implements UserRepository {
       print('tomer${data1}');
       var date2 = data1['data'];
       print(date2);
-
+      print(response.statusCode);
       var user_id;
       var date3 = date2[0];
       print('singham${date3}');
-      await _prefHelper.saveString(
-          'booking_id', date3['booking_id'].toString());
-      await _prefHelper.saveString(
-          'booking_id', date3['booking_id'].toString());
-      await _prefHelper.saveString(
-          'booking_date', date3['booking_date'].toString());
-      await _prefHelper.saveString(
-          'booking_time', date3['booking_time'].toString());
-      await _prefHelper.saveString(
-          'service_name', date3['service_name'].toString());
-      await _prefHelper.saveString(
-          'total_amount', date3['total_amount'].toString());
-      await _prefHelper.saveString('pet_image', date3['pet_image'].toString());
-      await _prefHelper.saveString(
-          'company_name', date3['company_name'].toString());
-      await _prefHelper.saveString(
-          'company_city', date3['company_city'].toString());
-      await _prefHelper.saveString(
-          'company_state', date3['company_state'].toString());
-      await _prefHelper.saveString(
-          'company_zip_code', date3['company_zip_code'].toString());
       if (response.statusCode == 200) {
-        print(data1);
-        print(response.statusCode);
-        return Right(Void);
+        await _prefHelper.saveString(
+            'booking_id', date3['booking_id'].toString());
+        await _prefHelper.saveString(
+            'booking_id', date3['booking_id'].toString());
+        await _prefHelper.saveString(
+            'booking_date', date3['booking_date'].toString());
+        await _prefHelper.saveString(
+            'booking_time', date3['booking_time'].toString());
+        await _prefHelper.saveString(
+            'service_name', date3['service_name'].toString());
+        await _prefHelper.saveString(
+            'total_amount', date3['total_amount'].toString());
+        await _prefHelper.saveString(
+            'pet_image', date3['pet_image'].toString());
+        await _prefHelper.saveString(
+            'company_name', date3['company_name'].toString());
+        await _prefHelper.saveString(
+            'company_city', date3['company_city'].toString());
+        await _prefHelper.saveString(
+            'company_state', date3['company_state'].toString());
+        await _prefHelper.saveString(
+            'company_zip_code', date3['company_zip_code'].toString());
+        if (response.statusCode == 200) {
+          print(data1);
+          print(response.statusCode);
+          return Right(Void);
+        }
       } else {
         return Left(CacheFailure('Slot are Book Please Change date Or time'));
       }
@@ -955,7 +973,7 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, UpcomingPastAppointmentModel>>
-      getUpcomingAndPastAppointment(UpcomingBooking params) async {
+  getUpcomingAndPastAppointment(UpcomingBooking params) async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -964,7 +982,8 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
       final response = await http.get(
           Uri.parse(
-            'http://18.191.199.31/api/bookings/filter?service=${params.serviceName}&date=${params.bookingDate}',
+            'http://18.191.199.31/api/bookings/filter?service=${params
+                .serviceName}&date=${params.bookingDate}',
           ),
           headers: headers);
       print(response.body);
@@ -1081,7 +1100,7 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, GetAllAppointmentProvider>>
-      getUpcomingPastAndDeclineAppointment(SearchParams params) async {
+  getUpcomingPastAndDeclineAppointment(SearchParams params) async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -1090,7 +1109,9 @@ class UserRepositoryImpl implements UserRepository {
       var headers = {"access-token": token};
       final response = await http.get(
           Uri.parse(
-            'http://18.191.199.31/api/bookings/appointment-filter?name=${params.text1}&service=${params.text1}&date=${params.date}&page=1&limit=8',
+            'http://18.191.199.31/api/bookings/appointment-filter?name=${params
+                .text1}&service=${params.text1}&date=${params
+                .date}&page=1&limit=8',
           ),
           headers: headers);
       print(response.body);
@@ -1146,6 +1167,79 @@ class UserRepositoryImpl implements UserRepository {
     } catch (e) {
       print(e);
       return Left(CacheFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Bookingsss>> getBookingss(id1) async {
+    try {
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+      final response = await http.get(
+          Uri.parse(
+            'http://18.191.199.31/api/public/booking/3',
+          ),
+          headers: headers);
+      print(response.body);
+      var data = convert.jsonDecode(response.body);
+      print(data);
+      return Right(Bookingsss.fromJson(data));
+    } catch (e) {
+      print(e);
+      return Left(CacheFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> googleSignup() async{
+    try {
+      final googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        return left( ServerFailure('ss'));
+      }
+      final googleAuthentication = await googleUser.authentication;
+      final authCredential = GoogleAuthProvider.credential(
+        idToken: googleAuthentication.idToken,
+        accessToken: googleAuthentication.accessToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(authCredential);
+      print(authCredential.accessToken);
+      print(authCredential.providerId);
+      return right(Void);
+    } on FirebaseAuthException catch (_) {
+
+      return left(ServerFailure('ss'));
+    } catch(e){
+      print(e);
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> fbSignIn()async {
+    try {
+
+      final fbUser = await _facebookLogin.logIn([]);
+      if (fbUser == null) {
+        return left( ServerFailure('ss'));
+      }
+      final fbAuthenticate = await _facebookLogin.logIn([]);
+      final authCredential = FacebookAuthProvider.credential('');
+      //  final fbAuthenticate = await fbUser.accessToken;
+   //   final authCredential = FacebookAuthProvider.PROVIDER_ID
+
+      await FirebaseAuth.instance.signInWithCredential(authCredential);
+      print(authCredential.accessToken);
+      print(authCredential.providerId);
+      return right(Void);
+    } on FirebaseAuthException catch (_) {
+
+      return left(ServerFailure('ss'));
+    } catch(e){
+      print(e);
     }
   }
 }

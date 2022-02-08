@@ -53,14 +53,7 @@ class ShowLocation extends StatelessWidget {
             ),
           ),
         ),
-        InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => AccountSettingScreen()));
-          },
-
-
-        child:Container(
+        Container(
           height: 40,
           width: 40,
           decoration:  BoxDecoration(
@@ -69,12 +62,11 @@ class ShowLocation extends StatelessWidget {
             image: DecorationImage(
               image: _prefHelper.getStringByKey('img', '').isEmpty
                   ? const ExactAssetImage(
-                  'assets/icons/Oval.png')
+                  'assets/128/CrystalGaskell.png')
                   : FileImage(File(_prefHelper.getStringByKey('img', ''))),
               fit: BoxFit.cover,
             ),
           ),
-        ),
         )],
     );
   }

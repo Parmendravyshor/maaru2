@@ -10,6 +10,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 
 import 'book_appointment_screen1.dart';
@@ -35,9 +36,10 @@ class _BookAppointment2State extends State<BookAppointment2> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
-        bottomNavigationBar: const CreateHomeScreen(
+        bottomNavigationBar:(_prefHelper.getStringByKey('pet_name', '').isNotEmpty)?
+        const CreateHomeScreen(
           // Color:MaaruColors.textButtonColor
-        ),
+        ):const CreateProviderHome(),
         body: SafeArea(
             bottom: false,
             child: Center(
@@ -121,10 +123,14 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                   ),
                                                   InkWell(
                                                       onTap: () {
+                                                       if(_prefHelper.getStringByKey('pet_name', '').isNotEmpty){
                                                         Navigator.of(context).push(
                                                             MaterialPageRoute(
                                                                 builder: (_) =>
-                                                                    BookAppointmentScreen3(id3: widget.id2,image:  state.welcome4.providerDetails.provider.img,)));
+                                                                    BookAppointmentScreen3(id3: widget.id2,image:  state.welcome4.providerDetails.provider.img,)));}
+                                                       else{
+
+                                                       }
                                                       },
                                                       child: Image.asset(
                                                         'assets/icons/icone-setting-68.png',
@@ -312,10 +318,23 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                               ThemedButton(
                                                 text: 'Book Appointment',
                                                 onPressed: () {
-                                                  Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder: (_) =>
-                                                              BookAppointmentScreen3(id3: widget.id2,image: state.welcome4.providerDetails.provider.img,)));
+                                                  if(_prefHelper.getStringByKey('pet_name', '').isNotEmpty) {
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (_) =>
+
+                                                                BookAppointmentScreen3(
+                                                                  id3: widget
+                                                                      .id2,
+                                                                  image: state
+                                                                      .welcome4
+                                                                      .providerDetails
+                                                                      .provider
+                                                                      .img,)));
+                                                  }
+                                                  else{
+
+                                                  }
                                                 },
                                                 enabled: true,
                                               ),

@@ -61,7 +61,7 @@ import 'booked_confirm.dart';
 
 class BookAppointmentScreen3 extends StatefulWidget {
   final int id3;
-  final String image;
+  String image;
   BookAppointmentScreen3({this.id3, this.text, this.image});
   String text = '';
 
@@ -394,7 +394,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                     Container(
                       height: 200,
                       width: 500,
-                      child: Image.network(widget.image,
+                      child: Image.network(widget.image =null??'',
                         fit: BoxFit.fitWidth,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
@@ -464,12 +464,12 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                     ),
                                     InkWell(
                                         onTap: () {
-                                          Navigator.of(context).push(
+                                          Navigator.of(context).pushAndRemoveUntil(
                                               MaterialPageRoute(
                                                   builder: (_) =>
                                                       BookAppointmentScreen3(
                                                         id3: widget.id3,
-                                                      )));
+                                                      ),),(route)=>false) ;
                                         },
                                         child: Image.asset(
                                           'assets/icons/Rectangle copy 3.png',
@@ -635,24 +635,23 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                   'gdgdhgdhd${val.key1.toString()}');
 
                                               var valey;
-                                              setState(
-                                                () {
-                                                  _selValue = val.key1;
-
-                                                  if (val.key1 == val.key1) {}
-                                                  if (val.key1 ==
-                                                      "SELECT PET") {
-                                                    _dropDownValue = 0;
-                                                    print(_dropDownValue);
-                                                  }
-
-                                                  if (val.key1 == "VET") {
-                                                    _dropDownValue = 2;
-                                                  }
+                                             /// setState(
+                                             //   () {
+                                             //      _selValue = val.key1;
+                                             //
+                                             //      if (val.key1 == val.key1) {}
+                                             //      if (val.key1 ==
+                                             //          "SELECT PET") {
+                                             //        _dropDownValue = 0;
+                                             //        print(_dropDownValue);
+                                             //      }
+                                             //      if (val.key1 == "VET") {
+                                             //        _dropDownValue = 2;
+                                             //      }
                                                 },
                                               );
                                               Navigator.pop(context);
-                                            });
+                                          //  });
                                           },
                                           child: Text(val.key1,
                                               style: MaaruStyle.text.small),
@@ -671,21 +670,21 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                     print('gdgdhgdhd${value.toString()}');
 
                                     var valey;
-                                    setState(
-                                      () {
-                                        _selValue = value;
-
-                                        if (value == value) {}
-                                        if (value == "SELECT PET") {
-                                          _dropDownValue = 0;
-                                          print(_dropDownValue);
-                                        }
-
-                                        if (value == "VET") {
-                                          _dropDownValue = 2;
-                                        }
-                                      },
-                                    );
+                                    // setState(
+                                    //   () {
+                                    //     _selValue = value;
+                                    //
+                                    //     if (value == value) {}
+                                    //     if (value == "SELECT PET") {
+                                    //       _dropDownValue = 0;
+                                    //       print(_dropDownValue);
+                                    //     }
+                                    //
+                                    //     if (value == "VET") {
+                                    //       _dropDownValue = 2;
+                                    //     }
+                                    //   },
+                                    // );
                                   },
                                 ),
                               ),
@@ -1032,7 +1031,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                       BorderRadius.circular(
                                                           20.0)),
                                               child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(
+                                                  padding: const EdgeInsets.fromLTRB(
                                                       20, 20, 10, 20),
                                                   child: Column(children: [
                                                     Row(
@@ -1052,7 +1051,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                         ),
                                                       ],
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 20,
                                                     ),
                                                     Align(
@@ -1060,7 +1059,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                             Alignment.topRight,
                                                         child: card([index]
                                                             .sublist(0))),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 10,
                                                     ),
                                                     Row(
@@ -1371,25 +1370,30 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                   print('ssss1${daa}');
                                                   _showDialog(
                                                       context, 'Please Select Pet');
-                                                  setState(() {});
+                                                  print('something');
                                                 }
                                                 // else if((){
                                                 //   print('ssss1${daa}');
                                                 //   _showDialog(
                                                 //       context, 'Please Select Date');
                                                 // }
+
                                                 else {
+                                                  print('something');
                                                   final FormState form =
                                                       _formKey.currentState;
                                                   if (!form.validate()) {
                                                     setState(() {
+
                                                       _autoValidateMode =
                                                           AutovalidateMode
-                                                              .always; // Start validating on every change.
-                                                    });
+                                                              .always;
+                                                      print('something');// Start validating on every change.
+                                                    },);
                                                   } else {
+                                                    print('something');
                                                     form.save();
-                                                    MyStatefulWidget();
+                                                  //  MyStatefulWidget();
                                                  //  if( state is BookRegisterFormValidationSuccess) {
                                                      BlocProvider.of<
                                                          BookAppointmentBloc>(
@@ -1409,7 +1413,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                 ? Center(
                                                 child: Container(
                                                   margin: EdgeInsets.only(bottom: 20),
-                                                  width: 40,
+                                                  width: 100,
                                                   height: 100,
                                                   child: CircularProgressIndicator(),
                                                 ))
@@ -1708,7 +1712,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return ChatScreen();
+                        return BookedConfirm(id4: widget.id3,);
                       }));
                     });
                     return Container();

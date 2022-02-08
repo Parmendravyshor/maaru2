@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
 import 'package:maru/features/Account_setting/presentation/bloc/change_password_screen.dart';
@@ -20,6 +22,8 @@ class ProviderSetting extends StatefulWidget {
 }
 
 class _ProviderSettingState extends State<ProviderSetting> {
+  final SharedPrefHelper _prefHelper =
+      KiwiContainer().resolve<SharedPrefHelper>();
   bool priceupdate_value = true;
 
   bool update = true;
@@ -167,17 +171,17 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                         // child: Transform.scale(
                                                         //   scale: 1.2,
                                                         child: Switch(
-                                                          activeColor: MaaruColors
-                                                              .buttonColor,
+                                                          activeColor:
+                                                              MaaruColors
+                                                                  .buttonColor,
                                                           inactiveThumbColor:
                                                               MaaruColors
                                                                   .buttonColor,
                                                           // title: Text("Do you want to update your price?"),
                                                           // controlAffinity: ListTileControlAffinity.leading,
-                                                          value:
-                                                          update,
+                                                          value: update,
                                                           onChanged: (bool
-                                                          priceupdatevalue) {
+                                                              priceupdatevalue) {
                                                             setState(() {
                                                               update =
                                                                   priceupdatevalue;
@@ -263,11 +267,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 hite: 40,
                                 text: 'Privacy Policy',
                                 size: 90,
-                                onPressed: () async {
-
-
-
-                                },
+                                onPressed: () async {},
                               ),
                               SizedBox(
                                 height: 20,
@@ -282,7 +282,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                       builder: (_) => WebViewPrivacy()));
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               Test3(
@@ -291,13 +291,18 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 hite: 40,
                                 size: 130,
                                 text: 'Log Out',
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => VerifyUser()));
+                                onPressed: () async {
+                                  await _prefHelper.clear('pet_name');
+                                  await _prefHelper.clear('last_name');
+                                  await _prefHelper.clear('first_name');
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                          builder: (_) => VerifyUser()),
+                                      (route) => false);
                                 },
                               )
                             ])),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         )
                       ])

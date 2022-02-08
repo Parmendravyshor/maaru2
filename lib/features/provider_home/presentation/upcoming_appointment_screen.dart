@@ -27,11 +27,21 @@ class _UpcomingAppointmentCalender1State
     extends State<UpcomingAppointmentCalender1> {
   TextEditingController _textEditingController;
 ////
+  double opacity = 1.0;
   @override
   void initState() {
     _textEditingController = TextEditingController();
-
+    changeOpacity();
     super.initState();
+  }
+
+  changeOpacity() {
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        opacity = opacity == 0.0 ? 1.0 : 0.0;
+        changeOpacity();
+      });
+    });
   }
 
   void dispose() {
@@ -65,8 +75,8 @@ class _UpcomingAppointmentCalender1State
             child: BlocBuilder<BookAppointmentBloc, BookAppointmentState>(
                 builder: (context, state) {
               if (state is BookAppointmentInitial) {
-                BlocProvider.of<BookAppointmentBloc>(context)
-                    .add(DeclineRequestChanged(_textEditingController.text,''));
+                BlocProvider.of<BookAppointmentBloc>(context).add(
+                    DeclineRequestChanged(_textEditingController.text, ''));
                 // print('figffgfg${text}');
                 return const Center(child: CircularProgressIndicator());
               } else if (state is GGetDeclineRequestData) {
@@ -100,7 +110,8 @@ class _UpcomingAppointmentCalender1State
                                         height: 48,
                                         //     width: 350,
                                         child: TextField(
-                                          textInputAction:TextInputAction.search,
+                                          textInputAction:
+                                              TextInputAction.search,
                                           cursorColor: Colors.black,
                                           decoration: InputDecoration(
                                               border: OutlineInputBorder(
@@ -121,12 +132,16 @@ class _UpcomingAppointmentCalender1State
                                                   left: 10, top: 20),
                                               hintText: 'Search',
                                               fillColor: Colors.white,
-                                              suffixIcon:
-                                              InkWell(
-                                                onTap: (){
+                                              suffixIcon: InkWell(
+                                                onTap: () {
                                                   setState(() {
-                                                    BlocProvider.of<BookAppointmentBloc>(context)
-                                                        .add(DeclineRequestChanged(_textEditingController.text,''));
+                                                    BlocProvider.of<
+                                                                BookAppointmentBloc>(
+                                                            context)
+                                                        .add(DeclineRequestChanged(
+                                                            _textEditingController
+                                                                .text,
+                                                            ''));
                                                   });
                                                 },
                                                 child: Image.asset(
@@ -135,13 +150,21 @@ class _UpcomingAppointmentCalender1State
                                                   width: 45,
                                                 ),
                                               )),
-                                          onChanged: (text){
-                                            BlocProvider.of<BookAppointmentBloc>(context)
-                                                .add(DeclineRequestChanged(_textEditingController.text,''));
+                                          onChanged: (text) {
+                                            BlocProvider.of<
+                                                        BookAppointmentBloc>(
+                                                    context)
+                                                .add(DeclineRequestChanged(
+                                                    _textEditingController.text,
+                                                    ''));
                                           },
-                                          onSubmitted: (text){
-                                            BlocProvider.of<BookAppointmentBloc>(context)
-                                                .add(DeclineRequestChanged(_textEditingController.text,''));
+                                          onSubmitted: (text) {
+                                            BlocProvider.of<
+                                                        BookAppointmentBloc>(
+                                                    context)
+                                                .add(DeclineRequestChanged(
+                                                    _textEditingController.text,
+                                                    ''));
                                           },
                                           controller: _textEditingController,
                                         ),
@@ -149,7 +172,8 @@ class _UpcomingAppointmentCalender1State
                                     ),
                                     const SizedBox(
                                       width: 10,
-                                    ), InkWell(
+                                    ),
+                                    InkWell(
                                         onTap: () {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
@@ -177,161 +201,183 @@ class _UpcomingAppointmentCalender1State
 
                           Column(
                             children: [
-                              ListView.builder(
-                                  physics: ScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  reverse: true,
-                                  itemCount: state.upcomingPastAppointmentModel
-                                      .confirmed.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 12.0, right: 0, bottom: 20),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1.5,
-                                                color: Color(0xffE8E8E8)),
-                                            borderRadius:
-                                                BorderRadius.circular(25)),
-                                        height: size.height * 0.18,
-                                        width: 360,
-                                        child: Container(
+                              state.upcomingPastAppointmentModel.confirmed
+                                      .isNotEmpty
+                                  ? ListView.builder(
+                                      physics: ScrollPhysics(),
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      reverse: true,
+                                      itemCount: state
+                                          .upcomingPastAppointmentModel
+                                          .confirmed
+                                          .length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        print('f3oihfhfjifh');
+                                        return Padding(
                                           padding: const EdgeInsets.only(
-                                              left: 12, right: 12, top: 12),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                              left: 12.0, right: 0, bottom: 20),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1.5,
+                                                    color: Color(0xffE8E8E8)),
+                                                borderRadius:
+                                                    BorderRadius.circular(25)),
+                                            height: size.height * 0.18,
+                                            width: 360,
+                                            child: Container(
+                                              padding: const EdgeInsets.only(
+                                                  left: 12, right: 12, top: 12),
+                                              child: Column(
                                                 children: [
-                                                  Container(
-                                                      height:
-                                                          size.height * 0.12,
-                                                      width: size.width * 0.25,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                      ),
-                                                      child: Image.network('',
-                                                          // state
-                                                          //     .getProviderRequestModel
-                                                          //     .appointmentRequests[
-                                                          //         index]
-                                                          //     .petImage
-                                                          //     .toString(),
-                                                          errorBuilder:
-                                                              (context, error,
-                                                                  stackTrace) {
-                                                        return Container(
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: Image.asset(
-                                                                'assets/images/kutta.png'));
-                                                      })),
-                                                  Container(
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          state
-                                                              .upcomingPastAppointmentModel
-                                                              .confirmed[index]
-                                                              .companyName.toString(),
-                                                          style: MaaruStyle
-                                                              .text.tiniest,
-                                                        ),
-                                                        Text(
-                                                          state
-                                                              .upcomingPastAppointmentModel
-                                                              .confirmed[index]
-                                                              .service.toString(),
-                                                          style: MaaruStyle
-                                                              .text.tiny,
-                                                        ),
-                                                        SizedBox(
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Container(
                                                           height: size.height *
-                                                              0.02,
+                                                              0.12,
+                                                          width:
+                                                              size.width * 0.25,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                          ),
+                                                          child: Image.network(
+                                                              '',
+                                                              // state
+                                                              //     .getProviderRequestModel
+                                                              //     .appointmentRequests[
+                                                              //         index]
+                                                              //     .petImage
+                                                              //     .toString(),
+                                                              errorBuilder:
+                                                                  (context,
+                                                                      error,
+                                                                      stackTrace) {
+                                                            return Container(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                child: Image.asset(
+                                                                    'assets/images/kutta.png'));
+                                                          })),
+                                                      Container(
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              state
+                                                                  .upcomingPastAppointmentModel
+                                                                  .confirmed[
+                                                                      index]
+                                                                  .companyName
+                                                                  .toString(),
+                                                              style: MaaruStyle
+                                                                  .text.tiniest,
+                                                            ),
+                                                            Text(
+                                                              state
+                                                                  .upcomingPastAppointmentModel
+                                                                  .confirmed[
+                                                                      index]
+                                                                  .service
+                                                                  .toString(),
+                                                              style: MaaruStyle
+                                                                  .text.tiny,
+                                                            ),
+                                                            SizedBox(
+                                                              height:
+                                                                  size.height *
+                                                                      0.02,
+                                                            ),
+                                                            const Text(
+                                                              '1357 muno manor',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900),
+                                                            ),
+                                                            const Text(
+                                                              'Austin,Tx 75923',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        const Text(
-                                                          '1357 muno manor',
-                                                          style: TextStyle(
+                                                      ),
+                                                      Expanded(
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: const [
+                                                            Icon(
+                                                              Icons
+                                                                  .calendar_today_outlined,
                                                               color:
-                                                                  Colors.grey,
-                                                              fontSize: 10,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900),
+                                                                  Colors.yellow,
+                                                            ),
+                                                            SizedBox(
+                                                              height: 35,
+                                                            ),
+                                                            // functions.sizebox(height: size.width * 0.070),
+                                                            Text(
+                                                              'Aug,21,2021',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900),
+                                                            ),
+                                                            Text(
+                                                              '11:00 am',
+                                                              style: TextStyle(
+                                                                  fontSize: 12),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        const Text(
-                                                          'Austin,Tx 75923',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontSize: 10,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                      )
+                                                    ],
                                                   ),
-                                                  Expanded(
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: const [
-                                                        Icon(
-                                                          Icons
-                                                              .calendar_today_outlined,
-                                                          color: Colors.yellow,
-                                                        ),
-                                                        SizedBox(
-                                                          height: 35,
-                                                        ),
-                                                        // functions.sizebox(height: size.width * 0.070),
-                                                        Text(
-                                                          'Aug,21,2021',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontSize: 10,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900),
-                                                        ),
-                                                        Text(
-                                                          '11:00 am',
-                                                          style: TextStyle(
-                                                              fontSize: 12),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
+                                                  SizedBox(
+                                                    height: size.height * 0.01,
+                                                  ),
                                                 ],
                                               ),
-                                              SizedBox(
-                                                height: size.height * 0.01,
-                                              ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
+                                        );
+                                      })
+                                  : Center(child:   AnimatedOpacity(
+                                opacity:opacity == 1 ? 0 : 1,
+                                duration: Duration(seconds: 1),
+                                child: const Text(' Data Not Found',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 30),),
+                              ),),
                               Container(
                                   margin: EdgeInsets.only(
                                       left: 20, right: 20, top: 10),
@@ -343,158 +389,185 @@ class _UpcomingAppointmentCalender1State
                               const SizedBox(
                                 height: 20,
                               ),
-                              ListView.builder(
-                                  physics: ScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: state.upcomingPastAppointmentModel
-                                      .completed.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 12.0, right: 0, bottom: 20),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 1.5,
-                                                color: Color(0xffE8E8E8)),
-                                            borderRadius:
-                                                BorderRadius.circular(25)),
-                                        height: size.height * 0.18,
-                                        width: 360,
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              left: 12, right: 12, top: 12),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                              state.upcomingPastAppointmentModel.completed
+                                      .isNotEmpty
+                                  ? ListView.builder(
+                                      physics: ScrollPhysics(),
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      itemCount: state
+                                          .upcomingPastAppointmentModel
+                                          .completed
+                                          .length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        print(
+                                            'fhjifhfihf${state.upcomingPastAppointmentModel.completed.length}');
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 12.0, right: 0, bottom: 20),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1.5,
+                                                    color: Color(0xffE8E8E8)),
+                                                borderRadius:
+                                                    BorderRadius.circular(25)),
+                                            height: size.height * 0.18,
+                                            width: 360,
+                                            child: Container(
+                                              padding: EdgeInsets.only(
+                                                  left: 12, right: 12, top: 12),
+                                              child: Column(
                                                 children: [
-                                                  Container(
-                                                      height:
-                                                          size.height * 0.12,
-                                                      width: size.width * 0.25,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                      ),
-                                                      child: Image.network(
-                                                          state
-                                                              .upcomingPastAppointmentModel.completed[index].petImg
-
-                                                              .toString(),
-                                                          errorBuilder:
-                                                              (context, error,
-                                                                  stackTrace) {
-                                                        return Container(
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: Image.asset(
-                                                                'assets/images/kutta.png'));
-                                                      })),
-                                                  Container(
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          state
-                                                              .upcomingPastAppointmentModel
-                                                              .completed[index]
-                                                              .companyName,
-                                                          style: MaaruStyle
-                                                              .text.tiniest,
-                                                        ),
-                                                        Text(
-                                                          state
-                                                              .upcomingPastAppointmentModel
-                                                              .completed[index]
-                                                              .service,
-                                                          style: MaaruStyle
-                                                              .text.tiny,
-                                                        ),
-                                                        SizedBox(
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Container(
                                                           height: size.height *
-                                                              0.02,
+                                                              0.12,
+                                                          width:
+                                                              size.width * 0.25,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                          ),
+                                                          child: Image.network(
+                                                              state
+                                                                  .upcomingPastAppointmentModel
+                                                                  .completed[
+                                                                      index]
+                                                                  .petImg
+                                                                  .toString(),
+                                                              errorBuilder:
+                                                                  (context,
+                                                                      error,
+                                                                      stackTrace) {
+                                                            return Container(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                child: Image.asset(
+                                                                    'assets/images/kutta.png'));
+                                                          })),
+                                                      Container(
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              state
+                                                                  .upcomingPastAppointmentModel
+                                                                  .completed[
+                                                                      index]
+                                                                  .companyName,
+                                                              style: MaaruStyle
+                                                                  .text.tiniest,
+                                                            ),
+                                                            Text(
+                                                              state
+                                                                  .upcomingPastAppointmentModel
+                                                                  .completed[
+                                                                      index]
+                                                                  .service,
+                                                              style: MaaruStyle
+                                                                  .text.tiny,
+                                                            ),
+                                                            SizedBox(
+                                                              height:
+                                                                  size.height *
+                                                                      0.02,
+                                                            ),
+                                                            const Text(
+                                                              '1357 muno manor',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900),
+                                                            ),
+                                                            const Text(
+                                                              'Austin,Tx 75923',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        const Text(
-                                                          '1357 muno manor',
-                                                          style: TextStyle(
+                                                      ),
+                                                      Expanded(
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: const [
+                                                            Icon(
+                                                              Icons
+                                                                  .calendar_today_outlined,
                                                               color:
-                                                                  Colors.grey,
-                                                              fontSize: 10,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900),
+                                                                  Colors.yellow,
+                                                            ),
+                                                            SizedBox(
+                                                              height: 35,
+                                                            ),
+                                                            // functions.sizebox(height: size.width * 0.070),
+                                                            Text(
+                                                              'Aug,21,2021',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize: 10,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w900),
+                                                            ),
+                                                            Text(
+                                                              '11:00 am',
+                                                              style: TextStyle(
+                                                                  fontSize: 12),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        const Text(
-                                                          'Austin,Tx 75923',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontSize: 10,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                      )
+                                                    ],
                                                   ),
-                                                  Expanded(
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: const [
-                                                        Icon(
-                                                          Icons
-                                                              .calendar_today_outlined,
-                                                          color: Colors.yellow,
-                                                        ),
-                                                        SizedBox(
-                                                          height: 35,
-                                                        ),
-                                                        // functions.sizebox(height: size.width * 0.070),
-                                                        Text(
-                                                          'Aug,21,2021',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontSize: 10,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900),
-                                                        ),
-                                                        Text(
-                                                          '11:00 am',
-                                                          style: TextStyle(
-                                                              fontSize: 12),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
+                                                  SizedBox(
+                                                    height: size.height * 0.01,
+                                                  ),
                                                 ],
                                               ),
-                                              SizedBox(
-                                                height: size.height * 0.01,
-                                              ),
-                                            ],
+                                            ),
                                           ),
+                                        );
+                                      })
+                                  : Column(
+                                      children: [
+                                        AnimatedOpacity(
+                                          opacity:opacity == 1 ? 0 : 1,
+                                          duration: Duration(seconds: 1),
+                                          child: const Text(' Data Not Found',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 30),),
                                         ),
-                                      ),
-                                    );
-                                  }),
+
+                                      ],
+                                    ),
                               Container(
                                   margin: EdgeInsets.only(
                                       left: 20, right: 20, top: 10),

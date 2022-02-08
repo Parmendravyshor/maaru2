@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
-
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/features/chat/domain/entity/mesage.dart';
@@ -12,7 +11,6 @@ import 'package:maru/features/chat/domain/usecases/get_text_file.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:meta/meta.dart';
 import 'package:socket_io_client/socket_io_client.dart';
-
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';

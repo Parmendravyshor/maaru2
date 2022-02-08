@@ -105,7 +105,7 @@ class CardUtils {
   }
 
   static List<int> getExpiryDate(String value) {
-    var split = value.split(new RegExp(r'(/)'));
+    var split = value.split(RegExp(r'(/)'));
     return [int.parse(split[0]), int.parse(split[1])];
   }
 

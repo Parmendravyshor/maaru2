@@ -81,6 +81,14 @@ class PasswordChanged extends RegisterEvent {
 
   @override
   String toString() => "PasswordChanged";
-
-
+}
+class GoogleSignupButtonTapped extends RegisterEvent {
+  GoogleSignupButtonTapped();
+  @override
+  String toString() => "GoogleSignupButtonTapped";
+}
+class FacebookSignupButtonTapped extends RegisterEvent {
+  FacebookSignupButtonTapped();
+  @override
+  String toString() => "FacebookSignupButtonTapped";
 }

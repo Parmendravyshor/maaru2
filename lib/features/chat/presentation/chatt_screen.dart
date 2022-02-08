@@ -222,17 +222,23 @@ class Chat1State extends State<Chat1> {
             children: [
               SizedBox(height: 30),
               BackArrowButton(),
-              ProfileAvatar(
-                imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
-                width: 60,
-                avatarRadius: 60,
-                Color: Colors.yellow,
+              Container(
+                height: 75,
+                padding: const EdgeInsets.only(right: 20),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+
+                ),
+                child:   Image.asset('assets/128/AlanPost.png'),
               ),
+
               SizedBox(
                 height: 20,
               ),
               Text(
-                'OSCAR',
+                'Ram',
                 style: MaaruStyle.text.tiniest,
               )
             ],
@@ -275,7 +281,7 @@ class Chat1State extends State<Chat1> {
                                   image: DecorationImage(
                                     image: _prefHelper.getStringByKey('img', '').isEmpty
                                         ? const ExactAssetImage(
-                                        'assets/icons/Oval.png')
+                                        'assets/128/AlanPost.png')
                                         : FileImage(File(_prefHelper.getStringByKey('img', ''))),
                                     fit: BoxFit.cover,
                                   ),

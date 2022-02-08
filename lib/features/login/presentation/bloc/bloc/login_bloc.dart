@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/domain/usecases/resend_verification_code.dart';
 import 'package:maru/core/error/failure.dart';
@@ -23,6 +25,7 @@ import 'login_state.dart';
 /// Bloc for Register page
 ///
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  final SharedPrefHelper _pref = KiwiContainer().resolve<SharedPrefHelper>();
   final EmailSignin _emailSignin;
   final ProviderEmailSignin _providerEmailSignin;
   final ResendCode _resendCode;
@@ -86,23 +89,40 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield LoginInProgress();
       final result = await _emailSignin.call(EmailAuthParams(
           email: email, password: password, first_name: "Tes", lName: "Test"));
+      print('dddddoeheed');
       yield* result.fold((l) async* {
-        if (l is UserNotConfirmedFailure) {
-          final res = await _resendCode(email);
-          if (res.isRight()) {
-            // final result =  await getPetProfile1(NoParams());
-            if (result.isRight()) {
-              await getPetProfile1(event.toString());
-              yield VerificationNeeded();
-            }
-          } else {
-            yield LoginFailure("Email or password not valid");
-          }
-        } else {
-          yield LoginFailure("Email or password not valid");
+        print('step1');
+        if(_pref.getStringByKey('accessToken', '') == null){
+          LoginFailure("email or password not valid");
+          print('stfffep2');
         }
+        else{
+          print('step2');
+          yield VerificationNeeded();
+
+          print('step2');
+        }
+      //  if (l is UserNotConfirmedFailure) {
+          print('step2');
+          final res = await _resendCode(email);
+          print('step3');
+          if (res.isRight()) {
+            print('step4');
+
+            print('step5');
+          } else {
+            print('step6');
+
+            print('step7');
+          }
+        // } else {
+        //   yield LoginFailure("email or password not valid.. $l");
+        // }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
+//await getProviderRequest(No
+// printParams());
+        print('dddddoeheed');
         await getPetProfile('');
 
         int text1;
@@ -146,23 +166,35 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     //   }
     // }
     else if (event is ProviderLoginButtonTapped) {
+      print('dddddoeheed');
       yield LoginInProgress();
+      print('dddddoeheed');
       final result = await _providerEmailSignin.call(EmailAuthParams(
           email: email, password: password, first_name: "Tes", lName: "Test"));
+      print('dddddoeheed');
       yield* result.fold((l) async* {
+        print('step1');
         if (l is UserNotConfirmedFailure) {
+          print('step2');
           final res = await _resendCode(email);
+          print('step3');
           if (res.isRight()) {
+            print('step4');
             yield VerificationNeeded();
+            print('step5');
           } else {
+            print('step6');
             yield LoginFailure("email or password not valid");
+            print('step7');
           }
         } else {
-          yield LoginFailure("email or password not valid.. $l");
+          yield LoginFailure("email or password not valid.. ");
         }
         //yield LoginFailure("Signin failed..please try again.. $l");
       }, (r) async* {
-//await getProviderRequest(NoParams());
+//await getProviderRequest(No
+// printParams());
+      print('dddddoeheed');
         yield LoginSuccess();
       });
     } else if (event is GetProvider) {

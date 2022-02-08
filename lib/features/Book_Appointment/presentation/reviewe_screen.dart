@@ -6,6 +6,7 @@ import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 
@@ -152,10 +153,10 @@ class _ReviewScreenState extends State<ReviewScreen> {
                         Future.delayed(
                           const Duration(seconds: 3),
                           () {
-                            AlertManager.showSuccessMessage(
+                            AlertManager.showErrorMessage(
                                 'Thank you for Review', context);
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => ViewPetProfile()));
+                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                                builder: (_) => const HomeScreen()),(route)=>false);
                           },
                         );
                       },

@@ -140,17 +140,13 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                         ),
                                         Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                                MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
                                             children: [
                                               Text(
-                                                _prefHelper.getStringByKey(
-                                                    MaruConstant.firstName, ''),
+                                                state.welcome2.getSinglePe.petName.toString(),
                                                 style: MaaruStyle.text.large,
-                                              ),
-                                              SizedBox(
-                                                width: size.width * 0.60,
                                               ),
                                               InkWell(
                                                   onTap: () {
@@ -165,8 +161,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                   ))
                                             ]),
                                         Text(
-                                          _prefHelper.getStringByKey(
-                                              MaruConstant.lastName, ''),
+                                          state.welcome2.getSinglePe.breedType.toString(),
                                           style: MaaruStyle.text.tiny,
                                         ),
                                         const SizedBox(
@@ -377,7 +372,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                           .only(
                                                                       left: 43),
                                                               child: Text(
-                                                                'Jimmmy Booker',
+                                                                _prefHelper.getStringByKey(MaruConstant.firstName, ''),
                                                                 style: MaaruStyle
                                                                     .text
                                                                     .tiniest,
@@ -387,8 +382,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                 MainAxisAlignment
                                                                     .spaceEvenly,
                                                             children: [
-                                                              Text(
-                                                                'Owner',
+                                                              Text('Owner',
                                                                 style:
                                                                     MaaruStyle
                                                                         .text
@@ -431,7 +425,8 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
 
                                                     return Center(child: CircularProgressIndicator());
                                                   } else if (state is FetchUpcomingAppointmentModelData) {
-                                                    return ListView.builder(
+
+                                                    return state.upcomingPastAppointmentModel.upcomingBookings.isNotEmpty? ListView.builder(
                                                         scrollDirection:
                                                             Axis.vertical,
                                                         shrinkWrap: true,
@@ -539,7 +534,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                             return const Text(
                                                                 'No Data  Found');
                                                           }
-                                                        });
+                                                        }):const Center(child: Text('No Appointment Found'));
                                                   } else {
                                                     return CircularProgressIndicator();
                                                   }

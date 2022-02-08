@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/book_provider_cancel.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/get_bookings.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/post_review.dart';
@@ -17,6 +18,7 @@ class BookAppointmentBloc
     extends Bloc<BookAppointmentEvent, BookAppointmentState> {
   final BookProvider bookProvider;
   final PostReview postREviewAfterBooking;
+  final GetBookingss _getBookingSuccess;
   final GetUpcomingAndPastAppointmentdddddd getUpcomingAndPastAppointments;
   final GetUpcomingPastAndDeclineAppointment
   getUpcomingPastAndDeclineAppointment;
@@ -26,7 +28,7 @@ class BookAppointmentBloc
       this.getUpcomingPastAndDeclineAppointment,
       this.postREviewAfterBooking,
       this.bookProviderCancel,
-      this.getUpcomingAndPastAppointments);
+      this.getUpcomingAndPastAppointments, this._getBookingSuccess);
 
   @override
   // TODO: implement initialState
@@ -179,11 +181,8 @@ class BookAppointmentBloc
           cardId: cardid,
           cvv: cvv));
       yield* result.fold((l) async* {
-        if (l is ServerFailure) {
-          yield BookRegisterFailure("Signup failed..please try again.. $l");
-        } else {
-          yield BookRegisterFailure("Signup failed..please try again.. $l");
-        }
+          yield BookRegisterFailure('Slot are book please change time or date');
+
       }, (r) async* {
         yield BookRegisterSuccess();
       });
@@ -229,6 +228,15 @@ print('singh find out ${event.av}');
   yield CancelbookedProviderButtonTapped();
   }
   }
+    if (event is GetbookindataChanged) {
+      print('ddd');
+      final result = await _getBookingSuccess.call(event.id1);
+      if (result.isRight()) {
+        print('ddd');
+        yield GetBookingSuccesss(result.getOrElse(() => null));
+        print('ddd');
+      }
+    }
 }
   bool _isFormValid() {
     return pet_id.isNotEmpty &&

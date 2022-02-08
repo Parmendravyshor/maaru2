@@ -223,9 +223,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   } else if (validateEmail(email) != null) {
                                                     _showDialog(context,
                                                         "Please enter valid email", );
-                                                  } else if (password.length < 8) {
+                                                  } else if (password.length < 9) {
                                                     _showDialog(context,
-                                                        "Password must be 6 characters long",
+                                                        "Password must be 9 characters long",
                                                         );
 
                                                     //  enabled = true;

@@ -1,5 +1,7 @@
 
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
 import 'package:maru/features/forgot/Domain/usecases/reset_password.dart';
@@ -24,6 +26,7 @@ class ResetBloc extends Bloc<ResetEvent, ResetState> {
   @override
   // TODO: implement initialState
   ResetState get initialState => ResetInitial();
+
   @override
   Stream<ResetState> mapEventToState(ResetEvent event) async* {
     if (event is EmailChanged) {

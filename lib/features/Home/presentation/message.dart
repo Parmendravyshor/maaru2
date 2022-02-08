@@ -136,30 +136,15 @@ class _MessagesState extends State<Messages> {
                       //
                       //         child:
                       Container(
+                        height: 50,
                         padding: const EdgeInsets.only(right: 20),
                         alignment: Alignment.centerRight,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
+
                         ),
-                        child: ProfileAvatar(
-                          imageUrl:
-                              _prefHelper.getStringByKey(MaruConstant.img, ''),
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                alignment: Alignment.center,
-                                child: Image.asset(
-                                    'assets/128/CrystalGaskell.png'));
-                          },
-                          avatarRadius: 60,
-                          width: 40,
-                          Color: Colors.white,
-                          child: null,
-                        ),
-                        // )
+                        child:   Image.asset('assets/128/CrystalGaskell.png'),
                       ),
 
                       Padding(

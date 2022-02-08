@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -146,36 +147,39 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                   )),
                                             ],
                                           ),
-                                          Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  _prefHelper.getStringByKey(
-                                                      MaruConstant.firstName,
-                                                      ''),
-                                                  style: MaaruStyle.text.large,
-                                                ),
-                                                SizedBox(
-                                                  width: size.width * 0.60,
-                                                ),
-                                                InkWell(
-                                                    onTap: () {
-                                                      Navigator.of(context).push(
-                                                          MaterialPageRoute(
-                                                              builder: (_) =>
-                                                                  CreateregisterPetProfile1()));
-                                                    },
-                                                    child: Image.asset(
-                                                      'assets/icons/icone-setting-29.png',
-                                                      height: 40,
-                                                    ))
-                                              ]),
+                                          Container(
+                                            child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                 state.welcome2.getSinglePe.petName.toString(),
+                                                    style: MaaruStyle.text.large,
+                                                  ),
+                                                  // SizedBox(
+                                                  //   width: size.width * 0.60,
+                                                  // ),
+
+                                                  Align(
+                                                    alignment: Alignment.centerRight,
+                                                    child: InkWell(
+                                                        onTap: () {
+                                                          Navigator.of(context).push(
+                                                              MaterialPageRoute(
+                                                                  builder: (_) =>
+                                                                      CreateregisterPetProfile1()));
+                                                        },
+                                                        child: Image.asset(
+                                                          'assets/icons/icone-setting-29.png',
+                                                          height: 40,
+                                                        )),
+                                                  )
+                                                ]),
+                                          ),
                                           Text(
-                                            _prefHelper.getStringByKey(
-                                                MaruConstant.lastName, ''),
+                                            state.welcome2.getSinglePe.breedType.toString(),
                                             style: MaaruStyle.text.tiny,
                                           ),
                                           SizedBox(
@@ -365,16 +369,17 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                 style: MaaruStyle.text.tiny,
                                               ),
                                               SizedBox(
-                                                height: 20,
+                                                height: 10,
                                               ),
                                               Text(
                                                 state.welcome2.getSinglePe
+                                                    .knownAllergies.isEmpty ? '':  state.welcome2.getSinglePe
                                                     .knownAllergies,
                                                 style:
                                                     MaaruStyle.text.greyDisable,
                                               ),
                                               SizedBox(
-                                                height: 30,
+                                                height: 10,
                                               ),
                                               Text(
                                                 'Pet Vaccine',

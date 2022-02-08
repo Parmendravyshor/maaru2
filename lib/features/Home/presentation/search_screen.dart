@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -150,6 +151,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                   height: Switchcontainerheight)),
                         ],
                       ),
+
                       ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
@@ -157,7 +159,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                           itemCount:
                               state.getProviderModel.providersListing.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return Column(
+                            return   state.getProviderModel.providersListing.isNotEmpty?Column(
                               children: [
                                 Column(children: [
                                   InkWell(
@@ -282,7 +284,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                   )
                                 ]),
                               ],
-                            );
+                            ):Center(child:const Text('No data found'));
                             // RepeatContainer('assets/images/kutta.png',),
                             // SizedBox(
                             //   height: size.height * 0.02,

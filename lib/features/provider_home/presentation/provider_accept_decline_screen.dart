@@ -10,9 +10,11 @@ import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/show_location.dart';
+import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/Book_Appointment/presentation/provider_confirm_book.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_calender.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_screen.dart';
+import 'package:maru/features/provider_setting/presentation/provider_settin.dart';
 import 'bloc/provider_home_bloc.dart';
 import 'create_provider_home.dart';
 import 'package:flutter/scheduler.dart';
@@ -138,7 +140,9 @@ class _TestAppState extends State<TestApp> {
                             const SizedBox(
                               height: 20,
                             ),
-                            ShowLocation(),
+                            InkWell(onTap:(){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ProviderSetting()));
+                            },child: ShowLocation()),
                             const SizedBox(
                               height: 20,
                             ),
@@ -261,6 +265,7 @@ class _TestAppState extends State<TestApp> {
                             const SizedBox(
                               height: 20,
                             ),
+state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                            ListView.builder(
                                     physics:
                                         NeverScrollableScrollPhysics(),
@@ -512,7 +517,7 @@ class _TestAppState extends State<TestApp> {
                                                                             MaterialPageRoute(
                                                                                 builder: (
                                                                                     _) =>
-                                                                                    ProviderBookedConfirm()));
+                                                                                BookedConfirm(id4: state.getProviderRequestModel.appointmentRequests[index].id,)));
                                                                       },
                                                                       child:
                                                                       const Text(
@@ -536,7 +541,7 @@ class _TestAppState extends State<TestApp> {
                               } else {
                                 return const CircularProgressIndicator();
                               }
-                            }),
+                            }):const Center(child: Text('No data found')),
                           ]),
                         ),
                       );

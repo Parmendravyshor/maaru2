@@ -33,39 +33,39 @@ class _AfterSplashScreenState extends State<AfterSplashScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    Future.delayed(Duration(seconds: 3), () async {
-      SharedPrefHelper sharedPrefHelper =
-      KiwiContainer().resolve<SharedPrefHelper>();
-      bool isloggedin = sharedPrefHelper.isLoggedin();
-      if (!isloggedin) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
-        );
-      } else {
-        DateTime expiryTime = DateTime.fromMillisecondsSinceEpoch(
-            int.parse(sharedPrefHelper.getExpiryTime()) * 1000);
-        if (expiryTime.isAfter(DateTime.now())) {
-          await KiwiContainer().resolve<SaveRegistrationId>().call(NoParams());
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
-        } else {
-          EmailSignin emailSignin = KiwiContainer().resolve<EmailSignin>();
-          await emailSignin(EmailAuthParams(
-              email: sharedPrefHelper.getEmail(),
-            //  password: sharedPrefHelper.getPassword(),
-              first_name: "",
-              lName: ""));
-          await KiwiContainer().resolve<SaveRegistrationId>().call(NoParams());
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
-        }
-      }
-    });
+    // Future.delayed(Duration(seconds: 3), () async {
+    //   SharedPrefHelper sharedPrefHelper =
+    //   KiwiContainer().resolve<SharedPrefHelper>();
+    //   bool isloggedin = sharedPrefHelper.isLoggedin();
+    //   if (!isloggedin) {
+    //     Navigator.pushReplacement(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => LoginScreen()),
+    //     );
+    //   } else {
+    //     DateTime expiryTime = DateTime.fromMillisecondsSinceEpoch(
+    //         int.parse(sharedPrefHelper.getExpiryTime()) * 1000);
+    //     if (expiryTime.isAfter(DateTime.now())) {
+    //       await KiwiContainer().resolve<SaveRegistrationId>().call(NoParams());
+    //       Navigator.pushReplacement(
+    //         context,
+    //         MaterialPageRoute(builder: (context) => HomeScreen()),
+    //       );
+    //     } else {
+    //       EmailSignin emailSignin = KiwiContainer().resolve<EmailSignin>();
+    //       await emailSignin(EmailAuthParams(
+    //           email: sharedPrefHelper.getEmail(),
+    //         //  password: sharedPrefHelper.getPassword(),
+    //           first_name: "",
+    //           lName: ""));
+    //       await KiwiContainer().resolve<SaveRegistrationId>().call(NoParams());
+    //       Navigator.pushReplacement(
+    //         context,
+    //         MaterialPageRoute(builder: (context) => HomeScreen()),
+    //       );
+    //     }
+    //   }
+    // });
 
     return
       Scaffold(

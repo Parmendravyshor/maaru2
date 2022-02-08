@@ -114,7 +114,14 @@ class BookRegisterButtonTapped extends BookAppointmentEvent {
     return 'BookRegisterButtonTapped';
   }
 }
-
+class GetbookindataChanged extends BookAppointmentEvent {
+  final String id1;
+  GetbookindataChanged(this.id1);
+  @override
+  String toString() {
+    return 'Getbookindata';
+  }
+}
 class PostREviewAfterBooking extends BookAppointmentEvent {
   PostREviewAfterBooking(
       this.provider_id, this.comment, this.bookingid, this.rating);

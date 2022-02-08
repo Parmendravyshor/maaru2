@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
 //todo: Navigate to AfterSplashScreen
 //
   navigateToNextScreen() {
-    Future.delayed(const Duration(seconds: 0), () async {
+    Future.delayed(const Duration(seconds: 3), () async {
       SharedPrefHelper _prefHelper =
           KiwiContainer().resolve<SharedPrefHelper>();
       String token = _prefHelper.getfname();
@@ -70,13 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
         var id1 = _prefHelper.getStringByKey('pet_name', '');
         print('ddddd${id1}');
          if (id1.isNotEmpty) {
-           var accessdeniedOrsuccess = _prefHelper.getStringByKey('last_name', '');
-           print('abced${accessdeniedOrsuccess}');
-           if (accessdeniedOrsuccess.isNotEmpty) {
-            return Navigator.of(context).pushAndRemoveUntil(
-                 MaterialPageRoute(builder: (context) => TestApp()),
-                     (route) => false);
-           }
+
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (context) => const HomeScreen()),
               (route) => false);
@@ -90,6 +84,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
         }
       } else {
+        var accessdeniedOrsuccess = _prefHelper.getStringByKey('last_name', '');
+        print('abced${accessdeniedOrsuccess}');
+        if (accessdeniedOrsuccess.isNotEmpty) {
+          return Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => TestApp()),
+                  (route) => false);
+        }
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => VerifyUser()),
             (route) => false);

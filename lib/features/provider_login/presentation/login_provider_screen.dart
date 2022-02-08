@@ -96,7 +96,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                   Scaffold.of(context).showSnackBar(
                                     SnackBar(
                                       backgroundColor: Colors.black,
-                                      content: Text(state.errorMessage,
+                                      content: Text('please check your email or password',
                                           style: TextStyle(
                                               fontWeight: FontWeight.w400,
                                               fontFamily: 'Quicksand',

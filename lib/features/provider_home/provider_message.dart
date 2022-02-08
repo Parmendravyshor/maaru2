@@ -9,6 +9,7 @@ import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/Home/presentation/custom_card.dart';
+import 'package:maru/features/chat/domain/entity/mesage.dart';
 import 'package:maru/features/chat/presentation/chatt_screen.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
@@ -110,114 +111,146 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                     SizedBox(
                       height: 10,
                     ),
-                    ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: state.getUserModel.customers.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Column(
-                            children: [
-                              ListTile(
-                                  leading: Container(
-                                height: 100,
-                                width: 200,
-                                child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      ProfileAvatar(
-                                        imageUrl: state
-                                            .getUserModel
-                                            .customers[index]
-                                            .firstName
-                                            .toString(),
-                                        avatarRadius: 60,
-                                        width: 90,
-                                        Color: Colors.yellow,
-                                      ),
-                                      ProfileAvatar(
-                                        imageUrl:
-                                            'assets/images/istockphoto-1179420343-612x612.jpg',
-                                        avatarRadius: 60,
-                                        width: 90,
-                                        Color: Colors.yellow,
-                                      ),
-                                    ]),
-// title: Padding(padding: EdgeInsets.only(right: 30),child:
-// Align(alignment: Alignment.centerLeft,child:
-// ProfileAvatar(
-//   imageUrl: 'assets/images/Russo-Alessandro-Eric-20.jpg',
-//   avatarRadius: 60,
-//   width: 90,
-//   Color: Colors.yellow,
-// ),
-                              )),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => Chat2(
-                                            user: state.getUserModel.customers[index].id.toString(),
-                                      //  image: state.getUserModel.customers[index].firstName.toString(),
-                                          )));
-                                },
-                                child: Column(children: [
-                                  Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 10, right: 20),
-                                          child: Container(
-                                              height: 120,
-                                              width: 400,
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey[50],
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              child: Center(
-                                                child: ListTile(
-                                                  leading:  ProfileAvatar(
-                                                    imageUrl:
-                                                        ('assets/images/istockphoto-1179420343-612x612.jpg'),
-                                                    width: 50,
-                                                    avatarRadius: 60,
-                                                    Color: Colors.yellow,
+                        Column(
+                          children: [
+                            ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: state
+                                    .getUserModel.customers.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Container(
+                                          width: 100,
+                                          child: Image.network(
+                                            state
+                                                .getUserModel
+                                            .customers[index].firstName,
+                                            errorBuilder:
+                                                (BuildContext, Object,
+                                                StackTrace) {
+                                              return Image.asset(
+                                                'assets/128/AlanPost.png',
+                                                fit: BoxFit.fitWidth,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ]);
+                                }),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: state
+                                  .getUserModel.customers.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Column(children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                            builder: (_) => Chat1(
+                                              user: state
+                                                  .getUserModel.customers
+                                                 [index]
+                                                  .id
+                                                  .toString(),
+                                            )));
+                                      },
+                                      child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 10, right: 20),
+                                              child: Container(
+                                                  height: 120,
+                                                  width: 400,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.grey[50],
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        20.0),
                                                   ),
-                                                  title: Text(
-                                                    state
-                                                        .getUserModel
-                                                        .customers[index]
-                                                        .firstName
-                                                        .toString(),
-                                                    style: MaaruStyle.text.tiny,
-                                                  ),
-                                                  subtitle: Text(
-                                                    'Are we meeting tommarow still pet services'
-                                                        .toUpperCase(),
-                                                    style: const TextStyle(
-                                                        fontSize: 13,
-                                                        fontWeight:
+                                                  child: Center(
+                                                    child: ListTile(
+                                                      leading: Image.network('',
+                                                        // state
+                                                        //     .getUserModel.customers[index].
+                                                        //     .providersListing[
+                                                        // index]
+                                                        //     .img,
+                                                        errorBuilder:
+                                                            (BuildContext, Object,
+                                                            StackTrace) {
+                                                          return Image.asset(
+                                                            'assets/128/AlanPost.png',
+                                                            fit: BoxFit.fitWidth,
+                                                          );
+                                                        },
+                                                      ),
+                                                      title: Text(
+                                                        state
+                                                            .getUserModel.customers
+                                                            [
+                                                        index]
+                                                            .firstName
+                                                            .toString(),
+                                                        style:
+                                                        MaaruStyle.text.tiny,
+                                                      ),
+                                                      subtitle: ListView.builder(
+                                                      //   controller: _controller,
+                                                          scrollDirection:
+                                                          Axis.vertical,
+                                                          shrinkWrap: true,
+                                                          reverse: true,
+                                                          cacheExtent: 1000,
+                                                          itemCount: 0,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                          context,
+                                                              int index) {
+                                                            var message =
+                                                            MessagesModel
+                                                                .messages[0];
+                                                            print(message[
+                                                            'SenderID']
+                                                                .toString() +
+                                                                '---------' +
+                                                                4.toString());
+                                                            return Text(
+                                                              '${message['4']}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                                  color: Colors
+                                                                      .grey),
+                                                            );
+                                                          }),
+                                                      trailing: Text(
+                                                        'today'.toUpperCase(),
+                                                        style: const TextStyle(
+                                                            fontSize: 13,
+                                                            fontWeight:
                                                             FontWeight.bold,
-                                                        color: Colors.grey),
-                                                  ),
-                                                  trailing: Text(
-                                                    'today'.toUpperCase(),
-                                                    style: const TextStyle(
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.grey),
-                                                  ),
-                                                ),
-                                              )))),
-                                ]),
-                              )
-                            ],
-                          );
-                        }),
-                  ])));
+                                                            color: Colors.grey),
+                                                      ),
+                                                    ),
+                                                  )))),
+                                    ),
+                                  ]);
+                                }),
+                          ],
+                        )
+                      ]),
+                  ));
             } else {
               return const CircularProgressIndicator();
             }

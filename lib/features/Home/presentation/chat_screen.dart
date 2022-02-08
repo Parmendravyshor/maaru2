@@ -35,13 +35,13 @@ elevation: 0,
             child: Column(
               children: [
                 SizedBox(height: 30),
-
-                ProfileAvatar(
-                  imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
-                  width: 80,
-                  avatarRadius: 80,
-                  Color: Colors.yellow,
-                ),
+Image.asset('assets/128/CrystalGaskell.png'),
+                // ProfileAvatar(
+                //   imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
+                //   width: 80,
+                //   avatarRadius: 80,
+                //   Color: Colors.yellow,
+                // ),
                 SizedBox(
                   height: 20,
                 ),

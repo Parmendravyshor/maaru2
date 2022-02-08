@@ -27,6 +27,15 @@ class BookRegisterInProgress extends BookAppointmentState {
   String toString() => "BookRegisterInProgress";
 
 }
+
+class GetBookingSuccesss extends BookAppointmentState {
+  final Bookingsss bookingsss;
+  GetBookingSuccesss(this.bookingsss) : super();
+
+  @override
+  String toString() => "GetBookingSuccesss";
+
+}
 class RivewPostSuccess extends BookAppointmentState {
   RivewPostSuccess() : super();
 
