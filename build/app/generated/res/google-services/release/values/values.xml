@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">970983672247-fk6716d41vtsg6qo8utjp5bthsqk1fon.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">970983672247</string>
+    <string name="google_api_key" translatable="false">AIzaSyAy17CWx-1L-42U5tcN29_zXL9gB-Mkt-o</string>
+    <string name="google_app_id" translatable="false">1:970983672247:android:1b3c0afb3ac83b226fc032</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAy17CWx-1L-42U5tcN29_zXL9gB-Mkt-o</string>
+    <string name="google_storage_bucket" translatable="false">maru-cf792.appspot.com</string>
+    <string name="project_id" translatable="false">maru-cf792</string>
+</resources>

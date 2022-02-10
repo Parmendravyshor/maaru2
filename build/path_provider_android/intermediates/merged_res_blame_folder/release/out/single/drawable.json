@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\Lenovo\\AndroidStudioProjects\\maaru2-parmendra\\build\\path_provider_android\\intermediates\\res\\merged\\release\\drawable\\notification_bg_low.xml",
+        "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\f2f6bcb7c9e612cc7c9c4e5248d9429f\\core-1.6.0\\res\\drawable\\notification_bg_low.xml"
+    },
+    {
+        "merged": "C:\\Users\\Lenovo\\AndroidStudioProjects\\maaru2-parmendra\\build\\path_provider_android\\intermediates\\res\\merged\\release\\drawable\\notification_bg.xml",
+        "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\f2f6bcb7c9e612cc7c9c4e5248d9429f\\core-1.6.0\\res\\drawable\\notification_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\Lenovo\\AndroidStudioProjects\\maaru2-parmendra\\build\\path_provider_android\\intermediates\\res\\merged\\release\\drawable\\notification_tile_bg.xml",
+        "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\f2f6bcb7c9e612cc7c9c4e5248d9429f\\core-1.6.0\\res\\drawable\\notification_tile_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\Lenovo\\AndroidStudioProjects\\maaru2-parmendra\\build\\path_provider_android\\intermediates\\res\\merged\\release\\drawable\\notification_icon_background.xml",
+        "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\f2f6bcb7c9e612cc7c9c4e5248d9429f\\core-1.6.0\\res\\drawable\\notification_icon_background.xml"
+    }
+]
