@@ -159,7 +159,7 @@ class MyApp extends StatelessWidget {
 //TODO:need to putup scrooll pagination vie
 // w on the buttom (Provider search screen)
 
-        home:   Scaffold(body: (CreateRegisterPetProfile2())));
+        home:   Scaffold(body: (SplashScreen())));
   }
 }
 

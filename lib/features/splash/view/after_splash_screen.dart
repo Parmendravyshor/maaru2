@@ -80,12 +80,15 @@ class _AfterSplashScreenState extends State<AfterSplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Image.asset(
-                  'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
-                  height: size.height * 0.15,
+                SizedBox(height: size.height*0.22,),
+                Center(
+                  child: Image.asset(
+                    'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
+                    height: size.height * 0.15,
+                  ),
                 ),
                 SizedBox(
-                  height: size.height * 0.25,
+                  height: size.height * 0.15,
                 ),
                 InkWell(
                   onTap: () {
