@@ -63,6 +63,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
         // focusedBorder: MaaruStyle.focusedBorder,
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: MaaruColors.textfeildline),
+
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         labelText: widget.placeholder.toUpperCase(),
@@ -91,6 +92,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
                         textInputAction: widget.textinputaction2,
                         onChanged: widget.onChanged,
                         autocorrect: false,
+
                         keyboardType: widget.keyboardType,
                         style: MaaruStyle.text.tiny,
                         decoration: inputDecoration(widget),

@@ -51,18 +51,8 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
 
   // int step = 1;
-  String age = '';
-  var petneed = '';
-  String petName = "";
-  String width = "";
-  String hight = "";
-  var sex = '';
-  var birthdate = '';
-  String breadtype = '';
   String img = '';
   String allergies = '';
-  var gender = '';
-  var note = '';
   var knownAllergies = '';
   var vaccine = '';
   var text2 = '';
@@ -72,160 +62,19 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
   @override
   Stream<PetProfileState> mapEventToState(PetProfileEvent event) async* {
-    if (event is WidthChanged) {
-      if (event.width.isNotEmpty) {
-        width = event.width;
-      } else {
-        width = "";
-      }
-      print(width);
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    } else if (event is AgeChanged) {
-      print('djdd');
-      if (event.age.isNotEmpty) {
-        age = event.age;
-      } else {
-        age = '';
-      }
-      print(age);
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    } else if (event is HeightChanged) {
-      if (event.hight.isNotEmpty) {
-        hight = event.hight;
-      } else {
-        hight = "";
-      }
-      print(hight);
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    } else if (event is BreadChanged) {
-      if (event.breadtype.isNotEmpty) {
-        breadtype = event.breadtype;
-      } else {
-        breadtype = "";
-      }
-      print(breadtype);
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    } else if (event is BirthChanged) {
-      print(event.selectedDate);
-      if (event.selectedDate.isNotEmpty) {
-        birthdate = event.selectedDate;
-      } else {
-        birthdate = "";
-        print(birthdate);
-      }
-      print(birthdate);
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield UpdatedBirthDate(birthdate: event.selectedDate);
-        print(birthdate);
-      }
-    } else if (event is petNameChanged) {
-      if (event.petname.isNotEmpty) {
-        petName = event.petname;
-      } else {
-        petName = "";
-      }
-      print(petName);
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    } else if (event is SexChanged) {
-      if (event.sex.isNotEmpty) {
-        sex = event.sex;
-      } else {
-        sex = "";
-        print('sssss$sex');
-      }
-      print('sssd$sex');
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    } else if (event is NoteChanged) {
-      print('note event');
-      if (event.note.isNotEmpty) {
-        note = event.note;
-      } else {
-        note = "";
-        print(note);
-      }
-      print(note);
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    } else if (event is genderChanged) {
-      print(event.gender);
-      if (event.gender.isNotEmpty) {
-        gender = event.gender;
-      } else {
-        gender = "";
-        print(gender);
-      }
-
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    } else if (event is PetNeed) {
-      print('note event');
-      if (event.petneed.isNotEmpty) {
-        petneed = event.petneed;
-      } else {
-        petneed = "";
-        print(petneed);
-      }
-
-      bool isValidated = _isFormValid();
-      if (isValidated) {
-        yield RegisterFormValidationSuccess();
-      } else {
-        yield RegisterFormValidationFailure();
-      }
-    } else if (event is CreateRegisterPetProfile) {
+    if (event is CreateRegisterPetProfile) {
       yield RegisterInProgress();
       final result = await createPetProfile(PetProfile1(
-          age: age,
-          weight: width,
-          height: hight,
-          birthDate: birthdate,
-          breedType: breadtype,
-          petName: petName,
-          sex: sex,
+          age: event.age,
+          weight: event.width,
+          height: event.height,
+          birthDate: event.birthdate,
+          breedType: event.breedType,
+          petName: event.petName,
+          sex: event.sex,
           // petNeeds: knownAllergies,
-          gender: gender,
-          notes: note,
+          gender: event.gender,
+          notes: event.notes,
           knownAllergies: knownAllergies,
           vaccine: vaccine));
       yield* result.fold((l) async* {
@@ -351,16 +200,5 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
     //  }
   }
 
-  bool _isFormValid() {
-    return age.isNotEmpty &&
-        width.isNotEmpty &&
-        hight.isNotEmpty &&
-        breadtype.isNotEmpty &&
-        birthdate.isNotEmpty &&
-        sex.isNotEmpty &&
-        gender.isNotEmpty &&
-         img.isNotEmpty &&
-        petName.isNotEmpty;
 
-  }
 }

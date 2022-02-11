@@ -10,6 +10,7 @@ import 'package:maru/core/widget/disclaimer.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/provider_home/presentation/webview.dart';
 import 'package:maru/features/splash/verify_screen.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
 import 'package:maru/features/splash/view/view.dart';
@@ -270,9 +271,12 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   hite: 40,
                                   text: 'Privacy Policy',
                                   size: 90,
-                                  onPressed: () {},
+                                  onPressed: ()  {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (_) => WebViewPolicy()));
+                                  },
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   height: 20,
                                 ),
                                 Test3(
@@ -280,7 +284,10 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                   hite: 40,
                                   text: 'Terms and  Conditions',
                                   size: 0,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (_) => WebViewPrivacy()));
+                                  },
                                 ),
                                 SizedBox(
                                   height: size.height*0.02,

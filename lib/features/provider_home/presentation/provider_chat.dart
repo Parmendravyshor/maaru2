@@ -156,13 +156,18 @@ class Chat2State extends State<Chat2> {
           color: Colors.white,
           child: Column(
             children: [
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               BackArrowButton(),
-              ProfileAvatar(
-                imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
-                width: 60,
-                avatarRadius: 60,
-                Color: Colors.yellow,
+              Container(
+                height: 75,
+                padding: const EdgeInsets.only(right: 20),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+
+                ),
+                child:   Image.asset('assets/128/AlanPost.png'),
               ),
               SizedBox(
                 height: 20,

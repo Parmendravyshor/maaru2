@@ -35,8 +35,10 @@ class Messages extends StatefulWidget {
 
 class _MessagesState extends State<Messages> {
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  TextEditingController _petNameController;
   @override
   void initState() {
+    _petNameController = TextEditingController();
     initSocket();
   }
 
@@ -173,6 +175,9 @@ class _MessagesState extends State<Messages> {
                                   height: 50,
                                   // width: 30,
                                 )),
+                            onChanged: (text){
+                              BlocProvider.of<LoginBloc>(context).add(event.GetProvider(_petNameController.text));
+                            },controller: _petNameController,
                           )),
                       SizedBox(
                         height: 30,
@@ -190,35 +195,39 @@ class _MessagesState extends State<Messages> {
 
                       Column(
                         children: [
-                          ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: state
-                                  .getProviderModel.providersListing.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Container(
-                                        width: 100,
-                                        child: Image.network(
-                                          state
-                                              .getProviderModel
-                                              .providersListing[
-                                          index]
-                                              .img,
-                                          errorBuilder:
-                                              (BuildContext, Object,
-                                              StackTrace) {
-                                            return Image.asset(
-                                              'assets/128/CrystalGaskell.png',
-                                              fit: BoxFit.fitWidth,
-                                            );
-                                          },
+                          Container(
+                            height: 70,
+                            width: 400,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                itemCount: state
+                                    .getProviderModel.providersListing.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Container(
+                                          width: 100,
+                                          child: Image.network(
+                                            state
+                                                .getProviderModel
+                                                .providersListing[
+                                            index]
+                                                .img,
+                                            errorBuilder:
+                                                (BuildContext, Object,
+                                                StackTrace) {
+                                              return Image.asset(
+                                                'assets/128/CrystalGaskell.png',
+                                                fit: BoxFit.fitWidth,
+                                              );
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                    ]);
-                              }),
+                                      ]);
+                                }),
+                          ),
                           SizedBox(
                             height: 20,
                           ),

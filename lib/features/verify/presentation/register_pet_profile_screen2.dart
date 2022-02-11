@@ -14,6 +14,7 @@ import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/view_pet_profile/presentation/view_pet_profile2.dart';
 
 
 import '../../../main.dart';
@@ -198,8 +199,8 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                       style: MaaruStyle.text.tiny,
                                       maxLines: 2,
                                       decoration: InputDecoration(
-                                          hintText:
-                                              'Seprated by comma'.toUpperCase(),
+                                          hintText:_prefHelper.getStringByKey(MaruConstant.breedType, '').isEmpty?
+                                              'Seprated by comma'.toUpperCase():'',
                                           hintStyle: MaaruStyle.text.tiny,
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -298,14 +299,30 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                         ),
                                         InkWell(
                                             onTap: () {
+
                                               //
-                                              BlocProvider.of<PetProfileBloc>(
-                                                      context)
-                                                  .add(Profile2(
-                                                      _knowallergiesController
-                                                          .text,
-                                                      // getImage()
-                                                      _vaccineController.text));
+ if(_prefHelper.getStringByKey('pet_name', '').isEmpty) {
+   BlocProvider.of<PetProfileBloc>(
+       context)
+       .add(Profile2(
+       _knowallergiesController
+           .text,
+       // getImage()
+       _vaccineController.text));
+ }
+ else{
+   BlocProvider.of<PetProfileBloc>(
+       context)
+       .add(Profile2(
+       _knowallergiesController
+           .text,
+       // getImage()
+       _vaccineController.text));
+   int a;
+   Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ViewPetProfile2(id2: _prefHelper.getIntByKey('id', a),)));
+ }
+
+
                                             },
                                             child: Container(
                                               alignment: Alignment.centerRight,

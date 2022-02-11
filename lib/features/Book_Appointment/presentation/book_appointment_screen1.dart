@@ -20,7 +20,7 @@ import 'booked_confirm.dart';
 class BookAppointment1 extends StatefulWidget {
   final int id1;
 
-   BookAppointment1( {this.id1});
+  BookAppointment1({this.id1});
   @override
   _BookAppointment1State createState() => _BookAppointment1State();
 }
@@ -38,9 +38,8 @@ class _BookAppointment1State extends State<BookAppointment1> {
       BuildContext context, Image image, String text, Color color) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.only(bottom:0.0),
+      padding: const EdgeInsets.only(bottom: 0.0),
       child: Container(
-
         decoration: BoxDecoration(
           border: Border.all(
             color: MaaruColors.textfeildline,
@@ -51,8 +50,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
         // width: size.width * 0.43,
         child: Container(
           width: 150,
-
-          margin: EdgeInsets.only(left: 5, top: 9, bottom: 9,right: 0),
+          margin: EdgeInsets.only(left: 5, top: 9, bottom: 9, right: 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -64,7 +62,6 @@ class _BookAppointment1State extends State<BookAppointment1> {
                 text,
                 style: MaaruStyle.text.tiny,
               ),
-
             ],
           ),
         ),
@@ -79,11 +76,12 @@ class _BookAppointment1State extends State<BookAppointment1> {
     return Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
-        bottomNavigationBar:(_prefHelper.getStringByKey('pet_name', '').isNotEmpty)?
-        const CreateHomeScreen(
-          // Color:MaaruColors.textButtonColor
-        ):const CreateProviderHome(),
-
+        bottomNavigationBar:
+            (_prefHelper.getStringByKey('pet_name', '').isNotEmpty)
+                ? const CreateHomeScreen(
+                    // Color:MaaruColors.textButtonColor
+                    )
+                : const CreateProviderHome(),
         body: Center(
             //padding: const EdgeInsets.only(top: 100),
             child: BlocProvider(
@@ -115,12 +113,11 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                     color: Colors.amber,
                                     alignment: Alignment.bottomCenter,
                                     child:
-                                    Image.asset('assets/images/kutta.png'));
+                                        Image.asset('assets/images/kutta.png'));
                               },
                             ),
                           ),
                           Container(
-
                             decoration:
                                 const BoxDecoration(color: Colors.white),
                             //  height: size.height * 1.1,
@@ -129,7 +126,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                               margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
                               color: Colors.white,
                               //height: size.height*0.80,
-                            //  width: size.width * 1,
+                              //  width: size.width * 1,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -158,7 +155,9 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (_) =>
-                                                        BookAppointment2(id2: widget.id1,)));
+                                                        BookAppointment2(
+                                                          id2: widget.id1,
+                                                        )));
                                           },
                                           child: Image.asset(
                                             'assets/icons/icone-setting-68.png',
@@ -174,7 +173,14 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(
                                                     builder: (_) =>
-                                                        BookAppointmentScreen3(id3: widget.id1,image:  state.welcome4.providerDetails.provider.img,)));
+                                                        BookAppointmentScreen3(
+                                                          id3: widget.id1,
+                                                          image: state
+                                                              .welcome4
+                                                              .providerDetails
+                                                              .provider
+                                                              .img,
+                                                        )));
                                           },
                                           child: Image.asset(
                                             'assets/icons/icone-setting-68.png',
@@ -204,12 +210,10 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                         // state.welcome4.providerDetails.
                                         style: MaaruStyle.text.xlarge,
                                       ),
-
                                     ],
                                   ),
                                   //   }
                                   // ),
-
 
                                   Text(
                                     '${state.welcome4.providerDetails.provider.city.toString()} ${state.welcome4.providerDetails.provider.state} ${state.welcome4.providerDetails.provider.zipCode}',
@@ -218,57 +222,68 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                   // SizedBox(
                                   //   height: size.height * 0.02,
                                   // ),
-                                  Container(
-                                    child: GridView.builder(
-                                      itemCount: state.welcome4.providerDetails.service.length,
-                                      shrinkWrap: true,
-                                      gridDelegate:   const SliverGridDelegateWithFixedCrossAxisCount(
-
-                                          crossAxisCount:2,
-                                        mainAxisExtent: 55,
-                                      ),
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                        print(state.welcome4.masterServices.length);
-                                              print('xxx$index');
-                                          //    final int itemIndex = index + 1;
-                                     //   print('ffff$itemIndex');
-                                                assert( state.welcome4.providerDetails.service.length !=null );
-                                          return Column(
+                                  GridView.builder(
+                                    itemCount: state.welcome4.providerDetails
+                                        .service.length,
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisExtent: 55,
+                                    ),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      print(
+                                          state.welcome4.masterServices.length);
+                                      print('xxx$index');
+                                      //    final int itemIndex = index + 1;
+                                      //   print('ffff$itemIndex');
+                                      assert(state.welcome4.providerDetails
+                                              .service.length !=
+                                          null);
+                                      return Column(
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Column(
-                                               mainAxisAlignment:
-                                                    MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  choosecontainer(
-                                                      context,
-                                                      Image.network(
-                                                        state
-                                                            .welcome4
-                                                            .providerDetails.service[index].service.serviceIcon.toString(),
-                                                        errorBuilder: (context, error, stackTrace) {
-                                                          return Container(
-                                                              color: circlecolor3,
-                                                              alignment: Alignment.bottomCenter,
-                                                              child:
-                                                              Image.asset('assets/images/kutta.png',height: 30,));
-                                                        },
-
-                                                        height: 35,
-                                                      ),
-                                                      state
-                                                          .welcome4
-                                                          .providerDetails.service[index].service.serviceType.toString(),
-
-                                                      circlecolor3),
-
-                                                ],
-
-                                              ),
+                                              choosecontainer(
+                                                  context,
+                                                  Image.network(
+                                                    state
+                                                        .welcome4
+                                                        .providerDetails
+                                                        .service[index]
+                                                        .service
+                                                        .serviceIcon
+                                                        .toString(),
+                                                    errorBuilder: (context,
+                                                        error, stackTrace) {
+                                                      return Container(
+                                                          color: circlecolor3,
+                                                          alignment: Alignment
+                                                              .bottomCenter,
+                                                          child: Image.asset(
+                                                            'assets/images/kutta.png',
+                                                            height: 30,
+                                                          ));
+                                                    },
+                                                    height: 35,
+                                                  ),
+                                                  state
+                                                      .welcome4
+                                                      .providerDetails
+                                                      .service[index]
+                                                      .service
+                                                      .serviceType
+                                                      .toString(),
+                                                  circlecolor3),
                                             ],
-                                          );
-                                        print('ddd');
-                                        },),
+                                          ),
+                                        ],
+                                      );
+                                      print('ddd');
+                                    },
                                   ),
                                   // SizedBox(
                                   //   height: size.height * 0.02,
@@ -289,8 +304,13 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                   ),
                                   Text(
                                       state.welcome4.providerDetails.provider
-                                          .description.toString().isNotEmpty?'':state.welcome4.providerDetails.provider
-                                          .description.toString(),
+                                              .description
+                                              .toString()
+                                              .isNotEmpty
+                                          ? ''
+                                          : state.welcome4.providerDetails
+                                              .provider.description
+                                              .toString(),
                                       style: MaaruStyle.text.greyDisable),
                                   const SizedBox(
                                     height: 20,
@@ -299,53 +319,70 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                     'Hours Of Operation'.toUpperCase(),
                                     style: MaaruStyle.text.tiniest,
                                   ),
+                                  ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      reverse: true,
+                                      itemCount: state.welcome4.providerDetails
+                                          .provider.operationHours.week.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  state
+                                                      .welcome4
+                                                      .providerDetails
+                                                      .provider
+                                                      .operationHours
+                                                      .week[index]
+                                                      .day
+                                                      .name
+                                                      .toString(),  
+                                                  style: MaaruStyle
+                                                      .text.greyDisable,
+                                                ),
+                                                Text(
+                                                  '${state.welcome4.providerDetails.provider.operationHours.week[index].day.startTime.toString()} - ${state.welcome4.providerDetails.provider.operationHours.week[index].day.endTime.toString()}',
+                                                  style:
+                                                      MaaruStyle.text.tiniest,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        );
+                                      }),
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('monday-saturday'.toUpperCase(),
-                                          textAlign: TextAlign.start,
-                                          style: MaaruStyle.text.greyDisable),
-                                      Text(
-                                        '',
-                                          style: MaaruStyle.text.tiniest),
-                                    ],
-                                  ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('sunday'.toUpperCase(),
-                                          textAlign: TextAlign.start,
-                                          style: MaaruStyle.text.greyDisable),
-                                      Text('closed'.toUpperCase(),
-                                          style: MaaruStyle.text.tiniest),
-                                    ],
                                   ),
                                   SizedBox(
                                     height: 20,
                                   ),
                                   ThemedButton(
                                     onPressed: () {
-                                      if(_prefHelper.getStringByKey('pet_name', '').isNotEmpty) {
+                                      if (_prefHelper
+                                          .getStringByKey('pet_name', '')
+                                          .isNotEmpty) {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (_) =>
                                                     BookAppointmentScreen3(
                                                       id3: widget.id1,
-                                                      image: state.welcome4
+                                                      image: state
+                                                          .welcome4
                                                           .providerDetails
-                                                          .provider.img,)));
-                                      }
-                                      else{
-
-                                      }
+                                                          .provider
+                                                          .img,
+                                                    )));
+                                      } else {}
                                     },
                                     text: ' Book Appointments'.toUpperCase(),
                                     enabled: true,
@@ -372,8 +409,6 @@ class _BookAppointment1State extends State<BookAppointment1> {
                     return const CircularProgressIndicator();
                   }
                 }))));
-
-
   }
 }
 // icon:SizedBox(

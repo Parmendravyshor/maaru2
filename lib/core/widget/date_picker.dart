@@ -57,23 +57,19 @@ class _DatePickerState extends State<DatePicker> {
                 hintText: 'BIRTH DATE', hintStyle: MaaruStyle.text.tiny,
               ),
               onSaved: (text) {
-                BlocProvider.of<PetProfileBloc>(context)
-                    .add(BirthChanged(textEditingController.text));
+
               },
               onTap: () {
                 _selectDate(context);
               },
               onChanged: (text){
-                BlocProvider.of<PetProfileBloc>(context)
-                    .add(BirthChanged(textEditingController.text));
+
               },
               onFieldSubmitted: (text){
-                BlocProvider.of<PetProfileBloc>(context)
-                    .add(BirthChanged(textEditingController.text));
+
               },
               onEditingComplete: () {
-                BlocProvider.of<PetProfileBloc>(context)
-                    .add(BirthChanged(textEditingController.text));
+
                 print('datepicker on editing complete');
               },
             ),
@@ -114,8 +110,7 @@ class _DatePickerState extends State<DatePicker> {
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: textEditingController.text.length,
             affinity: TextAffinity.upstream));
-      BlocProvider.of<PetProfileBloc>(context)
-          .add(BirthChanged(textEditingController.text));
+
     }
   }
 }

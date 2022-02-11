@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            HorizList(),
+                           HorizList(),
                             SizedBox(
                               height: size.height * 0.03,
                             ),
@@ -267,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       duration: Duration(seconds: 1),
                                       child: const Text(' Data Not Found',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 30),),
                                     );
-                                  } else {
+                                  }else {
                                     return const CircularProgressIndicator();
                                   }
                                 }),

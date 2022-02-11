@@ -29,9 +29,9 @@ class CreateUserProfile extends StatefulWidget {
 
 class _CreateUserProfileState extends State<CreateUserProfile>
     with SingleTickerProviderStateMixin {
+  final FocusNode myFocusNode = FocusNode();
   bool enabled = false;
   bool _status = true;
-  final FocusNode myFocusNode = FocusNode();
   final GlobalKey<State> _keyLoader = GlobalKey<State>();
   TextEditingController _fnameController = TextEditingController();
   TextEditingController _lnameController = TextEditingController();
@@ -96,7 +96,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                   'Profile Updated Successfull', context);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return AccountSettingScreen();
+                return  AccountSettingScreen();
               }));
             });
           }

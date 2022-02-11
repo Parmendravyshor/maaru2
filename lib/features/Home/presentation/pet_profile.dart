@@ -1,20 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
-import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
-import 'package:maru/core/widget/alert_manager.dart';
-import 'package:maru/core/widget/back_arrow.dart';
-import 'package:maru/core/widget/profile_avtar.dart';
-import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
-import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
     as event;
-import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
@@ -92,7 +84,7 @@ class _PetProfile1State extends State<PetProfile1> {
                 BlocProvider.of<PetProfileBloc>(context)
                     .add(GetCovidList(text));
 
-                return const Center(child: CircularProgressIndicator());
+                return  Center(child: CircularProgressIndicator.adaptive(backgroundColor:MaaruColors.buttonColor,),heightFactor: 40,widthFactor: 40,);
               } else if (state is CovidLoaded3) {
                 print(
                     '+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
@@ -282,7 +274,7 @@ class _PetProfile1State extends State<PetProfile1> {
                   )),
                 );
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator.adaptive(backgroundColor: MaaruColors.button2Color,),heightFactor: 40,widthFactor: 40,);
               }
             })));
   }

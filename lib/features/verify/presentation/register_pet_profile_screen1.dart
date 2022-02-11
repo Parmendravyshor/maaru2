@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
+import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'pet_profile_bloc.dart';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +17,6 @@ import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/screen_icon2.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
-
 import 'package:maru/features/chat/presentation/chatt_screen.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
@@ -47,8 +46,10 @@ class CreateregisterPetProfile1 extends StatefulWidget {
 class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
-  String _image = "";
-
+  String _image;
+  String neutered = 'neutered';
+  String spade = 'spade';
+  String neither = 'neither';
   final picker = ImagePicker();
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
@@ -81,6 +82,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   TextEditingController _noteContoller;
   var abac;
   var abc2;
+  var a;
   String SelectGender = '';
   String Selectdate = '';
   @override
@@ -156,8 +158,6 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: textEditingController.text.length,
             affinity: TextAffinity.upstream));
-      BlocProvider.of<PetProfileBloc>(context)
-          .add(BirthChanged(textEditingController.text));
     }
   }
 
@@ -192,8 +192,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // _image = _prefHelper.getStringByKey(MaruConstant.img, "");
-
+    _image = _prefHelper.getStringByKey(MaruConstant.img, "");
+    print('fffffff$_image');
     return Scaffold(
         backgroundColor: Colors.grey[100],
         body: BlocProvider(
@@ -228,7 +228,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                 child: SingleChildScrollView(
                   child: Column(children: [
                     Padding(
-                        padding: EdgeInsets.only(top: 5.0),
+                        padding: const EdgeInsets.only(top: 5.0),
                         child: Stack(fit: StackFit.loose, children: <Widget>[
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -242,7 +242,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
                                       image: _image.isEmpty
-                                          ? ExactAssetImage(
+                                          ? const ExactAssetImage(
                                               'assets/icons/Oval.png')
                                           : FileImage(File(_image)),
                                       fit: BoxFit.cover,
@@ -327,57 +327,67 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                           GestureDetector(
                                               onTap: () {
                                                 setState(() {
+                                                  gender = 'male';
                                                   SelectedGender = Gender.male;
                                                   if (SelectedGender ==
                                                       Gender.male) {
-                                                    gender = 'male';
                                                     print(gender);
                                                   } else {
                                                     print('null');
                                                   }
                                                 });
-                                                BlocProvider.of<PetProfileBloc>(
-                                                        context)
-                                                    .add(genderChanged(gender));
                                               },
                                               child: ToggleContainer(
                                                   size.height * 0.060,
                                                   size.width * 0.40,
                                                   'male',
-                                                  SelectedGender == Gender.male
-                                                      ? MaaruColors.button2Color
-                                                      : malecontainercolor)),
+                                                  _prefHelper.getStringByKey('gender', '') ==
+                                                              'male'
+                                                      ? MaaruColors.walkingcolor
+                                                      : Colors.white)),
                                           GestureDetector(
                                               onTap: () {
-                                                if (gender == 'male') {
-                                                  AlertManager.showErrorMessage(
-                                                      "Please enter first name",
-                                                      context);
-                                                }
-                                                setState(() {
-                                                  SelectedGender =
-                                                      Gender.female;
-                                                  if (SelectedGender ==
-                                                      Gender.female) {
-                                                    gender = 'female';
-                                                    print(gender);
-                                                  } else {
-                                                    print('null');
+                                                if (_prefHelper
+                                                    .getStringByKey(
+                                                        'gender', '')
+                                                    !='female') {
+                                                  setState(() {
+                                                    Colors.red;
+                                                    Colors.red;
+                                                  });
+                                                } else {
+                                                  if (gender == 'male') {
+                                                    AlertManager.showErrorMessage(
+                                                        "Please enter first name",
+                                                        context);
                                                   }
-                                                });
-
-                                                BlocProvider.of<PetProfileBloc>(
-                                                        context)
-                                                    .add(genderChanged(gender));
+                                                  setState(() {
+                                                    SelectedGender =
+                                                        Gender.female;
+                                                    if (SelectedGender ==
+                                                        Gender.female) {
+                                                      gender = 'female';
+                                                      print(gender);
+                                                    } else {}
+                                                  });
+                                                }
                                               },
                                               child: ToggleContainer(
-                                                  size.height * 0.060,
-                                                  size.width * 0.44,
-                                                  'female',
-                                                  SelectedGender ==
-                                                          Gender.female
-                                                      ? MaaruColors.button2Color
-                                                      : Colors.white)),
+                                                size.height * 0.060,
+                                                size.width * 0.44,
+                                                'female',
+                                                  _prefHelper
+                                                      .getStringByKey(
+                                                      'gender', '')   == 'female'
+                                                    ? MaaruColors.walkingcolor
+                                                    :
+                                                         Colors.white),
+                                                // _prefHelper
+                                                //     .getStringByKey(
+                                                //     'gender',
+                                                //     '') ==
+                                                //     SelectedGender)
+                                              )
                                         ],
                                       ),
                                     ),
@@ -385,61 +395,88 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                       height: 20.0,
                                     ),
                                     ThemedTextField(
-                                      "PET NAME   ",
+                                      _prefHelper
+                                              .getStringByKey('pet_name', '')
+                                              .isEmpty
+                                          ? 'pet name'
+                                          : _prefHelper.getStringByKey(
+                                              'pet_name', ''),
                                       TextInputType.text,
                                       textStyle: TextStyle(color: Colors.black),
                                       textinputaction2: TextInputAction.next,
-                                      onChanged: (text) {
-                                        BlocProvider.of<PetProfileBloc>(context)
-                                            .add(petNameChanged(text));
-                                      },
+                                      onChanged: (text) {},
                                       editingController: _petNameController,
                                     ),
                                     SizedBox(
                                       height: 10.0,
                                     ),
                                     ThemedTextField(
-                                        "BREED TYPE", TextInputType.text,
-                                        textStyle:
-                                            TextStyle(color: Colors.black),
-                                        textInputAction: TextInputAction.done,
-                                        onChanged: (text) {
-                                      BlocProvider.of<PetProfileBloc>(context)
-                                          .add(BreadChanged(text));
-                                    }, editingController: _breadTypeController),
-                                    new SizedBox(
+                                        _prefHelper
+                                                .getStringByKey(
+                                                    'breed_type', '')
+                                                .isEmpty
+                                            ? "BREED TYPE"
+                                            : _prefHelper.getStringByKey(
+                                                'breed_type', ''),
+                                        TextInputType.text,
+                                        textinputaction2: TextInputAction.next,
+                                        textStyle: const TextStyle(
+                                            color: Colors.black),
+                                        textInputAction: TextInputAction.next,
+                                        onChanged: (text) {},
+                                        editingController:
+                                            _breadTypeController),
+                                    const SizedBox(
                                       height: 10.0,
                                     ),
-                                    ThemedTextField("AGE", TextInputType.number,
-                                        textStyle:
-                                            TextStyle(color: Colors.black),
-                                        textInputAction: TextInputAction.done,
-                                        onChanged: (text) {
-                                      BlocProvider.of<PetProfileBloc>(context)
-                                          .add(AgeChanged(text));
-                                    }, editingController: _ageTypeController),
                                     ThemedTextField(
-                                        "WEIGHT", TextInputType.number,
+                                        _prefHelper
+                                                .getStringByKey('age', '')
+                                                .isEmpty
+                                            ? 'AGE'
+                                            : _prefHelper.getStringByKey(
+                                                'age', ''),
+                                        TextInputType.number,
+                                        textinputaction2: TextInputAction.next,
+                                        textStyle: const TextStyle(
+                                            color: Colors.black),
+                                        textInputAction: TextInputAction.next,
+                                        onChanged: (_ageTypeController) {},
+                                        editingController: _ageTypeController),
+                                    ThemedTextField(
+                                        _weightController.text = _prefHelper
+                                                .getStringByKey('Weight', '')
+                                                .isEmpty
+                                            ? 'weight'
+                                            : _prefHelper.getStringByKey(
+                                                'weight', ''),
+                                        TextInputType.number,
+                                        textinputaction2: TextInputAction.next,
                                         textStyle:
                                             TextStyle(color: Colors.black),
-                                        textInputAction: TextInputAction.done,
+                                        textInputAction: TextInputAction.next,
                                         onChanged: (text) {
-                                      BlocProvider.of<PetProfileBloc>(context)
-                                          .add(WidthChanged(text));
+                                      _prefHelper.saveString(
+                                          'pet_name', _ageTypeController.text);
                                     }, editingController: _weightController),
-                                    new SizedBox(
+                                    const SizedBox(
                                       height: 20.0,
                                     ),
                                     //  ThemeChanges(),
                                     ThemedTextField(
-                                        "HEIGHT", TextInputType.number,
+                                        _prefHelper
+                                                .getStringByKey('height', '')
+                                                .isEmpty
+                                            ? 'height'
+                                            : _prefHelper.getStringByKey(
+                                                'height', ''),
+                                        TextInputType.number,
+                                        textinputaction2: TextInputAction.next,
                                         textStyle:
                                             TextStyle(color: Colors.black),
-                                        textInputAction: TextInputAction.done,
-                                        onChanged: (text) {
-                                      BlocProvider.of<PetProfileBloc>(context)
-                                          .add(HeightChanged(text));
-                                    }, editingController: _heightController),
+                                        textInputAction: TextInputAction.next,
+                                        onChanged: (text) {},
+                                        editingController: _heightController),
 
                                     Padding(
                                         padding:
@@ -448,6 +485,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                           GestureDetector(
                                             child: TextFormField(
                                               style: MaaruStyle.text.tiny,
+                                              textInputAction:
+                                                  TextInputAction.next,
                                               focusNode:
                                                   AlwaysDisabledFocusNode(),
                                               controller: textEditingController,
@@ -459,39 +498,24 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                           .textfeildline),
                                                 ),
                                                 // labelText: "Date of birth",
-                                                hintText: 'BIRTH DATE',
+                                                hintText: _prefHelper
+                                                        .getStringByKey(
+                                                            'birth_date', '')
+                                                        .isEmpty
+                                                    ? 'BIRTH DATE'
+                                                    : _prefHelper
+                                                        .getStringByKey(
+                                                            'birth_date', ''),
+
                                                 hintStyle: MaaruStyle.text.tiny,
                                               ),
-                                              onSaved: (text) {
-                                                BlocProvider.of<PetProfileBloc>(
-                                                        context)
-                                                    .add(BirthChanged(
-                                                        textEditingController
-                                                            .text));
-                                              },
+                                              onSaved: (text) {},
                                               onTap: () {
                                                 _selectDate(context);
                                               },
-                                              onChanged: (text) {
-                                                BlocProvider.of<PetProfileBloc>(
-                                                        context)
-                                                    .add(BirthChanged(
-                                                        textEditingController
-                                                            .text));
-                                              },
-                                              onFieldSubmitted: (text) {
-                                                BlocProvider.of<PetProfileBloc>(
-                                                        context)
-                                                    .add(BirthChanged(
-                                                        textEditingController
-                                                            .text));
-                                              },
+                                              onChanged: (text) {},
+                                              onFieldSubmitted: (text) {},
                                               onEditingComplete: () {
-                                                BlocProvider.of<PetProfileBloc>(
-                                                        context)
-                                                    .add(BirthChanged(
-                                                        textEditingController
-                                                            .text));
                                                 print(
                                                     'datepicker on editing complete');
                                               },
@@ -538,17 +562,18 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                     } else {
                                                       print('FAILURE');
                                                     }
-                                                    BlocProvider.of<
-                                                                PetProfileBloc>(
-                                                            context)
-                                                        .add(SexChanged(sex1));
                                                   });
                                                 },
                                                 child: ToggleContainer(
                                                     size.height * 0.060,
                                                     size.width * 0.29,
-                                                    'neutered',
-                                                    NeuteredContainerColor)),
+                                                    neutered,
+                                                    (_prefHelper.getStringByKey(
+                                                                'sex', '') ==
+                                                            neutered)
+                                                        ? MaaruColors
+                                                            .walkingcolor
+                                                        : NeitherContainerColor)),
                                             GestureDetector(
                                                 onTap: () {
                                                   setState(() {
@@ -572,17 +597,17 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                       print('FAILURE');
                                                     }
                                                   });
-
-                                                  BlocProvider.of<
-                                                              PetProfileBloc>(
-                                                          context)
-                                                      .add(SexChanged(sex1));
                                                 },
                                                 child: ToggleContainer(
                                                     size.height * 0.060,
                                                     size.width * 0.30,
                                                     'spade',
-                                                    SpadeContainerColor)),
+                                                    (_prefHelper.getStringByKey(
+                                                                'sex', '') ==
+                                                            neutered)
+                                                        ? MaaruColors
+                                                            .walkingcolor
+                                                        : SpadeContainerColor)),
                                             GestureDetector(
                                                 onTap: () {
                                                   setState(() {
@@ -601,11 +626,6 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                     if (NeitherContainerColor ==
                                                         activeneither) {
                                                       sex1 = 'neither';
-                                                      BlocProvider.of<
-                                                                  PetProfileBloc>(
-                                                              context)
-                                                          .add(
-                                                              SexChanged(sex1));
                                                     } else {
                                                       print('FAILURE');
                                                     }
@@ -615,20 +635,30 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                     size.height * 0.060,
                                                     size.width * 0.30,
                                                     'neither',
-                                                    NeitherContainerColor)),
+                                                    (_prefHelper.getStringByKey(
+                                                                'sex', '') ==
+                                                            neutered)
+                                                        ? MaaruColors
+                                                            .walkingcolor
+                                                        : NeitherContainerColor)),
                                           ],
                                         )),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20.0,
                                     ),
-                                    ThemedTextField("NOTES", TextInputType.text,
+                                    ThemedTextField(
+                                        _prefHelper
+                                                .getStringByKey('note', '')
+                                                .isEmpty
+                                            ? "NOTES"
+                                            : _prefHelper.getStringByKey(
+                                                'note', ''),
+                                        TextInputType.text,
                                         textStyle:
                                             TextStyle(color: Colors.black),
                                         textInputAction: TextInputAction.done,
-                                        onChanged: (text) {
-                                      BlocProvider.of<PetProfileBloc>(context)
-                                          .add(NoteChanged(text));
-                                    }, editingController: _noteContoller),
+                                        onChanged: (text) {},
+                                        editingController: _noteContoller),
                                     SizedBox(
                                       height: 20.0,
                                     ),
@@ -659,6 +689,36 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                           ),
                                           InkWell(
                                             onTap: () {
+                                              try {
+                                                _prefHelper.saveString(
+                                                    MaruConstant.height,
+                                                    _heightController.text);
+                                                _prefHelper.saveString(
+                                                    MaruConstant.age,
+                                                    _ageTypeController.text);
+                                                _prefHelper.saveString(
+                                                    MaruConstant.petName,
+                                                    _petNameController.text);
+                                                _prefHelper.saveString(
+                                                    MaruConstant.breedType,
+                                                    _breadTypeController.text);
+                                                _prefHelper.saveString(
+                                                    MaruConstant.weight,
+                                                    _weightController.text);
+                                                _prefHelper.saveString(
+                                                    MaruConstant.sex, sex1);
+                                                _prefHelper.saveString(
+                                                    MaruConstant.gender,
+                                                    gender);
+                                                _prefHelper.saveString(
+                                                    MaruConstant.img, _image);
+                                                _prefHelper.saveString(
+                                                    MaruConstant.birthdate,
+                                                    textEditingController.text);
+                                              } catch (e) {
+                                                print(e);
+                                              }
+                                              // Navigator.of(context).push(MaterialPageRoute(builder: (_)=>HomeScreen()));
                                               setState(() {
                                                 print('dd1${SelectGender}');
                                               });
@@ -727,10 +787,34 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                   "Please write note",
                                                 );
                                               } else {
-                                                BlocProvider.of<PetProfileBloc>(
-                                                        context)
-                                                    .add(
-                                                        CreateRegisterPetProfile());
+                                                if (_prefHelper
+                                                    .getStringByKey(
+                                                        'pet_name', '')
+                                                    .isNotEmpty) {
+                                                  BlocProvider.of<
+                                                              PetProfileBloc>(
+                                                          context)
+                                                      .add(Profile2('', ''));
+                                                } else {
+                                                  //     Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ViewPetProfile()));
+                                                  BlocProvider.of<
+                                                              PetProfileBloc>(
+                                                          context)
+                                                      .add(
+                                                          CreateRegisterPetProfile(
+                                                    _image,
+                                                    gender,
+                                                    _petNameController.text,
+                                                    _breadTypeController.text,
+                                                    _ageTypeController.text,
+                                                    _weightController.text,
+                                                    _heightController.text,
+                                                    textEditingController.text,
+                                                    sex1,
+                                                    _noteContoller.text,
+                                                  ));
+                                                  Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ViewPetProfile(id1: _prefHelper.getIntByKey('id', a),)));
+                                                }
                                               }
                                             },
                                             child: Container(
@@ -745,14 +829,14 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                           ),
                                           state is RegisterInProgress
                                               ? Center(
-                                              child: Container(
-                                                width: 5,
-                                                height: 5,
-                                                child: const CircularProgressIndicator(),
-                                              ))
+                                                  child: Container(
+                                                  width: 5,
+                                                  height: 5,
+                                                  child:
+                                                      const CircularProgressIndicator(),
+                                                ))
                                               : Container(),
                                         ]),
-
                                   ],
                                 ))))
                   ]),

@@ -89,8 +89,8 @@ class BookingTimeChaned extends BookAppointmentEvent {
 }
 
 class CardIdChanged extends BookAppointmentEvent {
-  final int cardid;
-  CardIdChanged(this.cardid);
+  final String carsidd;
+  CardIdChanged(this.carsidd);
   @override
   String toString() {
     // TODO: implement toString
@@ -112,6 +112,15 @@ class BookRegisterButtonTapped extends BookAppointmentEvent {
   @override
   String toString() {
     return 'BookRegisterButtonTapped';
+  }
+}
+class CardCvvChanged extends BookAppointmentEvent {
+  final String cardcvv;
+
+  CardCvvChanged(this.cardcvv);
+  @override
+  String toString() {
+    return 'CardCvvChanged';
   }
 }
 class GetbookindataChanged extends BookAppointmentEvent {

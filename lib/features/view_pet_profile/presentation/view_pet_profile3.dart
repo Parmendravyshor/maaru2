@@ -176,7 +176,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                         Navigator.of(context).push(
                                                             MaterialPageRoute(
                                                                 builder: (_) =>
-                                                                    CreateregisterPetProfile1()));
+                                                                    CreateRegisterPetProfile3()));
                                                       },
                                                       child: Image.asset(
                                                         'assets/icons/icone-setting-29.png',

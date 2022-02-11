@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math show sin, pi;
 import 'package:flutter/animation.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile_screen2.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
 
@@ -169,7 +170,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                           Navigator.of(context).push(
                                                               MaterialPageRoute(
                                                                   builder: (_) =>
-                                                                      CreateregisterPetProfile1()));
+                                                                      CreateRegisterPetProfile2()));
                                                         },
                                                         child: Image.asset(
                                                           'assets/icons/icone-setting-29.png',

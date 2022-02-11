@@ -2,9 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:kiwi/kiwi.dart';
-
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/icons.dart';
@@ -12,10 +10,8 @@ import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
-
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
-
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
@@ -50,6 +46,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  var _bloc = KiwiContainer().resolve<RegisterBloc>();
+
   TextEditingController _first_nameController;
   TextEditingController _lnameController;
   TextEditingController _passwordController;
@@ -64,16 +62,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _emailController = TextEditingController();
     _lnameController = TextEditingController();
     _cnfpasswordController = TextEditingController();
+
     super.initState();
   }
 
   @override
   void dispose() {
+
     _passwordController.dispose();
     _emailController.dispose();
     _first_nameController.dispose();
     _lnameController.dispose();
     _cnfpasswordController.dispose();
+    print('djdddd');
+    _bloc.distinct();
+    print('djdddd');
+   // _bloc.distinct();
    // final RegisterBloc drawerBloc = BlocProvider.of<RegisterBloc>(context);
     //RegisterBloc.dispatch(EventHere());
     super.dispose();
@@ -266,6 +270,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                   )
                                 ]))),
+
                       );
                     }))));
   }

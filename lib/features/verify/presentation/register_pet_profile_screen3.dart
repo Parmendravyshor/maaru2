@@ -16,6 +16,7 @@ import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
+import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
 
 import 'pet_profile_bloc.dart';
 import '../../../main.dart';
@@ -186,7 +187,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
     return BlocProvider(
         create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
         child: Scaffold(
-            backgroundColor:Colors.white,
+            backgroundColor: Colors.white,
             body: BlocProvider(
                 create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
                 child: BlocBuilder<PetProfileBloc, PetProfileState>(
@@ -219,32 +220,29 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                   }
                   return SingleChildScrollView(
                     //  physics: ScrollPhysics(),
-                    child: 
-                    SafeArea(
+                    child: SafeArea(
                       child: Column(children: [
                         Stack(fit: StackFit.loose, children: <Widget>[
                           Container(
                               alignment: Alignment.bottomRight,
                               //height: size.height * 0.20,
-                             // width: size.width * 0.9,
-                              child:
-                              Center(
+                              // width: size.width * 0.9,
+                              child: Center(
                                 child: Image.network(
                                     _prefHelper.getStringByKey('img', ''),
-                                    width:450,
+                                    width: 450,
                                     height: 250,
                                     fit: BoxFit.fitWidth,
                                     errorBuilder: (context, error, stackTrace) {
-                                      return Container(
-                                          color: MaaruColors.DogsBackground,
-                                          alignment: Alignment.center,
-                                          child: Image.asset('assets/images/kutta.png'));
-                                    }),
+                                  return Container(
+                                      color: MaaruColors.DogsBackground,
+                                      alignment: Alignment.center,
+                                      child: Image.asset(
+                                          'assets/images/kutta.png'));
+                                }),
                               )),
                           Padding(
-                              padding: EdgeInsets.only(
-                                  top: 30.0,bottom: 10
-                              ),
+                              padding: EdgeInsets.only(top: 30.0, bottom: 10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
@@ -252,9 +250,6 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                 ],
                               )),
                         ]),
-
-
-
                         Container(
                             //  width: 1000,
                             // height: 1300,
@@ -263,9 +258,11 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                               color: Color(0xFFffffff),
                             ),
                             child: Container(
-                                padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
+                                padding:
+                                    const EdgeInsets.fromLTRB(30, 20, 30, 10),
                                 child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                           _prefHelper.getStringByKey(
@@ -295,7 +292,14 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                         style: MaaruStyle.text.tiny,
                                         maxLines: 2,
                                         decoration: InputDecoration(
-                                            hintText: 'Note',
+                                            hintText: _prefHelper
+                                                    .getStringByKey(
+                                                        MaruConstant
+                                                            .walkingSchedule,
+                                                        '')
+                                                    .isEmpty
+                                                ? 'Note'
+                                                : '',
                                             hintStyle: MaaruStyle.text.tiny,
                                             border: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -320,7 +324,14 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                         style: MaaruStyle.text.tiny,
                                         maxLines: 2,
                                         decoration: InputDecoration(
-                                            hintText: 'Note',
+                                            hintText: _prefHelper
+                                                    .getStringByKey(
+                                                        MaruConstant
+                                                            .feedingSchedule,
+                                                        '')
+                                                    .isEmpty
+                                                ? 'Note'
+                                                : '',
                                             hintStyle: MaaruStyle.text.tiny,
                                             border: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -342,7 +353,14 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                         style: MaaruStyle.text.tiny,
                                         maxLines: 2,
                                         decoration: InputDecoration(
-                                            hintText: 'Note',
+                                            hintText: _prefHelper
+                                                    .getStringByKey(
+                                                        MaruConstant
+                                                            .temperament,
+                                                        '')
+                                                    .isEmpty
+                                                ? 'Note'
+                                                : '',
                                             hintStyle: MaaruStyle.text.tiny,
                                             border: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -394,18 +412,19 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                           ]),
                                       if (priceupdate_value)
                                         ListView.builder(
-                                          physics: NeverScrollableScrollPhysics(),
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           itemCount: containers.length,
-                                          itemBuilder:
-                                              (BuildContext context, int index) {
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
                                             return containers[index];
                                           },
                                         ),
                                       TextButton.icon(
                                         onPressed: () async {
-                                          setState(() =>
-                                              containers.add(createContainer()));
+                                          setState(() => containers
+                                              .add(createContainer()));
                                         },
                                         icon: Image.asset(
                                           'assets/icons/icone-setting-64.png',
@@ -439,48 +458,65 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                                     shape: BoxShape.circle),
                                                 child: Text(
                                                   'Back',
-                                                  style:
-                                                      MaaruStyle.text.greyDisable,
+                                                  style: MaaruStyle
+                                                      .text.greyDisable,
                                                 ),
                                               ),
                                             ),
                                             InkWell(
                                                 onTap: () {
-                                                  //
-                                                  // BlocProvider.of<PetProfileBloc>(
-                                                  //     context)
-                                                  //     .add(Profile3(
-                                                  //
-                                                  //  _tempramentController.text,
-                                                  //   _timesController.text,
-                                                  //   _feedingController.text,
-                                                  //   _notesController.text,
-                                                  //   _nameEditingController.text,
-                                                  //    _walkingController.text,
-                                                  //   _nameController.text,
-                                                  // ));
-                                                  Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder: (_) =>
-                                                              CreateRegisterPetProfile3()));
-
-                                                  BlocProvider.of<PetProfileBloc>(
-                                                          context)
-                                                      .add(Profile3(
-                                                    _tempramentController.text,
-                                                    _timesController.text,
-                                                    _feedingController.text,
-                                                    _notesController.text,
-                                                    _nameEditingController.text,
-                                                    _walkingController.text,
-                                                    _nameController.text,
-                                                  ));
-                                                  print('qkqjww');
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              CreateRegisterPetProfile4()));
+                                                  if (_prefHelper
+                                                      .getStringByKey(
+                                                          'pet_name', '')
+                                                      .isEmpty) {
+                                                    BlocProvider.of<
+                                                                PetProfileBloc>(
+                                                            context)
+                                                        .add(Profile3(
+                                                      _tempramentController
+                                                          .text,
+                                                      _timesController.text,
+                                                      _feedingController.text,
+                                                      _notesController.text,
+                                                      _nameEditingController
+                                                          .text,
+                                                      _walkingController.text,
+                                                      _nameController.text,
+                                                    ));
+                                                    print('qkqjww');
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                CreateRegisterPetProfile4()));
+                                                  } else {
+                                                    BlocProvider.of<
+                                                                PetProfileBloc>(
+                                                            context)
+                                                        .add(Profile3(
+                                                      _tempramentController
+                                                          .text,
+                                                      _timesController.text,
+                                                      _feedingController.text,
+                                                      _notesController.text,
+                                                      _nameEditingController
+                                                          .text,
+                                                      _walkingController.text,
+                                                      _nameController.text,
+                                                    ));
+                                                    print('qkqjww');
+                                                    int a;
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ViewPetProfile3(
+                                                                  id3: _prefHelper
+                                                                      .getIntByKey(
+                                                                          'id',
+                                                                          a),
+                                                                )));
+                                                  }
                                                 },
                                                 child: Container(
                                                   alignment:

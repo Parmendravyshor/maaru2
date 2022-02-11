@@ -26,12 +26,10 @@ import 'dart:ui';
 
 import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
     as event;
-
 class ProviderSearchScreen extends StatefulWidget {
   @override
   _ProviderSearchScreenState createState() => _ProviderSearchScreenState();
 }
-
 class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
   bool color;
   Color Groomingcolor = Color(0xff5e34d1);
@@ -67,7 +65,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
           if (state is LoginInitial) {
             BlocProvider.of<LoginBloc>(context).add(event.GetProvider(text));
             print('figffgfg${text}');
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           } else if (state is ProviderLoaded1) {
             return Container(
                 margin: const EdgeInsets.only(
@@ -164,16 +162,17 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                 Column(children: [
                                   InkWell(
                                     onTap:()async{
+                                      if (mounted) {
+                                      setState(()  {
 
-                                      setState(() async {
-                                        if (mounted) {}
-                                       await Navigator.of(context)
+                                        print('dkjhjfhjkfhjfhjfjfhjfjfffffff ${state.getProviderModel.providersListing[index].id}');
+                                        Navigator.of(context)
                                             .push(MaterialPageRoute(
                                           builder: (context) =>
                                               BookAppointment1(id1:state.getProviderModel.providersListing[index].id),
                                         ));
                                       });
-
+}
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
@@ -293,7 +292,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                           })
                     ]));
           } else {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
           ;
         }),

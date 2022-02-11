@@ -74,96 +74,19 @@ class BirthDate extends PetProfileEvent {
 
 }
 
-class AgeChanged extends PetProfileEvent {
-
-  final String age;
-  AgeChanged(this.age);
-
-  @override
-  String toString() => "AgeChanged";
-}
-class petNameChanged extends PetProfileEvent {
-  final String petname;
-
-  petNameChanged(this.petname);
-
-  @override
-  String toString() => "petNameChanged";
-}
-class SexChanged extends PetProfileEvent {
-  final String sex;
-
-  SexChanged(this.sex);
-
-  @override
-  String toString() => "SexChanged";
-}
-class NoteChanged extends PetProfileEvent {
-  final String note;
-
-  NoteChanged(this.note);
-
-  @override
-  String toString() => "NoteChanged";
-}
-class genderChanged extends PetProfileEvent {
-  final String gender;
-
-  genderChanged(this.gender);
-
-  @override
-  String toString() => "genderChanged";
-}
-class PetNeed extends PetProfileEvent {
-  final String petneed;
-
-  PetNeed(this.petneed);
-
-  @override
-  String toString() => "genderChanged";
-}
-class HeightChanged extends PetProfileEvent {
-  final  String hight;
-
-  HeightChanged(this.hight);
-  List<Object> get props => [
-    hight,
-
-  ];
-
-  @override
-  String toString() => "HeightChanged";
-
-}
-class BirthChanged extends PetProfileEvent {
-   final selectedDate;
-
-   BirthChanged(this.selectedDate);
-
-   @override
-  String toString() => "BirthChanged";
-
-}
-
-class BreadChanged extends PetProfileEvent {
-   var breadtype;
-
-  BreadChanged(this.breadtype);
-
-  @override
-  String toString() => "BirthChanged";
-}
-class WidthChanged extends PetProfileEvent {
-  final String width;
-
-  WidthChanged(this.width);
-
-  @override
-  String toString() => "WidthChanged";
-}
 
 class CreateRegisterPetProfile extends PetProfileEvent {
-  CreateRegisterPetProfile();
+  final String image;
+  final String gender;
+  final String petName;
+  final String breedType;
+  final String age;
+  final String height;
+  final String width;
+  final String birthdate;
+  final String sex;
+  final String notes;
+  CreateRegisterPetProfile(this.image, this.gender, this.petName, this.breedType, this.age, this.height, this.width, this.birthdate, this.sex, this.notes);
 
   @override
   String toString() => "CreatePetRegisterButtonTapped";

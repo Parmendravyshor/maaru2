@@ -13,6 +13,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/Home/presentation/search_screen.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
@@ -72,7 +73,7 @@ class _SplashScreenState extends State<SplashScreen> {
          if (id1.isNotEmpty) {
 
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              MaterialPageRoute(builder: (context) =>  const HomeScreen()),
               (route) => false);
         } if(id1.isEmpty) {
            print('ddd');
