@@ -28,7 +28,7 @@ class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
-
+//ghgghghgghghghg
 class _SplashScreenState extends State<SplashScreen> {
   Position _currentPosition;
   String _currentAddress;
