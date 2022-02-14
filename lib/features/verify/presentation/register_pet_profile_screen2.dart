@@ -15,7 +15,6 @@ import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
 
-
 import '../../../main.dart';
 import 'register_pet_profile_screen1.dart';
 import 'register_pet_profile_screen3.dart';
@@ -51,8 +50,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'register_pet_profile_screen2.dart';
 import 'package:http/http.dart' as http;
 
-class
-CreateRegisterPetProfile2 extends StatefulWidget {
+class CreateRegisterPetProfile2 extends StatefulWidget {
   @override
   _CreateRegisterPetProfile2State createState() =>
       _CreateRegisterPetProfile2State();
@@ -66,6 +64,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
   void initState() {
     _knowallergiesController = TextEditingController();
     _vaccineController = TextEditingController();
+
     super.initState();
   }
 
@@ -75,27 +74,27 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
     super.dispose();
   }
 
+  List imagefiles = [];
   final FocusNode myFocusNode = FocusNode();
   String _image = "";
+    List<File> funda = [];
   final picker = ImagePicker();
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
-  Future<List<File>> getImage() async {
+  Future<void> getImage() async {
     FilePickerResult result =
         await FilePicker.platform.pickFiles(allowMultiple: true);
 
     if (result != null) {
-
       List<File> files = result.paths.map((path) => File(path)).toList();
-return files;
-    } else {
+      List<File> file = files;
+      imagefiles.add(file);
 
+      print('these files:$imagefiles');
+    } else {
       // User canceled the picker
     }
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -134,37 +133,33 @@ return files;
               }
               return SingleChildScrollView(
                   child: Column(children: [
-                      Stack(fit: StackFit.loose, children: <Widget>[
-                Container(
-                    alignment: Alignment.bottomRight,
-                    // height: size.height * 0.20,
-                    // width: size.width * 0.9,
-                    child:
-                    Center(
-                      child: Image.network(
-                          _prefHelper.getStringByKey('img', ''),
-                          width:450,
-                          height: 250,
-                          fit: BoxFit.fitWidth,
-                          errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                            color: MaaruColors.DogsBackground,
-                            alignment: Alignment.center,
-                            child: Image.asset('assets/images/kutta.png'));
-                      }),
-                    )),
-                        Padding(
-                            padding: EdgeInsets.only(
-                                top: 30.0,bottom: 10
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                SkipButtons(),
-                              ],
-                            )),
-                      ]),
-
+                Stack(fit: StackFit.loose, children: <Widget>[
+                  Container(
+                      alignment: Alignment.bottomRight,
+                      // height: size.height * 0.20,
+                      // width: size.width * 0.9,
+                      child: Center(
+                        child: Image.network(
+                            _prefHelper.getStringByKey('img', ''),
+                            width: 450,
+                            height: 250,
+                            fit: BoxFit.fitWidth,
+                            errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                              color: MaaruColors.DogsBackground,
+                              alignment: Alignment.center,
+                              child: Image.asset('assets/images/kutta.png'));
+                        }),
+                      )),
+                  Padding(
+                      padding: EdgeInsets.only(top: 30.0, bottom: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          SkipButtons(),
+                        ],
+                      )),
+                ]),
                 Container(
                     alignment: FractionalOffset.bottomCenter,
                     decoration: BoxDecoration(
@@ -220,10 +215,8 @@ return files;
                               ),
                               Stack(fit: StackFit.loose, children: <Widget>[
                                 Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Row(
                                       mainAxisAlignment:
@@ -240,6 +233,7 @@ return files;
                                     ),
                                     InkWell(
                                         onTap: getImage,
+
                                         //   var picked =
                                         //       await FilePicker.platform.pickFiles();
                                         //
@@ -248,15 +242,43 @@ return files;
                                         //   }
 
                                         child: RoundedButton(
-                                          buttonName:
-                                              'Upload Vaccine Record'
-                                                  .toUpperCase(),
-                                          Color: MaaruColors
-                                              .primaryColorsuggesion,
+                                          buttonName: 'Upload Vaccine Record'
+                                              .toUpperCase(),
+                                          Color:
+                                              MaaruColors.primaryColorsuggesion,
                                           Color1: MaaruColors.whiteColor,
                                         )),
-
-
+                                    imagefiles == null
+                                        ? Text("Searching Files")
+                                        : Container(
+                                            color: Colors.yellow,
+                                            height: 200,
+                                            width: 200,
+                                            child: ListView.builder(
+                                              //if file/folder list is grabbed, then show here
+                                              itemCount:
+                                                  imagefiles?.length ?? 0,
+                                              itemBuilder: (context, index) {
+                                                return Card(
+                                                    child: ListTile(
+                                                        title: Text(
+                                                            imagefiles[index]
+                                                                .path),
+                                                        leading: Icon(Icons
+                                                            .picture_as_pdf),
+                                                        trailing: Icon(
+                                                          Icons.arrow_forward,
+                                                          color:
+                                                              Colors.redAccent,
+                                                        ),
+                                                        onTap: () {
+                                                          // Navigator.push(context, MaterialPageRoute(builder: (context){
+                                                          //   return ViewPDF(pathPDF:imagefiles[index].path.toString());
+                                                          //open viewPDF page on click
+                                                        }));
+                                              },
+                                            ),
+                                          ),
                                     GestureDetector(
                                       child: Container(
                                         padding: EdgeInsets.only(top: 100),
@@ -298,8 +320,7 @@ return files;
                                             shape: BoxShape.circle),
                                         child: Text(
                                           'BACK',
-                                          style:
-                                              MaaruStyle.text.greyDisable,
+                                          style: MaaruStyle.text.greyDisable,
                                         ),
                                       ),
                                     ),
@@ -309,8 +330,7 @@ return files;
                                           BlocProvider.of<PetProfileBloc>(
                                                   context)
                                               .add(Profile2(
-                                                  _knowallergiesController
-                                                      .text,
+                                                  _knowallergiesController.text,
                                                   // getImage()
                                                   _vaccineController.text));
                                         },

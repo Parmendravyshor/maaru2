@@ -22,7 +22,7 @@ class _ProviderProfile1State extends State<ProviderProfile1> {
     return Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: true,
-        bottomNavigationBar: CreateHomeScreen(
+        bottomNavigationBar: CreateProviderHome(
           // Color:MaaruColors.textButtonColor
         ),
         body: SingleChildScrollView(

@@ -279,6 +279,7 @@ final FacebookLogin _facebookLogin;
       await _prefHelper.saveString(MaruConstant.height, profile['height']);
       await _prefHelper.saveString(MaruConstant.age, profile['age']);
       await _prefHelper.saveString(MaruConstant.petName, profile['pet_name']);
+
       await _prefHelper.saveString(
           MaruConstant.breedType, profile['breed_type']);
       await _prefHelper.saveString(MaruConstant.weight, profile['weight']);

@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/features/Home/presentation/pet_profile.dart';
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_calender.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_screen.dart';
 import 'package:maru/features/provider_home/provider_message.dart';
+import 'package:maru/features/provider_profile/provider_profile1.dart';
 import 'package:maru/features/provider_setting/presentation/provider_settin.dart';
 
 
@@ -37,101 +39,78 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      elevation: 0.0,
-      backgroundColor: MaaruColors.darkGrey2,
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-            icon: InkWell(
-              onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => TestApp()));
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 20,top: 10),
-                child: Image.asset('assets/icons/icon0.png',
-                    height: 30, color: widget.Color
-                  //selectedIndex == 0
-                  //  ? MaaruColors.textButtonColor
-                  // : Colors.grey[350],
+    final size=MediaQuery.of(context).size;
+    return
+      Container(
+        height: size.height*0.09,
+        color: Colors.white,
+        child: Container(
+          margin: const EdgeInsets.only(left: 20, right: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TestApp()));
+                  },
+                  child: Image.asset(
+                    'assets/icons/icon0.png',
+                    height: 35,
+                  )),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UpcomingAppointmentCalender()));
+                },
+                child: Image.asset(
+                  'assets/icons/icon1.png',
+                  height: 35,
                 ),
               ),
-            ),
-            title: Text('')),
-        BottomNavigationBarItem(
-            icon: InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => UpcomingAppointmentCalender()));
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 40,bottom: 8),
-                child: Image.asset('assets/icons/icon1.png',
-                    height: 30, color: widget.Color1
-                  //selectedIndex == 1
-                  //   ? MaaruColors.textButtonColor
-                  //  : Colors.grey[350],
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProviderProfile1()));
+                },
+                child: Image.asset(
+                  'assets/icons/icon4.png',
+                  height: 55,
                 ),
               ),
-            ),
-            title: Text('')),
-        BottomNavigationBarItem(
-            icon: InkWell(
+              GestureDetector(
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) =>  UpcomingAppointmentCalender1(),));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProviderMessages()));
                 },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Image.asset(
-                    'assets/icons/icon4.png',
-                    height: 60,
-                  ),
-                )),
-            title: Text('')),
-        BottomNavigationBarItem(
-            icon: InkWell(
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => ProviderMessages()));
+                child: Image.asset(
+                  'assets/icons/icon2.png',
+                  height: 35,
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProviderSetting()));
                 },
-                child: Padding(
-                  padding: const EdgeInsets.only(),
-                  child: Image.asset(
-                      'assets/icons/icon2.png',
-                      height: 30,
-                      color: widget.Color2
-                    //selectedIndex == 3
-                    //  ? MaaruColors.textButtonColor
-                    // : Colors.grey[350],
-                  ),
-                )),
-            title: Text('')),
-        BottomNavigationBarItem(
-            icon: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>   ProviderSetting()));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Image.asset(
-                      'assets/icons/icon3.png',
-                      height: 30,
-                      color: widget.Color3
-                    //selectedIndex == 4
-                    //  ? MaaruColors.textButtonColor
-                    // : Colors.grey[350],
-                  ),
-                )),
-            title: Text('')),
-      ],
-      // currentIndex: selectedIndex,
-      // onTap: (index) => setState(() => selectedIndex = index),
-      //
-    );
+                child: Image.asset(
+                  'assets/icons/icon2.png',
+                  height: 35,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
   }
 }
+
+
+
+
+
 // class CreateProviderHome extends StatefulWidget {
 //
 //

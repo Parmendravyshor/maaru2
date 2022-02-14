@@ -182,6 +182,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                       child: Container(
 
                                         decoration: BoxDecoration(
+
                                             border: Border.all(
                                                 color: Colors.grey[200], width: 2),
                                             ),
@@ -276,9 +277,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 20,
-                                    )
+
                                   ]),
                                 ],
                               ):Center(child:const Text('No data found'));
@@ -382,7 +381,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
   //                       ),
   //                     ),
   //                   ),
-  //                   SizedBox(
+  //                   SizeFdBox(
   //                     width: size.width * 0.05,
   //                   ),
   //                   GestureDetector(

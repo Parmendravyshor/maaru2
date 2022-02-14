@@ -405,13 +405,8 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                   ),
                 ),
                 Container(
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(20),
-                          topLeft: Radius.circular(20),
-                        ),
-                        color: Colors.white),
-                    height: 250,
+                   color: Colors.white,
+                    height: 170,
                     width: size.width * 1,
                     child: Container(
                         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -437,7 +432,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                   )));
                                     },
                                     child: Image.asset(
-                                      'assets/icons/Rectangle copy 3.png',
+                                      'assets/icons/icone-setting-68.png',
                                       height: 40,
                                       width: 40,
                                     )),
@@ -454,7 +449,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                   )));
                                     },
                                     child: Image.asset(
-                                      'assets/icons/Rectangle copy 3.png',
+                                      'assets/icons/icone-setting-68.png',
                                       height: 40,
                                       width: 40,
                                     )),
@@ -532,7 +527,8 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
               ],
                 ),
                 Container(
-                height: 440,
+
+                height: 360,
                 width: 400,
                 child: buildTableCalendarWithBuilders()),
                 Align(
@@ -541,7 +537,9 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                 'Services',
                 style: MaaruStyle.text.tiniest,
               ),
+
                 ),
+                SizedBox(height: size.height*0.02,),
                 Padding(
                 padding: const EdgeInsets.only(right: 20, left: 20),
                 child: BlocProvider(
@@ -973,6 +971,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                   style: MaaruStyle.text.tiniest,
                                 )),
                             ListView.builder(
+                                physics: ClampingScrollPhysics(),
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 itemCount: state.fetchCardDetailsModel
@@ -1740,17 +1739,14 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                     Divider(
                                       color: Colors.grey[360],
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(1.0),
-                                      child: ThemedButton(
-                                        text: 'Book Appointment',
-                                        onPressed: () {
-                                          BlocProvider.of<BookAppointmentBloc>(
-                                                  context)
-                                              .add(BookRegisterButtonTapped());
-                                        },
-                                        enabled: true,
-                                      ),
+                                    ThemedButton(
+                                      text: 'Book Appointment',
+                                      onPressed: () {
+                                        BlocProvider.of<BookAppointmentBloc>(
+                                                context)
+                                            .add(BookRegisterButtonTapped());
+                                      },
+                                      enabled: true,
                                     )
                                   ],
                                 )))

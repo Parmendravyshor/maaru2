@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
@@ -220,22 +221,20 @@ class Chat1State extends State<Chat1> {
           color: Colors.white,
           child: Column(
             children: [
-              SizedBox(height: 30),
+              SizedBox(height: size.height * 0.03),
               BackArrowButton(),
               Container(
-                height: 75,
-                padding: const EdgeInsets.only(right: 20),
+                height: size.height * 0.08,
+                padding: const EdgeInsets.only(right: 0),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
-
                 ),
-                child:   Image.asset('assets/128/AlanPost.png'),
+                child: Image.asset('assets/128/AlanPost.png'),
               ),
-
               SizedBox(
-                height: 20,
+                height: size.height * 0.02,
               ),
               Text(
                 'Ram',
@@ -266,84 +265,93 @@ class Chat1State extends State<Chat1> {
                     widget.user.toString());
                 return (message['SenderID'].toString() ==
                         widget.user.toString())
-                    ?
-                        Container(
-                          alignment: Alignment.centerRight,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                height: 40,
-                                width: 40,
-                                decoration:  BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                    image: _prefHelper.getStringByKey('img', '').isEmpty
-                                        ? const ExactAssetImage(
-                                        'assets/128/AlanPost.png')
-                                        : FileImage(File(_prefHelper.getStringByKey('img', ''))),
-                                    fit: BoxFit.cover,
-                                  ),
+                    ? Container(
+                        alignment: Alignment.centerRight,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: _prefHelper
+                                          .getStringByKey('img', '')
+                                          .isEmpty
+                                      ? const ExactAssetImage(
+                                          'assets/128/AlanPost.png')
+                                      : FileImage(File(_prefHelper
+                                          .getStringByKey('img', ''))),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              SizedBox(width: 15,),
-                              ChatBubble(
-                                  clipper:
-                                      ChatBubbleClipper1(type: BubbleType.sendBubble),
-                                  alignment: Alignment.topRight,
-                                  margin: EdgeInsets.only(top: 5, bottom: 5),
-                                  backGroundColor: Colors.yellow[100],
-                                  child:
-                                      Container(
-                                        constraints:
-                                            BoxConstraints(maxWidth: size.width * 0.7),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-
-                                            Text('${message['message']}',
-                                                style: const TextStyle(
-                                                    color: Colors.black, fontSize: 16))
-                                          ],
-                                        ),
-
-                                  ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Container(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: MaaruColors.button2Color,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(7),
+                                        bottomLeft: Radius.circular(7),
+                                        bottomRight: Radius.circular(7))),
+                                margin: EdgeInsets.only(left: 20, right: 20),
+                                constraints:
+                                    BoxConstraints(maxWidth: size.width * 0.7),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('${message['message']}',
+                                        style: const TextStyle(
+                                            color: Colors.black, fontSize: 16))
+                                  ],
                                 ),
-                            ],
-                          ),
-                        )
-
-
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
                     : Row(
-                      children: [
-                        ChatBubble(
-                            clipper:
-                                ChatBubbleClipper1(type: BubbleType.receiverBubble),
-                            alignment: Alignment.topLeft,
-                            margin: const EdgeInsets.only(top: 5, bottom: 5),
-                            backGroundColor: Colors.white,
-                            child:
-                                Container(
-                                  constraints:
-                                      BoxConstraints(maxWidth: size.width * 0.7),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text('${message['SenderID']}',
-                                          style: const TextStyle(
-                                              color: Colors.grey, fontSize: 10)),
-                                      Text('${message['message']}',
-                                          style: const TextStyle(
-                                              color: Colors.black, fontSize: 16))
-                                    ],
-                                  ),
-
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 20, right: 20),
+                              decoration: BoxDecoration(
+                                  color: MaaruColors.buttonColor,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(7),
+                                      bottomLeft: Radius.circular(7),
+                                      bottomRight: Radius.circular(7))),
+                              constraints:
+                                  BoxConstraints(maxWidth: size.width * 0.7),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Text('${message['SenderID']}',
+                                  //     style: const TextStyle(
+                                  //         color: Colors.grey, fontSize: 10)),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text('${message['message']}',
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 16)),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        Image.asset('assets/128/CrystalGaskell.png',height: 50,width: 50,),
-                      ],
-                    );
+                          Image.asset(
+                            'assets/128/CrystalGaskell.png',
+                            height: 50,
+                            width: 50,
+                          ),
+                        ],
+                      );
               },
             ),
           ),

@@ -27,6 +27,7 @@ abstract class SharedPrefHelper {
   Future<bool>clear(String key);
   String gettoken();
   String getfname();
+  getstring(String key);
   String getlname();
   String getEmail();
   String getImage();
@@ -80,6 +81,11 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
   @override
   Future<void> savePassword(String password) {
     return sharedPreferences.setString('id', password);
+  }
+
+@override
+  getstring(String key) {
+    return sharedPreferences.getString(key);
   }
 
   @override

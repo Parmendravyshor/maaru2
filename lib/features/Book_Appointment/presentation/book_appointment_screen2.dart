@@ -99,7 +99,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                                     BookAppointment1(id1: widget.id2,)));
                                                       },
                                                       child: Image.asset(
-                                                        'assets/icons/Rectangle copy 3.png',
+                                                        'assets/icons/icone-setting-68.png',
                                                         height: 40,
                                                         width: 40,
                                                       )),
