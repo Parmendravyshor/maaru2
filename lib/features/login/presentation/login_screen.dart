@@ -199,9 +199,9 @@ print(id1);
                                       context,
                                       "Please enter valid email",
                                     );
-                                  } else if (password.length < 6) {
+                                  } else if (password.length < 8) {
                                     _showDialog(context,
-                                        "Password must be 6 characters long");
+                                        "Password must be 8 characters long");
                                   } else {
                                     if (state is LoginFormValidationSuccess ||
                                         state is LoginFormValidationFailure) {
