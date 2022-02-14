@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'dart:ui';
 import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
-import 'package:maru/features/indicator.dart';
+
 import 'pet_profile_bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -218,8 +218,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
     print('fffffff$_image');
     return Scaffold(
         backgroundColor: Colors.grey[100],
-       bottomNavigationBar:
-        _prefHelper.getStringByKey('breed_type', '').isNotEmpty?CreateHomeScreen():BackArrowButton(),
+     //  bottomNavigationBar:
+     //   _prefHelper.getStringByKey('breed_type', '').isNotEmpty?CreateHomeScreen():Image.asset('assets/icons/icone-setting-8.png'),
         body: BlocProvider(
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child: BlocBuilder<PetProfileBloc, PetProfileState>(
@@ -334,6 +334,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
               return SafeArea(
                 child: SingleChildScrollView(
                   child: Column(children: [
+
+                    BackArrowButton(),
                     Padding(
                         padding: const EdgeInsets.only(top: 5.0),
                         child: Stack(fit: StackFit.loose, children: <Widget>[

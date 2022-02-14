@@ -105,7 +105,7 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                                 )));
                                                   },
                                                   child: Image.asset(
-                                                    'assets/icons/Rectangle copy 3.png',
+                                                    'assets/icons/icone-setting-68.png',
                                                     height: 40,
                                                     width: 40,
                                                   )),

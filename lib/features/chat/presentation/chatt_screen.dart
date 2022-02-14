@@ -210,7 +210,7 @@ class Chat1State extends State<Chat1> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.maybeOf(context).size;
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         toolbarHeight: 190,
         elevation: 0,
@@ -288,28 +288,35 @@ class Chat1State extends State<Chat1> {
                                 ),
                               ),
                               SizedBox(width: 15,),
-                              ChatBubble(
-                                  clipper:
-                                      ChatBubbleClipper1(type: BubbleType.sendBubble),
-                                  alignment: Alignment.topRight,
-                                  margin: EdgeInsets.only(top: 5, bottom: 5),
-                                  backGroundColor: Colors.yellow[100],
-                                  child:
-                                      Container(
-                                        constraints:
-                                            BoxConstraints(maxWidth: size.width * 0.7),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: MaaruColors.button2Color,
+                                        borderRadius: BorderRadius.only(
+                                            topRight: Radius.circular(7),
+                                            bottomLeft: Radius.circular(7),
+                                            bottomRight: Radius.circular(7))),
+                                    margin: EdgeInsets.only(left: 20, right: 20),
+                                    constraints:
+                                        BoxConstraints(maxWidth: size.width * 0.7),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
 
-                                            Text('${message['message']}',
-                                                style: const TextStyle(
-                                                    color: Colors.black, fontSize: 16))
-                                          ],
-                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(7.0),
+                                          child: Text('${message['message']}',
+                                              style: const TextStyle(
+                                                  color: Colors.black, fontSize: 16)),
+                                        )
+                                      ],
+                                    ),
 
-                                  ),
+                                      ),
                                 ),
+                              ),
                             ],
                           ),
                         )
@@ -317,30 +324,36 @@ class Chat1State extends State<Chat1> {
 
                     : Row(
                       children: [
-                        ChatBubble(
-                            clipper:
-                                ChatBubbleClipper1(type: BubbleType.receiverBubble),
-                            alignment: Alignment.topLeft,
-                            margin: const EdgeInsets.only(top: 5, bottom: 5),
-                            backGroundColor: Colors.white,
-                            child:
-                                Container(
-                                  constraints:
-                                      BoxConstraints(maxWidth: size.width * 0.7),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text('${message['SenderID']}',
-                                          style: const TextStyle(
-                                              color: Colors.grey, fontSize: 10)),
-                                      Text('${message['message']}',
-                                          style: const TextStyle(
-                                              color: Colors.black, fontSize: 16))
-                                    ],
-                                  ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: MaaruColors.buttonColor,
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(7),
+                                      bottomLeft: Radius.circular(7),
+                                      bottomRight: Radius.circular(7))),
+                              constraints:
+                                  BoxConstraints(maxWidth: size.width * 0.7),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('${message['SenderID']}',
+                                      style: const TextStyle(
+                                          color: Colors.grey, fontSize: 10)),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text('${message['message']}',
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 16)),
+                                  )
+                                ],
+                              ),
 
-                            ),
+                                ),
                           ),
+                        ),
                         Image.asset('assets/128/CrystalGaskell.png',height: 50,width: 50,),
                       ],
                     );

@@ -184,7 +184,7 @@ class _UpcomingAppointmentCalenderState
                           reverse: true,
                           shrinkWrap: true,
                           itemCount: state
-                              .upcomingPastAppointmentModel.cancelled.length,
+                              .upcomingPastAppointmentModel.confirmed.length,
                           itemBuilder: (BuildContext context, int index) {
 
                             return Container(

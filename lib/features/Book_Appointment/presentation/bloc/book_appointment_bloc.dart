@@ -44,7 +44,7 @@ class BookAppointmentBloc
   var cardHolderNAme;
   var bookingtime;
   var cvv;
-  var cardidForsaveCard= '';
+  var cardidForsaveCard;
   var cardcvv;
   @override
   Stream<BookAppointmentState> mapEventToState(

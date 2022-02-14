@@ -953,7 +953,7 @@ final FacebookLogin _facebookLogin;
       map['card_number'] = params.cardno ==null?'': params.cardno.replaceAll(' ', '');
       map['exp_date'] = params.expdate.toString();
       map['booking_time'] = params.bookingTime.toString();
-      map['card_id'] = params.cardid2.toString();
+      map['card_id'] = params.cardcvv.toString()==null?'':'';
       map['cvv'] = params.cvv.toString();
       map['card_holder_name'] = params.cardHolderName.toString();
       print('singh${map}');

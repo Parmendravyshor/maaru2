@@ -206,13 +206,13 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                 child: BlocBuilder<PetProfileBloc, PetProfileState>(
                     builder: (context, state) {
                   if (_walkingController.text.isEmpty) {
-                    _walkingController.text = widget.walking;
+                    _walkingController.text = widget.walking ==null?'':'';
                   }
                   if (_feedingController.text.isEmpty) {
-                    _feedingController.text = widget.feeding;
+                    _feedingController.text = widget.feeding ==null?'':'';
                   }
                   if (_tempramentController.text.isEmpty) {
-                    _tempramentController.text = widget.temprature;
+                    _tempramentController.text = widget.temprature ==null?'':'';
                   }
                   if (state is pet3rofileButtonTapped) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {

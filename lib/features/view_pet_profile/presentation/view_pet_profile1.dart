@@ -8,7 +8,7 @@ import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
-import 'package:maru/features/indicator.dart';
+
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
@@ -49,7 +49,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                     BlocProvider.of<PetProfileBloc>(context)
                         .add(GetSinglePRof(widget.id1));
                     print('sssss${widget.id1}');
-                    return Center(child: Skeleton());
+                    return Center(child:CircularProgressIndicator());
                   } else if (state is SingleProfileLoaded) {
                     print('ddddd ${state.welcome2.getSinglePe.age}');
 

@@ -472,11 +472,11 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                       'Number behind the card',
                                                   labelText: 'CVV',
                                                 ),
-                                                // validator: CardUtils.validateCVV,
-                                                // keyboardType: TextInputType.number,
-                                                // onSaved: (value) {
-                                                //   _paymentCard.cvv = int.parse(value);
-                                                // },
+                                                validator: CardUtils.validateCVV,
+                                                keyboardType: TextInputType.number,
+                                                onSaved: (value) {
+                                                  _paymentCard.cvv = int.parse(value);
+                                                },
                                                 onChanged: (text) {
                                                   BlocProvider.of<
                                                               BookAppointmentBloc>(
@@ -491,60 +491,75 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                             Divider(
                                               color: Colors.grey[360],
                                             ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(1.0),
-                                              child: ThemedButton(
-                                                text: 'Book Appointment',
-                                                onPressed: () {
-                                                  BlocProvider.of<
-                                                              BookAppointmentBloc>(
-                                                          context)
-                                                      .add(dateChanged(aa, ''));
-                                                  BlocProvider.of<
-                                                              BookAppointmentBloc>(
-                                                          context)
-                                                      .add(PetIdChanged(
-                                                          int.parse(
-                                                              parmendra)));
-                                                  BlocProvider.of<
-                                                              BookAppointmentBloc>(
-                                                          context)
-                                                      .add((serviceIdChanged(
-                                                          int.parse(singh))));
-                                                  BlocProvider.of<
-                                                              BookAppointmentBloc>(
-                                                          context)
-                                                      .add((CardIdChanged(bb)));
-                                                  BlocProvider.of<
-                                                              BookAppointmentBloc>(
-                                                          context)
-                                                      .add((providerIdChanged(
-                                                          widget.id3)));
-                                                  // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(widget.id3)));
-                                                  // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(int.parse(const ChoiceRow(lebal1: '12:30',).toString()))));
-                                                  BlocProvider.of<
-                                                              BookAppointmentBloc>(
-                                                          context)
-                                                      .add((BookingTimeChaned(
-                                                          test)));
-                                                  String text =
-                                                      _cvvControllerCard.text;
-                                                  if (text.length <= 2) {
-                                                    _showDialog(context,
-                                                        'Cvv must be 3 digit');
-                                                  } else {
-                                                    // _prefHelper.getStringByKey(
-                                                    //     'id', '');
-                                                    BlocProvider.of<
-                                                                BookAppointmentBloc>(
-                                                            context)
-                                                        .add(
-                                                            BookRegisterButtonTapped());
-                                                  }
-                                                },
-                                                enabled: true,
-                                              ),
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(1.0),
+                                                  child: ThemedButton(
+                                                    text: 'Pay',
+                                                    onPressed: () {
+                                                      BlocProvider.of<
+                                                                  BookAppointmentBloc>(
+                                                              context)
+                                                          .add(dateChanged(aa, ''));
+                                                      BlocProvider.of<
+                                                                  BookAppointmentBloc>(
+                                                              context)
+                                                          .add(PetIdChanged(
+                                                              int.parse(
+                                                                  parmendra)));
+                                                      BlocProvider.of<
+                                                                  BookAppointmentBloc>(
+                                                              context)
+                                                          .add((serviceIdChanged(
+                                                              int.parse(singh))));
+                                                      BlocProvider.of<
+                                                                  BookAppointmentBloc>(
+                                                              context)
+                                                          .add((CardIdChanged(bb)));
+                                                      BlocProvider.of<
+                                                                  BookAppointmentBloc>(
+                                                              context)
+                                                          .add((providerIdChanged(
+                                                              widget.id3)));
+                                                      // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(widget.id3)));
+                                                      // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(int.parse(const ChoiceRow(lebal1: '12:30',).toString()))));
+                                                      BlocProvider.of<
+                                                                  BookAppointmentBloc>(
+                                                              context)
+                                                          .add((BookingTimeChaned(
+                                                              test)));
+                                                      String text =
+                                                          _cvvControllerCard.text;
+                                                      if (text.length <= 2) {
+                                                        _showDialog(context,
+                                                            'Cvv must be 3 digit');
+                                                      } else {
+                                                        // _prefHelper.getStringByKey(
+                                                        //     'id', '');
+                                                        BlocProvider.of<
+                                                                    BookAppointmentBloc>(
+                                                                context)
+                                                            .add(
+                                                                BookRegisterButtonTapped());
+                                                      }
+                                                    },
+                                                    enabled: true,
+                                                  ),
+                                                ),
+                                                state is BookRegisterInProgress
+                                                    ? Center(
+                                                    child: Container(
+                                                      margin:
+                                                      const EdgeInsets.only(bottom: 20),
+                                                      width: 40,
+                                                      height: 40,
+                                                      child:
+                                                      const CircularProgressIndicator(),
+                                                    ))
+                                                    : Container(),
+                                              ],
                                             )
                                           ],
                                         )))
@@ -587,7 +602,6 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                 topLeft: Radius.circular(20),
                               ),
                               color: Colors.white),
-                          height: 250,
                           width: size.width * 1,
                           child: Container(
                               margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -613,7 +627,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                         )));
                                           },
                                           child: Image.asset(
-                                            'assets/icons/Rectangle copy 3.png',
+                                            'assets/icons/icone-setting-68.png',
                                             height: 40,
                                             width: 40,
                                           )),
@@ -630,7 +644,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                         )));
                                           },
                                           child: Image.asset(
-                                            'assets/icons/Rectangle copy 3.png',
+                                            'assets/icons/icone-setting-68.png',
                                             height: 40,
                                             width: 40,
                                           )),
@@ -713,7 +727,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                     ],
                   ),
                   Container(
-                      height: 440,
+                      height:size.height*0.5,
                       width: 400,
                       child: buildTableCalendarWithBuilders()),
                   Align(
@@ -1071,64 +1085,23 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                     height: 20,
                   ),
                   Column(children: [
-                    InkWell(
-                      onTap: () {
-                        tomer = 'pressd';
-                      },
-                      child: Container(
-                        height: 100,
-                        child: Container(
-                            height: 40,
-                            width: 400,
-                            child: Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 20, left: 20),
-                                child: ListView(
-                                    scrollDirection: Axis.horizontal,
-                                    children: [
-                                      ChoiceRow(
-                                        lebal1: test,
-                                        lebal2: test1,
-                                        lebal3: '11:00 AM',
-                                        lebal4: '11:30 AM',
-                                        lebal5: '12:00 AM',
-                                      ),
-                                    ]))),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Afternoon',
-                        style: MaaruStyle.text.tiniest,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                        height: 40,
-                        width: double.infinity,
-                        child: Padding(
-                            padding: EdgeInsets.only(right: 20, left: 20),
-                            child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: const [
-                                  ChoiceRow(
-                                    lebal1: '12:00 PM',
-                                    lebal2: '12:30 PM',
-                                    lebal3: '01:00 PM',
-                                    lebal4: '01:30 PM',
-                                    lebal5: '02:00 PM',
-                                  ),
-                                ])))
+                    ChoiceRow(
+                      lebal1: '10:00 AM',
+                      lebal2: '10:30 AM',
+                      lebal3: '11:00 AM',
+                      lebal4: '11:30 AM',
+                      lebal5: '12:00 AM',
+                      lebal7: '12:30 PM',
+                      lebal8: '01:00 PM',
+                      lebal9: '01:30 PM',
+                      lebal10: '02:00 PM',
+
+                    )
                   ]),
                   SizedBox(
                     height: 20,
                   ),
+
                   Visibility(
                     maintainSize: false,
                     maintainAnimation: false,
@@ -1237,6 +1210,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                 ListView.builder(
                                     scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
+                                    physics:  ClampingScrollPhysics(),
                                     itemCount: state.fetchCardDetailsModel
                                         .getCardDetails.length,
                                     itemBuilder:
@@ -2076,23 +2050,32 @@ class ChoiceRow extends StatefulWidget {
   final String lebal4;
   final String lebal5;
   final String lebel6;
-  final String a;
-  const ChoiceRow(
+  final String lebal7;
+  final String lebal8;
+  final String lebal9;final String lebal10;
+
+
+
+
+
+  ChoiceRow(
       {Key key,
-      this.lebal1,
-      this.lebal2,
-      this.lebal3,
-      this.lebal4,
-      this.lebal5,
-      this.lebel6,
-      this.a})
+        this.lebal1,
+        this.lebal2,
+        this.lebal3,
+        this.lebal4,
+        this.lebal5,this.lebel6,this.lebal7,this.lebal8,this.lebal9,this.lebal10})
       : super(key: key);
+
   @override
   _ChoiceRowState createState() => _ChoiceRowState();
 }
 
 class _ChoiceRowState extends State<ChoiceRow> {
-  List<bool> isPressedList = [false, false, false, false, false, false];
+  List<bool> isPressedList = [false, false, false, false, false, false,false,false,false,false,false];
+
+
+
 
   String classChoice = '';
 
@@ -2100,152 +2083,441 @@ class _ChoiceRowState extends State<ChoiceRow> {
   Widget build(BuildContext context) {
     print("Status L $isPressedList");
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        //  SizedBox(width: 30),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (isPressedList[0] == true) {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-                isPressedList[6] = false;
-              } else {
-                isPressedList[0] = true;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-                isPressedList[5] = false;
-              }
-            });
+    return Container(
+      margin: EdgeInsets.only(left: 20,right: 20),
+      height: 150,
+      width: 400,
+      child: Column(
+        children: [
+          Container(
+            height: 40,
+            width: 400,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    //  SizedBox(width: 30),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (isPressedList[0] == true) {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          } else {
+                            isPressedList[0] = true;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          }
+                        });
+                        BlocProvider.of<BookAppointmentBloc>(context)
+                            .add(BookingTimeChaned(widget.lebal1));
+                      },
+                      child: ChoiceButton(
+                        isPressed: isPressedList[0],
+                        label: widget.lebal1,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        print(widget.lebal1);
+                        setState(() {
+                          if (isPressedList[1] == true) {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          } else {
+                            isPressedList[0] = false;
+                            isPressedList[1] = true;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          }
+                        });
+                        BlocProvider.of<BookAppointmentBloc>(context)
+                            .add(BookingTimeChaned(widget.lebal2));
+                      },
+                      child: ChoiceButton(
+                        isPressed: isPressedList[1],
+                        label: widget.lebal2,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (isPressedList[2] == true) {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          } else {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = true;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          }
+                        });
+                        BlocProvider.of<BookAppointmentBloc>(context)
+                            .add(BookingTimeChaned(widget.lebal3));
+                      },
+                      child: ChoiceButton(
+                        isPressed: isPressedList[2],
+                        label: widget.lebal3,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (isPressedList[3] == true) {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          } else {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = true;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          }
+                        });
+                        BlocProvider.of<BookAppointmentBloc>(context)
+                            .add(BookingTimeChaned(widget.lebal4));
+                      },
+                      child: ChoiceButton(
+                        isPressed: isPressedList[3],
+                        label: widget.lebal4,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (isPressedList[4] == true) {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          } else {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = true;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          }
+                        });
+                        BlocProvider.of<BookAppointmentBloc>(context)
+                            .add(BookingTimeChaned(widget.lebal5));
+                      },
+                      child: ChoiceButton(
+                        isPressed: isPressedList[4],
+                        label: widget.lebal5,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
 
-            BlocProvider.of<BookAppointmentBloc>(context)
-                .add(BookingTimeChaned(widget.lebal1));
-          },
-          child: ChoiceButton(
-            isPressed: isPressedList[0],
-            label: widget.lebal1,
+          SizedBox(
+            height: 20,
           ),
-        ),
-        SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            print(widget.lebal1);
-            setState(() {
-              if (isPressedList[1] == true) {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              } else {
-                isPressedList[0] = false;
-                isPressedList[1] = true;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              }
-            });
-            BlocProvider.of<BookAppointmentBloc>(context)
-                .add(BookingTimeChaned(widget.lebal2));
-          },
-          child: ChoiceButton(
-            isPressed: isPressedList[1],
-            label: widget.lebal2,
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              'Afternoon',
+              style: MaaruStyle.text.tiniest,
+            ),
           ),
-        ),
-        SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (isPressedList[2] == true) {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-              } else {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = true;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-              }
-            });
-            var a = BlocProvider.of<BookAppointmentBloc>(context)
-                .add(BookingTimeChaned(widget.lebal3));
-          },
-          child: ChoiceButton(
-            isPressed: isPressedList[2],
-            label: widget.lebal3,
+          SizedBox(
+            height: 20,
           ),
-        ),
-        SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (isPressedList[3] == true) {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              } else {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = true;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              }
-            });
-            BlocProvider.of<BookAppointmentBloc>(context)
-                .add(BookingTimeChaned(widget.lebal4));
-          },
-          child: ChoiceButton(
-            isPressed: isPressedList[3],
-            label: widget.lebal4,
-          ),
-        ),
-        SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (isPressedList[4] == true) {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              } else {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = true;
-                isPressedList[5] = false;
-              }
-            });
-            BlocProvider.of<BookAppointmentBloc>(context)
-                .add(BookingTimeChaned(widget.lebal5));
-          },
-          child: ChoiceButton(
-            isPressed: isPressedList[4],
-            label: widget.lebal5,
-          ),
-        ),
-      ],
+
+          Container(
+            height: 40,
+            width: 400,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    //  SizedBox(width: 30),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (isPressedList[6] == true) {
+                            isPressedList[6] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[0] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+
+
+                          } else {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = true;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+
+                          }
+                        });
+                        BlocProvider.of<BookAppointmentBloc>(context)
+                            .add(BookingTimeChaned(widget.lebal1));
+                      },
+                      child: ChoiceButton(
+                        isPressed: isPressedList[6],
+                        label: widget.lebal7,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        print(widget.lebal1);
+                        setState(() {
+                          if (isPressedList[7] == true) {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+
+                          } else {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = true;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+
+                          }
+                        });
+                        BlocProvider.of<BookAppointmentBloc>(context)
+                            .add(BookingTimeChaned(widget.lebal2));
+                      },
+                      child: ChoiceButton(
+                        isPressed: isPressedList[7],
+                        label: widget.lebal8,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (isPressedList[8] == true) {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+
+                          } else {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = true;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          }
+                        });
+                        BlocProvider.of<BookAppointmentBloc>(context)
+                            .add(BookingTimeChaned(widget.lebal3));
+                      },
+                      child: ChoiceButton(
+                        isPressed: isPressedList[8],
+                        label: widget.lebal9,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (isPressedList[9] == true) {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          } else {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = true;
+                            isPressedList[10] = false;
+                          }
+                        });
+                        BlocProvider.of<BookAppointmentBloc>(context)
+                            .add(BookingTimeChaned(widget.lebal4));
+                      },
+                      child: ChoiceButton(
+                        isPressed: isPressedList[9],
+                        label: widget.lebal10,
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          if (isPressedList[10] == true) {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = false;
+                          } else {
+                            isPressedList[0] = false;
+                            isPressedList[1] = false;
+                            isPressedList[2] = false;
+                            isPressedList[3] = false;
+                            isPressedList[4] = false;
+                            isPressedList[5] = false;
+                            isPressedList[6] = false;
+                            isPressedList[7] = false;
+                            isPressedList[8] = false;
+                            isPressedList[9] = false;
+                            isPressedList[10] = true;
+                          }
+                        });
+                        BlocProvider.of<BookAppointmentBloc>(context)
+                            .add(BookingTimeChaned(widget.lebal5));
+                      },
+                      child: ChoiceButton(
+                        isPressed: isPressedList[4],
+                        label: widget.lebal5,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -2282,234 +2554,11 @@ class _ChoiceButtonState extends State<ChoiceButton> {
             widget.label,
             style: widget.isPressed
                 ? GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Poppins',
-                        fontSize: 15,
-                        color: Colors.black))
-                : MaaruStyle.text.greyDisable,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ChoiceRow2 extends StatefulWidget {
-  final String lebal1;
-  final String lebal2;
-  final String lebal3;
-  final String lebal4;
-  final String lebal5;
-  final String laa;
-  const ChoiceRow2(
-      {Key key,
-      this.lebal1,
-      this.lebal2,
-      this.lebal3,
-      this.lebal4,
-      this.lebal5,
-      this.laa})
-      : super(key: key);
-
-  @override
-  _ChoiceRowState createState() => _ChoiceRowState();
-}
-
-class _ChoiceRow2State extends State<ChoiceRow> {
-  List<bool> isPressedList = [false, false, false, false, false, false];
-
-  String classChoice = '';
-
-  @override
-  Widget build(BuildContext context) {
-    print("Status L $isPressedList");
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        //  SizedBox(width: 30),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (isPressedList[0] == true) {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              } else {
-                isPressedList[0] = true;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              }
-            });
-            BlocProvider.of<BookAppointmentBloc>(context)
-                .add(dateChanged('', widget.lebal1));
-          },
-          child: ChoiceButton(
-            isPressed: isPressedList[0],
-            label: widget.lebal1,
-          ),
-        ),
-        SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (isPressedList[1] == true) {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              } else {
-                isPressedList[0] = false;
-                isPressedList[1] = true;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              }
-            });
-            BlocProvider.of<BookAppointmentBloc>(context)
-                .add(dateChanged('', widget.lebal2));
-          },
-          child: ChoiceButton(
-            isPressed: isPressedList[1],
-            label: widget.lebal2,
-          ),
-        ),
-        SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (isPressedList[2] == true) {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-              } else {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = true;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-              }
-            });
-            BlocProvider.of<BookAppointmentBloc>(context)
-                .add(dateChanged('', widget.lebal3));
-          },
-          child: ChoiceButton(
-            isPressed: isPressedList[2],
-            label: widget.lebal3,
-          ),
-        ),
-        SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              if (isPressedList[3] == true) {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              } else {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = true;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              }
-            });
-            BlocProvider.of<BookAppointmentBloc>(context)
-                .add(dateChanged('', widget.lebal4));
-          },
-          child: ChoiceButton(
-            isPressed: isPressedList[3],
-            label: widget.lebal4,
-          ),
-        ),
-        SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            print(widget.lebal4);
-            setState(() {
-              if (isPressedList[4] == true) {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = false;
-                isPressedList[5] = false;
-              } else {
-                isPressedList[0] = false;
-                isPressedList[1] = false;
-                isPressedList[2] = false;
-                isPressedList[3] = false;
-                isPressedList[4] = true;
-                isPressedList[5] = false;
-              }
-            });
-            BlocProvider.of<BookAppointmentBloc>(context)
-                .add(dateChanged('', widget.lebal5));
-          },
-          child: ChoiceButton(
-            isPressed: isPressedList[4],
-            label: widget.lebal5,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class ChoiceButton2 extends StatefulWidget {
-  final String label2;
-  final bool isPressed2;
-
-  ChoiceButton2({this.label2, this.isPressed2});
-
-  @override
-  State<ChoiceButton2> createState() => _ChoiceButton2State();
-}
-
-class _ChoiceButton2State extends State<ChoiceButton2> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 150,
-        height: 40,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey,
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-
-          color: widget.isPressed2 ? MaaruColors.button2Color : Colors.white,
-
-          // border: Border.all(color: Colors.grey),
-        ),
-        child: Center(
-          child: Text(
-            widget.label2,
-            style: widget.isPressed2
-                ? GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontFamily: 'Poppins',
-                        fontSize: 15,
-                        color: Colors.black))
+                textStyle: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontFamily: 'Poppins',
+                    fontSize: 15,
+                    color: Colors.black))
                 : MaaruStyle.text.greyDisable,
             textAlign: TextAlign.center,
           ),
