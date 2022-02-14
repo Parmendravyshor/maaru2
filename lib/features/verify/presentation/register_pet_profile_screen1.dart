@@ -224,7 +224,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child: BlocBuilder<PetProfileBloc, PetProfileState>(
                 builder: (context, state) {
-                  if(_prefHelper.getStringByKey('id', '').isNotEmpty) {
+                  if(widget.id1 !=null) {
                     if (_petNameController.text.characters.isNotEmpty) {
                       _prefHelper.saveString(
                           MaruConstant.petName, _petNameController.text) ??
@@ -545,12 +545,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                       height: 20.0,
                                     ),
                                     ThemedTextField(
-                                      _prefHelper
-                                              .getStringByKey('pet_name', '')
-                                              .isEmpty
-                                          ? 'pet name'
-                                          : _prefHelper.getStringByKey(
-                                              'pet_name', ''),
+                                      'Pet name',
                                       TextInputType.text,
                                       textStyle: TextStyle(color: Colors.black),
                                       textinputaction2: TextInputAction.next,
