@@ -1,3 +1,12 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+*.flutter-plugins
+*.flutter-plugins-dependencies
+*.metadata
+*.packages
+*.analysis_options.yaml
+*.pubspec.lock
+*.pubspec.lock~f38077fb070e945e12e76eb4c96ccef8ae6ff65f
+*.pubspec.yaml
+*.dart_tool/
