@@ -7,15 +7,10 @@ class BackArrowButton extends StatelessWidget {
  // BackArrowButton({this.onTap});
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Align(alignment: Alignment.topLeft,child:
-        IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined,color:MaaruColors.buttonColor,),
-          onPressed: (){Navigator.pop(context);},
-        ))
-      ],
-      alignment: Alignment.topLeft,
-    );
+    return Align(alignment: Alignment.topLeft,child:
+    IconButton(
+      icon: Icon(Icons.arrow_back_ios_outlined,color:MaaruColors.buttonColor,),
+      onPressed: (){Navigator.pop(context);},
+    ));
   }
 }

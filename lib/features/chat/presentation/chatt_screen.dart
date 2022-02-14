@@ -13,6 +13,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/chat/domain/entity/mesage.dart';
 import 'package:maru/main.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -210,9 +211,10 @@ class Chat1State extends State<Chat1> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.maybeOf(context).size;
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor:Color(0xfff9f9f9),
       appBar: AppBar(
-        toolbarHeight: 190,
+        backgroundColor: Colors.white,
+        toolbarHeight: 150,
         elevation: 0,
 
         // Set this height
@@ -220,11 +222,11 @@ class Chat1State extends State<Chat1> {
           color: Colors.white,
           child: Column(
             children: [
-              SizedBox(height: 30),
+              SizedBox(height: size.height*0.03),
               BackArrowButton(),
               Container(
-                height: 75,
-                padding: const EdgeInsets.only(right: 20),
+                height:size.height*0.09,
+
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -235,12 +237,14 @@ class Chat1State extends State<Chat1> {
               ),
 
               SizedBox(
-                height: 20,
+                height: size.height*0.01,
               ),
               Text(
                 'Ram',
-                style: MaaruStyle.text.tiniest,
-              )
+                style: MaaruStyle.text.tiny,
+              ),
+
+
             ],
           ),
         ),
@@ -268,6 +272,7 @@ class Chat1State extends State<Chat1> {
                         widget.user.toString())
                     ?
                         Container(
+
                           alignment: Alignment.centerRight,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -469,13 +474,13 @@ class Chat1State extends State<Chat1> {
                         labelStyle:
                             TextStyle(fontSize: 15, color: Colors.black),
                         enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                          borderSide: BorderSide(color: Colors.transparent),
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
+                          borderSide: BorderSide(color: Colors.transparent),
                         ),
                         disabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey),
+                          borderSide: BorderSide(color: Colors.transparent),
                         ),
                         counterText: '',
                       ),
