@@ -350,10 +350,10 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
-                                      image: _image.isEmpty?widget.img==null
+                                      image: _image.isEmpty
                                           ? const ExactAssetImage(
                                               'assets/icons/Oval.png')
-                                          : FileImage(File(_image)):widget.img,
+                                          : FileImage(File(_image)),
                                       fit: BoxFit.cover,
                                     ),
                                   ),

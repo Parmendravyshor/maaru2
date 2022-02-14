@@ -47,6 +47,7 @@ import 'core/theme/maaru_style.dart';
 import 'core/utils.dart';
 import 'features/Account_setting/presentation/bloc/edit_profile_screen.dart';
 import 'features/Book_Appointment/presentation/booked_confirm.dart';
+import 'features/Home/presentation/chat_screen.dart';
 import 'features/Home/presentation/pet_profile.dart';
 import 'features/Home/presentation/search_screen.dart';
 import 'features/chat/domain/entity/mesage.dart';
