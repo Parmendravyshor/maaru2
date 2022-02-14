@@ -58,7 +58,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                               children: [
                                 Flex(direction: Axis.vertical, children: [
                                   Container(
-                                    height: 200,
+                                    height: size.height*0.30,
                                     width: 500,
                                     child: Image.network(
                                       state.welcome4.providerDetails.provider.img,
@@ -149,11 +149,9 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                           .provider.companyName
                                                           .toString(),
                                                       style:
-                                                      MaaruStyle.text.tiniest),
+                                                      MaaruStyle.text.xlarge),
 // SizedBox(width: size.width*0.34,),
-                                                  Image.asset(
-                                                      'assets/icons/New Project (2).png',
-                                                      width: size.width * 0.08)
+
                                                 ],
                                               ),
                                               Text(

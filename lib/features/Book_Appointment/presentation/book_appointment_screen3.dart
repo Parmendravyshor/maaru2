@@ -246,6 +246,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   // More advanced TableCalendar configuration (using Builders & Styles)
   Widget buildTableCalendarWithBuilders() {
     return TableCalendar(
+
       calendarController: calendarController,
       //   events: _events,
       //holidays: _holidays,
@@ -257,6 +258,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
       availableCalendarFormats: const {CalendarFormat.month: ''},
 
       calendarStyle: CalendarStyle(
+
         outsideDaysVisible: false,
         weekendStyle: TextStyle().copyWith(color: Colors.grey[800]),
         holidayStyle: TextStyle().copyWith(color: Colors.grey[800]),
@@ -582,7 +584,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                   Column(
                     children: [
                       Container(
-                        height: 200,
+                        height: size.height*0.30,
                         width: 500,
                         child: Image.network(
                           widget.image = null ?? '',
@@ -694,7 +696,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                   state.welcome4.providerDetails
                                                       .provider.companyName,
                                                   style:
-                                                      MaaruStyle.text.tiniest,
+                                                      MaaruStyle.text.xlarge,
                                                 ),
                                                 SizedBox(
                                                   width: size.width * 0.16,
@@ -708,12 +710,13 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                             Text(
                                               '${state.welcome4.providerDetails.provider.city.toString()} '
                                               '${state.welcome4.providerDetails.provider.state} '
-                                              '${state.welcome4.providerDetails.provider.zipCode}',
+                                              '${state.welcome4.providerDetails.provider.zipCode}'.toUpperCase(),
                                               style: MaaruStyle.text.tiny,
                                             ),
+                                            SizedBox(height: size.height*0.02,),
                                             Text(
-                                              'Book Appointments',
-                                              style: MaaruStyle.text.tiniest,
+                                              'Book Appointments'.toUpperCase(),
+                                              style: MaaruStyle.text.tiny,
                                             ),
                                           ],
                                         );
@@ -727,16 +730,17 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                     ],
                   ),
                   Container(
-                      height:size.height*0.5,
+                      height:size.height*0.6,
                       width: 400,
                       child: buildTableCalendarWithBuilders()),
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Services',
-                      style: MaaruStyle.text.tiniest,
+                      'Services'.toUpperCase(),
+                      style: MaaruStyle.text.tiny,
                     ),
                   ),
+                  SizedBox(height: size.height*0.02,),
                   Padding(
                       padding: const EdgeInsets.only(right: 20, left: 20),
                       child: BlocProvider(
@@ -795,11 +799,13 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                     width: 350,
                                     color: Colors.grey[50],
                                     alignment: Alignment.center,
-                                    child: Center(
+                                    child: Align(
+                                      alignment: Alignment(0.3,0),
                                       child: DropdownButton(
+                                        underline: Container(color: Colors.transparent,),
                                         hint: Text(
                                           _selValue,
-                                          style: MaaruStyle.text.tiniest,
+                                          style: MaaruStyle.text.tiny,
                                         ),
 
                                         icon: Icon(
@@ -912,15 +918,18 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                               return const CircularProgressIndicator();
                             }
                           }))),
+                  SizedBox(
+                    height: size.height*0.02,
+                  ),
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Pet',
-                      style: MaaruStyle.text.tiniest,
+                      'Pet'.toUpperCase(),
+                      style: MaaruStyle.text.tiny,
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: size.height*0.02,
                   ),
                   Padding(
                       padding: EdgeInsets.only(right: 20, left: 20),
@@ -964,11 +973,13 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                               width: 350,
                               color: Colors.grey[50],
                               alignment: Alignment.center,
-                              child: Center(
+                              child: Align(
+                                alignment: Alignment(0.7,0),
                                 child: DropdownButton(
+                                  underline: Container(color: Colors.transparent,),
                                   hint: Text(
                                     _selValue1,
-                                    style: MaaruStyle.text.tiniest,
+                                    style: MaaruStyle.text.tiny,
                                   ),
 
                                   icon: Icon(
@@ -1069,16 +1080,14 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                         }),
                       )),
                   SizedBox(
-                    height: 20,
+                height: size.height*0.02,
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'Morning',
-                      style: MaaruStyle.text.tiniest,
+                      'Morning'.toUpperCase(),
+                      style: MaaruStyle.text.tiny,
                     ),
                   ),
                   SizedBox(
@@ -1099,7 +1108,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                     )
                   ]),
                   SizedBox(
-                    height: 20,
+                    height: size.height*0.02,
                   ),
 
                   Visibility(
@@ -1114,11 +1123,11 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                             child: Container(
                                 margin: const EdgeInsets.only(left: 20),
                                 child: Text(
-                                  'Booking Cost',
-                                  style: MaaruStyle.text.large,
+                                  'Booking Cost'.toUpperCase(),
+                                  style: MaaruStyle.text.tiny,
                                 ))),
-                        const SizedBox(
-                          height: 20,
+                         SizedBox(
+                          height: size.height*0.02,
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 20, right: 20),
@@ -1126,7 +1135,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Booking  Total',
+                                'Booking  Total'.toUpperCase(),
                                 style: MaaruStyle.text.tiny,
                               ),
                               Text(
@@ -1137,7 +1146,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                           ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: size.height*0.02,
                         ),
                         Padding(
                             padding: EdgeInsets.only(left: 20, right: 20),
@@ -1145,7 +1154,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Taxes',
+                                  'Taxes'.toUpperCase(),
                                   //  state.covidModel.petProfiles[_prefHelper.getIntByKey('id',abcd  )].am,
                                   style: MaaruStyle.text.tiny,
                                 ),
@@ -1163,7 +1172,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                         height: size.height*0.02,
                         ),
                         Padding(
                             padding: EdgeInsets.only(left: 20, right: 20),
@@ -1171,7 +1180,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Total',
+                                  'Total'.toUpperCase(),
                                   style: MaaruStyle.text.tiny,
                                 ),
                                 Text(
@@ -1184,7 +1193,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: size.height*0.02,
                   ),
                   BlocProvider(
                       create: (context) =>
@@ -1207,6 +1216,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                       'Your Saved Card',
                                       style: MaaruStyle.text.tiniest,
                                     )),
+                                SizedBox(height: size.height*0.02,),
                                 ListView.builder(
                                     scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
@@ -2014,30 +2024,33 @@ void _showDialog(BuildContext context, String text) {
           child: AlertDialog(actions: <Widget>[
             Align(
                 alignment: Alignment.center,
-                child: Container(
-                    decoration: BoxDecoration(
-                      color: MaaruStyle.colors.textColorWhite,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0, right: 20),
-                          child: Text(text),
-                        ),
-                        Divider(
-                          color: Colors.grey[360],
-                        ),
-                        InkWell(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              'ok',
-                              style: TextStyle(color: MaaruColors.buttonColor),
-                            ))
-                      ],
-                    )))
+                child: InkWell(
+                  onTap: (){Navigator.pop(context);},
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: MaaruStyle.colors.textColorWhite,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20.0, right: 20),
+                            child: Text(text),
+                          ),
+                          Divider(
+                            color: Colors.grey[360],
+                          ),
+                          InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'ok',
+                                style: TextStyle(color: MaaruColors.buttonColor),
+                              ))
+                        ],
+                      )),
+                ))
           ]));
     },
   );

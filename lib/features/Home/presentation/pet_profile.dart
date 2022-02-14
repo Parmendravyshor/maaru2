@@ -50,7 +50,7 @@ class _PetProfile1State extends State<PetProfile1> {
           },
           child: Row(children: [
             Padding(
-                padding: EdgeInsets.only(left: 70),
+                padding: EdgeInsets.only(left: 50),
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -69,7 +69,7 @@ class _PetProfile1State extends State<PetProfile1> {
                       )),
                 )),
             SizedBox(
-              width: 20,
+              width: size.width*0.10,
             ),
             Text(
               'Add New Pet',
@@ -94,7 +94,7 @@ class _PetProfile1State extends State<PetProfile1> {
                   child: SingleChildScrollView(
                       child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 15.0, right: 30, bottom: 15),
+                        left: 15.0, right: 15, bottom: 15),
                     child: Column(children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -124,12 +124,12 @@ class _PetProfile1State extends State<PetProfile1> {
                               )),
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: size.height*0.02,
                       ),
                       Padding(
                           padding: const EdgeInsets.only(
-                              top: 15, right: 10, left: 20),
+                              right: 5, left: 13),
                           child: TextFormField(
                             // cursorColor: Colors.black,
                             decoration: InputDecoration(
@@ -175,8 +175,8 @@ class _PetProfile1State extends State<PetProfile1> {
                       ),
                       Container(
                           // alignment: Alignment.center,
-                          height: 470,
-                          width: 250,
+                          height: size.height*0.60,
+                          width: size.width*0.80,
                           child: ListView.builder(
                             itemCount: state.covidModel.petProfiles.length,
                             scrollDirection: Axis.vertical,
@@ -202,6 +202,7 @@ class _PetProfile1State extends State<PetProfile1> {
                                     width: 250,
                                     alignment: FractionalOffset.topLeft,
                                     decoration: BoxDecoration(
+
                                       border: Border.all(
                                           color: Colors.grey[300], width: 1.0),
                                     ),
@@ -214,8 +215,8 @@ class _PetProfile1State extends State<PetProfile1> {
                                             state.covidModel.petProfiles[index]
                                                 .img
                                                 .toString(),
-                                            height: 150,
-                                            width: 232,
+                                            height: size.height*0.20,
+                                            width: size.width*1,
                                             fit: BoxFit.fitWidth,
                                             errorBuilder:
                                                 (context, error, stackTrace) {
@@ -226,7 +227,7 @@ class _PetProfile1State extends State<PetProfile1> {
                                                   ),
                                                   alignment: Alignment.center,
                                                   child: Image.asset(
-                                                      'assets/128/CrystalGaskell.png'));
+                                                      'assets/128/CrystalGaskell.png',));
                                             },
                                           )),
                                       Container(
@@ -249,6 +250,7 @@ class _PetProfile1State extends State<PetProfile1> {
                                                   style: MaaruStyle.text.large,
                                                 ),
                                                 Image.asset(
+
                                                   'assets/icons/icone-setting-31.png',
                                                   width: 25,
                                                 )

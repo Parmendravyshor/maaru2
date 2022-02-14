@@ -58,21 +58,8 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Container(
-                            height: 40,
-                            width: 40,
-                            decoration:  BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: _prefHelper.getStringByKey('img', '').isEmpty
-                                    ? const ExactAssetImage(
-                                    'assets/icons/Oval.png')
-                                    : FileImage(File(_prefHelper.getStringByKey('img', ''))),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
+                          SizedBox(height: size.height*0.02,),
+
                           Align(
                               alignment: Alignment.centerLeft,
                               child: Column(children: [

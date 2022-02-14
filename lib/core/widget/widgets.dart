@@ -48,7 +48,7 @@ class ThemedButton extends StatelessWidget {
     final enabledTextColor = MaaruColors.button2Color;
     final disabledTextColor = MaaruStyle.colors.textDisabled;
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
+      margin: EdgeInsets.only(left: 5, right: 5),
       child: Center(
           child: FractionallySizedBox(
               widthFactor: 1.022,

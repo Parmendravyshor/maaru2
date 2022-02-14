@@ -106,6 +106,7 @@ class _MessagesState extends State<Messages> {
   ScrollController _controller;
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
     var selectedIndex;
     return Scaffold(
@@ -180,7 +181,7 @@ class _MessagesState extends State<Messages> {
                             },controller: _petNameController,
                           )),
                       SizedBox(
-                        height: 30,
+                        height: size.height*0.02,
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
@@ -196,7 +197,8 @@ class _MessagesState extends State<Messages> {
                       Column(
                         children: [
                           Container(
-                            height: 70,
+
+                            height: size.height*0.10,
                             width: 400,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
@@ -208,7 +210,7 @@ class _MessagesState extends State<Messages> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Container(
-                                          width: 100,
+                                          width: size.width*0.18,
                                           child: Image.network(
                                             state
                                                 .getProviderModel
@@ -228,9 +230,7 @@ class _MessagesState extends State<Messages> {
                                       ]);
                                 }),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
+
                           ListView.builder(
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
@@ -254,9 +254,9 @@ class _MessagesState extends State<Messages> {
                                         alignment: Alignment.centerRight,
                                         child: Padding(
                                             padding: EdgeInsets.only(
-                                                left: 10, right: 20),
+                                                left: 10, right: 20,top: 10),
                                             child: Container(
-                                                height: 120,
+                                                height: size.height*0.15,
                                                 width: 400,
                                                 decoration: BoxDecoration(
                                                   color: Colors.grey[50],

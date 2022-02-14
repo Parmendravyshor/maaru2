@@ -103,8 +103,8 @@ class _BookAppointment1State extends State<BookAppointment1> {
                           child: Column(
                         children: [
                           Container(
-                            height: 200,
-                            width: 500,
+                            height: size.height*0.30,
+                            width: size.width*1,
                             child: Image.network(
                               state.welcome4.providerDetails.provider.img,
                               fit: BoxFit.fitWidth,
@@ -216,12 +216,12 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                   // ),
 
                                   Text(
-                                    '${state.welcome4.providerDetails.provider.city.toString()} ${state.welcome4.providerDetails.provider.state} ${state.welcome4.providerDetails.provider.zipCode}',
+                                    '${state.welcome4.providerDetails.provider.city.toString()} ${state.welcome4.providerDetails.provider.state} ${state.welcome4.providerDetails.provider.zipCode}'.toUpperCase(),
                                     style: MaaruStyle.text.tiny,
                                   ),
-                                  // SizedBox(
-                                  //   height: size.height * 0.02,
-                                  // ),
+                                  SizedBox(
+                                    height: size.height * 0.02,
+                                  ),
                                   GridView.builder(
                                     itemCount: state.welcome4.providerDetails
                                         .service.length,
@@ -292,16 +292,14 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                   // SizedBox(
                                   //   height: size.height * 0.02,
                                   // ),
-                                  // SizedBox(
-                                  //   height: size.height * 0.01,
-                                  // ),
-                                  Text(
-                                    'About'.toUpperCase(),
-                                    style: MaaruStyle.text.tiniest,
-                                  ),
                                   SizedBox(
                                     height: size.height * 0.02,
                                   ),
+                                  Text(
+                                    'About'.toUpperCase(),
+                                    style: MaaruStyle.text.tiny,
+                                  ),
+
                                   Text(
                                       state.welcome4.providerDetails.provider
                                               .description
@@ -312,12 +310,10 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                               .provider.description
                                               .toString(),
                                       style: MaaruStyle.text.greyDisable),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
+
                                   Text(
                                     'Hours Of Operation'.toUpperCase(),
-                                    style: MaaruStyle.text.tiniest,
+                                    style: MaaruStyle.text.tiny,
                                   ),
                                   ListView.builder(
                                       scrollDirection: Axis.vertical,
@@ -350,7 +346,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                                 Text(
                                                   '${state.welcome4.providerDetails.provider.operationHours.week[index].day.startTime.toString()} - ${state.welcome4.providerDetails.provider.operationHours.week[index].day.endTime.toString()}',
                                                   style:
-                                                      MaaruStyle.text.tiniest,
+                                                      MaaruStyle.text.tiny,
                                                 ),
                                               ],
                                             ),

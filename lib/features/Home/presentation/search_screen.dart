@@ -178,8 +178,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                       decoration: BoxDecoration(
                                           border: Border.all(
                                               color: Colors.grey[200], width: 2),
-                                          borderRadius:
-                                              BorderRadius.circular(25)),
+                                          ),
                                       height: 120,
                                       child: Container(
                                         color: Colors.white,
@@ -231,10 +230,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                                         .toString(),
 
                                                     // _prefHelper.getStringByKey(MaruConstant.company_name, ''),
-                                                    style: const TextStyle(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w900),
+                                                    style: MaaruStyle.text.tiny,
                                                   ),
                                                 ),
                                                 // Expanded(
@@ -245,10 +241,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                                 //       .serviceType
                                                 //       .toString(),
                                                 //   //   _prefHelper.getStringByKey(MaruConstant., ''),
-                                                //   style: const TextStyle(
-                                                //       fontSize: 10,
-                                                //       fontWeight:
-                                                //           FontWeight.w900),
+                                                //   style: MaaruStyle.text.medium,
                                                 // )),
                                                 Expanded(
                                                   child: Row(
@@ -262,11 +255,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                                       ),
                                                       Text(
                                                         '${state.getProviderModel.providersListing[index].reviews} Reviews (${state.getProviderModel.providersListing[index].averageRating})',
-                                                        style: const TextStyle(
-                                                            fontSize: 10,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w900),
+                                                        style:MaaruStyle.text.medium,
                                                       )
                                                     ],
                                                   ),
