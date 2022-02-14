@@ -224,85 +224,89 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child: BlocBuilder<PetProfileBloc, PetProfileState>(
                 builder: (context, state) {
-              if (_petNameController.text.characters.isNotEmpty) {
-                _prefHelper.saveString(
-                        MaruConstant.petName, _petNameController.text) ??
-                    _prefHelper.saveString(
-                        MaruConstant.petName, _petNameController.text);
-              } else {
-                _petNameController.text =
-                    _prefHelper.getStringByKey('pet_name', '');
-              }
+                  if(_prefHelper.getStringByKey('id', '').isNotEmpty) {
+                    if (_petNameController.text.characters.isNotEmpty) {
+                      _prefHelper.saveString(
+                          MaruConstant.petName, _petNameController.text) ??
+                          _prefHelper.saveString(
+                              MaruConstant.petName, _petNameController.text);
+                    } else {
+                      _petNameController.text =
+                          _prefHelper.getStringByKey('pet_name', '');
+                    }
 
-              if (_breadTypeController.text.isNotEmpty) {
-                _prefHelper.saveString(
-                        MaruConstant.breedType, _breadTypeController.text) ??
-                    _prefHelper.saveString(
-                        MaruConstant.breedType, _breadTypeController.text);
-                print('aaa');
-              } else {
-                _breadTypeController.text =
-                    _prefHelper.getStringByKey('breed_type', '');
-              }
-              if (_weightController.text.isNotEmpty) {
+                    if (_breadTypeController.text.isNotEmpty) {
+                      _prefHelper.saveString(
+                          MaruConstant.breedType, _breadTypeController.text) ??
+                          _prefHelper.saveString(
+                              MaruConstant.breedType,
+                              _breadTypeController.text);
+                      print('aaa');
+                    } else {
+                      _breadTypeController.text =
+                          _prefHelper.getStringByKey('breed_type', '');
+                    }
+                    if (_weightController.text.isNotEmpty) {
 
-              } else {
-                int b;
-                _weightController.text =
-                   widget.weight.toString();
-              }
-              if (_ageTypeController.text.isNotEmpty) {
+                    } else {
+                      int b;
+                      _weightController.text =
+                          widget.weight.toString();
+                    }
+                    if (_ageTypeController.text.isNotEmpty) {
 
-              } else {
-                int b;
-                _ageTypeController.text =
-                    widget.age.toString();
-              }
-              if (_heightController.text.isNotEmpty) {
+                    } else {
+                      int b;
+                      _ageTypeController.text =
+                          widget.age.toString();
+                    }
+                    if (_heightController.text.isNotEmpty) {
 
-              } else {
-                int b;
-                _heightController.text =
-                    widget.height.toString();
-              }
-              if (sex1.isNotEmpty) {
-                _prefHelper.saveString(MaruConstant.sex, sex1) ??
-                    _prefHelper.saveString(MaruConstant.sex, sex1);
-              } else {
-                sex1 = _prefHelper.getStringByKey(MaruConstant.sex, '');
-              }
-              if (gender.isNotEmpty) {
-                _prefHelper.saveString(MaruConstant.gender, gender) ??
-                    _prefHelper.saveString(MaruConstant.gender, gender);
-                print('aaa');
-              } else {
-                gender = _prefHelper.getStringByKey(MaruConstant.gender, '');
-              }
-              if (_image.isNotEmpty) {
-                _prefHelper.saveString(MaruConstant.img, _image) ??
-                    _prefHelper.saveString(MaruConstant.img, _image);
-              } else {
-                _image = _prefHelper.getStringByKey(MaruConstant.img, '');
-              }
-              if (textEditingController.text.isNotEmpty) {
-                _prefHelper.saveString(
-                        MaruConstant.birthdate, textEditingController.text) ??
-                    _prefHelper.saveString(
-                        MaruConstant.birthdate, textEditingController.text);
-              } else {
-                textEditingController.text =
-                    _prefHelper.getStringByKey('birth_date', '');
-              }
-              if (_noteContoller.text.isNotEmpty) {
-                _prefHelper.saveString(
-                        MaruConstant.note, _noteContoller.text) ??
-                    _prefHelper.saveString(
-                        MaruConstant.note, _noteContoller.text);
-              } else {
-                _noteContoller.text =
-                    _prefHelper.getStringByKey(MaruConstant.note, '');
-              }
-
+                    } else {
+                      int b;
+                      _heightController.text =
+                          widget.height.toString();
+                    }
+                    if (sex1.isNotEmpty) {
+                      _prefHelper.saveString(MaruConstant.sex, sex1) ??
+                          _prefHelper.saveString(MaruConstant.sex, sex1);
+                    } else {
+                      sex1 = _prefHelper.getStringByKey(MaruConstant.sex, '');
+                    }
+                    if (gender.isNotEmpty) {
+                      _prefHelper.saveString(MaruConstant.gender, gender) ??
+                          _prefHelper.saveString(MaruConstant.gender, gender);
+                      print('aaa');
+                    } else {
+                      gender =
+                          _prefHelper.getStringByKey(MaruConstant.gender, '');
+                    }
+                    if (_image.isNotEmpty) {
+                      _prefHelper.saveString(MaruConstant.img, _image) ??
+                          _prefHelper.saveString(MaruConstant.img, _image);
+                    } else {
+                      _image = _prefHelper.getStringByKey(MaruConstant.img, '');
+                    }
+                    if (textEditingController.text.isNotEmpty) {
+                      _prefHelper.saveString(
+                          MaruConstant.birthdate, textEditingController.text) ??
+                          _prefHelper.saveString(
+                              MaruConstant.birthdate,
+                              textEditingController.text);
+                    } else {
+                      textEditingController.text =
+                          _prefHelper.getStringByKey('birth_date', '');
+                    }
+                    if (_noteContoller.text.isNotEmpty) {
+                      _prefHelper.saveString(
+                          MaruConstant.note, _noteContoller.text) ??
+                          _prefHelper.saveString(
+                              MaruConstant.note, _noteContoller.text);
+                    } else {
+                      _noteContoller.text =
+                          _prefHelper.getStringByKey(MaruConstant.note, '');
+                    }
+                  }
               if (state is UserCreatePetProfileButtonTapped) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(context,

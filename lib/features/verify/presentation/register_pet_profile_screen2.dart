@@ -15,8 +15,6 @@ import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile2.dart';
-
-
 import '../../../main.dart';
 import 'register_pet_profile_screen1.dart';
 import 'register_pet_profile_screen3.dart';
