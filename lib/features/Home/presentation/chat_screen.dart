@@ -1,6 +1,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
@@ -13,6 +14,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+
   @override
   Widget build(BuildContext context) {
     var selectedIndex;
@@ -33,13 +35,13 @@ elevation: 0,
             child: Column(
               children: [
                 SizedBox(height: 30),
-
-                ProfileAvatar(
-                  imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
-                  width: 80,
-                  avatarRadius: 80,
-                  Color: Colors.yellow,
-                ),
+Image.asset('assets/128/CrystalGaskell.png'),
+                // ProfileAvatar(
+                //   imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
+                //   width: 80,
+                //   avatarRadius: 80,
+                //   Color: Colors.yellow,
+                // ),
                 SizedBox(
                   height: 20,
                 ),
@@ -55,8 +57,9 @@ elevation: 0,
            padding: EdgeInsets.only(bottom: 40),
           child:
         FloatingActionButton(
+
               onPressed: () {},
-              child: Image.asset('assets/icons/icone-setting-65.png')),
+              child: Image.asset('assets/icons/icone-setting-65.png',)),
         ),
         body: SafeArea(
           bottom: false,
@@ -100,9 +103,17 @@ elevation: 0,
                                          ListTile(
                                            title: Text(
                                                'I would like to discuss some monthly subscription with you',
-                                               style: MaaruStyle.text.whitetext),
+
+                                               style:
+                                                   TextStyle(
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Poppins',
+    fontSize: 15,
+    color: Colors.white))
                                          ),
-                                       ],
+                                     ],
+
+
                                      )),
                                )
                              ],
@@ -155,7 +166,8 @@ elevation: 0,
                    Align(
                      alignment: Alignment.bottomCenter,
                      child: Row(
-                         //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+
                          children: [
 
                            Container(
@@ -170,19 +182,22 @@ elevation: 0,
                                      keyboardType: TextInputType.multiline,
                                      decoration: InputDecoration(
                                        contentPadding:
-                                           EdgeInsets.only(right: 60, left: 20),
-                                       hintText: 'Type message here'.toUpperCase(),
+
+                                       EdgeInsets.only(right: 60, left: 20),
+                                       hintText: 'Type message here',
                                        hintStyle: MaaruStyle.text.greyDisable,
                                        enabledBorder: UnderlineInputBorder(
                                          borderSide:
-                                             BorderSide(color: Colors.white),
+                                         BorderSide(color: Colors.white),
                                        ),
                                        focusedBorder: UnderlineInputBorder(
                                            borderSide:
-                                               BorderSide(color: Colors.white)),
+                                           BorderSide(color: Colors.white)),
                                        disabledBorder: UnderlineInputBorder(
                                          borderSide:
-                                             BorderSide(color: Colors.white),
+                                         BorderSide(color: Colors.white),
+
+
                                        ),
                                        prefixIcon: TextButton(
                                          onPressed: () {
@@ -198,8 +213,10 @@ elevation: 0,
                                                        ),
                                                        Row(
                                                            mainAxisAlignment:
-                                                               MainAxisAlignment
-                                                                   .spaceEvenly,
+
+                                                           MainAxisAlignment
+                                                               .spaceEvenly,
+
                                                            children: [
                                                              IconItem(
                                                                Icons
@@ -219,11 +236,14 @@ elevation: 0,
                                                              InkWell(
                                                                onTap: () {
                                                                  Navigator.of(
-                                                                         context)
+
+                                                                     context)
                                                                      .push(MaterialPageRoute(
-                                                                         builder:
-                                                                             (_) =>
-                                                                                 MapView()));
+                                                                     builder:
+                                                                         (_) =>
+                                                                         MapView()));
+
+
                                                                },
                                                                child: IconItem(
                                                                    Icons
@@ -244,7 +264,13 @@ elevation: 0,
                                ))
                          ]),
                    ),
-                 ]))));
+
+
+                 ],
+                 ),
+          ),
+        ));
+
   }
 
   Widget IconItem(IconData icon, Color color, String text) {

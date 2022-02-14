@@ -12,6 +12,22 @@ class ResgiterInitial extends PetProfileState {
   String toString() => "ResgiterInitial";
 
 }
+// class CovidLoading extends PetProfileState {
+//    CovidLoading();
+//   @override
+//   List<Object> get props => null;
+// }
+// class CovidError extends PetProfileState {
+//   CovidError();
+//   @override
+//   List<Object> get props => null;
+// }
+// class CovidLoaded extends PetProfileState {
+//
+//    CovidLoaded();
+//   @override
+//   List<Object> get props => [];
+// }
 class UpdatedBirthDate extends PetProfileState {
   String birthdate;
 
@@ -39,11 +55,39 @@ class RegisterInProgress extends PetProfileState {
   String toString() => "RegisterInProgress";
 
 }
-class UserPetProfileButtonTapped extends PetProfileState {
-  UserPetProfileButtonTapped() : super();
+class UsergetPetProfileButtonTapped extends PetProfileState {
+  final PetProfile1 _petProfile;
+   UsergetPetProfileButtonTapped(this._petProfile);
+  @override
+  List<Object> get props => [_petProfile];
+
+}
+class UserCreatePetProfileButtonTapped extends PetProfileState {
+  UserCreatePetProfileButtonTapped() : super();
 
   @override
-  String toString() => "UserPetProfileButtonTapped";
+  String toString() => "UserCreatePetProfileButtonTapped";
+
+}
+class CovidLoaded3 extends PetProfileState {
+  //final Welcome _newsBloc = Welcome();
+  final Welcome covidModel;
+  CovidLoaded3(this.covidModel);
+
+  List<Object> get props => [covidModel];
+}
+class fakeUserPetProfileButtonTapped extends PetProfileState {
+  fakeUserPetProfileButtonTapped() : super();
+
+  @override
+  String toString() => "fakeUserPetProfileButtonTapped";
+
+}
+class GetUserPetProfileButtonTapped extends PetProfileState {
+  GetUserPetProfileButtonTapped() : super();
+
+  @override
+  String toString() => "GetUserPetProfileButtonTapped";
 
 }
 class pet3rofileButtonTapped extends PetProfileState {
@@ -53,20 +97,66 @@ class pet3rofileButtonTapped extends PetProfileState {
   String toString() => "pet3rofileButtonTapped";
 
 }
-class UserChangePasswordButtonTapped extends PetProfileState {
-  UserChangePasswordButtonTapped() : super();
+class pet4rofileButtonTapped extends PetProfileState {
+
+  pet4rofileButtonTapped() : super();
 
   @override
-  String toString() => "UserPetProfileButtonTapped";
+  String toString() => "pet4rofileButtonTapped";
 
 }
-class SavePaymentButtonTapped extends PetProfileState {
-  SavePaymentButtonTapped() : super();
+
+class PetProfile2Saves extends PetProfileState {
+  PetProfile2Saves() : super();
 
   @override
-  String toString() => "SavePaymentButtonTapped";
+  String toString() => "PetProfile2Saves";
 
 }
+class PetVaccineSuccessfull extends PetProfileState {
+  PetVaccineSuccessfull() : super();
+
+  @override
+  String toString() => "PetVaccineSuccessfull";
+
+}
+class CovidLoading extends PetProfileState {
+   CovidLoading();
+  @override
+  List<Object> get props => null;
+}
+
+
+class ProviderLoaded extends PetProfileState {
+  //final Welcome _newsBloc = Welcome();
+  final GetProvidersModel getProviderModel;
+  ProviderLoaded(this.getProviderModel);
+
+  List<Object> get props => [getProviderModel];
+}
+class SingleProfileLoaded extends PetProfileState {
+  //final Welcome _newsBloc = Welcome();
+  final Welcome2 welcome2;
+  SingleProfileLoaded(this.welcome2);
+  List<Object> get props => [welcome2];
+
+}
+class SingleProviderLoaded extends PetProfileState {
+  //final Welcome _newsBloc = Welcome();
+  final Welcome4 welcome4;
+  SingleProviderLoaded(this.welcome4);
+  List<Object> get props => [Welcome4];
+
+}
+///
+
+class CovidError extends PetProfileState {
+  final String message;
+   CovidError(this.message);
+  @override
+  List<Object> get props => [message];
+}
+
 class PetRegisterSuccess extends PetProfileState {
   PetRegisterSuccess() : super();
 

@@ -16,3 +16,33 @@ class GetTextFile implements UseCase<void, String> {
     return userRepository.getTextFile(params);
   }
 }
+class ChatModel{
+  final String userId;
+  final String userId2;
+  final String message;
+  final String mesageId;
+
+  ChatModel(this.userId, this.userId2, this.message, this.mesageId);
+}
+// switch (e.code) {
+// case "ERROR_OPERATION_NOT_ALLOWED":
+// throw UnImplementedFailure();
+// break;
+// case "ERROR_WEAK_PASSWORD":
+// throw WeakPasswordException();
+// break;
+// case "ERROR_INVALID_EMAIL":
+// throw InvalidEmailException();
+// break;
+// case "ERROR_EMAIL_ALREADY_IN_USE":
+// throw EmailInUseException();
+// break;
+// case "ERROR_INVALID_CREDENTIAL":
+// throw InvalidEmailException();
+// break;
+// case "ERROR_NETWORK_REQUEST_FAILED":
+// throw NetworkException();
+// break;
+// default:
+// throw UnImplementedFailure();
+// }

@@ -1,16 +1,34 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
+import 'package:maru/core/domain/usecases/email_auth_params.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/core/widget/round_button.dart';
+import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/login/domain/usecases/emailsignin.dart';
+import 'package:maru/features/login/presentation/login_screen.dart';
+import 'package:maru/features/provider_login/presentation/login_provider_screen.dart';
 import 'package:maru/features/splash/view/after_splash_Screen2.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
+import 'package:maru/features/verify/domain/usecases/save_registration_id.dart';
 
-class VerifyUser extends StatelessWidget {
+class VerifyUser extends StatefulWidget {
+
+  @override
+  State<VerifyUser> createState() => _VerifyUserState();
+}
+
+class _VerifyUserState extends State<VerifyUser> {
+
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return
-      Scaffold(body:
+final size = MediaQuery.of(context).size;
+     return Scaffold(body:
       Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -44,7 +62,7 @@ class VerifyUser extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => AfterSplashScreen2()));
+                      builder: (context) => LoginProviderScreen()));
                 },
                 child: RoundedButton(
                   buttonName: 'I AM A PROVIDER',
@@ -54,6 +72,7 @@ class VerifyUser extends StatelessWidget {
               ),
             ],
           ),
+
         ),
       ));
 

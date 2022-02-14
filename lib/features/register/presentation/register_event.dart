@@ -17,11 +17,11 @@ class RegisterOpened extends RegisterEvent {
 /// This event is fired when Register button is tapped
 class RegisterButtonTapped extends RegisterEvent {
 
-  RegisterButtonTapped();
+  // RegisterButtonTapped();
+  //
+  // @override
+  // String toString() => "RegisterButtonTapped";
 
-  @override
-  String toString() => "RegisterButtonTapped";
-  List<Object> get props => [RegisterButtonTapped];
 
 }
 class ProviderRegisterButtonTapped extends RegisterEvent {
@@ -81,6 +81,14 @@ class PasswordChanged extends RegisterEvent {
 
   @override
   String toString() => "PasswordChanged";
-
-
+}
+class GoogleSignupButtonTapped extends RegisterEvent {
+  GoogleSignupButtonTapped();
+  @override
+  String toString() => "GoogleSignupButtonTapped";
+}
+class FacebookSignupButtonTapped extends RegisterEvent {
+  FacebookSignupButtonTapped();
+  @override
+  String toString() => "FacebookSignupButtonTapped";
 }

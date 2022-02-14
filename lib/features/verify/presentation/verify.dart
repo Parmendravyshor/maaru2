@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,8 +77,8 @@ class OtpWidget extends State<Otp> {
                             Navigator.pushReplacement(context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) {
-                              return LoginProviderScreen();
-                            }));
+                                      return LoginScreen();
+                                    }));
                           });
                           return Container();
                         }
@@ -94,7 +96,7 @@ class OtpWidget extends State<Otp> {
                                           fontFamily: 'Quicksand',
                                           fontSize: 20,
                                           color:
-                                              MaaruStyle.colors.textColorWhite)),
+                                          MaaruStyle.colors.textColorWhite)),
                                 ),
                               ),
                             );
@@ -111,7 +113,7 @@ class OtpWidget extends State<Otp> {
                                         fontFamily: 'Quicksand',
                                         fontSize: 20,
                                         color:
-                                            MaaruStyle.colors.textColorWhite)),
+                                        MaaruStyle.colors.textColorWhite)),
                               ),
                             );
                           });
@@ -127,7 +129,7 @@ class OtpWidget extends State<Otp> {
                                         fontFamily: 'Quicksand',
                                         fontSize: 20,
                                         color:
-                                            MaaruStyle.colors.textColorWhite)),
+                                        MaaruStyle.colors.textColorWhite)),
                               ),
                             );
                           });
@@ -148,13 +150,13 @@ class OtpWidget extends State<Otp> {
                                 height: 20,
                               ),
                               Container(
-                                  child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        "One Time Password (OTP) Has Been Sent To Your Registered EMAIL ID",
-                                        style: MaaruStyle.text.medium,
-                                        textAlign: TextAlign.center,
-                                      )),),
+                                child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "One Time Password (OTP) Has Been Sent To Your Registered EMAIL ID",
+                                      style: MaaruStyle.text.medium,
+                                      textAlign: TextAlign.center,
+                                    )),),
                               SizedBox(
                                 height: 30,
                               ),
@@ -208,14 +210,14 @@ class OtpWidget extends State<Otp> {
                                 height: 20,
                               ),
                               state is VerifyOtpInProgress ||
-                                      state is ResendOtpInProgress
+                                  state is ResendOtpInProgress
                                   ? Center(
-                                      child: Container(
-                                      margin: EdgeInsets.only(bottom: 10),
-                                      width: 40,
-                                      height: 40,
-                                      child: CircularProgressIndicator(),
-                                    ))
+                                  child: Container(
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    width: 40,
+                                    height: 40,
+                                    child: CircularProgressIndicator(),
+                                  ))
                                   : Container(),
                             ],
                           ),
@@ -267,3 +269,4 @@ class GoToSignInText extends StatelessWidget {
     );
   }
 }
+

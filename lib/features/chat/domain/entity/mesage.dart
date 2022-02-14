@@ -1,20 +1,19 @@
-class Message {
-  final String message;
-  final int messageType;
-  Message(this.message, this.messageType);
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
 
-  String get text => message;
-  int get typeOfMsg => messageType;
+import 'dart:convert';
 
-  Map<String, dynamic> toMap() {
-    return {
-      'message': message,
-      'type': messageType,
-    };
-  }
+import 'package:flutter/material.dart';
+import 'package:flutter_chat_bubble/bubble_type.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_1.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart';
+class MessagesModel {
+  static final List<dynamic> messages = [];
 
-  @override
-  String toString() {
-    return 'Message{message: $message, type: $messageType}';
+  static updateMessages(dynamic message) async {
+    messages.add(message);
   }
 }

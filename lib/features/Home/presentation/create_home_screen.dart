@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-
-import 'package:maru/core/theme/maaru_style.dart';
-import 'package:maru/features/Account_setting/presentation/account_setting.dart';
-
+import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/Home/presentation/message.dart';
 import 'package:maru/features/Home/presentation/pet_profile.dart';
 import 'package:maru/features/Home/presentation/search_screen.dart';
-import 'package:maru/features/login/presentation/login_screen.dart';
-import 'package:maru/features/register/presentation/signup_screen.dart';
-import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
-import 'package:maru/main.dart';
 
-import 'message.dart';
+
+
 
 class CreateHomeScreen extends StatefulWidget {
   // final int selectedIndex;
@@ -22,11 +17,11 @@ class CreateHomeScreen extends StatefulWidget {
   final selectedIndex;
   const CreateHomeScreen(
       {Key key,
-      this.Color,
-      this.selectedIndex,
-      this.Color1,
-      this.Color2,
-      this.Color3})
+        this.Color,
+        this.selectedIndex,
+        this.Color1,
+        this.Color2,
+        this.Color3})
       : super(key: key);
   // const CreateHomeScreen({@required this.selectedIndex, @required this.Color})
   //     : super();
@@ -45,7 +40,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
         height: size.height*0.09,
         color: Colors.white,
         child: Container(
-          margin: EdgeInsets.only(left: 20, right: 20),
+          margin: const EdgeInsets.only(left: 20, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +67,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PetProfile()));
+                      MaterialPageRoute(builder: (context) => PetProfile1()));
                 },
                 child: Image.asset(
                   'assets/icons/icon4.png',
@@ -107,7 +102,7 @@ class _CreateHomeScreenState extends State<CreateHomeScreen> {
 }
 // class CreateHomeScreen extends StatefulWidget {
 //   @override
-//   _CreateHomeScreenState createState() => _CreateHomeScreenState();
+//   CreateHomeScreenState createState() => CreateHomeScreenState();
 // }
 //
 // class _CreateHomeScreenState extends State<CreateHomeScreen> {

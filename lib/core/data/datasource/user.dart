@@ -1,33 +1,27 @@
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+import 'package:dartz/dartz.dart';
 
-class User {
-  String email;
-  String name;
-  String password;
-  bool confirmed = false;
-  bool hasAccess = false;
+import 'package:firebase_auth/firebase_auth.dart';
 
-  User({this.email, this.name});
+import 'package:maru/core/error/failure.dart';
 
-  /// Decode user from Cognito User Attributes
-  factory User.fromUserAttributes(List<CognitoUserAttribute> attributes) {
-    final user = User();
-    attributes.forEach((attribute) {
-      if (attribute.getName() == 'email') {
-        user.email = attribute.getValue();
-      } else if (attribute.getName() == 'name') {
-        user.name = attribute.getValue();
-      } else if (attribute.getName().toLowerCase().contains('verified')) {
-        if (attribute.getValue().toLowerCase() == 'true') {
-          user.confirmed = true;
-        }
-      }
-    });
-    return user;
+import 'firebase_auth.dart';
+
+class FirebaseUsers extends IAuthFacade{
+  // @override
+  // Future<Option<User>> getSignedInUser() {
+  //   // TODO: implement getSignedInUser
+  //   throw UnimplementedError();
+  // }
+
+  @override
+  Future<Either<Failure, void>> signInWithGoogle() {
+    // TODO: implement signInWithGoogle
+    throw UnimplementedError();
   }
 
   @override
-  String toString() {
-    return "$email $name $password";
+  Future<void> signOut() {
+    // TODO: implement signOut
+    throw UnimplementedError();
   }
 }

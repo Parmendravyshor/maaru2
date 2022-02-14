@@ -12,10 +12,16 @@ class MaaruColors {
   static Color primaryColorsuggesion1 = Color(0xff236855);
   static Color buttonColor = Color(0xff2e1475);
   static Color buttonTextColor = Color(0xFF367355);
- static const Color greenColor=Color(0xff53CC71);
+ static const Color greenColor = Color(0xff53CC71);
   static const Color musteredColor=Color(0xffFDE15A);
  static const Color redColor=Color(0xffFD8447);
  static const Color whiteColor=Colors.white;
+ static const Color groomingcolor=Color(0xff93b7fd);
+ static const Color vetcolor=Color(0xffff9976);
+ static const Color hotelcolor=Color(0xfffff2bf);
+ static const Color walkingcolor=Color(0xffe2d5b7);
+ static const Color hospitalcolor=Color(0xfffc744f);
+ static const Color daycarecolor=Color(0xff4f75fe);
   static const Color greyColorText=Color(0xffBDBDBD);
   static const Color underlineColor=Color(0xffE5E5E5);
   static const Color blackColor=Colors.black;
@@ -49,12 +55,7 @@ class MaaruColors {
   Color bottomBg = Color(0xffFAFBFF);
   Color borderColor = Color(0xffD8D8D8);
   static Color textfeildline=Color(0xffd5d5d5);
-  static const Color groomingcolor=Color(0xff93b7fd);
-  static const Color vetcolor=Color(0xffff9976);
-  static const Color hotelcolor=Color(0xfffff2bf);
-  static const Color walkingcolor=Color(0xffe2d5b7);
-  static const Color hospitalcolor=Color(0xfffc744f);
-  static const Color daycarecolor=Color(0xff4f75fe);
+
 
 
 
@@ -106,7 +107,11 @@ class MaaruColors {
         textStyle: TextStyle(
             fontWeight: FontWeight.w600,
             fontFamily: 'Poppins',
-            fontSize: 13,
+
+
+            fontSize: 15,
+
+
             color: Colors.grey[400]));
 
 
@@ -151,7 +156,6 @@ class MaaruColors {
             fontSize: 14,
             color: Colors.black));
   }
-
 //semibold large
   TextStyle get large {
     return GoogleFonts.poppins(

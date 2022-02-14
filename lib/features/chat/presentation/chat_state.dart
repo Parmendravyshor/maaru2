@@ -14,7 +14,7 @@ class ChatSendInitial extends ChatState {
 }
 
 class ChatSendInProgress extends ChatState {
-  final List<Message> messageList;
+  final List<MessagesModel> messageList;
   ChatSendInProgress(this.messageList) : super();
 
   @override
@@ -22,16 +22,33 @@ class ChatSendInProgress extends ChatState {
 }
 
 class ChatSendSuccess extends ChatState {
-  final List<Message> messageList;
+  final List<MessagesModel> messageList;
   ChatSendSuccess(this.messageList) : super();
 
   @override
   String toString() => "ChatSendSuccess";
 }
+class ChatGet extends ChatState {
+  final List<MessagesModel> messageList;
+  ChatGet(this.messageList) : super();
 
+  @override
+  String toString() => "ChatSendSuccess";
+}
 class ChatSendFailure extends ChatState {
   final String errorMessage;
   ChatSendFailure(this.errorMessage) : super();
   @override
   String toString() => "ChatSendFailure";
 }
+class onlineDisconnect extends ChatState{
+  @override
+  String toString() =>'onlineDisconnet';
+  }
+  class OnlineConnectError extends ChatState{
+  @override
+  String toString() {
+    // TODO: implement toString
+    return super.toString();
+  }
+  }

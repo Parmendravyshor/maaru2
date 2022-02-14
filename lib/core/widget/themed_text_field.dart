@@ -16,20 +16,20 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
     _obscureText = this._password;
   }
 
-  @override
-  void initState() {
-    super.initState();
-
-    // Force a repaint whenever focus changes
-    _focusNode.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   // Force a repaint whenever focus changes
+  //   _focusNode.addListener(() {
+  //     setState(() {});
+  //   });
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   // Toggles the password show status
   void _toggle() {
@@ -63,6 +63,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
         // focusedBorder: MaaruStyle.focusedBorder,
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: MaaruColors.textfeildline),
+
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         labelText: widget.placeholder.toUpperCase(),
@@ -91,6 +92,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
                         textInputAction: widget.textinputaction2,
                         onChanged: widget.onChanged,
                         autocorrect: false,
+
                         keyboardType: widget.keyboardType,
                         style: MaaruStyle.text.tiny,
                         decoration: inputDecoration(widget),
@@ -129,7 +131,7 @@ class ThemedTextField extends StatefulWidget {
     this.password = false,
     this.textStyle,
     TextInputAction textInputAction,
-    bool autovalidate,
+    bool autovalidate, Null Function(dynamic val) onSaved, Null Function(dynamic val) validator,
   });
 
   @override
@@ -199,7 +201,7 @@ class ThemeChanges2 extends StatelessWidget {
                     //   editingController: _lnameController
                   )),
             ),
-            new Flexible(
+             Flexible(
               child: Container(
                  
                   child: TextFormField(

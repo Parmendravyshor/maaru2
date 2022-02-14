@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class BackgroundImage extends StatelessWidget {
-  final String assetImage;
+  final  assetImage;
   final double hight;
   final double widt;
+
   const BackgroundImage(
       {Key key, @required this.assetImage, this.hight, this.widt})
       : super(key: key);

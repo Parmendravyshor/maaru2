@@ -1,7 +1,13 @@
 
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:maru/core/constant/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'dart:typed_data';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:convert';
 abstract class SharedPrefHelper {
   Future<void> userLogin();
   Future<void> saveIdJwtToken(String accessToken);
@@ -12,10 +18,13 @@ abstract class SharedPrefHelper {
   Future<void> savePayload(String payload);
   Future<void> saveExpiryTime(String expiryTime);
   Future<void> saveString(String key, String value);
+  Future <void> saveStringList(var key, List<int> value);
   Future<void> saveBoolean(String key, bool value);
   Future<void> saveInt(String key, int value);
-  Future <void>saveImage(String key, value);
+  Future <void>saveImage(List<int> imageBytes);
   Future<void> saveDouble(String key, double value);
+  List<String> getStringList(String key);
+  Future<bool>clear(String key);
   String gettoken();
   String getfname();
   String getlname();
@@ -26,6 +35,7 @@ abstract class SharedPrefHelper {
   String getExpiryTime();
   double getDouble(String key, double defaultValue);
   String getStringByKey(String key, String defaultValue);
+  void getList(String key, List<int> value);
   bool isLoggedin();
   bool getBoolByKey(String key, bool defaultValue);
   int getIntByKey(String key, int defaultValue);
@@ -46,11 +56,11 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
     return sharedPreferences.setString(MaruConstant.token, accessToken);
   }
 
-  //
-  // @override
-  // Future<void> userLogin() {
-  //   return sharedPreferences.setBool(MaruConstant.isloggedIn, true);
-  // }
+
+  @override
+  Future<void> userLogin() {
+    return sharedPreferences.setBool('is_verified', true);
+  }
 
   @override
   String getEmail() {
@@ -59,7 +69,7 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
 
   @override
   int getPassword() {
-    return sharedPreferences.getInt(MaruConstant.id);
+    return sharedPreferences.getInt('id');
   }
 
   @override
@@ -69,7 +79,7 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
 
   @override
   Future<void> savePassword(String password) {
-    return sharedPreferences.setString(MaruConstant.id, password);
+    return sharedPreferences.setString('id', password);
   }
 
   @override
@@ -142,15 +152,16 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
     throw UnimplementedError();
   }
 
-  @override
-  Future<void> userLogin() {
-    // TODO: implement userLogin
-    throw UnimplementedError();
-  }
+  // @override
+  // Future<void> userLogin() {
+  //   // TODO: implement userLogin
+  //   throw UnimplementedError();
+  // }
 
   @override
-  Future<void> saveImage(String key, value) {
-    return sharedPreferences.setString(key, value);
+  Future<bool> saveImage(List<int> imageBytes) {
+    String base64Image = base64Encode(imageBytes);
+    return sharedPreferences.setString(MaruConstant.img, base64Image);
   }
 
   @override
@@ -160,24 +171,47 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
 
   @override
   Future<void> savefname(String key, String value) {
-    return sharedPreferences.setString(MaruConstant.first_name, '');
+    return sharedPreferences.setString(MaruConstant.firstName, '');
   }
 
   @override
   String getfname() {
     // TODO: implement getfname
-    return sharedPreferences.getString(MaruConstant.first_name,);
+    return sharedPreferences.getString(MaruConstant.firstName,);
   }
 
   @override
   String getlname() {
-    sharedPreferences.getString(MaruConstant.last_name,);
+    sharedPreferences.getString(MaruConstant.lastName,);
   }
 
   @override
   Future<void> savelname(String key, String value) {
-    return sharedPreferences.setString(MaruConstant.last_name, '');
+    return sharedPreferences.setString(MaruConstant.lastName, '');
+  }
+
+  @override
+  List<String> getStringList(String key) {
+    sharedPreferences.getStringList(key);
+  }
+
+
+  @override
+  Future<bool> saveStringList(var key, List<int> value) {
+ sharedPreferences.setString(key, value.toString());
+  }
+
+  @override
+  bool getList(String key, List<int> value) {
+    // TODO: implement getList
+    sharedPreferences.getStringList(key);
+  }
+
+  @override
+  Future<bool> clear(String key) {
+    sharedPreferences.clear();
   }
 
 
 }
+

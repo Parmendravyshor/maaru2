@@ -4,12 +4,12 @@ import '../../../../core/domain/repositories/user_repository.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 
-class CreatePetProfile extends UseCase<void,PetProfileParams > {
+class CreatePetProfile extends UseCase<void,PetProfile1 > {
   UserRepository userRepository;
   CreatePetProfile(this.userRepository);
 
   @override
-  Future<Either<Failure, void>> call(PetProfileParams params) async {
+  Future<Either<Failure, void>> call(PetProfile1 params) async {
     return userRepository.createPetProfile(params);
   }
 }

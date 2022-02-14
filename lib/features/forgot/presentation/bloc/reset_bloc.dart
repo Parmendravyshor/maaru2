@@ -1,6 +1,8 @@
 
-import 'package:email_validator/email_validator.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:maru/core/widget/alert_manager.dart';
+import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/forgot/Domain/usecases/forget_password.dart';
 import 'package:maru/features/forgot/Domain/usecases/reset_password.dart';
 import 'package:maru/features/forgot/Domain/usecases/send_reset_otp.dart';
@@ -24,10 +26,11 @@ class ResetBloc extends Bloc<ResetEvent, ResetState> {
   @override
   // TODO: implement initialState
   ResetState get initialState => ResetInitial();
+
   @override
   Stream<ResetState> mapEventToState(ResetEvent event) async* {
     if (event is EmailChanged) {
-      if (event.email.isNotEmpty && EmailValidator.validate(event.email)) {
+      if (event.email.isNotEmpty && validateEmail(email) != null) {
         email = event.email;
         yield ResetFormValidationSuccess();
       } else {
@@ -36,16 +39,20 @@ class ResetBloc extends Bloc<ResetEvent, ResetState> {
       }
     } else if (event is ResetButtonTapped) {
       yield ResetInProgress();
-      final result = await _sendResetPwdOtp(email);
+      final result = await _sendResetPwdOtp.call(email);
       yield* result.fold((l) async* {
         yield ResetFailure(
-            "Failed to send reset password link..please try again.");
+            "Enter Register email");
       },
+
               (r) async* {
-       step = 2;
-        yield ResetPasswordMessageSent(
-            "Password reset link sent to your email");
-      });
+
+                step = 2;
+                yield ResetPasswordMessageSent(
+                    "Password reset link sent to your email");
+              });
+
+
     } else if (event is SetNewPasswordTapped) {
       yield ResetInProgress();
       final result = await _resetpwd.call(SetNewPasswordParams(

@@ -1,6 +1,8 @@
 part of 'pet_profile_bloc.dart';
 
-abstract class PetProfileEvent {}
+abstract class PetProfileEvent {
+  PetProfileEvent();
+}
 
 class PetProfileRegistered extends PetProfileEvent {
   PetProfileRegistered();
@@ -20,6 +22,13 @@ class ProfileOpened extends PetProfileEvent {
 
   @override
   String toString() => "ProfileOpened";
+}
+
+class GetProfileOpened extends PetProfileEvent {
+  GetProfileOpened();
+
+  @override
+  String toString() => "GetProfileOpened";
 }
 class ChangePasswordOpened extends PetProfileEvent {
   ChangePasswordOpened();
@@ -65,75 +74,64 @@ class BirthDate extends PetProfileEvent {
 
 }
 
-class AgeChanged extends PetProfileEvent {
 
+class CreateRegisterPetProfile extends PetProfileEvent {
+  final String image;
+  final String gender;
+  final String petName;
+  final String breedType;
   final String age;
-  AgeChanged(this.age);
-
-  @override
-  String toString() => "AgeChanged";
-}
-class petNameChanged extends PetProfileEvent {
-  final String petname;
-
-  petNameChanged(this.petname);
-
-  @override
-  String toString() => "petNameChanged";
-}
-class SexChanged extends PetProfileEvent {
-  final String sex;
-
-  SexChanged(this.sex);
-
-  @override
-  String toString() => "SexChanged";
-}
-class HeightChanged extends PetProfileEvent {
-  final  String hight;
-
-  HeightChanged(this.hight);
-  List<Object> get props => [
-    hight,
-
-  ];
-
-  @override
-  String toString() => "HeightChanged";
-
-}
-class BirthChanged extends PetProfileEvent {
-   final selectedDate;
-
-   BirthChanged(this.selectedDate);
-
-   @override
-  String toString() => "BirthChanged";
-
-}
-
-class BreadChanged extends PetProfileEvent {
-   var breadtype;
-
-  BreadChanged(this.breadtype);
-
-  @override
-  String toString() => "BirthChanged";
-}
-class WidthChanged extends PetProfileEvent {
+  final String height;
   final String width;
-
-  WidthChanged(this.width);
+  final String birthdate;
+  final String sex;
+  final String notes;
+  CreateRegisterPetProfile(this.image, this.gender, this.petName, this.breedType, this.age, this.height, this.width, this.birthdate, this.sex, this.notes);
 
   @override
-  String toString() => "WidthChanged";
+  String toString() => "CreatePetRegisterButtonTapped";
+
+
+}
+class GetCovidList extends PetProfileEvent {
+final String text;
+
+    GetCovidList(this.text);
+  @override
+  String toString() => "fakeRegisterButtonTapped";
+}
+class GetProvider extends PetProfileEvent {
+
+final String text;
+
+  GetProvider(this.text);
+
+  @override
+  String toString() => "GetProvider";
+
 }
 
-class RegisterButtonTapped extends PetProfileEvent {
-  RegisterButtonTapped();
+class GetSinglePRof extends PetProfileEvent {
+ final int id1;
+
+  GetSinglePRof(this.id1);
+}
+class GetSinglePRovider extends PetProfileEvent {
+  final int id1;
+
+  GetSinglePRovider(this.id1);
+  @override
+  String toString() => "GetSinglePRovider";
+}
+class GetProviderBookingRequest extends PetProfileEvent {
+  @override
+  String toString() => "GetProviderBookingRequest";
+}
+class fakeRegisterButtonTapped extends PetProfileEvent {
+  fakeRegisterButtonTapped();
 
   @override
-  String toString() => "RegisterButtonTapped";
+  String toString() => "fakeRegisterButtonTapped";
 
 
 }
@@ -148,36 +146,39 @@ class Profile3 extends PetProfileEvent {
   Profile3(this.walking, this.feeding, this.temprament, this.medication, this.name, this.times, this.notes,);
 
   @override
-  String toString() => "SubmitProfileTapped";
+  String toString() => "SubmitProfileTapped3";
 }
-class RegisterUser extends PetProfileEvent {
-  final String fname;
-  final String lname;
-  final String phone;
-  final String city;
-  final String state;
-  final String zip;
-  RegisterUser(this.fname, this.lname, this.phone, this.city, this.zip,this.state);
+class Profile4 extends PetProfileEvent {
+  final String grooming;
+  final String vet;
+  final String walking;
+  final String hotel;
+  final String hospital;
+  final String daycare;
+  Profile4({this.grooming, this.vet, this.walking, this.hotel, this.hospital, this.daycare});
+
 
   @override
-  String toString() => "SubmitProfileTapped";
+  String toString() => "SubmitProfileTapped4";
 }
-class savePayment extends PetProfileEvent {
-  final String nameOnCard;
-  final String creditCardNumber;
-  final String expDate;
-  final String cvv;
-  savePayment(this.nameOnCard, this.creditCardNumber, this.expDate, this.cvv);
+class Profile2 extends PetProfileEvent {
+   var know_allergies;
+   var vaccine;
+
+  Profile2(this.know_allergies, this.vaccine);
 
   @override
-  String toString() => "savePayment";
+  String toString() => "SubmitProfileTapped2";
 }
-class ChangePassword extends PetProfileEvent {
-  final String oldPassword;
-  final String newPasword;
+class vaccineUplo extends PetProfileEvent {
 
-  ChangePassword(this.newPasword,this.oldPassword);
+  final vaccine;
+  final id;
+
+  vaccineUplo( this.vaccine,this.id);
 
   @override
-  String toString() => "SubmitProfileTapped";
+  String toString() => "vaccineUplo";
 }
+
+

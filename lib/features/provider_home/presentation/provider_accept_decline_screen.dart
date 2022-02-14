@@ -1,179 +1,23 @@
-
-
+import 'dart:core';
+import 'dart:core';
+import 'dart:core';
+import 'dart:typed_data';
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
+import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+import 'package:maru/core/widget/date_picker.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/Book_Appointment/presentation/provider_confirm_book.dart';
-import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/provider_home/presentation/upcoming_appointment_calender.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_screen.dart';
-
-import '../../../main.dart';
+import 'package:maru/features/provider_setting/presentation/provider_settin.dart';
+import 'bloc/provider_home_bloc.dart';
 import 'create_provider_home.dart';
-
-class ProviderAcceptOrDeclineScreen extends StatefulWidget {
-  const ProviderAcceptOrDeclineScreen({Key key}) : super(key: key);
-
-  @override
-  _ProviderAcceptOrDeclineScreenState createState() =>
-      _ProviderAcceptOrDeclineScreenState();
-}
-
-class _ProviderAcceptOrDeclineScreenState
-    extends State<ProviderAcceptOrDeclineScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-            child: SingleChildScrollView(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            ShowLocation(),
-            SizedBox(
-              height: 20,
-            ),
-                Padding(padding:EdgeInsets.only(left: 10,right: 10),child:
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children:[
-                      Container(
-                          child:new Flexible(
-                            child:
-                            TextFormField(
-                              // cursorColor: Colors.black,
-                              decoration: InputDecoration(
-                                  enabledBorder: new OutlineInputBorder(
-                                      borderRadius:
-                                      new BorderRadius.circular(10.7),
-                                      borderSide: new BorderSide(
-                                          color: Colors.grey[300],
-                                          width: 1.0)),
-                                  focusedBorder: new OutlineInputBorder(
-                                      borderRadius:
-                                      new BorderRadius.circular(10.7),
-                                      borderSide: new BorderSide(
-                                          color: Colors.grey[300],
-                                          width: 1.0)),
-
-                                  hintText: 'Search',
-                                  hintStyle: MaaruStyle.text.greyDisable,
-                                  contentPadding: EdgeInsets.fromLTRB(
-                                      20.0, 15.0, 25.0, 10.0),
-                                  fillColor: Colors.white,
-                                  suffixIcon: Image.asset(
-                                    'assets/icons/icone-setting-19.png',
-                                    height: 50,
-                                    // width: 30,
-                                  )),
-                            ),)),
-                      SizedBox(width: 10,),
-                      Image.asset('assets/icons/icone-setting-40.png',height: 40,),])),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-                margin: EdgeInsets.only(left: 20, right: 20),
-                child: Text(
-                  'Booking Request',
-                  style: MaaruStyle.text.large,
-                )),
-
-            // Align(
-            //     alignment: Alignment.center,
-            //     child:
-
-            Slidable(
-                actionPane: SlidableDrawerActionPane(),
-                actions: <Widget>[
-                  Stack(children: [
-                    IconSlideAction(
-                      caption: 'Accept',
-                      color: Colors.blue,
-                      icon: Icons.done,
-                      onTap: () {
-
-                      },
-                    ),
-                    Icon(Icons.arrow_forward)
-                  ])
-                ],
-                secondaryActions: <Widget>[
-                  IconSlideAction(
-                    caption: 'Delete',
-                    color: Colors.red,
-                    icon: Icons.delete,
-                  ),
-                ],
-                child: Column(children: [
-                  Container(
-                      height: 200,
-                      width: 420,
-                      decoration: BoxDecoration(
-                          borderRadius: new BorderRadius.circular(20.7),
-                          border: Border.all(color: Colors.grey[200])),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                'Max',
-                                style: MaaruStyle.text.large,
-                              ),
-                              SizedBox(
-                                width: 60,
-                              ),
-                              Text('Aug. 21, 2021')
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                'Dog Grooming',
-                                style: MaaruStyle.text.large,
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text('10:00')
-                            ],
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(right: 40),
-                              child: Text(
-                                '1357 Muno Manor Austin, Tx 75923',
-                              )),
-                          Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(left: 120),
-                            height: 35,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: MaaruColors.blueColor,
-                                borderRadius: new BorderRadius.circular(10.7),
-                                border: Border.all(color: Colors.white)),
-                            child: Text(
-                              'View Details',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700),
-                            ),
-                          ),
-                        ],
-                      )
-                      //Text('Item Data$index'),
-                      ),
-                ])),
-
-            //  )
-          ]),
-        )));
-  }
-}
+import 'package:flutter/scheduler.dart';
 
 class TestApp extends StatefulWidget {
   @override
@@ -181,235 +25,532 @@ class TestApp extends StatefulWidget {
 }
 
 class _TestAppState extends State<TestApp> {
+  DateTime _date = DateTime.now();
   int cntwidth = 0;
+  _selectDate(
+    BuildContext context,
+  ) async {
+    // final _PetProfileBloc = BlocProvider.of<PetProfileBloc>(context);
+    DateTime newSelectedDate = await showDatePicker(
+        context: context,
+        initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2040),
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: ThemeData.dark().copyWith(
+          colorScheme: ColorScheme.dark(
+            primary: Colors.deepPurple,
+            onPrimary: Colors.white,
+            surface: Colors.blueGrey,
+            onSurface: Colors.yellow,
+          ),
+          dialogBackgroundColor: Colors.blue[500],
+            ),
+            child: child,
+          );
+        });
+
+    if (newSelectedDate != null) {
+      _selectedDate = newSelectedDate;
+      _textEditingController
+        ..text =
+            "${_selectedDate.month.toString()}-${_selectedDate.day.toString().padLeft(2, '0')}-${_selectedDate.year.toString().padLeft(2, '0')}"
+        //   .format(_selectedDate).toString()
+        ..selection = TextSelection.fromPosition(TextPosition(
+            offset: _textEditingController.text.length,
+            affinity: TextAffinity.upstream));
+      BlocProvider.of<ProviderHomeBloc>(context).add(getProviderRequest(
+        page,
+        date,
+        date,
+        _textEditingController.text
+      ));
+
+    }
+  }
+
+  DateTime _selectedDate;
+  TextEditingController _ageType;
+  TextEditingController _textEditingController = TextEditingController();
 
   @override
+  void initState() {
+    _ageType = TextEditingController();
+    _selectedDate = _selectedDate;
+    super.initState();
+  }
+  @override
+  void dispose() {
+    _ageType.dispose();
+    super.dispose();
+  }
+  String limit = '';
+  String page = '';
+  String date = '';
+  String service = '';
+  String provider = '';
+  String name = '';
+  @override
   Widget build(BuildContext context) {
-    final size=MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     var selectedIndex;
-    return Scaffold(
-      backgroundColor: MaaruColors.darkGrey2,
-      bottomNavigationBar: CreateProviderHome(selectedIndex: 0,
-        Color:  selectedIndex == 0
-            ? Colors.grey[300]
-            : MaaruColors.textButtonColor,
-
-      ),
-      body: Column(
-        children: [
-          SafeArea(
-            child: Column(children: [
-             const  SizedBox(
-                height: 20,
+    return BlocProvider(
+      create: (context) => KiwiContainer().resolve<ProviderHomeBloc>(),
+      child: BlocBuilder<ProviderHomeBloc, ProviderHomeState>(
+        builder: (context, state) {
+          if (state is AcceptRequestSuccessful) {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (BuildContext context) {
+                return UpcomingAppointmentCalender1();
+              }));
+            });
+            return Container();
+          }
+          return Scaffold(
+              backgroundColor: MaaruColors.whiteColor,
+              bottomNavigationBar: CreateProviderHome(
+                selectedIndex: 0,
+                Color: selectedIndex == 0
+                    ? Colors.grey[300]
+                    : MaaruColors.textButtonColor,
               ),
-              ShowLocation(),
-            const   SizedBox(
-                height: 20,
-              ),
-              Padding(padding:EdgeInsets.only(left: 10,right: 10),child:
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children:[
-                    Container(
-                        child:new Flexible(
-                          child:
-                          TextFormField(
-                            // cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                                enabledBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                    new BorderRadius.circular(10.7),
-                                    borderSide: new BorderSide(
-                                        color: Colors.grey[300],
-                                        width: 1.0)),
-                                focusedBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                    new BorderRadius.circular(10.7),
-                                    borderSide: new BorderSide(
-                                        color: Colors.grey[300],
-                                        width: 1.0)),
-
-                                hintText: 'Search',
-                                hintStyle: MaaruStyle.text.greyDisable,
-                                contentPadding: EdgeInsets.fromLTRB(
-                                    20.0, 15.0, 25.0, 10.0),
-                                fillColor: Colors.white,
-                                suffixIcon: Image.asset(
-                                  'assets/icons/icone-setting-19.png',
-                                  height: 50,
-                                  // width: 30,
-                                )),
-                          ),)),
-                    SizedBox(width: 10,),
-                    Image.asset('assets/icons/New Project (36).png',height: 40,),])),
-              SizedBox(
-                height: 20,
-              ),
-              Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Container(
-                      padding: EdgeInsets.only(left: 20, right: 20),
-                      height: size.height*0.20,
-                      width: 420,
-                      decoration: BoxDecoration(
-
-                        gradient: LinearGradient(colors: [
-                          MaaruColors.blueColor,
-                          MaaruColors.blueColor,
-                          MaaruColors.blueColor,
-                          Colors.red,
-                          Colors.red,
-                          Colors.red
-                        ]),
-                      ),
-                    ),
-                  ),
-
-                  Slidable(
-                    actionPane: SlidableDrawerActionPane(),
-                    actionExtentRatio: 0.25,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: Container(
-                        height: size.height*0.20,
-                        width: 420,
-                        decoration: BoxDecoration(
-
-
-                          color: Colors.white,
-                        ),
-                        child: Container(
-                            height: size.height*0.20,
-                            width: size.width*0.90,
-                            decoration: BoxDecoration(
-
-
-                                border: Border.all(color: Colors.grey[200])),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+              body: BlocProvider(
+                  create: (context) =>
+                      KiwiContainer().resolve<ProviderHomeBloc>(),
+                  child: BlocBuilder<ProviderHomeBloc, ProviderHomeState>(
+                      builder: (context, state) {
+                    if (state is ProviderHomeInitial) {
+                      BlocProvider.of<ProviderHomeBloc>(context)
+                          .add(getProviderRequest(
+                        _ageType.text,
+                        _ageType.text,
+                        _ageType.text,
+                        _textEditingController.text,
+                      ));
+                      // print('figffgfg${text}');
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is RequestLoaded) {
+                      //  print(
+                      // 'datarequestfprcheckeinguseingstaat${state.getProviderRequestModel.appointmentRequests.length}');
+                      return SingleChildScrollView(
+                        child: SafeArea(
+                          child: Column(children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            InkWell(onTap:(){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ProviderSetting()));
+                            },child: ShowLocation()),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Column(
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      'Max',
-                                      style: MaaruStyle.text.large,
-                                    ),
-                                    SizedBox(
-                                      width: 60,
-                                    ),
-                                    Text('Aug. 21, 2021',style:   MaaruStyle.text.tiniest,)
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      'Dog Grooming',
-                                      style: MaaruStyle.text.tiniest,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text('10:00',style: MaaruStyle.text.greyDisable,)
-                                  ],
-                                ),
                                 Padding(
                                     padding:
-                                        EdgeInsets.only(right: 40, left: 18),
-                                    child: Text(
-                                      '1357 Muno Manor Austin, Tx 75923',style: MaaruStyle.text.greyDisable
-                                    )),
-
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                InkWell(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (_) => ProviderBookedConfirm()));
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      margin: EdgeInsets.only(left: 120),
-                                      height: 35,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                          color: MaaruColors
-                                              .blueColor,
-
-                                          border:
-                                              Border.all(color: Colors.white)),
-                                      child: Text(
-                                        'View Details',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    )),
+                                        EdgeInsets.only(left: 15, right: 20),
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Container(
+                                              child: Flexible(
+                                            child: TextField(
+                                              // cursorColor: Colors.black,
+                                              decoration: InputDecoration(
+                                                  enabledBorder: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              0.0),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Colors.grey[300],
+                                                          width: 1.0)),
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              0.0),
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Colors.grey[300],
+                                                          width: 1.0)),
+                                                  hintText: 'Search',
+                                                  hintStyle: MaaruStyle
+                                                      .text.greyDisable,
+                                                  contentPadding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          20.0,
+                                                          15.0,
+                                                          25.0,
+                                                          10.0),
+                                                  fillColor: Colors.white,
+                                                  suffixIcon: GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          service = 'grooming';
+                                                          print(
+                                                              'dhdgdhdhdhdghdgdhgd$service');
+                                                          BlocProvider.of<
+                                                                      ProviderHomeBloc>(
+                                                                  context)
+                                                              .add(getProviderRequest(
+                                                                  _ageType.text,
+                                                                  _ageType.text,
+                                                                  _ageType.text,
+                                                                  _textEditingController
+                                                                      .text));
+                                                        });
+                                                      },
+                                                      child: Image.asset(
+                                                        'assets/icons/icone-setting-19.png',
+                                                        height: 50,
+                                                        // width: 30,
+                                                      ))),
+                                              onChanged: (text) {
+                                                setState(() {
+                                                  BlocProvider.of<
+                                                              ProviderHomeBloc>(
+                                                          context)
+                                                      .add(getProviderRequest(
+                                                    _ageType.text,
+                                                    _ageType.text,
+                                                    _ageType.text,
+                                                    '',
+                                                  ));
+                                                  print(_ageType);
+                                                });
+                                              },
+                                              // onSubmitted: (text) {
+                                              //   setState(() {
+                                              //     BlocProvider.of<
+                                              //                 ProviderHomeBloc>(
+                                              //             context)
+                                              //         .add(getProviderRequest(
+                                              //       _ageType.text,
+                                              //       _ageType.text,
+                                              //       _ageType.text,
+                                              //       _textEditingController.text,
+                                              //     ));
+                                              //     print(_ageType);
+                                              //   });
+                                              // },
+                                              controller: _ageType,
+                                            ),
+                                          )),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                _selectDate(context);
+                                                BlocProvider.of<
+                                                            ProviderHomeBloc>(
+                                                        context)
+                                                    .add(getProviderRequest(
+                                                  _ageType.text,
+                                                  _ageType.text,
+                                                  _ageType.text,
+                                                  _textEditingController.text,
+                                                ));
+                                              },
+                                              child: Image.asset(
+                                                'assets/icons/New Project (36).png',
+                                                height: 40,
+                                              )),
+                                        ])),
                               ],
-                            )
-//Text('Item Data$index'),
                             ),
-                      ),
-                    ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+state.getProviderRequestModel.appointmentRequests.isNotEmpty?
+                           ListView.builder(
+                                    physics:
+                                        NeverScrollableScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    reverse: true,
+                                    itemCount: state
+                                        .getProviderRequestModel
+                                        .appointmentRequests
+                                        .length,
+                                    itemBuilder: (BuildContext context,
+                                        int index) {
+                                      if(state.getProviderRequestModel.appointmentRequests.isNotEmpty) {
+                                        var a = state
+                                            .getProviderRequestModel
+                                            .appointmentRequests;
 
-                    actions: <Widget>[
-                      Row(children: [
-                        IconSlideAction(
-                          caption: 'Accept',
-                          color: MaaruColors.blueColor,
-                          icon: Icons.done,
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => UpcomingAppointmentCalender1()));
-                          }
+                                        return Slidable(
+                                            actionPane:
+                                            SlidableDrawerActionPane(),
+                                            actions: <Widget>[
+                                              Stack(children: [
+                                                IconSlideAction(
+                                                  caption: 'Accept',
+                                                  color: Colors.blue,
+                                                  icon: Icons.done,
+                                                  onTap: () {
+                                                    BlocProvider.of<
+                                                        ProviderHomeBloc>(
+                                                        context)
+                                                        .add(
+                                                        AcceptRequested(
+                                                            state
+                                                                .getProviderRequestModel
+                                                                .appointmentRequests[
+                                                            index]
+                                                                .id));
+                                                    Navigator.of(
+                                                        context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (
+                                                                _) =>
+                                                                UpcomingAppointmentCalender1()));
+                                                  },
+                                                ),
+                                              ])
+                                            ],
+                                            secondaryActions: <Widget>[
+                                              IconSlideAction(
+                                                caption: 'Delete',
+                                                color: Colors.red,
+                                                icon: Icons.delete,
+                                                onTap: () {
+                                                  BlocProvider.of<
+                                                      ProviderHomeBloc>(
+                                                      context)
+                                                      .add(Decline(state
+                                                      .getProviderRequestModel
+                                                      .appointmentRequests[
+                                                  index]
+                                                      .id));
+                                                  Navigator.of(context)
+                                                      .push(
+                                                      MaterialPageRoute(
+                                                          builder: (
+                                                              _) =>
+                                                              UpcomingAppointmentCalender1()));
+                                                },
+                                              ),
+                                            ],
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsets.only(
+                                                  left: 15.0,
+                                                  right: 15.0,
+                                                  bottom: 15,top: 10),
+                                              child:
+                                              Column(
+                                                  mainAxisSize:
+                                                  MainAxisSize.min,
+                                                  children: [
+                                                    Container(
+                                                      padding: EdgeInsets.only(top: 10,right: 10),
+                                                        height: 150,
+                                                        decoration: BoxDecoration(
+                                                            border: Border
+                                                                .all(
+                                                                color: Colors
+                                                                    .grey[
+                                                                200])),
+                                                        child:
+                                                        Column(
+                                                          mainAxisSize:
+                                                          MainAxisSize
+                                                              .min,
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                          crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                              children: [
+                                                                Expanded(
+                                                                  child: Padding(
+                                                                    padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left: 15.0),
+                                                                    child: Text(
+                                                                        state
+                                                                            .getProviderRequestModel
+                                                                            .appointmentRequests[index]
+                                                                            .companyName
+                                                                            .toString(),
+                                                                        style:
+                                                                        MaaruStyle
+                                                                            .text
+                                                                            .tiniest,
+                                                                        textAlign: TextAlign
+                                                                            .justify),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  width:
+                                                                  10,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Align(
+                                                                    alignment:
+                                                                    Alignment
+                                                                        .centerRight,
+                                                                    child:
+                                                                    Text(
+
+                                                                        '${state
+                                                                            .getProviderRequestModel
+                                                                            .appointmentRequests[index]
+                                                                            .bookingDate.year.toString()}-${state
+                                                                            .getProviderRequestModel
+                                                                            .appointmentRequests[index]
+                                                                            .bookingDate.month.toString()}-${state
+                                                                            .getProviderRequestModel
+                                                                            .appointmentRequests[index]
+                                                                            .bookingDate.day.toString()}'),
+
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                              children: [
+                                                               Expanded(child: Padding(
+                                                                  padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 15.0),
+                                                                  child:
+                                                                  Text(
+                                                                    state
+                                                                        .getProviderRequestModel
+                                                                        .appointmentRequests[index]
+                                                                        .service
+                                                                        .toString(),
+                                                                    style:
+                                                                    MaaruStyle
+                                                                        .text
+                                                                        .medium,
+                                                                  ),
+                                                                )),
+                                                                const SizedBox(
+                                                                  width:
+                                                                  20,
+                                                                ),
+                                                                Text(
+                                                                  state
+                                                                    .getProviderRequestModel
+                                                                    .appointmentRequests[index]
+                                                                    .bookingStartTime
+                                                                    .toString(),)
+                                                              ],
+                                                            ),
+                                                            Expanded(
+
+                                                              child: Align(
+                                                                  alignment:
+                                                                  Alignment
+                                                                      .topLeft,
+                                                                  child:
+                                                                  Padding(
+                                                                    padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left: 15.0),
+                                                                    child:
+                                                                    Text(
+                                                                        '${state
+                                                                            .getProviderRequestModel
+                                                                            .appointmentRequests[index]
+                                                                            .companyCity
+                                                                            .toString()} ${a[index]
+                                                                            .companyZipCode
+                                                                            .toString()} ${a[index]
+                                                                            .companyState
+                                                                            .toString()}'),
+                                                                  )),
+                                                            ),
+                                                            Expanded(
+                                                              child: Align(
+                                                                alignment: Alignment.centerRight,
+                                                                child: Container(
+                                                                    alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                    transformAlignment: Alignment.centerRight,
+                                                                    margin: const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                        120,bottom: 10),
+                                                                    height:
+                                                                    35,
+                                                                    width:
+                                                                    150,
+                                                                    decoration: BoxDecoration(
+                                                                        color: MaaruColors
+                                                                            .blueColor,
+                                                                        borderRadius: BorderRadius
+                                                                            .circular(
+                                                                            10.7),
+                                                                        border:
+                                                                        Border
+                                                                            .all(
+                                                                            color: Colors
+                                                                                .white)),
+                                                                    child: InkWell(
+                                                                      onTap:
+                                                                          () {
+                                                                        Navigator
+                                                                            .of(
+                                                                            context)
+                                                                            .push(
+                                                                            MaterialPageRoute(
+                                                                                builder: (
+                                                                                    _) =>
+                                                                                BookedConfirm(id4: state.getProviderRequestModel.appointmentRequests[index].id,)));
+                                                                      },
+                                                                      child:
+                                                                      const Text(
+                                                                        'View Details',
+                                                                        style: TextStyle(
+                                                                            color: Colors
+                                                                                .white,
+                                                                            fontWeight: FontWeight
+                                                                                .w700),
+                                                                      ),
+                                                                    )),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      //Text('Item Data$index'),
+                                                    ),
+                                                  ]),
+                                            ));
+
+                              } else {
+                                return const CircularProgressIndicator();
+                              }
+                            }):const Center(child: Text('No data found')),
+                          ]),
                         ),
-                        SizedBox(
-                          width: 25,
-                        ),
-                        IconSlideAction(
-                          color: MaaruColors.blueColor,
-                          icon: Icons.arrow_forward,
-                          //onTap: () => _showSnackBar('Archive'),
-                        ),
-                      ])
-                    ],
-                    secondaryActions: <Widget>[
-                      Row(
-                        children: [
-                          IconSlideAction(
-                            color: Colors.red,
-                            icon: Icons.arrow_back,
-                            //onTap: () => _showSnackBar('Archive'),
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          IconSlideAction(
-                            caption: 'Delete',
-                            color: Colors.red,
-                            icon: Icons.delete,
-                            //onTap: () => _showSnackBar('Archive'),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ]),
-          )
-        ],
+                      );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  })));
+        },
       ),
     );
   }
 }
-
-
-

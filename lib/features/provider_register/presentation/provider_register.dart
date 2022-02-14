@@ -1,6 +1,4 @@
 
-
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -68,9 +66,9 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                     child: BlocBuilder<RegisterBloc, RegisterState>(
                         builder: (context, state) {
                       if (state is RegisterSuccess) {
-                        AlertManager.showErrorMessage(
-                            "otp send your register email", context);
                         SchedulerBinding.instance.addPostFrameCallback((_) {
+                          AlertManager.showErrorMessage(
+                            "otp send your register email", context,);
                           Navigator.pushReplacement(context, MaterialPageRoute(
                               builder: (BuildContext context) {
                             return BlocProvider(
@@ -107,145 +105,189 @@ class _RegisterPoviderScreenState extends State<RegisterPoviderScreen> {
                         });
                       }
 
-                      return Column(
-                        children: [
-                          Logo(),
-                          ScreenIcon(),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Center(
-                            child: Text(
-                              'or sign up with email',
-                              style: MaaruStyle.text.tiny
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                        child: Column(
+                          children: [
+                            Logo(),
+                            ScreenIcon(),
+                            SizedBox(
+                              height: 20,
                             ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            // padding: const EdgeInsets.symmetric(horizontal: 40),
-                            child: Column(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    ThemedTextField(
-                                        "First Name", TextInputType.text,
-                                        textInputAction: TextInputAction.next,
-                                        onChanged: (text) {
-                                       BlocProvider.of<RegisterBloc>(context)
-                                        .add(FNameChanged(text));
-                                    },
-                                        editingController:
-                                            _first_nameController),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    ThemedTextField(
-                                        "Last Name", TextInputType.text,
-                                        textInputAction: TextInputAction.next,
-                                        onChanged: (text) {
-                                         BlocProvider.of<RegisterBloc>(context)
-                                       .add(LNameChanged(text));
-                                    }, editingController: _lnameController),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    ThemedTextField(
-                                        "Email", TextInputType.emailAddress,
-                                        textInputAction: TextInputAction.next,
-                                        onChanged: (text) {
-                                       BlocProvider.of<RegisterBloc>(context)
-                                       .add(EmailChanged(text));
-                                    }, editingController: _emailController),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    ThemedTextField(
-                                      "Password",
-                                      TextInputType.visiblePassword,
-                                      textInputAction: TextInputAction.next,
-                                      password: true,
-                                      onChanged: (text) {
-                                          BlocProvider.of<RegisterBloc>(context)
-                                           .add(PasswordChanged(text));
+                            Center(
+                              child: Text('or sign up with email',
+                                  style: MaaruStyle.text.tiny),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              // padding: const EdgeInsets.symmetric(horizontal: 40),
+                              child: Column(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      ThemedTextField(
+                                          "First Name", TextInputType.text,
+                                          textInputAction: TextInputAction.next,
+                                          onChanged: (text) {
+                                        BlocProvider.of<RegisterBloc>(context)
+                                            .add(FNameChanged(text));
                                       },
-                                      editingController: _passwordController,
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    ThemedButton(
-                                      text: "Register",
-                                      onPressed: () {
-                                        String fname =
-                                            _first_nameController.text;
-                                        String lname = _lnameController.text;
-                                        String email = _emailController.text;
-                                        String password =
-                                            _passwordController.text;
+                                          editingController:
+                                              _first_nameController),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      ThemedTextField(
+                                          "Last Name", TextInputType.text,
+                                          textInputAction: TextInputAction.next,
+                                          onChanged: (text) {
+                                        BlocProvider.of<RegisterBloc>(context)
+                                            .add(LNameChanged(text));
+                                      }, editingController: _lnameController),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      ThemedTextField(
+                                          "Email", TextInputType.emailAddress,
+                                          textInputAction: TextInputAction.next,
+                                          onChanged: (text) {
+                                        BlocProvider.of<RegisterBloc>(context)
+                                            .add(EmailChanged(text));
+                                      }, editingController: _emailController),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      ThemedTextField(
+                                        "Password",
+                                        TextInputType.visiblePassword,
+                                        textInputAction: TextInputAction.next,
+                                        password: true,
+                                        onChanged: (text) {
+                                          BlocProvider.of<RegisterBloc>(context)
+                                              .add(PasswordChanged(text));
+                                        },
+                                        editingController: _passwordController,
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      ThemedButton(
+                                        text: "Register",
+                                        onPressed: () {
+                                          String fname =
+                                              _first_nameController.text;
+                                          String lname = _lnameController.text;
+                                          String email = _emailController.text;
+                                          String password =
+                                              _passwordController.text;
 
-                                        if (fname.isEmpty) {
-                                          AlertManager.showErrorMessage(
-                                              "Please enter first name",
-                                              context);
-                                        } else if (lname.isEmpty) {
-                                          AlertManager.showErrorMessage(
+                                          if (fname.isEmpty) {
+                                            _showDialog(context,
+                                                'Please enter pet name');
+                                          } else if (lname.isEmpty) {
+                                            _showDialog(
+                                              context,
                                               "Please enter last name",
-                                              context);
-                                        } else if (validateEmail(email) !=
-                                            null) {
-                                          AlertManager.showErrorMessage(
+                                            );
+                                          } else if (validateEmail(email) !=
+                                              null) {
+                                            _showDialog(
+                                              context,
                                               "Please enter valid email",
-                                              context);
-                                        } else if (password.length < 6) {
-                                          AlertManager.showErrorMessage(
+                                            );
+                                          } else if (password.length < 6) {
+                                            _showDialog(
+                                              context,
                                               "Password must be 6 characters long",
-                                              context);
+                                            );
 
-                                          enabled = true;
-                                        }
-
-                                        // else if (password != cnfpassword) {
-                                        //   AlertManager.showErrorMessage(
-                                        //       "Password do not match", context);
-
-                                        else {
-                                          BlocProvider.of<RegisterBloc>(context)
-                                              .add(ProviderRegisterButtonTapped());
-
-                                        }
-                                        enabled = false;
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    state is RegisterInProgress
-                                        ? Center(
-                                        child: Container(
-                                          width: 5,
-                                          height: 5,
-                                          child: CircularProgressIndicator(),
-                                        ))
-                                        : Container(),
-                                    GoToSignInText(),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
-                        ],
+                                            enabled = true;
+                                          } else {
+                                            if (state
+                                            is RegisterFormValidationSuccess ||
+                                                state
+                                                is RegisterFormValidationFailure) {
+                                              BlocProvider.of<RegisterBloc>(
+                                                  context)
+                                                  .add(
+                                                  ProviderRegisterButtonTapped());
+                                            }
+                                          }
+                                          enabled = false;
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      state is RegisterInProgress
+                                          ? Center(
+                                              child: Container(
+                                              width: 5,
+                                              height: 5,
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            ))
+                                          : Container(),
+                                      GoToSignInText(),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       );
                     })))));
+  }
+
+  void _showDialog(BuildContext context, String text) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+            padding: EdgeInsets.all(20.0),
+            child: AlertDialog(actions: <Widget>[
+              Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: MaaruStyle.colors.textColorWhite,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 20),
+                            child: Text(text),
+                          ),
+                          Divider(
+                            color: Colors.grey[360],
+                          ),
+                          InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'ok',
+                                style:
+                                    TextStyle(color: MaaruColors.buttonColor),
+                              ))
+                        ],
+                      )))
+            ]));
+      },
+    );
   }
 }
 
@@ -263,8 +305,8 @@ class GoToSignInText extends StatelessWidget {
         ),
         InkWell(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => LoginProviderScreen()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => LoginProviderScreen()));
             },
             child: Text(
               'Login'.toUpperCase(),

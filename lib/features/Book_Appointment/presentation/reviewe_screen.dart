@@ -6,10 +6,14 @@ import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 
 class ReviewScreen extends StatefulWidget {
+  final int id4;
+
+  const ReviewScreen({Key key, this.id4}) : super(key: key);
   @override
   _ReviewScreenState createState() => _ReviewScreenState();
 }
@@ -20,15 +24,15 @@ class _ReviewScreenState extends State<ReviewScreen> {
   bool star3 = true;
   bool star4 = true;
   bool star5 = true;
-
+  var a = '';
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: CreateProviderHome(
-        // Color:MaaruColors.textButtonColor
-      ),
+          // Color:MaaruColors.textButtonColor
+          ),
       body: SingleChildScrollView(
         child: Flex(
           direction: Axis.vertical,
@@ -58,55 +62,70 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           onTap: () {
                             setState(() {
                               star1 = !star1;
+                              a = '1';
+                              print(a);
                             });
                           },
                           child: Icon(
                             star1 ? Icons.star_border : Icons.star,
-                            color: star1 ? Colors.grey : MaaruColors.buttonColor,
+                            color:
+                                star1 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
                           onTap: () {
                             setState(() {
                               star2 = !star2;
+                              a = '2';
+                              print(a);
                             });
                           },
                           child: Icon(
                             star2 ? Icons.star_border : Icons.star,
-                            color: star2 ? Colors.grey : MaaruColors.buttonColor,
+                            color:
+                                star2 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
                           onTap: () {
                             setState(() {
                               star3 = !star3;
+                              a = '3';
+                              print(a);
                             });
                           },
                           child: Icon(
                             star3 ? Icons.star_border : Icons.star,
-                            color: star3 ? Colors.grey : MaaruColors.buttonColor,
+                            color:
+                                star3 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
                           onTap: () {
                             setState(() {
                               star4 = !star4;
+                              a = '4';
+                              print(a);
                             });
                           },
                           child: Icon(
                             star4 ? Icons.star_border : Icons.star,
-                            color: star4 ? Colors.grey : MaaruColors.buttonColor,
+                            color:
+                                star4 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                       GestureDetector(
                           onTap: () {
                             setState(() {
                               star5 = !star5;
+                              a = '5';
+                              print(a);
                             });
                           },
                           child: Icon(
                             star5 ? Icons.star_border : Icons.star,
-                            color: star5 ? Colors.grey : MaaruColors.buttonColor,
+                            color:
+                                star5 ? Colors.grey : MaaruColors.buttonColor,
                             size: 35,
                           )),
                     ],
@@ -131,9 +150,15 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   ),
                   InkWell(
                       onTap: () {
-                        AlertManager.showSuccessMessage('Thank you for Review', context);
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => ViewPetProfile()));
+                        Future.delayed(
+                          const Duration(seconds: 3),
+                          () {
+                            AlertManager.showErrorMessage(
+                                'Thank you for Review', context);
+                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                                builder: (_) => const HomeScreen()),(route)=>false);
+                          },
+                        );
                       },
                       child: RoundedButton(
                         buttonName: 'Submit Review',

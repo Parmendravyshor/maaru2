@@ -60,3 +60,50 @@ class RegisterFormValidationFailure extends RegisterState {
 
 
 }
+class GoogleRegisterInProgress extends RegisterState {
+  GoogleRegisterInProgress() : super();
+
+  @override
+  String toString() => "GoogleRegisterInProgress";
+
+}
+
+class GoogleRegisterSuccess extends RegisterState {
+  GoogleRegisterSuccess() : super();
+
+  @override
+  String toString() => "GoogleRegisterSuccess";
+
+}
+
+class GoogleRegisterFailure extends RegisterState {
+  final String errorMessage;
+  GoogleRegisterFailure(this.errorMessage) : super();
+  @override
+  String toString() => "GoogleRegisterFailure";
+
+
+}
+class fbRegisterInProgress extends RegisterState {
+  fbRegisterInProgress() : super();
+
+  @override
+  String toString() => "fbRegisterInProgress";
+
+}
+
+class fbRegisterSuccess extends RegisterState {
+  fbRegisterSuccess() : super();
+
+  @override
+  String toString() => "fbRegisterSuccess";
+
+}
+
+class fbRegisterFailure extends RegisterState {
+  final String errorMessage;
+  fbRegisterFailure(this.errorMessage) : super();
+  @override
+  String toString() => "fbRegisterFailure";
+
+}

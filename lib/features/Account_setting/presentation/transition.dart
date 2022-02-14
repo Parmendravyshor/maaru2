@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
@@ -151,11 +153,20 @@ class _TransitionScreenState extends State<TransitionScreen> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ProfileAvatar(
-                          imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
-                          width: 60,
-                          avatarRadius: 60,
-                          Color: Colors.yellow,
+                        Container(
+                          height: 40,
+                          width: 40,
+                          decoration:  BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: ''.isEmpty
+                                  ? const ExactAssetImage(
+                                  'assets/128/CrystalGaskell.png')
+                                  : FileImage(File('')),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                         SizedBox(width: 0,),
                         Column(

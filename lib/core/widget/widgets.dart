@@ -6,6 +6,7 @@ import 'package:formz/formz.dart';
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/theme/style.dart';
 import 'dart:math' as math;
+
 //import 'package:formz/formz.dart';
 /// This is a widget that will be used for displaying header titles
 class HeaderText extends StatelessWidget {
@@ -47,12 +48,11 @@ class ThemedButton extends StatelessWidget {
     final enabledTextColor = MaaruColors.button2Color;
     final disabledTextColor = MaaruStyle.colors.textDisabled;
     return Container(
-      margin: EdgeInsets.only(left: 20,right: 20),
+      margin: EdgeInsets.only(left: 20, right: 20),
       child: Center(
           child: FractionallySizedBox(
-              widthFactor: 0.99,
+              widthFactor: 1.022,
               child: Container(
-
                   decoration: enabled ? MaaruStyle.buttonShadow : null,
                   child: FlatButton(
                       minWidth: double.infinity,
@@ -91,7 +91,7 @@ class ThemedButtonGey extends StatelessWidget {
 
     return Center(
         child: FractionallySizedBox(
-            widthFactor: 0.9,
+            widthFactor: 0.8,
             child: Container(
                 decoration: enabled ? MaaruStyle.buttonShadow : null,
                 child: FlatButton(

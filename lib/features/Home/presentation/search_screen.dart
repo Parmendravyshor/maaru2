@@ -1,627 +1,802 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:maru/core/constant/constant.dart';
+import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
-import 'package:maru/core/widget/back_arrow.dart';
+import 'package:maru/core/usecases/usecase.dart';
+import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen1.dart';
+import 'package:maru/features/Book_Appointment/presentation/book_appointment_screen3.dart';
+
+import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
+import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
+import 'package:maru/features/login/presentation/login_screen.dart';
+import 'package:maru/features/verify/domain/usecases/get_pet_profile.dart';
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/main.dart';
-
+import 'package:flutter/scheduler.dart';
 import 'create_home_screen.dart';
+import 'dart:async';
+import 'dart:ui';
 
-// class ProviderSearchScreen extends StatefulWidget {
-//   @override
-//   _ProviderSearchScreenState createState() => _ProviderSearchScreenState();
-// }
-//
-// class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
-//   Color _iconColor = Colors.yellowAccent;
-//   @override
-//   Widget build(BuildContext context) {
-//     var selectedIndex;
-//     return Scaffold(
-//         backgroundColor:MaaruColors.darkGrey2,
-//         bottomNavigationBar: CreateHomeScreen(
-//           selectedIndex: 1,
-//           Color1:  selectedIndex == 1
-//               ? MaaruColors.darkGrey2
-//               : MaaruColors.textButtonColor
-//           //  Color:Colors.red
-//        // MaaruColors.textButtonColor
-//         ),
-//         body: SafeArea(
-//             child: Column(children: [
-//
-//
-// Stack(children:[
-//   ShowLocation(),
-//           MyClass(),
-//           SizedBox(
-//             height: 20,
-//           ),
-//           //  Padding(
-//           //    padding: EdgeInsets.only(left: 20),
-//           //
-//           // child:PadExp
-//
-//               Padding(
-//             padding: EdgeInsets.fromLTRB(10, 100, 0, 0),
-//             child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.start,
-//                 children: <Widget>[
-//                   Expanded(
-//                     child: Padding(
-//                         padding: EdgeInsets.only(
-//                           top: 0,
-//                           right: 10,
-//                         ),
-//                         child: TextFormField(
-//                           // cursorColor: Colors.black,
-//                           decoration: InputDecoration(
-//                               enabledBorder: new OutlineInputBorder(
-//                                   borderRadius: new BorderRadius.circular(10.7),
-//                                   borderSide: new BorderSide(
-//                                       color: Colors.grey[300], width: 1.0)),
-//                               focusedBorder: new OutlineInputBorder(
-//                                   borderRadius: new BorderRadius.circular(10.7),
-//                                   borderSide: new BorderSide(
-//                                       color: Colors.grey[300], width: 1.0)),
-//                               hintText: 'Search',
-//                               hintStyle: MaaruStyle.text.greyDisable,
-//                               contentPadding:
-//                                   EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-//                               fillColor: Colors.white,
-//                               suffixIcon: Image.asset(
-//                                 'assets/icons/icone-setting-19.png',
-//                                 height: 50,
-//                                 // width: 30,
-//                               )),
-//                         )),
-//                   ),
-//                   SizedBox(
-//                     width: 10,
-//                   ),
-//                   Padding(
-//                       padding: EdgeInsets.only(right: 70),
-//                       child: InkWell(
-//                           onTap: () {
-//                             Navigator.of(context).push(
-//                                 MaterialPageRoute(builder: (_) => MapView()));
-//                           },
-//                           child: Image.asset(
-//                             'assets/icons/icon-bl-15.png',
-//                             height: 40,
-//                           ))),
-//                 ]),
-//           ),
-//           SizedBox(
-//             width: 20,
-//           ),
-//
-//           Padding(
-//               padding: EdgeInsets.only(top: 320,right: 10,left: 10),
-//               child: InkWell(
-//                   onTap: () {
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) => BookAppointment1()));
-//                   },
-//                   child:      Container(
-//                     decoration: BoxDecoration(
-//                         borderRadius: BorderRadius.circular(20),
-//                         border: Border.all(color: Colors.grey[300])),
-//                     height: 120,
-//                     child: Container(
-//                       color: Colors.white,
-//                       margin: EdgeInsets.all(10),
-//                       child: Row(
-//                         children: [
-//                           Container(
-//                             width: 100,
-//                             decoration: BoxDecoration(
-//                               borderRadius: BorderRadius.circular(20),
-//                               color: Colors.white,
-//                             ),
-//                             child: Image.asset('assets/images/kutta.png'),
-//                           ),
-//                           SizedBox(
-//                             width: 20,
-//                           ),
-//                           Column(
-//                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                             crossAxisAlignment: CrossAxisAlignment.start,
-//                             children: [
-//                               Text(
-//                                 'Franks Pet Lounge',
-//                                 style: MaaruStyle.text.tiniest
-//                               ),
-//                               Text(
-//                                 'Franks Daycare',
-//                                 style: TextStyle(
-//                                     fontWeight: FontWeight.bold, fontSize: 12),
-//                               ),
-//                               Row(
-//                                 children: [
-//                                   Icon(
-//                                     Icons.star,
-//                                     size: 25,
-//                                     color: Colors.yellow,
-//                                   ),
-//                                   SizedBox(
-//                                     width: 10,
-//                                   ),
-//                                   Text(
-//                                     '42 Reviews   (4.0)',
-//                                     style: TextStyle(
-//                                         fontWeight: FontWeight.bold, fontSize: 12),
-//                                   ),
-//                                 ],
-//                               )
-//                             ],
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   ),)),
-//         ])
-//
-//             //   ]
-//             ])));
-//   }
-// }
-//
-// class MyClass extends StatefulWidget {
-//   @override
-//   _MyClassState createState() => _MyClassState();
-// }
-//
-// class _MyClassState extends State<MyClass> {
-//   bool pressGeoON = false;
-//   bool cmbscritta = true;
-//   bool isPressed = true;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(children: [
-//       Padding(
-//         padding: EdgeInsets.fromLTRB(20, 105, 10, 0),
-//         child: Container(
-//             decoration: BoxDecoration(
-//               borderRadius: BorderRadius.circular(50.0),
-//               color: Colors.transparent,
-//             ),
-//             alignment: Alignment.bottomRight,
-//             child: InkWell(
-//                 child: Column(children: [
-//                   cmbscritta
-//                       ? Image.asset(
-//                           'assets/icons/icon-bl-05.png',
-//                           height: 40,
-//                         )
-//                       : Padding(
-//                           padding: EdgeInsets.only(bottom: 20),
-//                           child: Container(
-//                             width: 500,
-//                             height: 200,
-//                             decoration: BoxDecoration(
-//                               image: DecorationImage(
-//                                 image: AssetImage(
-//                                     'assets/icons/icone-setting-62.png'),
-//                               ),
-//                             ),
-//                             child: Padding(
-//                               padding: EdgeInsets.fromLTRB(10, 20, 30, 0),
-//                               child: Row(
-//                                 mainAxisAlignment:
-//                                     MainAxisAlignment.spaceBetween,
-//                                 children: [
-//                                   InkWell(
-//
-//                                     onTap: () {
-//                                       setState(() {
-//                                         // isPressed = !isPressed;
-//                                       });
-//                                     },
-//                                     child: Image.asset(
-//                                       'assets/icons/icone-setting-49.png',
-//                                       //   color:
-//                                       //   isPressed ? Colors.white : Colors.blue,
-//                                       height: 40,
-//                                     ),
-//                                   ),
-//                             InkWell(
-//                               onTap: () {
-//                                 setState(() {
-//                                   // isPressed = !isPressed;
-//                                 });
-//                               },
-//                               child:
-//                                   Image.asset(
-//                                     'assets/icons/icone-setting-71.png',
-//                                     height: 40,
-//                                   )),
-//                                   Image.asset(
-//                                     'assets/icons/icone-setting-72.png',
-//                                     height: 40,
-//                                   ),
-//                             InkWell(
-//                               onTap: () {
-//                                 setState(() {
-//                                   // isPressed = !isPressed;
-//                                 });
-//                               },
-//                               child:
-//                                   Image.asset(
-//                                     'assets/icons/icone-setting-73.png',
-//                                     height: 40,
-//                                   )),
-//                             InkWell(
-//                               onTap: () {
-//                                 setState(() {
-//                                   // isPressed = !isPressed;
-//                                 });
-//                               },
-//                               child:
-//                                   Image.asset(
-//                                     'assets/icons/icone-setting-74.png',
-//                                     height: 40,
-//                                   )),
-//                             InkWell(
-//                               onTap: () {
-//                                 setState(() {
-//                                   // isPressed = !isPressed;
-//                                 });
-//                               },
-//                               child:
-//                                   Image.asset(
-//                                     'assets/icons/icone-setting-75.png',
-//                                     height: 40,
-//                                   )),
-//                                   // Padding(
-//                                   //     padding:
-//                                   //         EdgeInsets.fromLTRB(0, 100, 500, 0),
-//                                   //     child: ToggleButton(
-//                                   //       text1: 'hkd',
-//                                   //       text2: 'hkjf',
-//                                   //     )),
-//                                 ],
-//                               ),
-//                             ),
-//                           ),
-//                         )
-//                 ]),
-//                 //    style: TextStyle(fontSize: 14)
-//                 onTap: () {
-//                   setState(() {
-//                     pressGeoON = !pressGeoON;
-//                     cmbscritta = !cmbscritta;
-//                   });
-//                 })),
-//       ),
-//     ]);
-//   }
-// }
-//
-
-
-
+import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
+    as event;
 class ProviderSearchScreen extends StatefulWidget {
   @override
   _ProviderSearchScreenState createState() => _ProviderSearchScreenState();
 }
-
 class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
+  bool color;
   Color Groomingcolor = Color(0xff5e34d1);
   Color Vetcolor = Color(0xff5e34d1);
   Color Walkingcolor = Color(0xff5e34d1);
   Color hotelcolor = Color(0xff5e34d1);
   Color daycarecolor = Color(0xff5e34d1);
-
+  Color filterone = MaaruColors.greyColorText;
+  Color filtertwo = MaaruColors.greyColorText;
   String switchimage = 'assets/icons/icon-bl-19.png';
 
-  double height = 45;
-  double leftpad = 310;
-  Widget RepeatContainer(String image) {
-    return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>BookAppointment1()));
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: MaaruColors.textfeildline, width: 2),
-          ),
-        height: 120,
-        child: Container(
-          color: Colors.white,
-          margin: EdgeInsets.all(13.0),
-          child: Row(
-            children: [
-              Container(
-                height: 100,
-                width: 90,
-                decoration: BoxDecoration(
-                    gradient:LinearGradient(colors: [Colors.black,Colors.grey.shade500]),
-                    image: DecorationImage(
-                        fit: BoxFit.cover, image: AssetImage(image))),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Franks Pet Lounge'.toUpperCase(),
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
-                  ),
-                  Text(
-                    'Pet Daycare'.toUpperCase(),
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
+  double height = 40;
+  double leftpad = 0.9;
+  String text = '';
+  TextEditingController _petNameController;
+
+  @override
+  void initState() {
+    _petNameController = TextEditingController();
+
+    super.initState();
+  }
+
+  final SharedPrefHelper _prefHelper =
+      KiwiContainer().resolve<SharedPrefHelper>();
+
+  Widget use(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Center(
+      child: BlocProvider(
+        create: (context) => KiwiContainer().resolve<LoginBloc>(),
+        child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+          if (state is LoginInitial) {
+            BlocProvider.of<LoginBloc>(context).add(event.GetProvider(text));
+            print('figffgfg${text}');
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is ProviderLoaded1) {
+            return Container(
+                margin: const EdgeInsets.only(
+                    top: 70, bottom: 0, left: 20, right: 20),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        'assets/icons/ffth.png',
-                        height: 25,
+                      ShowLocation(),
+                      const SizedBox(
+                        height: 15.0,
                       ),
-                      Text(
-                        '38 Reviews (5.0)'.toUpperCase(),
-                        style:
-                        TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
-                      )
-                    ],
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
+                      Stack(
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Color(0xffE8E8E8)),
+                                  borderRadius: BorderRadius.circular(15)),
+                              height: size.height * 0.06,
+                              width: size.width * 0.62,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.only(top: 2.0, left: 20.0),
+                                  hintText: 'Search',
+                                  hintStyle: MaaruStyle.text.tiny,
+                                  suffixIcon: Image.asset(
+                                    'assets/icons/icone-setting-19.png',
+                                  ),
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide.none),
+                                ),
+                              )),
+                          Align(
+                            alignment: Alignment(0.6, 0),
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MapView()));
+                                });
+                              },
+                              child: Image.asset(
+                                'assets/icons/icone-setting-61.png',
+                                height: 40,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.05,
+                          ),
+                          Align(
+                            alignment: Alignment(leftpad, 0),
+                            child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    switchimage == 'assets/icons/icon-bl-19.png'
+                                        ? switchimage =
+                                            'assets/icons/icone-setting-62.png'
+                                        : switchimage =
+                                            'assets/icons/icon-bl-19.png';
+                                    height == 40 ? height = 165 : height = 40;
+                                    leftpad == 0.9
+                                        ? leftpad = 0
+                                        : leftpad = 0.9;
+                                    Switchcontainerheight == 0
+                                        ? Switchcontainerheight = 80
+                                        : Switchcontainerheight = 0;
+                                  });
+                                },
+                                child: Image.asset(
+                                  switchimage,
+                                  height: height,
+                                )),
+                          ),
+                          Positioned(
+                              left: 20,
+                              bottom: 20,
+                              child: switchcontainer(context,
+                                  height: Switchcontainerheight)),
+                        ],
+                      ),
+
+                      ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          reverse: true,
+                          itemCount:
+                              state.getProviderModel.providersListing.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return   state.getProviderModel.providersListing.isNotEmpty?Column(
+                              children: [
+                                Column(children: [
+                                  InkWell(
+                                    onTap:()async{
+                                      if (mounted) {
+                                      setState(()  {
+
+                                        print('dkjhjfhjkfhjfhjfjfhjfjfffffff ${state.getProviderModel.providersListing[index].id}');
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) =>
+                                              BookAppointment1(id1:state.getProviderModel.providersListing[index].id),
+                                        ));
+                                      });
+}
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey[200], width: 2),
+                                          borderRadius:
+                                              BorderRadius.circular(25)),
+                                      height: 120,
+                                      child: Container(
+                                        color: Colors.white,
+                                        margin: EdgeInsets.all(13.0),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              height: 120,
+                                              width: 120,
+                                              decoration: BoxDecoration(
+                                                gradient: const LinearGradient(
+                                                    colors: [
+                                                      Colors.white,
+                                                      Colors.white
+                                                    ]),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                              ),
+                                              child: Container(
+                                                width: 120,
+                                                child: Image.network(
+                                                  state
+                                                      .getProviderModel
+                                                      .providersListing[index]
+                                                      .img,
+                                                  errorBuilder: (BuildContext,
+                                                      Object, StackTrace) {
+                                                    return Image.asset(
+                                                      'assets/images/kutta.png',
+                                                      fit: BoxFit.fitWidth,
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 20,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Expanded(
+                                                  child: Text(
+                                                    state
+                                                        .getProviderModel
+                                                        .providersListing[index]
+                                                        .companyName
+                                                        .toString(),
+
+                                                    // _prefHelper.getStringByKey(MaruConstant.company_name, ''),
+                                                    style: const TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w900),
+                                                  ),
+                                                ),
+                                                // Expanded(
+                                                //     child: Text(
+                                                //   state
+                                                //       .getProviderModel
+                                                //       .providersListing[index]
+                                                //       .serviceType
+                                                //       .toString(),
+                                                //   //   _prefHelper.getStringByKey(MaruConstant., ''),
+                                                //   style: const TextStyle(
+                                                //       fontSize: 10,
+                                                //       fontWeight:
+                                                //           FontWeight.w900),
+                                                // )),
+                                                Expanded(
+                                                  child: Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/icons/ffth.png',
+                                                        height: 20,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        '${state.getProviderModel.providersListing[index].reviews} Reviews (${state.getProviderModel.providersListing[index].averageRating})',
+                                                        style: const TextStyle(
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w900),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  )
+                                ]),
+                              ],
+                            ):Center(child:const Text('No data found'));
+                            // RepeatContainer('assets/images/kutta.png',),
+                            // SizedBox(
+                            //   height: size.height * 0.02,
+                            // ),
+                            // RepeatContainer('assets/images/kutta.png',),
+                          })
+                    ]));
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+          ;
+        }),
       ),
     );
   }
 
+  // Widget switchcontainer(
+  //   BuildContext context,
+  // ) {
+  //   final size = MediaQuery.of(context).size;
+  //   return BlocProvider(
+  //       create: (context) => KiwiContainer().resolve<LoginBloc>(),
+  //       child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+  //         if (state is ProviderLoaded1) {
+  //           SchedulerBinding.instance.addPostFrameCallback((_) {
+  //             Navigator.pushReplacement(context,
+  //                 MaterialPageRoute(builder: (BuildContext context) {
+  //               return Scaffold(
+  //                   body: SingleChildScrollView(child: use(context)));
+  //             }));
+  //           });
+  //           return Container();
+  //         }
+  //         return Column(
+  //           children: [
+  //             SizedBox(
+  //               height: 20,
+  //             ),
+  //             Padding(
+  //               padding: const EdgeInsets.only(
+  //                 top: 0.0,
+  //               ),
+  //               child: Row(
+  //                 children: [
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           Groomingcolor == Color(0xff5e34d1)
+  //                               ? Groomingcolor = Colors.red
+  //                               : Groomingcolor = Color(0xff5e34d1);
+  //                         });
+  //                         text = 'grooming';
+  //                         print(text);
+  //
+  //                         BlocProvider.of<LoginBloc>(context)
+  //                             .add(event.GetProvider(text));
+  //                       }
+  //                     },
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           color: Groomingcolor),
+  //                       height: size.height * 0.05,
+  //                       width: size.width * 0.11,
+  //                       child: Image.asset(
+  //                         'assets/icons/icone-setting-55.png',
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: size.width * 0.10,
+  //                   ),
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           Vetcolor == Color(0xff5e34d1)
+  //                               ? Vetcolor = Colors.red
+  //                               : Vetcolor = Color(0xff5e34d1);
+  //                         });
+  //                       }
+  //                       text = 'Walking';
+  //                       print(text);
+  //
+  //                       BlocProvider.of<LoginBloc>(context)
+  //                           .add(event.GetProvider(text));
+  //                     },
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           color: Vetcolor),
+  //                       height: size.height * 0.05,
+  //                       width: size.width * 0.11,
+  //                       child: Image.asset(
+  //                         'assets/icons/icone-setting-56.png',
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: size.width * 0.05,
+  //                   ),
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           hotelcolor == Color(0xff5e34d1)
+  //                               ? hotelcolor = Colors.red
+  //                               : hotelcolor = Color(0xff5e34d1);
+  //                         });
+  //                       }
+  //                       text = 'Vet';
+  //                       print(text);
+  //
+  //                       BlocProvider.of<LoginBloc>(context)
+  //                           .add(event.GetProvider(text));
+  //                     },
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           color: hotelcolor),
+  //                       height: size.height * 0.05,
+  //                       width: size.width * 0.11,
+  //                       child: Image.asset(
+  //                         'assets/icons/icone-setting-57.png',
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: size.width * 0.05,
+  //                   ),
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           daycarecolor == Color(0xff5e34d1)
+  //                               ? daycarecolor = Colors.red
+  //                               : daycarecolor = Color(0xff5e34d1);
+  //                         });
+  //                       }
+  //                       text = 'Hotel';
+  //                       print(text);
+  //
+  //                       BlocProvider.of<LoginBloc>(context)
+  //                           .add(event.GetProvider(text));
+  //                     },
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           color: daycarecolor),
+  //                       height: size.height * 0.05,
+  //                       width: size.width * 0.11,
+  //                       child: Image.asset(
+  //                         'assets/icons/icone-setting-58.png',
+  //                       ),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: size.width * 0.05,
+  //                   ),
+  //                   GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           Walkingcolor == Color(0xff5e34d1)
+  //                               ? Walkingcolor = Colors.red
+  //                               : Walkingcolor = Color(0xff5e34d1);
+  //                         });
+  //                       }
+  //                       text = 'Hospital';
+  //                       print(text);
+  //
+  //                       BlocProvider.of<LoginBloc>(context)
+  //                           .add(event.GetProvider(text));
+  //                     },
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(10),
+  //                           color: Walkingcolor),
+  //                       height: size.height * 0.05,
+  //                       width: size.width * 0.11,
+  //                       child: Image.asset('assets/icons/icone-setting-59.png'),
+  //                     ),
+  //                   ),
+  //                   SizedBox(
+  //                     width: size.height * 0.05,
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //             SizedBox(
+  //               height: 15,
+  //             ),
+  //             Row(
+  //               mainAxisAlignment: MainAxisAlignment.start,
+  //               children: <Widget>[
+  //                 GestureDetector(
+  //                     onTap: () {
+  //                       if (mounted) {
+  //                         setState(() {
+  //                           Walkingcolor == Color(0xff5e34d1)
+  //                               ? Walkingcolor = Colors.red
+  //                               : Walkingcolor = Color(0xff5e34d1);
+  //                         });
+  //                       }
+  //                       text = '2-3 ratings ';
+  //                       print(text);
+  //
+  //                       BlocProvider.of<LoginBloc>(context)
+  //                           .add(event.GetProvider(text));
+  //                     },
+  //                     child: Container(
+  //                       height: 20,
+  //                       width: 100,
+  //                       decoration: BoxDecoration(
+  //                           border: Border.all(color: Colors.grey)),
+  //                       child: Text('  2-3 ratings ',
+  //                           style: MaaruStyle.text.greyDisable,
+  //                           textAlign: TextAlign.center),
+  //                     )),
+  //                 SizedBox(
+  //                   width: 40,
+  //                 ),
+  //                 GestureDetector(
+  //                   onTap: () {
+  //                     if (mounted) {
+  //                       setState(() {
+  //                         Walkingcolor == Color(0xff5e34d1)
+  //                             ? Walkingcolor = Colors.red
+  //                             : Walkingcolor = Color(0xff5e34d1);
+  //                       });
+  //                     }
+  //                     text = '3-4 ratings ';
+  //                     print(text);
+  //
+  //                     BlocProvider.of<LoginBloc>(context)
+  //                         .add(event.GetProvider(text));
+  //                   },
+  //                   child: Container(
+  //                     height: 20,
+  //                     width: 100,
+  //                     decoration:
+  //                         BoxDecoration(border: Border.all(color: Colors.grey)),
+  //                     child: Text(
+  //                       '  3-4 ratings ',
+  //                       style: MaaruStyle.text.greyDisable,
+  //                       textAlign: TextAlign.center,
+  //                     ),
+  //                   ),
+  //                 )
+  //               ],
+  //             )
+  //           ],
+  //         );
+  //       }));
+  // }
   Color switchcolor = Color(0xff5e34d1);
   Color activecolor = Colors.red;
+  double Switchcontainerheight = 0;
 
-  Widget switchcontainer(BuildContext context) {
+  Widget switchcontainer(BuildContext context, {double height}) {
     final size = MediaQuery.of(context).size;
-    return Container(
+    return BlocProvider(
+        create: (context) => KiwiContainer().resolve<LoginBloc>(),
+        child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+          if (state is ProviderLoaded1) {
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (BuildContext context) {
+                return Scaffold(
+                    body: SingleChildScrollView(child: use(context)));
+              }));
+            });
+            return Container();
+          }
+          return Container(
+            height: height,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        if(mounted) {
+                          setState(() {
+                          Groomingcolor == Color(0xff5e34d1)
+                              ? Groomingcolor = Colors.red
+                              : Groomingcolor = Color(0xff5e34d1);
+                        });
+                        }
+                        text = 'grooming';
+                        print(text);
 
-      child: Column(
-        children: [
-          // Row(
-          //   children: [
-          //     GestureDetector(
-          //       onTap: () {
-          //         setState(() {
-          //           Groomingcolor == Color(0xff5e34d1)
-          //               ? Groomingcolor = Colors.red
-          //               : Groomingcolor = Color(0xff5e34d1);
-          //         });
-          //       },
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(10),
-          //             color: Groomingcolor),
-          //         height: size.height * 0.05,
-          //         width: size.width * 0.11,
-          //         child: Image.asset(
-          //           'assets/icons/icone-setting-55.png',
-          //         ),
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: size.width * 0.05,
-          //     ),
-          //     GestureDetector(
-          //       onTap: () {
-          //         setState(() {
-          //           Vetcolor == Color(0xff5e34d1)
-          //               ? Vetcolor = Colors.red
-          //               : Vetcolor = Color(0xff5e34d1);
-          //         });
-          //       },
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(10), color: Vetcolor),
-          //         height: size.height * 0.05,
-          //         width: size.width * 0.11,
-          //         child: Image.asset(
-          //           'assets/icons/icone-setting-56.png',
-          //         ),
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: size.width * 0.05,
-          //     ),
-          //     GestureDetector(
-          //       onTap: () {
-          //         setState(() {
-          //           hotelcolor == Color(0xff5e34d1)
-          //               ? hotelcolor = Colors.red
-          //               : hotelcolor = Color(0xff5e34d1);
-          //         });
-          //       },
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(10), color: hotelcolor),
-          //         height: size.height * 0.05,
-          //         width: size.width * 0.11,
-          //         child: Image.asset(
-          //           'assets/icons/icone-setting-57.png',
-          //         ),
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: size.width * 0.05,
-          //     ),
-          //     GestureDetector(
-          //       onTap: () {
-          //         setState(() {
-          //           daycarecolor == Color(0xff5e34d1)
-          //               ? daycarecolor = Colors.red
-          //               : daycarecolor = Color(0xff5e34d1);
-          //         });
-          //       },
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(10), color: daycarecolor),
-          //         height: size.height * 0.05,
-          //         width: size.width * 0.11,
-          //         child: Image.asset(
-          //           'assets/icons/icone-setting-58.png',
-          //         ),
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: size.width * 0.05,
-          //     ),
-          //     GestureDetector(
-          //       onTap: () {
-          //         setState(() {
-          //           Walkingcolor == Color(0xff5e34d1)
-          //               ? Walkingcolor = Colors.red
-          //               : Walkingcolor = Color(0xff5e34d1);
-          //         });
-          //       },
-          //       child: Container(
-          //         decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(10), color: Walkingcolor),
-          //         height: size.height * 0.05,
-          //         width: size.width * 0.11,
-          //         child: Image.asset(
-          //           'assets/icons/icone-setting-59.png'
-          //         ),
-          //       ),
-          //     ),
-          //     SizedBox(
-          //       width: size.width * 0.05,
-          //     ),
-          //   ],
-          // ),
-    Row(
-    children: [
-    Container(
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(event.GetProvider(text));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Groomingcolor),
+                        height: size.height * 0.05,
+                        width: size.width * 0.11,
+                        child: Image.asset(
+                          'assets/icons/icone-setting-55.png',
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.05,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if(mounted) {
+                          setState(() {
+                          Vetcolor == Color(0xff5e34d1)
+                              ? Vetcolor = Colors.red
+                              : Vetcolor = Color(0xff5e34d1);
+                        });
+                        }
+                        text = 'vet';
+                        print(text);
 
-    decoration: BoxDecoration(border: Border.all(color: MaaruColors.textfeildline),borderRadius: BorderRadius.circular(5.0)),
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(event.GetProvider(text));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Vetcolor),
+                        height: size.height * 0.05,
+                        width: size.width * 0.11,
+                        child: Image.asset(
+                          'assets/icons/icone-setting-56.png',
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.05,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if(mounted) {
+                          setState(() {
+                          hotelcolor == Color(0xff5e34d1)
+                              ? hotelcolor = Colors.red
+                              : hotelcolor = Color(0xff5e34d1);
+                        });
+                        }
+                        text = 'hotel';
+                        print(text);
 
-    height: size.height*0.03,
-    width: size.width*0.30,
-    child: Center(child: Text('3-4 rating',style: TextStyle(fontSize: 10,color: MaaruColors.textfeildline),)),
-    ),
-    SizedBox(width: size.width*0.04,),
-    Container(
-    decoration: BoxDecoration(border: Border.all(color: MaaruColors.textfeildline),borderRadius: BorderRadius.circular(5.0)),
-    height: size.height*0.03,
-    width: size.width*0.28,
-    child: Center(child: Text('4+ rating',style: TextStyle(fontSize: 10,color: MaaruColors.textfeildline),)),
-    ),
-    ],
-    )
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(event.GetProvider(text));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: hotelcolor),
+                        height: size.height * 0.05,
+                        width: size.width * 0.11,
+                        child: Image.asset(
+                          'assets/icons/icone-setting-57.png',
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.05,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if(mounted) {
+                          setState(() {
+                          daycarecolor == Color(0xff5e34d1)
+                              ? daycarecolor = Colors.red
+                              : daycarecolor = Color(0xff5e34d1);
+                        });
+                        }
+                        text = 'daycare';
+                        print(text);
 
-        ],
-      ),
-    );
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(event.GetProvider(text));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: daycarecolor),
+                        height: size.height * 0.05,
+                        width: size.width * 0.11,
+                        child: Image.asset(
+                          'assets/icons/icone-setting-58.png',
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.05,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if(mounted) {
+                          setState(() {
+                          Walkingcolor == Color(0xff5e34d1)
+                              ? Walkingcolor = Colors.red
+                              : Walkingcolor = Color(0xff5e34d1);
+                        });
+                        }
+                        text = 'walking';
+                        print(text);
+
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(event.GetProvider(text));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Walkingcolor),
+                        height: size.height * 0.05,
+                        width: size.width * 0.11,
+                        child: Image.asset('assets/icons/icone-setting-59.png'),
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.05,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: size.height * 0.01,
+                ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        if(mounted) {
+                          setState(() {
+                          filterone == MaaruColors.greyColorText
+                              ? filterone = MaaruColors.whiteColor
+                              : filterone = MaaruColors.greyColorText;
+                        });
+                        }
+                        text = '3-4  rating';
+                        print(text);
+
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(event.GetProvider(text));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: filterone),
+                            borderRadius: BorderRadius.circular(5.0)),
+                        height: size.height * 0.03,
+                        width: size.width * 0.30,
+                        child: Center(
+                            child: Text(
+                          '3-4 rating',
+                          style: TextStyle(fontSize: 10, color: filterone),
+                        )),
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.04,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        if(mounted) {
+                          setState(() {
+                          filtertwo == MaaruColors.greyColorText
+                              ? filtertwo = MaaruColors.whiteColor
+                              : filtertwo = MaaruColors.greyColorText;
+                        });
+                        }
+                        text = '4+ rating';
+                        print(text);
+
+                        BlocProvider.of<LoginBloc>(context)
+                            .add(event.GetProvider(text));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: filtertwo),
+                            borderRadius: BorderRadius.circular(5.0)),
+                        height: size.height * 0.03,
+                        width: size.width * 0.28,
+                        child: Center(
+                            child: Text(
+                          '4+ rating',
+                          style: TextStyle(fontSize: 10, color: filtertwo),
+                        )),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          );
+        }));
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: CreateHomeScreen(),
-backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child:Container(
-            margin:
-            EdgeInsets.only(top: 70, bottom: 0, left: 20, right: 20),
+        backgroundColor: Colors.white,
+        bottomNavigationBar: CreateHomeScreen(
+          selectedIndex: 2,
+        ),
+        body: SingleChildScrollView(child: use(context)
 
-            child:Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-               ShowLocation(),
-                SizedBox(
-                  height: 15.0,
-                ),
-                Stack(
-                  children: [
-                    Container(
+            ));
+  }
 
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Color(0xffE8E8E8)),
-                            borderRadius: BorderRadius.circular(15)),
-                        height: 50,
-                        width: 250,
-                        child: TextField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(top: 2.0, left: 20.0),
-                            hintText: 'Search',
-                            hintStyle: MaaruStyle.text.tiny,
-                            suffixIcon: Image.asset(
-                              'assets/icons/icone-setting-19.png',
-                              height: 100,
-                            ),
-                            border: OutlineInputBorder(borderSide: BorderSide.none),
-                          ),
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 260),
-                      child: GestureDetector(
-                        onTap: (){setState(() {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>MapView()));
-                        });},
-                        child: Image.asset(
-                          'assets/icons/icone-setting-61.png',
-                          height: 45,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: leftpad),
-                      child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              switchimage == 'assets/icons/icon-bl-19.png'
-                                  ? switchimage = 'assets/icons/icone-setting-62.png'
-                                  : switchimage = 'assets/icons/icon-bl-19.png';
-                              height == 45 ? height = 180 : height = 45;
-                              leftpad == 310 ? leftpad = 0 : leftpad = 310;
-
-
-
-
-                            });
-                          },
-                          child: Image.asset(
-                            switchimage,
-                            height: height,
-                          )),
-                    ),
-                    Positioned(
-                        left: 50, bottom: 50, child: switchcontainer(context)),
-
-                  ],
-                ),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
-                RepeatContainer('assets/images/kutta.png',),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
-                RepeatContainer('assets/images/kutta.png',),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
-                RepeatContainer('assets/images/kutta.png',),
-              ],
-            )),
-      ),
-    );
+  void submitServices(String text) {
+    BlocProvider.of<LoginBloc>(context)
+        .add(event.GetProvider(_petNameController.text));
   }
 }
-
-
-
