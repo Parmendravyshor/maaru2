@@ -156,6 +156,7 @@ class Chat2State extends State<Chat2> {
           color: Colors.white,
           child: Column(
             children: [
+<<<<<<< HEAD
               const SizedBox(height: 30),
               BackArrowButton(),
               Container(
@@ -168,6 +169,15 @@ class Chat2State extends State<Chat2> {
 
                 ),
                 child:   Image.asset('assets/128/AlanPost.png'),
+=======
+              SizedBox(height: 30),
+              BackArrowButton(),
+              ProfileAvatar(
+                imageUrl: ('assets/images/istockphoto-1179420343-612x612.jpg'),
+                width: 60,
+                avatarRadius: 60,
+                Color: Colors.yellow,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
               ),
               SizedBox(
                 height: 20,

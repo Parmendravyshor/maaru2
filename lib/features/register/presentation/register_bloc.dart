@@ -23,7 +23,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   String email = "";
   String password = "";
 
+<<<<<<< HEAD
 
+=======
+  @override
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   @override
   RegisterBloc(this._emailSignup, this._providerEmailSignUp, this.googleSignup)
       : super();

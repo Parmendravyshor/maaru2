@@ -1,5 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+<<<<<<< HEAD
+=======
+import 'dart:ui';
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_bubble/bubble_type.dart';
@@ -220,15 +224,24 @@ class Chat1State extends State<Chat1> {
           color: Colors.white,
           child: Column(
             children: [
+<<<<<<< HEAD
               SizedBox(height: 30),
               BackArrowButton(),
               Container(
                 height: 75,
                 padding: const EdgeInsets.only(right: 20),
+=======
+              SizedBox(height: size.height * 0.03),
+              BackArrowButton(),
+              Container(
+                height: size.height * 0.08,
+                padding: const EdgeInsets.only(right: 0),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
+<<<<<<< HEAD
 
                 ),
                 child:   Image.asset('assets/128/AlanPost.png'),
@@ -236,6 +249,13 @@ class Chat1State extends State<Chat1> {
 
               SizedBox(
                 height: 20,
+=======
+                ),
+                child: Image.asset('assets/128/AlanPost.png'),
+              ),
+              SizedBox(
+                height: size.height * 0.02,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
               ),
               Text(
                 'Ram',
@@ -266,6 +286,7 @@ class Chat1State extends State<Chat1> {
                     widget.user.toString());
                 return (message['SenderID'].toString() ==
                         widget.user.toString())
+<<<<<<< HEAD
                     ?
                         Container(
                           alignment: Alignment.centerRight,
@@ -344,6 +365,95 @@ class Chat1State extends State<Chat1> {
                         Image.asset('assets/128/CrystalGaskell.png',height: 50,width: 50,),
                       ],
                     );
+=======
+                    ? Container(
+                        alignment: Alignment.centerRight,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: _prefHelper
+                                          .getStringByKey('img', '')
+                                          .isEmpty
+                                      ? const ExactAssetImage(
+                                          'assets/128/AlanPost.png')
+                                      : FileImage(File(_prefHelper
+                                          .getStringByKey('img', ''))),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Container(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: MaaruColors.button2Color,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(7),
+                                        bottomLeft: Radius.circular(7),
+                                        bottomRight: Radius.circular(7))),
+                                margin: EdgeInsets.only(left: 20, right: 20),
+                                constraints:
+                                    BoxConstraints(maxWidth: size.width * 0.7),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('${message['message']}',
+                                        style: const TextStyle(
+                                            color: Colors.black, fontSize: 16))
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 20, right: 20),
+                              decoration: BoxDecoration(
+                                  color: MaaruColors.buttonColor,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(7),
+                                      bottomLeft: Radius.circular(7),
+                                      bottomRight: Radius.circular(7))),
+                              constraints:
+                                  BoxConstraints(maxWidth: size.width * 0.7),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Text('${message['SenderID']}',
+                                  //     style: const TextStyle(
+                                  //         color: Colors.grey, fontSize: 10)),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text('${message['message']}',
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 16)),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Image.asset(
+                            'assets/128/CrystalGaskell.png',
+                            height: 50,
+                            width: 50,
+                          ),
+                        ],
+                      );
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
               },
             ),
           ),

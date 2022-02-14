@@ -11,7 +11,10 @@ import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
+<<<<<<< HEAD
 import 'package:maru/features/provider_login/presentation/login_provider_screen.dart';
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:maru/features/splash/view/after_splash_Screen2.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
 import 'package:maru/features/verify/domain/usecases/save_registration_id.dart';
@@ -34,6 +37,7 @@ final size = MediaQuery.of(context).size;
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage('assets/icons/Splash-Provider-or-User-screen-svg-new (3).png'))),
+<<<<<<< HEAD
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -73,6 +77,47 @@ final size = MediaQuery.of(context).size;
             ],
           ),
 
+=======
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: size.height*0.22,),
+            Center(
+              child: Image.asset(
+                'assets/icons/MARU_Logo_B2_Horizontal_03 copy.png',
+                height: size.height * 0.14,
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.15,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AfterSplashScreen()));
+              },
+              child: RoundedButton(
+                buttonName: 'I AM A CUSTOMER',
+                Color: MaaruColors.blueColor,
+                Color1: MaaruColors.whiteColor,
+              ),
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AfterSplashScreen2()));
+              },
+              child: RoundedButton(
+                buttonName: 'I AM A PROVIDER',
+                Color1: MaaruColors.blueColor,
+                Color: MaaruColors.button2Color,
+              ),
+            ),
+          ],
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
         ),
       ));
 

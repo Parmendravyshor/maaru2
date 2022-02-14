@@ -66,6 +66,10 @@ dependencies:
   flutter_facebook_login: ^3.0.0
   flutter_chat_bubble: ^1.0.2
   wifi_configuration_2: ^1.1.2+1
+<<<<<<< HEAD
+=======
+  loading_indicator: ^3.0.2
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 
 
 dev_dependencies:

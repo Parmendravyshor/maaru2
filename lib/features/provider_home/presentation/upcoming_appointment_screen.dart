@@ -192,7 +192,11 @@ class _UpcomingAppointmentCalender1State
                           Container(
                               margin: EdgeInsets.only(left: 20, right: 20),
                               child: Text(
+<<<<<<< HEAD
                                 'Upcoming Appointment',
+=======
+                                'Upcoming Appointment'.toUpperCase(),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                 style: MaaruStyle.text.tiniest,
                               )),
                           const SizedBox(
@@ -268,6 +272,10 @@ class _UpcomingAppointmentCalender1State
                                                                 child: Image.asset(
                                                                     'assets/images/kutta.png'));
                                                           })),
+<<<<<<< HEAD
+=======
+                                                      SizedBox(width: size.width*0.02,),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                       Container(
                                                         child: Column(
                                                           mainAxisAlignment:
@@ -285,7 +293,11 @@ class _UpcomingAppointmentCalender1State
                                                                   .companyName
                                                                   .toString(),
                                                               style: MaaruStyle
+<<<<<<< HEAD
                                                                   .text.tiniest,
+=======
+                                                                  .text.tiny,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                             ),
                                                             Text(
                                                               state
@@ -295,7 +307,11 @@ class _UpcomingAppointmentCalender1State
                                                                   .service
                                                                   .toString(),
                                                               style: MaaruStyle
+<<<<<<< HEAD
                                                                   .text.tiny,
+=======
+                                                                  .text.medium,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                             ),
                                                             SizedBox(
                                                               height:
@@ -455,6 +471,10 @@ class _UpcomingAppointmentCalender1State
                                                                 child: Image.asset(
                                                                     'assets/images/kutta.png'));
                                                           })),
+<<<<<<< HEAD
+=======
+                                                      SizedBox(width: size.width*0.02,),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                       Container(
                                                         child: Column(
                                                           mainAxisAlignment:
@@ -471,7 +491,11 @@ class _UpcomingAppointmentCalender1State
                                                                       index]
                                                                   .companyName,
                                                               style: MaaruStyle
+<<<<<<< HEAD
                                                                   .text.tiniest,
+=======
+                                                                  .text.tiny,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                             ),
                                                             Text(
                                                               state
@@ -480,7 +504,11 @@ class _UpcomingAppointmentCalender1State
                                                                       index]
                                                                   .service,
                                                               style: MaaruStyle
+<<<<<<< HEAD
                                                                   .text.tiny,
+=======
+                                                                  .text.medium,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                             ),
                                                             SizedBox(
                                                               height:
@@ -634,6 +662,10 @@ class _UpcomingAppointmentCalender1State
                                                             child: Image.asset(
                                                                 'assets/images/kutta.png'));
                                                       })),
+<<<<<<< HEAD
+=======
+                                                  SizedBox(width: size.width*0.02,),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                   Container(
                                                     child: Column(
                                                       mainAxisAlignment:
@@ -649,7 +681,11 @@ class _UpcomingAppointmentCalender1State
                                                               .cancelled[index]
                                                               .companyName,
                                                           style: MaaruStyle
+<<<<<<< HEAD
                                                               .text.tiniest,
+=======
+                                                              .text.tiny,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                         ),
                                                         Text(
                                                           state
@@ -657,7 +693,11 @@ class _UpcomingAppointmentCalender1State
                                                               .cancelled[index]
                                                               .service,
                                                           style: MaaruStyle
+<<<<<<< HEAD
                                                               .text.tiny,
+=======
+                                                              .text.medium,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                         ),
                                                         SizedBox(
                                                           height: size.height *

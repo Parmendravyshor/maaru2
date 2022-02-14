@@ -74,6 +74,7 @@ class BirthDate extends PetProfileEvent {
 
 }
 
+<<<<<<< HEAD
 
 class CreateRegisterPetProfile extends PetProfileEvent {
   final String image;
@@ -87,6 +88,98 @@ class CreateRegisterPetProfile extends PetProfileEvent {
   final String sex;
   final String notes;
   CreateRegisterPetProfile(this.image, this.gender, this.petName, this.breedType, this.age, this.height, this.width, this.birthdate, this.sex, this.notes);
+=======
+class AgeChanged extends PetProfileEvent {
+
+  final String age;
+  AgeChanged(this.age);
+
+  @override
+  String toString() => "AgeChanged";
+}
+class petNameChanged extends PetProfileEvent {
+  final String petname;
+
+  petNameChanged(this.petname);
+
+  @override
+  String toString() => "petNameChanged";
+}
+class SexChanged extends PetProfileEvent {
+  final String sex;
+
+  SexChanged(this.sex);
+
+  @override
+  String toString() => "SexChanged";
+}
+class NoteChanged extends PetProfileEvent {
+  final String note;
+
+  NoteChanged(this.note);
+
+  @override
+  String toString() => "NoteChanged";
+}
+class genderChanged extends PetProfileEvent {
+  final String gender;
+
+  genderChanged(this.gender);
+
+  @override
+  String toString() => "genderChanged";
+}
+class PetNeed extends PetProfileEvent {
+  final String petneed;
+
+  PetNeed(this.petneed);
+
+  @override
+  String toString() => "genderChanged";
+}
+class HeightChanged extends PetProfileEvent {
+  final  String hight;
+
+  HeightChanged(this.hight);
+  List<Object> get props => [
+    hight,
+
+  ];
+
+  @override
+  String toString() => "HeightChanged";
+
+}
+class BirthChanged extends PetProfileEvent {
+   final selectedDate;
+
+   BirthChanged(this.selectedDate);
+
+   @override
+  String toString() => "BirthChanged";
+
+}
+
+class BreadChanged extends PetProfileEvent {
+   var breadtype;
+
+  BreadChanged(this.breadtype);
+
+  @override
+  String toString() => "BirthChanged";
+}
+class WidthChanged extends PetProfileEvent {
+  final String width;
+
+  WidthChanged(this.width);
+
+  @override
+  String toString() => "WidthChanged";
+}
+
+class CreateRegisterPetProfile extends PetProfileEvent {
+  CreateRegisterPetProfile();
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 
   @override
   String toString() => "CreatePetRegisterButtonTapped";
@@ -112,9 +205,15 @@ final String text;
 }
 
 class GetSinglePRof extends PetProfileEvent {
+<<<<<<< HEAD
  final int id1;
 
   GetSinglePRof(this.id1);
+=======
+ final int id;
+
+  GetSinglePRof(this.id);
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 }
 class GetSinglePRovider extends PetProfileEvent {
   final int id1;

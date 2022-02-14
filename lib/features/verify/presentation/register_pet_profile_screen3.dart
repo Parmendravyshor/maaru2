@@ -14,16 +14,22 @@ import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
+<<<<<<< HEAD
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
+=======
+import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
+import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 
 import 'pet_profile_bloc.dart';
 import '../../../main.dart';
 import 'register_pet_profile_screen2.dart';
 
 class CreateRegisterPetProfile3 extends StatefulWidget {
+<<<<<<< HEAD
   final String walking;
   final String temprature;
   final String feeding;
@@ -32,6 +38,8 @@ class CreateRegisterPetProfile3 extends StatefulWidget {
   const CreateRegisterPetProfile3(
       {Key key, this.walking, this.temprature, this.feeding, this.notes})
       : super(key: key);
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   @override
   _CreateRegisterPetProfile3State createState() =>
       _CreateRegisterPetProfile3State();
@@ -196,15 +204,20 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
     return BlocProvider(
         create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
         child: Scaffold(
+<<<<<<< HEAD
             backgroundColor: Colors.white,
             bottomNavigationBar:
                 _prefHelper.getStringByKey('pet_name', '').isNotEmpty
                     ? CreateHomeScreen()
                     : '',
+=======
+            backgroundColor:Colors.white,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
             body: BlocProvider(
                 create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
                 child: BlocBuilder<PetProfileBloc, PetProfileState>(
                     builder: (context, state) {
+<<<<<<< HEAD
                   if (_walkingController.text.isEmpty) {
                     _walkingController.text = widget.walking;
                   }
@@ -214,6 +227,8 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                   if (_tempramentController.text.isEmpty) {
                     _tempramentController.text = widget.temprature;
                   }
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                   if (state is pet3rofileButtonTapped) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushReplacement(context,
@@ -242,12 +257,18 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                   }
                   return SingleChildScrollView(
                     //  physics: ScrollPhysics(),
+<<<<<<< HEAD
                     child: SafeArea(
+=======
+                    child: 
+                    SafeArea(
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                       child: Column(children: [
                         Stack(fit: StackFit.loose, children: <Widget>[
                           Container(
                               alignment: Alignment.bottomRight,
                               //height: size.height * 0.20,
+<<<<<<< HEAD
                               // width: size.width * 0.9,
                               child: Center(
                                 child: Image.network(
@@ -265,6 +286,27 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                               )),
                           Padding(
                               padding: EdgeInsets.only(top: 30.0, bottom: 10),
+=======
+                             // width: size.width * 0.9,
+                              child:
+                              Center(
+                                child: Image.network(
+                                    _prefHelper.getStringByKey('img', ''),
+                                    width:450,
+                                    height: 250,
+                                    fit: BoxFit.fitWidth,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                          color: MaaruColors.DogsBackground,
+                                          alignment: Alignment.center,
+                                          child: Image.asset('assets/images/kutta.png'));
+                                    }),
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  top: 30.0,bottom: 10
+                              ),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
@@ -272,6 +314,12 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                 ],
                               )),
                         ]),
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                         Container(
                             //  width: 1000,
                             // height: 1300,
@@ -280,11 +328,17 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                               color: Color(0xFFffffff),
                             ),
                             child: Container(
+<<<<<<< HEAD
                                 padding:
                                     const EdgeInsets.fromLTRB(30, 20, 30, 10),
                                 child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+=======
+                                padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
+                                child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                     children: [
                                       Text(
                                           _prefHelper.getStringByKey(
@@ -314,6 +368,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                         style: MaaruStyle.text.tiny,
                                         maxLines: 2,
                                         decoration: InputDecoration(
+<<<<<<< HEAD
                                             hintText: _prefHelper
                                                     .getStringByKey(
                                                         MaruConstant
@@ -322,6 +377,9 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                                     .isEmpty
                                                 ? 'Note'
                                                 : '',
+=======
+                                            hintText: 'Note',
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                             hintStyle: MaaruStyle.text.tiny,
                                             border: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -346,6 +404,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                         style: MaaruStyle.text.tiny,
                                         maxLines: 2,
                                         decoration: InputDecoration(
+<<<<<<< HEAD
                                             hintText: _prefHelper
                                                     .getStringByKey(
                                                         MaruConstant
@@ -354,6 +413,9 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                                     .isEmpty
                                                 ? 'Note'
                                                 : '',
+=======
+                                            hintText: 'Note',
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                             hintStyle: MaaruStyle.text.tiny,
                                             border: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -375,6 +437,7 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                         style: MaaruStyle.text.tiny,
                                         maxLines: 2,
                                         decoration: InputDecoration(
+<<<<<<< HEAD
                                             hintText: _prefHelper
                                                     .getStringByKey(
                                                         MaruConstant
@@ -383,6 +446,9 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                                     .isEmpty
                                                 ? 'Note'
                                                 : '',
+=======
+                                            hintText: 'Note',
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                             hintStyle: MaaruStyle.text.tiny,
                                             border: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -434,19 +500,32 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                           ]),
                                       if (priceupdate_value)
                                         ListView.builder(
+<<<<<<< HEAD
                                           physics:
                                               NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           itemCount: containers.length,
                                           itemBuilder: (BuildContext context,
                                               int index) {
+=======
+                                          physics: NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          itemCount: containers.length,
+                                          itemBuilder:
+                                              (BuildContext context, int index) {
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                             return containers[index];
                                           },
                                         ),
                                       TextButton.icon(
                                         onPressed: () async {
+<<<<<<< HEAD
                                           setState(() => containers
                                               .add(createContainer()));
+=======
+                                          setState(() =>
+                                              containers.add(createContainer()));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                         },
                                         icon: Image.asset(
                                           'assets/icons/icone-setting-64.png',
@@ -480,13 +559,19 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                                     shape: BoxShape.circle),
                                                 child: Text(
                                                   'Back',
+<<<<<<< HEAD
                                                   style: MaaruStyle
                                                       .text.greyDisable,
+=======
+                                                  style:
+                                                      MaaruStyle.text.greyDisable,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                 ),
                                               ),
                                             ),
                                             InkWell(
                                                 onTap: () {
+<<<<<<< HEAD
                                                   if (_prefHelper
                                                       .getStringByKey(
                                                           'pet_name', '')
@@ -539,6 +624,43 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                                                           a),
                                                                 )));
                                                   }
+=======
+                                                  //
+                                                  // BlocProvider.of<PetProfileBloc>(
+                                                  //     context)
+                                                  //     .add(Profile3(
+                                                  //
+                                                  //  _tempramentController.text,
+                                                  //   _timesController.text,
+                                                  //   _feedingController.text,
+                                                  //   _notesController.text,
+                                                  //   _nameEditingController.text,
+                                                  //    _walkingController.text,
+                                                  //   _nameController.text,
+                                                  // ));
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              CreateRegisterPetProfile3()));
+
+                                                  BlocProvider.of<PetProfileBloc>(
+                                                          context)
+                                                      .add(Profile3(
+                                                    _tempramentController.text,
+                                                    _timesController.text,
+                                                    _feedingController.text,
+                                                    _notesController.text,
+                                                    _nameEditingController.text,
+                                                    _walkingController.text,
+                                                    _nameController.text,
+                                                  ));
+                                                  print('qkqjww');
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              CreateRegisterPetProfile4()));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                 },
                                                 child: Container(
                                                   alignment:

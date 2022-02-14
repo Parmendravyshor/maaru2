@@ -176,6 +176,7 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                         Navigator.of(context).push(
                                                             MaterialPageRoute(
                                                                 builder: (_) =>
+<<<<<<< HEAD
                                                                     CreateRegisterPetProfile3(
                                                                       feeding: state
                                                                           .welcome2
@@ -197,6 +198,9 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                                             .notes
                                                                       ],
                                                                     )));
+=======
+                                                                    CreateregisterPetProfile1()));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                       },
                                                       child: Image.asset(
                                                         'assets/icons/icone-setting-29.png',

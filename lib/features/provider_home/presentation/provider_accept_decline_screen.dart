@@ -388,7 +388,11 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                                         style:
                                                                         MaaruStyle
                                                                             .text
+<<<<<<< HEAD
                                                                             .tiniest,
+=======
+                                                                            .tiny,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                                         textAlign: TextAlign
                                                                             .justify),
                                                                   ),
@@ -477,7 +481,11 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                                             .companyZipCode
                                                                             .toString()} ${a[index]
                                                                             .companyState
+<<<<<<< HEAD
                                                                             .toString()}'),
+=======
+                                                                            .toString()}',style: MaaruStyle.text.tiny13,),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                                   )),
                                                             ),
                                                             Expanded(

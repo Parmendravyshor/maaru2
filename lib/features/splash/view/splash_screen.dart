@@ -13,7 +13,10 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/core/widget/background_image.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+<<<<<<< HEAD
 import 'package:maru/features/Home/presentation/search_screen.dart';
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:maru/features/login/domain/usecases/emailsignin.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
@@ -29,7 +32,11 @@ class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
+<<<<<<< HEAD
 
+=======
+//ghgghghgghghghg
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 class _SplashScreenState extends State<SplashScreen> {
   Position _currentPosition;
   String _currentAddress;
@@ -73,7 +80,11 @@ class _SplashScreenState extends State<SplashScreen> {
          if (id1.isNotEmpty) {
 
           Navigator.of(context).pushAndRemoveUntil(
+<<<<<<< HEAD
               MaterialPageRoute(builder: (context) =>  const HomeScreen()),
+=======
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
               (route) => false);
         } if(id1.isEmpty) {
            print('ddd');

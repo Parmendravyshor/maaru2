@@ -174,7 +174,11 @@ class _UpcomingAppointmentCalenderState
                           alignment: Alignment.topLeft,
                           margin: EdgeInsets.only(left: 20, right: 0),
                           child: Text(
+<<<<<<< HEAD
                             'Upcoming Appointment',
+=======
+                            'Upcoming Appointment'.toUpperCase(),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                             style: MaaruStyle.text.tiniest,
                           )),
                       state.upcomingPastAppointmentModel.confirmed.isNotEmpty?
@@ -229,16 +233,24 @@ class _UpcomingAppointmentCalenderState
                                                     .upcomingPastAppointmentModel
                                                     .confirmed[index]
                                                     .companyName.toString(),
+<<<<<<< HEAD
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 15),
+=======
+                                                style:MaaruStyle.text.tiny
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                               ),
                                               Text(
                                                 state
                                                     .upcomingPastAppointmentModel
                                                     .confirmed[index]
                                                     .service,
+<<<<<<< HEAD
                                                 style: TextStyle(fontSize: 14),
+=======
+                                                style:MaaruStyle.text.medium,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                               ),
                                               SizedBox(
                                                 height: 20,

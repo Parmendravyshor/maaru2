@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+<<<<<<< HEAD
 
 class WebViewPrivacy extends StatefulWidget {
+=======
+class WebViewPrivacy extends StatefulWidget {
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   @override
   _WebViewPrivacyState createState() => _WebViewPrivacyState();
 }
@@ -9,6 +14,7 @@ class WebViewPrivacy extends StatefulWidget {
 class _WebViewPrivacyState extends State<WebViewPrivacy> {
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return const Scaffold(
       body: WebView(
         initialUrl: 'https://maru-frontend.vercel.app/terms',
@@ -63,6 +69,13 @@ class _ProviderWebViewSignupState extends State<ProviderWebViewSignup> {
       body: WebView(
         initialUrl: 'https://maru-frontend.vercel.app/auth/register',
         javascriptMode: JavascriptMode.unrestricted,
+=======
+    return Scaffold(
+      body:WebView(
+initialUrl: 'https://www.google.com/B',
+        javascriptMode: JavascriptMode.unrestricted,
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
       ),
     );
   }

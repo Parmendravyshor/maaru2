@@ -199,9 +199,15 @@ print(id1);
                                       context,
                                       "Please enter valid email",
                                     );
+<<<<<<< HEAD
                                   } else if (password.length < 6) {
                                     _showDialog(context,
                                         "Password must be 6 characters long");
+=======
+                                  } else if (password.length < 8) {
+                                    _showDialog(context,
+                                        "Password must be 8 characters long");
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                   } else {
                                     if (state is LoginFormValidationSuccess ||
                                         state is LoginFormValidationFailure) {
@@ -246,6 +252,7 @@ print(id1);
             child: AlertDialog(actions: <Widget>[
               Align(
                   alignment: Alignment.center,
+<<<<<<< HEAD
                   child: Container(
                       decoration: BoxDecoration(
                         color: MaaruStyle.colors.textColorWhite,
@@ -272,6 +279,39 @@ print(id1);
                               ))
                         ],
                       )))
+=======
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: MaaruStyle.colors.textColorWhite,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20.0, right: 20),
+                              child: Text(text),
+                            ),
+                            Divider(
+                              color: Colors.grey[360],
+                            ),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  'ok',
+                                  style:
+                                      TextStyle(color: MaaruColors.buttonColor),
+                                ))
+                          ],
+                        )),
+                  ))
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
             ]));
       },
     );

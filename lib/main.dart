@@ -162,14 +162,22 @@ class MyApp extends StatelessWidget {
         home:   Scaffold(body: (SplashScreen())));
   }
 }
+<<<<<<< HEAD
 
+=======
+///hihkjhjhjh
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 class HomePage4 extends StatefulWidget {
   // const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePage4State createState() => _HomePage4State();
 }
+<<<<<<< HEAD
 
+=======
+///commit one of commit
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 class _HomePage4State extends State<HomePage4> {
   var isMovedUp = false;
   @override

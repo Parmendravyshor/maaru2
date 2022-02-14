@@ -81,6 +81,17 @@ class MaaruColors {
             color: Color(0xFF000000)));
   }
 
+<<<<<<< HEAD
+=======
+  TextStyle get  tiny13 {
+    return GoogleFonts.poppins(
+        textStyle: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontFamily: 'Poppins',
+            fontSize: 13,
+            color: Color(0xFF000000)));
+  }
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 
   TextStyle get  toggel {
     return GoogleFonts.poppins(

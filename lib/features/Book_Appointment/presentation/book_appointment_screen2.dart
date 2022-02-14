@@ -99,7 +99,11 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                                     BookAppointment1(id1: widget.id2,)));
                                                       },
                                                       child: Image.asset(
+<<<<<<< HEAD
                                                         'assets/icons/Rectangle copy 3.png',
+=======
+                                                        'assets/icons/icone-setting-68.png',
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                         height: 40,
                                                         width: 40,
                                                       )),
@@ -149,7 +153,11 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                           .provider.companyName
                                                           .toString(),
                                                       style:
+<<<<<<< HEAD
                                                       MaaruStyle.text.tiniest),
+=======
+                                                      MaaruStyle.text.xlarge),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 // SizedBox(width: size.width*0.34,),
                                                   Image.asset(
                                                       'assets/icons/New Project (2).png',
@@ -313,10 +321,17 @@ class _BookAppointment2State extends State<BookAppointment2> {
                                                     _prefHelper.getStringByKey(
                                                         MaruConstant.companyName,
                                                         ''),
+<<<<<<< HEAD
                                                     style: MaaruStyle.text.tiny),
                                               ),
                                               ThemedButton(
                                                 text: 'Book Appointment',
+=======
+                                                    style: MaaruStyle.text.xlarge),
+                                              ),
+                                              ThemedButton(
+                                                text: 'Book Appointment'.toUpperCase(),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                 onPressed: () {
                                                   if(_prefHelper.getStringByKey('pet_name', '').isNotEmpty) {
                                                     Navigator.of(context).push(
@@ -585,3 +600,8 @@ class _IndicatorState extends State<Indicator> {
         ]));
   }
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a

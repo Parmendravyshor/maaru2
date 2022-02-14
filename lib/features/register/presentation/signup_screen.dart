@@ -2,7 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+<<<<<<< HEAD
 import 'package:kiwi/kiwi.dart';
+=======
+
+import 'package:kiwi/kiwi.dart';
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/alert_manager.dart';
 import 'package:maru/core/widget/icons.dart';
@@ -10,8 +16,15 @@ import 'package:maru/core/widget/logo.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+<<<<<<< HEAD
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
+=======
+
+import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
+import 'package:maru/features/login/presentation/login_screen.dart';
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
@@ -46,8 +59,11 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+<<<<<<< HEAD
   var _bloc = KiwiContainer().resolve<RegisterBloc>();
 
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   TextEditingController _first_nameController;
   TextEditingController _lnameController;
   TextEditingController _passwordController;
@@ -62,22 +78,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _emailController = TextEditingController();
     _lnameController = TextEditingController();
     _cnfpasswordController = TextEditingController();
+<<<<<<< HEAD
 
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     super.initState();
   }
 
   @override
   void dispose() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     _passwordController.dispose();
     _emailController.dispose();
     _first_nameController.dispose();
     _lnameController.dispose();
     _cnfpasswordController.dispose();
+<<<<<<< HEAD
     print('djdddd');
     _bloc.distinct();
     print('djdddd');
    // _bloc.distinct();
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
    // final RegisterBloc drawerBloc = BlocProvider.of<RegisterBloc>(context);
     //RegisterBloc.dispatch(EventHere());
     super.dispose();
@@ -270,7 +295,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                   )
                                 ]))),
+<<<<<<< HEAD
 
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                       );
                     }))));
   }

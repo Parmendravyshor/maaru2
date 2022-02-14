@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\Lenovo\\AndroidStudioProjects\\maaru2-parmendra\\build\\image_picker\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\notification_bg_low_normal.9.png",
+        "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\f2f6bcb7c9e612cc7c9c4e5248d9429f\\core-1.6.0\\res\\drawable-mdpi-v4\\notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Lenovo\\AndroidStudioProjects\\maaru2-parmendra\\build\\image_picker\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\notification_bg_normal.9.png",
+        "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\f2f6bcb7c9e612cc7c9c4e5248d9429f\\core-1.6.0\\res\\drawable-mdpi-v4\\notification_bg_normal.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Lenovo\\AndroidStudioProjects\\maaru2-parmendra\\build\\image_picker\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\notify_panel_notification_icon_bg.png",
+        "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\f2f6bcb7c9e612cc7c9c4e5248d9429f\\core-1.6.0\\res\\drawable-mdpi-v4\\notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "C:\\Users\\Lenovo\\AndroidStudioProjects\\maaru2-parmendra\\build\\image_picker\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\notification_bg_low_pressed.9.png",
+        "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\f2f6bcb7c9e612cc7c9c4e5248d9429f\\core-1.6.0\\res\\drawable-mdpi-v4\\notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Lenovo\\AndroidStudioProjects\\maaru2-parmendra\\build\\image_picker\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png",
+        "source": "C:\\Users\\Lenovo\\.gradle\\caches\\transforms-2\\files-2.1\\f2f6bcb7c9e612cc7c9c4e5248d9429f\\core-1.6.0\\res\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png"
+    }
+]

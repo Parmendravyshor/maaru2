@@ -18,7 +18,10 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math show sin, pi;
 import 'package:flutter/animation.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
+<<<<<<< HEAD
 import 'package:maru/features/verify/presentation/register_pet_profile_screen2.dart';
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
 
@@ -170,7 +173,11 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                           Navigator.of(context).push(
                                                               MaterialPageRoute(
                                                                   builder: (_) =>
+<<<<<<< HEAD
                                                                       CreateRegisterPetProfile2(allergies: state.welcome2.getSinglePe.knownAllergies.toString(),)));
+=======
+                                                                      CreateregisterPetProfile1()));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                         },
                                                         child: Image.asset(
                                                           'assets/icons/icone-setting-29.png',

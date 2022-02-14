@@ -97,9 +97,12 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                                 height: 50,
                                 // width: 30,
                               )),
+<<<<<<< HEAD
                           onChanged: (text){
                             BlocProvider.of<LoginBloc>(context).add(event.GetCustomers());
                           },
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                         )),
                     SizedBox(
                       height: 30,
@@ -107,7 +110,11 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
+<<<<<<< HEAD
                         '   Customers',
+=======
+                        '   Providers',
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                         style: MaaruStyle.text.small,
                       ),
                     ),
@@ -116,6 +123,7 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                     ),
                         Column(
                           children: [
+<<<<<<< HEAD
                             Container(
                               height: 100,width: 400,
                               child: ListView.builder(
@@ -146,6 +154,35 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                                         ]);
                                   }),
                             ),
+=======
+                            ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: state
+                                    .getUserModel.customers.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Container(
+                                          width: 100,
+                                          child: Image.network(
+                                            state
+                                                .getUserModel
+                                            .customers[index].firstName,
+                                            errorBuilder:
+                                                (BuildContext, Object,
+                                                StackTrace) {
+                                              return Image.asset(
+                                                'assets/128/AlanPost.png',
+                                                fit: BoxFit.fitWidth,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ]);
+                                }),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                             SizedBox(
                               height: 20,
                             ),
@@ -160,7 +197,11 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                                       onTap: () {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(
+<<<<<<< HEAD
                                             builder: (_) => Chat2(
+=======
+                                            builder: (_) => Chat1(
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                               user: state
                                                   .getUserModel.customers
                                                  [index]

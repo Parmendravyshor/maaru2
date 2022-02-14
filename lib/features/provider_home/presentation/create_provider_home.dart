@@ -2,10 +2,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+<<<<<<< HEAD
+=======
+import 'package:maru/features/Home/presentation/pet_profile.dart';
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_calender.dart';
 import 'package:maru/features/provider_home/presentation/upcoming_appointment_screen.dart';
 import 'package:maru/features/provider_home/provider_message.dart';
+<<<<<<< HEAD
+=======
+import 'package:maru/features/provider_profile/provider_profile1.dart';
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:maru/features/provider_setting/presentation/provider_settin.dart';
 
 
@@ -37,6 +45,7 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return BottomNavigationBar(
       elevation: 0.0,
       backgroundColor: MaaruColors.darkGrey2,
@@ -132,6 +141,80 @@ class _CreateProviderHomeState extends State<CreateProviderHome> {
     );
   }
 }
+=======
+    final size=MediaQuery.of(context).size;
+    return
+      Container(
+        height: size.height*0.09,
+        color: Colors.white,
+        child: Container(
+          margin: const EdgeInsets.only(left: 20, right: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TestApp()));
+                  },
+                  child: Image.asset(
+                    'assets/icons/icon0.png',
+                    height: 35,
+                  )),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UpcomingAppointmentCalender()));
+                },
+                child: Image.asset(
+                  'assets/icons/icon1.png',
+                  height: 35,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProviderProfile1()));
+                },
+                child: Image.asset(
+                  'assets/icons/icon4.png',
+                  height: 55,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProviderMessages()));
+                },
+                child: Image.asset(
+                  'assets/icons/icon2.png',
+                  height: 35,
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProviderSetting()));
+                },
+                child: Image.asset(
+                  'assets/icons/icon2.png',
+                  height: 35,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+  }
+}
+
+
+
+
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 // class CreateProviderHome extends StatefulWidget {
 //
 //

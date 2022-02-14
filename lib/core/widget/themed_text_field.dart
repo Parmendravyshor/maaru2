@@ -16,6 +16,7 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
     _obscureText = this._password;
   }
 
+<<<<<<< HEAD
   // @override
   // void initState() {
   //   super.initState();
@@ -30,6 +31,22 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
   // void dispose() {
   //   super.dispose();
   // }
+=======
+  @override
+  void initState() {
+    super.initState();
+
+    // Force a repaint whenever focus changes
+    _focusNode.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 
   // Toggles the password show status
   void _toggle() {
@@ -63,7 +80,10 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
         // focusedBorder: MaaruStyle.focusedBorder,
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: MaaruColors.textfeildline),
+<<<<<<< HEAD
 
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         labelText: widget.placeholder.toUpperCase(),
@@ -92,7 +112,10 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
                         textInputAction: widget.textinputaction2,
                         onChanged: widget.onChanged,
                         autocorrect: false,
+<<<<<<< HEAD
 
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                         keyboardType: widget.keyboardType,
                         style: MaaruStyle.text.tiny,
                         decoration: inputDecoration(widget),

@@ -51,8 +51,23 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
 
   // int step = 1;
+<<<<<<< HEAD
   String img = '';
   String allergies = '';
+=======
+  String age = '';
+  var petneed = '';
+  String petName = "";
+  String width = "";
+  String hight = "";
+  var sex = '';
+  var birthdate = '';
+  String breadtype = '';
+  String img = '';
+  String allergies = '';
+  var gender = '';
+  var note = '';
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   var knownAllergies = '';
   var vaccine = '';
   var text2 = '';
@@ -62,6 +77,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
 
   @override
   Stream<PetProfileState> mapEventToState(PetProfileEvent event) async* {
+<<<<<<< HEAD
     if (event is CreateRegisterPetProfile) {
       yield RegisterInProgress();
       final result = await createPetProfile(PetProfile1(
@@ -75,6 +91,162 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
           // petNeeds: knownAllergies,
           gender: event.gender,
           notes: event.notes,
+=======
+    if (event is WidthChanged) {
+      if (event.width.isNotEmpty) {
+        width = event.width;
+      } else {
+        width = "";
+      }
+      print(width);
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield RegisterFormValidationFailure();
+      }
+    } else if (event is AgeChanged) {
+      print('djdd');
+      if (event.age.isNotEmpty) {
+        age = event.age;
+      } else {
+        age = '';
+      }
+      print(age);
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield RegisterFormValidationFailure();
+      }
+    } else if (event is HeightChanged) {
+      if (event.hight.isNotEmpty) {
+        hight = event.hight;
+      } else {
+        hight = "";
+      }
+      print(hight);
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield RegisterFormValidationFailure();
+      }
+    } else if (event is BreadChanged) {
+      if (event.breadtype.isNotEmpty) {
+        breadtype = event.breadtype;
+      } else {
+        breadtype = "";
+      }
+      print(breadtype);
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield RegisterFormValidationFailure();
+      }
+    } else if (event is BirthChanged) {
+      print(event.selectedDate);
+      if (event.selectedDate.isNotEmpty) {
+        birthdate = event.selectedDate;
+      } else {
+        birthdate = "";
+        print(birthdate);
+      }
+      print(birthdate);
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield UpdatedBirthDate(birthdate: event.selectedDate);
+        print(birthdate);
+      }
+    } else if (event is petNameChanged) {
+      if (event.petname.isNotEmpty) {
+        petName = event.petname;
+      } else {
+        petName = "";
+      }
+      print(petName);
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield RegisterFormValidationFailure();
+      }
+    } else if (event is SexChanged) {
+      if (event.sex.isNotEmpty) {
+        sex = event.sex;
+      } else {
+        sex = "";
+        print('sssss$sex');
+      }
+      print('sssd$sex');
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield RegisterFormValidationFailure();
+      }
+    } else if (event is NoteChanged) {
+      print('note event');
+      if (event.note.isNotEmpty) {
+        note = event.note;
+      } else {
+        note = "";
+        print(note);
+      }
+      print(note);
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield RegisterFormValidationFailure();
+      }
+    } else if (event is genderChanged) {
+      print(event.gender);
+      if (event.gender.isNotEmpty) {
+        gender = event.gender;
+      } else {
+        gender = "";
+        print(gender);
+      }
+
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield RegisterFormValidationFailure();
+      }
+    } else if (event is PetNeed) {
+      print('note event');
+      if (event.petneed.isNotEmpty) {
+        petneed = event.petneed;
+      } else {
+        petneed = "";
+        print(petneed);
+      }
+
+      bool isValidated = _isFormValid();
+      if (isValidated) {
+        yield RegisterFormValidationSuccess();
+      } else {
+        yield RegisterFormValidationFailure();
+      }
+    } else if (event is CreateRegisterPetProfile) {
+      yield RegisterInProgress();
+      final result = await createPetProfile(PetProfile1(
+          age: age,
+          weight: width,
+          height: hight,
+          birthDate: birthdate,
+          breedType: breadtype,
+          petName: petName,
+          sex: sex,
+          // petNeeds: knownAllergies,
+          gender: gender,
+          notes: note,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
           knownAllergies: knownAllergies,
           vaccine: vaccine));
       yield* result.fold((l) async* {
@@ -164,7 +336,11 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       }
     }
     if (event is GetSinglePRof) {
+<<<<<<< HEAD
       final result = await getSinglePetProfile(event.id1);
+=======
+      final result = await getSinglePetProfile(event.id);
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
       if (result.isRight()) {
         yield SingleProfileLoaded(result.getOrElse(() => null));
       }
@@ -200,5 +376,20 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
     //  }
   }
 
+<<<<<<< HEAD
 
+=======
+  bool _isFormValid() {
+    return age.isNotEmpty &&
+        width.isNotEmpty &&
+        hight.isNotEmpty &&
+        breadtype.isNotEmpty &&
+        birthdate.isNotEmpty &&
+        sex.isNotEmpty &&
+        gender.isNotEmpty &&
+         img.isNotEmpty &&
+        petName.isNotEmpty;
+
+  }
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 }

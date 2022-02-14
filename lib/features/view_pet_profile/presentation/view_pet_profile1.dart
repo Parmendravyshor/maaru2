@@ -8,7 +8,10 @@ import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
 import 'package:maru/features/Home/presentation/appoinment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+<<<<<<< HEAD
 import 'package:maru/features/indicator.dart';
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
@@ -36,7 +39,11 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
 
     return Scaffold(
         backgroundColor: Colors.white,
+<<<<<<< HEAD
         bottomNavigationBar: const CreateHomeScreen(
+=======
+        bottomNavigationBar: CreateHomeScreen(
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
             // Color:MaaruColors.textButtonColor
             ),
         body: SafeArea(
@@ -49,9 +56,16 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                     BlocProvider.of<PetProfileBloc>(context)
                         .add(GetSinglePRof(widget.id1));
                     print('sssss${widget.id1}');
+<<<<<<< HEAD
                     return Center(child: Skeleton());
                   } else if (state is SingleProfileLoaded) {
                     print('ddddd ${state.welcome2.getSinglePe.age}');
+=======
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is SingleProfileLoaded) {
+                    print(
+                        '+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.welcome2.getSinglePe.petName}');
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 
                     return SingleChildScrollView(
                         //   itemCount: state.welcome2.getSinglePe[inde]
@@ -77,7 +91,11 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                           Container(
                               //height: size.,
                               width: 1000,
+<<<<<<< HEAD
                               //  height: 800,
+=======
+                            //  height: 800,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                               alignment: FractionalOffset.bottomCenter,
                               decoration: const BoxDecoration(
                                   color: Colors.white,
@@ -145,9 +163,13 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                 CrossAxisAlignment.end,
                                             children: [
                                               Text(
+<<<<<<< HEAD
                                                 state.welcome2.getSinglePe
                                                     .petName
                                                     .toString(),
+=======
+                                                state.welcome2.getSinglePe.petName.toString(),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                 style: MaaruStyle.text.large,
                                               ),
                                               InkWell(
@@ -155,6 +177,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                     Navigator.of(context).push(
                                                         MaterialPageRoute(
                                                             builder: (_) =>
+<<<<<<< HEAD
                                                                 CreateregisterPetProfile1(
                                                                   id1: widget
                                                                       .id1,
@@ -166,6 +189,9 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                       .getSinglePe
                                                                       .height,
                                                                 )));
+=======
+                                                                CreateregisterPetProfile1()));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                   },
                                                   child: Image.asset(
                                                     'assets/icons/icone-setting-29.png',
@@ -173,8 +199,12 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                   ))
                                             ]),
                                         Text(
+<<<<<<< HEAD
                                           state.welcome2.getSinglePe.breedType
                                               .toString(),
+=======
+                                          state.welcome2.getSinglePe.breedType.toString(),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                           style: MaaruStyle.text.tiny,
                                         ),
                                         const SizedBox(
@@ -385,10 +415,14 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                           .only(
                                                                       left: 43),
                                                               child: Text(
+<<<<<<< HEAD
                                                                 _prefHelper.getStringByKey(
                                                                     MaruConstant
                                                                         .firstName,
                                                                     ''),
+=======
+                                                                _prefHelper.getStringByKey(MaruConstant.firstName, ''),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                                 style: MaaruStyle
                                                                     .text
                                                                     .tiniest,
@@ -398,8 +432,12 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                                 MainAxisAlignment
                                                                     .spaceEvenly,
                                                             children: [
+<<<<<<< HEAD
                                                               Text(
                                                                 'Owner',
+=======
+                                                              Text('Owner',
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                                 style:
                                                                     MaaruStyle
                                                                         .text
@@ -431,6 +469,7 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                               height: 20,
                                             ),
                                             Center(
+<<<<<<< HEAD
                                               child: BlocProvider(
                                                 create: (context) =>
                                                     KiwiContainer().resolve<
@@ -565,6 +604,129 @@ class _ViewPetProfileState extends State<ViewPetProfile> {
                                                         : const Center(
                                                             child: Text(
                                                                 'No Appointment Found'));
+=======
+                                              child:    BlocProvider(
+                                                create: (context) => KiwiContainer().resolve<BookAppointmentBloc>(),
+                                                child: BlocBuilder<BookAppointmentBloc, BookAppointmentState>(builder: (context, state) {
+                                                  if (state is BookAppointmentInitial) {
+                                                    BlocProvider.of<BookAppointmentBloc>(context).add(
+                                                        UpcomingAppointmentChanged(
+                                                          '','',
+                                                        ));
+
+                                                    return Center(child: CircularProgressIndicator());
+                                                  } else if (state is FetchUpcomingAppointmentModelData) {
+
+                                                    return state.upcomingPastAppointmentModel.upcomingBookings.isNotEmpty? ListView.builder(
+                                                        scrollDirection:
+                                                            Axis.vertical,
+                                                        shrinkWrap: true,
+                                                        physics: ScrollPhysics(),
+                                                        itemCount: state
+                                                            .upcomingPastAppointmentModel
+                                                            .upcomingBookings
+                                                            .length,
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          if (state
+                                                                  .upcomingPastAppointmentModel
+                                                                  .upcomingBookings
+                                                                  .length !=
+                                                              null) {
+                                                            return Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .fromLTRB(
+                                                                        10,
+                                                                        20,
+                                                                        20,
+                                                                        10),
+                                                                child: Container(
+                                                                    //  height: size.height*0.30,
+                                                                    width: size.width * 1,
+                                                                    decoration: BoxDecoration(border: Border.all(color: MaaruColors.textfeildline)),
+                                                                    child: Container(
+                                                                        margin: const EdgeInsets.all(10),
+                                                                        child: Row(children: [
+                                                                          Expanded(
+                                                                              child: Container(
+                                                                            width:
+                                                                                100,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(20),
+                                                                              color: Colors.white,
+                                                                            ),
+                                                                            child:
+                                                                                Image.asset(
+                                                                              'assets/images/kutta.png',
+                                                                              height: 100,
+                                                                            ),
+                                                                          )),
+                                                                          SizedBox(
+                                                                            width:
+                                                                                20,
+                                                                          ),
+                                                                          Container(
+                                                                            child:
+                                                                                Column(
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                Text(
+                                                                                  state.upcomingPastAppointmentModel.upcomingBookings[index].companyName,
+                                                                                  style: MaaruStyle.text.tiny,
+                                                                                ),
+                                                                                Text(state.upcomingPastAppointmentModel.upcomingBookings[index].serviceName.toString(), style: MaaruStyle.text.medium),
+                                                                                const SizedBox(
+                                                                                  height: 5,
+                                                                                ),
+                                                                                Text(
+                                                                                  state.upcomingPastAppointmentModel.upcomingBookings[index].companyState.toString(),
+                                                                                  style: const TextStyle(color: Colors.grey, fontSize: 11),
+                                                                                ),
+                                                                                Text(
+                                                                                  '${state.upcomingPastAppointmentModel.upcomingBookings[index].companyZipCode.toString()}${state.upcomingPastAppointmentModel.upcomingBookings[index].companyCity.toString()}',
+                                                                                  style: const TextStyle(color: Colors.grey, fontSize: 11),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                          const SizedBox(
+                                                                              //width: 40,
+                                                                              ),
+                                                                          Container(
+                                                                            child:
+                                                                                Column(
+                                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                                              children: [
+                                                                                const Icon(
+                                                                                  Icons.calendar_today_outlined,
+                                                                                  size: 22,
+                                                                                  color: Colors.yellow,
+                                                                                ),
+                                                                                const SizedBox(
+                                                                                  height: 36,
+                                                                                ),
+                                                                                Text(
+                                                                                  state.upcomingPastAppointmentModel.upcomingBookings[index].bookingDate.toString(),
+                                                                                  style: const TextStyle(color: Colors.grey, fontSize: 11),
+                                                                                ),
+                                                                                Text(
+                                                                                  state.upcomingPastAppointmentModel.upcomingBookings[index].bookingTime,
+                                                                                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          )
+                                                                        ]))));
+                                                          } else {
+                                                            return const Text(
+                                                                'No Data  Found');
+                                                          }
+                                                        }):const Center(child: Text('No Appointment Found'));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                                   } else {
                                                     return CircularProgressIndicator();
                                                   }

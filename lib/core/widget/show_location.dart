@@ -18,6 +18,10 @@ class ShowLocation extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: Container(
+<<<<<<< HEAD
+=======
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
             color: Colors.transparent,
             margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: TextFormField(

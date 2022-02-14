@@ -125,7 +125,11 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 size: 60,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
+<<<<<<< HEAD
                                       builder: (_) => AchInformationWebView()));
+=======
+                                      builder: (_) => PaymentScreen1()));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                                 },
                               ),
                               SizedBox(
@@ -267,10 +271,14 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 hite: 40,
                                 text: 'Privacy Policy',
                                 size: 90,
+<<<<<<< HEAD
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (_) => WebViewPolicy()));
                                 },
+=======
+                                onPressed: () async {},
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                               ),
                               SizedBox(
                                 height: 20,

@@ -10,7 +10,10 @@ import 'package:maru/core/widget/disclaimer.dart';
 import 'package:maru/core/widget/profile_avtar.dart';
 import 'package:maru/features/Account_setting/presentation/payment/payment_screen.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
+<<<<<<< HEAD
 import 'package:maru/features/provider_home/presentation/webview.dart';
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:maru/features/splash/verify_screen.dart';
 import 'package:maru/features/splash/view/after_splash_screen.dart';
 import 'package:maru/features/splash/view/view.dart';
@@ -47,6 +50,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                     : MaaruColors.textButtonColor
                 //   Color:MaaruColors.textButtonColor
                 ),
+<<<<<<< HEAD
             body: SafeArea(
                 child: SingleChildScrollView(
 
@@ -315,6 +319,253 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                 )
                               ]))
                         ])))));
+=======
+            body: SingleChildScrollView(
+
+                //  child
+                //   Padding(
+                padding: EdgeInsets.only(
+                  left: 20,
+                ),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(height: size.height*0.05,),
+
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Column(children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Account Setting'.toUpperCase(),
+                                style: MaaruStyle.text.tiny,
+                              ),
+                            ),
+                            SizedBox(
+                              height: size.height*0.02,
+                            ),
+                            Test3(
+                              image: 'assets/icons/icone-setting-2.png',
+                              hite: 40,
+                              text: 'Edit Profile'.toUpperCase(),
+                              size: 115,
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            CreateUserProfile()));
+                              },
+                            ),
+                            SizedBox(
+                              height: size.height*0.02,
+                            ),
+                            Test3(
+                              image: 'assets/icons/icone-setting-2.png',
+                              hite: 40,
+                              text: 'Change Password',
+                              size: 35,
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            ChangePasswordScreen()));
+                              },
+                            ),
+                            SizedBox(
+                              height: size.height*0.02,
+                            ),
+                            Test3(
+                              image: 'assets/icons/icone-setting-3.png',
+                              hite: 40,
+                              text: 'Payment',
+                              size: 130,
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (_) => PaymentScreen1()));
+                              },
+                            ),
+                            SizedBox(
+                              height: size.height*0.02,
+                            ),
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                      child: Padding(
+                                          padding:
+                                              EdgeInsets.only(right: 30),
+                                          child: Container(
+                                              height: 60,
+                                              width: 400,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    const Color(0xfff7f7f7),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.0),
+                                              ),
+                                              alignment:
+                                                  Alignment.centerLeft,
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Image.asset(
+                                                      'assets/icons/icone-setting-4.png',
+                                                      height: 40,
+                                                    ),
+                                                    Text(
+                                                      'Push Notification'.toUpperCase(),
+                                                      style: MaaruStyle
+                                                          .text.tiny,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 35,
+                                                    ),
+                                                    Align(
+                                                      alignment: Alignment
+                                                          .centerLeft,
+                                                      // child: Transform.scale(
+                                                      //   scale: 1.2,
+                                                      child: Switch(
+                                                        activeColor:
+                                                            MaaruColors
+                                                                .buttonColor,
+                                                        inactiveThumbColor:
+                                                            MaaruColors
+                                                                .buttonColor,
+                                                        // title: Text("Do you want to update your price?"),
+                                                        // controlAffinity: ListTileControlAffinity.leading,
+                                                        value:
+                                                        update,
+                                                        onChanged: (bool
+                                                            priceupdateValue) {
+                                                          setState(() {
+                                                            update =
+                                                                priceupdateValue;
+                                                            print(priceupdateValue);
+                                                          });
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ]))))
+                                ]),
+                            SizedBox(
+                              height: size.height*0.02,
+                            ),
+                            Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                      child: Padding(
+                                          padding:
+                                          EdgeInsets.only(right: 30),
+                                          child: Container(
+                                              height: 60,
+                                              width: 400,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                const Color(0xfff7f7f7),
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    10.0),
+                                              ),
+                                              alignment:
+                                              Alignment.centerLeft,
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                                  children: [
+                                                    Image.asset(
+                                                      'assets/icons/icone-setting-5.png',
+                                                      height: 40,
+                                                    ),
+                                                    Text(
+                                                      'Email Notification'.toUpperCase(),
+                                                      style: MaaruStyle
+                                                          .text.tiny,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 35,
+                                                    ),
+                                                    Align(
+                                                      alignment: Alignment
+                                                          .centerLeft,
+                                                      // child: Transform.scale(
+                                                      //   scale: 1.2,
+                                                      child: Switch(
+                                                        activeColor:
+                                                        MaaruColors
+                                                            .buttonColor,
+                                                        inactiveThumbColor:
+                                                        MaaruColors
+                                                            .buttonColor,
+                                                        // title: Text("Do you want to update your price?"),
+                                                        // controlAffinity: ListTileControlAffinity.leading,
+                                                        value:
+                                                        priceupdate_value,
+                                                        onChanged: (bool
+                                                        priceupdateValue) {
+                                                          setState(() {
+                                                            priceupdate_value =
+                                                                priceupdateValue;
+                                                            print(priceupdateValue);
+                                                          });
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ]))))
+                                ]),
+                            SizedBox(
+                              height: size.height*0.02,
+                            ),
+                            Test3(
+                              image: 'assets/icons/icone-setting-6.png',
+                              hite: 40,
+                              text: 'Privacy Policy',
+                              size: 90,
+                              onPressed: () {},
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Test3(
+                              image: 'assets/icons/icone-setting-7.png',
+                              hite: 40,
+                              text: 'Terms and  Conditions',
+                              size: 0,
+                              onPressed: () {},
+                            ),
+                            SizedBox(
+                              height: size.height*0.02,
+                            ),
+                            Test3(
+                              image: 'assets/images/126-1264365_grey-logout-icon-png-transparent-png (2).png',
+                              hite: 25,
+                              size: 80,
+                              text: 'Log Out',
+                              onPressed: () async{
+                                await _prefHelper.clear('pet_name');
+                                await _prefHelper.clear('last_name');
+                                await _prefHelper.clear('first_name');
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) => VerifyUser()),
+                                    (route) => false);
+                              },
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            )
+                          ]))
+                    ]))));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   }
 }
 

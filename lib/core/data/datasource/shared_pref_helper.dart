@@ -27,6 +27,10 @@ abstract class SharedPrefHelper {
   Future<bool>clear(String key);
   String gettoken();
   String getfname();
+<<<<<<< HEAD
+=======
+  getstring(String key);
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   String getlname();
   String getEmail();
   String getImage();
@@ -82,6 +86,14 @@ class SharedPrefHelperImpl implements SharedPrefHelper {
     return sharedPreferences.setString('id', password);
   }
 
+<<<<<<< HEAD
+=======
+@override
+  getstring(String key) {
+    return sharedPreferences.getString(key);
+  }
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   @override
   String getStringByKey(String key, String defaultValue) {
     return sharedPreferences.getString(key) ?? defaultValue;

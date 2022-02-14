@@ -57,12 +57,18 @@ class _DatePickerState extends State<DatePicker> {
                 hintText: 'BIRTH DATE', hintStyle: MaaruStyle.text.tiny,
               ),
               onSaved: (text) {
+<<<<<<< HEAD
 
+=======
+                BlocProvider.of<PetProfileBloc>(context)
+                    .add(BirthChanged(textEditingController.text));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
               },
               onTap: () {
                 _selectDate(context);
               },
               onChanged: (text){
+<<<<<<< HEAD
 
               },
               onFieldSubmitted: (text){
@@ -70,6 +76,18 @@ class _DatePickerState extends State<DatePicker> {
               },
               onEditingComplete: () {
 
+=======
+                BlocProvider.of<PetProfileBloc>(context)
+                    .add(BirthChanged(textEditingController.text));
+              },
+              onFieldSubmitted: (text){
+                BlocProvider.of<PetProfileBloc>(context)
+                    .add(BirthChanged(textEditingController.text));
+              },
+              onEditingComplete: () {
+                BlocProvider.of<PetProfileBloc>(context)
+                    .add(BirthChanged(textEditingController.text));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
                 print('datepicker on editing complete');
               },
             ),
@@ -110,7 +128,12 @@ class _DatePickerState extends State<DatePicker> {
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: textEditingController.text.length,
             affinity: TextAffinity.upstream));
+<<<<<<< HEAD
 
+=======
+      BlocProvider.of<PetProfileBloc>(context)
+          .add(BirthChanged(textEditingController.text));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     }
   }
 }

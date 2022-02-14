@@ -279,6 +279,10 @@ final FacebookLogin _facebookLogin;
       await _prefHelper.saveString(MaruConstant.height, profile['height']);
       await _prefHelper.saveString(MaruConstant.age, profile['age']);
       await _prefHelper.saveString(MaruConstant.petName, profile['pet_name']);
+<<<<<<< HEAD
+=======
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
       await _prefHelper.saveString(
           MaruConstant.breedType, profile['breed_type']);
       await _prefHelper.saveString(MaruConstant.weight, profile['weight']);
@@ -403,6 +407,7 @@ final FacebookLogin _facebookLogin;
         _prefHelper.getStringByKey(MaruConstant.gender, ''),
         MaruConstant.breedType:
         _prefHelper.getStringByKey(MaruConstant.breedType, ''),
+<<<<<<< HEAD
         'birth_date': _prefHelper.getStringByKey('birth_date', ''),
         MaruConstant.knownAllergies.toString():
         params.knownAllergies.toString(),
@@ -417,6 +422,22 @@ final FacebookLogin _facebookLogin;
         MaruConstant.name.toString(): params.name.toString()==null?'':'',
         MaruConstant.timesADay.toString(): params.times_a_day.toString()==null?'':'',
         MaruConstant.note.toString(): params.notes.toString()==null?'':'',
+=======
+        'birth_date': _prefHelper.getStringByKey(MaruConstant.birthdate, ''),
+        MaruConstant.knownAllergies.toString():
+        params.knownAllergies.toString(),
+        MaruConstant.petNeeds.toString(): params.petNeeds.toString(),
+        MaruConstant.walkingSchedule.toString():
+        params.walkingSchedule.toString(),
+        MaruConstant.feedingSchedule.toString():
+        params.feedingSchedule.toString(),
+        MaruConstant.temperament.toString(): params.temperament.toString(),
+        MaruConstant.medication.toString(): params.medication.toString(),
+        MaruConstant.name.toString(): params.name.toString(),
+        MaruConstant.name.toString(): params.name.toString(),
+        MaruConstant.timesADay.toString(): params.times_a_day.toString(),
+        MaruConstant.note.toString(): params.notes.toString(),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
       };
       var petid3 = _prefHelper.getIntByKey('id', abc);
       print('dhjddd$petid3');
@@ -834,7 +855,11 @@ final FacebookLogin _facebookLogin;
   @override
   Future<Either<Failure, Welcome2>> getSinglePetProfile(int id1) async {
     try {
+<<<<<<< HEAD
       print('sssssr$id1');
+=======
+      print('sssssr$id');
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
         "",
@@ -847,6 +872,7 @@ final FacebookLogin _facebookLogin;
           headers: headers);
 //print(response.body);
       var data = convert.jsonDecode(response.body);
+<<<<<<< HEAD
       var data2 = data['pet_profile'];
       var data3 = data2['id'];
       print('naka${data2}');
@@ -891,6 +917,12 @@ final FacebookLogin _facebookLogin;
       return Right(Welcome2.fromJson(data));
     } catch (e) {
       print('djdlkdkdjkdjkdjkdbdjk$e');
+=======
+      print(response.body);
+      print(data);
+      return Right(Welcome2.fromJson(data));
+    } catch (e) {
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
       return Left(ApiFailure(e.toString()));
     }
   }
@@ -929,7 +961,11 @@ final FacebookLogin _facebookLogin;
   Future<Either<Failure, Welcome4>> getProviderById(int id1) async {
     try {
       final response = await http
+<<<<<<< HEAD
           .get(Uri.parse('http://18.191.199.31/api/public/provider/$id1'));
+=======
+          .get(Uri.parse('http://18.191.199.31/api/public/provider/4'));
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 //print(response.body);
       Map data = convert.jsonDecode(response.body);
       print(data);
@@ -950,10 +986,17 @@ final FacebookLogin _facebookLogin;
       map['provider_id'] = params.provider_id.toString();
       map['booking_date'] = params.booking_date.toString();
       map['service_id'] = params.service_id.toString();
+<<<<<<< HEAD
       map['card_number'] = params.cardno ==null?'': params.cardno.replaceAll(' ', '');
       map['exp_date'] = params.expdate.toString();
       map['booking_time'] = params.bookingTime.toString();
       map['card_id'] = params.cardid2.toString();
+=======
+      map['card_number'] = params.cardno.replaceAll(' ', '');
+      map['exp_date'] = params.expdate.toString();
+      map['booking_time'] = params.bookingTime.toString();
+      map['card_id'] = params.cardId.toString();
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
       map['cvv'] = params.cvv.toString();
       map['card_holder_name'] = params.cardHolderName.toString();
       print('singh${map}');
@@ -964,16 +1007,56 @@ final FacebookLogin _facebookLogin;
       var headers = {"access-token": token};
       final response = await http.post(MaruConstant.providerbookingappointment,
           body: map, headers: headers);
+<<<<<<< HEAD
       print(map);
       Map data1 = jsonDecode(response.body);
       print('singh${response.body}');
+=======
+      Map data1 = jsonDecode(response.body);
+      print('singh${response.body}');
+      print('tomer${data1}');
+      var date2 = data1['data'];
+      print(date2);
+      print(response.statusCode);
+      var user_id;
+      var date3 = date2[0];
+      print('singham${date3}');
+      if (response.statusCode == 200) {
+        await _prefHelper.saveString(
+            'booking_id', date3['booking_id'].toString());
+        await _prefHelper.saveString(
+            'booking_id', date3['booking_id'].toString());
+        await _prefHelper.saveString(
+            'booking_date', date3['booking_date'].toString());
+        await _prefHelper.saveString(
+            'booking_time', date3['booking_time'].toString());
+        await _prefHelper.saveString(
+            'service_name', date3['service_name'].toString());
+        await _prefHelper.saveString(
+            'total_amount', date3['total_amount'].toString());
+        await _prefHelper.saveString(
+            'pet_image', date3['pet_image'].toString());
+        await _prefHelper.saveString(
+            'company_name', date3['company_name'].toString());
+        await _prefHelper.saveString(
+            'company_city', date3['company_city'].toString());
+        await _prefHelper.saveString(
+            'company_state', date3['company_state'].toString());
+        await _prefHelper.saveString(
+            'company_zip_code', date3['company_zip_code'].toString());
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
         if (response.statusCode == 200) {
           print(data1);
           print(response.statusCode);
           return Right(Void);
+<<<<<<< HEAD
 
       } else {
         print(response.statusCode);
+=======
+        }
+      } else {
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
         return Left(CacheFailure('Slot are Book Please Change date Or time'));
       }
     } catch (e) {
@@ -1212,8 +1295,11 @@ final FacebookLogin _facebookLogin;
       if (googleUser == null) {
         return left( ServerFailure('ss'));
       }
+<<<<<<< HEAD
       GoogleSignIn _google;
       _google = googleUser as GoogleSignIn;
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
       final googleAuthentication = await googleUser.authentication;
       final authCredential = GoogleAuthProvider.credential(
         idToken: googleAuthentication.idToken,

@@ -1,13 +1,29 @@
 import 'dart:io';
+<<<<<<< HEAD
+=======
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:maru/core/constant/constant.dart';
 import 'package:maru/core/data/datasource/shared_pref_helper.dart';
 import 'package:maru/core/theme/maaru_style.dart';
+<<<<<<< HEAD
 import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
     as event;
+=======
+import 'package:maru/core/widget/alert_manager.dart';
+import 'package:maru/core/widget/back_arrow.dart';
+import 'package:maru/core/widget/profile_avtar.dart';
+import 'package:maru/core/widget/show_location.dart';
+import 'package:maru/features/Account_setting/presentation/bloc/account_setting.dart';
+import 'package:maru/features/login/presentation/bloc/bloc/login_bloc.dart';
+import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
+    as event;
+import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile_screen1.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile1.dart';
@@ -85,6 +101,7 @@ class _PetProfile1State extends State<PetProfile1> {
                 BlocProvider.of<PetProfileBloc>(context)
                     .add(GetCovidList(text));
 
+<<<<<<< HEAD
                 return  Center(child: CircularProgressIndicator.adaptive(backgroundColor:MaaruColors.buttonColor,),heightFactor: 40,widthFactor: 40,);
               } else if (state is CovidLoaded3) {
                 print(
@@ -276,6 +293,207 @@ class _PetProfile1State extends State<PetProfile1> {
                 );
               } else {
                 return const Center(child: CircularProgressIndicator.adaptive(backgroundColor: MaaruColors.button2Color,),heightFactor: 40,widthFactor: 40,);
+=======
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is CovidLoaded3) {
+                print(
+                    '+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
+                return SingleChildScrollView(
+                    child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15.0, right: 30, bottom: 15),
+                  child: Column(children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: (){
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.arrow_back_ios),
+                        ),
+                        InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => AccountSettingScreen()));
+                            },
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child:   Container(
+                                height: 80,
+                                width: 50,
+                                decoration:  BoxDecoration(
+                                  color: Colors.transparent,
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: _prefHelper.getStringByKey('img', '').isEmpty
+                                        ? const ExactAssetImage(
+                                        'assets/128/CrystalGaskell.png')
+                                        : FileImage(File(_prefHelper.getStringByKey('img', ''))),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              )
+                            )),
+                      ],
+                    ),
+                     SizedBox(
+                      height: size.height*0.02,
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(
+                            top: 5, right: 10, left: 20),
+                        child: TextFormField(
+                          // cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.7),
+                                  borderSide: BorderSide(
+                                      color: Colors.grey[300], width: 1.0)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                       BorderRadius.circular(10.7),
+                                  borderSide:  BorderSide(
+                                      color: Colors.grey[300], width: 1.0)),
+                              hintText: 'Search',
+                              hintStyle: MaaruStyle.text.greyDisable,
+                              contentPadding: const EdgeInsets.fromLTRB(
+                                  20.0, 15.0, 25.0, 10.0),
+                              fillColor: Colors.white,
+                              suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      BlocProvider.of<PetProfileBloc>(context)
+                                          .add(GetCovidList(
+                                              _textEditingController.text));
+                                    });
+                                  },
+                                  child: Image.asset(
+                                    'assets/icons/icone-setting-19.png',
+                                    height: 52,
+                                    // width: 30,
+                                  ))),
+                          // onFieldSubmitted: (text) {
+                          //   BlocProvider.of<PetProfileBloc>(context)
+                          //       .add(GetCovidList(text));
+                          // },
+                          onChanged: (text) {
+                            BlocProvider.of<PetProfileBloc>(context).add(
+                                GetCovidList(_textEditingController.text));
+                          },
+                          controller: _textEditingController,
+                        )),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+
+                        // alignment: Alignment.center,
+                        height: size.height*0.58,
+                        width: size.width*0.80,
+                        child: ListView.builder(
+                          itemCount: state.covidModel.petProfiles.length,
+                          scrollDirection: Axis.vertical,
+                          reverse: true,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return
+                                // padding: index == _hotels.length - 1
+
+                                InkWell(
+                              onTap: () {
+                                _prefHelper.saveInt('id',
+                                    state.covidModel.petProfiles[index].id);
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => ViewPetProfile(
+                                          id1: state.covidModel
+                                              .petProfiles[index].id,
+                                        )));
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  width: 250,
+                                  alignment: FractionalOffset.topLeft,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey[300], width: 1.0),
+                                  ),
+
+                                  child: Column(children: [
+                                    Container(
+                                        //width: 300,
+                                        alignment: Alignment.center,
+                                        child: Image.network(
+                                          state.covidModel.petProfiles[index]
+                                              .img
+                                              .toString(),
+                                          height: 150,
+                                          width: 300,
+                                          fit: BoxFit.fitWidth,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Container(
+                                                decoration:
+                                                    const BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                alignment: Alignment.center,
+                                                child: Image.asset(
+                                                    'assets/128/CrystalGaskell.png'));
+                                          },
+                                        )),
+
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          left: 20, right: 20),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          SizedBox(height: size.height*0.01,),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                state
+                                                    .covidModel
+                                                    .petProfiles[index]
+                                                    .petName,
+                                                style: MaaruStyle.text.tiny,
+                                              ),
+                                              Image.asset(
+                                                'assets/icons/icone-setting-31.png',
+                                                width: 25,
+                                              )
+                                            ],
+                                          ),
+                                          Text(
+                                            state.covidModel
+                                                .petProfiles[index].breedType,
+                                            style: MaaruStyle.text.medium,
+                                          ),
+                                          SizedBox(height: 10)
+                                        ],
+                                      ),
+                                    ),
+                                  ]),
+
+                                  // alignment: Alignment.center,
+                                ),
+                              ),
+                            );
+                          },
+                        )),
+                  ]),
+                ));
+              } else {
+                return Center(child: CircularProgressIndicator());
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
               }
             })));
   }

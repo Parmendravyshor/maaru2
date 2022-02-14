@@ -13,9 +13,41 @@ class GetProviderById implements UseCase<void, int> {
     return userRepository.getProviderById(id1);
   }
 }
+<<<<<<< HEAD
 Welcome4 welcome4FromJson(String str) => Welcome4.fromJson(json.decode(str));
 
 String welcome4ToJson(Welcome4 data) => json.encode(data.toJson());
+=======
+/// To parse this JSON data, do
+//
+///     final welcome = welcomeFromJson(jsonString);
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
+
+
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
+
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
+
+
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
+
+
+Welcome welcomeFromJson(String str) => Welcome.fromJson(json.decode(str));
+
+String welcomeToJson(Welcome data) => json.encode(data.toJson());
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
 
 class Welcome4 {
   Welcome4({
@@ -25,35 +57,59 @@ class Welcome4 {
     this.reviewCount,
     this.fiveStarView,
     this.average,
+<<<<<<< HEAD
     this.tax,
   });
 
   ProviderDetails providerDetails;
   List<dynamic> reviews;
+=======
+  });
+
+  ProviderDetails providerDetails;
+  List<Review> reviews;
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   List<MasterServiceElement> masterServices;
   int reviewCount;
   int fiveStarView;
   String average;
+<<<<<<< HEAD
   String tax;
 
   factory Welcome4.fromJson(Map<String, dynamic> json) => Welcome4(
     providerDetails: ProviderDetails.fromJson(json["provider_details"]),
     reviews: List<dynamic>.from(json["reviews"].map((x) => x)),
+=======
+
+  factory Welcome4.fromJson(Map<String, dynamic> json) => Welcome4(
+    providerDetails: ProviderDetails.fromJson(json["provider_details"]),
+    reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     masterServices: List<MasterServiceElement>.from(json["master_services"].map((x) => MasterServiceElement.fromJson(x))),
     reviewCount: json["review_count"],
     fiveStarView: json["five_Star_View"],
     average: json["average"],
+<<<<<<< HEAD
     tax: json["tax"],
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   );
 
   Map<String, dynamic> toJson() => {
     "provider_details": providerDetails.toJson(),
+<<<<<<< HEAD
     "reviews": List<dynamic>.from(reviews.map((x) => x)),
+=======
+    "reviews": List<dynamic>.from(reviews.map((x) => x.toJson())),
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     "master_services": List<dynamic>.from(masterServices.map((x) => x.toJson())),
     "review_count": reviewCount,
     "five_Star_View": fiveStarView,
     "average": average,
+<<<<<<< HEAD
     "tax": tax,
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   };
 }
 
@@ -115,10 +171,17 @@ class ProviderDetails {
   String lastName;
   String userType;
   String email;
+<<<<<<< HEAD
   String token;
   String password;
   String deviceToken;
   String deviceType;
+=======
+  dynamic token;
+  String password;
+  String deviceToken;
+  dynamic deviceType;
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   String otp;
   String isVerified;
   int mailNotifications;
@@ -172,7 +235,10 @@ class ProviderDetails {
 class Provider {
   Provider({
     this.img,
+<<<<<<< HEAD
     this.operationHours,
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     this.id,
     this.userId,
     this.companyName,
@@ -186,7 +252,11 @@ class Provider {
     this.longitude,
     this.latitude,
     this.description,
+<<<<<<< HEAD
     this.providerOperationHours,
+=======
+    this.operationHours,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     this.specialOperationHours,
     this.averageRating,
     this.reviews,
@@ -195,7 +265,10 @@ class Provider {
   });
 
   String img;
+<<<<<<< HEAD
   OperationHours operationHours;
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   int id;
   int userId;
   String companyName;
@@ -206,11 +279,19 @@ class Provider {
   String city;
   String state;
   int zipCode;
+<<<<<<< HEAD
   String longitude;
   String latitude;
   dynamic description;
   String providerOperationHours;
   String specialOperationHours;
+=======
+  dynamic longitude;
+  dynamic latitude;
+  String description;
+  String operationHours;
+  dynamic specialOperationHours;
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   String averageRating;
   String reviews;
   DateTime createdAt;
@@ -218,7 +299,10 @@ class Provider {
 
   factory Provider.fromJson(Map<String, dynamic> json) => Provider(
     img: json["img"],
+<<<<<<< HEAD
     operationHours: OperationHours.fromJson(json["operationHours"]),
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     id: json["id"],
     userId: json["user_id"],
     companyName: json["company_name"],
@@ -232,7 +316,11 @@ class Provider {
     longitude: json["longitude"],
     latitude: json["latitude"],
     description: json["description"],
+<<<<<<< HEAD
     providerOperationHours: json["operation_hours"],
+=======
+    operationHours: json["operation_hours"],
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     specialOperationHours: json["special_operation_hours"],
     averageRating: json["average_rating"],
     reviews: json["reviews"],
@@ -242,7 +330,10 @@ class Provider {
 
   Map<String, dynamic> toJson() => {
     "img": img,
+<<<<<<< HEAD
     "operationHours": operationHours.toJson(),
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     "id": id,
     "user_id": userId,
     "company_name": companyName,
@@ -256,7 +347,11 @@ class Provider {
     "longitude": longitude,
     "latitude": latitude,
     "description": description,
+<<<<<<< HEAD
     "operation_hours": providerOperationHours,
+=======
+    "operation_hours": operationHours,
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     "special_operation_hours": specialOperationHours,
     "average_rating": averageRating,
     "reviews": reviews,
@@ -265,6 +360,7 @@ class Provider {
   };
 }
 
+<<<<<<< HEAD
 class OperationHours {
   OperationHours({
     this.week,
@@ -328,6 +424,10 @@ class Day {
 class ProviderDetailsService {
   ProviderDetailsService({
     this.totalAmountWithTax,
+=======
+class ProviderDetailsService {
+  ProviderDetailsService({
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     this.id,
     this.serviceId,
     this.userId,
@@ -338,7 +438,10 @@ class ProviderDetailsService {
     this.service,
   });
 
+<<<<<<< HEAD
   double totalAmountWithTax;
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
   int id;
   int serviceId;
   int userId;
@@ -349,7 +452,10 @@ class ProviderDetailsService {
   MasterServiceElement service;
 
   factory ProviderDetailsService.fromJson(Map<String, dynamic> json) => ProviderDetailsService(
+<<<<<<< HEAD
     totalAmountWithTax: json["totalAmountWithTax"].toDouble(),
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     id: json["id"],
     serviceId: json["service_id"],
     userId: json["user_id"],
@@ -361,7 +467,10 @@ class ProviderDetailsService {
   );
 
   Map<String, dynamic> toJson() => {
+<<<<<<< HEAD
     "totalAmountWithTax": totalAmountWithTax,
+=======
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
     "id": id,
     "service_id": serviceId,
     "user_id": userId,
@@ -372,3 +481,55 @@ class ProviderDetailsService {
     "service": service.toJson(),
   };
 }
+<<<<<<< HEAD
+=======
+
+class Review {
+  Review({
+    this.id,
+    this.userId,
+    this.providerId,
+    this.bookingId,
+    this.serviceId,
+    this.reviewComment,
+    this.ratings,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int id;
+  int userId;
+  int providerId;
+  int bookingId;
+  int serviceId;
+  String reviewComment;
+  int ratings;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  factory Review.fromJson(Map<String, dynamic> json) => Review(
+    id: json["id"],
+    userId: json["user_id"],
+    providerId: json["provider_id"],
+    bookingId: json["booking_id"],
+    serviceId: json["service_id"],
+    reviewComment: json["review_comment"],
+    ratings: json["ratings"],
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "user_id": userId,
+    "provider_id": providerId,
+    "booking_id": bookingId,
+    "service_id": serviceId,
+    "review_comment": reviewComment,
+    "ratings": ratings,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+  };
+}
+
+>>>>>>> b97480d9783e56d23a544ec0d168ea94f68a671a
