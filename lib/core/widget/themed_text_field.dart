@@ -16,20 +16,20 @@ class _ThemedTextFieldState extends State<ThemedTextField> {
     _obscureText = this._password;
   }
 
-  @override
-  void initState() {
-    super.initState();
-
-    // Force a repaint whenever focus changes
-    _focusNode.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   // Force a repaint whenever focus changes
+  //   _focusNode.addListener(() {
+  //     setState(() {});
+  //   });
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   // Toggles the password show status
   void _toggle() {

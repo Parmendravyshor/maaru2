@@ -164,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           100,
                                                                     ),
                                                                   )),
-                                                                  SizedBox(
+                                                                  const SizedBox(
                                                                     width: 20,
                                                                   ),
                                                                   Container(
@@ -588,7 +588,7 @@ class _HorizListState extends State<HorizList> {
                                                                   .breedType
                                                                   .toString(),
                                                               style: MaaruStyle
-                                                                  .text.tiny,
+                                                                  .text.medium,
                                                             ))
                                                       ])
                                                   // alignment: Alignment.center,

@@ -53,6 +53,9 @@ import 'register_pet_profile_screen2.dart';
 import 'package:http/http.dart' as http;
 
 class CreateRegisterPetProfile2 extends StatefulWidget {
+  final String allergies;
+
+  const CreateRegisterPetProfile2({Key key, this.allergies}) : super(key: key);
   @override
   _CreateRegisterPetProfile2State createState() =>
       _CreateRegisterPetProfile2State();
@@ -83,7 +86,6 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
   Future getImage() async {
     FilePickerResult result =
         await FilePicker.platform.pickFiles(allowMultiple: true);
-
     if (result != null) {
       List<File> files = result.paths.map((path) => File(path)).toList();
     } else {
@@ -96,10 +98,16 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
+        bottomNavigationBar: _prefHelper.getStringByKey('pet_name', '').isNotEmpty?const CreateHomeScreen():'',
         body: BlocProvider(
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child: BlocBuilder<PetProfileBloc, PetProfileState>(
                 builder: (context, state) {
+                  if(_knowallergiesController.text.isNotEmpty){
+                  }
+                  else{
+                    _knowallergiesController.text = widget.allergies.toString();
+                  }
               if (state is PetProfile2Saves) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(context,
@@ -199,8 +207,8 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                       style: MaaruStyle.text.tiny,
                                       maxLines: 2,
                                       decoration: InputDecoration(
-                                          hintText:_prefHelper.getStringByKey(MaruConstant.breedType, '').isEmpty?
-                                              'Seprated by comma'.toUpperCase():'',
+                                          hintText:
+                                              'Seprated by comma'.toUpperCase(),
                                           hintStyle: MaaruStyle.text.tiny,
                                           border: OutlineInputBorder(
                                               borderSide: BorderSide(

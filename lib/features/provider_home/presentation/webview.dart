@@ -51,3 +51,19 @@ class _AchInformationWebViewState extends State<AchInformationWebView> {
     );
   }
 }
+class ProviderWebViewSignup extends StatefulWidget {
+  @override
+  _ProviderWebViewSignupState createState() => _ProviderWebViewSignupState();
+}
+
+class _ProviderWebViewSignupState extends State<ProviderWebViewSignup> {
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: WebView(
+        initialUrl: 'https://maru-frontend.vercel.app/auth/register',
+        javascriptMode: JavascriptMode.unrestricted,
+      ),
+    );
+  }
+}

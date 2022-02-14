@@ -14,6 +14,7 @@ import 'package:maru/core/widget/round_button.dart';
 import 'package:maru/core/widget/skip_buttons.dart';
 import 'package:maru/core/widget/themed_text_field.dart';
 import 'package:maru/core/widget/widgets.dart';
+import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
 import 'package:maru/features/verify/presentation/register_pet_profile4.dart';
 import 'package:maru/features/view_pet_profile/presentation/view_pet_profile3.dart';
@@ -23,6 +24,14 @@ import '../../../main.dart';
 import 'register_pet_profile_screen2.dart';
 
 class CreateRegisterPetProfile3 extends StatefulWidget {
+  final String walking;
+  final String temprature;
+  final String feeding;
+  final List notes;
+
+  const CreateRegisterPetProfile3(
+      {Key key, this.walking, this.temprature, this.feeding, this.notes})
+      : super(key: key);
   @override
   _CreateRegisterPetProfile3State createState() =>
       _CreateRegisterPetProfile3State();
@@ -188,10 +197,23 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
         create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
         child: Scaffold(
             backgroundColor: Colors.white,
+            bottomNavigationBar:
+                _prefHelper.getStringByKey('pet_name', '').isNotEmpty
+                    ? CreateHomeScreen()
+                    : '',
             body: BlocProvider(
                 create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
                 child: BlocBuilder<PetProfileBloc, PetProfileState>(
                     builder: (context, state) {
+                  if (_walkingController.text.isEmpty) {
+                    _walkingController.text = widget.walking;
+                  }
+                  if (_feedingController.text.isEmpty) {
+                    _feedingController.text = widget.feeding;
+                  }
+                  if (_tempramentController.text.isEmpty) {
+                    _tempramentController.text = widget.temprature;
+                  }
                   if (state is pet3rofileButtonTapped) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushReplacement(context,

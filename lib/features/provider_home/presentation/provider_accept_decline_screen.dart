@@ -440,7 +440,7 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                                     style:
                                                                     MaaruStyle
                                                                         .text
-                                                                        .tiniest,
+                                                                        .medium,
                                                                   ),
                                                                 )),
                                                                 const SizedBox(

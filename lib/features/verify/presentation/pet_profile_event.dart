@@ -112,9 +112,9 @@ final String text;
 }
 
 class GetSinglePRof extends PetProfileEvent {
- final int id;
+ final int id1;
 
-  GetSinglePRof(this.id);
+  GetSinglePRof(this.id1);
 }
 class GetSinglePRovider extends PetProfileEvent {
   final int id1;

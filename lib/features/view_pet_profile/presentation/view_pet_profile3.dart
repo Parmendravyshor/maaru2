@@ -176,7 +176,27 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                         Navigator.of(context).push(
                                                             MaterialPageRoute(
                                                                 builder: (_) =>
-                                                                    CreateRegisterPetProfile3()));
+                                                                    CreateRegisterPetProfile3(
+                                                                      feeding: state
+                                                                          .welcome2
+                                                                          .getSinglePe
+                                                                          .feedingSchedule
+                                                                          .toString(),
+                                                                      temprature: state
+                                                                          .welcome2
+                                                                          .getSinglePe
+                                                                          .temperament,
+                                                                      walking: state
+                                                                          .welcome2
+                                                                          .getSinglePe
+                                                                          .walkingSchedule,
+                                                                      notes: [
+                                                                        state
+                                                                            .welcome2
+                                                                            .getSinglePe
+                                                                            .notes
+                                                                      ],
+                                                                    )));
                                                       },
                                                       child: Image.asset(
                                                         'assets/icons/icone-setting-29.png',

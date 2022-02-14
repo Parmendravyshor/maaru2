@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
+import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/features/Home/presentation/home_sceen.dart';
+import 'package:maru/features/indicator.dart';
 import 'pet_profile_bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +36,13 @@ enum Gender { male, female, none }
 
 class CreateregisterPetProfile1 extends StatefulWidget {
   final String gender1;
-
-  const CreateregisterPetProfile1({Key key, this.gender1}) : super(key: key);
+  final int id1;
+  final int height;
+  final int weight;
+  final int age;
+  final String img;
+  const CreateregisterPetProfile1({Key key, this.gender1, this.id1, this.height, this.weight, this.age, this.img})
+      : super(key: key);
   //
   // const CreateregisterPetProfile1({Key key, this.text}) : super(key: key);
   @override
@@ -46,12 +53,12 @@ class CreateregisterPetProfile1 extends StatefulWidget {
 class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
-  String _image;
+  String _image = '';
   String neutered = 'neutered';
   String spade = 'spade';
   String neither = 'neither';
   final picker = ImagePicker();
-  SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
   Future getImage() async {
     final pickedFile = await picker.getImage(
@@ -87,6 +94,21 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   String Selectdate = '';
   @override
   void initState() {
+    //=
+    // _prefHelper.getStringByKey('pet_name', '');
+    // _breadTypeController =
+    //     (_prefHelper.getStringByKey('breed_type', '') == _breadTypeController.text).toString() as TextEditingController;
+    // _heightController.text =
+    //     _prefHelper.getStringByKey(MaruConstant.height, '');
+    // _ageTypeController.text =
+    //     _prefHelper.getStringByKey(MaruConstant.age, '');
+    // _weightController.text =
+    //     _prefHelper.getStringByKey(MaruConstant.weight, '');
+    // sex1 = _prefHelper.getStringByKey(MaruConstant.sex, '');
+    // gender = _prefHelper.getStringByKey(MaruConstant.gender, '');
+    // _image = _prefHelper.getStringByKey(MaruConstant.img, '');
+    // textEditingController.text =
+    //     _prefHelper.getStringByKey(MaruConstant.birthdate, '');
     _petNameController = TextEditingController();
     _breadTypeController = TextEditingController();
     _ageTypeController = TextEditingController();
@@ -196,10 +218,91 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
     print('fffffff$_image');
     return Scaffold(
         backgroundColor: Colors.grey[100],
+       bottomNavigationBar:
+        _prefHelper.getStringByKey('breed_type', '').isNotEmpty?CreateHomeScreen():BackArrowButton(),
         body: BlocProvider(
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child: BlocBuilder<PetProfileBloc, PetProfileState>(
                 builder: (context, state) {
+              if (_petNameController.text.characters.isNotEmpty) {
+                _prefHelper.saveString(
+                        MaruConstant.petName, _petNameController.text) ??
+                    _prefHelper.saveString(
+                        MaruConstant.petName, _petNameController.text);
+              } else {
+                _petNameController.text =
+                    _prefHelper.getStringByKey('pet_name', '');
+              }
+
+              if (_breadTypeController.text.isNotEmpty) {
+                _prefHelper.saveString(
+                        MaruConstant.breedType, _breadTypeController.text) ??
+                    _prefHelper.saveString(
+                        MaruConstant.breedType, _breadTypeController.text);
+                print('aaa');
+              } else {
+                _breadTypeController.text =
+                    _prefHelper.getStringByKey('breed_type', '');
+              }
+              if (_weightController.text.isNotEmpty) {
+
+              } else {
+                int b;
+                _weightController.text =
+                   widget.weight.toString();
+              }
+              if (_ageTypeController.text.isNotEmpty) {
+
+              } else {
+                int b;
+                _ageTypeController.text =
+                    widget.age.toString();
+              }
+              if (_heightController.text.isNotEmpty) {
+
+              } else {
+                int b;
+                _heightController.text =
+                    widget.height.toString();
+              }
+              if (sex1.isNotEmpty) {
+                _prefHelper.saveString(MaruConstant.sex, sex1) ??
+                    _prefHelper.saveString(MaruConstant.sex, sex1);
+              } else {
+                sex1 = _prefHelper.getStringByKey(MaruConstant.sex, '');
+              }
+              if (gender.isNotEmpty) {
+                _prefHelper.saveString(MaruConstant.gender, gender) ??
+                    _prefHelper.saveString(MaruConstant.gender, gender);
+                print('aaa');
+              } else {
+                gender = _prefHelper.getStringByKey(MaruConstant.gender, '');
+              }
+              if (_image.isNotEmpty) {
+                _prefHelper.saveString(MaruConstant.img, _image) ??
+                    _prefHelper.saveString(MaruConstant.img, _image);
+              } else {
+                _image = _prefHelper.getStringByKey(MaruConstant.img, '');
+              }
+              if (textEditingController.text.isNotEmpty) {
+                _prefHelper.saveString(
+                        MaruConstant.birthdate, textEditingController.text) ??
+                    _prefHelper.saveString(
+                        MaruConstant.birthdate, textEditingController.text);
+              } else {
+                textEditingController.text =
+                    _prefHelper.getStringByKey('birth_date', '');
+              }
+              if (_noteContoller.text.isNotEmpty) {
+                _prefHelper.saveString(
+                        MaruConstant.note, _noteContoller.text) ??
+                    _prefHelper.saveString(
+                        MaruConstant.note, _noteContoller.text);
+              } else {
+                _noteContoller.text =
+                    _prefHelper.getStringByKey(MaruConstant.note, '');
+              }
+
               if (state is UserCreatePetProfileButtonTapped) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(context,
@@ -241,10 +344,10 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
-                                      image: _image.isEmpty
+                                      image: _image.isEmpty?widget.img==null
                                           ? const ExactAssetImage(
                                               'assets/icons/Oval.png')
-                                          : FileImage(File(_image)),
+                                          : FileImage(File(_image)):widget.img,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -319,7 +422,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                       ),
                                     ),
                                     const SizedBox(height: 20),
-                                    Container(
+                                   widget.height==null ?Container(
                                       margin: const EdgeInsets.only(
                                           left: 18, right: 10),
                                       child: Row(
@@ -327,10 +430,10 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                           GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  gender = 'male';
                                                   SelectedGender = Gender.male;
                                                   if (SelectedGender ==
                                                       Gender.male) {
+                                                    gender = 'male';
                                                     print(gender);
                                                   } else {
                                                     print('null');
@@ -341,56 +444,99 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                   size.height * 0.060,
                                                   size.width * 0.40,
                                                   'male',
-                                                  _prefHelper.getStringByKey('gender', '') ==
-                                                              'male'
-                                                      ? MaaruColors.walkingcolor
-                                                      : Colors.white)),
+                                                  SelectedGender == Gender.male
+                                                      ? MaaruColors.button2Color
+                                                      : malecontainercolor)),
                                           GestureDetector(
                                               onTap: () {
-                                                if (_prefHelper
-                                                    .getStringByKey(
-                                                        'gender', '')
-                                                    !='female') {
-                                                  setState(() {
-                                                    Colors.red;
-                                                    Colors.red;
-                                                  });
-                                                } else {
-                                                  if (gender == 'male') {
-                                                    AlertManager.showErrorMessage(
-                                                        "Please enter first name",
-                                                        context);
-                                                  }
-                                                  setState(() {
-                                                    SelectedGender =
-                                                        Gender.female;
-                                                    if (SelectedGender ==
-                                                        Gender.female) {
-                                                      gender = 'female';
-                                                      print(gender);
-                                                    } else {}
-                                                  });
+                                                if (gender == 'male') {
+                                                  AlertManager.showErrorMessage(
+                                                      "Please enter first name",
+                                                      context);
                                                 }
+                                                setState(() {
+                                                  SelectedGender =
+                                                      Gender.female;
+                                                  if (SelectedGender ==
+                                                      Gender.female) {
+                                                    gender = 'female';
+                                                    print(gender);
+                                                  } else {
+                                                    print('null');
+                                                  }
+                                                });
+
+
                                               },
                                               child: ToggleContainer(
-                                                size.height * 0.060,
-                                                size.width * 0.44,
-                                                'female',
-                                                  _prefHelper
-                                                      .getStringByKey(
-                                                      'gender', '')   == 'female'
-                                                    ? MaaruColors.walkingcolor
-                                                    :
-                                                         Colors.white),
-                                                // _prefHelper
-                                                //     .getStringByKey(
-                                                //     'gender',
-                                                //     '') ==
-                                                //     SelectedGender)
-                                              )
+                                                  size.height * 0.060,
+                                                  size.width * 0.44,
+                                                  'female',
+                                                  SelectedGender ==
+                                                      Gender.female
+                                                      ? MaaruColors.button2Color
+                                                      : Colors.white)),
                                         ],
                                       ),
-                                    ),
+                                    ):Container(
+                                     margin: const EdgeInsets.only(
+                                         left: 18, right: 10),
+                                     child: Row(
+                                       children: [
+                                         GestureDetector(
+                                             onTap: () {
+
+                                               setState(() {
+                                                 SelectedGender = Gender.male;
+                                                 if (SelectedGender ==
+                                                     Gender.male) {
+                                                   gender = 'male';
+                                                   print(gender);
+                                                   _prefHelper.saveString('gender',gender );
+                                                 } else {
+                                                   print('null');
+                                                 }
+                                               });
+                                             },
+                                             child: ToggleContainer(
+                                                 size.height * 0.060,
+                                                 size.width * 0.40,
+                                                 'male',
+                                               _prefHelper.getStringByKey('gender', '') =='male'
+                                                     ? MaaruColors.button2Color
+                                                     : malecontainercolor)),
+                                         GestureDetector(
+                                             onTap: () {
+                                               if (gender == 'male') {
+                                                 AlertManager.showErrorMessage(
+                                                     "Please enter first name",
+                                                     context);
+                                               }
+                                               setState(() {
+                                                 SelectedGender =
+                                                     Gender.female;
+                                                 if (SelectedGender ==
+                                                     Gender.female) {
+                                                   gender = 'female';
+                                                   _prefHelper.saveString('gender',gender );
+                                                   print(gender);
+                                                 } else {
+                                                   print('null');
+                                                 }
+                                               });
+
+
+                                             },
+                                             child: ToggleContainer(
+                                                 size.height * 0.060,
+                                                 size.width * 0.44,
+                                                 'female',
+                                                 _prefHelper.getStringByKey('gender', '') =='female'
+                                                     ? MaaruColors.button2Color
+                                                     : Colors.white)),
+                                       ],
+                                     ),
+                                   ),
                                     const SizedBox(
                                       height: 20.0,
                                     ),
@@ -411,14 +557,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                       height: 10.0,
                                     ),
                                     ThemedTextField(
-                                        _prefHelper
-                                                .getStringByKey(
-                                                    'breed_type', '')
-                                                .isEmpty
-                                            ? "BREED TYPE"
-                                            : _prefHelper.getStringByKey(
-                                                'breed_type', ''),
-                                        TextInputType.text,
+                                        'Breed Type', TextInputType.text,
                                         textinputaction2: TextInputAction.next,
                                         textStyle: const TextStyle(
                                             color: Colors.black),
@@ -429,53 +568,44 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                     const SizedBox(
                                       height: 10.0,
                                     ),
-                                    ThemedTextField(
-                                        _prefHelper
-                                                .getStringByKey('age', '')
-                                                .isEmpty
-                                            ? 'AGE'
-                                            : _prefHelper.getStringByKey(
-                                                'age', ''),
-                                        TextInputType.number,
+                                    ThemedTextField('age', TextInputType.number,
                                         textinputaction2: TextInputAction.next,
                                         textStyle: const TextStyle(
                                             color: Colors.black),
                                         textInputAction: TextInputAction.next,
-                                        onChanged: (_ageTypeController) {},
+                                        onChanged: (text) {
+                                          _prefHelper.saveInt(
+                                              'age', int.parse(_ageTypeController.text));
+                                        },
                                         editingController: _ageTypeController),
                                     ThemedTextField(
-                                        _weightController.text = _prefHelper
-                                                .getStringByKey('Weight', '')
-                                                .isEmpty
-                                            ? 'weight'
-                                            : _prefHelper.getStringByKey(
-                                                'weight', ''),
-                                        TextInputType.number,
+                                        'Weight', TextInputType.number,
                                         textinputaction2: TextInputAction.next,
                                         textStyle:
                                             TextStyle(color: Colors.black),
                                         textInputAction: TextInputAction.next,
                                         onChanged: (text) {
-                                      _prefHelper.saveString(
-                                          'pet_name', _ageTypeController.text);
-                                    }, editingController: _weightController),
+                                            _prefHelper.saveInt(
+                                                    'weight', int.parse(_weightController.text)) ??
+                                                _prefHelper.saveInt(
+                                                    'weight', int.parse(_weightController.text));
+                                            print('aaa');
+                                        },
+                                        editingController: _weightController),
                                     const SizedBox(
                                       height: 20.0,
                                     ),
                                     //  ThemeChanges(),
                                     ThemedTextField(
-                                        _prefHelper
-                                                .getStringByKey('height', '')
-                                                .isEmpty
-                                            ? 'height'
-                                            : _prefHelper.getStringByKey(
-                                                'height', ''),
-                                        TextInputType.number,
+                                        'height', TextInputType.number,
                                         textinputaction2: TextInputAction.next,
                                         textStyle:
                                             TextStyle(color: Colors.black),
                                         textInputAction: TextInputAction.next,
-                                        onChanged: (text) {},
+                                        onChanged: (text) {
+                                          _prefHelper.saveInt(
+                                              'height', int.parse(_heightController.text)) ;
+                                        },
                                         editingController: _heightController),
 
                                     Padding(
@@ -489,7 +619,6 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                   TextInputAction.next,
                                               focusNode:
                                                   AlwaysDisabledFocusNode(),
-                                              controller: textEditingController,
                                               decoration: InputDecoration(
                                                 enabledBorder:
                                                     UnderlineInputBorder(
@@ -498,19 +627,14 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                           .textfeildline),
                                                 ),
                                                 // labelText: "Date of birth",
-                                                hintText: _prefHelper
-                                                        .getStringByKey(
-                                                            'birth_date', '')
-                                                        .isEmpty
-                                                    ? 'BIRTH DATE'
-                                                    : _prefHelper
-                                                        .getStringByKey(
-                                                            'birth_date', ''),
+                                                hintText: 'Birth Date',
 
                                                 hintStyle: MaaruStyle.text.tiny,
                                               ),
-                                              onSaved: (text) {},
+                                              onSaved:
+                                                  (textEditingController) {},
                                               onTap: () {
+                                                textEditingController.text;
                                                 _selectDate(context);
                                               },
                                               onChanged: (text) {},
@@ -519,6 +643,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                 print(
                                                     'datepicker on editing complete');
                                               },
+                                              controller: textEditingController,
                                             ),
                                           )
                                         ])),
@@ -535,7 +660,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                         style: MaaruStyle.text.tiny,
                                       ),
                                     ),
-                                    Container(
+                                   widget.height==null? Container(
                                         margin: EdgeInsets.only(left: 18),
                                         child: Row(
                                           children: [
@@ -567,13 +692,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                 child: ToggleContainer(
                                                     size.height * 0.060,
                                                     size.width * 0.29,
-                                                    neutered,
-                                                    (_prefHelper.getStringByKey(
-                                                                'sex', '') ==
-                                                            neutered)
-                                                        ? MaaruColors
-                                                            .walkingcolor
-                                                        : NeitherContainerColor)),
+                                                    'neutered',
+                                                    NeuteredContainerColor)),
                                             GestureDetector(
                                                 onTap: () {
                                                   setState(() {
@@ -597,17 +717,13 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                       print('FAILURE');
                                                     }
                                                   });
+
                                                 },
                                                 child: ToggleContainer(
                                                     size.height * 0.060,
                                                     size.width * 0.30,
                                                     'spade',
-                                                    (_prefHelper.getStringByKey(
-                                                                'sex', '') ==
-                                                            neutered)
-                                                        ? MaaruColors
-                                                            .walkingcolor
-                                                        : SpadeContainerColor)),
+                                                    SpadeContainerColor)),
                                             GestureDetector(
                                                 onTap: () {
                                                   setState(() {
@@ -635,14 +751,107 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                     size.height * 0.060,
                                                     size.width * 0.30,
                                                     'neither',
-                                                    (_prefHelper.getStringByKey(
-                                                                'sex', '') ==
-                                                            neutered)
-                                                        ? MaaruColors
-                                                            .walkingcolor
-                                                        : NeitherContainerColor)),
+                                                    NeitherContainerColor)),
                                           ],
-                                        )),
+                                        )):Container(
+                                       margin: EdgeInsets.only(left: 18),
+                                       child: Row(
+                                         children: [
+                                           GestureDetector(
+                                               onTap: () {
+                                                 setState(() {
+                                                   if (NeuteredContainerColor ==
+                                                       Colors.white) {
+                                                     NeuteredContainerColor =
+                                                         activenutered;
+                                                     SpadeContainerColor =
+                                                         Colors.white;
+                                                     NeitherContainerColor =
+                                                         Colors.white;
+                                                   } else {
+                                                     NeuteredContainerColor =
+                                                         Colors.white;
+                                                   }
+
+                                                   if (NeuteredContainerColor ==
+                                                       activenutered) {
+                                                     sex1 = 'neutered';
+                                                     print(sex1);
+                                                   } else {
+                                                     print('FAILURE');
+                                                   }
+                                                   _prefHelper.saveString('sex',sex1 );
+                                                 });
+                                               },
+                                               child: ToggleContainer(
+                                                   size.height * 0.060,
+                                                   size.width * 0.29,
+                                                   'neutered',_prefHelper.getStringByKey('sex', '')== 'neutered'?MaaruColors.button2Color:
+                                                   NeuteredContainerColor)),
+                                           GestureDetector(
+                                               onTap: () {
+                                                 setState(() {
+                                                   if (SpadeContainerColor ==
+                                                       Colors.white) {
+                                                     SpadeContainerColor =
+                                                         activespade;
+                                                     NeuteredContainerColor =
+                                                         Colors.white;
+                                                     NeitherContainerColor =
+                                                         Colors.white;
+                                                   } else {
+                                                     SpadeContainerColor =
+                                                         Colors.white;
+                                                   }
+                                                   if (SpadeContainerColor ==
+                                                       activespade) {
+                                                     sex1 = 'spade';
+                                                     print(sex1);
+                                                   } else {
+                                                     print('FAILURE');
+                                                   }
+                                                 });
+                                                 _prefHelper.saveString('sex',sex1 );
+                                               },
+                                               child: ToggleContainer(
+                                                   size.height * 0.060,
+                                                   size.width * 0.30,
+                                                   'spade',
+                                                   _prefHelper.getStringByKey('sex', '')== 'spade'?MaaruColors.button2Color:
+                                                   NeuteredContainerColor)),
+                                           GestureDetector(
+                                               onTap: () {
+
+                                                 setState(() {
+                                                   if (NeitherContainerColor ==
+                                                       Colors.white) {
+                                                     NeitherContainerColor =
+                                                         activeneither;
+                                                     SpadeContainerColor =
+                                                         Colors.white;
+                                                     NeuteredContainerColor =
+                                                         Colors.white;
+                                                   } else {
+                                                     NeitherContainerColor =
+                                                         Colors.white;
+                                                   }
+                                                   if (NeitherContainerColor ==
+                                                       activeneither) {
+                                                     sex1 = 'neither';
+                                                   } else {
+                                                     print('FAILURE');
+                                                   }
+                                                 });
+                                                 _prefHelper.saveString('sex',sex1 );
+                                               },
+                                               child: ToggleContainer(
+                                                   size.height * 0.060,
+                                                   size.width * 0.30,
+                                                   'neither',
+                                                   _prefHelper.getStringByKey('sex', '')== 'neither'?MaaruColors.button2Color:
+                                                   NeuteredContainerColor)),
+                                         ],
+                                       )),
                                     const SizedBox(
                                       height: 20.0,
                                     ),
@@ -655,7 +864,7 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                 'note', ''),
                                         TextInputType.text,
                                         textStyle:
-                                            TextStyle(color: Colors.black),
+                                            const TextStyle(color: Colors.black),
                                         textInputAction: TextInputAction.done,
                                         onChanged: (text) {},
                                         editingController: _noteContoller),
@@ -689,35 +898,6 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              try {
-                                                _prefHelper.saveString(
-                                                    MaruConstant.height,
-                                                    _heightController.text);
-                                                _prefHelper.saveString(
-                                                    MaruConstant.age,
-                                                    _ageTypeController.text);
-                                                _prefHelper.saveString(
-                                                    MaruConstant.petName,
-                                                    _petNameController.text);
-                                                _prefHelper.saveString(
-                                                    MaruConstant.breedType,
-                                                    _breadTypeController.text);
-                                                _prefHelper.saveString(
-                                                    MaruConstant.weight,
-                                                    _weightController.text);
-                                                _prefHelper.saveString(
-                                                    MaruConstant.sex, sex1);
-                                                _prefHelper.saveString(
-                                                    MaruConstant.gender,
-                                                    gender);
-                                                _prefHelper.saveString(
-                                                    MaruConstant.img, _image);
-                                                _prefHelper.saveString(
-                                                    MaruConstant.birthdate,
-                                                    textEditingController.text);
-                                              } catch (e) {
-                                                print(e);
-                                              }
                                               // Navigator.of(context).push(MaterialPageRoute(builder: (_)=>HomeScreen()));
                                               setState(() {
                                                 print('dd1${SelectGender}');
@@ -813,7 +993,15 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                                     sex1,
                                                     _noteContoller.text,
                                                   ));
-                                                  Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ViewPetProfile(id1: _prefHelper.getIntByKey('id', a),)));
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              ViewPetProfile(
+                                                                id1: _prefHelper
+                                                                    .getIntByKey(
+                                                                        'id',
+                                                                        a),
+                                                              )));
                                                 }
                                               }
                                             },

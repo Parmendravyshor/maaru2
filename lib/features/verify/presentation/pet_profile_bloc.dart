@@ -164,7 +164,7 @@ class PetProfileBloc extends Bloc<PetProfileEvent, PetProfileState> {
       }
     }
     if (event is GetSinglePRof) {
-      final result = await getSinglePetProfile(event.id);
+      final result = await getSinglePetProfile(event.id1);
       if (result.isRight()) {
         yield SingleProfileLoaded(result.getOrElse(() => null));
       }

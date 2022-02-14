@@ -17,6 +17,7 @@ import 'package:maru/features/login/presentation/bloc/bloc/login_state.dart';
 import 'package:maru/features/login/presentation/login_screen.dart';
 import 'package:maru/features/provider_home/presentation/create_provider_home.dart';
 import 'package:maru/features/provider_home/presentation/provider_accept_decline_screen.dart';
+import 'package:maru/features/provider_home/presentation/webview.dart';
 import 'package:maru/features/provider_register/presentation/provider_register.dart';
 import 'package:maru/features/register/presentation/signup_screen.dart';
 import 'package:maru/features/verify/presentation/bloc/verify_bloc.dart';
@@ -282,7 +283,7 @@ class GoToSignInText extends StatelessWidget {
         InkWell(
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) =>RegisterPoviderScreen()));
+                  .push(MaterialPageRoute(builder: (_) =>ProviderWebViewSignup()));
             },
             child: Text(
               'Signup ',

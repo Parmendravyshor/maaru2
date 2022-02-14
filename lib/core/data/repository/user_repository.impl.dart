@@ -834,7 +834,7 @@ final FacebookLogin _facebookLogin;
   @override
   Future<Either<Failure, Welcome2>> getSinglePetProfile(int id1) async {
     try {
-      print('sssssr$id');
+      print('sssssr$id1');
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
         "",
@@ -854,12 +854,13 @@ final FacebookLogin _facebookLogin;
       var height;
       await _prefHelper.saveString(MaruConstant.height, data2[height].toString().isEmpty?'':'');
       await _prefHelper.saveInt('id', data3);
-      await _prefHelper.saveString(MaruConstant.age, data2['age'].toString().isEmpty?'':'');
+      await _prefHelper.saveInt(MaruConstant.age, data2['age']);
       await _prefHelper.saveString(
-          MaruConstant.breedType, data2['breed_type'].toString().isEmpty?'':'');
-      await _prefHelper.saveString(MaruConstant.weight, data2['weight'].toString().isEmpty?'':'');
-      await _prefHelper.saveString(MaruConstant.sex, data2['sex'].toString().isEmpty?'':'');
-      await _prefHelper.saveString(MaruConstant.gender, data2['gender'].toString().isEmpty?'':'');
+         'breed_type', data2['breed_type']);
+      await _prefHelper.saveInt('weight', data2['weight']);
+      await _prefHelper.saveString('sex', data2['sex']);
+      await _prefHelper.saveString('gender', data2['gender']);
+      await _prefHelper.saveString('birth_date', data2['birth_date']);
       await _prefHelper.saveString(MaruConstant.img, data2['img'].toString().isEmpty?'':'');
       await _prefHelper.saveString(MaruConstant.knownAllergies, data2['known_allergies'].toString().isEmpty?'':'');
       await _prefHelper.saveString('pet_needs', data2['pet_needs'].toString().isEmpty?'':'');
@@ -870,19 +871,22 @@ final FacebookLogin _facebookLogin;
     //  await _prefHelper.save('walking_schedule', data2['walking_schedule'].toString());
    //   await _prefHelper.saveString('feeding_schedule', data2['feeding_schedule'].toString());
       await _prefHelper.saveString(
-          MaruConstant.birthdate, data2['birth_date'].toString().isEmpty?'':'');
+          'birth_date', data2['birth_date']);
       ///
-       _prefHelper.getStringByKey(MaruConstant.height, '');
-       _prefHelper.getStringByKey(MaruConstant.age, '');
-       _prefHelper.getStringByKey(MaruConstant.petName,'');
-       _prefHelper.getStringByKey(
-          MaruConstant.breedType,'');
-       _prefHelper.getStringByKey(MaruConstant.weight, '');
-       _prefHelper.getStringByKey(MaruConstant.sex, '');
-       _prefHelper.getStringByKey(MaruConstant.gender, '');
-       _prefHelper.getStringByKey(MaruConstant.img, '');
-       _prefHelper.getStringByKey(
-          MaruConstant.birthdate, '');
+   //    var a;
+   //    var b;
+   //    var c;
+   // print('ddddd ${ _prefHelper.getIntByKey(MaruConstant.height, a)}');
+   //    print('ddddd${ _prefHelper.getIntByKey(MaruConstant.age, b)}');
+   //  print('ddddd${   _prefHelper.getStringByKey(MaruConstant.petName,'')}');
+   //  print('ssss${   _prefHelper.getStringByKey(
+   //        MaruConstant.breedType,'')}');
+   //  print('gudigdjhff${   _prefHelper.getIntByKey(MaruConstant.weight, c)}');
+   //    print('dfjhfjf${ _prefHelper.getStringByKey(MaruConstant.sex, '')}');
+   // print('dddd${   _prefHelper.getStringByKey(MaruConstant.gender, '')}');
+   //    print(_prefHelper.getStringByKey(MaruConstant.img, ''));
+   //     _prefHelper.getStringByKey(
+   //        MaruConstant.birthdate, '');
       print(data);
       return Right(Welcome2.fromJson(data));
     } catch (e) {
