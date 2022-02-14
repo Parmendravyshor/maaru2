@@ -92,8 +92,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       print('dddddoeheed');
       yield* result.fold((l) async* {
         print('step1');
-        if(_pref.getStringByKey('accessToken', '') == null){
-          LoginFailure("email or password not valid");
+        if(_pref.getStringByKey('accessToken', '').isEmpty){
+        yield  LoginFailure("email or password not valid");
           print('stfffep2');
         }
         else{
