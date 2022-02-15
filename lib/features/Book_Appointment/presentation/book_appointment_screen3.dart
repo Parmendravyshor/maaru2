@@ -587,7 +587,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                         height: size.height*0.30,
                         width: 500,
                         child: Image.network(
-                          widget.image = null ?? '',
+                          widget.image ,
                           fit: BoxFit.fitWidth,
                           errorBuilder: (context, error, stackTrace) {
                             return Container(
@@ -974,7 +974,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                               color: Colors.grey[50],
                               alignment: Alignment.center,
                               child: Align(
-                                alignment: Alignment(0.7,0),
+                                alignment: Alignment(0.2,0),
                                 child: DropdownButton(
                                   underline: Container(color: Colors.transparent,),
                                   hint: Text(

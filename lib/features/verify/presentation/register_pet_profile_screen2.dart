@@ -52,8 +52,8 @@ import 'package:http/http.dart' as http;
 
 class CreateRegisterPetProfile2 extends StatefulWidget {
   final String allergies;
-
-  const CreateRegisterPetProfile2({Key key, this.allergies}) : super(key: key);
+final String image;
+  const CreateRegisterPetProfile2({Key key, this.allergies, this.image}) : super(key: key);
   @override
   _CreateRegisterPetProfile2State createState() =>
       _CreateRegisterPetProfile2State();
@@ -142,7 +142,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                         // height: size.height * 0.20,
                         // width: size.width * 0.9,
                         child:
-                        Center(
+                        widget.image.isEmpty?Center(
                           child: Image.network(
                               _prefHelper.getStringByKey('img', ''),
                               width:450,
@@ -154,7 +154,19 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                                 alignment: Alignment.center,
                                 child: Image.asset('assets/images/kutta.png'));
                           }),
-                        )),
+                        ):Center(
+                      child: Image.network(
+                          widget.image,
+                          width:450,
+                          height: 250,
+                          fit: BoxFit.fitWidth,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                                color: MaaruColors.DogsBackground,
+                                alignment: Alignment.center,
+                                child: Image.asset('assets/images/kutta.png'));
+                          }),
+                    )),
                             Padding(
                                 padding: EdgeInsets.only(
                                     top: 30.0,bottom: 10

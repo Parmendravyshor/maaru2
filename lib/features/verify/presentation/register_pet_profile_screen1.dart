@@ -33,7 +33,7 @@ import 'register_pet_profile_screen2.dart';
 import 'package:http/http.dart' as http;
 
 enum Gender { male, female, none }
-
+///
 class CreateregisterPetProfile1 extends StatefulWidget {
   final String gender1;
   final int id1;
@@ -41,7 +41,14 @@ class CreateregisterPetProfile1 extends StatefulWidget {
   final int weight;
   final int age;
   final String img;
-  const CreateregisterPetProfile1({Key key, this.gender1, this.id1, this.height, this.weight, this.age, this.img})
+  const CreateregisterPetProfile1(
+      {Key key,
+      this.gender1,
+      this.id1,
+      this.height,
+      this.weight,
+      this.age,
+      this.img})
       : super(key: key);
   //
   // const CreateregisterPetProfile1({Key key, this.text}) : super(key: key);
@@ -58,7 +65,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
   String spade = 'spade';
   String neither = 'neither';
   final picker = ImagePicker();
-  final SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
+  final SharedPrefHelper _prefHelper =
+      KiwiContainer().resolve<SharedPrefHelper>();
 
   Future getImage() async {
     final pickedFile = await picker.getImage(
@@ -218,95 +226,86 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
     print('fffffff$_image');
     return Scaffold(
         backgroundColor: Colors.grey[100],
-     //  bottomNavigationBar:
-     //   _prefHelper.getStringByKey('breed_type', '').isNotEmpty?CreateHomeScreen():Image.asset('assets/icons/icone-setting-8.png'),
+        //  bottomNavigationBar:
+        //   _prefHelper.getStringByKey('breed_type', '').isNotEmpty?CreateHomeScreen():Image.asset('assets/icons/icone-setting-8.png'),
         body: BlocProvider(
             create: (context) => KiwiContainer().resolve<PetProfileBloc>(),
             child: BlocBuilder<PetProfileBloc, PetProfileState>(
                 builder: (context, state) {
-                  if(widget.id1 !=null) {
-                    if (_petNameController.text.characters.isNotEmpty) {
-                      _prefHelper.saveString(
+              if (widget.id1 != null) {
+                if (_petNameController.text.characters.isNotEmpty) {
+                  _prefHelper.saveString(
                           MaruConstant.petName, _petNameController.text) ??
-                          _prefHelper.saveString(
-                              MaruConstant.petName, _petNameController.text);
-                    } else {
-                      _petNameController.text =
-                          _prefHelper.getStringByKey('pet_name', '');
-                    }
-
-                    if (_breadTypeController.text.isNotEmpty) {
                       _prefHelper.saveString(
+                          MaruConstant.petName, _petNameController.text);
+                } else {
+                  _petNameController.text =
+                      _prefHelper.getStringByKey('pet_name', '');
+                }
+
+                if (_breadTypeController.text.isNotEmpty) {
+                  _prefHelper.saveString(
                           MaruConstant.breedType, _breadTypeController.text) ??
-                          _prefHelper.saveString(
-                              MaruConstant.breedType,
-                              _breadTypeController.text);
-                      print('aaa');
-                    } else {
-                      _breadTypeController.text =
-                          _prefHelper.getStringByKey('breed_type', '');
-                    }
-                    if (_weightController.text.isNotEmpty) {
-
-                    } else {
-                      int b;
-                      _weightController.text =
-                          widget.weight.toString();
-                    }
-                    if (_ageTypeController.text.isNotEmpty) {
-
-                    } else {
-                      int b;
-                      _ageTypeController.text =
-                          widget.age.toString();
-                    }
-                    if (_heightController.text.isNotEmpty) {
-
-                    } else {
-                      int b;
-                      _heightController.text =
-                          widget.height.toString();
-                    }
-                    if (sex1.isNotEmpty) {
-                      _prefHelper.saveString(MaruConstant.sex, sex1) ??
-                          _prefHelper.saveString(MaruConstant.sex, sex1);
-                    } else {
-                      sex1 = _prefHelper.getStringByKey(MaruConstant.sex, '');
-                    }
-                    if (gender.isNotEmpty) {
-                      _prefHelper.saveString(MaruConstant.gender, gender) ??
-                          _prefHelper.saveString(MaruConstant.gender, gender);
-                      print('aaa');
-                    } else {
-                      gender =
-                          _prefHelper.getStringByKey(MaruConstant.gender, '');
-                    }
-                    if (_image.isNotEmpty) {
-                      _prefHelper.saveString(MaruConstant.img, _image) ??
-                          _prefHelper.saveString(MaruConstant.img, _image);
-                    } else {
-                      _image = _prefHelper.getStringByKey(MaruConstant.img, '');
-                    }
-                    if (textEditingController.text.isNotEmpty) {
                       _prefHelper.saveString(
+                          MaruConstant.breedType, _breadTypeController.text);
+                  print('aaa');
+                } else {
+                  _breadTypeController.text =
+                      _prefHelper.getStringByKey('breed_type', '');
+                }
+                if (_weightController.text.isNotEmpty) {
+                } else {
+                  int b;
+                  _weightController.text = widget.weight.toString();
+                }
+                if (_ageTypeController.text.isNotEmpty) {
+                } else {
+                  int b;
+                  _ageTypeController.text = widget.age.toString();
+                }
+                if (_heightController.text.isNotEmpty) {
+                } else {
+                  int b;
+                  _heightController.text = widget.height.toString();
+                }
+                if (sex1.isNotEmpty) {
+                  _prefHelper.saveString(MaruConstant.sex, sex1) ??
+                      _prefHelper.saveString(MaruConstant.sex, sex1);
+                } else {
+                  sex1 = _prefHelper.getStringByKey(MaruConstant.sex, '');
+                }
+                if (gender.isNotEmpty) {
+                  _prefHelper.saveString(MaruConstant.gender, gender) ??
+                      _prefHelper.saveString(MaruConstant.gender, gender);
+                  print('aaa');
+                } else {
+                  gender = _prefHelper.getStringByKey(MaruConstant.gender, '');
+                }
+                if (_image.isNotEmpty) {
+                  _prefHelper.saveString(MaruConstant.img, _image) ??
+                      _prefHelper.saveString(MaruConstant.img, _image);
+                } else {
+                  _image = _prefHelper.getStringByKey(MaruConstant.img, '');
+                }
+                if (textEditingController.text.isNotEmpty) {
+                  _prefHelper.saveString(
                           MaruConstant.birthdate, textEditingController.text) ??
-                          _prefHelper.saveString(
-                              MaruConstant.birthdate,
-                              textEditingController.text);
-                    } else {
-                      textEditingController.text =
-                          _prefHelper.getStringByKey('birth_date', '');
-                    }
-                    if (_noteContoller.text.isNotEmpty) {
                       _prefHelper.saveString(
+                          MaruConstant.birthdate, textEditingController.text);
+                } else {
+                  textEditingController.text =
+                      _prefHelper.getStringByKey('birth_date', '');
+                }
+                if (_noteContoller.text.isNotEmpty) {
+                  _prefHelper.saveString(
                           MaruConstant.note, _noteContoller.text) ??
-                          _prefHelper.saveString(
-                              MaruConstant.note, _noteContoller.text);
-                    } else {
-                      _noteContoller.text =
-                          _prefHelper.getStringByKey(MaruConstant.note, '');
-                    }
-                  }
+                      _prefHelper.saveString(
+                          MaruConstant.note, _noteContoller.text);
+                } else {
+                  _noteContoller.text =
+                      _prefHelper.getStringByKey(MaruConstant.note, '');
+                }
+              }
               if (state is UserCreatePetProfileButtonTapped) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(context,
@@ -334,35 +333,51 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
               return SafeArea(
                 child: SingleChildScrollView(
                   child: Column(children: [
-
-                    BackArrowButton(),
-                    Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: Stack(fit: StackFit.loose, children: <Widget>[
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              GestureDetector(
-                                child: Container(
-                                  width: size.width * 0.50,
-                                  height: size.height * 0.25,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: _image.isEmpty
-                                          ? const ExactAssetImage(
-                                              'assets/icons/Oval.png')
-                                          : FileImage(File(_image)),
-                                      fit: BoxFit.cover,
+                   // BackArrowButton(),
+                    widget.img.isEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child:
+                                Stack(fit: StackFit.loose, children: <Widget>[
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  GestureDetector(
+                                    child: Container(
+                                      width: size.width * 0.50,
+                                      height: size.height * 0.25,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          image: _image.isEmpty
+                                              ? const ExactAssetImage(
+                                                  'assets/icons/Oval.png')
+                                              : FileImage(File(_image)),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
+                                    onTap: getImage,
                                   ),
-                                ),
-                                onTap: getImage,
+                                ],
                               ),
-                            ],
+                            ]))
+                        : Container(
+                            height: size.height * 0.30,
+                            width: 500,
+                            child: Image.network(
+                              widget.img,
+                              fit: BoxFit.fitWidth,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                    color: Colors.amber,
+                                    alignment: Alignment.bottomCenter,
+                                    child:
+                                        Image.asset('assets/images/kutta.png'));
+                              },
+                            ),
                           ),
-                        ])),
                     Padding(
                         padding: EdgeInsets.only(left: 40, right: 40),
                         child: Row(
@@ -428,121 +443,139 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                       ),
                                     ),
                                     const SizedBox(height: 20),
-                                   widget.height==null ?Container(
-                                      margin: const EdgeInsets.only(
-                                          left: 18, right: 10),
-                                      child: Row(
-                                        children: [
-                                          GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  SelectedGender = Gender.male;
-                                                  if (SelectedGender ==
-                                                      Gender.male) {
-                                                    gender = 'male';
-                                                    print(gender);
-                                                  } else {
-                                                    print('null');
-                                                  }
-                                                });
-                                              },
-                                              child: ToggleContainer(
-                                                  size.height * 0.060,
-                                                  size.width * 0.40,
-                                                  'male',
-                                                  SelectedGender == Gender.male
-                                                      ? MaaruColors.button2Color
-                                                      : malecontainercolor)),
-                                          GestureDetector(
-                                              onTap: () {
-                                                if (gender == 'male') {
-                                                  AlertManager.showErrorMessage(
-                                                      "Please enter first name",
-                                                      context);
-                                                }
-                                                setState(() {
-                                                  SelectedGender =
-                                                      Gender.female;
-                                                  if (SelectedGender ==
-                                                      Gender.female) {
-                                                    gender = 'female';
-                                                    print(gender);
-                                                  } else {
-                                                    print('null');
-                                                  }
-                                                });
-
-
-                                              },
-                                              child: ToggleContainer(
-                                                  size.height * 0.060,
-                                                  size.width * 0.44,
-                                                  'female',
-                                                  SelectedGender ==
-                                                      Gender.female
-                                                      ? MaaruColors.button2Color
-                                                      : Colors.white)),
-                                        ],
-                                      ),
-                                    ):Container(
-                                     margin: const EdgeInsets.only(
-                                         left: 18, right: 10),
-                                     child: Row(
-                                       children: [
-                                         GestureDetector(
-                                             onTap: () {
-
-                                               setState(() {
-                                                 SelectedGender = Gender.male;
-                                                 if (SelectedGender ==
-                                                     Gender.male) {
-                                                   gender = 'male';
-                                                   print(gender);
-                                                   _prefHelper.saveString('gender',gender );
-                                                 } else {
-                                                   print('null');
-                                                 }
-                                               });
-                                             },
-                                             child: ToggleContainer(
-                                                 size.height * 0.060,
-                                                 size.width * 0.40,
-                                                 'male',
-                                               _prefHelper.getStringByKey('gender', '') =='male'
-                                                     ? MaaruColors.button2Color
-                                                     : malecontainercolor)),
-                                         GestureDetector(
-                                             onTap: () {
-                                               if (gender == 'male') {
-                                                 AlertManager.showErrorMessage(
-                                                     "Please enter first name",
-                                                     context);
-                                               }
-                                               setState(() {
-                                                 SelectedGender =
-                                                     Gender.female;
-                                                 if (SelectedGender ==
-                                                     Gender.female) {
-                                                   gender = 'female';
-                                                   _prefHelper.saveString('gender',gender );
-                                                   print(gender);
-                                                 } else {
-                                                   print('null');
-                                                 }
-                                               });
-
-
-                                             },
-                                             child: ToggleContainer(
-                                                 size.height * 0.060,
-                                                 size.width * 0.44,
-                                                 'female',
-                                                 _prefHelper.getStringByKey('gender', '') =='female'
-                                                     ? MaaruColors.button2Color
-                                                     : Colors.white)),
-                                       ],
-                                     ),
-                                   ),
+                                    widget.height == null
+                                        ? Container(
+                                            margin: const EdgeInsets.only(
+                                                left: 18, right: 10),
+                                            child: Row(
+                                              children: [
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        SelectedGender =
+                                                            Gender.male;
+                                                        if (SelectedGender ==
+                                                            Gender.male) {
+                                                          gender = 'male';
+                                                          print(gender);
+                                                        } else {
+                                                          print('null');
+                                                        }
+                                                      });
+                                                    },
+                                                    child: ToggleContainer(
+                                                        size.height * 0.060,
+                                                        size.width * 0.40,
+                                                        'male',
+                                                        SelectedGender ==
+                                                                Gender.male
+                                                            ? MaaruColors
+                                                                .button2Color
+                                                            : malecontainercolor)),
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      if (gender == 'male') {
+                                                        AlertManager
+                                                            .showErrorMessage(
+                                                                "Please enter first name",
+                                                                context);
+                                                      }
+                                                      setState(() {
+                                                        SelectedGender =
+                                                            Gender.female;
+                                                        if (SelectedGender ==
+                                                            Gender.female) {
+                                                          gender = 'female';
+                                                          print(gender);
+                                                        } else {
+                                                          print('null');
+                                                        }
+                                                      });
+                                                    },
+                                                    child: ToggleContainer(
+                                                        size.height * 0.060,
+                                                        size.width * 0.44,
+                                                        'female',
+                                                        SelectedGender ==
+                                                                Gender.female
+                                                            ? MaaruColors
+                                                                .button2Color
+                                                            : Colors.white)),
+                                              ],
+                                            ),
+                                          )
+                                        : Container(
+                                            margin: const EdgeInsets.only(
+                                                left: 18, right: 10),
+                                            child: Row(
+                                              children: [
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        SelectedGender =
+                                                            Gender.male;
+                                                        if (SelectedGender ==
+                                                            Gender.male) {
+                                                          gender = 'male';
+                                                          print(gender);
+                                                          _prefHelper
+                                                              .saveString(
+                                                                  'gender',
+                                                                  gender);
+                                                        } else {
+                                                          print('null');
+                                                        }
+                                                      });
+                                                    },
+                                                    child: ToggleContainer(
+                                                        size.height * 0.060,
+                                                        size.width * 0.40,
+                                                        'male',
+                                                        _prefHelper.getStringByKey(
+                                                                    'gender',
+                                                                    '') ==
+                                                                'male'
+                                                            ? MaaruColors
+                                                                .button2Color
+                                                            : malecontainercolor)),
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      if (gender == 'male') {
+                                                        AlertManager
+                                                            .showErrorMessage(
+                                                                "Please enter first name",
+                                                                context);
+                                                      }
+                                                      setState(() {
+                                                        SelectedGender =
+                                                            Gender.female;
+                                                        if (SelectedGender ==
+                                                            Gender.female) {
+                                                          gender = 'female';
+                                                          _prefHelper
+                                                              .saveString(
+                                                                  'gender',
+                                                                  gender);
+                                                          print(gender);
+                                                        } else {
+                                                          print('null');
+                                                        }
+                                                      });
+                                                    },
+                                                    child: ToggleContainer(
+                                                        size.height * 0.060,
+                                                        size.width * 0.44,
+                                                        'female',
+                                                        _prefHelper.getStringByKey(
+                                                                    'gender',
+                                                                    '') ==
+                                                                'female'
+                                                            ? MaaruColors
+                                                                .button2Color
+                                                            : Colors.white)),
+                                              ],
+                                            ),
+                                          ),
                                     const SizedBox(
                                       height: 20.0,
                                     ),
@@ -575,10 +608,9 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                             color: Colors.black),
                                         textInputAction: TextInputAction.next,
                                         onChanged: (text) {
-                                          _prefHelper.saveInt(
-                                              'age', int.parse(_ageTypeController.text));
-                                        },
-                                        editingController: _ageTypeController),
+                                      _prefHelper.saveInt('age',
+                                          int.parse(_ageTypeController.text));
+                                    }, editingController: _ageTypeController),
                                     ThemedTextField(
                                         'Weight', TextInputType.number,
                                         textinputaction2: TextInputAction.next,
@@ -586,13 +618,16 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                             TextStyle(color: Colors.black),
                                         textInputAction: TextInputAction.next,
                                         onChanged: (text) {
-                                            _prefHelper.saveInt(
-                                                    'weight', int.parse(_weightController.text)) ??
-                                                _prefHelper.saveInt(
-                                                    'weight', int.parse(_weightController.text));
-                                            print('aaa');
-                                        },
-                                        editingController: _weightController),
+                                      _prefHelper.saveInt(
+                                              'weight',
+                                              int.parse(
+                                                  _weightController.text)) ??
+                                          _prefHelper.saveInt(
+                                              'weight',
+                                              int.parse(
+                                                  _weightController.text));
+                                      print('aaa');
+                                    }, editingController: _weightController),
                                     const SizedBox(
                                       height: 20.0,
                                     ),
@@ -604,10 +639,9 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                             TextStyle(color: Colors.black),
                                         textInputAction: TextInputAction.next,
                                         onChanged: (text) {
-                                          _prefHelper.saveInt(
-                                              'height', int.parse(_heightController.text)) ;
-                                        },
-                                        editingController: _heightController),
+                                      _prefHelper.saveInt('height',
+                                          int.parse(_heightController.text));
+                                    }, editingController: _heightController),
 
                                     Padding(
                                         padding:
@@ -661,198 +695,217 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                         style: MaaruStyle.text.tiny,
                                       ),
                                     ),
-                                   widget.height==null? Container(
-                                        margin: EdgeInsets.only(left: 18),
-                                        child: Row(
-                                          children: [
-                                            GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    if (NeuteredContainerColor ==
-                                                        Colors.white) {
-                                                      NeuteredContainerColor =
-                                                          activenutered;
-                                                      SpadeContainerColor =
-                                                          Colors.white;
-                                                      NeitherContainerColor =
-                                                          Colors.white;
-                                                    } else {
-                                                      NeuteredContainerColor =
-                                                          Colors.white;
-                                                    }
+                                    widget.height == null
+                                        ? Container(
+                                            margin: EdgeInsets.only(left: 18),
+                                            child: Row(
+                                              children: [
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        if (NeuteredContainerColor ==
+                                                            Colors.white) {
+                                                          NeuteredContainerColor =
+                                                              activenutered;
+                                                          SpadeContainerColor =
+                                                              Colors.white;
+                                                          NeitherContainerColor =
+                                                              Colors.white;
+                                                        } else {
+                                                          NeuteredContainerColor =
+                                                              Colors.white;
+                                                        }
 
-                                                    if (NeuteredContainerColor ==
-                                                        activenutered) {
-                                                      sex1 = 'neutered';
-                                                      print(sex1);
-                                                    } else {
-                                                      print('FAILURE');
-                                                    }
-                                                  });
-                                                },
-                                                child: ToggleContainer(
-                                                    size.height * 0.060,
-                                                    size.width * 0.29,
-                                                    'neutered',
-                                                    NeuteredContainerColor)),
-                                            GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    if (SpadeContainerColor ==
-                                                        Colors.white) {
-                                                      SpadeContainerColor =
-                                                          activespade;
-                                                      NeuteredContainerColor =
-                                                          Colors.white;
-                                                      NeitherContainerColor =
-                                                          Colors.white;
-                                                    } else {
-                                                      SpadeContainerColor =
-                                                          Colors.white;
-                                                    }
-                                                    if (SpadeContainerColor ==
-                                                        activespade) {
-                                                      sex1 = 'spade';
-                                                      print(sex1);
-                                                    } else {
-                                                      print('FAILURE');
-                                                    }
-                                                  });
+                                                        if (NeuteredContainerColor ==
+                                                            activenutered) {
+                                                          sex1 = 'neutered';
+                                                          print(sex1);
+                                                        } else {
+                                                          print('FAILURE');
+                                                        }
+                                                      });
+                                                    },
+                                                    child: ToggleContainer(
+                                                        size.height * 0.060,
+                                                        size.width * 0.29,
+                                                        'neutered',
+                                                        NeuteredContainerColor)),
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        if (SpadeContainerColor ==
+                                                            Colors.white) {
+                                                          SpadeContainerColor =
+                                                              activespade;
+                                                          NeuteredContainerColor =
+                                                              Colors.white;
+                                                          NeitherContainerColor =
+                                                              Colors.white;
+                                                        } else {
+                                                          SpadeContainerColor =
+                                                              Colors.white;
+                                                        }
+                                                        if (SpadeContainerColor ==
+                                                            activespade) {
+                                                          sex1 = 'spade';
+                                                          print(sex1);
+                                                        } else {
+                                                          print('FAILURE');
+                                                        }
+                                                      });
+                                                    },
+                                                    child: ToggleContainer(
+                                                        size.height * 0.060,
+                                                        size.width * 0.30,
+                                                        'spade',
+                                                        SpadeContainerColor)),
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        if (NeitherContainerColor ==
+                                                            Colors.white) {
+                                                          NeitherContainerColor =
+                                                              activeneither;
+                                                          SpadeContainerColor =
+                                                              Colors.white;
+                                                          NeuteredContainerColor =
+                                                              Colors.white;
+                                                        } else {
+                                                          NeitherContainerColor =
+                                                              Colors.white;
+                                                        }
+                                                        if (NeitherContainerColor ==
+                                                            activeneither) {
+                                                          sex1 = 'neither';
+                                                        } else {
+                                                          print('FAILURE');
+                                                        }
+                                                      });
+                                                    },
+                                                    child: ToggleContainer(
+                                                        size.height * 0.060,
+                                                        size.width * 0.30,
+                                                        'neither',
+                                                        NeitherContainerColor)),
+                                              ],
+                                            ))
+                                        : Container(
+                                            margin: EdgeInsets.only(left: 18),
+                                            child: Row(
+                                              children: [
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        if (NeuteredContainerColor ==
+                                                            Colors.white) {
+                                                          NeuteredContainerColor =
+                                                              activenutered;
+                                                          SpadeContainerColor =
+                                                              Colors.white;
+                                                          NeitherContainerColor =
+                                                              Colors.white;
+                                                        } else {
+                                                          NeuteredContainerColor =
+                                                              Colors.white;
+                                                        }
 
-                                                },
-                                                child: ToggleContainer(
-                                                    size.height * 0.060,
-                                                    size.width * 0.30,
-                                                    'spade',
-                                                    SpadeContainerColor)),
-                                            GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    if (NeitherContainerColor ==
-                                                        Colors.white) {
-                                                      NeitherContainerColor =
-                                                          activeneither;
-                                                      SpadeContainerColor =
-                                                          Colors.white;
-                                                      NeuteredContainerColor =
-                                                          Colors.white;
-                                                    } else {
-                                                      NeitherContainerColor =
-                                                          Colors.white;
-                                                    }
-                                                    if (NeitherContainerColor ==
-                                                        activeneither) {
-                                                      sex1 = 'neither';
-                                                    } else {
-                                                      print('FAILURE');
-                                                    }
-                                                  });
-                                                },
-                                                child: ToggleContainer(
-                                                    size.height * 0.060,
-                                                    size.width * 0.30,
-                                                    'neither',
-                                                    NeitherContainerColor)),
-                                          ],
-                                        )):Container(
-                                       margin: EdgeInsets.only(left: 18),
-                                       child: Row(
-                                         children: [
-                                           GestureDetector(
-                                               onTap: () {
-                                                 setState(() {
-                                                   if (NeuteredContainerColor ==
-                                                       Colors.white) {
-                                                     NeuteredContainerColor =
-                                                         activenutered;
-                                                     SpadeContainerColor =
-                                                         Colors.white;
-                                                     NeitherContainerColor =
-                                                         Colors.white;
-                                                   } else {
-                                                     NeuteredContainerColor =
-                                                         Colors.white;
-                                                   }
-
-                                                   if (NeuteredContainerColor ==
-                                                       activenutered) {
-                                                     sex1 = 'neutered';
-                                                     print(sex1);
-                                                   } else {
-                                                     print('FAILURE');
-                                                   }
-                                                   _prefHelper.saveString('sex',sex1 );
-                                                 });
-                                               },
-                                               child: ToggleContainer(
-                                                   size.height * 0.060,
-                                                   size.width * 0.29,
-                                                   'neutered',_prefHelper.getStringByKey('sex', '')== 'neutered'?MaaruColors.button2Color:
-                                                   NeuteredContainerColor)),
-                                           GestureDetector(
-                                               onTap: () {
-                                                 setState(() {
-                                                   if (SpadeContainerColor ==
-                                                       Colors.white) {
-                                                     SpadeContainerColor =
-                                                         activespade;
-                                                     NeuteredContainerColor =
-                                                         Colors.white;
-                                                     NeitherContainerColor =
-                                                         Colors.white;
-                                                   } else {
-                                                     SpadeContainerColor =
-                                                         Colors.white;
-                                                   }
-                                                   if (SpadeContainerColor ==
-                                                       activespade) {
-                                                     sex1 = 'spade';
-                                                     print(sex1);
-                                                   } else {
-                                                     print('FAILURE');
-                                                   }
-                                                 });
-                                                 _prefHelper.saveString('sex',sex1 );
-                                               },
-                                               child: ToggleContainer(
-                                                   size.height * 0.060,
-                                                   size.width * 0.30,
-                                                   'spade',
-                                                   _prefHelper.getStringByKey('sex', '')== 'spade'?MaaruColors.button2Color:
-                                                   NeuteredContainerColor)),
-                                           GestureDetector(
-                                               onTap: () {
-
-                                                 setState(() {
-                                                   if (NeitherContainerColor ==
-                                                       Colors.white) {
-                                                     NeitherContainerColor =
-                                                         activeneither;
-                                                     SpadeContainerColor =
-                                                         Colors.white;
-                                                     NeuteredContainerColor =
-                                                         Colors.white;
-                                                   } else {
-                                                     NeitherContainerColor =
-                                                         Colors.white;
-                                                   }
-                                                   if (NeitherContainerColor ==
-                                                       activeneither) {
-                                                     sex1 = 'neither';
-                                                   } else {
-                                                     print('FAILURE');
-                                                   }
-                                                 });
-                                                 _prefHelper.saveString('sex',sex1 );
-                                               },
-                                               child: ToggleContainer(
-                                                   size.height * 0.060,
-                                                   size.width * 0.30,
-                                                   'neither',
-                                                   _prefHelper.getStringByKey('sex', '')== 'neither'?MaaruColors.button2Color:
-                                                   NeuteredContainerColor)),
-                                         ],
-                                       )),
+                                                        if (NeuteredContainerColor ==
+                                                            activenutered) {
+                                                          sex1 = 'neutered';
+                                                          print(sex1);
+                                                        } else {
+                                                          print('FAILURE');
+                                                        }
+                                                        _prefHelper.saveString(
+                                                            'sex', sex1);
+                                                      });
+                                                    },
+                                                    child: ToggleContainer(
+                                                        size.height * 0.060,
+                                                        size.width * 0.29,
+                                                        'neutered',
+                                                        _prefHelper.getStringByKey(
+                                                                    'sex',
+                                                                    '') ==
+                                                                'neutered'
+                                                            ? MaaruColors
+                                                                .button2Color
+                                                            : NeuteredContainerColor)),
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        if (SpadeContainerColor ==
+                                                            Colors.white) {
+                                                          SpadeContainerColor =
+                                                              activespade;
+                                                          NeuteredContainerColor =
+                                                              Colors.white;
+                                                          NeitherContainerColor =
+                                                              Colors.white;
+                                                        } else {
+                                                          SpadeContainerColor =
+                                                              Colors.white;
+                                                        }
+                                                        if (SpadeContainerColor ==
+                                                            activespade) {
+                                                          sex1 = 'spade';
+                                                          print(sex1);
+                                                        } else {
+                                                          print('FAILURE');
+                                                        }
+                                                      });
+                                                      _prefHelper.saveString(
+                                                          'sex', sex1);
+                                                    },
+                                                    child: ToggleContainer(
+                                                        size.height * 0.060,
+                                                        size.width * 0.30,
+                                                        'spade',
+                                                        _prefHelper.getStringByKey(
+                                                                    'sex',
+                                                                    '') ==
+                                                                'spade'
+                                                            ? MaaruColors
+                                                                .button2Color
+                                                            : NeuteredContainerColor)),
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        if (NeitherContainerColor ==
+                                                            Colors.white) {
+                                                          NeitherContainerColor =
+                                                              activeneither;
+                                                          SpadeContainerColor =
+                                                              Colors.white;
+                                                          NeuteredContainerColor =
+                                                              Colors.white;
+                                                        } else {
+                                                          NeitherContainerColor =
+                                                              Colors.white;
+                                                        }
+                                                        if (NeitherContainerColor ==
+                                                            activeneither) {
+                                                          sex1 = 'neither';
+                                                        } else {
+                                                          print('FAILURE');
+                                                        }
+                                                      });
+                                                      _prefHelper.saveString(
+                                                          'sex', sex1);
+                                                    },
+                                                    child: ToggleContainer(
+                                                        size.height * 0.060,
+                                                        size.width * 0.30,
+                                                        'neither',
+                                                        _prefHelper.getStringByKey(
+                                                                    'sex',
+                                                                    '') ==
+                                                                'neither'
+                                                            ? MaaruColors
+                                                                .button2Color
+                                                            : NeuteredContainerColor)),
+                                              ],
+                                            )),
                                     const SizedBox(
                                       height: 20.0,
                                     ),
@@ -864,8 +917,8 @@ class _CreateregisterPetProfile1State extends State<CreateregisterPetProfile1> {
                                             : _prefHelper.getStringByKey(
                                                 'note', ''),
                                         TextInputType.text,
-                                        textStyle:
-                                            const TextStyle(color: Colors.black),
+                                        textStyle: const TextStyle(
+                                            color: Colors.black),
                                         textInputAction: TextInputAction.done,
                                         onChanged: (text) {},
                                         editingController: _noteContoller),

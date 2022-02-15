@@ -35,21 +35,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-   double opacity = 1.0;
-  @override
-  void initState() {
 
-    changeOpacity();
-    super.initState();
-  }
-  changeOpacity() {
-    Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        opacity = opacity == 0.0 ? 1.0 : 0.0;
-        changeOpacity();
-      });
-    });
-  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -260,10 +246,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     'assets/128/CrddystalGaskell.png'));
                                           }
                                         })
-                                    :  AnimatedOpacity(
-                                  opacity:opacity == 1 ? 0 : 1,
-                                  duration: Duration(seconds: 1),
-                                  child: const Text(' Data Not Found',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 30),),
+                                    :
+                                   const Text(' Data Not Found',style: TextStyle(color: Colors.grey,fontWeight: FontWeight.w800,fontSize: 15),
                                 );
                               }else {
                                 return const CircularProgressIndicator();
@@ -482,7 +466,6 @@ class _HorizListState extends State<HorizList> {
                           child: ListView.builder(
                               itemCount: state.covidModel.petProfiles.length,
                               scrollDirection: Axis.horizontal,
-                              reverse: true,
                               itemBuilder: (context, index) {
                                 return Padding(
                                     padding: index == Message.length - 1

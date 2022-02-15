@@ -194,8 +194,10 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                                         state
                                                                             .welcome2
                                                                             .getSinglePe
-                                                                            .notes
+                                                                            .notes,
+
                                                                       ],
+                                                                      image: state.welcome2.getSinglePe.img.toString(),
                                                                     )));
                                                       },
                                                       child: Image.asset(

@@ -28,9 +28,9 @@ class CreateRegisterPetProfile3 extends StatefulWidget {
   final String temprature;
   final String feeding;
   final List notes;
-
+final String image;
   const CreateRegisterPetProfile3(
-      {Key key, this.walking, this.temprature, this.feeding, this.notes})
+      {Key key, this.walking, this.temprature, this.feeding, this.notes, this.image})
       : super(key: key);
   @override
   _CreateRegisterPetProfile3State createState() =>
@@ -249,7 +249,8 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                               alignment: Alignment.bottomRight,
                               //height: size.height * 0.20,
                               // width: size.width * 0.9,
-                              child: Center(
+                              child:
+                              widget.image.isEmpty?Center(
                                 child: Image.network(
                                     _prefHelper.getStringByKey('img', ''),
                                     width: 450,
@@ -262,6 +263,19 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                       child: Image.asset(
                                           'assets/images/kutta.png'));
                                 }),
+                              ):Center(
+                                child: Image.network(
+                                   widget.image,
+                                    width: 450,
+                                    height: 250,
+                                    fit: BoxFit.fitWidth,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                          color: MaaruColors.DogsBackground,
+                                          alignment: Alignment.center,
+                                          child: Image.asset(
+                                              'assets/images/kutta.png'));
+                                    }),
                               )),
                           Padding(
                               padding: EdgeInsets.only(top: 30.0, bottom: 10),

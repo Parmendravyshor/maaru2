@@ -84,6 +84,37 @@ class _CreateUserProfileState extends State<CreateUserProfile>
   var textt2;
   @override
   Widget build(BuildContext context) {
+    if(_fnameController.text.isNotEmpty){
+       _prefHelper.saveString('first_name', _fnameController.text).toString();
+    }
+    else{
+      _fnameController.text = _prefHelper.getStringByKey('first_name', "");
+    }
+    if(_lnameController.text.isNotEmpty){
+     _prefHelper.saveString('last_name', _lnameController.text).toString();
+    }
+    else{
+       _prefHelper.getStringByKey('last_name', "");
+    }
+    if(_image.isNotEmpty){
+      _image = _prefHelper.saveString('img', _image).toString();
+    }
+    else{
+      _image = _prefHelper.getStringByKey('img', '');
+    }
+    if(_mobileController.text.isNotEmpty){
+       _prefHelper.saveString('phone_no',  _mobileController.text).toString();
+    }
+    else{
+      _mobileController.text = _prefHelper.getStringByKey('phone_no', "");
+    }
+
+    if(_cityController.text.isNotEmpty){
+     _prefHelper.saveString('city',  _cityController.text).toString();
+    }
+    else{
+      _cityController.text = _prefHelper.getStringByKey('city', "");
+    }
     final size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (context) => KiwiContainer().resolve<SettingBloc>(),
@@ -104,12 +135,8 @@ class _CreateUserProfileState extends State<CreateUserProfile>
             Navigator.of(_keyLoader.currentContext, rootNavigator: true);
             //    Navigator.of(context).pop();
           } catch (e) {}
-          _image = _prefHelper.getStringByKey('img', '');
-          _fnameController.text = _prefHelper.getStringByKey('first_name', "");
-          _mobileController.text = _prefHelper.getStringByKey('phone_no', "");
-          _lnameController.text = _prefHelper.getStringByKey('last_name', "");
-          _cityController.text = _prefHelper.getStringByKey('city', "");
-          _emailController.text =_prefHelper.getEmail();
+
+
           // if (state is UserPetProfileButtonTapped) {
           //   _status = true;
           // }
@@ -132,7 +159,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: _image.isEmpty
+                          image: Image.network(_image) !=null
                               ? ExactAssetImage(
                                   'assets/icons/icone-setting-28.png')
                               : FileImage(File(_image)),
@@ -230,9 +257,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                           // BlocProvider.of<RegisterBloc>(context)
                           // .add(PasswordChanged(text));
                         },
-                        onSaved: (text) {
-                          text = _mobileController.text;
-                        },
+
                         editingController: _mobileController,
                       ),
                       Row(

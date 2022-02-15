@@ -124,7 +124,7 @@ class _MessagesState extends State<Messages> {
             if (state is LoginInitial) {
               BlocProvider.of<LoginBloc>(context).add(event.GetProvider(''));
 
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             } else if (state is ProviderLoaded1) {
               return SafeArea(
                   bottom: false,
