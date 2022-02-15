@@ -692,7 +692,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                         }
                         text = 'walking';
                         print(text);
-
+///
                         BlocProvider.of<LoginBloc>(context)
                             .add(event.GetProvider(text));
                       },
