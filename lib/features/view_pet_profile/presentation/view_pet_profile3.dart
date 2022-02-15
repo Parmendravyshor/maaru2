@@ -423,14 +423,14 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                                       CrossAxisAlignment
                                                                           .start,
                                                                   children: [
-                                                                    Text(
-                                                                      state.welcome2.getSinglePe.temperament.isNotEmpty.toString() !=
-                                                                              null
-                                                                          ? ''
-                                                                          : state
-                                                                              .welcome2
-                                                                              .getSinglePe
-                                                                              .temperament,
+                                                                    Text('',
+                                                                      // state.welcome2.getSinglePe.temperament.toString() ==null
+                                                                      //
+                                                                      //     ? ''
+                                                                      //     : state
+                                                                      //         .welcome2
+                                                                      //         .getSinglePe
+                                                                      //         .temperament,
                                                                       // state.welcome2.getSinglePe.notes.
                                                                       style: MaaruStyle
                                                                           .text
@@ -451,16 +451,16 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                                       height:
                                                                           10,
                                                                     ),
-                                                                    Text(
-                                                                      state.welcome2.getSinglePe
-                                                                              .walkingSchedule
-                                                                              .toString()
-                                                                              .isEmpty
-                                                                          ? ''
-                                                                          : state
-                                                                              .welcome2
-                                                                              .getSinglePe
-                                                                              .temperament,
+                                                                    Text('',
+                                                                      // state.welcome2.getSinglePe
+                                                                      //         .walkingSchedule
+                                                                      //         .toString()
+                                                                      //         .isEmpty
+                                                                      //     ? ''
+                                                                      //     : state
+                                                                      //         .welcome2
+                                                                      //         .getSinglePe
+                                                                      //         .temperament,
                                                                       style: MaaruStyle
                                                                           .text
                                                                           .greyDisable,
