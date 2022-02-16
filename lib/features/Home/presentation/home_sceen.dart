@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         scrollDirection: Axis.vertical,
                                         physics: const ScrollPhysics(),
                                         shrinkWrap: true,
-                                        reverse: true,
+                                        reverse: false,
                                         itemCount: state
                                             .upcomingPastAppointmentModel
                                             .upcomingBookings
@@ -260,14 +260,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (_) => AppointmentScreen()));
                           },
-                          text: 'View All Appoinments',
+                          text: 'View All Appoinments'.toUpperCase(),
                           enabled: true,
                         ),
                          SizedBox(
                           height: size.height*0.02,
                         ),
                         Text(
-                          'Recent Messages',
+                          'Recent Messages'.toUpperCase(),
                           style: MaaruStyle.text.tiny,
                         ),
                         Padding(
@@ -287,10 +287,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('Austin Pet Groomers',
+                                        Text('Austin Pet Groomers'.toUpperCase(),
                                             style: MaaruStyle.text.tiny),
-                                        const Text(
-                                          'Aug 8,2021 11:00am',
+                                         Text(
+                                          'Aug 8,2021 11:00am'.toUpperCase(),
                                           style: TextStyle(
                                               color: Colors.grey,
                                               fontSize: 11),
@@ -300,13 +300,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const SizedBox(
                                       height: 3,
                                     ),
-                                    Text('Pet Grooming',
+                                    Text('Pet Grooming'.toUpperCase(),
                                         style: MaaruStyle.text.tiny),
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    const Text(
-                                      'Roscoe needs a trim and was wanting to know if we  could move up our appointmenr?',
+                                     Text(
+                                      'Roscoe needs a trim and was wanting to know if we  could move up our appointmenr?'.toUpperCase(),
                                       style: TextStyle(
                                           color: Colors.grey, fontSize: 11),
                                     ),
@@ -324,8 +324,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     builder: (_) =>
                                                         ChatScreen()));
                                           },
-                                          child: const Text(
-                                            'Show Message',
+                                          child:  Text(
+                                            'Show Message'.toUpperCase(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 12,
@@ -344,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (_) => Messages()));
                           },
-                          text: ' All messages',
+                          text: ' All messages'.toUpperCase(),
                           enabled: true,
                         ),
                         const SizedBox(
@@ -540,7 +540,7 @@ class _HorizListState extends State<HorizList> {
                                                                     .petProfiles[
                                                                         index]
                                                                     .petName
-                                                                    .toString(),
+                                                                    .toString().toUpperCase(),
                                                                 style:
                                                                     GoogleFonts
                                                                         .poppins(
@@ -566,7 +566,7 @@ class _HorizListState extends State<HorizList> {
                                                                   .petProfiles[
                                                                       index]
                                                                   .breedType
-                                                                  .toString(),
+                                                                  .toString().toUpperCase(),
                                                               style: MaaruStyle
                                                                   .text.medium,
                                                             ))

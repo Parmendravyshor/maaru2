@@ -74,7 +74,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   int s;
   double p;
   var aa;
-  var bb;
+  var bb ='';
   var cc;
   var test = '10:00 AM';
   var test1 = '10:30 AM';
@@ -272,7 +272,10 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
         formatButtonVisible: false,
       ),
       builders: CalendarBuilders(
-        selectedDayBuilder: (context, date, _) {
+        selectedDayBuilder: (context, date, _,) {
+        var  date3 = '${DateTime.february}';
+        print("weekday is ${date.weekday}");
+        print('dddfdfyudfydfdfdfd$date3');
           date1 =
               '${date.month.toString()}-${date.day.toString().padLeft(2, '0')}-${date.year.toString().padLeft(2, '0')}';
           aa = date1;
@@ -300,6 +303,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
           );
         },
         todayDayBuilder: (context, date, _) {
+          print('fffjfhffh${date.weekday}',);
           date1 =
               '${date.month.toString()}-${date.day.toString().padLeft(2, '0')}-${date.year.toString().padLeft(2, '0')}';
           print('gfgffhjgfhj${date1}');
@@ -525,6 +529,8 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                               context)
                                                           .add((providerIdChanged(
                                                               widget.id3)));
+
+
                                                       // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(widget.id3)));
                                                       // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(int.parse(const ChoiceRow(lebal1: '12:30',).toString()))));
                                                       BlocProvider.of<
@@ -730,7 +736,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                     ],
                   ),
                   Container(
-                      height:size.height*0.6,
+                      height:size.height*0.5,
                       width: 400,
                       child: buildTableCalendarWithBuilders()),
                   Align(
@@ -1326,6 +1332,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                                                           index]
                                                                       .id
                                                                       .toString();
+                                                                  print('dddd$bb');
                                                                   setState(() {
                                                                     if (date1
                                                                         .isEmpty) {

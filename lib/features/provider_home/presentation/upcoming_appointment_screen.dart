@@ -51,6 +51,7 @@ class _UpcomingAppointmentCalender1State
 
   @override
   Widget build(BuildContext context) {
+
     double calendercontainer = 0;
     actiontaken actionchoosen = actiontaken.none;
     String switchimage = 'images/icone-setting.png';
@@ -85,17 +86,19 @@ class _UpcomingAppointmentCalender1State
                 return SafeArea(
                     child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //  BackArrowButton(),
                           SizedBox(
-                            height: 20,
+                            height: size.height*0.02,
                           ),
-                          ShowLocation(),
+                          Container(
+                              margin: EdgeInsets.only(left: 13,right: 13),
+                              child: ShowLocation()),
                           SizedBox(
-                            height: 20,
+                            height: size.height*0.02,
                           ),
                           Padding(
                               padding:
@@ -192,8 +195,8 @@ class _UpcomingAppointmentCalender1State
                           Container(
                               margin: EdgeInsets.only(left: 20, right: 20),
                               child: Text(
-                                'Upcoming Appointment',
-                                style: MaaruStyle.text.tiniest,
+                                'Upcoming Appointment'.toUpperCase(),
+                                style: MaaruStyle.text.tiny,
                               )),
                           const SizedBox(
                             height: 20,
@@ -285,7 +288,7 @@ class _UpcomingAppointmentCalender1State
                                                                   .companyName
                                                                   .toString(),
                                                               style: MaaruStyle
-                                                                  .text.tiniest,
+                                                                  .text.tiny,
                                                             ),
                                                             Text(
                                                               state
@@ -293,17 +296,17 @@ class _UpcomingAppointmentCalender1State
                                                                   .confirmed[
                                                                       index]
                                                                   .service
-                                                                  .toString(),
+                                                                  .toString().toUpperCase(),
                                                               style: MaaruStyle
-                                                                  .text.tiny,
+                                                                  .text.medium,
                                                             ),
                                                             SizedBox(
                                                               height:
                                                                   size.height *
                                                                       0.02,
                                                             ),
-                                                            const Text(
-                                                              '1357 muno manor',
+                                                             Text(
+                                                              '1357 muno manor'.toUpperCase(),
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .grey,
@@ -312,8 +315,8 @@ class _UpcomingAppointmentCalender1State
                                                                       FontWeight
                                                                           .w900),
                                                             ),
-                                                            const Text(
-                                                              'Austin,Tx 75923',
+                                                             Text(
+                                                              'Austin,Tx 75923'.toUpperCase(),
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .grey,
@@ -333,7 +336,7 @@ class _UpcomingAppointmentCalender1State
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .end,
-                                                          children: const [
+                                                          children:  [
                                                             Icon(
                                                               Icons
                                                                   .calendar_today_outlined,
@@ -345,7 +348,7 @@ class _UpcomingAppointmentCalender1State
                                                             ),
                                                             // functions.sizebox(height: size.width * 0.070),
                                                             Text(
-                                                              'Aug,21,2021',
+                                                              'Aug,21,2021'.toUpperCase(),
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .grey,
@@ -355,7 +358,7 @@ class _UpcomingAppointmentCalender1State
                                                                           .w900),
                                                             ),
                                                             Text(
-                                                              '11:00 am',
+                                                              '11:00 am'.toUpperCase(),
                                                               style: TextStyle(
                                                                   fontSize: 12),
                                                             ),
@@ -383,8 +386,8 @@ class _UpcomingAppointmentCalender1State
                                       left: 20, right: 20, top: 10),
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    'Past Appointment',
-                                    style: MaaruStyle.text.tiniest,
+                                    'Past Appointment'.toUpperCase(),
+                                    style: MaaruStyle.text.tiny,
                                   )),
                               const SizedBox(
                                 height: 20,
@@ -471,7 +474,7 @@ class _UpcomingAppointmentCalender1State
                                                                       index]
                                                                   .companyName,
                                                               style: MaaruStyle
-                                                                  .text.tiniest,
+                                                                  .text.tiny,
                                                             ),
                                                             Text(
                                                               state
@@ -480,15 +483,15 @@ class _UpcomingAppointmentCalender1State
                                                                       index]
                                                                   .service,
                                                               style: MaaruStyle
-                                                                  .text.tiny,
+                                                                  .text.medium,
                                                             ),
                                                             SizedBox(
                                                               height:
                                                                   size.height *
                                                                       0.02,
                                                             ),
-                                                            const Text(
-                                                              '1357 muno manor',
+                                                             Text(
+                                                              '1357 muno manor'.toUpperCase(),
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .grey,
@@ -497,8 +500,8 @@ class _UpcomingAppointmentCalender1State
                                                                       FontWeight
                                                                           .w900),
                                                             ),
-                                                            const Text(
-                                                              'Austin,Tx 75923',
+                                                             Text(
+                                                              'Austin,Tx 75923'.toUpperCase(),
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .grey,
@@ -518,7 +521,7 @@ class _UpcomingAppointmentCalender1State
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .end,
-                                                          children: const [
+                                                          children:  [
                                                             Icon(
                                                               Icons
                                                                   .calendar_today_outlined,
@@ -530,7 +533,7 @@ class _UpcomingAppointmentCalender1State
                                                             ),
                                                             // functions.sizebox(height: size.width * 0.070),
                                                             Text(
-                                                              'Aug,21,2021',
+                                                              'Aug,21,2021'.toUpperCase(),
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .grey,
@@ -540,7 +543,7 @@ class _UpcomingAppointmentCalender1State
                                                                           .w900),
                                                             ),
                                                             Text(
-                                                              '11:00 am',
+                                                              '11:00 am'.toUpperCase(),
                                                               style: TextStyle(
                                                                   fontSize: 12),
                                                             ),
@@ -573,7 +576,7 @@ class _UpcomingAppointmentCalender1State
                                       left: 20, right: 20, top: 10),
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    'Decline Appointment',
+                                    'Decline Appointment'.toUpperCase(),
                                     style: MaaruStyle.text.tiniest,
                                   )),
                               const SizedBox(
@@ -647,24 +650,24 @@ class _UpcomingAppointmentCalender1State
                                                           state
                                                               .upcomingPastAppointmentModel
                                                               .cancelled[index]
-                                                              .companyName,
+                                                              .companyName.toUpperCase(),
                                                           style: MaaruStyle
-                                                              .text.tiniest,
+                                                              .text.tiny,
                                                         ),
                                                         Text(
                                                           state
                                                               .upcomingPastAppointmentModel
                                                               .cancelled[index]
-                                                              .service,
+                                                              .service.toUpperCase(),
                                                           style: MaaruStyle
-                                                              .text.tiny,
+                                                              .text.medium,
                                                         ),
                                                         SizedBox(
                                                           height: size.height *
                                                               0.02,
                                                         ),
-                                                        const Text(
-                                                          '1357 muno manor',
+                                                         Text(
+                                                          '1357 muno manor'.toUpperCase(),
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.grey,
@@ -673,8 +676,8 @@ class _UpcomingAppointmentCalender1State
                                                                   FontWeight
                                                                       .w900),
                                                         ),
-                                                        const Text(
-                                                          'Austin,Tx 75923',
+                                                         Text(
+                                                          'Austin,Tx 75923'.toUpperCase(),
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.grey,
@@ -694,7 +697,7 @@ class _UpcomingAppointmentCalender1State
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .end,
-                                                      children: const [
+                                                      children:  [
                                                         Icon(
                                                           Icons
                                                               .calendar_today_outlined,
@@ -705,7 +708,7 @@ class _UpcomingAppointmentCalender1State
                                                         ),
                                                         // functions.sizebox(height: size.width * 0.070),
                                                         Text(
-                                                          'Aug,21,2021',
+                                                          'Aug,21,2021'.toUpperCase(),
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.grey,
@@ -715,7 +718,7 @@ class _UpcomingAppointmentCalender1State
                                                                       .w900),
                                                         ),
                                                         Text(
-                                                          '11:00 am',
+                                                          '11:00 am'.toUpperCase(),
                                                           style: TextStyle(
                                                               fontSize: 12),
                                                         ),

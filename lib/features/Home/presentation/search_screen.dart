@@ -227,7 +227,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                                         .getProviderModel
                                                         .providersListing[index]
                                                         .companyName
-                                                        .toString(),
+                                                        .toString().toUpperCase(),
 
                                                     // _prefHelper.getStringByKey(MaruConstant.company_name, ''),
                                                     style: MaaruStyle.text.tiny,
@@ -254,7 +254,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                                         width: 10,
                                                       ),
                                                       Text(
-                                                        '${state.getProviderModel.providersListing[index].reviews} Reviews (${state.getProviderModel.providersListing[index].averageRating})',
+                                                        '${state.getProviderModel.providersListing[index].reviews} Reviews (${state.getProviderModel.providersListing[index].averageRating})'.toUpperCase(),
                                                         style:MaaruStyle.text.medium,
                                                       )
                                                     ],

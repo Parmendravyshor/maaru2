@@ -137,12 +137,14 @@ class _TestAppState extends State<TestApp> {
                       return SingleChildScrollView(
                         child: SafeArea(
                           child: Column(children: [
-                            const SizedBox(
-                              height: 20,
+                             SizedBox(
+                              height: size.height*0.02,
                             ),
                             InkWell(onTap:(){
                               Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ProviderSetting()));
-                            },child: ShowLocation()),
+                            },child: Container(
+                                margin: EdgeInsets.only(left: 20,right: 20),
+                                child: ShowLocation())),
                             const SizedBox(
                               height: 20,
                             ),
@@ -150,7 +152,7 @@ class _TestAppState extends State<TestApp> {
                               children: [
                                 Padding(
                                     padding:
-                                        EdgeInsets.only(left: 15, right: 20),
+                                        EdgeInsets.only(left: 20, right: 20),
                                     child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
@@ -262,8 +264,8 @@ class _TestAppState extends State<TestApp> {
                                         ])),
                               ],
                             ),
-                            const SizedBox(
-                              height: 20,
+                             SizedBox(
+                              height: size.height*0.02,
                             ),
 state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                            ListView.builder(
@@ -303,6 +305,7 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                                 .appointmentRequests[
                                                             index]
                                                                 .id));
+                                                    print('ffff${state.getProviderRequestModel.appointmentRequests[index].id}');
                                                     Navigator.of(
                                                         context).push(
                                                         MaterialPageRoute(
@@ -339,8 +342,8 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                             child: Padding(
                                               padding:
                                               const EdgeInsets.only(
-                                                  left: 15.0,
-                                                  right: 15.0,
+                                                  left: 20.0,
+                                                  right: 20.0,
                                                   bottom: 15,top: 10),
                                               child:
                                               Column(
@@ -348,9 +351,10 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                   MainAxisSize.min,
                                                   children: [
                                                     Container(
-                                                      padding: EdgeInsets.only(top: 10,right: 10),
-                                                        height: 150,
+                                                      padding: EdgeInsets.only(top: 20,right: 20),
+                                                        height: size.height*0.18,
                                                         decoration: BoxDecoration(
+
                                                             border: Border
                                                                 .all(
                                                                 color: Colors
@@ -384,11 +388,11 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                                             .getProviderRequestModel
                                                                             .appointmentRequests[index]
                                                                             .companyName
-                                                                            .toString(),
+                                                                            .toString().toUpperCase(),
                                                                         style:
                                                                         MaaruStyle
                                                                             .text
-                                                                            .tiniest,
+                                                                            .tiny,
                                                                         textAlign: TextAlign
                                                                             .justify),
                                                                   ),
@@ -436,7 +440,7 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                                         .getProviderRequestModel
                                                                         .appointmentRequests[index]
                                                                         .service
-                                                                        .toString(),
+                                                                        .toString().toUpperCase(),
                                                                     style:
                                                                     MaaruStyle
                                                                         .text
@@ -452,7 +456,7 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                                     .getProviderRequestModel
                                                                     .appointmentRequests[index]
                                                                     .bookingStartTime
-                                                                    .toString(),)
+                                                                    .toString().toUpperCase(),)
                                                               ],
                                                             ),
                                                             Expanded(
@@ -473,11 +477,11 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                                             .getProviderRequestModel
                                                                             .appointmentRequests[index]
                                                                             .companyCity
-                                                                            .toString()} ${a[index]
+                                                                            .toString().toUpperCase()} ${a[index]
                                                                             .companyZipCode
-                                                                            .toString()} ${a[index]
+                                                                            .toString().toUpperCase()} ${a[index]
                                                                             .companyState
-                                                                            .toString()}'),
+                                                                            .toString().toUpperCase()}'),
                                                                   )),
                                                             ),
                                                             Expanded(
@@ -520,8 +524,8 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                                                 BookedConfirm(id4: state.getProviderRequestModel.appointmentRequests[index].id,)));
                                                                       },
                                                                       child:
-                                                                      const Text(
-                                                                        'View Details',
+                                                                       Text(
+                                                                        'View Details'.toUpperCase(),
                                                                         style: TextStyle(
                                                                             color: Colors
                                                                                 .white,

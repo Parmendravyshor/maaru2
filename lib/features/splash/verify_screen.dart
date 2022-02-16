@@ -51,7 +51,7 @@ final size = MediaQuery.of(context).size;
                       builder: (context) => AfterSplashScreen()));
                 },
                 child: RoundedButton(
-                  buttonName: 'I AM A CUSTOMER',
+                  buttonName: 'I AM A CUSTOMER'.toUpperCase(),
                   Color: MaaruColors.blueColor,
                   Color1: MaaruColors.whiteColor,
                 ),
@@ -65,7 +65,7 @@ final size = MediaQuery.of(context).size;
                       builder: (context) => LoginProviderScreen()));
                 },
                 child: RoundedButton(
-                  buttonName: 'I AM A PROVIDER',
+                  buttonName: 'I AM A PROVIDER'.toUpperCase(),
                   Color1: MaaruColors.blueColor,
                   Color: MaaruColors.button2Color,
                 ),

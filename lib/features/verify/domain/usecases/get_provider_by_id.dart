@@ -5,6 +5,11 @@ import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import 'get_providers.dart';
 import 'dart:convert';
+// To parse this JSON data, do
+//
+//     final welcome4 = welcome4FromJson(jsonString);
+
+import 'dart:convert';
 class GetProviderById implements UseCase<void, int> {
   UserRepository userRepository;
   GetProviderById(this.userRepository);
@@ -13,6 +18,8 @@ class GetProviderById implements UseCase<void, int> {
     return userRepository.getProviderById(id1);
   }
 }
+
+
 Welcome4 welcome4FromJson(String str) => Welcome4.fromJson(json.decode(str));
 
 String welcome4ToJson(Welcome4 data) => json.encode(data.toJson());
@@ -26,6 +33,7 @@ class Welcome4 {
     this.fiveStarView,
     this.average,
     this.tax,
+    this.bookedTimes,
   });
 
   ProviderDetails providerDetails;
@@ -35,6 +43,7 @@ class Welcome4 {
   int fiveStarView;
   String average;
   String tax;
+  List<String> bookedTimes;
 
   factory Welcome4.fromJson(Map<String, dynamic> json) => Welcome4(
     providerDetails: ProviderDetails.fromJson(json["provider_details"]),
@@ -44,6 +53,7 @@ class Welcome4 {
     fiveStarView: json["five_Star_View"],
     average: json["average"],
     tax: json["tax"],
+    bookedTimes: List<String>.from(json["booked_times"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
@@ -54,6 +64,7 @@ class Welcome4 {
     "five_Star_View": fiveStarView,
     "average": average,
     "tax": tax,
+    "booked_times": List<dynamic>.from(bookedTimes.map((x) => x)),
   };
 }
 
@@ -173,6 +184,7 @@ class Provider {
   Provider({
     this.img,
     this.operationHours,
+    this.specialOperationHours,
     this.id,
     this.userId,
     this.companyName,
@@ -187,7 +199,7 @@ class Provider {
     this.latitude,
     this.description,
     this.providerOperationHours,
-    this.specialOperationHours,
+    this.providerSpecialOperationHours,
     this.averageRating,
     this.reviews,
     this.createdAt,
@@ -196,6 +208,7 @@ class Provider {
 
   String img;
   OperationHours operationHours;
+  SpecialOperationHours specialOperationHours;
   int id;
   int userId;
   String companyName;
@@ -210,7 +223,7 @@ class Provider {
   String latitude;
   dynamic description;
   String providerOperationHours;
-  String specialOperationHours;
+  String providerSpecialOperationHours;
   String averageRating;
   String reviews;
   DateTime createdAt;
@@ -219,6 +232,7 @@ class Provider {
   factory Provider.fromJson(Map<String, dynamic> json) => Provider(
     img: json["img"],
     operationHours: OperationHours.fromJson(json["operationHours"]),
+    specialOperationHours: SpecialOperationHours.fromJson(json["specialOperationHours"]),
     id: json["id"],
     userId: json["user_id"],
     companyName: json["company_name"],
@@ -233,7 +247,7 @@ class Provider {
     latitude: json["latitude"],
     description: json["description"],
     providerOperationHours: json["operation_hours"],
-    specialOperationHours: json["special_operation_hours"],
+    providerSpecialOperationHours: json["special_operation_hours"],
     averageRating: json["average_rating"],
     reviews: json["reviews"],
     createdAt: DateTime.parse(json["createdAt"]),
@@ -243,6 +257,7 @@ class Provider {
   Map<String, dynamic> toJson() => {
     "img": img,
     "operationHours": operationHours.toJson(),
+    "specialOperationHours": specialOperationHours.toJson(),
     "id": id,
     "user_id": userId,
     "company_name": companyName,
@@ -257,7 +272,7 @@ class Provider {
     "latitude": latitude,
     "description": description,
     "operation_hours": providerOperationHours,
-    "special_operation_hours": specialOperationHours,
+    "special_operation_hours": providerSpecialOperationHours,
     "average_rating": averageRating,
     "reviews": reviews,
     "createdAt": createdAt.toIso8601String(),
@@ -286,10 +301,10 @@ class Week {
     this.day,
   });
 
-  Day day;
+  Date day;
 
   factory Week.fromJson(Map<String, dynamic> json) => Week(
-    day: Day.fromJson(json["day"]),
+    day: Date.fromJson(json["day"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -297,31 +312,51 @@ class Week {
   };
 }
 
-class Day {
-  Day({
+class Date {
+  Date({
     this.name,
     this.status,
     this.startTime,
     this.endTime,
+    this.date,
   });
 
   String name;
   bool status;
   String startTime;
   String endTime;
+  DateTime date;
 
-  factory Day.fromJson(Map<String, dynamic> json) => Day(
-    name: json["name"],
+  factory Date.fromJson(Map<String, dynamic> json) => Date(
+    name: json["name"] == null ? null : json["name"],
     status: json["status"],
     startTime: json["start_time"] == null ? null : json["start_time"],
     endTime: json["end_time"] == null ? null : json["end_time"],
+    date: json["date"] == null ? null : DateTime.parse(json["date"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
+    "name": name == null ? null : name,
     "status": status,
     "start_time": startTime == null ? null : startTime,
     "end_time": endTime == null ? null : endTime,
+    "date": date == null ? null : "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
+  };
+}
+
+class SpecialOperationHours {
+  SpecialOperationHours({
+    this.dates,
+  });
+
+  List<Date> dates;
+
+  factory SpecialOperationHours.fromJson(Map<String, dynamic> json) => SpecialOperationHours(
+    dates: List<Date>.from(json["dates"].map((x) => Date.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "dates": List<dynamic>.from(dates.map((x) => x.toJson())),
   };
 }
 

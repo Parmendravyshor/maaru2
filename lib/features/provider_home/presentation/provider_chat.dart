@@ -146,9 +146,9 @@ class Chat2State extends State<Chat2> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.maybeOf(context).size;
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Color(0xfff9f9f9),
       appBar: AppBar(
-        toolbarHeight: 190,
+        toolbarHeight: size.height*0.20,
         elevation: 0,
 
         // Set this height
@@ -156,10 +156,10 @@ class Chat2State extends State<Chat2> {
           color: Colors.white,
           child: Column(
             children: [
-              const SizedBox(height: 30),
+               SizedBox(height: size.height*0.03),
               BackArrowButton(),
               Container(
-                height: 75,
+                height: size.height*0.10,
                 padding: const EdgeInsets.only(right: 20),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -170,7 +170,7 @@ class Chat2State extends State<Chat2> {
                 child:   Image.asset('assets/128/AlanPost.png'),
               ),
               SizedBox(
-                height: 20,
+                height: size.height*0.00,
               ),
               Text(
                 'OSCAR',

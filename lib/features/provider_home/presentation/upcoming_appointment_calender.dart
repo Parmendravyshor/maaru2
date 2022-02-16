@@ -54,6 +54,7 @@ class _UpcomingAppointmentCalenderState
 
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     var selectedIndex;
     return Scaffold(
         backgroundColor: MaaruColors.whiteColor,
@@ -79,14 +80,16 @@ class _UpcomingAppointmentCalenderState
                       child: Column(
                     children: [
                       SizedBox(
-                        height: 20,
+                        height: size.height*0.02,
                       ),
-                      ShowLocation(),
+                      Container(
+                          margin: EdgeInsets.only(left: 20,right: 20),
+                          child: ShowLocation()),
                       SizedBox(
-                        height: 30,
+                        height: size.height*0.02,
                       ),
                       Padding(
-                          padding: EdgeInsets.only(left: 10, right: 10),
+                          padding: EdgeInsets.only(left: 20, right: 20),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -110,7 +113,7 @@ class _UpcomingAppointmentCalenderState
                                         hintStyle: MaaruStyle.text.greyDisable,
                                         contentPadding:
                                             const EdgeInsets.fromLTRB(
-                                                20.0, 15.0, 25.0, 10.0),
+                                                10.0, 20.0, 20.0, 10),
                                         fillColor: Colors.white,
                                         suffixIcon: InkWell(
                                           onTap: () {
@@ -161,21 +164,21 @@ class _UpcomingAppointmentCalenderState
                                     )),
                               ])),
                       Container(
-                          height: 440,
+                          height: size.height*0.48,
                           width: 400,
                           color: Colors.white,
                           child: Appointments(widget.text)),
 
                       // ),),),
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: size.height*0.02,
                       ),
                       Container(
                           alignment: Alignment.topLeft,
                           margin: EdgeInsets.only(left: 20, right: 0),
                           child: Text(
-                            'Upcoming Appointment',
-                            style: MaaruStyle.text.tiniest,
+                              'Upcoming Appointment'.toUpperCase(),
+                            style: MaaruStyle.text.tiny,
                           )),
                       state.upcomingPastAppointmentModel.confirmed.isNotEmpty?
                       ListView.builder(
@@ -188,7 +191,7 @@ class _UpcomingAppointmentCalenderState
                           itemBuilder: (BuildContext context, int index) {
 
                             return Container(
-                              margin: const EdgeInsets.all(10),
+                              margin: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
                               height: 170,
                               width: 400,
                               decoration: BoxDecoration(
@@ -228,7 +231,7 @@ class _UpcomingAppointmentCalenderState
                                                 state
                                                     .upcomingPastAppointmentModel
                                                     .confirmed[index]
-                                                    .companyName.toString(),
+                                                    .companyName.toString().toUpperCase(),
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 15),
@@ -237,20 +240,20 @@ class _UpcomingAppointmentCalenderState
                                                 state
                                                     .upcomingPastAppointmentModel
                                                     .confirmed[index]
-                                                    .service,
+                                                    .service.toUpperCase(),
                                                 style: TextStyle(fontSize: 14),
                                               ),
                                               SizedBox(
                                                 height: 20,
                                               ),
                                               Text(
-                                                '${state.upcomingPastAppointmentModel.confirmed[index].state.toString()}${state.upcomingPastAppointmentModel.confirmed[index].city.toString()}',
+                                                '${state.upcomingPastAppointmentModel.confirmed[index].state.toString()}${state.upcomingPastAppointmentModel.confirmed[index].city.toString().toUpperCase()}',
                                                 style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 12),
                                               ),
                                               Text(
-                                                '${state.upcomingPastAppointmentModel.confirmed[index].zipCode.toString()}',
+                                                '${state.upcomingPastAppointmentModel.confirmed[index].zipCode.toString().toUpperCase()}',
                                                 style: TextStyle(
                                                     color: Colors.grey,
                                                     fontSize: 12),
@@ -276,7 +279,7 @@ class _UpcomingAppointmentCalenderState
                                               height: 36,
                                             ),
                                             Text(
-                                              "${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.month.toString().padLeft(2, '0')}-${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.day.toString().padLeft(2, '0')}-${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.year.toString().padLeft(2, '0')}",
+                                              "${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.month.toString().padLeft(2, '0')}-${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.day.toString().toUpperCase().padLeft(2, '0')}-${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.year.toString().toUpperCase().padLeft(2, '0')}",
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 12),
@@ -286,7 +289,7 @@ class _UpcomingAppointmentCalenderState
                                                   .upcomingPastAppointmentModel
                                                   .cancelled[index]
                                                   .bookingStartTime
-                                                  .toString(),
+                                                  .toString().toUpperCase(),
 
                                               //   state.getProviderRequestModel.appointmentRequests[index]
                                               style: TextStyle(
@@ -323,8 +326,8 @@ class _UpcomingAppointmentCalenderState
                                                 BorderRadius.circular(20),
                                             border:
                                                 Border.all(color: Colors.white)),
-                                        child: const Text(
-                                          'View Details',
+                                        child:  Text(
+                                          'View Details'.toUpperCase(),
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w700),

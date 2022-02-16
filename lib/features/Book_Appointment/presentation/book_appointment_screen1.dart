@@ -318,18 +318,20 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                   ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: true,
-                                      reverse: true,
+                                      physics: AlwaysScrollableScrollPhysics(),
                                       itemCount: state.welcome4.providerDetails
                                           .provider.operationHours.week.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Column(
                                           children: [
+                                            state.welcome4.providerDetails.provider.operationHours.week[index].day.status ==true?
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: [
+
                                                 Text(
                                                   state
                                                       .welcome4
@@ -343,25 +345,22 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                                   style: MaaruStyle
                                                       .text.greyDisable,
                                                 ),
-                                                Text(
+                                              Text(
+
                                                   '${state.welcome4.providerDetails.provider.operationHours.week[index].day.startTime.toString()} - ${state.welcome4.providerDetails.provider.operationHours.week[index].day.endTime.toString()}',
                                                   style:
                                                       MaaruStyle.text.tiny,
                                                 ),
                                               ],
-                                            ),
+                                            ):Text(''),
                                           ],
                                         );
                                       }),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
+
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+
                                   ThemedButton(
                                     onPressed: () {
                                       if (_prefHelper

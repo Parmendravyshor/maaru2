@@ -131,7 +131,7 @@ class _MessagesState extends State<Messages> {
                   child: SingleChildScrollView(
                     child: Column(children: [
                       SizedBox(
-                        height: 30,
+                        height: size.height*0.02,
                       ),
 
                       // Align(
@@ -191,14 +191,14 @@ class _MessagesState extends State<Messages> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: size.height*0.02,
                       ),
 
                       Column(
                         children: [
                           Container(
 
-                            height: size.height*0.10,
+                              height: size.height*0.10,
                             width: 400,
                             child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
@@ -256,7 +256,7 @@ class _MessagesState extends State<Messages> {
                                             padding: EdgeInsets.only(
                                                 left: 10, right: 20,top: 10),
                                             child: Container(
-                                                height: size.height*0.15,
+                                                height: size.height*0.12,
                                                 width: 400,
                                                 decoration: BoxDecoration(
                                                   color: Colors.grey[50],
@@ -287,7 +287,7 @@ class _MessagesState extends State<Messages> {
                                                           .providersListing[
                                                               index]
                                                           .companyName
-                                                          .toString(),
+                                                          .toString().toUpperCase(),
                                                       style:
                                                           MaaruStyle.text.tiny,
                                                     ),

@@ -181,7 +181,7 @@ print(id1);
                                 child: Align(
                                   alignment: Alignment.centerRight,
                                   child: Text(
-                                    'Forgot Password?',
+                                    'Forgot Password?'.toUpperCase(),
                                     style: MaaruStyle.text.greyDisable,
                                   ),
                                 )),
@@ -301,7 +301,7 @@ class GoToSignInText extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (_) => RegisterScreen()));
             },
             child: Text(
-              'Signup ',
+              'Signup '.toUpperCase(),
               style: MaaruStyle.text.mediumDisable,
             ))
       ],

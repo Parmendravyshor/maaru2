@@ -93,7 +93,7 @@ class _AfterSplashScreenState extends State<AfterSplashScreen> {
                         builder: (context) => LoginScreen()));
                   },
                   child: RoundedButton(
-                    buttonName: 'LOGIN',
+                    buttonName: 'LOGIN'.toUpperCase(),
                     Color1: MaaruColors.whiteColor,
                     Color: MaaruColors.primaryColorsuggesion,
                   ),
@@ -118,7 +118,7 @@ class _AfterSplashScreenState extends State<AfterSplashScreen> {
                           builder: (_) => RegisterScreen()));
                     },
                     child: Text(
-                      'Create account',
+                      'Create account'.toUpperCase(),
                       style: TextStyle(
                           color: MaaruColors.buttonColor,
                           fontWeight: FontWeight.bold,

@@ -18,7 +18,7 @@ import 'package:maru/features/provider_home/presentation/provider_chat.dart';
 import 'package:maru/features/login/presentation/bloc/bloc/login_event.dart'
     as event;
 
-class ProviderMessages extends StatefulWidget {
+class   ProviderMessages extends StatefulWidget {
   // const Messages({Key key}) : super(key: key);
 
   @override
@@ -28,6 +28,7 @@ class ProviderMessages extends StatefulWidget {
 class _ProviderMessagesState extends State<ProviderMessages> {
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
     var selectedIndex;
     return Scaffold(
@@ -51,8 +52,8 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                   bottom: false,
                   child: SingleChildScrollView(
                       child: Column(children: [
-                    const SizedBox(
-                      height: 30,
+                     SizedBox(
+                      height: size.height*0.02,
                     ),
 
                     // Align(
@@ -60,6 +61,7 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                     //
                     //         child:
                     Container(
+
                       alignment: Alignment.centerRight,
                       decoration: const BoxDecoration(
                         color: Colors.white,
@@ -102,22 +104,23 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                           },
                         )),
                     SizedBox(
-                      height: 30,
+                      height:size.height*0.02,
                     ),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        '   Customers',
-                        style: MaaruStyle.text.small,
+                        '   Customers'.toUpperCase(),
+                        style: MaaruStyle.text.tiny,
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: size.height*0.02,
                     ),
                         Column(
                           children: [
                             Container(
-                              height: 100,width: 400,
+
+                              height: size.height*0.10,width: 400,
                               child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   shrinkWrap: true,
@@ -128,7 +131,7 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Container(
-                                            width: 100,
+                                            width: size.width*0.18,
                                             child: Image.network(
                                               state
                                                   .getUserModel
@@ -146,9 +149,7 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                                         ]);
                                   }),
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
+
                             ListView.builder(
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
@@ -172,9 +173,9 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                                           alignment: Alignment.centerRight,
                                           child: Padding(
                                               padding: EdgeInsets.only(
-                                                  left: 10, right: 20),
+                                                  left: 10, right: 20,bottom: 10),
                                               child: Container(
-                                                  height: 120,
+                                                  height: size.height*0.12,
                                                   width: 400,
                                                   decoration: BoxDecoration(
                                                     color: Colors.grey[50],

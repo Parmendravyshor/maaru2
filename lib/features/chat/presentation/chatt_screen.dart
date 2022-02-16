@@ -214,7 +214,7 @@ class Chat1State extends State<Chat1> {
       backgroundColor:Color(0xfff9f9f9),
       appBar: AppBar(
         backgroundColor: Colors.white,
-        toolbarHeight: 150,
+        toolbarHeight: size.height*0.20,
         elevation: 0,
 
         // Set this height
@@ -225,7 +225,7 @@ class Chat1State extends State<Chat1> {
               SizedBox(height: size.height*0.03),
               BackArrowButton(),
               Container(
-                height:size.height*0.09,
+                  height:size.height*0.09,
 
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -359,7 +359,7 @@ class Chat1State extends State<Chat1> {
                                 ),
                           ),
                         ),
-                        Image.asset('assets/128/CrystalGaskell.png',height: 50,width: 50,),
+                        Image.asset('assets/128/CrystalGaskell.png',height: size.height*0.05,),
                       ],
                     );
               },

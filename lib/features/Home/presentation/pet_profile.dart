@@ -72,7 +72,7 @@ class _PetProfile1State extends State<PetProfile1> {
               width: size.width*0.10,
             ),
             Text(
-              'Add New Pet',
+              'Add New Pet'.toUpperCase(),
               style: MaaruStyle.text.mediumGreen,
             ),
           ]),
@@ -108,7 +108,7 @@ class _PetProfile1State extends State<PetProfile1> {
                                 alignment: Alignment.topLeft,
                                 child:   Container(
                                   height: 40,
-                                  width: 40,
+                                  width: size.width*0.12,
                                   decoration:  BoxDecoration(
                                     color: Colors.white,
                                     shape: BoxShape.circle,
@@ -180,7 +180,7 @@ class _PetProfile1State extends State<PetProfile1> {
                           child: ListView.builder(
                             itemCount: state.covidModel.petProfiles.length,
                             scrollDirection: Axis.vertical,
-                            reverse: true,
+                            reverse: false,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return
@@ -237,6 +237,7 @@ class _PetProfile1State extends State<PetProfile1> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
+                                            SizedBox(height: size.height*0.02,),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -246,8 +247,8 @@ class _PetProfile1State extends State<PetProfile1> {
                                                   state
                                                       .covidModel
                                                       .petProfiles[index]
-                                                      .petName,
-                                                  style: MaaruStyle.text.large,
+                                                      .petName.toString().toUpperCase(),
+                                                  style: MaaruStyle.text.tiny,
                                                 ),
                                                 Image.asset(
 
@@ -258,8 +259,8 @@ class _PetProfile1State extends State<PetProfile1> {
                                             ),
                                             Text(
                                               state.covidModel
-                                                  .petProfiles[index].breedType,
-                                              style: MaaruStyle.text.tiny,
+                                                  .petProfiles[index].breedType.toString().toUpperCase(),
+                                              style: MaaruStyle.text.medium,
                                             ),
                                             SizedBox(height: 10)
                                           ],

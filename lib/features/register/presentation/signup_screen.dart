@@ -145,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   Center(
                                     child: Text(
-                                        'or sign up with email',
+                                        'or sign up with email'.toUpperCase(),
                                         style: MaaruStyle.text.tiny
                                     ),
                                   ),
@@ -207,7 +207,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               height: 20,
                                             ),
                                             ThemedButton(
-                                                text: "JOIN",
+                                                text: "JOIN".toUpperCase(),
                                                 onPressed: () {
                                                   setState(() {
 
@@ -329,7 +329,7 @@ class GoToSignInText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Already a member? ',
+          'Already a member? '.toUpperCase(),
           style: MaaruStyle.text.medium,
         ),
         InkWell(
@@ -338,7 +338,7 @@ class GoToSignInText extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (_) => LoginScreen()));
             },
             child: Text(
-              'LOGIN',
+              'LOGIN'.toUpperCase(),
               style: MaaruStyle.text.mediumDisable,
             ))
       ],

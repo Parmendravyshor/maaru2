@@ -91,7 +91,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                 Test3(
                                   image: 'assets/icons/icone-setting-2.png',
                                   hite: 40,
-                                  text: 'Change Password',
+                                  text: 'Change Password'.toUpperCase(),
                                   size: 35,
                                   onPressed: () {
                                     Navigator.of(context).push(
@@ -106,7 +106,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                 Test3(
                                   image: 'assets/icons/icone-setting-3.png',
                                   hite: 40,
-                                  text: 'Payment',
+                                  text: 'Payment'.toUpperCase(),
                                   size: 130,
                                   onPressed: () {
                                     Navigator.of(context).push(
@@ -256,7 +256,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                 Test3(
                                   image: 'assets/icons/icone-setting-6.png',
                                   hite: 40,
-                                  text: 'Privacy Policy',
+                                  text: 'Privacy Policy'.toUpperCase(),
                                   size: 90,
                                   onPressed: ()  {
                                     Navigator.of(context).push(MaterialPageRoute(
@@ -269,7 +269,7 @@ class _AccountSettingScreenState extends State<AccountSettingScreen> {
                                 Test3(
                                   image: 'assets/icons/icone-setting-7.png',
                                   hite: 40,
-                                  text: 'Terms and  Conditions',
+                                  text: 'Terms and  Conditions'.toUpperCase(),
                                   size: 0,
                                   onPressed: () {
                                     Navigator.of(context).push(MaterialPageRoute(

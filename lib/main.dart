@@ -161,7 +161,7 @@ class MyApp extends StatelessWidget {
 // w on the buttom (Provider search screen)
 
 
-        home:   Scaffold(body: (SplashScreen())));
+        home:   Scaffold(body:(SplashScreen())));
 
   }
 }

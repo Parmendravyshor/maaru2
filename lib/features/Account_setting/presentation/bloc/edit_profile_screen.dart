@@ -84,6 +84,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
   var textt2;
   @override
   Widget build(BuildContext context) {
+    _emailController.text =_prefHelper.getEmail();
     if(_fnameController.text.isNotEmpty){
        _prefHelper.saveString('first_name', _fnameController.text).toString();
     }
@@ -96,12 +97,12 @@ class _CreateUserProfileState extends State<CreateUserProfile>
     else{
        _prefHelper.getStringByKey('last_name', "");
     }
-    if(_image.isNotEmpty){
-      _image = _prefHelper.saveString('img', _image).toString();
-    }
-    else{
-      _image = _prefHelper.getStringByKey('img', '');
-    }
+    // if(_image.isNotEmpty){
+    //   _image = _prefHelper.saveString('img', _image).toString();
+    // }
+    // else{
+    //   _image = _prefHelper.getStringByKey('img', '');
+    // }
     if(_mobileController.text.isNotEmpty){
        _prefHelper.saveString('phone_no',  _mobileController.text).toString();
     }
@@ -159,7 +160,7 @@ class _CreateUserProfileState extends State<CreateUserProfile>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: Image.network(_image) !=null
+                          image:_image.isEmpty
                               ? ExactAssetImage(
                                   'assets/icons/icone-setting-28.png')
                               : FileImage(File(_image)),

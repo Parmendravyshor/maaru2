@@ -118,7 +118,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                   ),
                                   Center(
                                     child: Text(
-                                      'or login with email',
+                                      'or login with email'.toUpperCase(),
                                       style: GoogleFonts.poppins(
                                           textStyle: const TextStyle(
                                               color: Colors.black,
@@ -135,7 +135,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                     Column(
                                         crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
-                                          ThemedTextField("Email", TextInputType.emailAddress,
+                                          ThemedTextField("Email".toUpperCase(), TextInputType.emailAddress,
                                               textinputaction2: TextInputAction.next,
                                               onChanged: (text) {
                                                 BlocProvider.of<LoginBloc>(context).add(event.EmailChanged(text));
@@ -144,7 +144,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                             height: 5,
                                           ),
                                           ThemedTextField(
-                                            "Password",
+                                            "Password".toUpperCase(),
                                             TextInputType.text,
                                             textinputaction2: TextInputAction.done,
                                             password: true,
@@ -165,7 +165,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                                                 ResetPasswordScreen()));
                                                   },
                                                   child: Text(
-                                                    'Forgot Password',
+                                                    'Forgot Password'.toUpperCase(),
                                                     style: MaaruStyle.text.greyDisable,
                                                   ))),
                                           SizedBox(
@@ -173,7 +173,7 @@ class _LoginProviderScreenState extends State<LoginProviderScreen> {
                                           ),
 
                                           ThemedButton(
-                                            text: 'Login',
+                                            text: 'Login'.toUpperCase(),
                                             onPressed: () {
                                               String email = _emailController.text;
                                               String password = _passwordController.text;
@@ -282,7 +282,7 @@ class GoToSignInText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'Not a member? ',
+          'Not a member? '.toUpperCase(),
           style: MaaruStyle.text.medium,
         ),
         InkWell(
@@ -291,7 +291,7 @@ class GoToSignInText extends StatelessWidget {
                   .push(MaterialPageRoute(builder: (_) =>ProviderWebViewSignup()));
             },
             child: Text(
-              'Signup ',
+              'Signup '.toUpperCase(),
               style: MaaruStyle.text.mediumDisable,
             ))
       ],

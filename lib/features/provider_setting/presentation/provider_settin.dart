@@ -70,7 +70,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  'Account Setting',
+                                  'Account Setting'.toUpperCase(),
                                   style: MaaruStyle.text.large,
                                 ),
                               ),
@@ -80,7 +80,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                               Test3(
                                 image: 'assets/icons/icone-setting-1.png',
                                 hite: 40,
-                                text: 'Edit Profile',
+                                text: 'Edit Profile'.toUpperCase(),
                                 size: 115,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
@@ -94,7 +94,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                               Test3(
                                 image: 'assets/icons/icone-setting-2.png',
                                 hite: 40,
-                                text: 'Change Password',
+                                text: 'Change Password'.toUpperCase(),
                                 size: 35,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
@@ -108,7 +108,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                               Test3(
                                 image: 'assets/icons/icone-setting-3.png',
                                 hite: 40,
-                                text: 'Transactions',
+                                text: 'Transactions'.toUpperCase(),
                                 size: 90,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
@@ -121,7 +121,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                               Test3(
                                 image: 'assets/icons/icone-setting-3.png',
                                 hite: 40,
-                                text: 'ACH Information',
+                                text: 'ACH Information'.toUpperCase(),
                                 size: 60,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
@@ -158,7 +158,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                         height: 40,
                                                       ),
                                                       Text(
-                                                        'Push Notification',
+                                                        'Push Notification'.toUpperCase(),
                                                         style: MaaruStyle
                                                             .text.tiniest,
                                                       ),
@@ -222,7 +222,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                         height: 40,
                                                       ),
                                                       Text(
-                                                        'Email Notification'
+                                                        'Email Notification'.toUpperCase()
                                                             .toUpperCase(),
                                                         style: MaaruStyle
                                                             .text.tiny,
@@ -265,7 +265,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                               Test3(
                                 image: 'assets/icons/icone-setting-6.png',
                                 hite: 40,
-                                text: 'Privacy Policy',
+                                text: 'Privacy Policy'.toUpperCase(),
                                 size: 90,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
@@ -278,7 +278,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                               Test3(
                                 image: 'assets/icons/icone-setting-7.png',
                                 hite: 40,
-                                text: 'Terms and  Conditions',
+                                text: 'Terms and  Conditions'.toUpperCase(),
                                 size: 0,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
