@@ -49,6 +49,16 @@ class AcceptRequestSuccessful extends ProviderHomeState{
   @override
   String toString() =>'AcceptRequestSuccessful';
 }
+class AcceptRequestDecline extends ProviderHomeState{
+  AcceptRequestDecline():super();
+  @override
+  String toString() =>'AcceptRequestSuccessful';
+}
+class AcceptRequestInProgress extends ProviderHomeState{
+  AcceptRequestInProgress():super();
+  @override
+  String toString() =>'AcceptRequestInProgress';
+}
 class DeclineRequestSuccessful extends ProviderHomeState{
   DeclineRequestSuccessful():super();
   @override

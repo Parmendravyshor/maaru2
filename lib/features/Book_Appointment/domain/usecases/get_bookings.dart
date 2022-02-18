@@ -9,7 +9,9 @@ class GetBookingss implements UseCase<void,String> {
   @override
   Future<Either<Failure, Bookingsss>> call(String id1) {
     return userRepository.getBookingss(id1);
+
   }
+
 }
 // To parse this JSON data, do
 //
@@ -72,7 +74,7 @@ class Datum {
   int providerId;
   String amount;
   int bookingId;
-  DateTime bookingDate;
+  dynamic bookingDate;
   String bookingTime;
   String status;
   String serviceName;

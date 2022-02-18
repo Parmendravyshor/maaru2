@@ -87,3 +87,9 @@ class FetchUpcomingAppointmentModelData extends BookAppointmentState {
   @override
   String toString() => "FetchUpcomingAppointmentModelData";
 }
+class PostDateBooking extends BookAppointmentState {
+ final Bookingdatemodels bookingdatemodels;
+  PostDateBooking(this.bookingdatemodels);@override
+  String toString() => "PostDateBooking";
+
+}

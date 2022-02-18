@@ -20,8 +20,9 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class Chat1 extends StatefulWidget {
   final String user;
-
-  const Chat1({Key key, this.user}) : super(key: key);
+final String img;
+final String name;
+  const Chat1({Key key, this.user, this.img, this.name}) : super(key: key);
 
   @override
   Chat1State createState() => Chat1State();
@@ -233,14 +234,24 @@ class Chat1State extends State<Chat1> {
                   shape: BoxShape.circle,
 
                 ),
-                child:   Image.asset('assets/128/AlanPost.png'),
+                child:   Image.network(
+                    widget.img,
+                    // width:450,
+                    // height: 250,
+                    fit: BoxFit.fitWidth,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                          color: Colors.white,
+                          alignment: Alignment.center,
+                          child: Image.asset('assets/images/kutta.png'));
+                    }),
               ),
 
               SizedBox(
                 height: size.height*0.01,
               ),
               Text(
-                'Ram',
+               widget.name,
                 style: MaaruStyle.text.tiny,
               ),
 

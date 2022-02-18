@@ -25,12 +25,21 @@ import 'register_pet_profile_screen2.dart';
 
 class CreateRegisterPetProfile3 extends StatefulWidget {
   final String walking;
+  final String petname;
+  final String brredType;
   final String temprature;
   final String feeding;
   final List notes;
-final String image;
+  final String image;
   const CreateRegisterPetProfile3(
-      {Key key, this.walking, this.temprature, this.feeding, this.notes, this.image})
+      {Key key,
+      this.walking,
+      this.temprature,
+      this.feeding,
+      this.notes,
+      this.image,
+      this.petname,
+      this.brredType})
       : super(key: key);
   @override
   _CreateRegisterPetProfile3State createState() =>
@@ -206,13 +215,14 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                 child: BlocBuilder<PetProfileBloc, PetProfileState>(
                     builder: (context, state) {
                   if (_walkingController.text.isEmpty) {
-                    _walkingController.text = widget.walking ==null?'':'';
+                    _walkingController.text = widget.walking == null ? '' : '';
                   }
                   if (_feedingController.text.isEmpty) {
-                    _feedingController.text = widget.feeding ==null?'':'';
+                    _feedingController.text = widget.feeding == null ? '' : '';
                   }
                   if (_tempramentController.text.isEmpty) {
-                    _tempramentController.text = widget.temprature ==null?'':'';
+                    _tempramentController.text =
+                        widget.temprature == null ? '' : '';
                   }
                   if (state is pet3rofileButtonTapped) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -249,34 +259,34 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                               alignment: Alignment.bottomRight,
                               //height: size.height * 0.20,
                               // width: size.width * 0.9,
-                              child:
-                              widget.image.isEmpty?Center(
-                                child: Image.network(
-                                    _prefHelper.getStringByKey('img', ''),
-                                    width: 450,
-                                    height: 250,
-                                    fit: BoxFit.fitWidth,
-                                    errorBuilder: (context, error, stackTrace) {
-                                  return Container(
-                                      color: MaaruColors.DogsBackground,
-                                      alignment: Alignment.center,
-                                      child: Image.asset(
-                                          'assets/images/kutta.png'));
-                                }),
-                              ):Center(
-                                child: Image.network(
-                                   widget.image,
-                                    width: 450,
-                                    height: 250,
-                                    fit: BoxFit.fitWidth,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Container(
-                                          color: MaaruColors.DogsBackground,
-                                          alignment: Alignment.center,
-                                          child: Image.asset(
-                                              'assets/images/kutta.png'));
-                                    }),
-                              )),
+                              child: widget.image == null
+                                  ? Center(
+                                      child: Image.network(
+                                          _prefHelper.getStringByKey('img', ''),
+                                          width: 450,
+                                          height: 250,
+                                          fit: BoxFit.fitWidth, errorBuilder:
+                                              (context, error, stackTrace) {
+                                        return Container(
+                                            color: MaaruColors.DogsBackground,
+                                            alignment: Alignment.center,
+                                            child: Image.asset(
+                                                'assets/images/kutta.png'));
+                                      }),
+                                    )
+                                  : Center(
+                                      child: Image.network(widget.image,
+                                          width: 450,
+                                          height: 250,
+                                          fit: BoxFit.fitWidth, errorBuilder:
+                                              (context, error, stackTrace) {
+                                        return Container(
+                                            color: MaaruColors.DogsBackground,
+                                            alignment: Alignment.center,
+                                            child: Image.asset(
+                                                'assets/images/kutta.png'));
+                                      }),
+                                    )),
                           Padding(
                               padding: EdgeInsets.only(top: 30.0, bottom: 10),
                               child: Row(
@@ -300,16 +310,25 @@ class _CreateRegisterPetProfile3State extends State<CreateRegisterPetProfile3> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                          _prefHelper.getStringByKey(
-                                              MaruConstant.petName, ''),
-                                          style: MaaruStyle.text.large,
-                                          textAlign: TextAlign.left),
-                                      Text(
-                                        _prefHelper.getStringByKey(
-                                            MaruConstant.breedType, ''),
-                                        style: MaaruStyle.text.tiny,
-                                      ),
+                                      widget.petname == null
+                                          ? Text(
+                                              _prefHelper.getStringByKey(
+                                                  MaruConstant.petName, ''),
+                                              style: MaaruStyle.text.large,
+                                              textAlign: TextAlign.left)
+                                          : Text(widget.petname,
+                                              style: MaaruStyle.text.large,
+                                              textAlign: TextAlign.left),
+                                      widget.brredType == null
+                                          ? Text(
+                                              _prefHelper.getStringByKey(
+                                                  MaruConstant.breedType, ''),
+                                              style: MaaruStyle.text.tiny,
+                                            )
+                                          : Text(
+                                              widget.brredType,
+                                              style: MaaruStyle.text.tiny,
+                                            ),
                                       SizedBox(
                                         width: 20,
                                       ),

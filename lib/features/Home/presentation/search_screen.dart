@@ -43,7 +43,8 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
 
   double height = 40;
   double leftpad = 0.9;
-  String text = '';
+  String text1 = '';
+  String text ='';
   TextEditingController _petNameController;
 
   @override
@@ -62,9 +63,37 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
       child: BlocProvider(
         create: (context) => KiwiContainer().resolve<LoginBloc>(),
         child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+          voiid() {
+            return Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Color(0xffE8E8E8)),
+                    borderRadius: BorderRadius.circular(15)),
+                height: size.height * 0.06,
+                width: size.width * 0.62,
+                child: TextField(
+                  decoration: InputDecoration(
+                    contentPadding:
+                    EdgeInsets.only(top: 2.0, left: 20.0),
+                    hintText: 'Search',
+                    hintStyle: MaaruStyle.text.tiny,
+                    suffixIcon: Image.asset(
+                      'assets/icons/icone-setting-19.png',
+                    ),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide.none),
+                  ),
+                  onChanged: (text) {
+                    text1 = _petNameController.text;
+                    BlocProvider.of<LoginBloc>(context).add(
+                        event.GetProvider(text1));
+                  },
+                ));
+          }
           if (state is LoginInitial) {
-            BlocProvider.of<LoginBloc>(context).add(event.GetProvider(text));
-            print('figffgfg${text}');
+
+
+           BlocProvider.of<LoginBloc>(context).add(event.GetProvider(text1));
+           print('figffgfg${text1}');
             return const Center(child: CircularProgressIndicator());
           } else if (state is ProviderLoaded1) {
             return Container(
@@ -79,25 +108,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                       ),
                       Stack(
                         children: [
-                          Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Color(0xffE8E8E8)),
-                                  borderRadius: BorderRadius.circular(15)),
-                              height: size.height * 0.06,
-                              width: size.width * 0.62,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.only(top: 2.0, left: 20.0),
-                                  hintText: 'Search',
-                                  hintStyle: MaaruStyle.text.tiny,
-                                  suffixIcon: Image.asset(
-                                    'assets/icons/icone-setting-19.png',
-                                  ),
-                                  border: OutlineInputBorder(
-                                      borderSide: BorderSide.none),
-                                ),
-                              )),
+                          voiid(),
                           Align(
                             alignment: Alignment(0.6, 0),
                             child: GestureDetector(
@@ -153,7 +164,7 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                       ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
-                          reverse: true,
+                       physics: ScrollPhysics(),
                           itemCount:
                               state.getProviderModel.providersListing.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -198,7 +209,9 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                                     BorderRadius.circular(15),
                                               ),
                                               child: Container(
-                                                width: 120,
+
+                                                height: size.height*0.12,
+                                                width: size.width*0.28  ,
                                                 child: Image.network(
                                                   state
                                                       .getProviderModel
@@ -206,11 +219,11 @@ class _ProviderSearchScreenState extends State<ProviderSearchScreen> {
                                                       .img,
                                                   errorBuilder: (BuildContext,
                                                       Object, StackTrace) {
-                                                    return Image.asset(
-                                                      'assets/images/kutta.png',
+                                                    return Image.network(
+                                                      'https://images.wuzzuf-data.net/files/company_logo/Easy-apply-education-consultancy-Egypt-69250-1637220497.png',
                                                       fit: BoxFit.fitWidth,
                                                     );
-                                                  },
+                                                  },fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),

@@ -85,7 +85,7 @@ class PetProfile1 {
   var birthDate;
   var name;
   var times_a_day;
-  String sex;
+  var sex;
   var gender;
   var service_cost;
   var walkingSchedule;
@@ -165,24 +165,24 @@ class GetSinglePe {
     this.vaccine,
   });
 
-  String img;
-  int id;
-  int userId;
-  String petName;
-  String breedType;
-  int age;
-  int weight;
-  int height;
-  String knownAllergies;
-  String petNeeds;
+  var img;
+  var id;
+  var userId;
+  var petName;
+  var breedType;
+  var age;
+  var weight;
+  var height;
+  var knownAllergies;
+  var petNeeds;
   DateTime birthDate;
-  String sex;
-  String gender;
-  String walkingSchedule;
-  String feedingSchedule;
-  String temperament;
-  String medication;
-  String status;
+  var sex;
+  var gender;
+  var walkingSchedule;
+  var feedingSchedule;
+  var temperament;
+  var medication;
+  var status;
   DateTime createdAt;
   DateTime updatedAt;
   List<Note> notes;
@@ -253,7 +253,7 @@ class Note {
   int id;
   int petId;
   String name;
-  int timesADay;
+  String timesADay;
   String note;
   DateTime createdAt;
   DateTime updatedAt;
@@ -278,5 +278,3 @@ class Note {
     "updatedAt": updatedAt.toIso8601String(),
   };
 }
-
-

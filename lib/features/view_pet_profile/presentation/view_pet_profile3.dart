@@ -177,6 +177,14 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                             MaterialPageRoute(
                                                                 builder: (_) =>
                                                                     CreateRegisterPetProfile3(
+                                                                      petname: state
+                                                                          .welcome2
+                                                                          .getSinglePe
+                                                                          .petName,
+                                                                      brredType: state
+                                                                          .welcome2
+                                                                          .getSinglePe
+                                                                          .breedType,
                                                                       feeding: state
                                                                           .welcome2
                                                                           .getSinglePe
@@ -195,9 +203,12 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                                             .welcome2
                                                                             .getSinglePe
                                                                             .notes,
-
                                                                       ],
-                                                                      image: state.welcome2.getSinglePe.img.toString(),
+                                                                      image: state
+                                                                          .welcome2
+                                                                          .getSinglePe
+                                                                          .img
+                                                                          .toString(),
                                                                     )));
                                                       },
                                                       child: Image.asset(
@@ -422,10 +433,10 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                                       left: 20),
                                                               child: Column(
                                                                   crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
+                                                                      CrossAxisAlignment.start,
                                                                   children: [
-                                                                    Text('',
+                                                                    Text(
+                                                                      '',
                                                                       // state.welcome2.getSinglePe.temperament.toString() ==null
                                                                       //
                                                                       //     ? ''
@@ -453,7 +464,8 @@ class _ViewPetProfile3State extends State<ViewPetProfile3> {
                                                                       height:
                                                                           10,
                                                                     ),
-                                                                    Text('',
+                                                                    Text(
+                                                                      '',
                                                                       // state.welcome2.getSinglePe
                                                                       //         .walkingSchedule
                                                                       //         .toString()

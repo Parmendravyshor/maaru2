@@ -58,7 +58,7 @@ class _BookAppointment2State extends State<BookAppointment2> {
                               children: [
                                 Flex(direction: Axis.vertical, children: [
                                   Container(
-                                    height: size.height*0.30,
+                                    height: size.height*0.25,
                                     width: 500,
                                     child: Image.network(
                                       state.welcome4.providerDetails.provider.img,
@@ -153,6 +153,9 @@ class _BookAppointment2State extends State<BookAppointment2> {
 // SizedBox(width: size.width*0.34,),
 
                                                 ],
+                                              ),
+                                              SizedBox(
+                                                height: size.height * 0.01,
                                               ),
                                               Text(
                                                 //'${state.welcome4.providerDetails[_prefHelper.getIntByKey('id', abc)].city.toString()} ${state.welcome4.providerDetails[_prefHelper.getIntByKey('id', abc)].state} ${state.welcome4.providerDetails[_prefHelper.getIntByKey('id', abc)].zipCode}',

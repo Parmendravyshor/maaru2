@@ -346,7 +346,7 @@ class Test3 extends StatelessWidget {
                             ),
                             Text(
                               text,
-                              style: MaaruStyle.text.tiniest,
+                              style: MaaruStyle.text.tiny,
                             ),
                             SizedBox(
                               width: size,

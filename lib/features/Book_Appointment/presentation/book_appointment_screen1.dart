@@ -103,7 +103,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                           child: Column(
                         children: [
                           Container(
-                            height: size.height*0.30,
+                            height: size.height*0.25,
                             width: size.width*1,
                             child: Image.network(
                               state.welcome4.providerDetails.provider.img,
@@ -214,6 +214,9 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                   ),
                                   //   }
                                   // ),
+                                  SizedBox(
+                                    height: size.height * 0.01,
+                                  ),
 
                                   Text(
                                     '${state.welcome4.providerDetails.provider.city.toString()} ${state.welcome4.providerDetails.provider.state} ${state.welcome4.providerDetails.provider.zipCode}'.toUpperCase(),
@@ -304,7 +307,7 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                       state.welcome4.providerDetails.provider
                                               .description
                                               .toString()
-                                              .isNotEmpty
+                                              .isEmpty
                                           ? ''
                                           : state.welcome4.providerDetails
                                               .provider.description
@@ -315,10 +318,12 @@ class _BookAppointment1State extends State<BookAppointment1> {
                                     'Hours Of Operation'.toUpperCase(),
                                     style: MaaruStyle.text.tiny,
                                   ),
+                                  SizedBox(
+                                    height: size.height * 0.02,
+                                  ),
                                   ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: true,
-                                      physics: AlwaysScrollableScrollPhysics(),
                                       itemCount: state.welcome4.providerDetails
                                           .provider.operationHours.week.length,
                                       itemBuilder:

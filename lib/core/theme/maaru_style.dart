@@ -151,9 +151,9 @@ class MaaruColors {
   TextStyle get medium {
     return GoogleFonts.poppins(
         textStyle: TextStyle(
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
             fontFamily: 'Poppins',
-            fontSize: 14,
+            fontSize: 13,
             color: Colors.black));
   }
 //semibold large

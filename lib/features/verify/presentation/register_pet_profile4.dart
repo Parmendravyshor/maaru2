@@ -172,11 +172,11 @@ class _CreateRegisterPetProfile4State extends State<CreateRegisterPetProfile4> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text('Max'.toUpperCase(),
+                                          Text(_prefHelper.getStringByKey('pet_name', ''),
                                               style: MaaruStyle.text.large,
                                               textAlign: TextAlign.left),
                                           Text(
-                                            'Jack  Russell'.toUpperCase(),
+                                              _prefHelper.getStringByKey('breed_type', '')
                                           ),
                                           const SizedBox(
                                             width: 20,

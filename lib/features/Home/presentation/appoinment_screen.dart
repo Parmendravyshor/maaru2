@@ -4,6 +4,7 @@ import 'package:maru/core/theme/maaru_style.dart';
 import 'package:maru/core/widget/back_arrow.dart';
 import 'package:maru/core/widget/show_location.dart';
 import 'package:maru/features/Book_Appointment/presentation/bloc/book_appointment_bloc.dart';
+import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/Book_Appointment/presentation/provider_confirm_book.dart';
 import 'package:maru/features/Home/presentation/create_home_screen.dart';
 import 'dart:io';
@@ -249,7 +250,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                             return InkWell(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => ProviderBookedConfirm()));
+                                    builder: (_) => BookedConfirm(id4: state.upcomingPastAppointmentModel.upcomingBookings[index].bookingId,)));
                               },
                               child: Padding(
                                 padding: EdgeInsets.only(left: 20, right: 15,bottom: 15),
@@ -262,20 +263,21 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                   child: Container(
                                     margin: EdgeInsets.all(10),
                                     child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Expanded(
-                                            child: Container(
-                                          width: 100,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: Colors.white,
+                                        Container(
+                                          width: 120,
+                                          child: Image.network(
+                                            state.upcomingPastAppointmentModel.upcomingBookings[index].petImage.toString(),
+                                            errorBuilder: (BuildContext,
+                                                Object, StackTrace) {
+                                              return Image.asset(
+                                                'assets/images/kutta.png',
+                                                fit: BoxFit.fitWidth,
+                                              );
+                                            },
                                           ),
-                                          child: Image.asset(
-                                            'assets/images/kutta.png',
-                                            height: 200,
-                                          ),
-                                        )),
+                                        ),
                                         const SizedBox(
                                           width: 20,
                                         ),
@@ -389,7 +391,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                               .pastBookings.length,
                           itemBuilder: (BuildContext context, int index) {
                             if(state.upcomingPastAppointmentModel
-                                .pastBookings.length = null){
+                                .pastBookings.length == null){
                               return Text('Not Appointment Found');
                             }
                             return Padding(
@@ -404,20 +406,21 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                 child: Container(
                                   margin: EdgeInsets.all(10),
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Expanded(
-                                          child: Container(
-                                        width: 100,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: Colors.white,
+                                      Container(
+                                        width: 120,
+                                        child: Image.network(
+                                          state.upcomingPastAppointmentModel.pastBookings[index].petImage.toString(),
+                                          errorBuilder: (BuildContext,
+                                              Object, StackTrace) {
+                                            return Image.asset(
+                                              'assets/images/kutta.png',
+                                              fit: BoxFit.fitWidth,
+                                            );
+                                          },
                                         ),
-                                        child: Image.asset(
-                                          'assets/images/kutta.png',
-                                          height: 200,
-                                        ),
-                                      )),
+                                      ),
                                       const SizedBox(
                                         width: 20,
                                       ),

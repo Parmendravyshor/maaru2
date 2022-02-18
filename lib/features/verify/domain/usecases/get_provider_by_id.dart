@@ -5,6 +5,12 @@ import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import 'get_providers.dart';
 import 'dart:convert';
+
+// To parse this JSON data, do
+//
+//     final welcome4 = welcome4FromJson(jsonString);
+
+import 'dart:convert';
 // To parse this JSON data, do
 //
 //     final welcome4 = welcome4FromJson(jsonString);
@@ -18,6 +24,7 @@ class GetProviderById implements UseCase<void, int> {
     return userRepository.getProviderById(id1);
   }
 }
+
 
 
 Welcome4 welcome4FromJson(String str) => Welcome4.fromJson(json.decode(str));
@@ -407,3 +414,4 @@ class ProviderDetailsService {
     "service": service.toJson(),
   };
 }
+

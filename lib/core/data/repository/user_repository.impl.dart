@@ -6,6 +6,7 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:maru/core/data/datasource/firebase_auth.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/date_time_get.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_bookings.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
@@ -38,11 +39,17 @@ import 'package:maru/features/verify/domain/usecases/verify_code.dart';
 class UserRepositoryImpl implements UserRepository {
   final IAuthFacade iAuthFacade;
   final SharedPrefHelper sharedPrefHelper;
- // final FirebaseAuth _firebaseAuth;
+
+  // final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-final FacebookLogin _facebookLogin;
-  UserRepositoryImpl(this.sharedPrefHelper, this.iAuthFacade,this._facebookLogin,
-     this._googleSignIn,);
+  final FacebookLogin _facebookLogin;
+
+  UserRepositoryImpl(
+    this.sharedPrefHelper,
+    this.iAuthFacade,
+    this._facebookLogin,
+    this._googleSignIn,
+  );
 
   SharedPrefHelper _prefHelper = KiwiContainer().resolve<SharedPrefHelper>();
 
@@ -72,7 +79,9 @@ final FacebookLogin _facebookLogin;
   }
 
   @override
-  Future<Either<Failure, void>> emailLogin(EmailAuthParams params,) async {
+  Future<Either<Failure, void>> emailLogin(
+    EmailAuthParams params,
+  ) async {
     try {
       var map = Map<String, String>();
 
@@ -241,7 +250,7 @@ final FacebookLogin _facebookLogin;
       var headers = {"access-token": token, 'Content-Type': 'json/application'};
       final File imageFile = File(img1);
       var stream =
-      http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+          http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
       var request = http.MultipartRequest(
         "POST",
@@ -263,7 +272,7 @@ final FacebookLogin _facebookLogin;
         ..fields[MaruConstant.timesADay] = ''
         ..fields[MaruConstant.sex] = params.sex
         ..fields[MaruConstant.gender] = params.gender
-      // ..fields['breed_type'] = 'dff'
+        // ..fields['breed_type'] = 'dff'
         ..fields['birth_date'] = params.birthDate
         ..headers.addAll(headers);
       print('request params ${request.fields.toString()}');
@@ -287,7 +296,7 @@ final FacebookLogin _facebookLogin;
       await _prefHelper.saveString(MaruConstant.img, profile['img']);
       await _prefHelper.saveString(
           MaruConstant.birthdate, profile['birth_date']);
-
+      print('dddddddgkggk');
       return Right(Void);
     } catch (e) {
       print('exception print etrhtjryjhytrytjrnytjjhy5jyjy + $e');
@@ -390,33 +399,40 @@ final FacebookLogin _facebookLogin;
       var headers = {
         "access-token": token,
       };
+      var a;
+      int b;
+      int c;
       var requetBodyPArams = {
         MaruConstant.petName:
-        _prefHelper.getStringByKey(MaruConstant.petName, ''),
-        'age': _prefHelper.getStringByKey(MaruConstant.age, ''),
-        MaruConstant.height:
-        _prefHelper.getStringByKey(MaruConstant.height, ''),
+            _prefHelper.getStringByKey(MaruConstant.petName, a).toString(),
+        'age': _prefHelper.getIntByKey(MaruConstant.age, b).toString(),
+        'height':
+            _prefHelper.getStringByKey(MaruConstant.height, '').toString(),
         MaruConstant.weight:
-        _prefHelper.getStringByKey(MaruConstant.weight, ""),
+            _prefHelper.getIntByKey(MaruConstant.weight, a).toString(),
         MaruConstant.sex: _prefHelper.getStringByKey(MaruConstant.sex, ''),
         MaruConstant.gender:
-        _prefHelper.getStringByKey(MaruConstant.gender, ''),
+            _prefHelper.getStringByKey(MaruConstant.gender, ''),
         MaruConstant.breedType:
-        _prefHelper.getStringByKey(MaruConstant.breedType, ''),
+            _prefHelper.getStringByKey(MaruConstant.breedType, ''),
         'birth_date': _prefHelper.getStringByKey('birth_date', ''),
         MaruConstant.knownAllergies.toString():
-        params.knownAllergies.toString(),
-        MaruConstant.petNeeds.toString(): (params.petNeeds.toString() ==null ? '':''),
+            params.knownAllergies.toString(),
+        MaruConstant.petNeeds.toString():
+            (params.petNeeds.toString() == null ? '' : ''),
         MaruConstant.walkingSchedule.toString():
-        params.walkingSchedule.toString() ==null?'':'',
+            params.walkingSchedule.toString() == null ? '' : '',
         MaruConstant.feedingSchedule.toString():
-        params.feedingSchedule.toString()==null?'':'',
-        MaruConstant.temperament.toString(): params.temperament.toString()==null?'':'',
-        MaruConstant.medication.toString(): params.medication.toString() ==null?'':'',
-        MaruConstant.name.toString(): params.name.toString()==null?'':'',
-        MaruConstant.name.toString(): params.name.toString()==null?'':'',
-        MaruConstant.timesADay.toString(): params.times_a_day.toString()==null?'':'',
-        MaruConstant.note.toString(): params.notes.toString()==null?'':'',
+            params.feedingSchedule.toString() == null ? '' : '',
+        MaruConstant.temperament.toString():
+            params.temperament.toString() == null ? '' : '',
+        MaruConstant.medication.toString():
+            params.medication.toString() == null ? '' : '',
+        MaruConstant.name.toString(): params.name.toString() == null ? '' : '',
+        MaruConstant.name.toString(): params.name.toString() == null ? '' : '',
+        MaruConstant.timesADay.toString():
+            params.times_a_day.toString() == null ? '' : '',
+        MaruConstant.note.toString(): params.notes.toString() == null ? '' : '',
       };
       var petid3 = _prefHelper.getIntByKey('id', abc);
       print('dhjddd$petid3');
@@ -451,7 +467,7 @@ final FacebookLogin _facebookLogin;
       var headers = {"access-token": token};
       final File imageFile = File(image);
       var stream =
-      http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+          http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
       var length = await imageFile.length();
       var request = http.MultipartRequest(
         "Put",
@@ -789,7 +805,7 @@ final FacebookLogin _facebookLogin;
       );
       var headers = {
         "access-token":
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo0LCJmaXJzdF9uYW1lIjoiTmF2ZGVlcCIsImxhc3RfbmFtZSI6Ikt1bWFyIiwidXNlcl90eXBlIjoicHJvdmlkZXIiLCJlbWFpbCI6Im5hdmRlZXBAeW9wbWFpbC5jb20iLCJ0b2tlbiI6IkdDUUVzIiwicGFzc3dvcmQiOiIkMmEkMDgkZFp3WUE2eEVZdHlHSDhDd3F0dUtrZVp5NnllWnVNNXRTd2Y3dEtwdEsvMFRSWWVVV3AwMWkiLCJvdHAiOiJpdFJiciIsImlzX3ZlcmlmaWVkIjoiMSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTFUMTA6MDA6MjAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMTEtMzBUMTA6MzQ6MTUuMDAwWiJ9LCJpYXQiOjE2MzkxMTAxMDYsImV4cCI6MTYzOTE5NjUwNn0.SELp-HJE7GUu27Q3_yPm98niJcPp_iXKI5QPZXjFPHc'
       };
       final response = await http.get(MaruConstant.getReview, headers: headers);
 //print(response.body);
@@ -817,9 +833,7 @@ final FacebookLogin _facebookLogin;
       var headers = {"access-token": token};
       final response = await http.get(
           Uri.parse(
-              'http://18.191.199.31/api/bookings/appointment-requests?name=${params
-                  .name}&service=${params.service}&provider=${params
-                  .provider}&date=${params.date}&page=1&limit=100'),
+              'http://18.191.199.31/api/bookings/appointment-requests?name=${params.name}&service=${params.service}&provider=${params.provider}&date=${params.date}&page=1&limit=100'),
           headers: headers);
       print(response.body);
       var data = convert.jsonDecode(response.body);
@@ -847,46 +861,54 @@ final FacebookLogin _facebookLogin;
           headers: headers);
 //print(response.body);
       var data = convert.jsonDecode(response.body);
+      print('alpha,beta,gama');
       var data2 = data['pet_profile'];
       var data3 = data2['id'];
       print('naka${data2}');
-    //  print(response.body);
+      //  print(response.body);
       var height;
-      await _prefHelper.saveString(MaruConstant.height, data2[height].toString().isEmpty?'':'');
+      await _prefHelper.saveString(
+          MaruConstant.height, data2[height].toString().isEmpty ? '' : '');
       await _prefHelper.saveInt('id', data3);
       await _prefHelper.saveInt(MaruConstant.age, data2['age']);
-      await _prefHelper.saveString(
-         'breed_type', data2['breed_type']);
+      await _prefHelper.saveString('breed_type', data2['breed_type']);
       await _prefHelper.saveInt('weight', data2['weight']);
       await _prefHelper.saveString('sex', data2['sex']);
       await _prefHelper.saveString('gender', data2['gender']);
       await _prefHelper.saveString('birth_date', data2['birth_date']);
-      await _prefHelper.saveString(MaruConstant.img, data2['img'].toString().isEmpty?'':'');
-      await _prefHelper.saveString(MaruConstant.knownAllergies, data2['known_allergies'].toString().isEmpty?'':'');
-      await _prefHelper.saveString('pet_needs', data2['pet_needs'].toString().isEmpty?'':'');
-      await _prefHelper.saveString('walking_schedule', data2['walking_schedule'].toString().isEmpty?'':'');
-      await _prefHelper.saveString('feeding_schedule', data2['feeding_schedule'].toString().isEmpty?'':'');
-      await _prefHelper.saveString('temperament', data2['temperament'].toString().isEmpty?'':'');
-      await _prefHelper.saveString('medication', data2['medication'].toString().isEmpty?'':'');
-    //  await _prefHelper.save('walking_schedule', data2['walking_schedule'].toString());
-   //   await _prefHelper.saveString('feeding_schedule', data2['feeding_schedule'].toString());
       await _prefHelper.saveString(
-          'birth_date', data2['birth_date']);
+          MaruConstant.img, data2['img'].toString().isEmpty ? '' : '');
+      await _prefHelper.saveString(MaruConstant.knownAllergies,
+          data2['known_allergies'].toString().isEmpty ? '' : '');
+      await _prefHelper.saveString(
+          'pet_needs', data2['pet_needs'].toString().isEmpty ? '' : '');
+      await _prefHelper.saveString('walking_schedule',
+          data2['walking_schedule'].toString().isEmpty ? '' : '');
+      await _prefHelper.saveString('feeding_schedule',
+          data2['feeding_schedule'].toString().isEmpty ? '' : '');
+      await _prefHelper.saveString(
+          'temperament', data2['temperament'].toString().isEmpty ? '' : '');
+      await _prefHelper.saveString(
+          'medication', data2['medication'].toString().isEmpty ? '' : '');
+      //  await _prefHelper.save('walking_schedule', data2['walking_schedule'].toString());
+      //   await _prefHelper.saveString('feeding_schedule', data2['feeding_schedule'].toString());
+      await _prefHelper.saveString('birth_date', data2['birth_date']);
+
       ///
-   //    var a;
-   //    var b;
-   //    var c;
-   // print('ddddd ${ _prefHelper.getIntByKey(MaruConstant.height, a)}');
-   //    print('ddddd${ _prefHelper.getIntByKey(MaruConstant.age, b)}');
-   //  print('ddddd${   _prefHelper.getStringByKey(MaruConstant.petName,'')}');
-   //  print('ssss${   _prefHelper.getStringByKey(
-   //        MaruConstant.breedType,'')}');
-   //  print('gudigdjhff${   _prefHelper.getIntByKey(MaruConstant.weight, c)}');
-   //    print('dfjhfjf${ _prefHelper.getStringByKey(MaruConstant.sex, '')}');
-   // print('dddd${   _prefHelper.getStringByKey(MaruConstant.gender, '')}');
-   //    print(_prefHelper.getStringByKey(MaruConstant.img, ''));
-   //     _prefHelper.getStringByKey(
-   //        MaruConstant.birthdate, '');
+      //    var a;
+      //    var b;
+      //    var c;
+      // print('ddddd ${ _prefHelper.getIntByKey(MaruConstant.height, a)}');
+      //    print('ddddd${ _prefHelper.getIntByKey(MaruConstant.age, b)}');
+      //  print('ddddd${   _prefHelper.getStringByKey(MaruConstant.petName,'')}');
+      //  print('ssss${   _prefHelper.getStringByKey(
+      //        MaruConstant.breedType,'')}');
+      //  print('gudigdjhff${   _prefHelper.getIntByKey(MaruConstant.weight, c)}');
+      //    print('dfjhfjf${ _prefHelper.getStringByKey(MaruConstant.sex, '')}');
+      // print('dddd${   _prefHelper.getStringByKey(MaruConstant.gender, '')}');
+      //    print(_prefHelper.getStringByKey(MaruConstant.img, ''));
+      //     _prefHelper.getStringByKey(
+      //        MaruConstant.birthdate, '');
       print(data);
       return Right(Welcome2.fromJson(data));
     } catch (e) {
@@ -950,11 +972,12 @@ final FacebookLogin _facebookLogin;
       map['provider_id'] = params.provider_id.toString();
       map['booking_date'] = params.booking_date.toString();
       map['service_id'] = params.service_id.toString();
-      map['card_number'] = params.cardno ==null?'': params.cardno.replaceAll(' ', '');
+      map['card_number'] =
+          params.cardno == null ? '' : params.cardno.replaceAll(' ', '');
       map['exp_date'] = params.expdate.toString();
       map['booking_time'] = params.bookingTime.toString();
-      map['card_id'] = params.cardid2.toString();
-      map['cvv'] = params.cvv.toString().isEmpty;
+      map['card_id'] = params.cardcvv.toString() == null ? '' : '';
+      map['cvv'] = params.cvv.toString();
       map['card_holder_name'] = params.cardHolderName.toString();
       print('singh${map}');
       final token = _prefHelper.getStringByKey(
@@ -967,11 +990,10 @@ final FacebookLogin _facebookLogin;
       print(map);
       Map data1 = jsonDecode(response.body);
       print('singh${response.body}');
-        if (response.statusCode == 200) {
-          print(data1);
-          print(response.statusCode);
-          return Right(Void);
-
+      if (response.statusCode == 200) {
+        print(data1);
+        print(response.statusCode);
+        return Right(Void);
       } else {
         print(response.statusCode);
         return Left(CacheFailure('Slot are Book Please Change date Or time'));
@@ -985,7 +1007,7 @@ final FacebookLogin _facebookLogin;
 
   @override
   Future<Either<Failure, UpcomingPastAppointmentModel>>
-  getUpcomingAndPastAppointment(UpcomingBooking params) async {
+      getUpcomingAndPastAppointment(UpcomingBooking params) async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -994,8 +1016,7 @@ final FacebookLogin _facebookLogin;
       var headers = {"access-token": token};
       final response = await http.get(
           Uri.parse(
-            'http://18.191.199.31/api/bookings/filter?service=${params
-                .serviceName}&date=${params.bookingDate}',
+            'http://18.191.199.31/api/bookings/filter?service=${params.serviceName}&date=${params.bookingDate}',
           ),
           headers: headers);
       print(response.body);
@@ -1112,7 +1133,7 @@ final FacebookLogin _facebookLogin;
 
   @override
   Future<Either<Failure, GetAllAppointmentProvider>>
-  getUpcomingPastAndDeclineAppointment(SearchParams params) async {
+      getUpcomingPastAndDeclineAppointment(SearchParams params) async {
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -1121,9 +1142,7 @@ final FacebookLogin _facebookLogin;
       var headers = {"access-token": token};
       final response = await http.get(
           Uri.parse(
-            'http://18.191.199.31/api/bookings/appointment-filter?name=${params
-                .text1}&service=${params.text1}&date=${params
-                .date}&page=1&limit=8',
+            'http://18.191.199.31/api/bookings/appointment-filter?name=${params.text1}&service=${params.text1}&date=${params.date}&page=10&limit=10',
           ),
           headers: headers);
       print(response.body);
@@ -1184,6 +1203,7 @@ final FacebookLogin _facebookLogin;
 
   @override
   Future<Either<Failure, Bookingsss>> getBookingss(id1) async {
+    print('ddddddd$id1');
     try {
       final token = _prefHelper.getStringByKey(
         MaruConstant.token,
@@ -1192,7 +1212,7 @@ final FacebookLogin _facebookLogin;
       var headers = {"access-token": token};
       final response = await http.get(
           Uri.parse(
-            'http://18.191.199.31/api/public/booking/3',
+            'http://18.191.199.31/api/public/booking/$id1',
           ),
           headers: headers);
       print(response.body);
@@ -1206,11 +1226,11 @@ final FacebookLogin _facebookLogin;
   }
 
   @override
-  Future<Either<Failure, void>> googleSignup() async{
+  Future<Either<Failure, void>> googleSignup() async {
     try {
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        return left( ServerFailure('ss'));
+        return left(ServerFailure('ss'));
       }
       GoogleSignIn _google;
       _google = googleUser as GoogleSignIn;
@@ -1225,35 +1245,60 @@ final FacebookLogin _facebookLogin;
       print(authCredential.providerId);
       return right(Void);
     } on FirebaseAuthException catch (_) {
-
       return left(ServerFailure('ss'));
-    } catch(e){
+    } catch (e) {
       print(e);
     }
   }
 
   @override
-  Future<Either<Failure, void>> fbSignIn()async {
+  Future<Either<Failure, void>> fbSignIn() async {
     try {
-
       final fbUser = await _facebookLogin.logIn([]);
       if (fbUser == null) {
-        return left( ServerFailure('ss'));
+        return left(ServerFailure('ss'));
       }
       final fbAuthenticate = await _facebookLogin.logIn([]);
       final authCredential = FacebookAuthProvider.credential('');
       //  final fbAuthenticate = await fbUser.accessToken;
-   //   final authCredential = FacebookAuthProvider.PROVIDER_ID
+      //   final authCredential = FacebookAuthProvider.PROVIDER_ID
 
       await FirebaseAuth.instance.signInWithCredential(authCredential);
       print(authCredential.accessToken);
       print(authCredential.providerId);
       return right(Void);
     } on FirebaseAuthException catch (_) {
-
       return left(ServerFailure('ss'));
-    } catch(e){
+    } catch (e) {
       print(e);
+    }
+  }
+
+  @override
+  Future<Either<Failure, Bookingdatemodels>> getDateAndTime(
+      GetTimeAndDAteParams params) async {
+    try {
+      print('ddddddsin,gjhddid');
+      final token = _prefHelper.getStringByKey(
+        MaruConstant.token,
+        "",
+      );
+      var headers = {"access-token": token};
+      final response = await http.get(
+          Uri.parse(
+            'http://18.191.199.31/api/public/check-booking-time?providerID=${params.providerid}&booking_date=${params.Bookingdate}'
+          ),
+          headers: headers,
+        );
+      print('ddddddsin,gjhddid');
+      print(response.body);
+      var data = convert.jsonDecode(response.body);
+
+
+      return Right(Bookingdatemodels.fromJson(data));
+    } catch (e) {
+      print(e);
+      return Left(CacheFailure(e.toString()));
     }
   }
 }

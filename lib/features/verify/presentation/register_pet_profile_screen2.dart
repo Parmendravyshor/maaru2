@@ -53,7 +53,9 @@ import 'package:http/http.dart' as http;
 class CreateRegisterPetProfile2 extends StatefulWidget {
   final String allergies;
 final String image;
-  const CreateRegisterPetProfile2({Key key, this.allergies, this.image}) : super(key: key);
+final String petname;
+final String breedtype;
+  const CreateRegisterPetProfile2({Key key, this.allergies, this.image, this.petname, this.breedtype}) : super(key: key);
   @override
   _CreateRegisterPetProfile2State createState() =>
       _CreateRegisterPetProfile2State();
@@ -104,7 +106,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                   if(_knowallergiesController.text.isNotEmpty){
                   }
                   else{
-                    _knowallergiesController.text = widget.allergies.toString();
+                    _knowallergiesController.text = widget.allergies.toString() ==null?"":'';
                   }
               if (state is PetProfile2Saves) {
                 SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -142,7 +144,7 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                         // height: size.height * 0.20,
                         // width: size.width * 0.9,
                         child:
-                        widget.image.isEmpty?Center(
+                        widget.image==null?Center(
                           child: Image.network(
                               _prefHelper.getStringByKey('img', ''),
                               width:450,
@@ -189,16 +191,21 @@ class _CreateRegisterPetProfile2State extends State<CreateRegisterPetProfile2> {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                 widget.petname==null? Text(
                                       _prefHelper.getStringByKey(
                                           MaruConstant.petName, ''),
                                       style: MaaruStyle.text.large,
-                                      textAlign: TextAlign.left),
-                                  Text(
+                                      textAlign: TextAlign.left):Text(
+                                    widget.petname,
+                                     style: MaaruStyle.text.large,
+                                     textAlign: TextAlign.left),
+                                 widget.breedtype==null? Text(
                                     _prefHelper.getStringByKey(
                                         MaruConstant.breedType, ''),
                                     style: MaaruStyle.text.tiny,
-                                  ),
+                                  ):Text(
+                                  widget.breedtype,
+                                   style: MaaruStyle.text.tiny),
                                   const SizedBox(
                                     width: 20,
                                   ),

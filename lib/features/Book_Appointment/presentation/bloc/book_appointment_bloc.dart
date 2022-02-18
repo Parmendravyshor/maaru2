@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:maru/core/error/failure.dart';
 import 'package:maru/core/usecases/usecase.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/book_provider_cancel.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/date_time_get.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_bookings.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
@@ -19,6 +21,7 @@ class BookAppointmentBloc
   final BookProvider bookProvider;
   final PostReview postREviewAfterBooking;
   final GetBookingss _getBookingSuccess;
+  final GetDateAndTime _getDateAndTime;
   final GetUpcomingAndPastAppointmentdddddd getUpcomingAndPastAppointments;
   final GetUpcomingPastAndDeclineAppointment
       getUpcomingPastAndDeclineAppointment;
@@ -30,7 +33,8 @@ class BookAppointmentBloc
       this.postREviewAfterBooking,
       this.bookProviderCancel,
       this.getUpcomingAndPastAppointments,
-      this._getBookingSuccess);
+      this._getBookingSuccess,
+      this._getDateAndTime);
 
   @override
   // TODO: implement initialState
@@ -56,7 +60,6 @@ class BookAppointmentBloc
         pet_id;
       }
       print('djdkdjd${booking_date}');
-
     } else if (event is providerIdChanged) {
       if (event.providerid != null) {
         provider_id = event.providerid;
@@ -64,7 +67,6 @@ class BookAppointmentBloc
         provider_id;
       }
       print('djdkdjd1${provider_id}');
-
     } else if (event is dateChanged) {
       if (event.date.isNotEmpty) {
         booking_date = '${event.date}${event.time}';
@@ -87,7 +89,6 @@ class BookAppointmentBloc
         bookingtime;
       }
       print('djdkdjd${bookingtime}');
-
     } else if (event is CardHolderNameChanged) {
       if (event.cardHolderName.isNotEmpty) {
         cardHolderNAme = event.cardHolderName;
@@ -116,8 +117,7 @@ class BookAppointmentBloc
         cardcvv;
       }
       print('djdkdjd${cvv}');
-    }
-    else if (event is CardIdChanged) {
+    } else if (event is CardIdChanged) {
       if (event.carsidd.isNotEmpty) {
         cardidForsaveCard = event.carsidd;
         print('there is your card id${event.carsidd}');
@@ -126,8 +126,7 @@ class BookAppointmentBloc
         cardidForsaveCard;
       }
       print('singh${cardidForsaveCard}');
-    }
-    else if (event is ExpDateChanged) {
+    } else if (event is ExpDateChanged) {
       if (event.expDate.isNotEmpty) {
         expdate = event.expDate;
       } else {
@@ -196,6 +195,15 @@ class BookAppointmentBloc
         yield CancelbookedProviderButtonTapped();
       }
     }
+    if (event is BokingDateChanged) {
+      final result = await _getDateAndTime.call(GetTimeAndDAteParams(
+        providerid: event.providerid,
+        Bookingdate: event.bookingdate,
+      ));
+      if (result.isRight()) {
+        yield PostDateBooking(result.getOrElse(() => null));
+      }
+    }
     if (event is GetbookindataChanged) {
       print('ddd');
       final result = await _getBookingSuccess.call(event.id1);
@@ -206,5 +214,4 @@ class BookAppointmentBloc
       }
     }
   }
-
 }

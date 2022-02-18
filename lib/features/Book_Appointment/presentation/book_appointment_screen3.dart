@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'dart:io';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +20,7 @@ import 'package:maru/features/Account_setting/presentation/payment/bloc/payment_
 import 'package:maru/features/Account_setting/presentation/payment/input_formetters.dart';
 import 'package:maru/features/Account_setting/presentation/payment/my_strings.dart';
 import 'package:maru/features/Account_setting/presentation/payment/payment_card_details.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/date_time_get.dart';
 import 'package:maru/features/Book_Appointment/entity/entity.dart';
 import 'package:maru/features/Book_Appointment/presentation/booked_confirm.dart';
 import 'package:maru/features/verify/presentation/pet_profile_bloc.dart';
@@ -74,11 +76,11 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   int s;
   double p;
   var aa;
-  var bb ='';
+  var bb = '';
   var cc;
   var test = '10:00 AM';
   var test1 = '10:30 AM';
-
+  var selecttDate;
   // var test2
   // var tet3
   TextEditingController _expDateController = TextEditingController();
@@ -223,7 +225,7 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   bool _debug = false;
   bool _contextoff = false;
   bool _contextrand = false;
-
+  Bookingdatemodels _bookingdatemodels = Bookingdatemodels();
   int _dropDownValue = 0;
   String _selValue = "Select Service";
   String _selValue1 = 'SELECT PET';
@@ -246,7 +248,6 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
   // More advanced TableCalendar configuration (using Builders & Styles)
   Widget buildTableCalendarWithBuilders() {
     return TableCalendar(
-
       calendarController: calendarController,
       //   events: _events,
       //holidays: _holidays,
@@ -258,7 +259,6 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
       availableCalendarFormats: const {CalendarFormat.month: ''},
 
       calendarStyle: CalendarStyle(
-
         outsideDaysVisible: false,
         weekendStyle: TextStyle().copyWith(color: Colors.grey[800]),
         holidayStyle: TextStyle().copyWith(color: Colors.grey[800]),
@@ -272,10 +272,15 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
         formatButtonVisible: false,
       ),
       builders: CalendarBuilders(
-        selectedDayBuilder: (context, date, _,) {
-        var  date3 = '${DateTime.february}';
-        print("weekday is ${date.weekday}");
-        print('dddfdfyudfydfdfdfd$date3');
+        selectedDayBuilder: (
+          context,
+          date,
+          _,
+        ) {
+          var date3 = '${DateTime.february}';
+          selecttDate = date.weekday.toString();
+          print("weekday is ${date.weekday}");
+          print('dddfdfyudfydfdfdfd$date3');
           date1 =
               '${date.month.toString()}-${date.day.toString().padLeft(2, '0')}-${date.year.toString().padLeft(2, '0')}';
           aa = date1;
@@ -303,12 +308,19 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
           );
         },
         todayDayBuilder: (context, date, _) {
-          print('fffjfhffh${date.weekday}',);
+          print(
+            'fffjfhffh${date.weekday}',
+          );
           date1 =
               '${date.month.toString()}-${date.day.toString().padLeft(2, '0')}-${date.year.toString().padLeft(2, '0')}';
           print('gfgffhjgfhj${date1}');
           BlocProvider.of<BookAppointmentBloc>(context)
               .add(dateChanged(date1.toString(), ''));
+
+          BlocProvider.of<BookAppointmentBloc>(context).add(BokingDateChanged(
+            widget.id3.toString(),
+            date1,
+          ));
 
           return Container(
               margin: const EdgeInsets.all(4.0),
@@ -408,394 +420,602 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                       create: (context) =>
                           KiwiContainer().resolve<BookAppointmentBloc>(),
                       child: BlocBuilder<BookAppointmentBloc,
-                          BookAppointmentState>(
-                        builder: (context, state) {
-                          if (state is BookRegisterSuccess) {
-                            SchedulerBinding.instance.addPostFrameCallback((_) {
-                              Navigator.pushReplacement(context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) {
-                                return BookedConfirm(
-                                  id4: widget.id3,
-                                );
-                              }));
+                          BookAppointmentState>(builder: (context, state) {
+                        if (state is BookRegisterSuccess) {
+                          SchedulerBinding.instance.addPostFrameCallback((_) {
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                              return BookedConfirm(
+                                id4: widget.id3,
+                              );
+                            }));
+                          });
+                          return Container();
+                        } else if (state is BookRegisterFailure) {
+                          SchedulerBinding.instance.addPostFrameCallback((_) {
+                            Future.delayed(const Duration(seconds: 3), () {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.black,
+                                  content: Text(
+                                      'slot are booked please change time or date',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'poppins',
+                                          fontSize: 20,
+                                          color: MaaruStyle
+                                              .colors.textColorWhite)),
+                                ),
+                              );
                             });
-                            return Container();
-                          } else if (state is BookRegisterFailure) {
-                            SchedulerBinding.instance.addPostFrameCallback((_) {
-                              Future.delayed(const Duration(seconds: 3), () {
-                                Scaffold.of(context).showSnackBar(
-                                  SnackBar(
-                                    backgroundColor: Colors.black,
-                                    content: Text(
-                                        'slot are booked please change time or date',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: 'poppins',
-                                            fontSize: 20,
-                                            color: MaaruStyle
-                                                .colors.textColorWhite)),
-                                  ),
-                                );
-                              });
-                            });
-                          }
-                          return Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: AlertDialog(actions: <Widget>[
-                                Align(
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                          color:
-                                              MaaruStyle.colors.textColorWhite,
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 20.0, right: 20),
-                                              child: TextFormField(
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
-                                                  LengthLimitingTextInputFormatter(
-                                                      4),
-                                                ],
-                                                decoration: InputDecoration(
-                                                  fillColor: Colors.white,
-                                                  hoverColor: Colors.white,
-                                                  icon: Image.asset(
-                                                    'assets/images/card_cvv.png',
-                                                    width: 40.0,
-                                                    color: Colors.grey[600],
-                                                  ),
-                                                  border:
-                                                      const UnderlineInputBorder(),
-                                                  filled: true,
-                                                  hintText:
-                                                      'Number behind the card',
-                                                  labelText: 'CVV',
+                          });
+                        }
+
+                        return Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: AlertDialog(actions: <Widget>[
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                        color: MaaruStyle.colors.textColorWhite,
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20.0, right: 20),
+                                            child: TextFormField(
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                                LengthLimitingTextInputFormatter(
+                                                    4),
+                                              ],
+                                              decoration: InputDecoration(
+                                                fillColor: Colors.white,
+                                                hoverColor: Colors.white,
+                                                icon: Image.asset(
+                                                  'assets/images/card_cvv.png',
+                                                  width: 40.0,
+                                                  color: Colors.grey[600],
                                                 ),
-                                                validator: CardUtils.validateCVV,
-                                                keyboardType: TextInputType.number,
-                                                onSaved: (value) {
-                                                  _paymentCard.cvv = int.parse(value);
-                                                },
-                                                onChanged: (text) {
-                                                  BlocProvider.of<
-                                                              BookAppointmentBloc>(
-                                                          context)
-                                                      .add(CardCvvChanged(
-                                                          _cvvControllerCard
-                                                              .text));
-                                                },
-                                                controller: _cvvControllerCard,
+                                                border:
+                                                    const UnderlineInputBorder(),
+                                                filled: true,
+                                                hintText:
+                                                    'Number behind the card',
+                                                labelText: 'CVV',
                                               ),
+                                              validator: CardUtils.validateCVV,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              onSaved: (value) {
+                                                _paymentCard.cvv =
+                                                    int.parse(value);
+                                              },
+                                              onChanged: (text) {
+                                                BlocProvider.of<
+                                                            BookAppointmentBloc>(
+                                                        context)
+                                                    .add(CardCvvChanged(
+                                                        _cvvControllerCard
+                                                            .text));
+                                              },
+                                              controller: _cvvControllerCard,
                                             ),
-                                            Divider(
-                                              color: Colors.grey[360],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(1.0),
-                                                  child: ThemedButton(
-                                                    text: 'Pay',
-                                                    onPressed: () {
-                                                      BlocProvider.of<
-                                                                  BookAppointmentBloc>(
-                                                              context)
-                                                          .add(dateChanged(aa, ''));
-                                                      BlocProvider.of<
-                                                                  BookAppointmentBloc>(
-                                                              context)
-                                                          .add(PetIdChanged(
-                                                              int.parse(
-                                                                  parmendra)));
-                                                      BlocProvider.of<
-                                                                  BookAppointmentBloc>(
-                                                              context)
-                                                          .add((serviceIdChanged(
-                                                              int.parse(singh))));
-                                                      BlocProvider.of<
-                                                                  BookAppointmentBloc>(
-                                                              context)
-                                                          .add((CardIdChanged(bb)));
-                                                      BlocProvider.of<
-                                                                  BookAppointmentBloc>(
-                                                              context)
-                                                          .add((providerIdChanged(
-                                                              widget.id3)));
+                                          ),
+                                          Divider(
+                                            color: Colors.grey[360],
+                                          ),
+                                          Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(1.0),
+                                                child: ThemedButton(
+                                                  text: 'Pay',
+                                                  onPressed: () {
+                                                    BlocProvider.of<
+                                                                BookAppointmentBloc>(
+                                                            context)
+                                                        .add(dateChanged(
+                                                            aa, ''));
+                                                    BlocProvider.of<
+                                                                BookAppointmentBloc>(
+                                                            context)
+                                                        .add(PetIdChanged(
+                                                            int.parse(
+                                                                parmendra)));
+                                                    BlocProvider.of<
+                                                                BookAppointmentBloc>(
+                                                            context)
+                                                        .add((serviceIdChanged(
+                                                            int.parse(singh))));
+                                                    BlocProvider.of<
+                                                                BookAppointmentBloc>(
+                                                            context)
+                                                        .add((CardIdChanged(
+                                                            bb)));
+                                                    BlocProvider.of<
+                                                                BookAppointmentBloc>(
+                                                            context)
+                                                        .add((providerIdChanged(
+                                                            widget.id3)));
 
-
-                                                      // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(widget.id3)));
-                                                      // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(int.parse(const ChoiceRow(lebal1: '12:30',).toString()))));
+                                                    // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(widget.id3)));
+                                                    // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(int.parse(const ChoiceRow(lebal1: '12:30',).toString()))));
+                                                    BlocProvider.of<
+                                                                BookAppointmentBloc>(
+                                                            context)
+                                                        .add((BookingTimeChaned(
+                                                            test)));
+                                                    String text =
+                                                        _cvvControllerCard.text;
+                                                    if (text.length <= 2) {
+                                                      _showDialog(context,
+                                                          'Cvv must be 3 digit');
+                                                    } else {
+                                                      // _prefHelper.getStringByKey(
+                                                      //     'id', '');
                                                       BlocProvider.of<
                                                                   BookAppointmentBloc>(
                                                               context)
-                                                          .add((BookingTimeChaned(
-                                                              test)));
-                                                      String text =
-                                                          _cvvControllerCard.text;
-                                                      if (text.length <= 2) {
-                                                        _showDialog(context,
-                                                            'Cvv must be 3 digit');
-                                                      } else {
-                                                        // _prefHelper.getStringByKey(
-                                                        //     'id', '');
-                                                        BlocProvider.of<
-                                                                    BookAppointmentBloc>(
-                                                                context)
-                                                            .add(
-                                                                BookRegisterButtonTapped());
-                                                      }
-                                                    },
-                                                    enabled: true,
-                                                  ),
+                                                          .add(
+                                                              BookRegisterButtonTapped());
+                                                    }
+                                                  },
+                                                  enabled: true,
                                                 ),
-                                                state is BookRegisterInProgress
-                                                    ? Center(
-                                                    child: Container(
+                                              ),
+                                              state is BookRegisterInProgress
+                                                  ? Center(
+                                                      child: Container(
                                                       margin:
-                                                      const EdgeInsets.only(bottom: 20),
+                                                          const EdgeInsets.only(
+                                                              bottom: 20),
                                                       width: 40,
                                                       height: 40,
                                                       child:
-                                                      const CircularProgressIndicator(),
+                                                          const CircularProgressIndicator(),
                                                     ))
-                                                    : Container(),
-                                              ],
-                                            )
-                                          ],
-                                        )))
-                              ]));
-                        },
-                      ));
+                                                  : Container(),
+                                            ],
+                                          )
+                                        ],
+                                      )))
+                            ]));
+                      }));
                 });
           }
 
-          return Scaffold(
-              backgroundColor: Colors.white,
-              bottomNavigationBar: const CreateHomeScreen(
-                  // Color:MaaruColors.textButtonColor
-                  ),
-              body: SafeArea(
-                  child: SingleChildScrollView(
-                      child: Flex(
-                direction: Axis.vertical,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        height: size.height*0.30,
-                        width: 500,
-                        child: Image.network(
-                          widget.image ,
-                          fit: BoxFit.fitWidth,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                                color: Colors.amber,
-                                alignment: Alignment.bottomCenter,
-                                child: Image.asset('assets/images/kutta.png'));
-                          },
-                        ),
-                      ),
-                      Container(
-                          decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                topLeft: Radius.circular(20),
-                              ),
-                              color: Colors.white),
-                          width: size.width * 1,
-                          child: Container(
-                              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                              color: Colors.white,
-                              //height: size.height*0.80,
-                              width: size.width * 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: size.height * 0.05,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (_) =>
-                                                        BookAppointment1(
-                                                          id1: widget.id3,
-                                                        )));
-                                          },
-                                          child: Image.asset(
-                                            'assets/icons/icone-setting-68.png',
-                                            height: 40,
-                                            width: 40,
-                                          )),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (_) =>
-                                                        BookAppointment2(
-                                                          id2: widget.id3,
-                                                        )));
-                                          },
-                                          child: Image.asset(
-                                            'assets/icons/icone-setting-68.png',
-                                            height: 40,
-                                            width: 40,
-                                          )),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      InkWell(
-                                          onTap: () {
-                                            Navigator.of(context)
-                                                .pushAndRemoveUntil(
-                                                    MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          BookAppointmentScreen3(
-                                                        id3: widget.id3,
-                                                      ),
-                                                    ),
-                                                    (route) => false);
-                                          },
-                                          child: Image.asset(
-                                            'assets/icons/Rectangle copy 3.png',
-                                            height: 40,
-                                            width: 40,
-                                          )),
-                                    ],
-                                  ),
-                                  BlocProvider(
-                                    create: (context) => KiwiContainer()
-                                        .resolve<PetProfileBloc>(),
-                                    child: BlocBuilder<PetProfileBloc,
-                                            PetProfileState>(
-                                        builder: (context, state) {
-                                      if (state is PetProfileInitial) {
-                                        BlocProvider.of<PetProfileBloc>(context)
-                                            .add(GetSinglePRovider(widget.id3));
-
-                                        return const CircularProgressIndicator();
-                                      } else if (state
-                                          is SingleProviderLoaded) {
-                                        return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              //  mainAxisAlignment: MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  state.welcome4.providerDetails
-                                                      .provider.companyName,
-                                                  style:
-                                                      MaaruStyle.text.xlarge,
-                                                ),
-                                                SizedBox(
-                                                  width: size.width * 0.16,
-                                                ),
-                                                // Image.asset(
-                                                //   'assets/icons/New Project (2).png',
-                                                //   width: size.width * 0.10,
-                                                // )
-                                              ],
-                                            ),
-                                            Text(
-                                              '${state.welcome4.providerDetails.provider.city.toString()} '
-                                              '${state.welcome4.providerDetails.provider.state} '
-                                              '${state.welcome4.providerDetails.provider.zipCode}'.toUpperCase(),
-                                              style: MaaruStyle.text.tiny,
-                                            ),
-                                            SizedBox(height: size.height*0.02,),
-                                            Text(
-                                              'Book Appointments'.toUpperCase(),
-                                              style: MaaruStyle.text.tiny,
-                                            ),
-                                          ],
-                                        );
-                                      } else {
-                                        return const CircularProgressIndicator();
-                                      }
-                                    }),
-                                  ),
-                                ],
-                              )))
-                    ],
-                  ),
-                  Container(
-                      height:size.height*0.5,
-                      width: 400,
-                      child: buildTableCalendarWithBuilders()),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Services'.toUpperCase(),
-                      style: MaaruStyle.text.tiny,
+          if (state is BookAppointmentInitial) {
+            BlocProvider.of<BookAppointmentBloc>(context).add(BokingDateChanged(
+              widget.id3.toString(),
+              date1,
+            ));
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is PostDateBooking) {
+            return Scaffold(
+                backgroundColor: Colors.white,
+                bottomNavigationBar: const CreateHomeScreen(
+                    // Color:MaaruColors.textButtonColor
                     ),
-                  ),
-                  SizedBox(height: size.height*0.02,),
-                  Padding(
-                      padding: const EdgeInsets.only(right: 20, left: 20),
-                      child: BlocProvider(
+                body: SafeArea(
+                    child: SingleChildScrollView(
+                        child: Flex(
+                  direction: Axis.vertical,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          height: size.height * 0.25,
+                          width: 500,
+                          child: Image.network(
+                            widget.image,
+                            fit: BoxFit.fitWidth,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                  color: Colors.amber,
+                                  alignment: Alignment.bottomCenter,
+                                  child:
+                                      Image.asset('assets/images/kutta.png'));
+                            },
+                          ),
+                        ),
+                        Container(
+                            decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  topLeft: Radius.circular(20),
+                                ),
+                                color: Colors.white),
+                            width: size.width * 1,
+                            child: Container(
+                                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                color: Colors.white,
+                                //height: size.height*0.80,
+                                width: size.width * 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: size.height * 0.05,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          BookAppointment1(
+                                                            id1: widget.id3,
+                                                          )));
+                                            },
+                                            child: Image.asset(
+                                              'assets/icons/icone-setting-68.png',
+                                              height: 40,
+                                              width: 40,
+                                            )),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        InkWell(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          BookAppointment2(
+                                                            id2: widget.id3,
+                                                          )));
+                                            },
+                                            child: Image.asset(
+                                              'assets/icons/icone-setting-68.png',
+                                              height: 40,
+                                              width: 40,
+                                            )),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        InkWell(
+                                            onTap: () {
+                                              Navigator.of(context)
+                                                  .pushAndRemoveUntil(
+                                                      MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            BookAppointmentScreen3(
+                                                          id3: widget.id3,
+                                                        ),
+                                                      ),
+                                                      (route) => false);
+                                            },
+                                            child: Image.asset(
+                                              'assets/icons/Rectangle copy 3.png',
+                                              height: 40,
+                                              width: 40,
+                                            )),
+                                      ],
+                                    ),
+                                    BlocProvider(
+                                      create: (context) => KiwiContainer()
+                                          .resolve<PetProfileBloc>(),
+                                      child: BlocBuilder<PetProfileBloc,
+                                              PetProfileState>(
+                                          builder: (context, state) {
+                                        if (state is PetProfileInitial) {
+                                          BlocProvider.of<PetProfileBloc>(
+                                                  context)
+                                              .add(GetSinglePRovider(
+                                                  widget.id3));
+
+                                          return const CircularProgressIndicator();
+                                        } else if (state
+                                            is SingleProviderLoaded) {
+                                          return Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                //  mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    state
+                                                        .welcome4
+                                                        .providerDetails
+                                                        .provider
+                                                        .companyName,
+                                                    style:
+                                                        MaaruStyle.text.xlarge,
+                                                  ),
+                                                  SizedBox(
+                                                    width: size.width * 0.16,
+                                                  ),
+                                                  // Image.asset(
+                                                  //   'assets/icons/New Project (2).png',
+                                                  //   width: size.width * 0.10,
+                                                  // )
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: size.height * 0.01,
+                                              ),
+                                              Text(
+                                                '${state.welcome4.providerDetails.provider.city.toString()} '
+                                                        '${state.welcome4.providerDetails.provider.state} '
+                                                        '${state.welcome4.providerDetails.provider.zipCode}'
+                                                    .toUpperCase(),
+                                                style: MaaruStyle.text.tiny,
+                                              ),
+                                              SizedBox(
+                                                height: size.height * 0.02,
+                                              ),
+                                              Text(
+                                                'Book Appointments'
+                                                    .toUpperCase(),
+                                                style: MaaruStyle.text.tiny,
+                                              ),
+                                            ],
+                                          );
+                                        } else {
+                                          return const CircularProgressIndicator();
+                                        }
+                                      }),
+                                    ),
+                                  ],
+                                )))
+                      ],
+                    ),
+                    Container(
+                        height: size.height * 0.5,
+                        width: 400,
+                        child: buildTableCalendarWithBuilders()),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Services'.toUpperCase(),
+                        style: MaaruStyle.text.tiny,
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(right: 20, left: 20),
+                        child: BlocProvider(
+                            create: (context) =>
+                                KiwiContainer().resolve<PetProfileBloc>(),
+                            child: BlocBuilder<PetProfileBloc, PetProfileState>(
+                                builder: (context, state) {
+                              if (state is PetProfileInitial) {
+                                String text = '';
+                                BlocProvider.of<PetProfileBloc>(context)
+                                    .add(GetSinglePRovider(widget.id3));
+
+                                return CircularProgressIndicator();
+                              }
+                              if (state is SingleProviderLoaded) {
+                                List<KeyValueModel1> _dates = [];
+                                print('dddwddqqdqdd$_dates');
+                                var abc2 = [];
+                                String _selectedValue =
+                                    //_prefHelper.getStringByKey(MaruConstant.first_name, '');
+                                    state.welcome4.providerDetails.service[0]
+                                        .service.id
+                                        .toString();
+                                for (int i = 0;
+                                    i <=
+                                        state.welcome4.providerDetails.service
+                                                .length -
+                                            1;
+                                    i++) {
+                                  _dates.add(
+                                    KeyValueModel1(
+                                      key1: state.welcome4.providerDetails
+                                          .service[i].service.serviceType
+                                          .toString(),
+                                      value1: state.welcome4.providerDetails
+                                          .service[i].id
+                                          .toString(),
+                                      cost: state.welcome4.providerDetails
+                                          .service[i].serviceCost,
+                                      totalCost: state.welcome4.providerDetails
+                                          .service[i].totalAmountWithTax,
+                                    ),
+                                  );
+                                  //  abc2.add(state.covidModel.petProfiles[i].id);
+                                  // print(abc2);
+                                  // abc2.add(state.covidModel.petProfiles[i]
+                                  //     .service_cost);
+                                  _prefHelper.saveString(
+                                      'tax', state.welcome4.tax);
+                                }
+
+                                print(_dates.toString());
+                                return Column(
+                                  children: [
+                                    Container(
+                                      width: 350,
+                                      color: Colors.grey[50],
+                                      alignment: Alignment.center,
+                                      child: Center(
+                                        //alignment: Alignment(0.3, 0),
+                                        child: DropdownButton(
+                                          underline: Container(
+                                            color: Colors.transparent,
+                                          ),
+                                          hint: Text(
+                                            _selValue,
+                                            style: MaaruStyle.text.tiny,
+                                          ),
+
+                                          icon: Icon(
+                                            Icons.expand_more,
+                                            color: MaaruColors.textButtonColor,
+                                            size: 40.09,
+                                          ),
+                                          // hint: Center(
+                                          //     child: Text(
+                                          //   _selectedValue,
+                                          //   style: MaaruStyle.text.small,
+                                          // )),
+                                          isExpanded: false,
+                                          iconSize: 30.0,
+                                          style: TextStyle(color: Colors.white),
+                                          items: _dates.map(
+                                            (val) {
+                                              var index;
+                                              //    print('singham is on back ${val.value}');
+                                              return DropdownMenuItem<String>(
+                                                value: val.key1,
+                                                child: Center(
+                                                    child: InkWell(
+                                                  onTap: () {
+                                                    singh = val.value1;
+                                                    s = val.cost;
+                                                    print('cost $s');
+                                                    p = val.totalCost;
+                                                    print('total cot$p');
+                                                    print(
+                                                        'singham is back ${val.value1}');
+
+                                                    BlocProvider.of<
+                                                                BookAppointmentBloc>(
+                                                            context)
+                                                        .add(serviceIdChanged(
+                                                      int.parse(val.value1),
+                                                    ));
+                                                    setState(() {
+                                                      _selValue = val.key1;
+
+                                                      print(
+                                                          'gdgdhgdhd${val.key1.toString()}');
+
+                                                      var valey;
+                                                      setState(
+                                                        () {
+                                                          _selValue = val.key1;
+
+                                                          if (val.key1 ==
+                                                              val.key1) {}
+                                                          if (val.key1 ==
+                                                              "SELECT PET") {
+                                                            _dropDownValue = 0;
+                                                            print(
+                                                                _dropDownValue);
+                                                          }
+
+                                                          if (val.key1 ==
+                                                              "VET") {
+                                                            _dropDownValue = 2;
+                                                          }
+                                                        },
+                                                      );
+                                                      showTax();
+                                                      Navigator.pop(context);
+                                                    });
+                                                  },
+                                                  child: Text(val.key1,
+                                                      style: MaaruStyle
+                                                          .text.small),
+                                                )),
+                                                // value: val.value,
+                                              );
+                                            },
+                                          ).toList(),
+                                          onChanged: (value) {
+                                            _selValue = value;
+                                            BlocProvider.of<
+                                                        BookAppointmentBloc>(
+                                                    context)
+                                                .add(PetIdChanged(
+                                              value,
+                                            ));
+                                            // _prefHelper.saveInt(
+                                            //     'service_cost', s);
+                                            // _prefHelper.saveDouble(
+                                            //     'totalAmountWithTax', p);
+                                            print(
+                                                'gdgdhgdhd${value.toString()}');
+
+                                            var valey;
+                                            setState(
+                                              () {
+                                                _selValue = value;
+                                                if (value == value) {}
+                                                if (value == "SELECT PET") {
+                                                  _dropDownValue = 0;
+                                                  print(_dropDownValue);
+                                                }
+
+                                                if (value == "VET") {
+                                                  _dropDownValue = 2;
+                                                }
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return const CircularProgressIndicator();
+                              }
+                            }))),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Pet'.toUpperCase(),
+                        style: MaaruStyle.text.tiny,
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
+                    Padding(
+                        padding: EdgeInsets.only(right: 20, left: 20),
+                        child: BlocProvider(
                           create: (context) =>
                               KiwiContainer().resolve<PetProfileBloc>(),
                           child: BlocBuilder<PetProfileBloc, PetProfileState>(
                               builder: (context, state) {
                             if (state is PetProfileInitial) {
-                              String text = '';
                               BlocProvider.of<PetProfileBloc>(context)
-                                  .add(GetSinglePRovider(widget.id3));
-
+                                  .add(GetCovidList(''));
                               return CircularProgressIndicator();
-                            }
-                            if (state is SingleProviderLoaded) {
-                              List<KeyValueModel1> _dates = [];
+                            } else if (state is CovidLoaded3) {
+                              print(
+                                  '+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
+                              //
+                              List<KeyValueModel> _dates = [];
                               print('dddwddqqdqdd$_dates');
                               var abc2 = [];
                               String _selectedValue =
                                   //_prefHelper.getStringByKey(MaruConstant.first_name, '');
-                                  state.welcome4.providerDetails.service[0]
-                                      .service.id
-                                      .toString();
+                                  state.covidModel.petProfiles[0].id.toString();
                               for (int i = 0;
-                                  i <=
-                                      state.welcome4.providerDetails.service
-                                              .length -
-                                          1;
+                                  i <= state.covidModel.petProfiles.length - 1;
                                   i++) {
                                 _dates.add(
-                                  KeyValueModel1(
-                                    key1: state.welcome4.providerDetails
-                                        .service[i].service.serviceType
-                                        .toString(),
-                                    value1: state
-                                        .welcome4.providerDetails.service[i].id
-                                        .toString(),
-                                    cost: state.welcome4.providerDetails
-                                        .service[i].serviceCost,
-                                    totalCost: state.welcome4.providerDetails
-                                        .service[i].totalAmountWithTax,
-                                  ),
+                                  KeyValueModel(
+                                      key: state
+                                          .covidModel.petProfiles[i].petName
+                                          .toString(),
+                                      value: state.covidModel.petProfiles[i].id
+                                          .toString()),
                                 );
-                                //  abc2.add(state.covidModel.petProfiles[i].id);
+                                abc2.add(state.covidModel.petProfiles[i].id);
                                 // print(abc2);
                                 // abc2.add(state.covidModel.petProfiles[i]
                                 //     .service_cost);
-                                _prefHelper.saveString(
-                                    'tax', state.welcome4.tax);
                               }
 
                               print(_dates.toString());
@@ -805,19 +1025,36 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                     width: 350,
                                     color: Colors.grey[50],
                                     alignment: Alignment.center,
-                                    child: Align(
-                                      alignment: Alignment(0.3,0),
+                                    child: Center(
+                                      //  alignment: Alignment(0.2, 0),
                                       child: DropdownButton(
-                                        underline: Container(color: Colors.transparent,),
-                                        hint: Text(
-                                          _selValue,
-                                          style: MaaruStyle.text.tiny,
+                                        underline: Container(
+                                          color: Colors.transparent,
+                                        ),
+                                        hint: Center(
+                                          child: Container(
+                                            width: size.width * 0.35,
+                                            child: Align(
+                                              alignment: Alignment.centerRight,
+                                              child: Text(
+                                                _selValue1,
+                                                style: MaaruStyle.text.tiny,
+                                              ),
+                                            ),
+                                          ),
                                         ),
 
-                                        icon: Icon(
-                                          Icons.expand_more,
-                                          color: MaaruColors.textButtonColor,
-                                          size: 40.09,
+                                        icon: Container(
+                                          width: size.width * 0.20,
+                                          child: Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Icon(
+                                              Icons.expand_more,
+                                              color:
+                                                  MaaruColors.textButtonColor,
+                                              size: 40.09,
+                                            ),
+                                          ),
                                         ),
                                         // hint: Center(
                                         //     child: Text(
@@ -832,53 +1069,48 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                             var index;
                                             //    print('singham is on back ${val.value}');
                                             return DropdownMenuItem<String>(
-                                              value: val.key1,
+                                              value: val.key,
                                               child: Center(
                                                   child: InkWell(
                                                 onTap: () {
-                                                  singh = val.value1;
-                                                  s = val.cost;
-                                                  print('cost $s');
-                                                  p = val.totalCost;
-                                                  print('total cot$p');
+                                                  parmendra = val.value;
                                                   print(
-                                                      'singham is back ${val.value1}');
-
+                                                      'singham is back ${val.value}');
                                                   BlocProvider.of<
                                                               BookAppointmentBloc>(
                                                           context)
-                                                      .add(serviceIdChanged(
-                                                    int.parse(val.value1),
+                                                      .add(PetIdChanged(
+                                                    int.parse(val.value),
                                                   ));
                                                   setState(() {
-                                                    _selValue = val.key1;
+                                                    _selValue1 = val.key;
 
                                                     print(
-                                                        'gdgdhgdhd${val.key1.toString()}');
+                                                        'gdgdhgdhd${val.key.toString()}');
 
                                                     var valey;
                                                     setState(
                                                       () {
-                                                        _selValue = val.key1;
+                                                        _selValue1 = val.key;
 
-                                                        if (val.key1 ==
-                                                            val.key1) {}
-                                                        if (val.key1 ==
+                                                        if (val.key ==
+                                                            val.key) {}
+                                                        if (val.key ==
                                                             "SELECT PET") {
                                                           _dropDownValue = 0;
                                                           print(_dropDownValue);
                                                         }
 
-                                                        if (val.key1 == "VET") {
+                                                        if (val.key == "VET") {
                                                           _dropDownValue = 2;
                                                         }
                                                       },
                                                     );
-                                                    showTax();
+                                                    // _prefHelper.saveInt('', value)
                                                     Navigator.pop(context);
                                                   });
                                                 },
-                                                child: Text(val.key1,
+                                                child: Text(val.key,
                                                     style:
                                                         MaaruStyle.text.small),
                                               )),
@@ -887,22 +1119,18 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                           },
                                         ).toList(),
                                         onChanged: (value) {
-                                          _selValue = value;
+                                          _selValue1 = value;
                                           BlocProvider.of<BookAppointmentBloc>(
                                                   context)
                                               .add(PetIdChanged(
                                             value,
                                           ));
-                                          // _prefHelper.saveInt(
-                                          //     'service_cost', s);
-                                          // _prefHelper.saveDouble(
-                                          //     'totalAmountWithTax', p);
                                           print('gdgdhgdhd${value.toString()}');
 
                                           var valey;
                                           setState(
                                             () {
-                                              _selValue = value;
+                                              _selValue1 = value;
                                               if (value == value) {}
                                               if (value == "SELECT PET") {
                                                 _dropDownValue = 0;
@@ -921,1053 +1149,1069 @@ class _BookAppointmentScreen3State extends State<BookAppointmentScreen3>
                                 ],
                               );
                             } else {
-                              return const CircularProgressIndicator();
+                              return CircularProgressIndicator();
                             }
-                          }))),
-                  SizedBox(
-                    height: size.height*0.02,
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Pet'.toUpperCase(),
-                      style: MaaruStyle.text.tiny,
+                          }),
+                        )),
+                    SizedBox(
+                      height: size.height * 0.02,
                     ),
-                  ),
-                  SizedBox(
-                    height: size.height*0.02,
-                  ),
-                  Padding(
-                      padding: EdgeInsets.only(right: 20, left: 20),
-                      child: BlocProvider(
-                        create: (context) =>
-                            KiwiContainer().resolve<PetProfileBloc>(),
-                        child: BlocBuilder<PetProfileBloc, PetProfileState>(
-                            builder: (context, state) {
-                          if (state is PetProfileInitial) {
-                            BlocProvider.of<PetProfileBloc>(context)
-                                .add(GetCovidList(''));
-                            return CircularProgressIndicator();
-                          } else if (state is CovidLoaded3) {
-                            print(
-                                '+-+****rhedhhhhhhhhhhhhhhhhhhhhhhhhh ${state.covidModel.petProfiles}');
-                            //
-                            List<KeyValueModel> _dates = [];
-                            print('dddwddqqdqdd$_dates');
-                            var abc2 = [];
-                            String _selectedValue =
-                                //_prefHelper.getStringByKey(MaruConstant.first_name, '');
-                                state.covidModel.petProfiles[0].id.toString();
-                            for (int i = 0;
-                                i <= state.covidModel.petProfiles.length - 1;
-                                i++) {
-                              _dates.add(
-                                KeyValueModel(
-                                    key: state.covidModel.petProfiles[i].petName
-                                        .toString(),
-                                    value: state.covidModel.petProfiles[i].id
-                                        .toString()),
-                              );
-                              abc2.add(state.covidModel.petProfiles[i].id);
-                              // print(abc2);
-                              // abc2.add(state.covidModel.petProfiles[i]
-                              //     .service_cost);
-                            }
-
-                            print(_dates.toString());
-                            return Container(
-                              width: 350,
-                              color: Colors.grey[50],
-                              alignment: Alignment.center,
-                              child: Align(
-                                alignment: Alignment(0.2,0),
-                                child: DropdownButton(
-                                  underline: Container(color: Colors.transparent,),
-                                  hint: Text(
-                                    _selValue1,
-                                    style: MaaruStyle.text.tiny,
-                                  ),
-
-                                  icon: Icon(
-                                    Icons.expand_more,
-                                    color: MaaruColors.textButtonColor,
-                                    size: 40.09,
-                                  ),
-                                  // hint: Center(
-                                  //     child: Text(
-                                  //   _selectedValue,
-                                  //   style: MaaruStyle.text.small,
-                                  // )),
-                                  isExpanded: false,
-                                  iconSize: 30.0,
-                                  style: TextStyle(color: Colors.white),
-                                  items: _dates.map(
-                                    (val) {
-                                      var index;
-                                      //    print('singham is on back ${val.value}');
-                                      return DropdownMenuItem<String>(
-                                        value: val.key,
-                                        child: Center(
-                                            child: InkWell(
-                                          onTap: () {
-                                            parmendra = val.value;
-                                            print(
-                                                'singham is back ${val.value}');
-                                            BlocProvider.of<
-                                                        BookAppointmentBloc>(
-                                                    context)
-                                                .add(PetIdChanged(
-                                              int.parse(val.value),
-                                            ));
-                                            setState(() {
-                                              _selValue1 = val.key;
-
-                                              print(
-                                                  'gdgdhgdhd${val.key.toString()}');
-
-                                              var valey;
-                                              setState(
-                                                () {
-                                                  _selValue1 = val.key;
-
-                                                  if (val.key == val.key) {}
-                                                  if (val.key == "SELECT PET") {
-                                                    _dropDownValue = 0;
-                                                    print(_dropDownValue);
-                                                  }
-
-                                                  if (val.key == "VET") {
-                                                    _dropDownValue = 2;
-                                                  }
-                                                },
-                                              );
-                                              // _prefHelper.saveInt('', value)
-                                              Navigator.pop(context);
-                                            });
-                                          },
-                                          child: Text(val.key,
-                                              style: MaaruStyle.text.small),
-                                        )),
-                                        // value: val.value,
-                                      );
-                                    },
-                                  ).toList(),
-                                  onChanged: (value) {
-                                    _selValue1 = value;
-                                    BlocProvider.of<BookAppointmentBloc>(
-                                            context)
-                                        .add(PetIdChanged(
-                                      value,
-                                    ));
-                                    print('gdgdhgdhd${value.toString()}');
-
-                                    var valey;
-                                    setState(
-                                      () {
-                                        _selValue1 = value;
-                                        if (value == value) {}
-                                        if (value == "SELECT PET") {
-                                          _dropDownValue = 0;
-                                          print(_dropDownValue);
-                                        }
-
-                                        if (value == "VET") {
-                                          _dropDownValue = 2;
-                                        }
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
-                            );
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        }),
-                      )),
-                  SizedBox(
-                height: size.height*0.02,
-                  ),
-
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Morning'.toUpperCase(),
-                      style: MaaruStyle.text.tiny,
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Morning'.toUpperCase(),
+                        style: MaaruStyle.text.tiny,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Column(children: [
-                    ChoiceRow(
-                      lebal1: '10:00 AM',
-                      lebal2: '10:30 AM',
-                      lebal3: '11:00 AM',
-                      lebal4: '11:30 AM',
-                      lebal5: '12:00 AM',
-                      lebal7: '12:30 PM',
-                      lebal8: '01:00 PM',
-                      lebal9: '01:30 PM',
-                      lebal10: '02:00 PM',
-
-                    )
-                  ]),
-                  SizedBox(
-                    height: size.height*0.02,
-                  ),
-
-                  Visibility(
-                    maintainSize: false,
-                    maintainAnimation: false,
-                    maintainState: false,
-                    visible: viewVisible3,
-                    child: Column(
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Column(
                       children: [
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Container(
-                                margin: const EdgeInsets.only(left: 20),
-                                child: Text(
-                                  'Booking Cost'.toUpperCase(),
-                                  style: MaaruStyle.text.tiny,
-                                ))),
-                         SizedBox(
-                          height: size.height*0.02,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Booking  Total'.toUpperCase(),
-                                style: MaaruStyle.text.tiny,
+                        Container(
+                          child: GridView.builder(
+                              itemCount: state.bookingdatemodels.times.length,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 5,
+                                mainAxisExtent: 60,
                               ),
-                              Text(
-                                '\$${s}',
-                                style: MaaruStyle.text.tiny,
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: size.height*0.02,
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(left: 20, right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Taxes'.toUpperCase(),
-                                  //  state.covidModel.petProfiles[_prefHelper.getIntByKey('id',abcd  )].am,
-                                  style: MaaruStyle.text.tiny,
-                                ),
-                                Text(
-                                  '\$${_prefHelper.getStringByKey('tax', '')}',
-                                  style: MaaruStyle.text.tiny,
-                                )
-                              ],
-                            )),
-                        const Padding(
-                          padding: EdgeInsets.only(
-                              left: 15.0, right: 15.0, top: 2.0),
-                          child: Divider(
-                            thickness: 2.0,
-                          ),
-                        ),
-                        SizedBox(
-                         height: size.height*0.02,
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(left: 20, right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Total'.toUpperCase(),
-                                  style: MaaruStyle.text.tiny,
-                                ),
-                                Text(
-                                  '\$${p}',
-                                  style: MaaruStyle.text.tiny,
-                                )
-                              ],
-                            )),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.height*0.02,
-                  ),
-                  BlocProvider(
-                      create: (context) =>
-                          KiwiContainer().resolve<PaymentBloc>(),
-                      child: BlocBuilder<PaymentBloc, PaymentState>(
-                          builder: (context, state) {
-                        if (state is PaymentInitial) {
-                          BlocProvider.of<PaymentBloc>(context)
-                              .add(GetUserPayment());
-
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        } else if (state is GetUserPaymentModel) {
-                          return Padding(
-                              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                              child: Column(children: [
-                                Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      'Your Saved Card',
-                                      style: MaaruStyle.text.tiniest,
-                                    )),
-                                SizedBox(height: size.height*0.02,),
-                                ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    physics:  ClampingScrollPhysics(),
-                                    itemCount: state.fetchCardDetailsModel
-                                        .getCardDetails.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      if (state.fetchCardDetailsModel
-                                          .getCardDetails.isNotEmpty) {
-                                        return Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 20.0),
-                                          child: Container(
-                                              height: 150,
-                                              width: 380,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.deepPurple[50],
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0)),
-                                              child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          20, 20, 10, 20),
-                                                  child: Column(children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          'Visa Card',
-                                                          style: MaaruStyle
-                                                              .text.tiniest,
-                                                        ),
-                                                        Text(
-                                                          'Primary Payment',
-                                                          style: MaaruStyle
-                                                              .text.greyDisable,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    Align(
-                                                        alignment:
-                                                            Alignment.topRight,
-                                                        child: card([index]
-                                                            .sublist(0))),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(
-                                                            '**** **** **** ${state.fetchCardDetailsModel.getCardDetails[index].cardNumber.substring(state.fetchCardDetailsModel.getCardDetails[index].cardNumber.length - 4)}',
-                                                            style: MaaruStyle
-                                                                .text.tiny,
-                                                          ),
-                                                          Container(
-                                                            height: 40,
-                                                            width: 120,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            100.0),
-                                                                    boxShadow: const [
-                                                                      BoxShadow(
-                                                                        color: Color(
-                                                                            0x80000000),
-                                                                        blurRadius:
-                                                                            12.0,
-                                                                        offset: Offset(
-                                                                            0.0,
-                                                                            5.0),
-                                                                      ),
-                                                                    ],
-                                                                    gradient:
-                                                                        LinearGradient(
-                                                                      begin: Alignment
-                                                                          .topLeft,
-                                                                      end: Alignment
-                                                                          .bottomRight,
-                                                                      colors: [
-                                                                        MaaruColors
-                                                                            .primaryColorsuggesion,
-                                                                        MaaruColors
-                                                                            .primaryColorsuggesion,
-                                                                      ],
-                                                                    )),
-                                                            child: Center(
-                                                              child: InkWell(
-                                                                onTap: () {
-                                                                  print(
-                                                                      'ssshgssgsgsare');
-                                                                  print(
-                                                                      'final confirm${state.fetchCardDetailsModel.getCardDetails[index].id}');
-                                                                  bb = state
-                                                                      .fetchCardDetailsModel
-                                                                      .getCardDetails[
-                                                                          index]
-                                                                      .id
-                                                                      .toString();
-                                                                  print('dddd$bb');
-                                                                  setState(() {
-                                                                    if (date1
-                                                                        .isEmpty) {
-                                                                      print(
-                                                                          'ssss${date1}');
-                                                                      _showDialog(
-                                                                          context,
-                                                                          'Please Select Date');
-                                                                    } else if (singh
-                                                                        .isEmpty) {
-                                                                      _showDialog(
-                                                                          context,
-                                                                          'Please Select Services');
-                                                                    } else if (parmendra
-                                                                        .isEmpty) {
-                                                                      _showDialog(
-                                                                          context,
-                                                                          'Please Select Pet');
-                                                                    } else {
-                                                                      setState(
-                                                                          () {
-                                                                        addpayment(
-                                                                            context,
-                                                                            '');
-                                                                        // showDialog(
-                                                                        //   context:
-                                                                        //       context,
-                                                                        //   builder:
-                                                                        //       (BuildContext context) {
-                                                                        //     return Padding(
-                                                                        //         padding: EdgeInsets.all(20.0),
-                                                                        //         child: AlertDialog(actions: <Widget>[
-                                                                        //           Align(
-                                                                        //               alignment: Alignment.center,
-                                                                        //               child: Container(
-                                                                        //                   decoration: BoxDecoration(
-                                                                        //                     color: MaaruStyle.colors.textColorWhite,
-                                                                        //                   ),
-                                                                        //                   child: Column(
-                                                                        //                     mainAxisSize: MainAxisSize.min,
-                                                                        //                     children: [
-                                                                        //                       Padding(
-                                                                        //                         padding: const EdgeInsets.only(left: 20.0, right: 20),
-                                                                        //                         child: TextFormField(
-                                                                        //                           inputFormatters: [
-                                                                        //                             FilteringTextInputFormatter.digitsOnly,
-                                                                        //                             LengthLimitingTextInputFormatter(4),
-                                                                        //                           ],
-                                                                        //                           decoration: InputDecoration(
-                                                                        //                             fillColor: Colors.white,
-                                                                        //                             hoverColor: Colors.white,
-                                                                        //                             icon: Image.asset(
-                                                                        //                               'assets/images/card_cvv.png',
-                                                                        //                               width: 40.0,
-                                                                        //                               color: Colors.grey[600],
-                                                                        //                             ),
-                                                                        //                             border: const UnderlineInputBorder(),
-                                                                        //                             filled: true,
-                                                                        //                             hintText: 'Number behind the card',
-                                                                        //                             labelText: 'CVV',
-                                                                        //                           ),
-                                                                        //                           // validator: CardUtils.validateCVV,
-                                                                        //                           // keyboardType: TextInputType.number,
-                                                                        //                           // onSaved: (value) {
-                                                                        //                           //   _paymentCard.cvv = int.parse(value);
-                                                                        //                           // },
-                                                                        //                           onChanged: (text) {
-                                                                        //                             BlocProvider.of<BookAppointmentBloc>(context).add(CardCvvChanged(_cvvControllerCard.text));
-                                                                        //                           },
-                                                                        //                           controller: _cvvControllerCard,
-                                                                        //                         ),
-                                                                        //                       ),
-                                                                        //                       Divider(
-                                                                        //                         color: Colors.grey[360],
-                                                                        //                       ),
-                                                                        //                       Padding(
-                                                                        //                         padding: const EdgeInsets.all(1.0),
-                                                                        //                         child: ThemedButton(
-                                                                        //                           text: 'Book Appointment',
-                                                                        //                           onPressed: () {
-                                                                        //                              BlocProvider.of<BookAppointmentBloc>(context).add(dateChanged(aa,''));
-                                                                        //                              BlocProvider.of<BookAppointmentBloc>(context).add(PetIdChanged(int.parse(parmendra)));
-                                                                        //                              BlocProvider.of<BookAppointmentBloc>(context).add((serviceIdChanged(int.parse(singh))));
-                                                                        //                              BlocProvider.of<BookAppointmentBloc>(context).add((CardIdChanged(bb)));
-                                                                        //                              BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(widget.id3)));
-                                                                        //                             // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(widget.id3)));
-                                                                        //                             // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(int.parse(const ChoiceRow(lebal1: '12:30',).toString()))));
-                                                                        //                              BlocProvider.of<BookAppointmentBloc>(context).add((BookingTimeChaned()));
-                                                                        //                             String text = _cvvControllerCard.text;
-                                                                        //                             if (text.length <= 2) {
-                                                                        //                               _showDialog(context, 'Cvv must be 3 digit');
-                                                                        //                             } else {
-                                                                        //                               // _prefHelper.getStringByKey(
-                                                                        //                               //     'id', '');
-                                                                        //                               BlocProvider.of<BookAppointmentBloc>(context).add(BookRegisterButtonTapped());
-                                                                        //                             }
-                                                                        //                           },
-                                                                        //                           enabled: true,
-                                                                        //                         ),
-                                                                        //                       )
-                                                                        //                     ],
-                                                                        //                   )))
-                                                                        //         ]));
-                                                                        //   },
-                                                                        // );
-                                                                      });
-                                                                    }
-                                                                    // viewVisible1 = true;
-                                                                  });
-                                                                },
-                                                                child:
-                                                                    const Text(
-                                                                  'Payment',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      color: Colors
-                                                                          .white),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ])
-                                                  ]))),
-                                        );
-                                      } else {
-                                        return Form(
-                                            key: _formKey,
-                                            autovalidateMode: _autoValidateMode,
-                                            child: Column(children: [
-                                              TextFormField(
-                                                decoration:
-                                                    const InputDecoration(
-                                                  fillColor: Colors.white,
-                                                  hoverColor: Colors.white,
-                                                  border:
-                                                      UnderlineInputBorder(),
-                                                  filled: true,
-                                                  icon: Icon(
-                                                    Icons.person,
-                                                    size: 40.0,
-                                                  ),
-                                                  hintText:
-                                                      'What name is written on card?',
-                                                  labelText: 'Card Name',
-                                                ),
-                                                onSaved: (String value) {
-                                                  _card.name = value;
-                                                },
-                                                keyboardType:
-                                                    TextInputType.text,
-                                                validator: (String value) =>
-                                                    value.isEmpty
-                                                        ? Strings.fieldReq
-                                                        : null,
-                                                controller: textController,
-                                              ),
-                                              new SizedBox(
-                                                height: 30.0,
-                                              ),
-                                              TextFormField(
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
-                                                  LengthLimitingTextInputFormatter(
-                                                      19),
-                                                  CardNumberInputFormatter()
-                                                ],
-                                                controller:
-                                                    _creditCardNumberController,
-                                                decoration: InputDecoration(
-                                                  fillColor: Colors.white,
-                                                  hoverColor: Colors.white,
-                                                  border:
-                                                      const UnderlineInputBorder(),
-                                                  filled: true,
-                                                  icon: CardUtils.getCardIcon(
-                                                      _paymentCard.type),
-                                                  hintText:
-                                                      'What number is written on card?',
-                                                  labelText: 'Number',
-                                                ),
-                                                onSaved: (String value) {
-                                                  print('onSaved = $value');
-                                                  print(
-                                                      'Num controller has = ${_creditCardNumberController.text}');
-                                                  _paymentCard.number =
-                                                      CardUtils
-                                                          .getCleanedNumber(
-                                                              value);
-                                                },
-                                                validator:
-                                                    CardUtils.validateCardNum,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                              itemBuilder: (BuildContext context, int index) {
+                                // print(
+                                //     state.welcome4.masterServices.length);
+                                // print('xxx$index');
+                                return state.bookingdatemodels.times[index]
+                                            .booked ==
+                                        true
+                                    ? InkWell(
+                                        onTap: () {
+                                          BlocProvider.of<BookAppointmentBloc>(
+                                                  context)
+                                              .add(BookingTimeChaned(state
+                                                  .bookingdatemodels
+                                                  .times[index]
+                                                  .time));
+                                        },
+                                        child: state.bookingdatemodels
+                                                    .times[index].time ==
+                                                '10:30'
+                                            ? Column(
                                                 children: [
-                                                  Flexible(
-                                                    child: Container(
-                                                      padding:
-                                                          EdgeInsets.only(),
-                                                      child: TextFormField(
-                                                        inputFormatters: [
-                                                          FilteringTextInputFormatter
-                                                              .digitsOnly,
-                                                          LengthLimitingTextInputFormatter(
-                                                              4),
-                                                        ],
+                                                  Row(
+                                                    children: [
+                                                      //  Text('${state.bookingdatemodels.times[index].time}'),
+                                                      Container(
+                                                        width: 80,
+                                                        height: 40,
                                                         decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          hoverColor:
-                                                              Colors.white,
-                                                          icon: Image.asset(
-                                                            'assets/images/card_cvv.png',
-                                                            width: 40.0,
-                                                            color: Colors
-                                                                .grey[600],
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                            color: Colors.grey,
                                                           ),
-                                                          border:
-                                                              UnderlineInputBorder(),
-                                                          filled: true,
-                                                          hintText:
-                                                              'Number behind the card',
-                                                          labelText: 'CVV',
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10)),
+
+                                                          color: Colors.white !=
+                                                                  null
+                                                              ? MaaruColors
+                                                                  .button2Color
+                                                              : Colors.white,
+
+                                                          // border: Border.all(color: Colors.grey),
                                                         ),
-                                                        validator: CardUtils
-                                                            .validateCVV,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        onSaved: (value) {
-                                                          _paymentCard.cvv =
-                                                              int.parse(value);
-                                                        },
-                                                        controller:
-                                                            _cvvController,
+                                                        child: Center(
+                                                          child: Text(
+                                                            '${state.bookingdatemodels.times[index].time}',
+                                                            style: pressed
+                                                                ? GoogleFonts.poppins(
+                                                                    textStyle: TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .normal,
+                                                                        fontFamily:
+                                                                            'Poppins',
+                                                                        fontSize:
+                                                                            15,
+                                                                        color: Colors
+                                                                            .black))
+                                                                : MaaruStyle
+                                                                    .text
+                                                                    .greyDisable,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
+                                                    ],
                                                   ),
-                                                  // SizedBox(
-                                                  //   width: 10,
-                                                  // ),
-                                                  Flexible(
-                                                    child: Container(
-                                                      padding:
-                                                          EdgeInsets.only(),
-                                                      child: TextFormField(
-                                                        inputFormatters: [
-                                                          FilteringTextInputFormatter
-                                                              .digitsOnly,
-                                                          LengthLimitingTextInputFormatter(
-                                                              4),
-                                                          CardMonthInputFormatter()
-                                                        ],
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          hoverColor:
-                                                              Colors.white,
-                                                          border:
-                                                              const UnderlineInputBorder(),
-                                                          filled: true,
-                                                          icon: Image.asset(
-                                                            'assets/icons/icone-setting-21.png',
-                                                            width: 25,
-                                                            color: Colors
-                                                                .grey[600],
-                                                          ),
-                                                          hintText: 'MM/YY',
-                                                          labelText:
-                                                              'Expiry Date',
-                                                        ),
-                                                        validator: CardUtils
-                                                            .validateDate,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        onSaved: (value) {
-                                                          List<int> expiryDate =
-                                                              CardUtils
-                                                                  .getExpiryDate(
-                                                                      value);
-                                                          _paymentCard.month =
-                                                              expiryDate[0];
-                                                          _paymentCard.year =
-                                                              expiryDate[1];
-                                                        },
-                                                        controller:
-                                                            _expDateController,
-                                                      ),
-                                                    ),
+                                                  SizedBox(
+                                                    height: 20,
                                                   ),
                                                 ],
-                                              ),
-                                              const SizedBox(
-                                                height: 30.0,
-                                              ),
-                                              Container(
-                                                  alignment: Alignment.center,
-                                                  child: ThemedButton(
-                                                    text: 'Update Payment',
-                                                    enabled: true,
-                                                    onPressed: () {
-                                                      final FormState form =
-                                                          _formKey.currentState;
-                                                      if (!form.validate()) {
-                                                        setState(() {
-                                                          _autoValidateMode =
-                                                              AutovalidateMode
-                                                                  .always; // Start validating on every change.
-                                                        });
-                                                      } else {
-                                                        form.save();
-                                                        // MyStatefulWidget();
-                                                        // Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
-                                                        // BlocProvider.of<BookAppointmentBloc>(
-                                                        //         context)
-                                                        //     .add(BookRegisterButtonTapped());
-
-                                                        //  MyStatefulWidget();
-                                                        // Encrypt and send send payment details to payment gateway
-                                                      }
-                                                    },
-                                                  )),
-                                              const SizedBox(
-                                                height: 100,
-                                              ),
-                                              const SizedBox(
-                                                height: 100,
-                                              ),
-                                            ]));
-                                      }
-                                    }),
-                              ]));
-                        } else {
-                          return null;
-                        }
-                      })),
-                  Form(
-                      key: _formKey,
-                      autovalidateMode: _autoValidateMode,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 15.0),
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: TextButton.icon(
-                                onPressed: showPayment,
-                                icon: Image.asset(
-                                  'assets/icons/icone-setting-64.png',
-                                  height: 40,
-                                ),
-                                label: Text(
-                                  'Payment With New Card',
-                                  style: MaaruStyle.text.tiniest,
-                                ),
-                              ),
+                                              )
+                                            : Text(''),
+                                      )
+                                    : Text('');
+                              }),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'AfterNoon'.toUpperCase(),
+                            style: MaaruStyle.text.tiny,
+                          ),
+                        ),
+                        GridView.builder(
+                            itemCount: state.bookingdatemodels.times.length,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 5,
+                              mainAxisExtent: 50,
                             ),
-                            Visibility(
-                                maintainSize: false,
-                                maintainAnimation: false,
-                                maintainState: false,
-                                visible: viewVisible2,
-                                child: Column(
-                                  children: <Widget>[
-                                    TextFormField(
-                                      decoration: const InputDecoration(
-                                        fillColor: Colors.white,
-                                        hoverColor: Colors.white,
-                                        border: UnderlineInputBorder(),
-                                        filled: true,
-                                        icon: Icon(
-                                          Icons.person,
-                                          size: 40.0,
-                                        ),
-                                        hintText:
-                                            'What name is written on card?',
-                                        labelText: 'Card Name',
-                                      ),
-                                      onChanged: (text) {
-                                        BlocProvider.of<BookAppointmentBloc>(
-                                                context)
-                                            .add(CardHolderNameChanged(
-                                                textController.text));
-                                      },
-                                      onSaved: (String value) {
-                                        _card.name = value;
-                                      },
-                                      keyboardType: TextInputType.text,
-                                      validator: (String value) => value.isEmpty
-                                          ? Strings.fieldReq
-                                          : null,
-                                      controller: textController,
-                                    ),
-                                    const SizedBox(
-                                      height: 30.0,
-                                    ),
-                                    TextFormField(
-                                      keyboardType: TextInputType.number,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly,
-                                        LengthLimitingTextInputFormatter(19),
-                                        CardNumberInputFormatter()
-                                      ],
-                                      // onChanged: (text) {
-                                      //   BlocProvider.of<
-                                      //       BookAppointmentBloc>(
-                                      //       context)
-                                      //       .add(CardNumberChanged(
-                                      //       int.parse(
-                                      //           _creditCardNumberController
-                                      //               .text)));
-                                      // },
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.white,
-                                        hoverColor: Colors.white,
-                                        border: const UnderlineInputBorder(),
-                                        filled: true,
-                                        icon: CardUtils.getCardIcon(
-                                            _paymentCard.type),
-                                        hintText:
-                                            'What number is written on card?',
-                                        labelText: 'Number',
-                                      ),
-                                      onSaved: (String value) {
-                                        print('onSaved = $value');
-                                        print(
-                                            'Num controller has = ${_creditCardNumberController.text}');
-                                        _paymentCard.number =
-                                            CardUtils.getCleanedNumber(value);
-                                        BlocProvider.of<BookAppointmentBloc>(
-                                                context)
-                                            .add(CardNumberChanged(
-                                                value.toString()));
-                                      },
-                                      validator: CardUtils.validateCardNum,
-
-                                      controller: _creditCardNumberController,
-                                    ),
+                            itemBuilder: (BuildContext context, int index) {
+                              // print(
+                              //     state.welcome4.masterServices.length);
+                              // print('xxx$index');
+                              return
+                              state.bookingdatemodels.times[index].booked ==true?
+                                InkWell(
+                                onTap: (){
+                                  BlocProvider.of<BookAppointmentBloc>(context)
+                                      .add(BookingTimeChaned(state.bookingdatemodels.times[index].time));
+                                },
+                                child:
+                                state.bookingdatemodels.times[index].time =='14:39'?Column(
+                                  children: [
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Flexible(
-                                          child: Container(
-                                            padding: EdgeInsets.only(),
-                                            child: TextFormField(
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
-                                                LengthLimitingTextInputFormatter(
-                                                    4),
-                                              ],
-                                              decoration: InputDecoration(
-                                                fillColor: Colors.white,
-                                                hoverColor: Colors.white,
-                                                icon: Image.asset(
-                                                  'assets/images/card_cvv.png',
-                                                  width: 25,
-                                                  color: Colors.grey[600],
-                                                ),
-                                                border: UnderlineInputBorder(),
-                                                filled: true,
-                                                hintText:
-                                                    'Number behind the card',
-                                                labelText: 'CVV',
-                                              ),
-                                              validator: CardUtils.validateCVV,
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              onSaved: (value) {
-                                                _paymentCard.cvv =
-                                                    int.parse(value);
-                                              },
-                                              onChanged: (text) {
-                                                BlocProvider.of<
-                                                            BookAppointmentBloc>(
-                                                        context)
-                                                    .add(CvvIdChanged(
-                                                        _cvvController.text));
-                                              },
-                                              controller: _cvvController,
+                                        //  Text('${state.bookingdatemodels.times[index].time}'),
+                                        Container(
+                                          width: 80,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Colors.grey,
                                             ),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+
+                                            color: Colors.white != null
+                                                ? MaaruColors.button2Color
+                                                : Colors.white,
+
+                                            // border: Border.all(color: Colors.grey),
                                           ),
-                                        ),
-                                        // SizedBox(
-                                        //   width: 10,
-                                        // ),
-                                        Flexible(
-                                          child: Container(
-                                            padding: EdgeInsets.only(),
-                                            child: TextFormField(
-                                              inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .digitsOnly,
-                                                LengthLimitingTextInputFormatter(
-                                                    4),
-                                                CardMonthInputFormatter()
-                                              ],
-                                              decoration: InputDecoration(
-                                                fillColor: Colors.white,
-                                                hoverColor: Colors.white,
-                                                border:
-                                                    const UnderlineInputBorder(),
-                                                filled: true,
-                                                icon: Image.asset(
-                                                  'assets/icons/icone-setting-21.png',
-                                                  width: 25,
-                                                  color: Colors.grey[600],
-                                                ),
-                                                hintText: 'MM/YY',
-                                                labelText: 'Expiry Date',
-                                              ),
-                                              validator: CardUtils.validateDate,
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              onChanged: (value) {
-                                                List<int> expiryDate =
-                                                    CardUtils.getExpiryDate(
-                                                        value);
-                                                _paymentCard.month =
-                                                    expiryDate[0];
-                                                _paymentCard.year =
-                                                    expiryDate[1];
-                                                print(expiryDate);
-                                                BlocProvider.of<
-                                                            BookAppointmentBloc>(
-                                                        context)
-                                                    .add(ExpDateChanged(
-                                                        _expDateController
-                                                            .text));
-                                              },
-                                              controller: _expDateController,
+                                          child: Center(
+                                            child: Text(
+                                              '${state.bookingdatemodels.times[index].time}',
+                                              style: pressed
+                                                  ? GoogleFonts.poppins(
+                                                      textStyle: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight
+                                                                  .normal,
+                                                          fontFamily:
+                                                              'Poppins',
+                                                          fontSize: 15,
+                                                          color:
+                                                              Colors.black))
+                                                  : MaaruStyle
+                                                      .text.greyDisable,
+                                              textAlign: TextAlign.center,
                                             ),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ],
-                                )),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            Column(
+                                ):Text(''),
+                              ):Text('');
+                            }),
+                      ],
+                    ),
+                    SizedBox(
+                      height: size.height * 0.01,
+                    ),
+                    Visibility(
+                      maintainSize: false,
+                      maintainAnimation: false,
+                      maintainState: false,
+                      visible: viewVisible3,
+                      child: Column(
+                        children: [
+                          Align(
+                              alignment: Alignment.topLeft,
+                              child: Container(
+                                  margin: const EdgeInsets.only(left: 20),
+                                  child: Text(
+                                    'Booking Cost'.toUpperCase(),
+                                    style: MaaruStyle.text.tiny,
+                                  ))),
+                          SizedBox(
+                            height: size.height * 0.02,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                ThemedButton(
-                                  onPressed: () {
-                                    BlocProvider.of<BookAppointmentBloc>(
-                                            context)
-                                        .add(providerIdChanged(widget.id3));
-                                    print('ram sita${widget.id3}');
-                                    var daa = _dates1;
-                                    print('ssss1${daa}');
-                                    print('sss');
-                                    print(date1);
-                                    if (date1.isEmpty) {
-                                      print('ssss${date1}');
-                                      _showDialog(
-                                          context, 'Please Select Date');
-                                    } else if (singh.isEmpty) {
-                                      print('ssss1${daa}');
-                                      _showDialog(
-                                          context, 'Please Select Services');
-                                    } else if (parmendra.isEmpty) {
-                                      print('ssss1${daa}');
-                                      _showDialog(context, 'Please Select Pet');
-                                      print('something');
-                                    }
-                                    // else if((){
-                                    //   print('ssss1${daa}');
-                                    //   _showDialog(
-                                    //       context, 'Please Select Date');
-                                    // }
-
-                                    else {
-                                      print('something');
-                                      final FormState form =
-                                          _formKey.currentState;
-                                      if (!form.validate()) {
-                                        setState(
-                                          () {
-                                            _autoValidateMode =
-                                                AutovalidateMode.always;
-                                            print(
-                                                'something'); // Start validating on every change.
-                                          },
-                                        );
-                                      } else {
-                                        print('something');
-                                        form.save();
-                                        MyStatefulWidget();
-                                        //
-                                        BlocProvider.of<BookAppointmentBloc>(
-                                                context)
-                                            .add(BookRegisterButtonTapped());
-                                      }
-                                    }
-                                  },
-                                  text: 'Book Appointment',
+                                Text(
+                                  'Booking  Total'.toUpperCase(),
+                                  style: MaaruStyle.text.tiny,
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                state is BookRegisterInProgress
-                                    ? Center(
-                                        child: Container(
-                                        margin:
-                                            const EdgeInsets.only(bottom: 20),
-                                        width: 40,
-                                        height: 40,
-                                        child:
-                                            const CircularProgressIndicator(),
-                                      ))
-                                    : Container(),
+                                Text(
+                                  '\$${s}',
+                                  style: MaaruStyle.text.tiny,
+                                )
                               ],
                             ),
-                          ],
-                        ),
-                      )),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                ],
-              ))));
+                          ),
+                          SizedBox(
+                            height: size.height * 0.02,
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(left: 20, right: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Taxes'.toUpperCase(),
+                                    //  state.covidModel.petProfiles[_prefHelper.getIntByKey('id',abcd  )].am,
+                                    style: MaaruStyle.text.tiny,
+                                  ),
+                                  Text(
+                                    '\$${_prefHelper.getStringByKey('tax', '')}',
+                                    style: MaaruStyle.text.tiny,
+                                  )
+                                ],
+                              )),
+                          const Padding(
+                            padding: EdgeInsets.only(
+                                left: 15.0, right: 15.0, top: 2.0),
+                            child: Divider(
+                              thickness: 2.0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: size.height * 0.02,
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(left: 20, right: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Total'.toUpperCase(),
+                                    style: MaaruStyle.text.tiny,
+                                  ),
+                                  Text(
+                                    '\$${p}',
+                                    style: MaaruStyle.text.tiny,
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
+                    BlocProvider(
+                        create: (context) =>
+                            KiwiContainer().resolve<PaymentBloc>(),
+                        child: BlocBuilder<PaymentBloc, PaymentState>(
+                            builder: (context, state) {
+                          if (state is PaymentInitial) {
+                            BlocProvider.of<PaymentBloc>(context)
+                                .add(GetUserPayment());
+
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (state is GetUserPaymentModel) {
+                            return Padding(
+                                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                                child: Column(children: [
+                                  Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Your Saved Card',
+                                        style: MaaruStyle.text.tiniest,
+                                      )),
+                                  SizedBox(
+                                    height: size.height * 0.02,
+                                  ),
+                                  ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      physics: ClampingScrollPhysics(),
+                                      itemCount: state.fetchCardDetailsModel
+                                          .getCardDetails.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        if (state.fetchCardDetailsModel
+                                            .getCardDetails.isNotEmpty) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 20.0),
+                                            child: Container(
+                                                height: 150,
+                                                width: 380,
+                                                decoration: BoxDecoration(
+                                                    color:
+                                                        Colors.deepPurple[50],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0)),
+                                                child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .fromLTRB(
+                                                        20, 20, 10, 20),
+                                                    child: Column(children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            'Visa Card',
+                                                            style: MaaruStyle
+                                                                .text.tiniest,
+                                                          ),
+                                                          Text(
+                                                            'Primary Payment',
+                                                            style: MaaruStyle
+                                                                .text
+                                                                .greyDisable,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      Align(
+                                                          alignment: Alignment
+                                                              .topRight,
+                                                          child: card([index]
+                                                              .sublist(0))),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              '**** **** **** ${state.fetchCardDetailsModel.getCardDetails[index].cardNumber.substring(state.fetchCardDetailsModel.getCardDetails[index].cardNumber.length - 4)}',
+                                                              style: MaaruStyle
+                                                                  .text.tiny,
+                                                            ),
+                                                            Container(
+                                                              height: 40,
+                                                              width: 120,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              100.0),
+                                                                      boxShadow: const [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Color(0x80000000),
+                                                                          blurRadius:
+                                                                              12.0,
+                                                                          offset: Offset(
+                                                                              0.0,
+                                                                              5.0),
+                                                                        ),
+                                                                      ],
+                                                                      gradient:
+                                                                          LinearGradient(
+                                                                        begin: Alignment
+                                                                            .topLeft,
+                                                                        end: Alignment
+                                                                            .bottomRight,
+                                                                        colors: [
+                                                                          MaaruColors
+                                                                              .primaryColorsuggesion,
+                                                                          MaaruColors
+                                                                              .primaryColorsuggesion,
+                                                                        ],
+                                                                      )),
+                                                              child: Center(
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    print(
+                                                                        'ssshgssgsgsare');
+                                                                    print(
+                                                                        'final confirm${state.fetchCardDetailsModel.getCardDetails[index].id}');
+                                                                    bb = state
+                                                                        .fetchCardDetailsModel
+                                                                        .getCardDetails[
+                                                                            index]
+                                                                        .id
+                                                                        .toString();
+                                                                    print(
+                                                                        'dddd$bb');
+                                                                    setState(
+                                                                        () {
+                                                                      if (date1
+                                                                          .isEmpty) {
+                                                                        print(
+                                                                            'ssss${date1}');
+                                                                        _showDialog(
+                                                                            context,
+                                                                            'Please Select Date');
+                                                                      } else if (singh
+                                                                          .isEmpty) {
+                                                                        _showDialog(
+                                                                            context,
+                                                                            'Please Select Services');
+                                                                      } else if (parmendra
+                                                                          .isEmpty) {
+                                                                        _showDialog(
+                                                                            context,
+                                                                            'Please Select Pet');
+                                                                      } else {
+                                                                        setState(
+                                                                            () {
+                                                                          addpayment(
+                                                                              context,
+                                                                              '');
+                                                                          // showDialog(
+                                                                          //   context:
+                                                                          //       context,
+                                                                          //   builder:
+                                                                          //       (BuildContext context) {
+                                                                          //     return Padding(
+                                                                          //         padding: EdgeInsets.all(20.0),
+                                                                          //         child: AlertDialog(actions: <Widget>[
+                                                                          //           Align(
+                                                                          //               alignment: Alignment.center,
+                                                                          //               child: Container(
+                                                                          //                   decoration: BoxDecoration(
+                                                                          //                     color: MaaruStyle.colors.textColorWhite,
+                                                                          //                   ),
+                                                                          //                   child: Column(
+                                                                          //                     mainAxisSize: MainAxisSize.min,
+                                                                          //                     children: [
+                                                                          //                       Padding(
+                                                                          //                         padding: const EdgeInsets.only(left: 20.0, right: 20),
+                                                                          //                         child: TextFormField(
+                                                                          //                           inputFormatters: [
+                                                                          //                             FilteringTextInputFormatter.digitsOnly,
+                                                                          //                             LengthLimitingTextInputFormatter(4),
+                                                                          //                           ],
+                                                                          //                           decoration: InputDecoration(
+                                                                          //                             fillColor: Colors.white,
+                                                                          //                             hoverColor: Colors.white,
+                                                                          //                             icon: Image.asset(
+                                                                          //                               'assets/images/card_cvv.png',
+                                                                          //                               width: 40.0,
+                                                                          //                               color: Colors.grey[600],
+                                                                          //                             ),
+                                                                          //                             border: const UnderlineInputBorder(),
+                                                                          //                             filled: true,
+                                                                          //                             hintText: 'Number behind the card',
+                                                                          //                             labelText: 'CVV',
+                                                                          //                           ),
+                                                                          //                           // validator: CardUtils.validateCVV,
+                                                                          //                           // keyboardType: TextInputType.number,
+                                                                          //                           // onSaved: (value) {
+                                                                          //                           //   _paymentCard.cvv = int.parse(value);
+                                                                          //                           // },
+                                                                          //                           onChanged: (text) {
+                                                                          //                             BlocProvider.of<BookAppointmentBloc>(context).add(CardCvvChanged(_cvvControllerCard.text));
+                                                                          //                           },
+                                                                          //                           controller: _cvvControllerCard,
+                                                                          //                         ),
+                                                                          //                       ),
+                                                                          //                       Divider(
+                                                                          //                         color: Colors.grey[360],
+                                                                          //                       ),
+                                                                          //                       Padding(
+                                                                          //                         padding: const EdgeInsets.all(1.0),
+                                                                          //                         child: ThemedButton(
+                                                                          //                           text: 'Book Appointment',
+                                                                          //                           onPressed: () {
+                                                                          //                              BlocProvider.of<BookAppointmentBloc>(context).add(dateChanged(aa,''));
+                                                                          //                              BlocProvider.of<BookAppointmentBloc>(context).add(PetIdChanged(int.parse(parmendra)));
+                                                                          //                              BlocProvider.of<BookAppointmentBloc>(context).add((serviceIdChanged(int.parse(singh))));
+                                                                          //                              BlocProvider.of<BookAppointmentBloc>(context).add((CardIdChanged(bb)));
+                                                                          //                              BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(widget.id3)));
+                                                                          //                             // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(widget.id3)));
+                                                                          //                             // BlocProvider.of<BookAppointmentBloc>(context).add((providerIdChanged(int.parse(const ChoiceRow(lebal1: '12:30',).toString()))));
+                                                                          //                              BlocProvider.of<BookAppointmentBloc>(context).add((BookingTimeChaned()));
+                                                                          //                             String text = _cvvControllerCard.text;
+                                                                          //                             if (text.length <= 2) {
+                                                                          //                               _showDialog(context, 'Cvv must be 3 digit');
+                                                                          //                             } else {
+                                                                          //                               // _prefHelper.getStringByKey(
+                                                                          //                               //     'id', '');
+                                                                          //                               BlocProvider.of<BookAppointmentBloc>(context).add(BookRegisterButtonTapped());
+                                                                          //                             }
+                                                                          //                           },
+                                                                          //                           enabled: true,
+                                                                          //                         ),
+                                                                          //                       )
+                                                                          //                     ],
+                                                                          //                   )))
+                                                                          //         ]));
+                                                                          //   },
+                                                                          // );
+                                                                        });
+                                                                      }
+                                                                      // viewVisible1 = true;
+                                                                    });
+                                                                  },
+                                                                  child:
+                                                                      const Text(
+                                                                    'Payment',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            20.0,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            )
+                                                          ])
+                                                    ]))),
+                                          );
+                                        } else {
+                                          return Form(
+                                              key: _formKey,
+                                              autovalidateMode:
+                                                  _autoValidateMode,
+                                              child: Column(children: [
+                                                TextFormField(
+                                                  decoration:
+                                                      const InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    hoverColor: Colors.white,
+                                                    border:
+                                                        UnderlineInputBorder(),
+                                                    filled: true,
+                                                    icon: Icon(
+                                                      Icons.person,
+                                                      size: 40.0,
+                                                    ),
+                                                    hintText:
+                                                        'What name is written on card?',
+                                                    labelText: 'Card Name',
+                                                  ),
+                                                  onSaved: (String value) {
+                                                    _card.name = value;
+                                                  },
+                                                  keyboardType:
+                                                      TextInputType.text,
+                                                  validator: (String value) =>
+                                                      value.isEmpty
+                                                          ? Strings.fieldReq
+                                                          : null,
+                                                  controller: textController,
+                                                ),
+                                                new SizedBox(
+                                                  height: 30.0,
+                                                ),
+                                                TextFormField(
+                                                  keyboardType:
+                                                      TextInputType.number,
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly,
+                                                    LengthLimitingTextInputFormatter(
+                                                        19),
+                                                    CardNumberInputFormatter()
+                                                  ],
+                                                  controller:
+                                                      _creditCardNumberController,
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    hoverColor: Colors.white,
+                                                    border:
+                                                        const UnderlineInputBorder(),
+                                                    filled: true,
+                                                    icon: CardUtils.getCardIcon(
+                                                        _paymentCard.type),
+                                                    hintText:
+                                                        'What number is written on card?',
+                                                    labelText: 'Number',
+                                                  ),
+                                                  onSaved: (String value) {
+                                                    print('onSaved = $value');
+                                                    print(
+                                                        'Num controller has = ${_creditCardNumberController.text}');
+                                                    _paymentCard.number =
+                                                        CardUtils
+                                                            .getCleanedNumber(
+                                                                value);
+                                                  },
+                                                  validator:
+                                                      CardUtils.validateCardNum,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Flexible(
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.only(),
+                                                        child: TextFormField(
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly,
+                                                            LengthLimitingTextInputFormatter(
+                                                                4),
+                                                          ],
+                                                          decoration:
+                                                              InputDecoration(
+                                                            fillColor:
+                                                                Colors.white,
+                                                            hoverColor:
+                                                                Colors.white,
+                                                            icon: Image.asset(
+                                                              'assets/images/card_cvv.png',
+                                                              width: 40.0,
+                                                              color: Colors
+                                                                  .grey[600],
+                                                            ),
+                                                            border:
+                                                                UnderlineInputBorder(),
+                                                            filled: true,
+                                                            hintText:
+                                                                'Number behind the card',
+                                                            labelText: 'CVV',
+                                                          ),
+                                                          validator: CardUtils
+                                                              .validateCVV,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          onSaved: (value) {
+                                                            _paymentCard.cvv =
+                                                                int.parse(
+                                                                    value);
+                                                          },
+                                                          controller:
+                                                              _cvvController,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    // SizedBox(
+                                                    //   width: 10,
+                                                    // ),
+                                                    Flexible(
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.only(),
+                                                        child: TextFormField(
+                                                          inputFormatters: [
+                                                            FilteringTextInputFormatter
+                                                                .digitsOnly,
+                                                            LengthLimitingTextInputFormatter(
+                                                                4),
+                                                            CardMonthInputFormatter()
+                                                          ],
+                                                          decoration:
+                                                              InputDecoration(
+                                                            fillColor:
+                                                                Colors.white,
+                                                            hoverColor:
+                                                                Colors.white,
+                                                            border:
+                                                                const UnderlineInputBorder(),
+                                                            filled: true,
+                                                            icon: Image.asset(
+                                                              'assets/icons/icone-setting-21.png',
+                                                              width: 25,
+                                                              color: Colors
+                                                                  .grey[600],
+                                                            ),
+                                                            hintText: 'MM/YY',
+                                                            labelText:
+                                                                'Expiry Date',
+                                                          ),
+                                                          validator: CardUtils
+                                                              .validateDate,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          onSaved: (value) {
+                                                            List<int>
+                                                                expiryDate =
+                                                                CardUtils
+                                                                    .getExpiryDate(
+                                                                        value);
+                                                            _paymentCard.month =
+                                                                expiryDate[0];
+                                                            _paymentCard.year =
+                                                                expiryDate[1];
+                                                          },
+                                                          controller:
+                                                              _expDateController,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 30.0,
+                                                ),
+                                                Container(
+                                                    alignment: Alignment.center,
+                                                    child: ThemedButton(
+                                                      text: 'Update Payment',
+                                                      enabled: true,
+                                                      onPressed: () {
+                                                        final FormState form =
+                                                            _formKey
+                                                                .currentState;
+                                                        if (!form.validate()) {
+                                                          setState(() {
+                                                            _autoValidateMode =
+                                                                AutovalidateMode
+                                                                    .always; // Start validating on every change.
+                                                          });
+                                                        } else {
+                                                          form.save();
+                                                          // MyStatefulWidget();
+                                                          // Dialogs.showLoadingDialog(context, _keyLoader, "Updating Payment..");
+                                                          // BlocProvider.of<BookAppointmentBloc>(
+                                                          //         context)
+                                                          //     .add(BookRegisterButtonTapped());
+
+                                                          //  MyStatefulWidget();
+                                                          // Encrypt and send send payment details to payment gateway
+                                                        }
+                                                      },
+                                                    )),
+                                                const SizedBox(
+                                                  height: 100,
+                                                ),
+                                                const SizedBox(
+                                                  height: 100,
+                                                ),
+                                              ]));
+                                        }
+                                      }),
+                                ]));
+                          } else {
+                            return null;
+                          }
+                        })),
+                    Form(
+                        key: _formKey,
+                        autovalidateMode: _autoValidateMode,
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 8.0, right: 15.0),
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.topLeft,
+                                child: TextButton.icon(
+                                  onPressed: showPayment,
+                                  icon: Image.asset(
+                                    'assets/icons/icone-setting-64.png',
+                                    height: 40,
+                                  ),
+                                  label: Text(
+                                    'Payment With New Card',
+                                    style: MaaruStyle.text.tiniest,
+                                  ),
+                                ),
+                              ),
+                              Visibility(
+                                  maintainSize: false,
+                                  maintainAnimation: false,
+                                  maintainState: false,
+                                  visible: viewVisible2,
+                                  child: Column(
+                                    children: <Widget>[
+                                      TextFormField(
+                                        decoration: const InputDecoration(
+                                          fillColor: Colors.white,
+                                          hoverColor: Colors.white,
+                                          border: UnderlineInputBorder(),
+                                          filled: true,
+                                          icon: Icon(
+                                            Icons.person,
+                                            size: 40.0,
+                                          ),
+                                          hintText:
+                                              'What name is written on card?',
+                                          labelText: 'Card Name',
+                                        ),
+                                        onChanged: (text) {
+                                          BlocProvider.of<BookAppointmentBloc>(
+                                                  context)
+                                              .add(CardHolderNameChanged(
+                                                  textController.text));
+                                        },
+                                        onSaved: (String value) {
+                                          _card.name = value;
+                                        },
+                                        keyboardType: TextInputType.text,
+                                        validator: (String value) =>
+                                            value.isEmpty
+                                                ? Strings.fieldReq
+                                                : null,
+                                        controller: textController,
+                                      ),
+                                      const SizedBox(
+                                        height: 30.0,
+                                      ),
+                                      TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          LengthLimitingTextInputFormatter(19),
+                                          CardNumberInputFormatter()
+                                        ],
+                                        // onChanged: (text) {
+                                        //   BlocProvider.of<
+                                        //       BookAppointmentBloc>(
+                                        //       context)
+                                        //       .add(CardNumberChanged(
+                                        //       int.parse(
+                                        //           _creditCardNumberController
+                                        //               .text)));
+                                        // },
+                                        decoration: InputDecoration(
+                                          fillColor: Colors.white,
+                                          hoverColor: Colors.white,
+                                          border: const UnderlineInputBorder(),
+                                          filled: true,
+                                          icon: CardUtils.getCardIcon(
+                                              _paymentCard.type),
+                                          hintText:
+                                              'What number is written on card?',
+                                          labelText: 'Number',
+                                        ),
+                                        onSaved: (String value) {
+                                          print('onSaved = $value');
+                                          print(
+                                              'Num controller has = ${_creditCardNumberController.text}');
+                                          _paymentCard.number =
+                                              CardUtils.getCleanedNumber(value);
+                                          BlocProvider.of<BookAppointmentBloc>(
+                                                  context)
+                                              .add(CardNumberChanged(
+                                                  value.toString()));
+                                        },
+                                        validator: CardUtils.validateCardNum,
+
+                                        controller: _creditCardNumberController,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Flexible(
+                                            child: Container(
+                                              padding: EdgeInsets.only(),
+                                              child: TextFormField(
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly,
+                                                  LengthLimitingTextInputFormatter(
+                                                      4),
+                                                ],
+                                                decoration: InputDecoration(
+                                                  fillColor: Colors.white,
+                                                  hoverColor: Colors.white,
+                                                  icon: Image.asset(
+                                                    'assets/images/card_cvv.png',
+                                                    width: 25,
+                                                    color: Colors.grey[600],
+                                                  ),
+                                                  border:
+                                                      UnderlineInputBorder(),
+                                                  filled: true,
+                                                  hintText:
+                                                      'Number behind the card',
+                                                  labelText: 'CVV',
+                                                ),
+                                                validator:
+                                                    CardUtils.validateCVV,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                onSaved: (value) {
+                                                  _paymentCard.cvv =
+                                                      int.parse(value);
+                                                },
+                                                onChanged: (text) {
+                                                  BlocProvider.of<
+                                                              BookAppointmentBloc>(
+                                                          context)
+                                                      .add(CvvIdChanged(
+                                                          _cvvController.text));
+                                                },
+                                                controller: _cvvController,
+                                              ),
+                                            ),
+                                          ),
+                                          // SizedBox(
+                                          //   width: 10,
+                                          // ),
+                                          Flexible(
+                                            child: Container(
+                                              padding: EdgeInsets.only(),
+                                              child: TextFormField(
+                                                inputFormatters: [
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly,
+                                                  LengthLimitingTextInputFormatter(
+                                                      4),
+                                                  CardMonthInputFormatter()
+                                                ],
+                                                decoration: InputDecoration(
+                                                  fillColor: Colors.white,
+                                                  hoverColor: Colors.white,
+                                                  border:
+                                                      const UnderlineInputBorder(),
+                                                  filled: true,
+                                                  icon: Image.asset(
+                                                    'assets/icons/icone-setting-21.png',
+                                                    width: 25,
+                                                    color: Colors.grey[600],
+                                                  ),
+                                                  hintText: 'MM/YY',
+                                                  labelText: 'Expiry Date',
+                                                ),
+                                                validator:
+                                                    CardUtils.validateDate,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                onChanged: (value) {
+                                                  List<int> expiryDate =
+                                                      CardUtils.getExpiryDate(
+                                                          value);
+                                                  _paymentCard.month =
+                                                      expiryDate[0];
+                                                  _paymentCard.year =
+                                                      expiryDate[1];
+                                                  print(expiryDate);
+                                                  BlocProvider.of<
+                                                              BookAppointmentBloc>(
+                                                          context)
+                                                      .add(ExpDateChanged(
+                                                          _expDateController
+                                                              .text));
+                                                },
+                                                controller: _expDateController,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  )),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Column(
+                                children: [
+                                  ThemedButton(
+                                    onPressed: () {
+                                      BlocProvider.of<BookAppointmentBloc>(
+                                              context)
+                                          .add(providerIdChanged(widget.id3));
+                                      print('ram sita${widget.id3}');
+                                      var daa = _dates1;
+                                      print('ssss1${daa}');
+                                      print('sss');
+                                      print(date1);
+                                      if (date1.isEmpty) {
+                                        print('ssss${date1}');
+                                        _showDialog(
+                                            context, 'Please Select Date');
+                                      } else if (singh.isEmpty) {
+                                        print('ssss1${daa}');
+                                        _showDialog(
+                                            context, 'Please Select Services');
+                                      } else if (parmendra.isEmpty) {
+                                        print('ssss1${daa}');
+                                        _showDialog(
+                                            context, 'Please Select Pet');
+                                        print('something');
+                                      }
+                                      // else if((){
+                                      //   print('ssss1${daa}');
+                                      //   _showDialog(
+                                      //       context, 'Please Select Date');
+                                      // }
+
+                                      else {
+                                        print('something');
+                                        final FormState form =
+                                            _formKey.currentState;
+                                        if (!form.validate()) {
+                                          setState(
+                                            () {
+                                              _autoValidateMode =
+                                                  AutovalidateMode.always;
+                                              print(
+                                                  'something'); // Start validating on every change.
+                                            },
+                                          );
+                                        } else {
+                                          print('something');
+                                          form.save();
+                                          MyStatefulWidget();
+                                          //
+                                          BlocProvider.of<BookAppointmentBloc>(
+                                                  context)
+                                              .add(BookRegisterButtonTapped());
+                                        }
+                                      }
+                                    },
+                                    text: 'Book Appointment',
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  state is BookRegisterInProgress
+                                      ? Center(
+                                          child: Container(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 20),
+                                          width: 50,
+                                          height: 50,
+                                          child:
+                                              const CircularProgressIndicator(),
+                                        ))
+                                      : Container(),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                  ],
+                ))));
+          } else {
+            return null;
+          }
         }));
   }
 }
@@ -2032,7 +2276,9 @@ void _showDialog(BuildContext context, String text) {
             Align(
                 alignment: Alignment.center,
                 child: InkWell(
-                  onTap: (){Navigator.pop(context);},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Container(
                       decoration: BoxDecoration(
                         color: MaaruStyle.colors.textColorWhite,
@@ -2041,7 +2287,8 @@ void _showDialog(BuildContext context, String text) {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 20.0, right: 20),
+                            padding:
+                                const EdgeInsets.only(left: 20.0, right: 20),
                             child: Text(text),
                           ),
                           Divider(
@@ -2053,7 +2300,8 @@ void _showDialog(BuildContext context, String text) {
                               },
                               child: Text(
                                 'ok',
-                                style: TextStyle(color: MaaruColors.buttonColor),
+                                style:
+                                    TextStyle(color: MaaruColors.buttonColor),
                               ))
                         ],
                       )),
@@ -2072,19 +2320,21 @@ class ChoiceRow extends StatefulWidget {
   final String lebel6;
   final String lebal7;
   final String lebal8;
-  final String lebal9;final String lebal10;
-
-
-
-
+  final String lebal9;
+  final String lebal10;
 
   ChoiceRow(
       {Key key,
-        this.lebal1,
-        this.lebal2,
-        this.lebal3,
-        this.lebal4,
-        this.lebal5,this.lebel6,this.lebal7,this.lebal8,this.lebal9,this.lebal10})
+      this.lebal1,
+      this.lebal2,
+      this.lebal3,
+      this.lebal4,
+      this.lebal5,
+      this.lebel6,
+      this.lebal7,
+      this.lebal8,
+      this.lebal9,
+      this.lebal10})
       : super(key: key);
 
   @override
@@ -2092,10 +2342,19 @@ class ChoiceRow extends StatefulWidget {
 }
 
 class _ChoiceRowState extends State<ChoiceRow> {
-  List<bool> isPressedList = [false, false, false, false, false, false,false,false,false,false,false];
-
-
-
+  List<bool> isPressedList = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
 
   String classChoice = '';
 
@@ -2104,7 +2363,7 @@ class _ChoiceRowState extends State<ChoiceRow> {
     print("Status L $isPressedList");
 
     return Container(
-      margin: EdgeInsets.only(left: 20,right: 20),
+      margin: EdgeInsets.only(left: 20, right: 20),
       height: 150,
       width: 400,
       child: Column(
@@ -2312,7 +2571,6 @@ class _ChoiceRowState extends State<ChoiceRow> {
               ],
             ),
           ),
-
           SizedBox(
             height: 20,
           ),
@@ -2326,7 +2584,6 @@ class _ChoiceRowState extends State<ChoiceRow> {
           SizedBox(
             height: 20,
           ),
-
           Container(
             height: 40,
             width: 400,
@@ -2352,8 +2609,6 @@ class _ChoiceRowState extends State<ChoiceRow> {
                             isPressedList[8] = false;
                             isPressedList[9] = false;
                             isPressedList[10] = false;
-
-
                           } else {
                             isPressedList[0] = false;
                             isPressedList[1] = false;
@@ -2366,7 +2621,6 @@ class _ChoiceRowState extends State<ChoiceRow> {
                             isPressedList[8] = false;
                             isPressedList[9] = false;
                             isPressedList[10] = false;
-
                           }
                         });
                         BlocProvider.of<BookAppointmentBloc>(context)
@@ -2394,7 +2648,6 @@ class _ChoiceRowState extends State<ChoiceRow> {
                             isPressedList[8] = false;
                             isPressedList[9] = false;
                             isPressedList[10] = false;
-
                           } else {
                             isPressedList[0] = false;
                             isPressedList[1] = false;
@@ -2407,7 +2660,6 @@ class _ChoiceRowState extends State<ChoiceRow> {
                             isPressedList[8] = false;
                             isPressedList[9] = false;
                             isPressedList[10] = false;
-
                           }
                         });
                         BlocProvider.of<BookAppointmentBloc>(context)
@@ -2433,7 +2685,6 @@ class _ChoiceRowState extends State<ChoiceRow> {
                             isPressedList[8] = false;
                             isPressedList[9] = false;
                             isPressedList[10] = false;
-
                           } else {
                             isPressedList[0] = false;
                             isPressedList[1] = false;
@@ -2574,11 +2825,11 @@ class _ChoiceButtonState extends State<ChoiceButton> {
             widget.label,
             style: widget.isPressed
                 ? GoogleFonts.poppins(
-                textStyle: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontFamily: 'Poppins',
-                    fontSize: 15,
-                    color: Colors.black))
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontFamily: 'Poppins',
+                        fontSize: 15,
+                        color: Colors.black))
                 : MaaruStyle.text.greyDisable,
             textAlign: TextAlign.center,
           ),

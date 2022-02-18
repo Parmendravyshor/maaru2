@@ -129,215 +129,224 @@ class _MessagesState extends State<Messages> {
               return SafeArea(
                   bottom: false,
                   child: SingleChildScrollView(
-                    child: Column(children: [
-                      SizedBox(
-                        height: size.height*0.02,
-                      ),
-
-                      // Align(
-                      //     alignment: Alignment.centerRight,
-                      //
-                      //         child:
-                      Container(
-                        height: 50,
-                        padding: const EdgeInsets.only(right: 20),
-                        alignment: Alignment.centerRight,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-
+                    child: Container(
+                      margin: EdgeInsets.only(left: 10),
+                      child: Column(children: [
+                        SizedBox(
+                          height: size.height*0.02,
                         ),
-                        child:   Image.asset('assets/128/CrystalGaskell.png'),
-                      ),
 
-                      Padding(
-                          padding:
-                              EdgeInsets.only(top: 15, right: 20, left: 10),
-                          child: TextFormField(
-                            // cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                                enabledBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(10.7),
-                                    borderSide: new BorderSide(
-                                        color: Colors.grey[300], width: 1.0)),
-                                focusedBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(10.7),
-                                    borderSide: new BorderSide(
-                                        color: Colors.grey[300], width: 1.0)),
-                                hintText: 'Search',
-                                hintStyle: MaaruStyle.text.greyDisable,
-                                contentPadding: const EdgeInsets.fromLTRB(
-                                    20.0, 15.0, 25.0, 10.0),
-                                fillColor: Colors.white,
-                                suffixIcon: Image.asset(
-                                  'assets/icons/icone-setting-19.png',
-                                  height: 50,
-                                  // width: 30,
-                                )),
-                            onChanged: (text){
-                              BlocProvider.of<LoginBloc>(context).add(event.GetProvider(_petNameController.text));
-                            },controller: _petNameController,
-                          )),
-                      SizedBox(
-                        height: size.height*0.02,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          '   Providers'.toUpperCase(),
-                          style: MaaruStyle.text.tiny,
+                        // Align(
+                        //     alignment: Alignment.centerRight,
+                        //
+                        //         child:
+                        Container(
+                          height: 50,
+                          padding: const EdgeInsets.only(right: 20),
+                          alignment: Alignment.centerRight,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+
+                          ),
+                          child:   Image.asset('assets/128/CrystalGaskell.png'),
                         ),
-                      ),
-                      SizedBox(
-                        height: size.height*0.02,
-                      ),
 
-                      Column(
-                        children: [
-                          Container(
+                        Padding(
+                            padding:
+                                EdgeInsets.only(top: 15, right: 20, left: 10),
+                            child: TextFormField(
+                              // cursorColor: Colors.black,
+                              decoration: InputDecoration(
+                                  enabledBorder: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(10.7),
+                                      borderSide: new BorderSide(
+                                          color: Colors.grey[300], width: 1.0)),
+                                  focusedBorder: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(10.7),
+                                      borderSide: new BorderSide(
+                                          color: Colors.grey[300], width: 1.0)),
+                                  hintText: 'Search',
+                                  hintStyle: MaaruStyle.text.greyDisable,
+                                  contentPadding: const EdgeInsets.fromLTRB(
+                                      20.0, 15.0, 25.0, 10.0),
+                                  fillColor: Colors.white,
+                                  suffixIcon: Image.asset(
+                                    'assets/icons/icone-setting-19.png',
+                                    height: 50,
+                                    // width: 30,
+                                  )),
+                              onChanged: (text){
+                                BlocProvider.of<LoginBloc>(context).add(event.GetProvider(_petNameController.text));
+                              },controller: _petNameController,
+                            )),
+                        SizedBox(
+                          height: size.height*0.02,
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            '   Providers'.toUpperCase(),
+                            style: MaaruStyle.text.tiny,
+                          ),
+                        ),
+                        SizedBox(
+                          height: size.height*0.02,
+                        ),
 
-                              height: size.height*0.10,
-                            width: 400,
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
+                        Column(
+                          children: [
+                            Container(
+
+                                height: size.height*0.10,
+                              width: 400,
+                              child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  physics: ScrollPhysics(),
+                                  itemCount: state
+                                      .getProviderModel.providersListing.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Container(
+                                            width: size.width*0.18,
+
+                                            child: 
+                                            Image.network(
+                                              state
+                                                  .getProviderModel
+                                                  .providersListing[
+                                              index]
+                                                  .img,
+                                              errorBuilder:
+                                                  (BuildContext, Object,
+                                                  StackTrace) {
+                                                return Image.asset(
+                                                  'assets/128/CrystalGaskell.png',
+                                                  fit: BoxFit.fitWidth,
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ]);
+                                  }),
+                            ),
+
+                            ListView.builder(
+                                scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
+                                physics: ScrollPhysics(),
                                 itemCount: state
                                     .getProviderModel.providersListing.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Container(
-                                          width: size.width*0.18,
-                                          child: Image.network(
-                                            state
-                                                .getProviderModel
-                                                .providersListing[
-                                            index]
-                                                .img,
-                                            errorBuilder:
-                                                (BuildContext, Object,
-                                                StackTrace) {
-                                              return Image.asset(
-                                                'assets/128/CrystalGaskell.png',
-                                                fit: BoxFit.fitWidth,
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ]);
-                                }),
-                          ),
-
-                          ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: state
-                                  .getProviderModel.providersListing.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Column(children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                              builder: (_) => Chat1(
-                                                    user: state
-                                                        .getProviderModel
-                                                        .providersListing[index]
-                                                        .id
-                                                        .toString(),
-                                                  )));
-                                    },
-                                    child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 10, right: 20,top: 10),
-                                            child: Container(
-                                                height: size.height*0.12,
-                                                width: 400,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey[50],
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
-                                                ),
-                                                child: Center(
-                                                  child: ListTile(
-                                                    leading: Image.network(
-                                                      state
+                                  return Column(children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                                builder: (_) => Chat1(
+                                                      user: state
                                                           .getProviderModel
-                                                          .providersListing[
-                                                              index]
-                                                          .img,
-                                                      errorBuilder:
-                                                          (BuildContext, Object,
-                                                              StackTrace) {
-                                                        return Image.asset(
-                                                          'assets/128/CrystalGaskell.png',
-                                                          fit: BoxFit.fitWidth,
-                                                        );
-                                                      },
-                                                    ),
-                                                    title: Text(
-                                                      state
-                                                          .getProviderModel
-                                                          .providersListing[
-                                                              index]
-                                                          .companyName
-                                                          .toString().toUpperCase(),
-                                                      style:
-                                                          MaaruStyle.text.tiny,
-                                                    ),
-                                                    subtitle: ListView.builder(
-                                                        controller: _controller,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        shrinkWrap: true,
-                                                        reverse: true,
-                                                        cacheExtent: 1000,
-                                                        itemCount: 0,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          var message =
-                                                              MessagesModel
-                                                                  .messages[0];
-                                                          print(message[
-                                                                      'SenderID']
-                                                                  .toString() +
-                                                              '---------' +
-                                                              4.toString());
-                                                          return Text(
-                                                            '${message['4']}',
-                                                            style: const TextStyle(
-                                                                fontSize: 13,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                color: Colors
-                                                                    .grey),
-                                                          );
-                                                        }),
-                                                    trailing: Text(
-                                                      'today'.toUpperCase(),
-                                                      style: const TextStyle(
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.grey),
-                                                    ),
+                                                          .providersListing[index]
+                                                          .id
+                                                          .toString(),name: state.getProviderModel.providersListing[index].companyName,
+                                                  img: state.getProviderModel.providersListing[index].img,
+                                                    )));
+                                      },
+                                      child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 10, right: 20,top: 10),
+                                              child: Container(
+                                                  height: size.height*0.12,
+                                                  width: 400,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.grey[50],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.0),
                                                   ),
-                                                )))),
-                                  ),
-                                ]);
-                              }),
-                        ],
-                      )
-                    ]),
+                                                  child: Center(
+                                                    child: ListTile(
+                                                      leading: Image.network(
+                                                        state
+                                                            .getProviderModel
+                                                            .providersListing[
+                                                                index]
+                                                            .img,
+                                                        errorBuilder:
+                                                            (BuildContext, Object,
+                                                                StackTrace) {
+                                                          return Image.asset(
+                                                            'assets/128/CrystalGaskell.png',
+                                                            fit: BoxFit.fitWidth,
+                                                          );
+                                                        },
+
+                                                      ),
+                                                      title: Text(
+                                                        state
+                                                            .getProviderModel
+                                                            .providersListing[
+                                                                index]
+                                                            .companyName
+                                                            .toString().toUpperCase(),
+                                                        style:
+                                                            MaaruStyle.text.tiny,
+                                                      ),
+                                                      subtitle: ListView.builder(
+                                                          controller: _controller,
+                                                          scrollDirection:
+                                                              Axis.vertical,
+                                                          shrinkWrap: true,
+                                                          reverse: true,
+                                                          cacheExtent: 1000,
+                                                          itemCount: 0,
+                                                          itemBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  int index) {
+                                                            var message =
+                                                                MessagesModel
+                                                                    .messages[0];
+                                                            print(message[
+                                                                        'SenderID']
+                                                                    .toString() +
+                                                                '---------' +
+                                                                4.toString());
+                                                            return Text(
+                                                              '${message['4']}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .grey),
+                                                            );
+                                                          }),
+                                                      trailing: Text(
+                                                        'today'.toUpperCase(),
+                                                        style: const TextStyle(
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.grey),
+                                                      ),
+                                                    ),
+                                                  )))),
+                                    ),
+                                  ]);
+                                }),
+                          ],
+                        )
+                      ]),
+                    ),
                   ));
             } else {
               return const CircularProgressIndicator();

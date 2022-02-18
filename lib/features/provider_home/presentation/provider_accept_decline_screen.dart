@@ -39,13 +39,13 @@ class _TestAppState extends State<TestApp> {
         builder: (BuildContext context, Widget child) {
           return Theme(
             data: ThemeData.dark().copyWith(
-          colorScheme: ColorScheme.dark(
-            primary: Colors.deepPurple,
-            onPrimary: Colors.white,
-            surface: Colors.blueGrey,
-            onSurface: Colors.yellow,
-          ),
-          dialogBackgroundColor: Colors.blue[500],
+              colorScheme: ColorScheme.dark(
+                primary: Colors.deepPurple,
+                onPrimary: Colors.white,
+                surface: Colors.blueGrey,
+                onSurface: Colors.yellow,
+              ),
+              dialogBackgroundColor: Colors.blue[500],
             ),
             child: child,
           );
@@ -60,13 +60,8 @@ class _TestAppState extends State<TestApp> {
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: _textEditingController.text.length,
             affinity: TextAffinity.upstream));
-      BlocProvider.of<ProviderHomeBloc>(context).add(getProviderRequest(
-        page,
-        date,
-        date,
-        _textEditingController.text
-      ));
-
+      BlocProvider.of<ProviderHomeBloc>(context).add(
+          getProviderRequest(page, date, date, _textEditingController.text));
     }
   }
 
@@ -80,11 +75,13 @@ class _TestAppState extends State<TestApp> {
     _selectedDate = _selectedDate;
     super.initState();
   }
+
   @override
   void dispose() {
     _ageType.dispose();
     super.dispose();
   }
+
   String limit = '';
   String page = '';
   String date = '';
@@ -137,14 +134,18 @@ class _TestAppState extends State<TestApp> {
                       return SingleChildScrollView(
                         child: SafeArea(
                           child: Column(children: [
-                             SizedBox(
-                              height: size.height*0.02,
+                            SizedBox(
+                              height: size.height * 0.02,
                             ),
-                            InkWell(onTap:(){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ProviderSetting()));
-                            },child: Container(
-                                margin: EdgeInsets.only(left: 20,right: 20),
-                                child: ShowLocation())),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => ProviderSetting()));
+                                },
+                                child: Container(
+                                    margin:
+                                        EdgeInsets.only(left: 20, right: 20),
+                                    child: ShowLocation())),
                             const SizedBox(
                               height: 20,
                             ),
@@ -264,30 +265,28 @@ class _TestAppState extends State<TestApp> {
                                         ])),
                               ],
                             ),
-                             SizedBox(
-                              height: size.height*0.02,
+                            SizedBox(
+                              height: size.height * 0.02,
                             ),
-state.getProviderRequestModel.appointmentRequests.isNotEmpty?
-                           ListView.builder(
-                                    physics:
-                                        NeverScrollableScrollPhysics(),
+                            state.getProviderRequestModel.appointmentRequests
+                                    .isNotEmpty
+                                ? ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
                                     scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
                                     reverse: true,
-                                    itemCount: state
-                                        .getProviderRequestModel
-                                        .appointmentRequests
-                                        .length,
-                                    itemBuilder: (BuildContext context,
-                                        int index) {
-                                      if(state.getProviderRequestModel.appointmentRequests.isNotEmpty) {
-                                        var a = state
-                                            .getProviderRequestModel
+                                    itemCount: state.getProviderRequestModel
+                                        .appointmentRequests.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      if (state.getProviderRequestModel
+                                          .appointmentRequests.isNotEmpty) {
+                                        var a = state.getProviderRequestModel
                                             .appointmentRequests;
 
                                         return Slidable(
                                             actionPane:
-                                            SlidableDrawerActionPane(),
+                                                SlidableDrawerActionPane(),
                                             actions: <Widget>[
                                               Stack(children: [
                                                 IconSlideAction(
@@ -296,21 +295,18 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                   icon: Icons.done,
                                                   onTap: () {
                                                     BlocProvider.of<
-                                                        ProviderHomeBloc>(
-                                                        context)
-                                                        .add(
-                                                        AcceptRequested(
-                                                            state
-                                                                .getProviderRequestModel
-                                                                .appointmentRequests[
-                                                            index]
-                                                                .id));
-                                                    print('ffff${state.getProviderRequestModel.appointmentRequests[index].id}');
-                                                    Navigator.of(
-                                                        context).push(
+                                                                ProviderHomeBloc>(
+                                                            context)
+                                                        .add(AcceptRequested(state
+                                                            .getProviderRequestModel
+                                                            .appointmentRequests[
+                                                                index]
+                                                            .id));
+                                                    print(
+                                                        'ffff${state.getProviderRequestModel.appointmentRequests[index].id}');
+                                                    Navigator.of(context).push(
                                                         MaterialPageRoute(
-                                                            builder: (
-                                                                _) =>
+                                                            builder: (_) =>
                                                                 UpcomingAppointmentCalender1()));
                                                   },
                                                 ),
@@ -323,234 +319,239 @@ state.getProviderRequestModel.appointmentRequests.isNotEmpty?
                                                 icon: Icons.delete,
                                                 onTap: () {
                                                   BlocProvider.of<
-                                                      ProviderHomeBloc>(
-                                                      context)
+                                                              ProviderHomeBloc>(
+                                                          context)
                                                       .add(Decline(state
-                                                      .getProviderRequestModel
-                                                      .appointmentRequests[
-                                                  index]
-                                                      .id));
-                                                  Navigator.of(context)
-                                                      .push(
+                                                          .getProviderRequestModel
+                                                          .appointmentRequests[
+                                                              index]
+                                                          .id));
+                                                  Navigator.of(context).push(
                                                       MaterialPageRoute(
-                                                          builder: (
-                                                              _) =>
+                                                          builder: (_) =>
                                                               UpcomingAppointmentCalender1()));
                                                 },
                                               ),
                                             ],
                                             child: Padding(
-                                              padding:
-                                              const EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   left: 20.0,
                                                   right: 20.0,
-                                                  bottom: 15,top: 10),
-                                              child:
-                                              Column(
+                                                  bottom: 15,
+                                                  top: 10),
+                                              child: Column(
                                                   mainAxisSize:
-                                                  MainAxisSize.min,
+                                                      MainAxisSize.min,
                                                   children: [
                                                     Container(
-                                                      padding: EdgeInsets.only(top: 20,right: 20),
-                                                        height: size.height*0.18,
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 20,
+                                                                right: 20),
+                                                        height:
+                                                            size.height * 0.18,
                                                         decoration: BoxDecoration(
-
-                                                            border: Border
-                                                                .all(
-                                                                color: Colors
-                                                                    .grey[
-                                                                200])),
-                                                        child:
-                                                        Column(
+                                                            border: Border.all(
+                                                                color:
+                                                                    Colors.grey[
+                                                                        200])),
+                                                        child: Column(
                                                           mainAxisSize:
-                                                          MainAxisSize
-                                                              .min,
+                                                              MainAxisSize.min,
                                                           mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
+                                                              CrossAxisAlignment
+                                                                  .center,
                                                           children: [
                                                             Row(
                                                               mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceAround,
+                                                                  MainAxisAlignment
+                                                                      .spaceAround,
                                                               children: [
                                                                 Expanded(
-                                                                  child: Padding(
-                                                                    padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        left: 15.0),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            15.0),
                                                                     child: Text(
                                                                         state
                                                                             .getProviderRequestModel
-                                                                            .appointmentRequests[index]
+                                                                            .appointmentRequests[
+                                                                                index]
                                                                             .companyName
-                                                                            .toString().toUpperCase(),
-                                                                        style:
-                                                                        MaaruStyle
+                                                                            .toString()
+                                                                            .toUpperCase(),
+                                                                        style: MaaruStyle
                                                                             .text
                                                                             .tiny,
-                                                                        textAlign: TextAlign
-                                                                            .justify),
+                                                                        textAlign:
+                                                                            TextAlign.justify),
                                                                   ),
                                                                 ),
                                                                 SizedBox(
-                                                                  width:
-                                                                  10,
+                                                                  width: 10,
                                                                 ),
                                                                 Expanded(
                                                                   child: Align(
                                                                     alignment:
-                                                                    Alignment
-                                                                        .centerRight,
-                                                                    child:
-                                                                    Text(
-
-                                                                        '${state
-                                                                            .getProviderRequestModel
-                                                                            .appointmentRequests[index]
-                                                                            .bookingDate.year.toString()}-${state
-                                                                            .getProviderRequestModel
-                                                                            .appointmentRequests[index]
-                                                                            .bookingDate.month.toString()}-${state
-                                                                            .getProviderRequestModel
-                                                                            .appointmentRequests[index]
-                                                                            .bookingDate.day.toString()}'),
-
+                                                                        Alignment
+                                                                            .centerRight,
+                                                                    child: Text(
+                                                                        '${state.getProviderRequestModel.appointmentRequests[index].bookingDate.year.toString()}-${state.getProviderRequestModel.appointmentRequests[index].bookingDate.month.toString()}-${state.getProviderRequestModel.appointmentRequests[index].bookingDate.day.toString()}'),
                                                                   ),
                                                                 )
                                                               ],
                                                             ),
                                                             Row(
                                                               mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceAround,
+                                                                  MainAxisAlignment
+                                                                      .spaceAround,
                                                               children: [
-                                                               Expanded(child: Padding(
-                                                                  padding:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      left: 15.0),
-                                                                  child:
-                                                                  Text(
+                                                                Expanded(
+                                                                    child:
+                                                                        Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left:
+                                                                          15.0),
+                                                                  child: Text(
                                                                     state
                                                                         .getProviderRequestModel
-                                                                        .appointmentRequests[index]
+                                                                        .appointmentRequests[
+                                                                            index]
                                                                         .service
-                                                                        .toString().toUpperCase(),
-                                                                    style:
-                                                                    MaaruStyle
+                                                                        .toString()
+                                                                        .toUpperCase(),
+                                                                    style: MaaruStyle
                                                                         .text
                                                                         .medium,
                                                                   ),
                                                                 )),
                                                                 const SizedBox(
-                                                                  width:
-                                                                  20,
+                                                                  width: 20,
                                                                 ),
                                                                 Text(
                                                                   state
-                                                                    .getProviderRequestModel
-                                                                    .appointmentRequests[index]
-                                                                    .bookingStartTime
-                                                                    .toString().toUpperCase(),)
+                                                                      .getProviderRequestModel
+                                                                      .appointmentRequests[
+                                                                          index]
+                                                                      .bookingStartTime
+                                                                      .toString()
+                                                                      .toUpperCase(),
+                                                                )
                                                               ],
                                                             ),
                                                             Expanded(
-
                                                               child: Align(
                                                                   alignment:
-                                                                  Alignment
-                                                                      .topLeft,
+                                                                      Alignment
+                                                                          .topLeft,
                                                                   child:
-                                                                  Padding(
-                                                                    padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        left: 15.0),
-                                                                    child:
-                                                                    Text(
-                                                                        '${state
-                                                                            .getProviderRequestModel
-                                                                            .appointmentRequests[index]
-                                                                            .companyCity
-                                                                            .toString().toUpperCase()} ${a[index]
-                                                                            .companyZipCode
-                                                                            .toString().toUpperCase()} ${a[index]
-                                                                            .companyState
-                                                                            .toString().toUpperCase()}'),
+                                                                      Padding(
+                                                                    padding: const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            15.0),
+                                                                    child: Text(
+                                                                        '${state.getProviderRequestModel.appointmentRequests[index].companyCity.toString().toUpperCase()} ${a[index].companyZipCode.toString().toUpperCase()} ${a[index].companyState.toString().toUpperCase()}'),
                                                                   )),
                                                             ),
                                                             Expanded(
                                                               child: Align(
-                                                                alignment: Alignment.centerRight,
-                                                                child: Container(
-                                                                    alignment:
-                                                                    Alignment
-                                                                        .center,
-                                                                    transformAlignment: Alignment.centerRight,
-                                                                    margin: const EdgeInsets
-                                                                        .only(
-                                                                        left:
-                                                                        120,bottom: 10),
-                                                                    height:
-                                                                    35,
-                                                                    width:
-                                                                    150,
-                                                                    decoration: BoxDecoration(
-                                                                        color: MaaruColors
-                                                                            .blueColor,
-                                                                        borderRadius: BorderRadius
-                                                                            .circular(
-                                                                            10.7),
-                                                                        border:
-                                                                        Border
-                                                                            .all(
-                                                                            color: Colors
-                                                                                .white)),
-                                                                    child: InkWell(
-                                                                      onTap:
-                                                                          () {
-                                                                        Navigator
-                                                                            .of(
-                                                                            context)
-                                                                            .push(
-                                                                            MaterialPageRoute(
-                                                                                builder: (
-                                                                                    _) =>
-                                                                                BookedConfirm(id4: state.getProviderRequestModel.appointmentRequests[index].id,)));
-                                                                      },
-                                                                      child:
-                                                                       Text(
-                                                                        'View Details'.toUpperCase(),
-                                                                        style: TextStyle(
-                                                                            color: Colors
-                                                                                .white,
-                                                                            fontWeight: FontWeight
-                                                                                .w700),
-                                                                      ),
-                                                                    )),
+                                                                alignment: Alignment
+                                                                    .centerRight,
+                                                                child:
+                                                                    Container(
+                                                                        alignment:
+                                                                            Alignment
+                                                                                .center,
+                                                                        transformAlignment:
+                                                                            Alignment
+                                                                                .centerRight,
+                                                                        margin: const EdgeInsets.only(
+                                                                            left:
+                                                                                120,
+                                                                            bottom:
+                                                                                5),
+                                                                        height:
+                                                                            size.height*0.10,
+                                                                        width:
+                                                                            150,
+                                                                        decoration: BoxDecoration(
+                                                                            color:
+                                                                                MaaruColors.blueColor,
+
+                                                                            border: Border.all(color: Colors.white)),
+                                                                        child: InkWell(
+                                                                          onTap:
+                                                                              () {
+                                                                            Navigator.of(context).push(MaterialPageRoute(
+                                                                                builder: (_) => BookedConfirm(
+                                                                                      id4: state.getProviderRequestModel.appointmentRequests[index].id,
+                                                                                    )));
+                                                                          },
+                                                                          child:
+                                                                              Text(
+                                                                            'View Details'.toUpperCase(),
+                                                                            style:
+                                                                                TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+                                                                          ),
+                                                                        )),
                                                               ),
                                                             ),
+                                                            Container(
+                                                              color: Colors.transparent,
+                                                              height:
+                                                              size.height * 0.03,
+                                                              width: size.width * 1,
+                                                              child: Row(
+                                                                children: [
+                                                                  SizedBox(width: size.width*0.04,),
+                                                                  Icon(
+                                                                    Icons
+                                                                        .arrow_back_ios,
+                                                                    color: Colors.black,
+                                                                  ),
+                                                                  Icon(Icons
+                                                                      .arrow_back_ios,color: Colors.black54,),
+                                                                  Icon(Icons
+                                                                      .arrow_back_ios,color: Colors.black54,),
+                                                                  Text('SWIPE LEFT',style: TextStyle(fontSize: 12),),
+
+                                                                  SizedBox(width: size.width*0.14 ,),
+                                                                  Text('SWIPE Right',style: TextStyle(fontSize: 12),),
+                                                                  Icon(Icons
+                                                                      .arrow_forward_ios_outlined,color: Colors.black38,),
+                                                                  Icon(Icons
+                                                                      .arrow_forward_ios_outlined,color: Colors.black54,),
+                                                                  Icon(Icons
+                                                                      .arrow_forward_ios_outlined,color: Colors.black,),
+                                                                ],
+                                                              ),
+                                                            )
                                                           ],
                                                         )
-                                                      //Text('Item Data$index'),
-                                                    ),
+                                                        //Text('Item Data$index'),
+                                                        ),
+
                                                   ]),
                                             ));
-
-                              } else {
-                                return const CircularProgressIndicator();
-                              }
-                            }):const Center(child: Text('No data found')),
+                                      } else {
+                                        return Center(
+                                            child:
+                                                const CircularProgressIndicator());
+                                      }
+                                    })
+                                : const Center(child: Text('No data found')),
                           ]),
                         ),
                       );
                     } else {
-                      return const CircularProgressIndicator();
+                      return Center(child: const CircularProgressIndicator());
                     }
                   })));
         },

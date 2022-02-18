@@ -51,7 +51,7 @@ final size = MediaQuery.of(context).size;
                       builder: (context) => AfterSplashScreen()));
                 },
                 child: RoundedButton(
-                  buttonName: 'I AM A CUSTOMER'.toUpperCase(),
+                  buttonName: 'I AM A DOG OWNER'.toUpperCase(),
                   Color: MaaruColors.blueColor,
                   Color1: MaaruColors.whiteColor,
                 ),

@@ -46,7 +46,7 @@ class _ProviderMessagesState extends State<ProviderMessages> {
             if (state is LoginInitial) {
               BlocProvider.of<LoginBloc>(context).add(event.GetCustomers());
 
-              return const CircularProgressIndicator();
+              return Center(child: const CircularProgressIndicator());
             } else if (state is CustomerLoaded) {
               return SafeArea(
                   bottom: false,
@@ -60,24 +60,27 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                     //     alignment: Alignment.centerRight,
                     //
                     //         child:
-                    Container(
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Container(
 
-                      alignment: Alignment.centerRight,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
+                        alignment: Alignment.centerRight,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.asset(
+                          'assets/128/CrystalGaskell.png',
+                          height: 50    ,
+                          // width: 60,
+                        ),
+                        // )
                       ),
-                      child: Image.asset(
-                        'assets/128/CrystalGaskell.png',
-                        height: 60,
-                        // width: 60,
-                      ),
-                      // )
                     ),
 
                     Padding(
                         padding:
-                            const EdgeInsets.only(top: 15, right: 20, left: 10),
+                            const EdgeInsets.only(top: 15, right: 25, left: 25),
                         child: TextFormField(
                           // cursorColor: Colors.black,
                           decoration: InputDecoration(
@@ -106,11 +109,14 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                     SizedBox(
                       height:size.height*0.02,
                     ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        '   Customers'.toUpperCase(),
-                        style: MaaruStyle.text.tiny,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          '   Customers'.toUpperCase(),
+                          style: MaaruStyle.text.tiny,
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -118,36 +124,39 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                     ),
                         Column(
                           children: [
-                            Container(
+                            Padding(
+                              padding: const EdgeInsets.only(left: 15,right: 15),
+                              child: Container(
 
-                              height: size.height*0.10,width: 400,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  itemCount: state
-                                      .getUserModel.customers.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Container(
-                                            width: size.width*0.18,
-                                            child: Image.network(
-                                              state
-                                                  .getUserModel
-                                              .customers[index].firstName,
-                                              errorBuilder:
-                                                  (BuildContext, Object,
-                                                  StackTrace) {
-                                                return Image.asset(
-                                                  'assets/128/AlanPost.png',
-                                                  fit: BoxFit.fitWidth,
-                                                );
-                                              },
+                                height: size.height*0.10,width: 400,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: state
+                                        .getUserModel.customers.length,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Container(
+                                              width: size.width*0.18,
+                                              child: Image.network(
+                                                state
+                                                    .getUserModel
+                                                .customers[index].firstName,
+                                                errorBuilder:
+                                                    (BuildContext, Object,
+                                                    StackTrace) {
+                                                  return Image.asset(
+                                                    'assets/128/AlanPost.png',
+                                                    fit: BoxFit.fitWidth,
+                                                  );
+                                                },
+                                              ),
                                             ),
-                                          ),
-                                        ]);
-                                  }),
+                                          ]);
+                                    }),
+                              ),
                             ),
 
                             ListView.builder(
@@ -167,21 +176,21 @@ class _ProviderMessagesState extends State<ProviderMessages> {
                                                  [index]
                                                   .id
                                                   .toString(),
+                                              name: state.getUserModel.customers[index].firstName,
+                                          //    image: state.getUserModel.customers[index].,
                                             )));
                                       },
                                       child: Align(
                                           alignment: Alignment.centerRight,
                                           child: Padding(
                                               padding: EdgeInsets.only(
-                                                  left: 10, right: 20,bottom: 10),
+                                                  left: 25, right: 25,bottom: 10),
                                               child: Container(
                                                   height: size.height*0.12,
                                                   width: 400,
                                                   decoration: BoxDecoration(
                                                     color: Colors.grey[50],
-                                                    borderRadius:
-                                                    BorderRadius.circular(
-                                                        20.0),
+
                                                   ),
                                                   child: Center(
                                                     child: ListTile(

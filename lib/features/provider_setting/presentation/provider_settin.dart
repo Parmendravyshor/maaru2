@@ -29,6 +29,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
   bool update = true;
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.of(context).size;
     var selectedIndex;
     return Scaffold(
         backgroundColor: Colors.white,
@@ -71,11 +72,11 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   'Account Setting'.toUpperCase(),
-                                  style: MaaruStyle.text.large,
+                                  style: MaaruStyle.text.tiny,
                                 ),
                               ),
                               SizedBox(
-                                height: 20,
+                                height: size.height*0.02,
                               ),
                               Test3(
                                 image: 'assets/icons/icone-setting-1.png',
@@ -89,13 +90,13 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 },
                               ),
                               SizedBox(
-                                height: 20,
+                                height: size.height*0.02,
                               ),
                               Test3(
                                 image: 'assets/icons/icone-setting-2.png',
                                 hite: 40,
                                 text: 'Change Password'.toUpperCase(),
-                                size: 35,
+                                size: 55,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (_) =>
@@ -103,7 +104,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 },
                               ),
                               SizedBox(
-                                height: 20,
+                                height: size.height*0.02,
                               ),
                               Test3(
                                 image: 'assets/icons/icone-setting-3.png',
@@ -116,7 +117,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 },
                               ),
                               SizedBox(
-                                height: 20,
+                                height: size.height*0.02,
                               ),
                               Test3(
                                 image: 'assets/icons/icone-setting-3.png',
@@ -129,7 +130,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 },
                               ),
                               SizedBox(
-                                height: 20,
+                                height: size.height*0.02,
                               ),
                               Row(
                                   mainAxisAlignment:
@@ -160,7 +161,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                       Text(
                                                         'Push Notification'.toUpperCase(),
                                                         style: MaaruStyle
-                                                            .text.tiniest,
+                                                            .text.tiny,
                                                       ),
                                                       SizedBox(
                                                         width: 35,
@@ -192,7 +193,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                     ]))))
                                   ]),
                               SizedBox(
-                                height: 20,
+                                height: size.height*0.02,
                               ),
                               Row(
                                   mainAxisAlignment:
@@ -260,7 +261,7 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                                     ]))))
                                   ]),
                               SizedBox(
-                                height: 20,
+                                height: size.height*0.02,
                               ),
                               Test3(
                                 image: 'assets/icons/icone-setting-6.png',
@@ -273,27 +274,27 @@ class _ProviderSettingState extends State<ProviderSetting> {
                                 },
                               ),
                               SizedBox(
-                                height: 20,
+                                height: size.height*0.02,
                               ),
                               Test3(
                                 image: 'assets/icons/icone-setting-7.png',
-                                hite: 40,
+                                hite: 35,
                                 text: 'Terms and  Conditions'.toUpperCase(),
-                                size: 0,
+                                size: 15,
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (_) => WebViewPrivacy()));
                                 },
                               ),
-                              const SizedBox(
-                                height: 20,
+                               SizedBox(
+                                height: size.height*0.02,
                               ),
                               Test3(
                                 image:
                                     'assets/images/126-1264365_grey-logout-icon-png-transparent-png (2).png',
-                                hite: 40,
+                                hite: 30,
                                 size: 130,
-                                text: 'Log Out',
+                                text: 'Log Out'.toUpperCase(),
                                 onPressed: () async {
                                   await _prefHelper.clear('pet_name');
                                   await _prefHelper.clear('last_name');

@@ -10,7 +10,8 @@ class KeyValueModel1 {
   int cost;
   double totalCost;
   int total;
-
+String startTime;
+String endTime;
   KeyValueModel1(
-      {this.key1, this.value1, this.cost, this.total, this.totalCost});
+      {this.key1, this.value1, this.cost, this.total, this.totalCost,this.startTime,this.endTime});
 }

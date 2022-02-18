@@ -10,6 +10,7 @@ import 'package:maru/features/Account_setting/domain/usecases/save_user_payment.
 import 'package:maru/features/Account_setting/presentation/bloc/setting_bloc.dart';
 import 'package:maru/features/Account_setting/presentation/payment/bloc/payment_bloc.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/book_provider_cancel.dart';
+import 'package:maru/features/Book_Appointment/domain/usecases/date_time_get.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_bookings.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_decline_appointment_request.dart';
 import 'package:maru/features/Book_Appointment/domain/usecases/get_upcoming_past_appointments.dart';
@@ -73,7 +74,8 @@ Future<void> registerDependencyInjection() async {
 }
 
 void _registerBloc(KiwiContainer container) {
-  container.registerFactory((c) => RegisterBloc(c.resolve(), c.resolve(),c.resolve()));
+  container.registerFactory(
+      (c) => RegisterBloc(c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory(
       (c) => PaymentBloc(c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory((c) => LoginBloc(
@@ -107,7 +109,7 @@ void _registerBloc(KiwiContainer container) {
   container.registerFactory(
       (c) => ProviderHomeBloc(c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory((c) => BookAppointmentBloc(c.resolve(), c.resolve(),
-      c.resolve(), c.resolve(), c.resolve(), c.resolve()));
+      c.resolve(), c.resolve(), c.resolve(), c.resolve(), c.resolve()));
   container.registerFactory((c) => ChatBloc(
         c.resolve(),
         c.resolve(),
@@ -120,6 +122,7 @@ void _registerBloc(KiwiContainer container) {
         c.resolve(),
       ));
 }
+
 void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => EmailSignin(c.resolve()));
   container.registerFactory((c) => EmailSignup(c.resolve()));
@@ -157,20 +160,21 @@ void _registerUseCases(KiwiContainer container) {
   container.registerFactory((c) => BookProviderCancel(c.resolve()));
   container.registerFactory((c) => GetUsers(c.resolve()));
   container.registerFactory((c) => GetBookingss(c.resolve()));
-  container.registerFactory((c) => GoogleSignups (c.resolve()));
-  container.registerFactory((c) => GoogleSignIn ());
-  container.registerFactory((c) => FbSignIn (c.resolve()));
-  container.registerFactory((c) => FacebookLogin ());
+  container.registerFactory((c) => GoogleSignups(c.resolve()));
+  container.registerFactory((c) => GoogleSignIn());
+  container.registerFactory((c) => FbSignIn(c.resolve()));
+  container.registerFactory((c) => FacebookLogin());
+  container.registerFactory((c) => GetDateAndTime(c.resolve()));
   // container.registerFactory((c) => SaveSingleField(c.resolve()));
 }
+
 void _registerRepositories(KiwiContainer container) {
-  container.registerFactory<UserRepository>((c) => UserRepositoryImpl(
-        c.resolve(),c.resolve(),c.resolve(),c.resolve()
-      ));
+  container.registerFactory<UserRepository>((c) =>
+      UserRepositoryImpl(c.resolve(), c.resolve(), c.resolve(), c.resolve()));
 }
+
 _registerDataSources(KiwiContainer container) {
-  container.registerFactory<IAuthFacade>(
-          (c) => FirebaseUsers());
+  container.registerFactory<IAuthFacade>((c) => FirebaseUsers());
   container.registerFactory<SharedPrefHelper>(
       (c) => SharedPrefHelperImpl(c.resolve()));
 }

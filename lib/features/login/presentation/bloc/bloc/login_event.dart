@@ -17,6 +17,8 @@ class GetProvider extends LoginEvent {
   final String text;
 
   GetProvider(this.text);
+  @override
+  String toString() => "LoginOpened";
 }
 class GetCustomers extends LoginEvent {
   GetCustomers();

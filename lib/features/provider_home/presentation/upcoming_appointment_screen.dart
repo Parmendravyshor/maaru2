@@ -188,8 +188,8 @@ class _UpcomingAppointmentCalender1State
                                           height: 40,
                                         ))
                                   ])),
-                          const SizedBox(
-                            height: 20,
+                           SizedBox(
+                            height: size.height*0.02,
                           ),
 
                           Container(
@@ -205,7 +205,7 @@ class _UpcomingAppointmentCalender1State
                           Column(
                             children: [
                               state.upcomingPastAppointmentModel.confirmed
-                                      .isNotEmpty
+                                      !=null
                                   ? ListView.builder(
                                       physics: ScrollPhysics(),
                                       scrollDirection: Axis.vertical,
@@ -226,8 +226,7 @@ class _UpcomingAppointmentCalender1State
                                                 border: Border.all(
                                                     width: 1.5,
                                                     color: Color(0xffE8E8E8)),
-                                                borderRadius:
-                                                    BorderRadius.circular(25)),
+                                             ),
                                             height: size.height * 0.18,
                                             width: 360,
                                             child: Container(
@@ -253,13 +252,11 @@ class _UpcomingAppointmentCalender1State
                                                                         20),
                                                           ),
                                                           child: Image.network(
-                                                              '',
-                                                              // state
-                                                              //     .getProviderRequestModel
-                                                              //     .appointmentRequests[
-                                                              //         index]
-                                                              //     .petImage
-                                                              //     .toString(),
+
+                                                              state
+                                                                  .upcomingPastAppointmentModel.confirmed[index].petImg
+
+                                                                  .toString(),
                                                               errorBuilder:
                                                                   (context,
                                                                       error,
@@ -379,7 +376,7 @@ class _UpcomingAppointmentCalender1State
                                   : Center(child:   AnimatedOpacity(
                                 opacity:opacity == 1 ? 0 : 1,
                                 duration: Duration(seconds: 1),
-                                child: const Text(' Data Not Found',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 30),),
+                                child: const Text(' Data Not Found',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w800,fontSize: 20),),
                               ),),
                               Container(
                                   margin: EdgeInsets.only(
@@ -389,8 +386,8 @@ class _UpcomingAppointmentCalender1State
                                     'Past Appointment'.toUpperCase(),
                                     style: MaaruStyle.text.tiny,
                                   )),
-                              const SizedBox(
-                                height: 20,
+                               SizedBox(
+                                height: size.height*0.02,
                               ),
                               state.upcomingPastAppointmentModel.completed
                                       .isNotEmpty
@@ -414,8 +411,7 @@ class _UpcomingAppointmentCalender1State
                                                 border: Border.all(
                                                     width: 1.5,
                                                     color: Color(0xffE8E8E8)),
-                                                borderRadius:
-                                                    BorderRadius.circular(25)),
+                                                ),
                                             height: size.height * 0.18,
                                             width: 360,
                                             child: Container(
@@ -440,24 +436,23 @@ class _UpcomingAppointmentCalender1State
                                                                     .circular(
                                                                         20),
                                                           ),
-                                                          child: Image.network(
+                                                          child:  Image.network(
+
                                                               state
-                                                                  .upcomingPastAppointmentModel
-                                                                  .completed[
-                                                                      index]
-                                                                  .petImg
+                                                                  .upcomingPastAppointmentModel.completed[index].petImg
+
                                                                   .toString(),
                                                               errorBuilder:
                                                                   (context,
-                                                                      error,
-                                                                      stackTrace) {
-                                                            return Container(
-                                                                alignment:
+                                                                  error,
+                                                                  stackTrace) {
+                                                                return Container(
+                                                                    alignment:
                                                                     Alignment
                                                                         .center,
-                                                                child: Image.asset(
-                                                                    'assets/images/kutta.png'));
-                                                          })),
+                                                                    child: Image.asset(
+                                                                        'assets/images/kutta.png'));
+                                                              })),
                                                       Container(
                                                         child: Column(
                                                           mainAxisAlignment:
@@ -576,8 +571,8 @@ class _UpcomingAppointmentCalender1State
                                       left: 20, right: 20, top: 10),
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    'Decline Appointment'.toUpperCase(),
-                                    style: MaaruStyle.text.tiniest,
+                                    'Declined Appointment'.toUpperCase(),
+                                    style: MaaruStyle.text.tiny,
                                   )),
                               const SizedBox(
                                 height: 20,
@@ -598,8 +593,7 @@ class _UpcomingAppointmentCalender1State
                                             border: Border.all(
                                                 width: 1.5,
                                                 color: Color(0xffE8E8E8)),
-                                            borderRadius:
-                                                BorderRadius.circular(25)),
+                                           ),
                                         height: size.height * 0.18,
                                         width: 360,
                                         child: Container(
@@ -621,22 +615,23 @@ class _UpcomingAppointmentCalender1State
                                                             BorderRadius
                                                                 .circular(20),
                                                       ),
-                                                      child: Image.network('',
-                                                          // state
-                                                          //     .getProviderRequestModel
-                                                          //     .appointmentRequests[
-                                                          //         index]
-                                                          //     .petImage
-                                                          //     .toString(),
+                                                      child:  Image.network(
+
+                                                          state
+                                                              .upcomingPastAppointmentModel.cancelled[index].petImg
+
+                                                              .toString(),
                                                           errorBuilder:
-                                                              (context, error,
-                                                                  stackTrace) {
-                                                        return Container(
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: Image.asset(
-                                                                'assets/images/kutta.png'));
-                                                      })),
+                                                              (context,
+                                                              error,
+                                                              stackTrace) {
+                                                            return Container(
+                                                                alignment:
+                                                                Alignment
+                                                                    .center,
+                                                                child: Image.asset(
+                                                                    'assets/images/kutta.png'));
+                                                          })),
                                                   Container(
                                                     child: Column(
                                                       mainAxisAlignment:

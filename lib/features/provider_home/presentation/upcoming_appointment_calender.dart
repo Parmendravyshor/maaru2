@@ -163,8 +163,9 @@ class _UpcomingAppointmentCalenderState
                                       height: 40,
                                     )),
                               ])),
+
                       Container(
-                          height: size.height*0.48,
+                          height: size.height*0.47,
                           width: 400,
                           color: Colors.white,
                           child: Appointments(widget.text)),
@@ -192,7 +193,7 @@ class _UpcomingAppointmentCalenderState
 
                             return Container(
                               margin: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
-                              height: 170,
+                              height: size.height*0.24,
                               width: 400,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(0),
@@ -209,8 +210,8 @@ class _UpcomingAppointmentCalenderState
                                                 BorderRadius.circular(20),
                                             color: Colors.white,
                                           ),
-                                          child: Image.network('',
-                                              //state.getProviderRequestModel.appointmentRequests[index].userImg.toString(),
+                                          child: Image.network(
+                                              state.upcomingPastAppointmentModel.confirmed[index].petImg,
                                               errorBuilder:
                                                   (context, error, stackTrace) {
                                             return Container(
@@ -232,19 +233,17 @@ class _UpcomingAppointmentCalenderState
                                                     .upcomingPastAppointmentModel
                                                     .confirmed[index]
                                                     .companyName.toString().toUpperCase(),
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 15),
+                                                style: MaaruStyle.text.tiny,
                                               ),
                                               Text(
                                                 state
                                                     .upcomingPastAppointmentModel
                                                     .confirmed[index]
                                                     .service.toUpperCase(),
-                                                style: TextStyle(fontSize: 14),
+                                                style: MaaruStyle.text.medium,
                                               ),
                                               SizedBox(
-                                                height: 20,
+                                                height: size.height*0.02,
                                               ),
                                               Text(
                                                 '${state.upcomingPastAppointmentModel.confirmed[index].state.toString()}${state.upcomingPastAppointmentModel.confirmed[index].city.toString().toUpperCase()}',
@@ -279,7 +278,7 @@ class _UpcomingAppointmentCalenderState
                                               height: 36,
                                             ),
                                             Text(
-                                              "${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.month.toString().padLeft(2, '0')}-${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.day.toString().toUpperCase().padLeft(2, '0')}-${state.upcomingPastAppointmentModel.cancelled[index].bookingDate.year.toString().toUpperCase().padLeft(2, '0')}",
+                                              "${state.upcomingPastAppointmentModel.confirmed[index].bookingDate.month.toString().padLeft(2, '0')}-${state.upcomingPastAppointmentModel.confirmed[index].bookingDate.day.toString().toUpperCase().padLeft(2, '0')}-${state.upcomingPastAppointmentModel.confirmed[index].bookingDate.year.toString().toUpperCase().padLeft(2, '0')}",
                                               style: TextStyle(
                                                   color: Colors.grey,
                                                   fontSize: 12),
@@ -287,7 +286,7 @@ class _UpcomingAppointmentCalenderState
                                             Text(
                                               state
                                                   .upcomingPastAppointmentModel
-                                                  .cancelled[index]
+                                                  .confirmed[index]
                                                   .bookingStartTime
                                                   .toString().toUpperCase(),
 
@@ -304,14 +303,14 @@ class _UpcomingAppointmentCalenderState
                                   InkWell(
                                     onTap:
                                         () {
-                                      Navigator
-                                          .of(
-                                          context)
-                                          .push(
-                                          MaterialPageRoute(
-                                              builder: (
-                                                  _) =>
-                                                  BookedConfirm()));
+                                      // Navigator
+                                      //     .of(
+                                      //     context)
+                                      //     .push(
+                                      //     MaterialPageRoute(
+                                      //         builder: (
+                                      //             _) =>
+                                      //             BookedConfirm(id4: state.upcomingPastAppointmentModel.confirmed[index].,)));
                                     },
                                     child: Padding(
                                       padding: EdgeInsets.only(left: 220),
@@ -322,8 +321,7 @@ class _UpcomingAppointmentCalenderState
                                         width: 140,
                                         decoration: BoxDecoration(
                                             color: MaaruColors.blueColor,
-                                            borderRadius:
-                                                BorderRadius.circular(20),
+
                                             border:
                                                 Border.all(color: Colors.white)),
                                         child:  Text(

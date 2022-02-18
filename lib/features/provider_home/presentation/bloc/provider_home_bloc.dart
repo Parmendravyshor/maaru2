@@ -12,10 +12,12 @@ part 'provider_home_event.dart';
 part 'provider_home_state.dart';
 
 class ProviderHomeBloc extends Bloc<ProviderHomeEvent, ProviderHomeState> {
-  ProviderHomeBloc(this._getProviderRequest, this._acceptRequest,this._declineRequest) : super();
+  ProviderHomeBloc(
+      this._getProviderRequest, this._acceptRequest, this._declineRequest)
+      : super();
   final GetProviderRequest _getProviderRequest;
   final AcceptRequest _acceptRequest;
-final DeclineRequest _declineRequest;
+  final DeclineRequest _declineRequest;
   @override
   ProviderHomeState get initialState => ProviderHomeInitial();
 
@@ -38,9 +40,13 @@ final DeclineRequest _declineRequest;
       }
     }
     if (event is AcceptRequested) {
+      yield AcceptRequestInProgress();
       final result = await _acceptRequest(event.id);
       if (result.isRight()) {
         yield AcceptRequestSuccessful();
+      }
+      if (result.isLeft()) {
+        yield AcceptRequestDecline();
       }
       return;
     }

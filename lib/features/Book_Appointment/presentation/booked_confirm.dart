@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:ui' as ui show lerpDouble;
@@ -20,16 +21,15 @@ import 'book_appointment_screen3.dart';
 class BookedConfirm extends StatefulWidget {
   final int id4;
 
-  const BookedConfirm({Key key, this.id4}) : super(key: key);
+  const     BookedConfirm({Key key, this.id4}) : super(key: key);
   @override
   _BookedConfirmState createState() => _BookedConfirmState();
 }
 
 class _BookedConfirmState extends State<BookedConfirm> {
   BookProviderParams bookProviderParams = BookProviderParams();
-  String taskheading = 'Booking Confirmed';
-  String taskmessage = 'Confirmation email and SMS has been\n'
-      'sent to your registered details';
+  String taskheading = 'Booking Confirmed'.toUpperCase();
+  String taskmessage = 'A CONFIRMATION EMAIL AND TEXT HAS BEEN SENT TO YOU';
   Color actioncolor = MaaruColors.blueColor;
 
   Widget bottombuttons(
@@ -77,7 +77,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
               // }
               if (state is BookAppointmentInitial) {
                 BlocProvider.of<BookAppointmentBloc>(context)
-                    .add(GetbookindataChanged(''));
+                    .add(GetbookindataChanged(widget.id4.toString()));
                 return const Center(child: CircularProgressIndicator());
               } else if (state is GetBookingSuccesss) {
                 //  a .add(state.bookingsss.data[0]);
@@ -107,7 +107,7 @@ class _BookedConfirmState extends State<BookedConfirm> {
                                 height: size.height * 0.01,
                               ),
                               Text(
-                                taskheading,
+                                'Booking ${state.bookingsss.data[0].status}'.toUpperCase(),
                                 style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.white,
@@ -117,7 +117,8 @@ class _BookedConfirmState extends State<BookedConfirm> {
                                 height: size.height * 0.02,
                               ),
                               Text(
-                                taskmessage,
+                                '${state.bookingsss.data[0].status} email and SMS has been\n'
+                                'sent to your registered details'.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                     color: Colors.white, fontSize: 12),
@@ -131,292 +132,340 @@ class _BookedConfirmState extends State<BookedConfirm> {
                           color: Colors.white,
                         ),
                         child: Container(
-                          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                           color: Colors.white,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: size.height * 0.03,
-                              ),
-                              Text(
-                                state.bookingsss.data[0].companyName.toString(),
-                                //   'Appointment Details',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: size.height * 0.02,
-                              ),
-                              Container(
-                                  color: Colors.transparent,
-                                  height: size.height * 0.08,
-                                  width: size.width * 0.99,
-                                  child: Row(children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          color: Colors.white),
-                                      height: size.height * 0.08,
-                                      width: size.width * 0.16,
-                                      child: Image.network(
-                                        state.bookingsss.data[0].petImage
-                                            .toString(),
-                                        height: size.height * 0.08,
-                                        width: size.width * 0.16,
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              physics: ScrollPhysics(),
+                              itemCount: state.bookingsss.data.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  margin: EdgeInsets.only(left: 20,right: 20),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: size.height * 0.02,
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: size.width * 0.05,
-                                    ),
-                                    Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      Text('APPOINTMENT DETAILS',style: MaaruStyle.text.tiny,),
+                                      SizedBox(
+                                        height: size.height * 0.02,
+                                      ),
+                                      // Text(
+                                      //   state.bookingsss.data[0].companyName
+                                      //       .toString().toUpperCase(),
+                                      //   //   'Appointment Details',
+                                      //   style:MaaruStyle.text.tiny
+                                      // ),
+                                      // SizedBox(
+                                      //   height: size.height * 0.02,
+                                      // ),
+                                      Container(
+                                          color: Colors.transparent,
+                                          height: size.height * 0.08,
+                                          width: size.width * 0.99,
+                                          child: Row(children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color: Colors.white),
+                                              height: size.height * 0.08,
+                                              width: size.width * 0.16,
+                                              child: Image.network(
+                                                state.bookingsss.data[0].petImage
+                                                    .toString(),
+                                                height: size.height * 0.08,
+                                                width: size.width * 0.16,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: size.width * 0.05,
+                                            ),
+                                            Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    state.bookingsss.data[index]
+                                                        .companyName
+                                                        .toString().toUpperCase(),
+                                                    style: MaaruStyle.text.tiny,
+                                                  ),
+                                                  SizedBox(height: size.height*0.0,),
+                                                  Text(
+                                                    state.bookingsss.data[index]
+                                                        .serviceName
+                                                        .toString().toUpperCase(),
+                                                    style:
+                                                        MaaruStyle.text.medium,
+                                                  ),
+                                                ])
+                                          ])),
+                                      SizedBox(height: size.height*0.02,),
+                                      Container(
+                                        height: 135,
+                                        padding:
+                                            EdgeInsets.only(left: 10, right: 10),
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFf9f9f9),
+
+                                          border: Border.all(color: Colors.white),
+                                        ),
+                                        child: Container(
+                                             margin: EdgeInsets.all(20),
+                                            child:
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Image.asset(
+                                                          'assets/icons/icone-setting-21.png',
+                                                          height: 20,
+                                                        ),
+                                                        Image.asset(
+                                                          'assets/icons/caticon.png',
+                                                          height: 20,
+                                                        ),
+
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        const Text(
+                                                          '  Date & Time',
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 12),
+                                                        ),
+                                                        Text(
+                                                          state
+                                                              .bookingsss
+                                                              .data[index]
+                                                              .companyName
+                                                              .toString().toUpperCase(),
+                                                          textAlign:
+                                                          TextAlign.right,
+                                                          style: MaaruStyle.text.tiny,
+                                                        ),
+                                                        Text(
+                                                          state
+                                                              .bookingsss
+                                                              .data[index]
+                                                              .petName
+                                                              .toString().toUpperCase(),
+                                                          textAlign:
+                                                          TextAlign.right,
+                                                          style: MaaruStyle.text.tiny,
+                                                        )
+                                                      ],
+                                                    ),
+                                                    SizedBox(width: size.width*0.20,),
+                                                    Column(
+                                                      children: [
+                                                        Text(
+                                                          '${state.bookingsss.data[0].bookingDate.year.toString().padLeft(4, '0')}-${state.bookingsss.data[0].bookingDate.month.toString().padLeft(2, '0')}-${state.bookingsss.data[0].bookingDate.day.toString().padLeft(2, '0')}',
+                                                          style: const TextStyle(
+                                                              color: Colors.grey,
+                                                              fontSize: 12),
+                                                        ),
+                                                        Text(
+                                                          state.bookingsss.data[index]
+                                                              .bookingTime
+                                                              .toString(),
+                                                          style: const TextStyle(
+                                                              fontSize: 13,
+                                                              fontWeight: FontWeight.bold),
+                                                        ),
+                                                        SizedBox(height: size.height*0.01 ,),
+                                                        Text(
+                                                          state.bookingsss.data[index]
+                                                              .totalAmount
+                                                              .toString(),
+                                                          style: const TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 12),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+
+
+
+                                   ),
+                                      ),
+                                       SizedBox(
+                                        height: size.height*0.02,
+                                      ),
+                                      const Text(
+                                        'Location',
+                                        style: TextStyle(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        height: size.height*0.01,
+                                      ),
+                                      Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            state.bookingsss.data[0].companyName
-                                                .toString(),
-                                            style: const TextStyle(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text(
-                                            state.bookingsss.data[0].serviceName
-                                                .toString(),
-                                            style: TextStyle(fontSize: 10),
-                                          ),
-                                        ])
-                                  ])),
-                              Container(
-                                height: 135,
-                                padding: EdgeInsets.only(left: 10, right: 10),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFf9f9f9),
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: Colors.white),
-                                ),
-                                child: Container(
-                                    // margin: EdgeInsets.all(10),
-                                    child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      state.bookingsss.data[0].bookingDate
-                                          .toString(),
-                                      style: const TextStyle(
-                                          color: Colors.grey, fontSize: 12),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Image.asset(
-                                          'assets/icons/icone-setting-21.png',
-                                          height: 20,
-                                        ),
-                                        const Text(
-                                          '  Date & Time',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      state.bookingsss.data[0].bookingTime
-                                          .toString(),
-                                      style: const TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          width: 70,
-                                          child: Align(
-                                              alignment:
-                                                  const Alignment(0.5, 0.5),
-                                              child: Text(
-                                                state.bookingsss.data[0]
-                                                    .companyName
-                                                    .toString(),
-                                                textAlign: TextAlign.right,
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 15),
-                                              )),
-                                        ),
-                                        Text(
-                                          state.bookingsss.data[0].totalAmount
-                                              .toString(),
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 12),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      //  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Image.asset(
-                                          'assets/icons/caticon.png',
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          width: 70,
-                                          alignment: Alignment(0.5, 0.5),
-                                          child: Text(
-                                            state.bookingsss.data[0].petName
-                                                .toString(),
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                  ],
-                                )),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Text(
-                                'Location',
-                                style: TextStyle(
-                                    fontSize: 8, fontWeight: FontWeight.bold),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                      '${state.bookingsss.data[0].companyCity.toString()}'
-                                      '${state.bookingsss.data[0].companyZipCode.toString()}${state.bookingsss.data[0].companyState.toString()}',
-                                      style: MaaruStyle.text.greyDisable),
-                                  Image.asset(
-                                    'assets/icons/icone-setting-24.png',
-                                    height: size.height * 0.03,
-                                  )
-                                ],
-                              ),
-                              InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (_) => SimpleMAp()));
-                                  },
-                                  child: Image.asset(
-                                    'assets/images/g.png',
-                                    height: size.height * 0.20,
-                                    width: size.width * 1,
-                                  )),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  bottombuttons(
-                                      context, MaaruColors.button2Color, 'DONE',
-                                      () {
-                                    if (_prefHelper
-                                        .getStringByKey('pet_name', '')
-                                        .isEmpty) {
-                                      Navigator.pop(context);
-                                    } else {
-                                      return Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ReviewScreen(
-                                                    id4: widget.id4,
-                                                  )));
-                                    }
-                                  }),
-                                  GestureDetector(
-                                    onTap: () {
-                                      print('fhfihfjfhfh${widget.id4}');
-                                      Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  BookAppointment1(
-                                                    id1: widget.id4,
-                                                  )),
-                                          (route) => false);
-                                    },
-                                    child: Container(
-                                      height: size.height * 0.08,
-                                      width: size.width * 0.40,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border.all(
-                                            color: MaaruColors.button2Color),
+                                              '${state.bookingsss.data[index].companyCity.toString()}'
+                                              '${state.bookingsss.data[index].companyZipCode.toString()}${state.bookingsss.data[0].companyState.toString()}',
+                                              style: MaaruStyle.text.greyDisable),
+                                          Image.asset(
+                                            'assets/icons/icone-setting-24.png',
+                                            height: size.height * 0.03,
+                                          )
+                                        ],
                                       ),
-                                      child: const Center(
-                                        child: Text(
-                                          'VIEW PROFILE',
-                                          style: TextStyle(
-                                              color: MaaruColors.blueColor,
-                                              fontSize: 15,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w700),
-                                        ),
+                                      SizedBox(
+                                        height: size.height*0.01,
                                       ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: size.height * 0.02,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  bottombuttons(context,
-                                      MaaruColors.mehrooncolor, 'CANCEL', () {
-                                    if (_prefHelper
-                                        .getStringByKey('pet_name', '')
-                                        .isNotEmpty) {
-                                      showAlertDialog(context, 'Cancel', a);
-                                    } else {}
-                                  }),
-                                  bottombuttons(context, MaaruColors.blueColor,
-                                      'RESCHEDULE', () {
-                                    if (_prefHelper
-                                        .getStringByKey('pet_name', '')
-                                        .isNotEmpty) {
-                                      Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  BookAppointmentScreen3(
-                                                    id3: widget.id4,
-                                                    image: state.bookingsss
-                                                        .data[0].petImage
-                                                        .toString(),
-                                                  )),
-                                          (route) => false);
-                                    } else {}
-                                  })
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              )
-                            ],
-                          ),
+                                      InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                    builder: (_) => SimpleMAp()));
+                                          },
+                                          child: Image.asset(
+                                            'assets/images/g.png',
+                                            height: size.height * 0.20,
+                                            width: size.width * 1,
+                                          )),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          _prefHelper.getStringByKey('pet_name', '').isNotEmpty?
+                                          bottombuttons(
+                                              context,
+                                              MaaruColors.button2Color,
+                                              'DONE', () {
+                                            if (_prefHelper
+                                                .getStringByKey('pet_name', '')
+                                                .isEmpty) {
+                                              Navigator.pop(context);
+                                            } else {
+                                              if (state.bookingsss.data[0]
+                                                      .status ==
+                                                  'pending') {
+                                                AlertManager.showErrorMessage(
+                                                    'your booking was pending ',
+                                                    context);
+                                              } else {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ReviewScreen(
+                                                              id4: widget.id4,
+                                                            )));
+                                              }
+                                            }
+                                          }):Text(''),
+                                          GestureDetector(
+                                            onTap: () {
+                                              print('fhfihfjfhfh${widget.id4}');
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ViewPetProfile(
+                                                              id1: state
+                                                                  .bookingsss
+                                                                  .data[index]
+                                                                  .userId)));
+                                            },
+                                            child: Container(
+                                              height: size.height * 0.08,
+                                              width: size.width * 0.40,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                    color:
+                                                        MaaruColors.button2Color),
+                                              ),
+                                              child: const Center(
+                                                child: Text(
+                                                  'VIEW PROFILE',
+                                                  style: TextStyle(
+                                                      color:
+                                                          MaaruColors.blueColor,
+                                                      fontSize: 15,
+                                                      fontFamily: 'Poppins',
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: size.height * 0.02,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          bottombuttons(
+                                              context,
+                                              MaaruColors.mehrooncolor,
+                                              'CANCEL', () {
+                                            if (_prefHelper
+                                                .getStringByKey('pet_name', '')
+                                                .isNotEmpty) {
+                                              showAlertDialog(
+                                                  context, 'Cancel', a);
+                                            } else {}
+                                          }),
+
+                               _prefHelper.getStringByKey('pet_name','' ).isNotEmpty ?bottombuttons(
+                                              context,
+                                              MaaruColors.blueColor,
+                                              'RESCHEDULE', () {
+                                            if (_prefHelper
+                                                .getStringByKey('pet_name', '')
+                                                .isNotEmpty) {
+                                              Navigator.pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BookAppointmentScreen3(
+                                                            id3: widget.id4,
+                                                            image: state
+                                                                .bookingsss
+                                                                .data[index]
+                                                                .petImage
+                                                                .toString(),
+                                                          )),
+                                                  (route) => false);
+                                            } else {}
+                                          }):Text('')
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }),
                         ),
                       )
                     ],

@@ -199,7 +199,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       });
     } else if (event is GetProvider) {
       final result = await getProviders.call(event.text);
-      print('ddddd$event.text');
+      print('ddddd${event.text}');
       if (result.isRight()) {
         yield ProviderLoaded1(result.getOrElse(() => null));
       }

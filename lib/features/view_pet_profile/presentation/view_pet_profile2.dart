@@ -170,7 +170,8 @@ class _ViewPetProfile2State extends State<ViewPetProfile2> {
                                                           Navigator.of(context).push(
                                                               MaterialPageRoute(
                                                                   builder: (_) =>
-                                                                      CreateRegisterPetProfile2(allergies: state.welcome2.getSinglePe.knownAllergies.toString(),image: state.welcome2.getSinglePe.img.toString(),)));
+                                                                      CreateRegisterPetProfile2(petname: state.welcome2.getSinglePe.petName,breedtype: state.welcome2.getSinglePe.breedType,
+                                                                        allergies: state.welcome2.getSinglePe.knownAllergies.toString(),image: state.welcome2.getSinglePe.img.toString(),)));
                                                         },
                                                         child: Image.asset(
                                                           'assets/icons/icone-setting-29.png',

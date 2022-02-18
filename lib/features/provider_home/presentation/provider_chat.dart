@@ -15,8 +15,9 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class Chat2 extends StatefulWidget {
   final String user;
-
-  const Chat2({Key key, this.user}) : super(key: key);
+  final String name;
+  final String image;
+  const Chat2({Key key, this.user, this.name, this.image}) : super(key: key);
 
   @override
   Chat2State createState() => Chat2State();
@@ -148,7 +149,7 @@ class Chat2State extends State<Chat2> {
     return Scaffold(
       backgroundColor: Color(0xfff9f9f9),
       appBar: AppBar(
-        toolbarHeight: size.height*0.20,
+        toolbarHeight: size.height * 0.20,
         elevation: 0,
 
         // Set this height
@@ -156,24 +157,23 @@ class Chat2State extends State<Chat2> {
           color: Colors.white,
           child: Column(
             children: [
-               SizedBox(height: size.height*0.03),
+              SizedBox(height: size.height * 0.03),
               BackArrowButton(),
               Container(
-                height: size.height*0.10,
+                height: size.height * 0.10,
                 padding: const EdgeInsets.only(right: 20),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
-
                 ),
-                child:   Image.asset('assets/128/AlanPost.png'),
+                child: Image.asset('assets/128/AlanPost.png'),
               ),
               SizedBox(
-                height: size.height*0.00,
+                height: size.height * 0.00,
               ),
               Text(
-                'OSCAR',
+              widget.name,
                 style: MaaruStyle.text.tiniest,
               )
             ],
@@ -228,13 +228,13 @@ class Chat2State extends State<Chat2> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-
-                              child: Container( decoration: BoxDecoration(
-                                  color: MaaruColors.button2Color,
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(7),
-                                      bottomLeft: Radius.circular(7),
-                                      bottomRight: Radius.circular(7))),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: MaaruColors.button2Color,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(7),
+                                        bottomLeft: Radius.circular(7),
+                                        bottomRight: Radius.circular(7))),
                                 margin: EdgeInsets.only(left: 20, right: 20),
                                 constraints:
                                     BoxConstraints(maxWidth: size.width * 0.7),
@@ -245,7 +245,8 @@ class Chat2State extends State<Chat2> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text('${message['message']}',
                                           style: TextStyle(
-                                              color: Colors.black, fontSize: 16)),
+                                              color: Colors.black,
+                                              fontSize: 16)),
                                     )
                                   ],
                                 ),
@@ -279,7 +280,8 @@ class Chat2State extends State<Chat2> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text('${message['message']}',
                                           style: const TextStyle(
-                                              color: Colors.white, fontSize: 16)),
+                                              color: Colors.white,
+                                              fontSize: 16)),
                                     )
                                   ],
                                 ),
@@ -293,8 +295,7 @@ class Chat2State extends State<Chat2> {
                               color: Colors.white,
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image:'assets/128/CrystalGaskell.png'
-                                        .isEmpty
+                                image: 'assets/128/CrystalGaskell.png'.isEmpty
                                     ? const ExactAssetImage(
                                         'assets/128/CrystalGaskell.png')
                                     : FileImage(File(

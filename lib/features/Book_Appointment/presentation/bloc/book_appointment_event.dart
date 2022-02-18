@@ -159,3 +159,11 @@ class UpcomingAppointmentChanged extends BookAppointmentEvent {
   @override
   String toString() => "UpcomingAppointmentChanged";
 }
+
+class BokingDateChanged extends BookAppointmentEvent {
+  final String providerid;
+  final String bookingdate;
+  BokingDateChanged(this.providerid, this.bookingdate);
+  @override
+  String toString() => "BokingDateChanged";
+}
